@@ -132,7 +132,12 @@ h_i(x_i)\in\mathbb R^{k_i-1}.
 
 主效应使用较宽的弱信息先验。通过边际似然/经验贝叶斯更新 \(\alpha_{ij}\)：缺乏数据支持的交互组被强收缩，数据支持的组保留较大后验方差和非零系数。
 
-实现可使用迭代重加权贝叶斯线性回归；对有界连续分数先使用 Gaussian working likelihood。若真实任务采用 0/1 成功率，则使用 Bayesian logistic regression 的 Laplace posterior 或 beta-binomial 分层模型，并通过 task-level bootstrap 检验不确定性校准。不能把 Gaussian 工作模型的置信度未经校准地直接用于 Bernoulli 结果。
+实现可使用迭代重加权贝叶斯线性回归。若第 \(g\) 个 interaction group 的维度为 \(d_g\)，当前 posterior mean/covariance block 为 \(m_g,\Sigma_{gg}\)，可用 Type-II ML / EM 形式更新组精度：
+\[
+\alpha_g\leftarrow
+\frac{d_g}{\|m_g\|_2^2+\operatorname{tr}(\Sigma_{gg})+\epsilon}.
+\]
+对有界连续分数先使用 Gaussian working likelihood。若真实任务采用 0/1 成功率，则使用 Bayesian logistic regression 的 Laplace posterior 或 beta-binomial 分层模型，并通过 task-level bootstrap 检验不确定性校准。不能把 Gaussian 工作模型的置信度未经校准地直接用于 Bernoulli 结果。
 
 ### 4.2 交互边的强度和方向
 
@@ -459,8 +464,8 @@ r_{k,n}=\sqrt{\frac{2\ln(2/\alpha_{k,n})}{n}}.
 \]
 
 \[
-LCB_n=\bar d_n-r_n,\qquad UCB_n=\bar d_n+r_n.
-\]
+LCB_{k,n}=\bar d_n-r_{k,n},\qquad UCB_{k,n}=\bar d_n+r_{k,n}.
+]
 
 对第 \(k\) 个 offspring proposal 分配 \(\alpha_k\)，对该 proposal 的第 \(n\) 次序贯查看分配 \(\alpha_{k,n}\)。因为 \(\sum_k\alpha_k=\alpha_{\mathrm{total}}\)，且每个 proposal 内 \(\sum_n\alpha_{k,n}=\alpha_k\)，union bound 同时控制跨 proposal 和重复查看的错误率。该结论要求每个 task-block difference 有界，且 task blocks 独立，或满足所用 martingale confidence bound 的条件。若同一任务的多个 rollout 相关，先聚合成 task-level block；若任务来自相关簇，则以 task family/cluster 作为统计单位。
 
@@ -538,10 +543,10 @@ Output:
 1. Initialize discounted-UCB statistics for available operator arms
 2. for each generation while budget remains:
 3.     for each target parent x in P:
-4.         FOS <- singleton blocks + identifiable credible interaction pairs from G(z)
-5.         shuffle FOS order using the selected FOS-order policy
-6.         for proposal index l = 1...L while budget remains:
-7.             z <- current training/evaluation task context
+4.         for proposal index l = 1...L while budget remains:
+5.             z <- sample current training task context
+6.             FOS <- singleton blocks + identifiable credible interaction pairs from G(z)
+7.             shuffle FOS order using the selected FOS-order policy
 8.             choose one available proposal arm a using discounted-UCB
 9.             choose block B according to arm a (singleton, random k-set, or learned pair)
 10.            select donor d from P using uniform-compatible or posterior-aware rule
