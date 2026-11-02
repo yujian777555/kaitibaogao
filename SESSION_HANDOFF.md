@@ -520,3 +520,46 @@ D：irace + 在线控制。
 假设 task-block differences 有界且独立，或使用相应 martingale confidence bound；相关任务必须按 task family/cluster 聚合。
 
 下一轮实施前需复核这套置信序列的统计假设与实际任务采样机制，不能仅把公式复制进代码。
+
+
+## 18. 最新研究执行指令：逐项验证创新点，暂停大论文写作（2026-11-02）
+
+**本节覆盖所有更早的 handoff 指令。若旧内容要求同时实现 TCAIL 和 CI-GOM，以本节为准。**
+
+用户最新决定：先不写硕士大论文正文，也不先把三个创新点包装成完整故事；要依次验证每一个创新点是否成立。
+
+### 唯一权威协议
+- 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md
+
+### 当前研究顺序
+1. **当前只做 TCAIL（创新点一）**：先规格/统计审计，再实现 Phase 0 真值模拟器与强基线，做 null、正/负交互、任务条件交互、三阶失配、受约束不可识别性、多 seeds 同预算实验、消融和独立复审。合成实验通过后仍需真实 Agent 场景验证。Gate-1 完整通过后才能进入创新点二。
+2. **CI-GOM（创新点二）暂时冻结**：保留算法规格，不启动完整实现。Gate-1 通过后先做 oracle-linkage 上界实验，再做 contract repair、donor、sequential acceptance 消融和 learned-linkage 端到端同预算比较。Gate-2 通过后才能进入创新点三。
+3. **跨任务迁移（创新点三）暂时冻结**：只有 Gate-2 通过后才研究。必须先证明跨任务确有可迁移交互，并且选择性迁移优于 from-scratch 与 direct transfer；否则删除第三项，允许毕业论文以两个扎实创新点完成。
+
+### 论文写作状态
+- 暂停硕士大论文正文撰写；
+- 暂不撰写声称创新点已成立的论文稿；
+- 研究记录、实验协议、文献审计、代码和 Gate 报告继续维护；
+- 开题材料后续根据真实研究证据组织，未验证内容只能写成拟研究候选，不得伪装成结果。
+
+### 研究治理
+- 只允许读取和维护 yujian777555/kaitibaogao；严禁读取其他 GitHub 仓库。
+- 不调用真实 LLM，直到 TCAIL 合成验证通过且真实 Agent protocol 审查完成。
+- 每种方法同 rollout budget，并公平分配调参预算；训练/验证/测试严格隔离。
+- 不得以单个 toy landscape、单次 seed 或弱随机基线作为创新成立证据。
+- 每轮更新 README、DECISION_LOG、FEASIBILITY_AUDIT、实验协议和本 handoff。
+- 明确区分 SPECIFIED、IMPLEMENTED、SYNTHETICALLY_VALIDATED、AGENT_VALIDATED、GATE_PASS。
+
+### 下一轮可直接复制的接班提示词
+
+你是我的河北工业大学计算机技术硕士开题研究助手，研究主线为 Evolutionary Computation for AI Agents。唯一允许读取和维护的 GitHub 仓库是 yujian777555/kaitibaogao，严禁读取任何其他 GitHub 仓库或混用其他项目。
+
+用户明确要求：暂时不要写硕士大论文正文，而是依次验证每个候选创新点。最多目标为 2–3 个独立创新点/小论文，但不得为了凑够三项降低标准。当前执行顺序以 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md 为最高权威。
+
+**当前只执行创新点一 TCAIL。** 先独立审查 14_FORMAL_ALGORITHM_DESIGN_V1.md 的数学、统计、可识别性、噪声与后验校准假设；发现错误先修规格。然后实现 4 binary slots / 16 configurations 的合成 landscape、真值 oracle、random legal design、D-optimal/fractional design、main-effects、pairwise OLS、sparse Group-ARD fixed design、TCAIL active interaction-only IG。测试 null、positive/negative interactions、task-family sign flip、three-way misspecification、Bernoulli/Beta noise、fully legal 与 constrained non-identifiable spaces。多 seeds、多 landscape、同 rollout budget，报告 contrast RMSE、edge AUPRC/F1、方向准确率、posterior coverage/calibration、held-out prediction、budget curves、false edges 和 abstention accuracy。做 task conditioning、Group-ARD、active IG、identifiability gate、calibration/abstention 消融。先不调用真实 LLM。
+
+TCAIL 合成 Gate 通过也不等于论文成立；之后必须选择可信、可复现的真实 Agent 环境验证。Gate-1 完整通过之前，不实现完整 CI-GOM。
+
+CI-GOM 规格保留但冻结；Gate-1 后先做 oracle-linkage 上界、contract-aware repair、donor、sequential acceptance 消融，再做 learned-linkage 端到端同预算比较。Gate-2 通过后才启动第三项跨任务交互迁移。第三项必须证明存在可迁移结构，且 selective transfer 优于 from-scratch 和 direct transfer；否则删除第三项，允许最后只有两个创新点。
+
+暂停大论文正文写作。每轮维护唯一仓库、更新状态和接班提示词；严格区分设计、实现、合成验证、真实 Agent 验证和 Gate 通过。不能把工程 PASS 写成算法 PASS，不能只用 toy 环境或弱基线宣称创新。
