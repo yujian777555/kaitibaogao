@@ -321,3 +321,10 @@ CI-GOM 会连续产生多个 offspring proposal；只在每个 proposal 内控�
 - 跨任务迁移：条件性候选，等待 Gate-2。
 
 每个方向必须独立过关。合成实验只证明受控环境下机制正确，仍需真实 Agent 任务验证。若第三项无迁移结构或无独立收益，就不做第三篇；两项扎实创新优于三项凑数。
+
+
+## 13. TCAIL 规格独立审计（2026-11-02）
+
+新增 16_TCAIL_SPECIFICATION_AUDIT_R1.md，结论 REQUEST REVISION。总体框架值得继续，但当前公式和统计假设不足以直接实现。主要需要修订 pairwise estimand、identifiability 状态机、非高斯 likelihood 的 expected information、edge-level BFDR、Bayesian D-optimal 强基线、扩展规模 landscape 和三阶 misspecification 诊断。
+
+TCAIL 当前状态从 SPECIFICATION_REVIEW_PENDING 更新为 SPECIFICATION_REVISION_REQUIRED。不要将当前设计描述成已验证创新。
