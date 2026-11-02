@@ -112,3 +112,10 @@
 - 09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION.md：组件 epistasis 估计与 linkage-aware crossover 方案。
 
 候选 G 尚未通过相关工作审查，不得写入最终开题题目或创新点。
+
+
+### 本轮新增文件索引
+- 08_CANDIDATE_SCREENING.md：候选 D/E/F/G 的去留与当前优先级；
+- 09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION.md：候选 G 的问题定义、交互效应公式、算法草案和证伪实验。
+
+最新候选 G 仍处于 PRIORITY FOR AUDIT，不代表最终开题方向。
