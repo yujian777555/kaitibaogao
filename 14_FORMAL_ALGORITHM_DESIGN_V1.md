@@ -1,5 +1,7 @@
 > **重要状态说明（2026-11-02）：** 本文件中的 TCAIL（PART A）已由 17_TCAIL_FORMAL_SPECIFICATION_V2.md 完整替代。请勿按本文件旧版 TCAIL 公式直接实现。PART B（CI-GOM）保留为历史设计规格，但仍冻结，只有 TCAIL Gate-1 通过后才重新审查。
 
+> **重要状态说明（2026-11-02）：** 本文件中的 TCAIL（PART A）已由 17_TCAIL_FORMAL_SPECIFICATION_V2.md 完整替代。请勿按本文件旧版 TCAIL 公式直接实现。PART B（CI-GOM）保留为历史设计规格，但仍冻结，只有 TCAIL Gate-1 通过后才重新审查。
+
 # 14 — 两个核心算法的形式化设计 V1
 
 **日期：** 2026-11-02  
