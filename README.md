@@ -255,3 +255,22 @@ V2.1 已正确补充 reference-standardized contrast vector、有限 context anc
 8. full-factorial 计数预算与 rollout-equivalent cost 的等价条件需要补充。
 
 **当前状态：** TCAIL 继续 HOLD；尚未实现、未运行实验、未通过 Gate-1。下一轮只修订规格，不编码、不启动正式 Phase 0、不调用真实 LLM。CI-GOM、第三项迁移和大论文正文继续冻结。具体复审见 20 号报告。
+
+
+## 2026-11-02 第四轮：GOMEA linkage 接口与先行工作审计
+
+新增：
+- \`21_GOMEA_LINKAGE_AND_NOISY_INTERACTION_RELATED_WORK_AUDIT_R1.md\`：区分 SLL、fitness-based linkage、DLED/cDLED 与 task-conditioned Agent interaction，并审查 2021–2026 直接先行工作。
+- \`22_TCAIL_LINKAGE_INTERFACE_REVISION_PROPOSAL_R1.md\`：B1 的接口修订提案，尚未并入权威规格，等待独立复审。
+- \`02_LITERATURE_REGISTER.md\` 新增 P125–P132。
+
+**关键修正：** GOMEA linkage 既可能来自种群统计依赖（SLL-MI），也可能来自目标函数差分（fitness-based linkage）。因此不能简单声称统计交互与 linkage 无关；但当前 TCAIL 的平均有符号交互也不能直接等同于局部 FOS edge。
+
+本轮建议：
+1. 用实际优化目标尺度的条件四格有限差分定义局部 fitness interaction；
+2. 全局 RMS interaction energy 仅作 task-conditioned summary，不直接作为当前个体 FOS；
+3. 对当前 parent/task 计算 local posterior linkage evidence；
+4. 将 local weighted VIG 通过固定 LT / conditional FOS builder 转换为 FOS，不把图和 FOS 混为一谈；
+5. 将 FBL、DLED/cDLED、LMM、ALI/AIM、在线副产物式交互学习纳入强基线。
+
+本轮没有实现、没有实验、没有 Gate-1 PASS。TCAIL 继续 HOLD / IMPLEMENTATION BLOCKED；22 号文件仅为提案，不替代 17 号权威规格，也不解除 CI-GOM 冻结。详细见 21、22 号报告。
