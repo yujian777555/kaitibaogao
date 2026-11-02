@@ -166,3 +166,30 @@ Agent 配置组件间存在协同、拮抗、依赖和任务条件化交互。�
 
 ### 直接相关新文献
 MESH-Harness、ARTEMIS、EvoMAS、AgentEvo、Evo-Harness 已补入文献总表。它们会显著提高创新点二、三的审查门槛。
+
+
+## 9. 创新可行性审查修订（2026-11-02）
+
+### 9.1 总题目工作稿
+**《面向大语言模型智能体的交互感知演化优化方法研究》**
+
+### 9.2 当前建议的核心研究内容（两个核心创新候选）
+
+**研究内容一：预算受限的任务条件化 Agent 组件交互结构识别。**
+- 不是普通组件消融、全因子实验或 Shapley 归因；
+- 研究多实现、混合类型、随机执行和昂贵评价条件下，如何用主动实验设计识别稀疏、任务条件化、带不确定性的交互结构；
+- 直接对照 CCI（arXiv:2605.05716）、Prompt component regression、MESH-Harness additive LinUCB；
+- 状态 HOLD，需先做已知真值的交互地形实验。
+
+**研究内容二：交互结构驱动的约束最优混合演化。**
+- 将交互 linkage 用于 Agent 模块块级 mixing；
+- 处理接口/类型/控制流依赖和随机 fitness；
+- 必须区别于 GOMEA/CGOMEA/LK-GOMEA、AgentSquare、ARTEMIS、两篇 EvoMAS、AgentEvo、HFlow、MESH-Harness；
+- 状态 HOLD，优先做 oracle linkage 与 learned linkage 对照。
+
+**研究内容三（储备）：跨任务交互结构迁移。**
+- 暂不列为正式创新点；
+- 需先证明跨任务存在可迁移的共享 linkage，且迁移收益超过 LK-GOMEA 类局部 linkage、独立重建和现有 online harness evolution。
+
+### 9.3 可行性与开题策略
+目前更稳妥的是“两项核心研究内容 + 一项储备方向”，符合 2–3 个创新点要求。不能在开题报告中把尚未验证的第三项写成已确认创新点。详细 Gate、算法和实验见 11_INNOVATION_FEASIBILITY_AUDIT.md。
