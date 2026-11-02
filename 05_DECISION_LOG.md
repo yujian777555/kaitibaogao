@@ -261,3 +261,32 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 新颖性与 EC 定位仍未成立：TCAIL 是统计建模/主动实验设计模块；Group-ARD、Bayesian OED、BFDR 和 decision-theoretic acquisition 均有成熟先例。只有证明其对后续 GOM linkage/mixing/search 带来独立收益，才能闭合 EC 主线。当前不能把 TCAIL 写成已成立的独立创新点。
 
 **决定：TCAIL 保持 HOLD / SPECIFICATION REVISION REQUIRED；IMPLEMENTATION BLOCKED。** 本次不是算法实验失败，因为尚无代码和实验。下一轮只按 20 号报告修订规格；修订后再独立复审。CI-GOM、第三项迁移、正式 Phase 0、真实 LLM 和大论文正文继续冻结。
+
+
+## 决策 D-029：修正 TCAIL 与 GOMEA linkage 的接口定义（2026-11-02）
+
+新增审计与提案：
+- 21_GOMEA_LINKAGE_AND_NOISY_INTERACTION_RELATED_WORK_AUDIT_R1.md；
+- 22_TCAIL_LINKAGE_INTERFACE_REVISION_PROPOSAL_R1.md；
+- 文献总表新增 P125–P132。
+
+本轮核查后，修正上一轮过于粗略的表述：GOMEA linkage 并非单一概念。标准 SLL 常由种群 MI 学习；fitness-based linkage 则通过目标函数差分估计变量依赖，已有 RV-GOMEA、conditional FOS、DLED/cDLED 等直接先例。因此“fitness interaction 与 GOMEA linkage 无关”不准确，但“平均统计交互图可直接作为 FOS”同样不成立。
+
+发现的重要先行工作：
+- Olieman et al. 2021：fitness-based linkage learning in RV-GOMEA；
+- Andreadis et al. 2024：fitness-based linkage + maximum-clique conditional linkage；
+- Przewozniczek et al. 2021/2025：DLED / cDLED，后者处理 individual-specific multi-structured linkage；
+- Zhong et al. 2023/2024：LMM 与 ALI/AIM，已研究噪声下 linkage decomposition；
+- Tinós et al. 2026：从 GA 搜索过程副产物学习变量交互；
+- Guijt et al. 2022：Linkage Kernels，为每个解学习局部 linkage。
+
+因此 TCAIL 的原始平均有符号 contrast 不能直接作为通用 linkage edge。22 号提案建议：
+1. 在实际 objective utility scale 上定义局部四格 fitness contrast；
+2. 用 global RMS interaction energy 描述任务条件化的总体依赖强度，但不直接将其作为当前 parent 的 FOS edge；
+3. 对当前 parent 和 task context 估计 local posterior linkage evidence；
+4. 输出 local weighted VIG，再通过预注册的 LT / conditional FOS builder 转换为 FOS；
+5. 比较 FBL、DLED/cDLED、LMM、ALI/AIM、SLL-MI、在线副产物式交互学习。
+
+该方向可能的差异只在于随机昂贵 Agent rollout、任务异质性、合法配置约束、task-block 后验校准和主动预算的联合处理。噪声 linkage、conditional linkage、fitness-based linkage 均已有先例，不能单独宣称创新。
+
+**决定：** 接受 21 号审计结论；22 号仅作为 B1 修订提案，尚未并入权威规格。TCAIL 仍 HOLD / IMPLEMENTATION BLOCKED。B2–B8 继续有效；不实现、不跑正式 Phase 0、不调用真实 LLM。CI-GOM 和第三项迁移继续冻结。需要先对 22 号提案独立复审，再决定是否整合进 V2.2。
