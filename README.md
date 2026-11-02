@@ -138,3 +138,19 @@
 - 10_THESIS_INNOVATION_AND_PAPER_ROADMAP.md：三个创新点、三篇小论文、独立实验和投稿 Gate 的完整规划。
 
 文献总表新增 MESH-Harness、Evo-Harness、AgentEvo、ARTEMIS、EvoMAS。当前创新点仍未全部通过新颖性审查，不得把路线图误当作已确认创新成果。
+
+
+## 2026-11-02 第四轮：创新可行性审查
+
+新增直接相关文献与基础方法：Liu (2026) CCI、Lauziere et al. (2026) Prompt component regression、GOMEA/CGOMEA、LK-GOMEA、DG2，以及 ToolSandbox、tau-bench、AppWorld。
+
+**重要决策：**
+- 普通组件交互效应估计（差分公式、全因子分析、Shapley、pairwise regression）已被直接相关工作覆盖，原创新点一表述 NO-GO。
+- 修订候选一：预算受限、任务条件化的稀疏 Agent 组件交互结构识别，HOLD，先做已知真值和主动采样预实验。
+- 修订候选二：交互结构驱动的 Agent 约束最优混合演化，HOLD，优先验证是否实质优于 GOMEA/GOM、CGOMEA、LK-GOMEA 和 Agent crossover。
+- 跨任务交互结构迁移暂缓，不能现在写成第三个正式创新点。
+
+新增文件：
+- 11_INNOVATION_FEASIBILITY_AUDIT.md：完整可行性判断、相关工作威胁、修订算法、基线、实验和 GO/HOLD/NO-GO 条件。
+
+当前合理规划为 2 个核心创新候选 + 1 个储备方向。只有两项都通过预实验才进入正式创新点；第三项不凑数。
