@@ -328,3 +328,19 @@ CI-GOM 会连续产生多个 offspring proposal；只在每个 proposal 内控�
 新增 16_TCAIL_SPECIFICATION_AUDIT_R1.md，结论 REQUEST REVISION。总体框架值得继续，但当前公式和统计假设不足以直接实现。主要需要修订 pairwise estimand、identifiability 状态机、非高斯 likelihood 的 expected information、edge-level BFDR、Bayesian D-optimal 强基线、扩展规模 landscape 和三阶 misspecification 诊断。
 
 TCAIL 当前状态从 SPECIFICATION_REVIEW_PENDING 更新为 SPECIFICATION_REVISION_REQUIRED。不要将当前设计描述成已验证创新。
+
+## 14. TCAIL V2 规格替代与新颖性审查（2026-11-02）
+
+新增 17_TCAIL_FORMAL_SPECIFICATION_V2.md 和 18_TCAIL_RELATED_WORK_AUDIT_R1.md。
+
+TCAIL 当前状态由 SPECIFICATION_REVISION_REQUIRED 更新为 REVISED_SPEC_PENDING_INDEPENDENT_REVIEW。V1 的 TCAIL 部分已由 V2 替代；CI-GOM 不变，继续冻结。
+
+新颖性审查的关键结论：
+- 组件交互的全因子实验和回归已有直接 Agent 研究；
+- 交互 group screening、GDS-ARM 等统计筛选方法已有先例；
+- Bayesian D-optimal / expected information gain、Bayesian FDR 已成熟；
+- 预算约束 Agent harness 进化优化已有近期工作；
+- TCAIL 的潜在价值只能在受约束、随机、任务异质的 Agent 配置空间中，以同预算强基线证明其额外价值；
+- TCAIL 不是独立 EC 算法，必须证明其对演化搜索的下游作用，才与毕业论文 EC 主线闭环。
+
+当前不启动实现或正式实验。
