@@ -304,3 +304,8 @@ F(x,z)=\beta_0(z)+\sum_i f_i(x_i,z)+\sum_{i<j}g_{ij}(x_i,x_j,z)+\epsilon.
 - CI-GOM：HOLD，优先做 oracle-linkage 对照；
 - AOS：可选，只有同预算优于离线调参固定策略才保留；
 - 第三创新点：继续暂缓。
+
+
+## 11. 第六轮补充：CI-GOM 序贯接受的全局错误率控制（2026-11-02）
+
+CI-GOM 会连续产生多个 offspring proposal；只在每个 proposal 内控制反复查看错误率还不够。正式规格已改为跨 proposal 与 proposal 内两层 alpha spending：\(\alpha_k=6\alpha_{\mathrm{total}}/(\pi^2k^2)\)，\(\alpha_{k,n}=6\alpha_k/(\pi^2n^2)\)。在有界且独立 task-block differences（或适用 martingale 条件）下，通过 union bound 控制全局错误率。若任务块相关，必须按独立 task family/cluster 聚合，不能把同一任务多次 rollout 当作独立样本。
