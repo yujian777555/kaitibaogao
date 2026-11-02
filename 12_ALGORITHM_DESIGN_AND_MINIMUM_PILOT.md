@@ -246,3 +246,27 @@ Paper 2 的主算法是 categorical genotype + GOM 思想，不引入 DE 专属 
 算子奖励使用配对评价改进的置信下界除以 rollout 成本；在线控制参数为 UCB exploration \(c\) 和历史折扣 \(\rho\)。FOS order、donor strategy、graph update interval 和稀疏正则 \(\lambda\) 通过训练任务离线配置。统计门禁不参与性能调参。
 
 完整参数表、范围、公式、irace 协议、A/B/C/D 消融和停止条件见 13_EC_PARAMETER_CONTROL_PLAN.md。在线 AOS 本身不是创新点；如果它不优于离线调参固定策略，则删除在线控制，保持简单算法。
+
+
+## 9. 第六轮：形式化算法设计 V1（2026-11-02）
+
+新增完整规格：14_FORMAL_ALGORITHM_DESIGN_V1.md。
+
+Paper 1 工作代号 TCAIL：
+- categorical orthogonal contrasts + task-context features；
+- Group-ARD 稀疏层级估计；
+- posterior edge confidence \(P(|\Delta_{ij}|>\delta_{\mathrm{link}})\)；
+- legal-space identifiability gate；
+- interaction-only posterior information gain / rollout cost 主动采样；
+- task-blocked noise calibration 与 abstention。
+
+Paper 2 工作代号 CI-GOM：
+- singleton + credible non-additive pairwise FOS；
+- contract-aware deterministic minimal repair；
+- posterior-aware donor compatibility；
+- paired anytime-valid sequential acceptance；
+- discounted-UCB 作为可选在线动作控制。
+
+**本轮重要纠正：** 负交互同样代表非加性依赖，不能只把正交互放进 FOS。V1 按 \(P(|\Delta_{ij}|>\delta)\) 建边，正/负符号只用于解释和 donor score；负交互绝不等同于硬约束。类型/接口/权限/调用依赖才是硬约束。
+
+Phase 0 真值函数、噪声模型、全合法/受约束空间、伪代码、复杂度和 GO/HOLD/NO-GO 详见 14_FORMAL_ALGORITHM_DESIGN_V1.md。当前仍是设计稿，未实现、未运行、未证明优于基线。
