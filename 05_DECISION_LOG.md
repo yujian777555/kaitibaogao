@@ -142,3 +142,15 @@ AgentSquare、ARTEMIS、Hu-EvoMAS、Wei-EvoMAS、AgentEvo、HFlow 已覆盖大�
 ## 2026-11-02 决策 D-019：核心产出目标调整
 
 以 **2 个核心创新候选 + 1 个有条件的扩展方向**推进。Paper 1 和 Paper 2 各自必须具备独立方法贡献和实验；第三篇不是当前承诺。完整可行性矩阵与实验 Gate 见 11_INNOVATION_FEASIBILITY_AUDIT.md。
+
+
+## 2026-11-02 决策 D-020：演化参数采用离线+在线两层调节
+
+确定主方案：
+- 离线：训练任务上使用 irace/iterated racing 调节少量数值与类别超参数；
+- 在线：使用 discounted-UCB/AOS，根据配对改进的置信下界和 rollout 成本，调整变异强度与算子选择；
+- 统计门禁：\(\alpha\)、\(\delta_{\min}\) 和硬约束预先锁定，不进入性能调参。
+
+主算法是 categorical GOM，不移植 DE 专属 \(F,CR\)。第一阶段固定种群 \(N=8\)，敏感性比较 \(N=4,8,12\)，后续再比较 IMS/P3。在线 AOS 不是独立创新，若不优于离线调参固定策略则删除。
+
+详细参数定义、范围、公式、消融和停止条件见 13_EC_PARAMETER_CONTROL_PLAN.md。
