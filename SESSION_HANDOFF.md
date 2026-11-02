@@ -162,3 +162,46 @@ EvoTest 将完整 Agent 配置表示为 χ=(p,M,h,u)，每轮执行一个 episod
 研究主线是 Evolutionary Computation for AI Agents。当前优先审查候选 D：面向任务分布变化的多目标演化测试时自适应。直接依据是 EvoTest（ICLR 2026）作者明确指出 (1+m)+UCB 简单、可能局部收敛、任务特定过拟合，并建议种群 EA、QD 和程序综合。不要把“加入 NSGA-III / MAP-Elites”直接当创新；必须与 M*、MemEvolve、E-SPL、INSPO、COvolve、EvoTeam、HFlow、两篇 EvoMAS、GEPA 等机制级对照。
 
 请继续精读原文、提取算法公式和实验设置，提出可证伪的机制改进与强基线，判断能否支撑 2–3 个硕士创新点。若无实质缺口就否证。每轮必须更新文献总表、机制比较、决策日志、接班提示词并提交到唯一仓库。
+
+
+## 10. 最新更新（2026-11-02 第三轮）
+
+### 研究方向重审
+候选 D“跨任务序列的测试时演化”宽泛表述已标记 NO-GO / SUPERSEDED，因为新检索发现 TTHE、Meta-TTL、TacoMAS、Inherit-MAS、EvolveNet、DarwinX 等直接工作。
+
+普通多目标 Agent 演化、skill 进化、role evolution、test-time evolution、population-centered evolution、evolvability selection 和 evaluator co-evolution 均已有大量工作覆盖。
+
+### 当前优先审查候选 G
+**组件交互感知的演化重组方法（Interaction-Aware Evolutionary Recombination for Agent Configurations）。**
+
+问题：Agent 的 Prompt、工具策略、记忆、规划、验证、恢复等模块存在协同/拮抗关系。已有工作大量使用 mutation、crossover、module recombination 和 additive merge，但是否显式估计模块间 epistasis/linkage，并据此设计重组算子，仍需核验。
+
+直接依据：
+- DarwinX 明确指出 recombination 相对 mutation 的贡献尚未通过受控消融单独识别；
+- EvoMAS、HFlow、AgentSquare 已有 crossover / module recombination，普通交叉不是创新；
+- HiveMind 的 DAG-Shapley 估计 Agent 级贡献，不等于单 Agent 配置内的组件交互；
+- EvoCF 的 counterfactual 是协作计划反事实，不等于配置基因交互效应；
+- SERO 的结构契约保持不是 epistasis-aware crossover。
+
+候选 G 的工作定义：
+- 通过同任务、同随机种子的配对反事实组件替换，估计组件交互效应 ε_ij；
+- 构造组件 linkage/interaction graph；
+- 对正向强交互模块进行块级继承，对负向强交互组合进行约束/修复；
+- 与 LLM crossover、随机模块 crossover、DarwinX additive merge、mutation-only 对照。
+
+详细筛选见 08_CANDIDATE_SCREENING.md 和 09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION.md。
+
+### 下一会话必须完成
+1. 精读两篇 EvoMAS、HFlow、AgentSquare、AgentBreeder、DarwinX 的表示、交叉、变异、修复和消融；
+2. 精读 SERO、HiveMind、EvoCF、Optimas，确认组件贡献/交互已有程度；
+3. 检索经典 linkage learning、epistasis、GOMEA、LTGA、DSMGA-II 等演化计算方法；
+4. 对候选 G 给出可执行的 ε_ij 估计方案、任务配对设计和统计检验；
+5. 如果已有工作已经显式使用组件交互图指导 Agent crossover，则立即否证候选 G；
+6. 继续补充国内研究、中文学术数据库和 2026 年 11 月新论文。
+
+### 最新接班提示词
+你是我的河北工业大学计算机技术硕士开题研究助手。唯一允许读取和维护的 GitHub 仓库是 yujian777555/kaitibaogao，严禁读取我其他 GitHub 仓库。先读取 README、00_PROJECT_CHARTER、01_SEARCH_PROTOCOL、02_LITERATURE_REGISTER、03_MECHANISM_COMPARISON、04_OPENING_REPORT_PLAN、05_DECISION_LOG、06_EVOTEST_DEEP_DIVE、07_CANDIDATE_D_TEST_TIME_ADAPTATION、08_CANDIDATE_SCREENING、09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION 和 SESSION_HANDOFF。
+
+研究主线是 Evolutionary Computation for AI Agents。候选 D“跨任务测试时演化”宽泛表述已因 TTHE、Meta-TTL、TacoMAS、Inherit-MAS、EvolveNet、DarwinX 等直接工作而 NO-GO。当前优先审查候选 G：通过配对反事实干预估计 Agent 配置组件之间的 epistasis/linkage，并据此设计 interaction-aware crossover。不能把普通模块化编码、遗传交叉、Shapley 贡献、反事实计划或结构契约保持当作创新。
+
+请精读 EvoMAS（两篇）、HFlow、AgentSquare、AgentBreeder、DarwinX、SERO、HiveMind、EvoCF、Optimas，逐项比较 genotype、variation、crossover、component interaction、repair、fitness 和 ablation。然后检索经典 linkage learning / epistasis 方法，形成严格可证伪的算法方案。若已有工作覆盖就 NO-GO，不要强行定题。每轮更新文献、机制比较、决策、接班提示词并提交到这个唯一仓库。
