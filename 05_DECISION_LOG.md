@@ -165,3 +165,8 @@ AgentSquare、ARTEMIS、Hu-EvoMAS、Wei-EvoMAS、AgentEvo、HFlow 已覆盖大�
 **纠正旧规则：** linkage 反映非加性依赖，不以交互正负号决定是否建边。V1 使用 \(P(|\Delta_{ij}|>\delta_{\mathrm{link}})\) 建边，正负符号用于 donor scoring；负交互不是硬约束。
 
 当前状态仍为 HOLD / SPECIFICATION ONLY。下一步先实现 Phase 0 合成地形和算法模拟器，完成真值恢复与同预算消融，不调用真实 LLM。
+
+
+## 2026-11-02 决策 D-022：CI-GOM 序贯接受采用跨 proposal 的 alpha spending
+
+CI-GOM 不只存在单个 proposal 内的 repeated looks，也会在整个演化运行中连续检验多个 offspring。故不能对每个 offspring 都重复使用同一个 alpha。正式方案采用 proposal index \(k\) 与 within-proposal look \(n\) 两层 alpha spending，控制跨 proposal 与序贯查看的累计错误率。任务块相关时必须以 task family/cluster 为独立统计单位。详细公式见 14_FORMAL_ALGORITHM_DESIGN_V1.md。
