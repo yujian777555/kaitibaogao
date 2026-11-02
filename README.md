@@ -174,3 +174,14 @@
 新增文件：
 - 13_EC_PARAMETER_CONTROL_PLAN.md：完整参数清单、初始取值/搜索范围、离线 irace、在线 UCB/AOS、统计门禁、A/B/C/D 消融和停止条件。
 - 02_LITERATURE_REGISTER.md 新增参数控制相关文献 118–124。
+
+
+## 2026-11-02 第六轮：算法形式化设计 V1
+
+新增 14_FORMAL_ALGORITHM_DESIGN_V1.md，把两个候选算法具体化：
+- TCAIL：任务条件化 Group-ARD + 合法配置可识别性门禁 + interaction-only posterior IG 主动采样；
+- CI-GOM：基于可信非加性交互的 FOS + contract-aware deterministic minimal repair + posterior-aware donor + paired sequential acceptance。
+
+本轮纠正：负交互同样代表 linkage，不能只用正交互建边。按 \(P(|\Delta|>\delta)\) 判断非加性依赖，符号只用于 donor scoring；负交互不是硬约束。
+
+算法设计仍为待验证规格。下一步实现合成真值模拟器和可复现的参数/算法消融，不调用真实 LLM。
