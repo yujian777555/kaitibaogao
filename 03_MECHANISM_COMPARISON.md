@@ -339,3 +339,26 @@ Parameterless GOMEA 研究了 IMS、P3 等 population-size-free scheme，但仍�
 
 ### 14.4 与 Agent 相关工作的重复风险
 Wei et al. 的 EvoMAS 已有七种策略与 adaptive strategy selection。故 AOS/UCB 仅是辅助控制，不构成本课题独立创新。我们的潜在差异仍需落在 interaction-derived linkage、Agent 类型/接口约束和噪声感知的 constrained mixing 上。
+
+
+## 15. 第六轮：两个核心算法的形式化机制审查（2026-11-02）
+
+新增规格：14_FORMAL_ALGORITHM_DESIGN_V1.md。
+
+### 15.1 对之前 FOS 规则的纠正
+之前草案偏向“正交互才形成 linkage block”。这在演化计算上不严谨：linkage 表示非加性依赖，不表示正向收益。负交互同样可能表示两个基因需要联合考虑，以避免单独替换破坏原有组合。
+
+V1 改为：
+\[
+q_{ij}(z)=P(|\Delta_{ij}(z)|>\delta_{\mathrm{link}}\mid D)
+\]
+当边可识别且 \(q_{ij}\ge\tau_{\mathrm{edge}}\) 时建立 linkage；正/负方向单独记录，并在 donor compatibility 中使用。负交互不是硬约束。
+
+### 15.2 Paper 1 TCAIL
+Group-ARD task-conditioned pairwise surrogate + legal-space identifiability gate + interaction-only posterior IG acquisition。与普通 pairwise regression 的差异必须通过同预算恢复精度、校准和 held-out prediction 实验来证明。若受限合法空间导致 pair contrast 不可识别，必须 abstain。
+
+### 15.3 Paper 2 CI-GOM
+interaction FOS + contract-aware deterministic minimal repair + posterior-aware donor selection + paired sequential acceptance。修复必须限定在依赖闭包，超出 repair budget 或无可行解则拒绝。donor score 根据 posterior predicted delta、uncertainty 和 repair cost，而不是简单按交互符号硬编码。
+
+### 15.4 新颖性边界
+Group-ARD、Bayesian information gain、GOM、softmax donor、UCB 和 confidence sequence 各自均是成熟工具。潜在贡献只能来自它们针对 Agent 的混合类型、合法配置空间、任务条件化随机 rollout 的具体耦合机制，以及同预算实验增益。不得把组合成熟模块自动写成首次提出。
