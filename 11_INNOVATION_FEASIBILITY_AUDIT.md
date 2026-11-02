@@ -309,3 +309,15 @@ F(x,z)=\beta_0(z)+\sum_i f_i(x_i,z)+\sum_{i<j}g_{ij}(x_i,x_j,z)+\epsilon.
 ## 11. 第六轮补充：CI-GOM 序贯接受的全局错误率控制（2026-11-02）
 
 CI-GOM 会连续产生多个 offspring proposal；只在每个 proposal 内控制反复查看错误率还不够。正式规格已改为跨 proposal 与 proposal 内两层 alpha spending：\(\alpha_k=6\alpha_{\mathrm{total}}/(\pi^2k^2)\)，\(\alpha_{k,n}=6\alpha_k/(\pi^2n^2)\)。在有界且独立 task-block differences（或适用 martingale 条件）下，通过 union bound 控制全局错误率。若任务块相关，必须按独立 task family/cluster 聚合，不能把同一任务多次 rollout 当作独立样本。
+
+
+## 12. 逐项验证策略（2026-11-02）
+
+本轮用户决策：先不写大论文，逐个验证创新点。新增权威协议 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md。
+
+当前三个方向不是三个已确认创新点，而是按证据门槛推进的候选：
+- TCAIL：第一优先级，HOLD，先做规格审计与 Phase 0；
+- CI-GOM：冻结，等待 Gate-1；
+- 跨任务迁移：条件性候选，等待 Gate-2。
+
+每个方向必须独立过关。合成实验只证明受控环境下机制正确，仍需真实 Agent 任务验证。若第三项无迁移结构或无独立收益，就不做第三篇；两项扎实创新优于三项凑数。
