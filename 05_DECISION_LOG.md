@@ -154,3 +154,14 @@ AgentSquare、ARTEMIS、Hu-EvoMAS、Wei-EvoMAS、AgentEvo、HFlow 已覆盖大�
 主算法是 categorical GOM，不移植 DE 专属 \(F,CR\)。第一阶段固定种群 \(N=8\)，敏感性比较 \(N=4,8,12\)，后续再比较 IMS/P3。在线 AOS 不是独立创新，若不优于离线调参固定策略则删除。
 
 详细参数定义、范围、公式、消融和停止条件见 13_EC_PARAMETER_CONTROL_PLAN.md。
+
+
+## 2026-11-02 决策 D-021：正式算法设计 V1 与 FOS 规则纠正
+
+新增 14_FORMAL_ALGORITHM_DESIGN_V1.md，定义：
+- Paper 1 TCAIL：Group-ARD task-conditioned interaction model、legal-space identifiability、interaction-only posterior IG active design；
+- Paper 2 CI-GOM：interaction FOS、contract-aware minimal repair、posterior-aware donor、paired sequential acceptance、可选 discounted-UCB action control。
+
+**纠正旧规则：** linkage 反映非加性依赖，不以交互正负号决定是否建边。V1 使用 \(P(|\Delta_{ij}|>\delta_{\mathrm{link}})\) 建边，正负符号用于 donor scoring；负交互不是硬约束。
+
+当前状态仍为 HOLD / SPECIFICATION ONLY。下一步先实现 Phase 0 合成地形和算法模拟器，完成真值恢复与同预算消融，不调用真实 LLM。
