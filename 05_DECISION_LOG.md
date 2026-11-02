@@ -73,3 +73,21 @@ COvolve（GECCO 2026）、CATArena（ICML 2026）、M*（NeurIPS 2026）、E-SPL
 
 ### 决策 D-010
 新增文献记录 51–72。文献总表目前为 72 条登记记录，仍非穷尽清单；下一轮必须继续追踪综述引用和国内研究。
+
+
+## 2026-11-02 第三轮：直接工作密集出现，重审候选
+
+### 新增文献
+本轮新增 MOAE、SkillMOO、MOCHA、ParetoPO、AgentBreeder、TTHE、Meta-TTL、TacoMAS、Inherit-MAS、EvolveNet、CPE、DarwinX、AHE、RQGM、Certified Selective Automation、Calibrating the Evaluator、Self-Reports Are Not Verification、HGM、PCE、FreeEvolve、Group-Evolving Agents、HERA、HiveMind、FlowReasoner、TOA、SERO、Evolvability Search、Evolvability ES、噪声适应度优化综述和 F-Race 等文献。
+
+### 决策 D-011：候选 D 宽泛表述 NO-GO
+TTHE、Meta-TTL、TacoMAS、Inherit-MAS、EvolveNet、DarwinX 已直接覆盖跨任务测试时 Agent/harness 演化。EvoTest 保留为基础论文，但不再以“跨任务测试时演化”作为创新。
+
+### 决策 D-012：普通多目标/技能/角色/可进化性优化不构成独立创新
+MOAE、SkillMOO、MOCHA、AgentBreeder、HGM、PCE、FreeEvolve、SERO 等已覆盖这些方向的多个关键机制。
+
+### 决策 D-013：新增候选 G 优先审查
+组件交互感知的演化重组：通过配对反事实干预估计 Agent 配置组件之间的 epistasis/linkage，再指导遗传重组，重点解决现有方法的泛化 crossover / additive merge 未显式建模组件协同和拮抗关系的问题。
+
+### 决策 D-014：候选 G 尚未通过审查
+必须精读 EvoMAS、HFlow、AgentSquare、AgentBreeder、DarwinX、SERO、HiveMind、EvoCF、Optimas，确认是否已有等价机制；必须把反事实估计误差和执行成本纳入可行性判断。
