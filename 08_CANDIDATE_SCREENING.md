@@ -65,3 +65,23 @@ EvoMAS (Hu et al.)、EvoMAS (Wei et al.)、HFlow、AgentSquare、AgentBreeder、
 - 反事实组件替换可能导致不合法配置，需要设计类型约束与 repair。
 
 **当前结论：G 仅为优先审查候选，不是已确认创新点或最终论文题目。**
+
+## 9. 2–3 篇投稿论文的结构约束与新增威胁
+
+用户明确要求硕士论文有 2–3 个创新点，并且每个创新点分别形成一篇小论文投稿。现将此要求设为硬约束。
+
+新增直接工作：
+- MESH-Harness：模块池、模块组合、full-covariance LinUCB、coordinate ascent、轨迹引导模块演化；
+- ARTEMIS：Agent 组件自动发现、语义感知遗传算子、配置联合演化；
+- EvoMAS：结构化 MAS 配置空间中的反馈引导 mutation/crossover；
+- AgentEvo：多阶段 workflow evolution、subgraph graft、prompt fusion、Pareto cost-performance；
+- Evo-Harness：经验上下文编译成可复用技能 harness。
+
+这些工作使普通模块交叉、语义交叉、模块组合搜索、跨任务 harness 更新都不能直接作为创新。
+
+三篇规划见 10_THESIS_INNOVATION_AND_PAPER_ROADMAP.md：
+1. 任务条件化组件交互效应估计；
+2. 交互感知演化重组算子；
+3. 任务分布变化下交互结构迁移（条件性）。
+
+候选 G 仍为 HOLD / PRIORITY FOR AUDIT。尤其要精读 ARTEMIS 和 MESH-Harness 的组件表示、交互建模、选择、交叉和消融。只有确认没有等价机制后，创新点一、二才能 GO。
