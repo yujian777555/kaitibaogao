@@ -222,3 +222,9 @@
 首轮结论：TCAIL V1 不能直接实现；V2 已完成纸面修订，但仍待独立复审。interaction-only IG / Bayesian D-optimal、Bayesian FDR、组件交互回归和预算约束 Agent harness search 均有既有先例。TCAIL V2 仍是条件性候选，不能宣称新颖性已成立。
 
 特别说明：TCAIL 是统计建模/主动实验设计模块，本身不是完整 EC 算法。其能否成为毕业论文创新点，取决于是否对后续演化搜索提供独立、可测量的价值。当前不实现、不运行正式 Phase 0。
+
+## 2026-11-02 TCAIL V2 第二轮复核：REQUEST CHANGES
+
+新增 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md。V2 的基础公式大部分通过纸面检查，但发现高阶模型失配尚未进入主要边估计、reference-standardized contrast vector 未显式构造、连续 task context 的 BFDR 检验族未有限化、edge-risk acquisition 缺少完整 Monte Carlo 估计协议、预算分母需精确定义等问题。
+
+已将相应 V2.1 澄清补入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节。当前状态为 V2.1 / PENDING INDEPENDENT REVIEW；没有实现、没有正式实验、没有 Gate-1 PASS。
