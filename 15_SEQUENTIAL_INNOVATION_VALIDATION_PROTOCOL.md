@@ -342,3 +342,9 @@ V2 状态：REVISED SPECIFICATION / PENDING INDEPENDENT REVIEW。当前仍不实
 - null、additive-only、three-way-only 和 mixed-order 都必须覆盖。
 
 相关工作审查指出，Agent 组件交互、全因子分析、回归、Bayesian OED、FDR 和预算约束 harness search 已有直接先例。TCAIL 新颖性仍需通过方法级比较证明。
+
+## 8. TCAIL V2.1 当前状态（2026-11-02）
+
+第二轮复核见 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md，结论 REQUEST CHANGES。对应澄清已补入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节。
+
+当前状态：V2.1 / PENDING INDEPENDENT REVIEW。未实现、未运行正式实验、未通过 Gate-1。下一步只做修订后独立复审。
