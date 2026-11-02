@@ -246,3 +246,12 @@
 - EvoTeam（arXiv:2610.39813，2026-10-29）：团队组织、交互规则和个体技能联合演化。
 - Evolving Agent Teams（arXiv:2610.36848，2026-10-27）：监督器诊断局部最优并重构团队。
 - 这两篇均为本次检索时的最新预印本，不能写成同行评审正式发表论文；应持续检查后续版本和发表状态。
+
+
+## H. 第二轮元数据核验补充
+
+- E-SPL 的 arXiv 当前题名为 **Evolutionary System Prompt Learning can Facilitate Reinforcement Learning for LLMs**（arXiv:2602.14697）；其论文首页注明发表于 ICML 2026 的 1st FoGen workshop，不是 ICML 主会论文。登记中的旧题名来自早期 PDF 标题，正式引用前按最新 arXiv/Workshop 版本统一。
+- INSPO 的完整题名核实为 **Agentic Policy Optimization via Instruction-Policy Co-Evolution**（arXiv:2512.01945）。
+- M* 的正式 NeurIPS 2026 论文标题为 **M*: Every Task Deserves Its Own Memory Harness**；不同 arXiv 版本的作者元数据需以 NeurIPS 最终出版页为准，正式参考文献先用 Pan et al. 避免版本作者列表差异。
+- EvoMemBench 已被 NeurIPS 2026 接收，arXiv v3 版本日期为 2026-10-30。
+- 以上核验说明：文献表仍需逐条按最终出版版本校正作者、标题、页码和 DOI；当前不应直接把整个登记表复制成最终参考文献。
