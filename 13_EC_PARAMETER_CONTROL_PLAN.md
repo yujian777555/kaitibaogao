@@ -274,3 +274,17 @@ irace 使用 iterated racing 对算法配置进行自动调优：先产生候选
 3. 先跑 A/B/C/D 四组参数控制消融；
 4. 若在线自适应无显著收益，删掉它，不为“自适应”这个词保留复杂度；
 5. 只有 Phase 0 通过后才进入真实 Agent rollout。
+
+
+## 10. 参数控制与 CI-GOM V1 的对接（2026-11-02）
+
+正式动作集合见 14_FORMAL_ALGORITHM_DESIGN_V1.md：
+- \(a_1\)：singleton mixing；
+- \(a_2\)：2-locus random mixing；
+- \(a_3\)：3-locus random mixing；
+- \(a_4\)：learned interaction block + uniform feasible donor；
+- \(a_5\)：learned interaction block + posterior-aware donor。
+
+每个 proposal 只选择一个 action，避免一次 offspring 同时经过多个算子后无法做信用分配。若当前没有可识别的 pair edge，\(a_4,a_5\) 暂不可用。reward 使用配对改进 LCB 减去 \(\delta_{\min}\)，再按 rollout-equivalent 成本归一化；非法 repair、无 donor 等情况按预先定义的负反馈记录。
+
+重要修正：FOS 建边依据是可信非加性强度的绝对值，不是只看正交互。正/负符号进入 donor score；负交互不能直接作为硬拒绝条件。
