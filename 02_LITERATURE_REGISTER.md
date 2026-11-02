@@ -255,3 +255,104 @@
 - M* 的正式 NeurIPS 2026 论文标题为 **M*: Every Task Deserves Its Own Memory Harness**；不同 arXiv 版本的作者元数据需以 NeurIPS 最终出版页为准，正式参考文献先用 Pan et al. 避免版本作者列表差异。
 - EvoMemBench 已被 NeurIPS 2026 接收，arXiv v3 版本日期为 2026-10-30。
 - 以上核验说明：文献表仍需逐条按最终出版版本校正作者、标题、页码和 DOI；当前不应直接把整个登记表复制成最终参考文献。
+
+
+## H. 第三轮补充：Agent 演化最新方法、选择/评价、重组与可进化性
+
+73. **(2026). MOAE: Multi-Objective Agent Evolution with Pareto-Preserving Search. arXiv:2609.05992.** [arXiv](https://arxiv.org/abs/2609.05992)  
+    类型：PREPRINT / DIRECT-CORE。对完整 Agent rollout 做 Pareto-preserving evolutionary search，维护非支配候选档案，以任务表现、轨迹质量和安全为目标。来源页面声称与 ICLR workshop 相关，但 arXiv 首次提交时间为 2026-09-05，会议归属需进一步核验；暂不写作 ICLR 正式发表论文。
+
+74. **Gong, Y. et al. (2026). SkillMOO: Multi-Objective Optimization of Agent Skills for Software Engineering. ASE 2026, NIER track.** DOI: 10.1145/3832783.3834550. [ACM DOI](https://doi.org/10.1145/3832783.3834550)  
+    类型：PUBLISHED / DIRECT-CORE。使用 NSGA-II 优化软件工程 Agent 的 skill bundles，目标包含任务通过率和推理成本；说明“NSGA-II + Agent skills”已有直接研究。
+
+75. **(2026). MOCHA: Multi-Objective Chebyshev Annealing for Agent Skill Optimization. arXiv:2605.19330.** [arXiv](https://arxiv.org/abs/2605.19330)  
+    类型：PREPRINT / DIRECT-ADJACENT。使用 Chebyshev 标量化与退火优化 Agent skill，属于强相关多目标技能优化。
+
+76. **(2026). ParetoPO: Towards Pareto-Optimal Tool-Integrated Agents with Pareto Ranking Policy Optimization. ICML 2026.**  
+    类型：PUBLISHED / ADJACENT。通过 Pareto ranking policy optimization 训练 tool-integrated agents；属于 RL/策略优化，不是演化算法。完整作者、页码和正式链接待核验。
+
+77. **(2025). AgentBreeder: Mitigating the AI Safety Risks of Multi-Agent Scaffolds via Self-Improvement. NeurIPS 2025.** [arXiv:2502.00757](https://arxiv.org/abs/2502.00757)  
+    类型：PUBLISHED / DIRECT-CORE。对 Multi-Agent scaffold 做多目标演化与质量多样性搜索，关注能力和安全权衡；早期版本曾以相近题名出现在 ICLR 2025 workshop，正式引用以 NeurIPS 版本为准。
+
+78. **(2026). Test-Time Harness Evolution (TTHE). arXiv:2607.08124.** [arXiv](https://arxiv.org/abs/2607.08124)  
+    类型：PREPRINT / DIRECT-CORE。跨多个任务批次持续演化 Agent harness，使用多个 proposer 分支和 judge 选择，并将已接受修改持续带入后续任务。论文指出代理信号可靠性是核心问题，并报告候选池 oracle 选择与 judge 选择之间存在明显 selection regret。
+
+79. **(2026). Meta-TTL: Learning to Learn-at-Test-Time—Language Agents with Learnable Adaptation Policies. arXiv:2604.00830.** [arXiv](https://arxiv.org/abs/2604.00830)  
+    类型：PREPRINT / DIRECT-CORE。跨任务训练可迁移的 Agent 自适应策略；外层通过反思式搜索改进单一 adaptation meta-prompt，内层执行 test-time adaptation。
+
+80. **(2026). TacoMAS: Test-Time Co-Evolution of Topology and Capability in LLM-Based Multi-Agent Systems. arXiv:2605.09539.** [arXiv](https://arxiv.org/abs/2605.09539)  
+    类型：PREPRINT / DIRECT-CORE。测试时联合演化 Multi-Agent 拓扑和能力，采用快慢时间尺度。
+
+81. **Wei, S. et al. (2026). Inherit-MAS: Test-Time Evolution of Multi-Agent Systems through Workflow and Execution Inheritance. arXiv:2610.02396.** [arXiv](https://arxiv.org/abs/2610.02396)  
+    类型：PREPRINT / DIRECT-CORE。显式继承工作流结构和历史执行结果，使用 Judge 评价候选并诊断不足；2026-10 新近预印本。
+
+82. **Nie, J. et al. (2026). EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement. arXiv:2608.04968.** [arXiv](https://arxiv.org/abs/2608.04968)  
+    类型：PREPRINT / DIRECT-CORE。多个数据本地部署分别演化 Agent harness，再通过 scope-typed、evidence-guided program aggregation 合并适应性修改。
+
+83. **Yu, Y. et al. (2026). Do Self-Evolving Agents Forget? Capability Degradation and Preservation in Lifelong LLM Agent Adaptation. arXiv:2605.09315.** [arXiv](https://arxiv.org/abs/2605.09315)  
+    类型：PREPRINT / DIRECT-ADJACENT。提出 Capability-Preserving Evolution（CPE），研究 workflow、skill、model、memory 演化中的能力退化和保持。
+
+84. **(2026). DarwinX: Evolving Agent Harnesses Through Natural Selection. arXiv:2608.07545.** [arXiv](https://arxiv.org/abs/2608.07545)  
+    类型：PREPRINT / DIRECT-CORE。通过 preserve-and-extend contract、候选档案、跨 lineage merge 和 verifier-based fitness 演化 coding-agent harness。作者指出 recombination 相对单 lineage mutation 的贡献仍需受控消融；SWE-bench Verified 的 in-domain 演化因缺乏可靠的轨迹完成信号而受限。
+
+85. **(2026). Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses. arXiv:2604.25850.** [arXiv](https://arxiv.org/abs/2604.25850)  
+    类型：PREPRINT / DIRECT-CORE。通过 component observability、experience observability、decision observability 将 harness 修改变成可验证编辑；每次修改带有自声明预测并在下一轮任务中核验。
+
+86. **(2026). The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators. arXiv:2606.26294.** [arXiv](https://arxiv.org/abs/2606.26294)  
+    类型：PREPRINT / DIRECT-ADJACENT。联合改进 Agent 和 evaluator，针对固定评价标准会随 Agent 能力提升而失效的问题提出 co-evolution。
+
+87. **(2026). Certified Selective Automation of LLM Agent Evaluation. arXiv:2609.34320.** [arXiv](https://arxiv.org/abs/2609.34320)  
+    类型：PREPRINT / EVALUATION。提出 task-level bootstrap certificate，处理同一任务下多条 Agent 轨迹的相关性，为 LLM judge 的自动决策错误率提供选择性证书。
+
+88. **(2026). Calibrating the Evaluator: Does Probability Calibration Mitigate Preference Coupling in LLM Agent Feedback Loops? arXiv:2606.31371.** [arXiv](https://arxiv.org/abs/2606.31371)  
+    类型：PREPRINT / EVALUATION。研究 evaluator pairwise judgment 的概率校准对 preference coupling 的影响；实验规模较小，需谨慎解释。
+
+89. **Pan, E., Zhou, R., & Hu, T. (2026). Self-Reports Are Not Verification: Environment-Grounded Auditing of LLM Operators in Evolutionary Search. arXiv:2609.00652.** [arXiv](https://arxiv.org/abs/2609.00652)  
+    类型：PREPRINT / EVALUATION。对 LLM evolutionary search 中的自报告置信度和 rationale 做环境真值审计，发现自报告可能严重失准。
+
+90. **Wang, W. et al. (2026). Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine. ICLR 2026.** [arXiv:2510.21614](https://arxiv.org/abs/2510.21614)  
+    类型：PUBLISHED / DIRECT-CORE。提出 clade metaproductivity（CMP），用后代整体表现估计 Agent 的未来自改进潜力，指导自修改树搜索。
+
+91. **Yan, S. et al. (2026). The View from Nowhere: Population-Centered Agent Evolution. arXiv:2610.36660.** [arXiv](https://arxiv.org/abs/2610.36660)  
+    类型：PREPRINT / DIRECT-CORE。Population-Centered Evolution（PCE）将整个种群的任务记录、修改历史、互补成功和重复失败压缩为 population block，辅助改进选定父代。
+
+92. **Kong, L. et al. (2026). FreeEvolve: Learning to Evolve Beyond Fixed Loops. arXiv:2610.09197.** [arXiv](https://arxiv.org/abs/2610.09197)  
+    类型：PREPRINT / DIRECT-CORE。将 evolver 自身的搜索、证据采集、候选选择和停止策略表示为可编辑 evolution skill，并通过 meta-evolution 改进 evolver。
+
+93. **(2026). Group-Evolving Agents: Open-Ended Self-Improvement via Experience Sharing. arXiv:2602.04837.** [arXiv](https://arxiv.org/abs/2602.04837)  
+    类型：PREPRINT / DIRECT-ADJACENT。群体级 Agent 演化和经验共享，需继续核验正式发表状态及与 PCE 的差异。
+
+94. **(2026). Experience as a Compass: Multi-Agent RAG with Evolving Orchestration and Agent Prompts (HERA). arXiv:2604.00901.** [arXiv](https://arxiv.org/abs/2604.00901)  
+    类型：PREPRINT / ADJACENT。联合优化多 Agent orchestration 与 prompt，结合历史经验检索；需精读是否存在真正的遗传算子。
+
+95. **Xia, Y. et al. (2026). HiveMind: Contribution-Guided Online Prompt Optimization of LLM Multi-Agent Systems. AAAI 2026, 40(35):29767–29774.** DOI: 10.1609/aaai.v40i35.40222. [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/40222)  
+    类型：PUBLISHED / ADJACENT。使用 DAG-Shapley 估计 Multi-Agent workflow 中个体 Agent 的贡献，并对低贡献 Agent 的 Prompt 进行在线优化；是信用分配强基线，但不是 EA。
+
+96. **(2025). FlowReasoner: Reinforcing Query-Level Meta-Agents. arXiv:2504.15257.** [arXiv](https://arxiv.org/abs/2504.15257)  
+    类型：PREPRINT / ADJACENT。通过 RL 训练 meta-agent 为单个查询设计 Multi-Agent workflow；不是 EA。
+
+97. **(2024). Multi-Agent Sampling: Scaling Inference Compute for Data Synthesis with Tree Search-Based Agentic Collaboration (TOA). arXiv:2412.17061.** [arXiv](https://arxiv.org/abs/2412.17061)  
+    类型：PREPRINT / ADJACENT。通过树搜索组织多 Agent 数据合成，属于搜索型协作对照。
+
+98. **(2026). Self-Evolving Agent Harness. arXiv:2610.18813.** [arXiv](https://arxiv.org/abs/2610.18813)  
+    类型：PREPRINT / DIRECT-ADJACENT。研究 harness 持续演化中的泛化界、能力保持和独立验证准入规则；需精读并核对完整题名/作者。
+
+99. **Ge, L.-Y. & Guo, L.-Z. (2026). Roles with Rails: Contract-Preserving Role Evolution in Multi-Agent Structured Reasoning. Findings of EMNLP 2026, pp. 6159–6192.** [ACL Anthology](https://aclanthology.org/2026.findings-emnlp.290/)  
+    类型：PUBLISHED / ADJACENT。SERO 维护 typed role-card pool、通信 DAG、受保护的终端聚合器和条件验证器修复；候选修改只有通过结构契约且提高任务分数才提交。
+
+100. **(2026). EvoDrive: Pareto Evolution for Safety-Critical Autonomous Driving via Self-Improving LLM Agents. CoRL 2026.** [CoRL 2026](https://www.corl.org/)  
+     类型：PUBLISHED / ADJACENT。使用 Agentic 演化优化安全关键自动驾驶场景/系统，需进一步确认演化对象主要是场景生成器还是 Agent 本身，不能直接当作 Agent 配置演化证据。
+
+## I. 演化计算基础：可进化性、噪声适应度与统计竞赛
+
+101. **Mengistu, H., Lehman, J., & Clune, J. (2016). Evolvability Search: Directly Selecting for Evolvability in Order to Study and Produce It. GECCO 2016, pp. 141–148.** DOI: 10.1145/2908812.2908838. [ACM DOI](https://doi.org/10.1145/2908812.2908838)  
+     类型：FOUNDATION。通过直接测量个体即时后代的行为多样性来选择可进化个体；说明“按 offspring potential 选择”是经典 EC 已有思想。
+
+102. **Gajewski, A., Clune, J., Stanley, K. O., & Lehman, J. (2019). Evolvability ES: Scalable and Direct Optimization of Evolvability. GECCO 2019.** DOI: 10.1145/3321707.3321876. [ACM DOI](https://doi.org/10.1145/3321707.3321876) · [arXiv:1907.06077](https://arxiv.org/abs/1907.06077)  
+     类型：FOUNDATION。以可扩展 ES 直接优化扰动后产生多样行为的能力。
+
+103. **Rakshit, P., Konar, A., & Das, S. (2017). Noisy Evolutionary Optimization Algorithms—A Comprehensive Survey. Swarm and Evolutionary Computation, 33, 18–45.** DOI: 10.1016/j.swevo.2016.09.002. [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S221065021630308X)  
+     类型：FOUNDATION / SURVEY。系统整理噪声适应度下的采样、估计、动态种群规模、搜索策略和选择机制。
+
+104. **Birattari, M., Stützle, T., Paquete, L., & Varrentrapp, K. (2002). A Racing Algorithm for Configuring Metaheuristics. GECCO 2002, pp. 11–18.** [PDF](https://www.metaheuristics.org/downloads/BirStuPaqVar2002_gecco.pdf)  
+     类型：FOUNDATION。F-Race 根据统计证据逐步淘汰较差配置；可作为不确定/噪声评价下候选比较的经典方法基础。
