@@ -590,3 +590,74 @@ CI-GOM 规格保留但冻结；Gate-1 后先做 oracle-linkage 上界、contract
 
 ### 接班提示词的最新补充
 先读 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md、16_TCAIL_SPECIFICATION_AUDIT_R1.md、14_FORMAL_ALGORITHM_DESIGN_V1.md。当前只做 TCAIL 规格修订。注意 Bayesian D-optimal 对照、背景平均 pair estimand、structural vs sample identifiability、Bernoulli/Beta expected information、Bayesian FDR 和大规模 synthetic landscapes。不要把 REQUEST REVISION 写成算法已失败，也不要把算法设计写成已验证创新；这是实现前规格审计发现的可修订缺口。
+
+
+## 21. TCAIL V2 纸面修订与首轮新颖性审查完成（2026-11-02）
+
+本节覆盖此前 handoff 中要求按 V1 直接进入 Phase 0 的旧指令。
+
+### 新增文件
+- 17_TCAIL_FORMAL_SPECIFICATION_V2.md：TCAIL 修订规格；
+- 18_TCAIL_RELATED_WORK_AUDIT_R1.md：首轮相关工作与新颖性审查。
+
+14_FORMAL_ALGORITHM_DESIGN_V1.md 已加状态说明：其 TCAIL 部分由 V2 替代；CI-GOM 部分保留为历史规格且继续冻结。
+
+### 当前状态
+- V1 审计结论仍是 REQUEST REVISION；
+- V2 已完成纸面修订，但尚未独立复审；
+- 没有代码实现、没有正式实验、没有性能结果、没有 Gate-1 PASS；
+- TCAIL 状态：REVISED_SPEC_PENDING_INDEPENDENT_REVIEW；
+- CI-GOM 继续冻结；第三项迁移继续冻结；大论文正文继续暂停。
+
+### V2 关键修订
+1. Pairwise contrast 显式依赖其他槽位背景，并以预先指定 reference distribution 定义平均边效应；
+2. 同时报告背景异质性和共同支持质量；
+3. 区分 link-scale interaction 与 reward-scale performance contrast；
+4. 区分 IDENTIFIABLE、PENDING_SUPPORT、STRUCTURALLY_NOT_IDENTIFIABLE、STRUCTURAL_STATUS_UNCERTIFIED；
+5. Gaussian、Bernoulli、Beta 似然分别定义；
+6. 非 Gaussian Group-ARD 采用 Laplace approximate marginal likelihood，不复用 Gaussian 闭式更新；
+7. Bayesian FDR 全局控制；
+8. interaction-only IG 明确作为 Bayesian D-optimal 对照，不再作为新颖点；
+9. edge-decision risk reduction 作为待验证候选，不能先验宣称新颖；
+10. 4-slot 仅 debug，增加 8/10/12-slot scaling；
+11. 增加 null、additive-only、three-way-only 和 mixed-order 场景；
+12. 明确 TCAIL 本身不是完整 EC 算法，其对 EC 搜索的实际价值必须后续验证。
+
+### 首轮相关工作审查发现
+- Lewis & Dean (2001)：interaction group screening；
+- Singh & Stufken (2024)：GDS-ARM；
+- Huan et al. (2024)：Bayesian / sequential OED；
+- Hainy et al. (2022)：decision-theoretic Bayesian model discrimination；
+- Chen et al. (2008)：Bayesian FDR interaction selection；
+- Lauziere et al. (2026)：Prompt component regression；
+- Liu (2026)：Agent scaffolding 32-configuration factorial analysis，且其特定设置中 pairwise model 留出表现弱于 main-effects model；
+- Radwan et al. (2026)：Harness-aware evaluation；
+- Zhao et al. (2026)：预算约束 Agent harness 进化优化。
+
+新颖性未成立。上述工作意味着不能把“发现组件交互”、pairwise regression、Bayesian IG/D-optimal、Bayesian FDR 或一般 Agent harness 搜索本身作为创新。TCAIL 只能通过受约束、随机、任务异质的 Agent 配置空间中的同预算强基线结果证明额外价值。
+
+### EC 主线约束
+TCAIL 是统计建模和主动实验设计模块，不是完整 EC 算法。它可以作为后续 CI-GOM 的交互结构输入，但只有当其结构信息被证明能改善演化 linkage/mixing/search，才能闭合毕业论文 EC 主线。不能仅凭未来计划把它写成已成立的 EC 创新。
+
+### 下一轮唯一任务
+独立复审 17_TCAIL_FORMAL_SPECIFICATION_V2.md。重点检查：
+- link-scale estimand 与 reference-background averaging 是否一致；
+- Beta Fisher information 推导；
+- Gaussian/GLM posterior 与 Group-ARD evidence；
+- row-space estimability 与四格共同支持的边界；
+- BFDR 的全局检验族定义；
+- edge-decision risk acquisition 是否可计算且目标明确；
+- budget、task-block、cluster bootstrap 是否一致；
+- 8/10/12-slot 实验统计单位和样本量；
+- 与 OED、group screening、Agent interaction work 的真实差异。
+
+如果 V2 仍有数学错误，继续修规格；如果数学正确但新颖性不成立，修改研究主张或 NO-GO。不得为了看起来新而添加未经论证的复杂模块。规格复审通过之前，不实现代码、不跑正式实验、不调用真实 LLM。
+
+### 最新接班提示词
+你是我的硕士研究 Planner。唯一仓库 yujian777555/kaitibaogao。当前先不写大论文，按创新点逐项验证。当前只做 TCAIL，CI-GOM 和迁移冻结。
+
+请先读 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md、16_TCAIL_SPECIFICATION_AUDIT_R1.md、17_TCAIL_FORMAL_SPECIFICATION_V2.md、18_TCAIL_RELATED_WORK_AUDIT_R1.md 和本 handoff。
+
+V1 的 TCAIL 已被 V2 替代。V2 已修订但尚未独立复审。请独立检查所有数学定义、Beta Fisher information、Gaussian/GLM posterior、ARD evidence、identifiability row-space test、reference distribution、BFDR 和 acquisition。不得直接实现或跑正式实验。
+
+特别审查 EC 主线定位：TCAIL 是统计/实验设计模块，不是完整 EC 算法；不能将其独立写成 EC 创新，除非证明它对演化搜索有独立贡献。首轮相关工作已发现 interaction group screening、GDS-ARM、Bayesian OED、Bayesian FDR、Agent 组件全因子/回归、harness-aware evaluation、预算约束 Agent harness 进化优化均有先例。新颖性未成立。只有独立复审通过后才能进入代码；合成通过后仍必须做真实 Agent 验证。
