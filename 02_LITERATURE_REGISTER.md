@@ -402,3 +402,28 @@
 117. **Trivedi, H. et al. (2024). AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents. ACL 2024.** [ACL Anthology](https://aclanthology.org/2024.acl-long.850/)  
      类型：BENCHMARK / PUBLISHED。提供 9 个日常应用、457 个 API 和 750 个任务，使用程序化状态检查评价任务完成及意外副作用；可作为多工具、有状态 Agent 配置演化的外部验证基准。
 
+
+
+## L. 第五轮：演化计算参数调优与在线参数控制（2026-11-02）
+
+118. **Eiben, A. E., Michalewicz, Z., Schoenauer, M., & Smith, J. E. (2007). Parameter Control in Evolutionary Algorithms.** In *Parameter Setting in Evolutionary Algorithms*, Studies in Computational Intelligence, vol. 54, pp. 19–46. DOI: 10.1007/978-3-540-69432-8_2. [University of Adelaide record](https://digital.library.adelaide.edu.au/items/e7778f8f-c154-4995-a207-b29c0c098598)  
+     类型：FOUNDATION / SURVEY。区分预先参数设置与运行时参数控制，并将运行时控制划分为 deterministic、adaptive、self-adaptive。用于本课题建立离线调参和在线控制的概念边界。
+
+119. **Eiben, A. E., & Smit, S. K. (2011). Parameter tuning for configuring and analyzing evolutionary algorithms. Swarm and Evolutionary Computation, 1(1), 19–31.** DOI: 10.1016/j.swevo.2011.02.001. [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2210650211000022)  
+     类型：FOUNDATION / SURVEY。提出问题—演化算法—调参器的三层框架，讨论采样、模型、筛选和元演化调参，并强调算法性能与鲁棒性评价。
+
+120. **Aleti, A., & Moser, I. (2016). A systematic literature review of adaptive parameter control methods for evolutionary algorithms. ACM Computing Surveys, 49(3), Article 56.** DOI: 10.1145/2996355. [Monash record](https://research.monash.edu/en/publications/a-systematic-literature-review-of-adaptive-parameter-control-method/)  
+     类型：FOUNDATION / SURVEY。系统梳理基于运行反馈的在线参数控制，指出 mutation rate、crossover rate、population size 等参数具有问题和阶段依赖性。
+
+121. **López-Ibáñez, M., Dubois-Lacoste, J., Pérez Cáceres, L., Stützle, T., & Birattari, M. (2016). The irace package: Iterated racing for automatic algorithm configuration. Operations Research Perspectives, 3, 43–58.** DOI: 10.1016/j.orp.2016.09.002. [Open access paper](https://www.sciencedirect.com/science/article/pii/S2214716015300270) · [irace documentation](https://mlopez-ibanez.github.io/irace/)  
+     类型：METHOD / TOOL。通过候选配置采样和 iterated racing 在问题实例上淘汰统计上较差的参数配置；适用于离线自动算法配置，作为本课题混合数值/类别参数的首选调参工具候选。
+
+122. **Da Costa, L., Fialho, Á., Schoenauer, M., & Sebag, M. (2008). Adaptive operator selection with dynamic multi-armed bandits. GECCO 2008, pp. 913–920.** DOI: 10.1145/1389095.1389272. [Author manuscript](https://www.cs.ubc.ca/~hutter/EARG.shtml/earg/papers08/pap333s1-dacosta.pdf)  
+     类型：FOUNDATION / METHOD。AOS 将算子信用分配与多臂老虎机选择机制分开处理，根据历史 offspring 表现调整算子使用策略。用于本课题的辅助参数控制，不单独宣称新颖。
+
+123. **Tanabe, R., & Fukunaga, A. (2013). Success-history based parameter adaptation for Differential Evolution. IEEE Congress on Evolutionary Computation 2013, pp. 71–78.** DOI: 10.1109/CEC.2013.6557555. [IEEE Xplore](https://doi.org/10.1109/CEC.2013.6557555)  
+     类型：FOUNDATION / METHOD。SHADE 使用历史成功的 \(F\)、\(CR\) 参数对未来采样进行引导；可借鉴“成功历史”思想，但 \(F\)、\(CR\) 是 DE 参数，不能直接移植为 categorical GOM 参数。
+
+124. **Tanabe, R., & Fukunaga, A. (2014). Improving the search performance of SHADE using linear population size reduction. IEEE Congress on Evolutionary Computation 2014.** DOI: 10.1109/CEC.2014.6900380. [DOI](https://doi.org/10.1109/CEC.2014.6900380)  
+     类型：FOUNDATION / METHOD。L-SHADE 在 SHADE 基础上加入线性种群规模缩减，作为 DE 中种群规模动态控制的代表工作；仅用于 DE baseline 和参数控制背景，不作为本课题 GOM 的直接参数方案。
+
