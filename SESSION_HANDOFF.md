@@ -778,3 +778,71 @@ TCAIL 仍是统计建模/主动实验设计模块，不是完整 EC 算法。普
 **严格禁止：** 当前不实现代码、不运行正式 Phase 0、不调用真实 LLM、不启动 CI-GOM、不启动第三项迁移、不写硕士大论文正文。规格修订完成后，先交独立复审；不得自己修订后自行宣布通过。
 
 每轮结束必须更新本仓库的研究报告、README、05_DECISION_LOG 和 SESSION_HANDOFF；检查旧规格与新规格状态一致；提交到 main，重新读取远端 main HEAD 和关键文件核验。未推送或未核验成功时如实报告。
+
+
+## 25. GOMEA linkage 接口补充审计与 B1 修订提案（2026-11-02）
+
+### 本轮交付
+
+- 新增 21_GOMEA_LINKAGE_AND_NOISY_INTERACTION_RELATED_WORK_AUDIT_R1.md；
+- 新增 22_TCAIL_LINKAGE_INTERFACE_REVISION_PROPOSAL_R1.md（B1 proposal only，未并入权威规格）；
+- 文献总表 02_LITERATURE_REGISTER.md 新增 P125–P132；
+- README、05_DECISION_LOG（D-029）、15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL 已更新；
+- 14_FORMAL_ALGORITHM_DESIGN_V1.md 新增 Addendum 18，明确旧 CI-GOM Section 10 为 historical/frozen，不得按原样实现。
+
+### 关键研究修正
+
+GOMEA linkage 并非只有 SLL-MI；fitness-based linkage 已有 RV-GOMEA 工作，conditional FOS / maximum-clique linkage、DLED/cDLED、Linkage Kernels 也已覆盖局部/多结构依赖。噪声环境下 linkage decomposition 也已有 LMM、ALI/AIM。
+
+因此：
+- 不得宣称 fitness-based linkage 是新概念；
+- 不得把平均有符号 interaction 直接当作通用 linkage edge；
+- 不得把 VIG 直接称为 FOS；
+- 不得忽略当前 parent 的局部结构；
+- 不得忽略高阶/重叠依赖和现有 conditional FOS 基线。
+
+### 22 号提案的核心
+
+- 实际 objective utility scale 上的条件四格差分；
+- global RMS interaction energy 仅作 task-conditioned 总体摘要；
+- current-parent/task-conditioned local posterior linkage \(q_{ij}(x,z)\)；
+- 输出 local weighted VIG，再通过固定 LT / conditional FOS builder 形成 FOS。
+
+这可能形成的候选差异是：随机昂贵 Agent rollout、任务异质、合法配置约束、task-block 配对、posterior uncertainty 和主动预算的联合处理。但 LMM/ALI 已覆盖一般噪声 linkage，cDLED 已覆盖局部 conditional linkage，必须做直接强基线比较。
+
+### 当前状态
+
+**TCAIL 仍 HOLD / IMPLEMENTATION BLOCKED。** 21 号报告是相关工作审计；22 号是 B1 修订提案，不是已通过规格。B2–B8 仍然未解决。没有代码、没有实验、没有 Gate-1 PASS。
+
+14 号文件中的 CI-GOM Section 10 已明确标记为 historical/frozen，不允许按原样实现。CI-GOM 和第三项迁移继续冻结。
+
+### 下一轮唯一任务
+
+独立复审 22_TCAIL_LINKAGE_INTERFACE_REVISION_PROPOSAL_R1.md。重点核查：
+1. RMS interaction energy 的数学解释与边界；
+2. local posterior linkage 与 DLED/cDLED/FBL 的机制差异；
+3. objective-scale contrast 与真实 Agent fitness/GOM acceptance 的一致性；
+4. local weighted VIG 到 LT/conditional FOS 的接口；
+5. 是否存在可证伪的 EC 搜索收益和公平强基线。
+
+如果 22 号提案的差异仅是已知 FBL/DLED 的贝叶斯化包装，应 NO-GO 或继续收窄，而不是强行命名新算法。
+
+### 下一会话完整接班提示词
+
+你是我的河北工业大学计算机技术硕士开题研究 Planner。唯一仓库为 yujian777555/kaitibaogao；不得读取其他用户 GitHub 仓库，不得混入 openissue、agentfotagent、GLEPPO 等项目。
+
+开始前核对远端 main HEAD，并阅读 README.md、REPOSITORY_MAINTENANCE_POLICY.md、02_LITERATURE_REGISTER.md、05_DECISION_LOG.md、SESSION_HANDOFF.md、15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md、17_TCAIL_FORMAL_SPECIFICATION_V2.md、20_TCAIL_V2_1_INDEPENDENT_REVIEW_R1.md、21_GOMEA_LINKAGE_AND_NOISY_INTERACTION_RELATED_WORK_AUDIT_R1.md、22_TCAIL_LINKAGE_INTERFACE_REVISION_PROPOSAL_R1.md，以及 14_FORMAL_ALGORITHM_DESIGN_V1.md Addendum 18。
+
+当前唯一任务：独立复审 22 号 B1 修订提案，不编码、不跑正式 Phase 0、不调用真实 LLM。
+
+必须审查：
+- GOMEA SLL-MI 与 fitness-based linkage 的区别；
+- FBL（Olieman 2021）、Andreadis 2024 fitness-based conditional linkage、DLED/cDLED、LMM、ALI/AIM、Linkage Kernels、Tinós 2026 在线 interaction learning；
+- objective-scale conditional finite difference；
+- global RMS interaction energy 与 local parent/task posterior linkage 的分工；
+- local weighted VIG 与 FOS 的区别，以及固定 FOS builder 的公平比较；
+- 是否能在同等 rollout budget 下优于 FBL/cDLED/LMM/ALI 和在线副产物基线。
+
+不要把 RMS 平方平均本身包装成新颖算子。若 22 号提案只是在已有 FBL/DLED 上加 Bayesian posterior，而没有独立的任务异质/随机 Agent/预算收益，应建议 NO-GO 或继续收窄。
+
+B2–B8 仍未解决；TCAIL 仍 HOLD。CI-GOM 与第三项迁移继续冻结。每轮结束按 REPOSITORY_MAINTENANCE_POLICY.md 更新报告、README、决策日志和 handoff，推送并复核远端 main。
