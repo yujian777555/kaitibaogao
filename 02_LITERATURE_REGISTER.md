@@ -356,3 +356,21 @@
 
 104. **Birattari, M., Stützle, T., Paquete, L., & Varrentrapp, K. (2002). A Racing Algorithm for Configuring Metaheuristics. GECCO 2002, pp. 11–18.** [PDF](https://www.metaheuristics.org/downloads/BirStuPaqVar2002_gecco.pdf)  
      类型：FOUNDATION。F-Race 根据统计证据逐步淘汰较差配置；可作为不确定/噪声评价下候选比较的经典方法基础。
+
+
+## J. 开题论文结构相关的新增直接工作（2026-11-02）
+
+105. **Shang, Z. et al. (2026). MESH-Harness: Self-Improving Agent Harnesses via Bandit-Guided Compositional Evolution. arXiv:2610.05300.** [arXiv](https://arxiv.org/abs/2610.05300)  
+     类型：PREPRINT / DIRECT-CORE。将 Agent harness 分为固定接口功能槽位，维护模块实现池，以 full-covariance LinUCB 和 mixed-start coordinate ascent 选择完整组合，并根据执行轨迹编辑模块。重要机制细节：其配置表示为各槽位 embedding 拼接；预测均值仍是 slot-wise additive，full covariance 用于统计共同出现信息和组合不确定性，并非直接拟合非加性组件 epistasis。是强组合搜索与评价分配基线。
+
+106. **Wei, T. et al. (2026). Evo-Harness: Context-to-Harness Skill Compilation for Self-Evolving Agents. EMNLP 2026, pp. 22343–22358.** DOI: 10.18653/2026.emnlp-main.969. [ACL Anthology](https://aclanthology.org/2026.emnlp-main.969/)  
+     类型：PUBLISHED / DIRECT-ADJACENT。研究在线 Harness 学习，将单次执行中含噪上下文编译成可复用技能 harness，在 TerminalBench2、SWE-bench、CL-Bench、τ-bench、WebArena-Infinity 等任务上评估。对第三创新点的任务迁移和经验更新是直接相关工作。
+
+107. **(2026). AgentEvo: Cost-Aware Agentic Workflow Generation via Adaptive Multi-Stage Evolution. Complex & Intelligent Systems.** DOI: 10.1007/s40747-026-02325-0. [Springer](https://link.springer.com/article/10.1007/s40747-026-02325-0)  
+     类型：PUBLISHED / DIRECT-CORE。采用探索、精炼、交叉多阶段演化，进行工作流子图 graft、prompt fusion 和性能-Token 成本 Pareto 选择。说明 Agent workflow crossover、多目标成本优化已有直接研究。
+
+108. **Brookes, P. et al. (2025). Evolving Excellence: Automated Optimization of LLM-Based Agents. arXiv:2512.09108.** [arXiv](https://arxiv.org/abs/2512.09108)  
+     类型：PREPRINT / DIRECT-CORE。ARTEMIS 使用语义感知遗传算子，自动发现可配置 Agent 组件，并联合演化不同 Agent 配置。需要进一步精读其组件依赖识别和遗传算子细节；不能仅凭摘要断言其已实现 epistasis-aware linkage learning。
+
+109. **Hu, Y. et al. (2026). Evolutionary Generation of Multi-Agent Systems. ICML 2026.** [arXiv](https://arxiv.org/abs/2602.06511)  
+     类型：PUBLISHED / DIRECT-CORE。EvoMAS 将 MAS 生成建模为结构化配置空间中的演化，使用执行轨迹引导的 feedback-conditioned mutation 和 crossover，并维护候选池与经验记忆。是结构化 Agent 演化的强基线。
