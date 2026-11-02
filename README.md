@@ -75,3 +75,20 @@
 5. 按学校模板撰写开题报告，不提前拼凑空泛综述。
 
 **重要：本 README 中“首批文献”不等于穷尽全部文献。文献检索必须持续迭代并保留检索记录。**
+
+
+## 8. 第二轮研究更新（2026-11-02）
+
+第二轮检索增加了 EvoTest（ICLR 2026）、COvolve（GECCO 2026）、CATArena（ICML 2026）、M*（NeurIPS 2026）、E-SPL（ICML 2026 FoGen workshop）、INSPO、SkillRL、EvoSkills、MemEvolve、MemSkill、Live-Evo、EvoTeam、Evolving Agent Teams 等文献。
+
+**重要进展：** EvoTest 论文第 16 页明确指出其当前采用简单的 (1+m) 演化策略和 UCB 选择，可能陷入局部最优，并将更复杂的种群演化、Quality-Diversity 和自动程序综合列为未来方向。它同时指出单任务测试时学习容易产生任务特定过拟合。由此新增候选 D：面向任务分布变化的多目标演化测试时自适应。该候选尚未通过创新性审查。
+
+后续必须重点区分：
+- EvoTest：测试时整套 Agent 配置演化；
+- M* / MemEvolve：Agent 记忆程序/记忆架构的演化；
+- E-SPL / INSPO / SkillRL：提示、指令、策略或技能与 RL 的协同演化；
+- COvolve：策略与环境的对抗协同演化；
+- EvoTeam / Evolving Agent Teams：团队组织、交互规则或 Agent 团队重构；
+- HFlow / 两篇 EvoMAS：工作流/多智能体系统的演化搜索。
+
+后续不能把“使用种群”“使用 QD”“跨任务迁移”或“在线演化”单独当作创新，必须明确与这些直接相关工作之间的机制差异。
