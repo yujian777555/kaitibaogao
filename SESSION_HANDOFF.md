@@ -458,3 +458,47 @@ D：irace + 在线控制。
 本轮新增 13_EC_PARAMETER_CONTROL_PLAN.md，包含参数表、初始策略、irace、UCB/AOS 公式、A/B/C/D 消融和停止条件。在线 AOS 不单独算创新；如果不优于离线调参固定策略就删除。
 
 下一步先完成合成真值 landscape 精确定义、伪代码、参数敏感性实验；不调用真实 LLM，不读其他 GitHub 仓库。所有结论必须区分论文事实、推断和待验证假设。每轮更新唯一仓库并核验 main。
+
+
+## 16. 第六轮：算法形式化设计 V1 已完成（2026-11-02）
+
+新增文件：14_FORMAL_ALGORITHM_DESIGN_V1.md。
+
+### 本轮成果
+已把两个核心候选从概念推进到可实现规格：
+- **Paper 1 TCAIL**：categorical orthogonal contrasts、task-context features、Group-ARD、posterior edge confidence、合法空间 identifiability gate、interaction-only posterior IG / cost acquisition、噪声校准和 abstention。
+- **Paper 2 CI-GOM**：interaction FOS、contract-aware dependency closure、deterministic minimal repair、posterior-aware donor softmax、paired anytime-valid sequential acceptance、discounted-UCB 动作控制。
+
+### 重要理论纠正
+此前草案倾向只把正交互放进 FOS。现已纠正：linkage 表示非加性依赖，正/负交互都可能形成 linkage。V1 用 \(P(|\Delta_{ij}|>\delta_{\mathrm{link}})\) 建边；符号用于解释和 donor score。负交互不等于非法组合，不能当作硬约束。
+
+### 当前状态
+- TCAIL：HOLD，尚未实现/实验；
+- CI-GOM：HOLD，尚未实现/实验；
+- AOS/UCB：辅助可选组件，不是独立创新；若不优于离线调参固定策略则删除；
+- 第三篇跨任务迁移：暂缓；
+- 未调用真实 LLM，未运行 Phase 0。
+
+### 下一轮必须做
+1. 只允许维护 yujian777555/kaitibaogao，严禁读取其他 GitHub 仓库。
+2. 先读取 14_FORMAL_ALGORITHM_DESIGN_V1.md、12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md、13_EC_PARAMETER_CONTROL_PLAN.md、11_INNOVATION_FEASIBILITY_AUDIT.md。
+3. 设计并实现 Phase 0 合成 landscape 生成器：4 binary slots、主效应、正/负 pair interactions、任务家族符号翻转、三阶 misspecification、Bernoulli/Beta 噪声。
+4. 同时实现 full factorial、random design、D-optimal/fractional design、main-effects、pairwise OLS、sparse Group-ARD fixed design、TCAIL active IG。
+5. 先验证交互估计：RMSE、edge AUPRC/F1、方向准确率、区间覆盖率、held-out prediction、预算曲线。
+6. 实现 CI-GOM 的最小模拟版本：oracle graph、random graph、learned graph；standard GOM、random linkage、CI-GOM；contract checker、repair closure 和 noisy acceptance 分开消融。
+7. 做 A/B/C/D 参数控制实验：default fixed、irace tuned fixed、default + AOS、irace + AOS。所有方法同 rollout budget。
+8. 先不要调用真实 LLM，不要读取 benchmark GitHub 源码。Phase 0 通过后才选 ToolSandbox/AppWorld/tau-bench 的公开任务与文档。
+9. 每轮更新 README、算法规格、参数计划、机制比较、开题计划、决策日志和接班提示词。当前没有新增文献，因此不为凑数修改文献总表。
+
+### 最新可直接复制的接班提示词
+你是我的河北工业大学计算机技术硕士开题研究助手。研究主线为 Evolutionary Computation for AI Agents。唯一允许读取和维护的 GitHub 仓库是 yujian777555/kaitibaogao，严禁读取任何其他 GitHub 仓库。
+
+用户要求硕士论文有 2–3 个独立创新点，每个创新点形成一篇小论文。当前仅保留两个核心候选 + 一个暂缓扩展，不得凑数。总题目工作稿：《面向大语言模型智能体的交互感知演化优化方法研究》。
+
+普通组件交互分析 NO-GO。Paper 1 候选为 TCAIL：任务条件化类别效应编码 + Group-ARD 稀疏交互估计 + 合法配置可识别性门禁 + interaction-only posterior information gain 主动采样。Paper 2 候选为 CI-GOM：交互 FOS + contract-aware deterministic minimal repair + posterior-aware donor + paired sequential acceptance。两者仍 HOLD，尚未实现和验证。
+
+关键修正：linkage 反映非加性依赖，正/负交互都可建边。V1 使用 \(P(|\Delta_{ij}|>\delta_{\mathrm{link}})\) 建边，符号只用于 donor scoring；负交互不等于硬约束。类型、接口、权限、调用依赖才是硬约束。
+
+演化参数方案：训练任务上 irace 离线配置；discounted-UCB/AOS 在线调整动作使用倾向；统计门禁固定。AOS 不是独立创新，若不优于离线调参固定策略则删除。主算法 categorical GOM，不用 DE 专属 F/CR。
+
+最新算法文档：14_FORMAL_ALGORITHM_DESIGN_V1.md。下一步先实现 Phase 0 合成真值模拟器和基线：4 binary slots、正负交互、task-family sign flip、三阶模型失配、Bernoulli/Beta 噪声、全合法和受约束空间；实现 TCAIL 及 CI-GOM 的最小模拟版本；做同预算恢复、搜索和参数控制消融。先不调用真实 LLM、不读其他 GitHub 仓库。每轮更新唯一仓库和接班提示词，严格区分设计、实现、实验结果。
