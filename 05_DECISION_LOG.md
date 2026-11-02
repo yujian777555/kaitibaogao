@@ -222,3 +222,14 @@ V2 修订：
 另记录 EC 主线约束：TCAIL 本身是统计/实验设计模块，不是完整 EC 算法。只有后续证明其结构信息能够改善演化搜索，才可纳入 EC 主线创新证据。
 
 **当前决定：V2 只进入独立规格复审，不进入代码实现或正式性能实验。**
+
+## 2026-11-02 决策 D-026：TCAIL V2 第二轮复核 REQUEST CHANGES
+
+第二轮数学复核详见 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md。Beta Fisher information、Gaussian posterior update、row-space estimability 和 Bayesian FDR 形式基本正确；但仍有五项需要闭合：
+1. 高阶模型失配必须进入主要边估计的 M2/M3 sensitivity gate；
+2. 显式构造 reference-standardized contrast vector l_e；
+3. 连续 task context 的 BFDR 必须限定在预注册有限 anchor set；
+4. edge-risk acquisition 必须规定 posterior MC、refit、Monte Carlo SE 和候选间 common random numbers；
+5. 预算百分比的 full-factorial denominator 必须精确定义。
+
+已将澄清写入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节。当前仍不实现、不跑正式 Phase 0。需要对修订后的 V2.1 再做独立复审。
