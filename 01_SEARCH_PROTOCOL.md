@@ -133,3 +133,25 @@
 - Agent 评价器和反馈可靠性已有 TTHE、DarwinX、RQGM、Certified Selective Automation、Calibrating the Evaluator 等相关工作。
 - 当前新候选 G 是组件交互感知的演化重组，核心是估计配置组件间的 epistasis/linkage，并将其用于 crossover。必须与 EvoMAS、HFlow、AgentSquare、AgentBreeder、DarwinX、SERO、HiveMind、EvoCF、Optimas 比较。
 - 文献表目前 104 条，仍非全领域穷尽；下一轮需重点审计 crossover/interaction 机制和经典 linkage learning，不能只继续堆论文数量。
+
+
+## 9. 第四轮检索日志：组件交互和 Linkage Learning 可行性（2026-11-02）
+
+新增检索式：
+- "cross-component interference in LLM agent scaffolding"
+- "prompt component interaction regression LLM"
+- "task-conditioned interaction estimation agent modules"
+- "GOMEA Gene-pool Optimal Mixing"
+- "Conditional GOM CGOMEA"
+- "linkage kernels GOMEA multi-structured problems"
+- "DG2 differential grouping black-box optimization"
+- "stateful agent benchmark ToolSandbox AppWorld tau-bench"
+
+新增关键发现：
+1. Liu (2026) CCI 已做 5 个 Agent scaffolding 组件的 \(2^5\) 全因子实验、Shapley、pairwise regression 和探索性三阶交互；其 pairwise regression 在主要设置下出现过拟合。
+2. Lauziere et al. (2026) 已做 Prompt component regression。
+3. MESH-Harness 的均值预测为 slot-wise additive，但 full covariance 利用槽位共同出现信息估计组合不确定性。
+4. GOMEA/CGOMEA/LK-GOMEA/DG2/RDG 已覆盖经典 linkage learning、optimal mixing、条件依赖和变量交互识别。
+5. ToolSandbox、AppWorld、tau-bench 可为可执行、有状态工具 Agent 的组件交互与演化提供程序化评估环境。
+
+研究决策：普通组件交互估计 NO-GO；预算受限、任务条件化、稀疏交互主动发现 HOLD；Agent constrained optimal mixing HOLD；跨任务 linkage transfer 暂缓。详见 11_INNOVATION_FEASIBILITY_AUDIT.md。
