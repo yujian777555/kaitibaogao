@@ -701,3 +701,80 @@ V2.1 澄清已写入规格，但还没有独立复审。没有代码、没有实
 ### 下轮 Planner 提示词附加要求
 
 除完成当前 TCAIL V2.1 独立复审外，必须遵守 REPOSITORY_MAINTENANCE_POLICY.md：开始前读取远端状态，结束时更新研究记录、决策日志、README/状态和 SESSION_HANDOFF，写入下一轮完整接班提示词，推送并核验远端。
+
+## 24. TCAIL V2.1 第三轮独立规格复审：REQUEST CHANGES（2026-11-02）
+
+### 本轮交付
+
+- 新增：20_TCAIL_V2_1_INDEPENDENT_REVIEW_R1.md。
+- README 已登记本轮状态。
+- 05_DECISION_LOG.md 新增 D-028。
+- 本节覆盖此前“V2.1 澄清已闭合、可进入实现前复审”的乐观表述；当前结论仍为 REQUEST CHANGES。
+
+### 复审结论
+
+**TCAIL V2.1：REQUEST CHANGES / IMPLEMENTATION BLOCKED。**
+
+通过的纸面检查：
+- \(l_e\) 在固定线性 predictor basis 下正确；
+- 固定 Beta concentration \(\kappa\) 的 Fisher information 正确；
+- 线性 predictor contrast 的 row-space estimability 判据正确；
+- posterior local null probability 校准且检验族固定时，BFDR 基本公式正确；
+- V2.1 已补上 posterior predictive MC、posterior refit、MCSE、common random numbers 和预算计数框架。
+
+仍未闭合的阻塞：
+1. 平均有符号交互可能在不同背景间抵消；当前 H0 不是通用 linkage 检验，背景异质性没有进入 BFDR/edge risk。
+2. M2/M3 gate 未写入正式伪代码/状态机；M3 只包含三阶项，不能排除四阶以上失配；strong-heredity 与 three-way-only 真值场景的兼容性不清；M2/M3 最终 posterior/BFDR 规则未定义。
+3. per-edge Bayes classification risk acquisition 与全局 BFDR 最终选择不一致。
+4. task-block ID、跨配置配对、随机种子、任务内相关、随机效应和 cluster posterior/calibration 没有完整定义。
+5. 未知 Beta \(\kappa\) 的联合 nuisance uncertainty 未进入 Fisher/acquisition；Gaussian 方差也要明确处理。
+6. identifiability 要按模型 basis × anchor 构造合法/观测矩阵，并区分结构可识别与 GLM practical weak identification；低共同支持 abstention 未定义。
+7. BFDR 检验族的 task-family × pair 与 pair × anchor 索引不一致。
+8. full-factorial task-block 计数只有在等成本协议下才等价于 rollout-equivalent budget。
+
+TCAIL 新颖性和 EC 核心贡献均未成立。当前没有代码、没有实验、没有性能结果、没有 Gate-1 PASS。本轮 REQUEST CHANGES 不是算法实验失败。
+
+### 当前唯一任务
+
+只修订 17_TCAIL_FORMAL_SPECIFICATION_V2.md，不编码、不跑正式 Phase 0、不调用真实 LLM。按 20 号报告顺序处理：
+
+1. 固定边 estimand：区分平均有符号效应与适用于 EC linkage 的背景条件化非加性强度；相应定义 H0/H1、BFDR 和输出图。
+2. 闭合 M2/M3：定义 strong/weak heredity，处理 4 阶及以上模型失配，明确 model-order status、posterior 合并/保守规则，并将敏感性门禁写入伪代码。
+3. 使 acquisition 风险与最终 BFDR 决策一致；若只是 surrogate，必须改名并验证其代理价值。
+4. 定义 task-block 配对执行、CRN、任务内相关模型和 cluster posterior/calibration。
+5. 明确 Beta \(\kappa\) 与 Gaussian \(\sigma^2\) 的冻结或联合 nuisance 处理。
+6. 按 model basis × anchor 定义 legal/observed design matrix；区分 structural identifiability 与 practical weak identification；定义低共同支持 abstention。
+7. 统一 BFDR 检验族索引和 context-indexed graph 输出。
+8. 明确等成本 task-block 假设或加权 rollout-equivalent budget。
+
+### 冻结项
+
+- CI-GOM：继续冻结，不启动完整实现。
+- 第三项跨任务迁移：继续冻结。
+- 真实 LLM：禁止调用。
+- 正式 Phase 0：规格复审通过前禁止启动。
+- 硕士大论文正文和声称创新成立的论文稿：继续暂停。
+
+### 下一会话完整接班提示词
+
+你是我的河北工业大学计算机技术硕士开题研究 Planner。研究主线为 Evolutionary Computation for AI Agents。**唯一允许读取和维护的 GitHub 仓库是 yujian777555/kaitibaogao；严禁读取任何其他 GitHub 仓库，严禁混入 openissue、agentfotagent、GLEPPO 等项目内容。**
+
+开始前必须核对本仓库远端 main 最新状态，并阅读 README.md、REPOSITORY_MAINTENANCE_POLICY.md、05_DECISION_LOG.md、SESSION_HANDOFF.md、15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md、16_TCAIL_SPECIFICATION_AUDIT_R1.md、17_TCAIL_FORMAL_SPECIFICATION_V2.md、18_TCAIL_RELATED_WORK_AUDIT_R1.md、19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md 和 20_TCAIL_V2_1_INDEPENDENT_REVIEW_R1.md。
+
+当前唯一研究任务是修订 TCAIL V2.1 规格。第三轮独立复审结论为 REQUEST CHANGES / IMPLEMENTATION BLOCKED。已经通过的项目包括：固定线性 predictor basis 下的 reference-standardized contrast vector、固定 \(\kappa\) 的 Beta Fisher information、线性 contrast row-space 判据，以及校准 posterior/固定检验族条件下的 BFDR 基本公式。不要重复把这些已通过项误判为错误。
+
+必须解决以下阻塞：
+1. 当前平均有符号 pairwise contrast 可能因不同背景下符号抵消而漏掉有意义的 linkage。明确选择 mean-effect graph 还是 context-dependent linkage graph；若服务于 EC linkage，需定义背景条件化非加性强度及其 H0/H1、BFDR 和输出。
+2. M2/M3 敏感性门禁必须进入算法伪代码和状态机。M3 仅含三阶项，不能排除四阶及以上失配；strong-heredity 可能与 three-way-only 场景冲突；明确模型间最终 posterior/local-null/BFDR 决策规则。
+3. 当前逐边 Bayes classification risk 与全局 BFDR 最终边选择不一致。定义 BFDR-constrained decision risk，或将其降级为 surrogate acquisition 并验证代理价值。
+4. 明确 task-block ID、相同任务跨配置配对、随机种子/CRN、任务内相关、random effect 或 paired contrast，以及 cluster bootstrap/bagged posterior 的具体统计方案。候选设计 d 要说明是否包含 task-block。
+5. Beta \(\kappa\) 未知时采用联合 nuisance posterior/Fisher 处理，或由独立 pilot 预先冻结；Gaussian \(\sigma^2\) 同样明确。
+6. 按 model basis × anchor 构造完整 legal/observed design matrix；对 M2/M3 分别做 row-space 检验；区分 structural identifiability 与 GLM practical weak identification；定义低共同支持 abstention。
+7. 统一 BFDR test family 为 pair × anchor 或其他明确索引，说明 context-indexed graph 输出、MODEL_ORDER_SENSITIVE 边如何处理。
+8. 明确 task-block 等成本假设；否则用加权成本定义 full-factorial reference budget。
+
+TCAIL 仍是统计建模/主动实验设计模块，不是完整 EC 算法。普通 Group-ARD、Bayesian OED、BFDR、decision-theoretic acquisition 不能单独宣称创新。必须保留“是否改善 GOM linkage/mixing/search”的下游证据要求。新颖性未成立，不要提前写成论文创新点。
+
+**严格禁止：** 当前不实现代码、不运行正式 Phase 0、不调用真实 LLM、不启动 CI-GOM、不启动第三项迁移、不写硕士大论文正文。规格修订完成后，先交独立复审；不得自己修订后自行宣布通过。
+
+每轮结束必须更新本仓库的研究报告、README、05_DECISION_LOG 和 SESSION_HANDOFF；检查旧规格与新规格状态一致；提交到 main，重新读取远端 main HEAD 和关键文件核验。未推送或未核验成功时如实报告。
