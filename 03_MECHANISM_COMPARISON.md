@@ -182,3 +182,51 @@ EvoTest（ICLR 2026）将 Agent 配置表示为 χ=(p,M,h,u)，分别对应策�
 这只是待验证框架。需要先证明任务签名、行为描述符和 QD 档案比 UCB、标准 EA 和已有记忆档案确实更有效。
 
 详细定义见 07_CANDIDATE_D_TEST_TIME_ADAPTATION.md。
+
+
+## 10. 第三轮检索后的方向重审
+
+### 10.1 候选 D（跨任务测试时演化）不再作为优先方向
+新增直接工作包括 TTHE（跨多个任务批次持续演化 harness）、Meta-TTL（跨任务学习测试时适应策略）、TacoMAS（测试时拓扑/能力协同演化）、Inherit-MAS（工作流和执行继承）、EvolveNet（多工作负载协同 harness 演化）、DarwinX（自然选择式 harness 演化）。因此，“跨任务序列中的测试时演化”这一宽泛问题已被密集覆盖。
+
+**决策：** 候选 D 的宽泛表述标记 NO-GO / SUPERSEDED。EvoTest 仍作为关键基础文献保留，但不能再以“跨任务测试时演化”本身作为创新。
+
+### 10.2 新增强相关方法对研究缺口的影响
+MOAE 已做完整 Agent rollout 的 Pareto-preserving evolutionary search；SkillMOO 已使用 NSGA-II 优化 Agent skill bundle；MOCHA 已做 Agent skill 多目标优化；AgentBreeder 已对 Multi-Agent scaffold 做质量多样性/多目标演化；HGM 已用后代 clade metaproductivity 估计 Agent 的未来自改进潜力；PCE 已把整个种群的成功、失败和修改历史用于父代改进；FreeEvolve 已 meta-evolve evolver 自身的搜索策略；SERO 已做结构契约保持的角色演化；HiveMind 已用 DAG-Shapley 进行 Agent 级贡献归因；AHE、DarwinX、TTHE、EvolveNet 等已经覆盖 coding-agent harness 的自动演化。
+
+因此，普通多目标选择、skill 进化、角色演化、测试时演化、种群知识汇总、evolvability 选择和 Agent 贡献归因都不能直接作为新颖点。
+
+### 10.3 新的优先候选 G：组件交互感知的演化重组
+
+**问题：** Agent 配置由相互依赖的 Prompt、工具策略、记忆、规划、验证、恢复等组件构成。现有方法已大量使用变异、交叉、模块重组或跨 lineage merge，但这些组件之间的协同/拮抗关系是否被显式估计？能否通过反事实干预学习组件间的 epistasis/linkage，并用其指导重组？
+
+关键依据：
+- DarwinX 明确指出，当前实验没有把 archive、parent selector、recombination operator 和 inference effort 独立随机化；recombination 相对 mutation 的贡献仍需要受控消融。
+- EvoMAS、HFlow、AgentSquare 已有交叉/模块重组，因此“使用 crossover”本身不是创新。
+- HiveMind 的 DAG-Shapley 是 Agent 级贡献分配，不等同于单 Agent 配置内部组件之间的 pairwise epistasis。
+- EvoCF 的 counterfactual 是协作计划层面的反事实，不等同于配置基因的交互效应估计。
+- SERO 的结构契约保持能防止角色结构破坏，但不是基于组件协同关系的遗传重组。
+
+候选 G 仅在精读 EvoMAS、HFlow、AgentSquare、AgentBreeder、DarwinX、SERO、HiveMind 后，确认没有等价机制时才可保留。
+
+### 10.4 候选 E/F 暂时保留为对照，不优先
+- E：弱反馈/代理评价下的适应度可靠性与稳健生存者选择。TTHE、DarwinX、RQGM、Certified Selective Automation、Calibrating the Evaluator 已覆盖大量相关机制，必须先比较。
+- F：可进化性/后代潜力驱动的 Agent 选择。HGM 的 CMP、Evolvability Search、Evolvability ES、CATArena、PCE、FreeEvolve 已覆盖关键概念，不应简单重复。
+
+## 11. 候选 G 的可证伪算法草案
+
+将 Agent 配置表示为模块化基因集合或依赖图。对组件 i、j 的组合进行同任务、同种子配对反事实干预，估计交互效应：
+
+ε_ij = f(χ_ij) - f(χ_i0,j) - f(χ_i,j0) + f(χ_i0,j0)
+
+其中 χ_ij 表示两个组件同时处于待测状态，其他三项表示单独替换/基准状态。该公式是工作定义，必须针对组件不可独立替换和执行依赖做修正。
+
+据此构造 linkage/interaction graph：
+- 正向强交互：作为 co-adapted block 一起继承；
+- 负向强交互：禁止直接组合或触发兼容性修复；
+- 低交互：允许独立重组；
+- 估计不确定：保持父代模块或进入验证阶段。
+
+候选算法名称：Interaction-Aware Evolutionary Recombination for Agent Configurations（IAER-AC），仅为工作代号。
+
+证伪条件：若 ε_ij 无预测力，或 linkage-aware crossover 不优于随机模块交叉、LLM crossover、mutation-only，则停止；若已有工作显式使用组件交互图指导 Agent crossover，则候选 G 需改题或 NO-GO。
