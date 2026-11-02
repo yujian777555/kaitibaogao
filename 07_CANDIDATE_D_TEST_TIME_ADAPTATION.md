@@ -127,3 +127,14 @@ H3：在相同 backbone、任务划分和评价协议下，所提方法相较于
 ## 9. 当前决策
 
 候选 D 是当前优先研究对象，因为它同时具备正式论文明确写出的算法改进空间、可形式化的演化搜索问题、可复现的直接基线和可设计的证伪实验。但它尚未通过完整相关工作审查，不能作为最终题目或正式创新点。
+
+
+## 10. 状态修订：候选 D 已被后续文献覆盖
+
+本文件前文提出的“跨任务序列的测试时演化自适应”只作为历史研究候选保留。第三轮发现 TTHE、Meta-TTL、TacoMAS、Inherit-MAS、EvolveNet、DarwinX 等直接工作后，宽泛版本已标记 **NO-GO / SUPERSEDED**。
+
+EvoTest 仍是重要基础论文，但不能再把“把 EvoTest 扩展到跨任务”本身作为创新。当前优先审查方向转为候选 G，详见：
+- 08_CANDIDATE_SCREENING.md
+- 09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION.md
+
+后续如果发现已有论文显式估计 Agent 配置组件间 epistasis/linkage 并据此指导 crossover，则候选 G 也必须停止。
