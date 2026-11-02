@@ -316,3 +316,11 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 ### 下一步
 
 先根据导师反馈修订报告初版，再核对参考文献和格式。用户当前优先级是开题报告初版，不要自动切回继续扩展算法规格。
+
+
+### D-030 补充：引用校对与 Word 初稿（2026-11-02）
+
+- 参考文献由 44 条扩展为 50 条，补入 Optimas、HiveMind、CCI、Prompt component regression、MESH-Harness、ARTEMIS；
+- 修正组件贡献与交互研究段落中 Optimas/HiveMind/CCI/Prompt 回归的引用编号；
+- 补充 NSGA-II、MOEA/D、MAP-Elites、噪声演化优化综述和 F-Race 的正文引用；
+- 已生成按 A4、宋体小四、1.5 倍行距排版的 Word 初稿，封面个人信息保留待填写项。
