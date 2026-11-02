@@ -171,3 +171,78 @@
 - HFlow 已使用三目标 Pareto 生存者选择；GEPA 已使用任务实例级 Pareto 候选选择；EvoMAS（Wei et al.）已研究自适应演化策略选择。普通 Pareto 选择、动态算子选择、反馈引导变异都不是天然空白。
 - AgentNet、DGM、MOSS、Agent-Pro、Q-Evolve、TPGO 的机制和“经典 EA”并不完全相同，写综述时要准确分类。
 - 任何论文的实验数值、模型版本、数据集划分和消融结果，必须精读原文后再写入正式开题报告。
+
+
+## F. 第二轮补充文献：测试时演化、策略/技能/记忆演化与新基准
+
+51. **He, Y., Liu, J., Liu, Y., Li, Y., Cao, T., Hu, Z., Xu, X., & Hooi, B. (2026). EvoTest: Evolutionary Test-Time Learning for Self-Improving Agentic Systems. ICLR 2026.** [OpenReview PDF](https://openreview.net/pdf?id=JFnnajbkvP) · [arXiv:2510.13220](https://arxiv.org/abs/2510.13220)  
+    类型：PUBLISHED / DIRECT-CORE。提出 J-TTL；完整 Agent 配置 χ=(p,M,h,u)，每轮 Actor 执行、Evolver 根据轨迹生成子配置，使用 UCB 在父代和子代中选择。论文明确指出 (1+m) 演化策略和 UCB 可能局部收敛，单任务策略易过拟合，并建议未来研究更复杂的种群 EA、QD 和程序综合。
+
+52. **Sygkounas, A., Hazra, R., Persson, A., Zuidberg Dos Martires, P., & Loutfi, A. (2026). COvolve: Adversarial Co-Evolution of Large-Language-Model-Generated Policies and Environments via Two-Player Zero-Sum Game. GECCO 2026, pp. 338–347.** DOI: 10.1145/3795095.3805144. [ACM DOI](https://doi.org/10.1145/3795095.3805144) · [arXiv:2603.28386](https://arxiv.org/abs/2603.28386)  
+    类型：PUBLISHED / DIRECT-CORE。策略设计器和环境设计器分别维护种群，以两人零和博弈协同演化；使用 mixed-strategy Nash equilibrium 维持对旧环境的能力。其重点是代码策略与环境的对抗式课程生成，不是通用工具 Agent 的测试时配置演化。
+
+53. **Fu, L. et al. (2026). CATArena: Evaluating Evolutionary Capabilities of Code Agents via Iterative Tournaments. ICML 2026, PMLR 306:31726–31755.** [PMLR](https://proceedings.mlr.press/v306/fu26a.html)  
+    类型：PUBLISHED / BENCHMARK。多轮锦标赛评估代码 Agent 的持续优化能力，区分静态生成能力与演化潜力。
+
+54. **Zhang, L., Chen, R., & Stadie, B. C. (2026). Evolutionary System Prompt Learning for Reinforcement Learning in LLMs. 1st FoGen Workshop at ICML 2026.** [OpenReview PDF](https://openreview.net/pdf/54e4bef7f3b700d23a7b58a1d40520984c32230f.pdf) · [arXiv:2602.14697](https://arxiv.org/abs/2602.14697)  
+    类型：WORKSHOP / DIRECT-ADJACENT。E-SPL 联合演化 system prompt 和 RL 权重；通过 LLM 反思执行 mutation/crossover，并使用 TrueSkill 对不同 prompt 做相对评分。注意：这是 ICML 2026 FoGen workshop，不是 ICML 主会论文。
+
+55. **Zhou, H., Wan, X., Vulić, I., & Korhonen, A. (2025/2026). Agentic Policy Optimization via Instruction-Policy Co-Evolution. arXiv:2512.01945.** [arXiv](https://arxiv.org/abs/2512.01945)  
+    类型：PREPRINT / ADJACENT。INSPO 在 RLVR 循环中维护动态 instruction population，将 rollout 奖励归因给指令，并通过 on-policy 反思产生新指令、淘汰低表现候选。
+
+56. **Pan, W., Liu, S., Zhou, X., Zhang, S., Shi, W., Xu, M., & Jia, X. (2026). M*: Every Task Deserves Its Own Memory Harness. NeurIPS 2026.** [Author page](https://www.wenbo.io/publications/mstar/) · [arXiv:2604.11811](https://arxiv.org/abs/2604.11811)  
+    类型：PUBLISHED / DIRECT-ADJACENT。把 Agent memory harness 表示为 Python 程序（Schema、Storage Logic、Workflow Instructions），使用种群式反思代码演化，按任务发现专用记忆系统。
+
+57. **Xia, P. et al. (2026). SkillRL: Evolving Agents via Recursive Skill-Augmented Reinforcement Learning. NeurIPS 2026.** [arXiv:2602.08234](https://arxiv.org/abs/2602.08234)  
+    类型：PUBLISHED / ADJACENT。通过经验蒸馏构造层级 SkillBank，采用自适应检索和递归演化机制，使技能库与 Agent policy 在 RL 中协同更新；不是经典 GA 主导的算法。
+
+58. **Cao, Q. et al. (2026). EvoTeam: Multi-Agent Collaboration via Evolving Teams. arXiv:2610.39813.** [arXiv](https://arxiv.org/abs/2610.39813)  
+    类型：PREPRINT / DIRECT-ADJACENT。联合演化团队组织、Agent 间交互规则和个体技能；维护可复用团队库，并区分团队上下文中的协作经验与可跨团队复用的个体技能。2026-10-29 提交，需持续跟踪版本。
+
+59. **Cao, S., Mao, Z., Li, D., Gonzalez, J. E., & Stoica, I. (2026). Evolving Agent Teams. arXiv:2610.36848.** [arXiv](https://arxiv.org/abs/2610.36848)  
+    类型：PREPRINT / ADJACENT。监督 Agent 诊断局部最优并重构团队角色、协作方式，依靠持久文件系统保留学习文档和团队产物。不是标准种群式 EA，属于团队重构型 Agent 演化。
+
+60. **Wang, Y. et al. (2026). EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective. NeurIPS 2026.** [arXiv:2605.18421](https://arxiv.org/abs/2605.18421)  
+    类型：PUBLISHED / BENCHMARK。按 in-episode/cross-episode 与 knowledge-oriented/execution-oriented 两轴评估 Agent 记忆，并比较 15 种记忆方法。
+
+61. **Zhang, A., Guo, J., Jia, F., Lv, C., Wang, B., & Li, F. (2026). EvoAgent: An Evolvable Agent Framework with Skill Learning and Multi-Agent Delegation. arXiv:2604.20133.** [arXiv](https://arxiv.org/abs/2604.20133)  
+    类型：PREPRINT / ADJACENT。与 NAACL 2025 的 EvoAgent 及 arXiv 2502.05907 的 EvoAgent 均为不同工作；采用多文件技能、用户反馈闭环、层级子 Agent 委派和三层记忆。
+
+62. **Zhai, Y. et al. (2025). AgentEvolver: Towards Efficient Self-Evolving Agent System. arXiv:2511.10395.** [arXiv](https://arxiv.org/abs/2511.10395)  
+    类型：PREPRINT / ADJACENT。包含 self-questioning、self-navigating、self-attributing 三类机制，以任务生成、探索和轨迹贡献归因支持 Agent 自进化。
+
+63. **Zhang, H. et al. (2026). EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification. arXiv:2604.01687.** [arXiv](https://arxiv.org/abs/2604.01687)  
+    类型：PREPRINT / ADJACENT。Skill Generator 与 Surrogate Verifier 协同演化；通过 verifier 的测试升级与结构化诊断，迭代生成多文件技能包。不是传统种群 EA，但“评价器/验证器协同演化”是重要相关机制。
+
+64. **Zhang, H. et al. (2026). MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents. arXiv:2602.02474.** [arXiv](https://arxiv.org/abs/2602.02474)  
+    类型：PREPRINT / ADJACENT。Controller 选择记忆技能，Executor 执行记忆提取，Designer 根据困难案例改进和扩充技能集。
+
+65. **Zhang, Y. et al. (2026). Live-Evo: Online Evolution of Agentic Memory from Continuous Feedback. arXiv:2602.02369.** [arXiv](https://arxiv.org/abs/2602.02369)  
+    类型：PREPRINT / ADJACENT。Experience Bank 与 Meta-Guideline Bank 分离，在线更新经验权重并强化/衰减记忆，以适应连续数据流和分布变化。
+
+66. **Zhang, Z., Lu, S., Qian, H., He, D., & Liu, Z. (2026). AgentFactory: A Self-Evolving Framework Through Executable Subagent Accumulation and Reuse. arXiv:2603.18000.** [arXiv](https://arxiv.org/abs/2603.18000)  
+    类型：PREPRINT / ADJACENT。把成功任务解保存为可执行 Python 子 Agent，并依据执行反馈持续修订和复用。
+
+67. **Zhang, G. et al. (2025). MemEvolve: Meta-Evolution of Agent Memory Systems. arXiv:2512.18746.** [arXiv](https://arxiv.org/abs/2512.18746)  
+    类型：PREPRINT / DIRECT-ADJACENT。联合演化 Agent 经验知识和记忆架构；EvolveLab 将 encode、store、retrieve、manage 组织成模块化设计空间，并报告跨任务、跨 LLM 泛化。
+
+68. **Zhang, Q. et al. (2026). Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models. ICLR 2026.** [Microsoft Research](https://www.microsoft.com/en-us/research/publication/agentic-context-engineering-evolving-contexts-for-self-improving-language-models/)  
+    类型：PUBLISHED / ADJACENT。ACE 通过 generation、reflection、curation 模块化演化上下文，强调避免 brevity bias 和 context collapse，并支持在线 Agent memory 更新。
+
+69. **Zhang, S. et al. (2026). EvoFSM: Controllable Self-Evolution for Deep Research with Finite State Machines. arXiv:2601.09465.** [arXiv](https://arxiv.org/abs/2601.09465)  
+    类型：PREPRINT / ADJACENT。以有限状态机表示工作流，分离 Flow 和 Skill，使用受约束操作与 Critic 改进 Agent，强调控制性和稳定性。
+
+70. **Yue, Z. et al. (2026). Dr. Zero: Self-Evolving Search Agents without Training Data. arXiv:2601.07055.** [arXiv](https://arxiv.org/abs/2601.07055)  
+    类型：PREPRINT / ADJACENT。Proposer 与 Solver 形成自进化课程：随着 Solver 能力变化，Proposer 产生更难但可解的问题；采用 HRPO 训练 Solver。属于双 Agent/RL 自进化，不是经典 EA。
+
+71. **Qiao, J. et al. (2026). Memory Intelligence Agent. arXiv:2604.04503.** [arXiv](https://arxiv.org/abs/2604.04503)  
+    类型：PREPRINT / ADJACENT。Manager-Planner-Executor 架构，交替 RL 和 test-time planner 更新，实现参数记忆与非参数记忆转换；不是经典 EA。
+
+72. **Hazra, R., Sygkounas, A., Persson, A., Loutfi, A., & Zuidberg Dos Martires, P. (2025). REvolve: Reward Evolution with Large Language Models using Human Feedback. ICLR 2025.** [ICLR](https://proceedings.iclr.cc/paper_files/paper/2025/hash/fc8ee7c7ab5b5f6b1615045dfb617ed6-Abstract-Conference.html) · [arXiv:2406.01309](https://arxiv.org/abs/2406.01309)  
+    类型：PUBLISHED / ADJACENT。演化 LLM 生成的 RL reward functions，研究人类反馈如何转化为可执行奖励；Agent policy 是下游训练对象，不是演化对象本身。
+
+## G. 2026 年 10 月最新动态（必须持续跟踪）
+
+- EvoTeam（arXiv:2610.39813，2026-10-29）：团队组织、交互规则和个体技能联合演化。
+- Evolving Agent Teams（arXiv:2610.36848，2026-10-27）：监督器诊断局部最优并重构团队。
+- 这两篇均为本次检索时的最新预印本，不能写成同行评审正式发表论文；应持续检查后续版本和发表状态。
