@@ -465,7 +465,7 @@ r_{k,n}=\sqrt{\frac{2\ln(2/\alpha_{k,n})}{n}}.
 
 \[
 LCB_{k,n}=\bar d_n-r_{k,n},\qquad UCB_{k,n}=\bar d_n+r_{k,n}.
-]
+\]
 
 对第 \(k\) 个 offspring proposal 分配 \(\alpha_k\)，对该 proposal 的第 \(n\) 次序贯查看分配 \(\alpha_{k,n}\)。因为 \(\sum_k\alpha_k=\alpha_{\mathrm{total}}\)，且每个 proposal 内 \(\sum_n\alpha_{k,n}=\alpha_k\)，union bound 同时控制跨 proposal 和重复查看的错误率。该结论要求每个 task-block difference 有界，且 task blocks 独立，或满足所用 martingale confidence bound 的条件。若同一任务的多个 rollout 相关，先聚合成 task-level block；若任务来自相关簇，则以 task family/cluster 作为统计单位。
 
