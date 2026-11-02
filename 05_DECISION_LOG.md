@@ -170,3 +170,17 @@ AgentSquare、ARTEMIS、Hu-EvoMAS、Wei-EvoMAS、AgentEvo、HFlow 已覆盖大�
 ## 2026-11-02 决策 D-022：CI-GOM 序贯接受采用跨 proposal 的 alpha spending
 
 CI-GOM 不只存在单个 proposal 内的 repeated looks，也会在整个演化运行中连续检验多个 offspring。故不能对每个 offspring 都重复使用同一个 alpha。正式方案采用 proposal index \(k\) 与 within-proposal look \(n\) 两层 alpha spending，控制跨 proposal 与序贯查看的累计错误率。任务块相关时必须以 task family/cluster 为独立统计单位。详细公式见 14_FORMAL_ALGORITHM_DESIGN_V1.md。
+
+
+## 2026-11-02 决策 D-023：三个创新点按顺序独立验证，暂停大论文写作
+
+用户明确决定：不先写毕业大论文，而是依次验证每个创新点。
+
+执行顺序：
+1. TCAIL：先做规格/统计审计，再做合成真值实验、强基线比较、消融和真实 Agent 验证。Gate-1 通过才进入下一项。
+2. CI-GOM：先 Oracle linkage 上界，再 contract repair、donor、sequential acceptance 消融，最后 learned linkage 同预算端到端验证。Gate-2 通过才进入下一项。
+3. 跨任务迁移：验证共享交互结构是否真实存在，再比较 from-scratch、direct transfer、selective transfer。Gate-3 未通过就删除第三创新点。
+
+暂停硕士大论文正文撰写；不将尚未验证的算法包装成已确认创新。开题准备后续以真实研究证据为基础组织。合成实验通过不是论文成立的充分条件，必须有可信真实 Agent 任务验证。
+
+权威协议：15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md。本决策覆盖旧 handoff 中“同时实现两个算法 Phase 0”的任务顺序。
