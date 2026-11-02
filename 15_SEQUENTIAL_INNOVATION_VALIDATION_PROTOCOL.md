@@ -348,3 +348,33 @@ V2 状态：REVISED SPECIFICATION / PENDING INDEPENDENT REVIEW。当前仍不实
 第二轮复核见 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md，结论 REQUEST CHANGES。对应澄清已补入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节。
 
 当前状态：V2.1 / PENDING INDEPENDENT REVIEW。未实现、未运行正式实验、未通过 Gate-1。下一步只做修订后独立复审。
+
+
+## 9. 2026-11-02：TCAIL 与 GOMEA linkage 接口复核更新
+
+本节覆盖此前任何将“任务条件化平均交互图”直接视为 GOMEA FOS linkage 的简化表述。
+
+### 新的研究边界
+
+GOMEA linkage 既可能来自种群统计依赖（SLL-MI），也可能来自目标函数差分（fitness-based linkage）。FBL、DLED/cDLED、conditional GOMEA、LMM、ALI/AIM 已有直接先例。详见 21 号补充审计和文献总表 P125–P132。
+
+### B1 修订提案
+
+22_TCAIL_LINKAGE_INTERFACE_REVISION_PROPOSAL_R1.md 提出：
+- objective-scale conditional four-cell fitness difference；
+- global RMS interaction energy 仅作为总体 task-conditioned summary；
+- current-parent/task-conditioned local posterior linkage；
+- local weighted VIG 经固定 FOS builder 转换，而不是将图直接称为 FOS。
+
+该提案尚未独立复审，不是权威规格，不允许直接实现。
+
+### 当前唯一任务
+
+独立审查 22 号提案的数学定义、与 DLED/FBL/cDLED/LMM/ALI 的真实差异，以及 local VIG 到 FOS 的接口。重点判断：
+1. RMS summary 是否只作为描述性统计，避免冒充新颖算子；
+2. local conditional posterior 是否确实比现有 DLED/cDLED 在随机 Agent task-block 下更可校准/更省 rollout；
+3. objective-scale contrast 是否与实际 Agent fitness 和 GOM acceptance 一致；
+4. local VIG 的 FOS builder 是否能处理高阶、重叠依赖；
+5. 是否存在可证伪且可测量的独立 EC 收益。
+
+B2–B8 仍未解决。规格未通过独立复审前，不实现、不跑正式 Phase 0、不调用真实 LLM。CI-GOM 与第三项迁移继续冻结。
