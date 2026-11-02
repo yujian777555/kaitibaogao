@@ -184,3 +184,19 @@ CI-GOM 不只存在单个 proposal 内的 repeated looks，也会在整个演化
 暂停硕士大论文正文撰写；不将尚未验证的算法包装成已确认创新。开题准备后续以真实研究证据为基础组织。合成实验通过不是论文成立的充分条件，必须有可信真实 Agent 任务验证。
 
 权威协议：15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md。本决策覆盖旧 handoff 中“同时实现两个算法 Phase 0”的任务顺序。
+
+
+## 2026-11-02 决策 D-024：TCAIL 首轮规格审计 REQUEST REVISION
+
+对 14_FORMAL_ALGORITHM_DESIGN_V1.md 的 TCAIL 部分完成纸面数学/统计审查，详见 16_TCAIL_SPECIFICATION_AUDIT_R1.md。
+
+主要阻塞：
+1. pairwise contrast 依赖其他槽位背景，estimand 未定义；
+2. 当前样本秩不足与合法空间结构性不可识别混淆；
+3. Bernoulli/Beta likelihood 与 Gaussian posterior rank-one IG update 未统一；
+4. edge threshold 缺少可执行的整体 FDR/BFDR 控制；
+5. interaction-only IG 是 Bayesian D-optimal 子空间信息增益，需加入严格匹配的强基线；
+6. 4-slot/16-config 只够 debug，需增加更大空间；
+7. 三阶失配与 pairwise marginal edge 的含义需区分。
+
+**决定：当前不启动正式 Phase 0 性能实验。先修订 TCAIL 规格并复审。** 没有实验结果，Gate-1 仍未通过。
