@@ -154,3 +154,9 @@
 - 11_INNOVATION_FEASIBILITY_AUDIT.md：完整可行性判断、相关工作威胁、修订算法、基线、实验和 GO/HOLD/NO-GO 条件。
 
 当前合理规划为 2 个核心创新候选 + 1 个储备方向。只有两项都通过预实验才进入正式创新点；第三项不凑数。
+
+
+新增文件：
+- 12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md：两个核心创新候选的数学定义、主动交互探测、约束最优混合、最小预实验和 GO/HOLD/NO-GO 门槛。
+
+下一步不再堆论文数量，先完成合成真值 Agent landscape 的 Phase 0 算法验证。
