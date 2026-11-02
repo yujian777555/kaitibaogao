@@ -283,3 +283,70 @@ EvoTest 将完整 Agent 配置表示为 χ=(p,M,h,u)，每轮执行一个 episod
 下一步先精读 MESH-Harness 与 ARTEMIS 全文，再逐项比较 EvoMAS、AgentSquare、AgentBreeder、AgentEvo、Evo-Harness、TTHE。核心问题是：已有工作是否显式估计 Agent 配置组件间非加性交互，并用其指导 linkage-aware crossover？如果已有等价方法，候选 G 必须否证或改变问题。
 
 每篇小论文必须有独立科学问题、方法贡献、实验假设、强基线、消融和统计检验。小论文一要证明估计器本身可独立验证；小论文二要证明交互感知重组算子带来增量收益；小论文三要证明任务条件化交互结构迁移区别于普通 test-time evolution。所有结论必须可证伪。每轮更新文献、机制比较、开题报告计划、决策日志、接班提示词并推送到唯一仓库。
+
+
+## 13. 最新状态：第四轮创新可行性审查（2026-11-02）
+
+### 本轮最重要的新发现
+Liu (2026), **More Is Not Always Better: Cross-Component Interference in LLM Agent Scaffolding**, arXiv:2605.05716，已经对五种 Agent scaffolding 组件做 32 种全因子组合、Shapley、pairwise regression 和探索性三阶交互。其主要设置中 main-effects LOOCV R²=0.872，pairwise regression LOOCV R²=0.748，说明无约束加入交互项会过拟合。Lauziere et al. (2026) 也已研究 Prompt component regression。
+
+这意味着原创新点一“组件交互效应估计”如果只是差分公式、交互图或 Shapley，必须 NO-GO。
+
+### 经典 EC 方法的覆盖
+GOMEA/LTGA 已有 Linkage Tree 与 Gene-pool Optimal Mixing；CGOMEA 利用条件依赖；DSMGA-II 有 dependency structure matrix；LK-GOMEA 已为局部邻域学习不同 linkage structure；DG2/RDG 已做 fitness-based variable interaction detection。
+
+因此“学习 linkage 并指导交叉”本身不是新颖点。必须解决 Agent 混合类型模块、接口/控制流依赖、随机 rollout 和昂贵 fitness 的特殊问题，并提出实质新机制。
+
+### 当前创新可行性判断
+1. **普通组件交互效应估计：NO-GO（原表述撤销）。**
+2. **修订创新一：预算受限、任务条件化的稀疏 Agent 组件交互结构识别：HOLD。** 需要主动实验设计、层级稀疏估计、不确定性校准、配对随机任务执行；在相同预算下优于 CCI full-factorial 子集、main-effects、pairwise OLS 和 MESH additive LinUCB。
+3. **修订创新二：交互结构驱动的 Agent 约束最优混合演化：HOLD / 优先预实验。** 需要类型/接口约束、linkage block mixing、最小 contract repair、噪声感知接受；在同预算下优于 GOMEA/GOM、CGOMEA、LK-GOMEA、DSMGA-II、AgentSquare、ARTEMIS、EvoMAS、AgentEvo 和 MESH。
+4. **创新三：跨任务交互结构迁移：暂缓。** LK-GOMEA、HFlow、EvoMAS、Evo-Harness、TTHE 已提高新颖性门槛；未证明独立贡献前不写入正式开题创新点。
+
+### 当前建议
+以 **2 个核心创新候选 + 1 个储备扩展方向**推进。用户要求 2–3 个创新点，两个经过验证的创新点符合要求。不要为了三篇而把一个算法拆成三篇。
+
+### 实验平台建议
+- ToolSandbox：有状态工具执行、隐式状态依赖、用户模拟和轨迹评价；
+- AppWorld：9 apps、457 APIs、750 tasks、程序化状态检查；
+- tau-bench：airline/retail、API 工具、模拟用户和最终数据库状态评价。
+
+建议第一阶段使用固定槽位、每槽位两个可执行实现的 16 配置空间；先在合成已知交互地形验证估计器，再进入真实工具 Agent。不要从任意 DAG/开放式代码搜索开始。
+
+### 新增研究文件
+- 11_INNOVATION_FEASIBILITY_AUDIT.md：本轮完整审查与实验 Gate。
+- 文献总表新增 110–117 条：CCI、Prompt regression、GOMEA、LK-GOMEA、DG2、ToolSandbox、tau-bench、AppWorld。
+
+### 下一会话必须完成
+1. 只读取 yujian777555/kaitibaogao；严禁读取其他 GitHub 仓库。
+2. 先读 README、00_PROJECT_CHARTER、01_SEARCH_PROTOCOL、02_LITERATURE_REGISTER、03_MECHANISM_COMPARISON、04_OPENING_REPORT_PLAN、05_DECISION_LOG、08_CANDIDATE_SCREENING、09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION、10_THESIS_INNOVATION_AND_PAPER_ROADMAP、11_INNOVATION_FEASIBILITY_AUDIT、SESSION_HANDOFF。
+3. 精读 CCI 论文的统计分析与限制，核验它与预算受限任务条件交互发现的边界；精读 MESH-Harness 的完整 surrogate 和组合选择算法。
+4. 将创新一算法具体化为稀疏层级任务条件模型 + 主动合法配置采样 + 配对/序贯不确定性估计；先给数学定义和算法伪代码。
+5. 将创新二具体化为 typed genotype + interaction FOS + contract-aware constrained mixing + noisy sequential acceptance；与 GOMEA/CGOMEA/LK-GOMEA 对照。
+6. 设计 4 槽位×2 实现的 16 配置最小预实验，在合成真值地形上先测交互恢复和预算效率。
+7. 明确 GO/HOLD/NO-GO，不要因为论文路线图已存在就强行保留创新。
+8. 更新文献、机制比较、开题计划、决策日志、可行性审计和接班提示词，并提交到唯一仓库。
+
+### 最新接班提示词
+你是我的河北工业大学计算机技术硕士开题研究助手。研究主线为 Evolutionary Computation for AI Agents。唯一允许读取和维护的 GitHub 仓库是 yujian777555/kaitibaogao，严禁读取用户其他 GitHub 仓库或将其他项目成果混入。
+
+用户要求硕士论文有 2–3 个创新点，每个创新点形成独立小论文投稿。当前不能强行凑三篇，建议 2 个核心创新候选 + 1 个储备方向。
+
+总题目工作稿：《面向大语言模型智能体的交互感知演化优化方法研究》。
+
+重要文献发现：
+- Liu (2026), More Is Not Always Better: Cross-Component Interference in LLM Agent Scaffolding, arXiv:2605.05716：已做五组件 32 种全因子组合、Shapley、pairwise regression、探索性三阶交互；其 pairwise model 在主要设置下 LOOCV 低于 main-effects。普通交互估计 NO-GO。
+- Lauziere et al. (2026) 已做 Prompt component regression。
+- MESH-Harness 已做预算受限模块组合搜索和 full-covariance LinUCB，但其 predicted mean 仍为 additive slot-wise model；它是强组合搜索基线。
+- AgentSquare、ARTEMIS、两篇 EvoMAS、AgentEvo、HFlow、AgentBreeder 已覆盖大量 Agent module/workflow crossover 和演化。
+- GOMEA/LTGA、CGOMEA、DSMGA-II、LK-GOMEA、DG2/RDG 已覆盖经典 linkage learning、optimal mixing、条件依赖、局部 linkage 和变量交互识别。
+
+当前候选状态：
+1. 普通组件交互效应估计：NO-GO。
+2. 修订创新一：预算受限、任务条件化的稀疏 Agent 组件交互结构识别：HOLD。必须包含主动实验设计、层级稀疏交互、不确定性校准、随机 rollout 配对/序贯估计，并在同预算下优于 full-factorial 子集、main-effects、pairwise OLS、MESH additive LinUCB。
+3. 修订创新二：交互结构驱动的 Agent 约束最优混合演化：HOLD / 优先预实验。必须提出 typed genotype、interaction FOS、contract-aware mixing/repair、noisy sequential acceptance，且同预算优于 GOMEA/GOM、CGOMEA、LK-GOMEA、DSMGA-II 和 Agent crossover。
+4. 第三项跨任务交互结构迁移：暂缓，LK-GOMEA、HFlow、EvoMAS、Evo-Harness、TTHE 已提高新颖性门槛。
+
+先用固定 4 槽位、每槽位 2 个实现的 16 配置空间，在合成已知交互地形中验证估计器，再进入 ToolSandbox/AppWorld/tau-bench 真实工具任务。不要第一版就做任意 DAG 或开放式代码搜索。下一轮请先形成创新一和创新二的数学定义、算法伪代码、复杂度/评价预算估算和最小可证伪实验，再决定是否启动真实模型评估。
+
+所有结论区分论文事实、研究推断和待验证假设。每轮更新本仓库并维护接班提示词。
