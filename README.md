@@ -160,3 +160,17 @@
 - 12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md：两个核心创新候选的数学定义、主动交互探测、约束最优混合、最小预实验和 GO/HOLD/NO-GO 门槛。
 
 下一步不再堆论文数量，先完成合成真值 Agent landscape 的 Phase 0 算法验证。
+
+
+## 2026-11-02 第五轮：演化计算如何调参
+
+已形成明确的三层调参方案：
+1. 离线算法配置：训练任务上用 irace / iterated racing 调整少量数值与类别超参数；
+2. 在线反馈控制：discounted-UCB / AOS 根据配对改进的置信下界和 rollout 成本，调整变异强度与算子选择；
+3. 统计门禁：\(\alpha\)、最小实际改进幅度和硬约束预先锁定，不进入性能调参。
+
+主算法为 categorical genotype + GOM，不使用 DE 专属 F/CR。Phase 0 固定 N=8，敏感性比较 N=4/8/12；后续再比较 IMS/P3。在线 AOS 不作为独立创新，如果不优于离线调参固定策略则删除。
+
+新增文件：
+- 13_EC_PARAMETER_CONTROL_PLAN.md：完整参数清单、初始取值/搜索范围、离线 irace、在线 UCB/AOS、统计门禁、A/B/C/D 消融和停止条件。
+- 02_LITERATURE_REGISTER.md 新增参数控制相关文献 118–124。
