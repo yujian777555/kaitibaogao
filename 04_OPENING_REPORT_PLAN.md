@@ -123,3 +123,23 @@ EvoTest（ICLR 2026）提供了直接研究起点：整套 Agent 配置在连续
 上述内容仍需与 M*、MemEvolve、E-SPL、INSPO、COvolve、EvoTeam、HFlow、EvoMAS 等强相关工作进行机制级比较。不得把“使用 MAP-Elites / NSGA-III”本身作为创新点。
 
 详细内容见 06_EVOTEST_DEEP_DIVE.md 和 07_CANDIDATE_D_TEST_TIME_ADAPTATION.md。
+
+
+## 7. 第三轮开题方向调整
+
+截至本轮，不能把“Agent 测试时演化”“Agent 多目标优化”“Agent 技能演化”直接作为题目，因为 2026 年已有大量直接研究。候选 D 已降为 NO-GO（宽泛表述）。
+
+当前优先审查候选 G：
+
+**面向大语言模型智能体的交互感知演化重组方法研究**（工作题目，未批准）。
+
+核心研究问题：Agent 配置由多个相互依赖的组件组成，如何估计组件之间的协同/拮抗关系，并据此改进演化算法的交叉重组算子？
+
+初步创新点候选：
+1. 基于配对反事实干预的组件交互效应估计；
+2. 基于 linkage/interaction graph 的协同块交叉与依赖约束修复；
+3. 可选：跨任务家族的交互关系更新与迁移。
+
+强制对照：两篇 EvoMAS、HFlow、AgentSquare、AgentBreeder、DarwinX、SERO、HiveMind、EvoCF、Optimas。若现有工作已有等价组件交互估计与重组机制，则立即 NO-GO。
+
+目前不得撰写最终题目和正式创新点；先完成机制级审查。
