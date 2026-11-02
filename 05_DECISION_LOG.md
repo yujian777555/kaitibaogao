@@ -200,3 +200,25 @@ CI-GOM 不只存在单个 proposal 内的 repeated looks，也会在整个演化
 7. 三阶失配与 pairwise marginal edge 的含义需区分。
 
 **决定：当前不启动正式 Phase 0 性能实验。先修订 TCAIL 规格并复审。** 没有实验结果，Gate-1 仍未通过。
+
+## 2026-11-02 决策 D-025：TCAIL V2 完成纸面修订，等待独立复审
+
+新增 17_TCAIL_FORMAL_SPECIFICATION_V2.md，作为 14_FORMAL_ALGORITHM_DESIGN_V1.md 中 TCAIL 部分的替代规格；新增 18_TCAIL_RELATED_WORK_AUDIT_R1.md。
+
+V2 修订：
+1. 定义 link-scale 条件交互及 reference-background 平均交互，并报告背景异质性；
+2. 明确共同四格合法支持；
+3. 区分 IDENTIFIABLE、PENDING_SUPPORT、STRUCTURALLY_NOT_IDENTIFIABLE、STRUCTURAL_STATUS_UNCERTIFIED；
+4. 分别定义 Gaussian、Bernoulli logistic、Beta likelihood 与 Fisher information；
+5. Gaussian ARD 闭式更新不再套用到非 Gaussian likelihood；
+6. 明确 Bayesian FDR；
+7. 将 interaction-subspace IG 明确归为 Bayesian D-optimal 基线；
+8. 增加 edge-decision risk reduction 候选 acquisition，但不宣称该目标本身新颖；
+9. 4-slot 仅作 debug，扩展 8/10/12 slots；
+10. 增加 additive/null、three-way-only、高阶和约束空间场景。
+
+相关工作审查确认：Agent 组件交互回归、全因子分析、交互 group screening、Bayesian OED/FDR、Agent harness 预算优化均已有先例。TCAIL V2 新颖性仍未成立，当前只是条件性候选。
+
+另记录 EC 主线约束：TCAIL 本身是统计/实验设计模块，不是完整 EC 算法。只有后续证明其结构信息能够改善演化搜索，才可纳入 EC 主线创新证据。
+
+**当前决定：V2 只进入独立规格复审，不进入代码实现或正式性能实验。**
