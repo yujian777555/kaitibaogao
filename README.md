@@ -194,3 +194,10 @@
 当前只执行创新点一 TCAIL。CI-GOM 在 Gate-1 通过前冻结；跨任务迁移在 Gate-2 通过前冻结。每项必须经过强基线、同预算、多 seeds、消融和独立复审。合成实验通过只是必要条件，真实 Agent 验证仍不可缺少。第三项若 Gate-3 不通过就删除，最终允许以两个已验证创新点完成毕业论文。
 
 **当前状态：TCAIL_SPECIFICATION_REVIEW_PENDING；不启动毕业论文正文撰写。**
+
+
+## 2026-11-02 TCAIL 首轮规格审计结果
+
+新增 16_TCAIL_SPECIFICATION_AUDIT_R1.md。对 14_FORMAL_ALGORITHM_DESIGN_V1.md 的独立数学/统计审查结论为 REQUEST REVISION：发现 pairwise estimand 背景依赖未定义、结构性不可识别与当前样本不足混淆、Bernoulli/Beta 与 Gaussian IG 更新不一致、edge 多重比较规则不完整、interaction-only IG 与 Bayesian D-optimal 的关系未处理、16 配置不足以证明可扩展性等问题。
+
+因此当前不进入正式 Phase 0 性能实验。下一步先修订 TCAIL 规格，再由独立审查确认，之后才编码。没有运行实验、没有性能结果、没有 Gate-1 PASS。
