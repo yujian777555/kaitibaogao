@@ -502,3 +502,21 @@ D：irace + 在线控制。
 演化参数方案：训练任务上 irace 离线配置；discounted-UCB/AOS 在线调整动作使用倾向；统计门禁固定。AOS 不是独立创新，若不优于离线调参固定策略则删除。主算法 categorical GOM，不用 DE 专属 F/CR。
 
 最新算法文档：14_FORMAL_ALGORITHM_DESIGN_V1.md。下一步先实现 Phase 0 合成真值模拟器和基线：4 binary slots、正负交互、task-family sign flip、三阶模型失配、Bernoulli/Beta 噪声、全合法和受约束空间；实现 TCAIL 及 CI-GOM 的最小模拟版本；做同预算恢复、搜索和参数控制消融。先不调用真实 LLM、不读其他 GitHub 仓库。每轮更新唯一仓库和接班提示词，严格区分设计、实现、实验结果。
+
+
+## 17. 算法规格 V1 的统计与执行细节修订（2026-11-02）
+
+14_FORMAL_ALGORITHM_DESIGN_V1.md 已进一步修订：
+- Group-ARD 给出组精度的 Type-II ML / EM 更新公式；
+- CI-GOM 每个 target 可运行多个 proposal，每个 proposal 只分配一个 operator arm，确保信用分配清晰；
+- 交互图按该 proposal 的任务上下文生成；
+- 序贯接受采用跨 proposal index 与 proposal 内 look index 的双层 alpha spending，避免多次 offspring 检验造成累计错误率膨胀。
+
+公式：
+\[
+\alpha_k=\frac{6\alpha_{\mathrm{total}}}{\pi^2k^2},\quad
+\alpha_{k,n}=\frac{6\alpha_k}{\pi^2n^2}.
+\]
+假设 task-block differences 有界且独立，或使用相应 martingale confidence bound；相关任务必须按 task family/cluster 聚合。
+
+下一轮实施前需复核这套置信序列的统计假设与实际任务采样机制，不能仅把公式复制进代码。
