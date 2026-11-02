@@ -1,0 +1,108 @@
+# 09 — 候选 G：组件交互感知的演化重组
+
+**工作题目：** 面向大语言模型智能体的交互感知演化重组方法研究  
+**状态：** PRIORITY FOR AUDIT / NOT APPROVED
+
+## 1. 研究动机
+
+Agent 配置不是相互独立的 Prompt 字段集合。规划、记忆、工具路由、验证、恢复和工作流控制等组件之间存在依赖、协同与冲突。
+
+现有方法已大量采用 Prompt/模块变异、workflow crossover、Agent 配置重组、跨 lineage merge、role/topology evolution。但“把两个高分父代的组件拼起来”并不保证得到高分子代。一个组件的效果可能依赖另一个组件的上下文、接口和执行顺序。组件单独有效，不代表组合后有效。
+
+## 2. 直接相关工作的缺口线索
+
+### DarwinX
+DarwinX 使用 additive patch merge 合并不同 lineage 的 harness 修改。论文明确指出，recombination 相对单 lineage mutation 的贡献仍需受控消融，且 archive、parent selector、recombination 和 inference effort 没有被独立随机化。
+
+### EvoMAS / HFlow
+两篇 EvoMAS 和 HFlow 已使用交叉、变异和反馈驱动的 Agent/workflow 演化。因此普通 crossover、LLM 反馈变异不能作为创新。需要核查它们是否显式估计组件间 epistasis/linkage。
+
+### AgentSquare
+AgentSquare 使用模块化设计空间和模块演化/重组。需要核查其固定模块槽位、模块兼容性、交叉粒度和结构依赖处理。
+
+### HiveMind
+HiveMind 使用 DAG-Shapley 估计 Multi-Agent workflow 中不同 Agent 的贡献。这是重要归因基线，但 Agent 级 Shapley contribution 不等同于单个 Agent 配置内部组件之间的 pairwise interaction effect。
+
+### EvoCF / Optimas / SERO
+EvoCF 的反事实主要用于协作计划；Optimas 研究组件局部奖励与全局表现对齐；SERO 通过结构契约保持角色池有效性。这些工作需要精读，判断是否覆盖配置组件交互和遗传重组。
+
+## 3. 拟研究的核心机制
+
+### 3.1 组件表示
+
+将 Agent 配置表示为带类型、参数和依赖关系的图：
+
+G = (V, E, τ, θ)
+
+- V：组件节点；
+- E：控制流、数据流或调用依赖边；
+- τ：组件类型；
+- θ：组件参数/Prompt/策略配置。
+
+初期只选择有限、可执行的组件集合，不追求任意程序级开放搜索。
+
+### 3.2 交互效应估计
+
+对于两个组件 i、j，通过配对反事实替换估计交互：
+
+ε_ij = f(χ_ij) - f(χ_i0,j) - f(χ_i,j0) + f(χ_i0,j0)
+
+所有变体在同一任务实例、同一环境状态和配对随机种子下执行。需要定义合法参考状态和修复规则。
+
+如果 ε_ij 显著为正，说明组件组合可能存在正协同；如果显著为负，说明可能存在冲突或拮抗。若置信区间覆盖零，则不强制建立 linkage。
+
+### 3.3 Linkage graph
+
+根据交互效应及其不确定性构造组件交互图：
+- 强正协同：作为 co-adapted block 一起继承；
+- 强负交互：禁止直接交叉或触发兼容性修复；
+- 交互不明显：允许独立重组；
+- 证据不足：保留原组件组合。
+
+### 3.4 Interaction-aware crossover
+
+1. 选择两个互补父代；
+2. 根据交互图识别可继承的协同模块块；
+3. 执行块级交换；
+4. 根据类型和依赖关系进行 repair；
+5. 在统一验证任务上评价子代；
+6. 将实际子代结果反馈给交互图更新。
+
+## 4. 预期创新点候选
+
+1. 面向 Agent 配置的组件交互效应估计方法：通过配对反事实干预估计模块间协同/拮抗关系，区分组件主效应与交互效应。
+2. 基于交互图的 linkage-aware evolutionary crossover：将组件协同关系转化为重组粒度和兼容性约束，降低无效组合和破坏性重组。
+3. 可选：面向任务分布变化的交互图更新机制。若证据不足，不强行列为创新点。
+
+## 5. 实验方案草案
+
+### 任务环境
+优先选择具有可复现工具执行轨迹、可控组件配置和确定性结果检查的 Agent 任务。可先用受控 tool-use benchmark，再用真实工具 Agent benchmark 外部验证。
+
+### 对照组
+Mutation-only；random component crossover；LLM-proposed crossover；AgentSquare-style module recombination；EvoMAS-style configuration crossover；HFlow-style workflow crossover；DarwinX-style additive merge；interaction-aware crossover。
+
+### 指标
+offspring validity / execution success、offspring task success、improvement probability over parents、harmful recombination rate、held-out task performance、interaction prediction accuracy、component graph stability。
+
+### 消融
+不使用交互效应；只用单组件主效应；随机 linkage graph；去除依赖约束；去除 repair；只保留正交互；只保留负交互约束；用 Shapley agent-level contribution 替代 pairwise gene interaction。
+
+## 6. 关键风险
+
+1. 已有 crossover 已覆盖。如果 EvoMAS/HFlow/AgentSquare 已显式建模组件交互并据此重组，候选 G 不成立。
+2. 反事实干预不合法。某些组件不能独立替换，需要类型约束、默认实现和修复器。
+3. 交互效应噪声大。需要配对随机种子、重复运行和置信区间。
+4. 组合数量爆炸。先研究少量关键组件和 pairwise interaction，不做全量高阶交互。
+5. 传统 linkage learning 已成熟。必须明确 Agent 配置的语义依赖、执行约束和轨迹反馈带来的新问题，而不是简单复刻 GOMEA/LTGA。
+
+## 7. 下一步研究任务
+
+1. 精读两篇 EvoMAS 的 crossover 伪代码；
+2. 精读 HFlow 的 workflow/prompt/model crossover；
+3. 精读 AgentSquare 的 module evolution；
+4. 精读 DarwinX 的 additive merge 与 limitation；
+5. 精读 HiveMind 的 DAG-Shapley；
+6. 精读 EvoCF、Optimas、SERO；
+7. 检索并比较 GOMEA、LTGA、DSMGA-II、Bayesian Optimization Algorithm 等 linkage-learning EC 方法；
+8. 再决定候选 G 是 GO、HOLD 还是 NO-GO。
