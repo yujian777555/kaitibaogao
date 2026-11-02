@@ -286,3 +286,21 @@ F(x,z)=\beta_0(z)+\sum_i f_i(x_i,z)+\sum_{i<j}g_{ij}(x_i,x_j,z)+\epsilon.
 参数控制本身是成熟研究领域，且 Wei et al. EvoMAS 已使用 adaptive strategy selection。故本课题不能把 UCB/AOS 或 parameterless population management 单独作为创新点。只有当交互置信度与 Agent 约束重组的结合，在同预算实验中产生独立、可重复收益时，才保留相应方法。
 
 当前创新点一和二仍为 HOLD；参数策略解决的是“如何公平、可复现地设定和控制算法参数”，并不自动证明创新性。
+
+
+## 10. 第六轮：算法规格成熟度与风险更新（2026-11-02）
+
+新增 14_FORMAL_ALGORITHM_DESIGN_V1.md。两个候选已有可实现的数学规格，但新颖性仍未确认。
+
+### 新的关键风险
+1. Group-ARD + posterior IG 是成熟统计工具的组合，必须证明其在 Agent 合法组合空间、任务条件化和随机评价下比 sparse fixed design / MESH additive surrogate 更有增益。
+2. GOM + FOS 本身是经典方法；CI-GOM 必须证明 Agent contract repair、posterior donor compatibility 和 noisy sequential acceptance 不是工程包装，而是解决传统 GOM 在该问题设定中的具体失效模式。
+3. 负交互同样是 linkage。V1 已将 FOS 建边从“只选正交互”修正为“可信非加性绝对强度”；符号只参与 donor score。
+4. 可识别性门禁可能使部分边 abstain；这不是算法失败，而是防止在约束空间里制造伪交互。但若真实任务中大部分关键边都不可识别，Paper 1 的适用价值会受限。
+5. anytime-valid acceptance 依赖独立、有界 task-block differences。若任务块相关或重复 rollout 伪独立，必须按 task family/cluster 重新定义统计单位。
+
+### 更新后的判断
+- TCAIL：HOLD，进入合成真值验证；
+- CI-GOM：HOLD，优先做 oracle-linkage 对照；
+- AOS：可选，只有同预算优于离线调参固定策略才保留；
+- 第三创新点：继续暂缓。
