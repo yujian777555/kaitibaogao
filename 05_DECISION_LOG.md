@@ -233,3 +233,11 @@ V2 修订：
 5. 预算百分比的 full-factorial denominator 必须精确定义。
 
 已将澄清写入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节。当前仍不实现、不跑正式 Phase 0。需要对修订后的 V2.1 再做独立复审。
+
+## 决策 D-027：将每轮仓库维护设为强制流程（2026-11-02）
+
+用户明确要求后续研究不能只在聊天中推进，必须持续维护唯一毕业论文研究仓库 yujian777555/kaitibaogao。
+
+已新增 REPOSITORY_MAINTENANCE_POLICY.md，并在 README.md 与 SESSION_HANDOFF.md 中登记。每轮开始核对远端状态、读取项目上下文；每轮结束更新研究记录、项目状态、决策日志和完整接班提示词；提交推送后复核远端 HEAD 与关键文件。若推送/核验失败，必须如实报告。
+
+项目隔离规则继续有效：kaitibaogao 不与 openissue、agentfotagent、GLEPPO 等独立项目混用。
