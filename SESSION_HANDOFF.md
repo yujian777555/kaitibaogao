@@ -563,3 +563,30 @@ TCAIL 合成 Gate 通过也不等于论文成立；之后必须选择可信、�
 CI-GOM 规格保留但冻结；Gate-1 后先做 oracle-linkage 上界、contract-aware repair、donor、sequential acceptance 消融，再做 learned-linkage 端到端同预算比较。Gate-2 通过后才启动第三项跨任务交互迁移。第三项必须证明存在可迁移结构，且 selective transfer 优于 from-scratch 和 direct transfer；否则删除第三项，允许最后只有两个创新点。
 
 暂停大论文正文写作。每轮维护唯一仓库、更新状态和接班提示词；严格区分设计、实现、合成验证、真实 Agent 验证和 Gate 通过。不能把工程 PASS 写成算法 PASS，不能只用 toy 环境或弱基线宣称创新。
+
+
+## 19. TCAIL 首轮规格审计完成：REQUEST REVISION（2026-11-02）
+
+本节覆盖更早 handoff 中将 TCAIL 标记为可直接进入 Phase 0 的表述。
+
+### 审计记录
+- 新增：16_TCAIL_SPECIFICATION_AUDIT_R1.md
+- 审计对象：14_FORMAL_ALGORITHM_DESIGN_V1.md 的 TCAIL 部分
+- 结论：REQUEST REVISION / IMPLEMENTATION BLOCKED
+- 当前状态：TCAIL_SPECIFICATION_REVISION_REQUIRED
+- 尚未编码、尚未运行实验、尚无性能结果、Gate-1 未通过。
+
+### 必须先修复的七项阻塞
+1. pairwise contrast 必须显式依赖背景槽位，并定义 reference distribution 下的边 estimand；同时报告背景异质性。
+2. 区分 PENDING_SUPPORT、IDENTIFIABLE、STRUCTURALLY_NOT_IDENTIFIABLE；不能把当前样本不足直接标为永久不可识别。
+3. Gaussian、Bernoulli logistic、Beta reward 的 likelihood 与 posterior / expected-information update 必须分别一致。
+4. edge selection 增加明确的 Bayesian FDR 或有理论依据的多重比较控制。
+5. interaction-only IG 本质上与 Bayesian D-optimal 子空间设计相连；必须增加严格匹配的 D-optimal 强基线，重新审查独立新颖性。
+6. 4-slot / 16-config 只用于 debug；新增 8/10/12-slot scaling landscape。
+7. 区分 pairwise marginal interaction、background-conditional interaction 和高阶模型预测失配；三阶项不意味着所有 pairwise edge 都必须 abstain。
+
+### 下一轮唯一任务
+只在 yujian777555/kaitibaogao 内工作。先按 16_TCAIL_SPECIFICATION_AUDIT_R1.md 修订 14_FORMAL_ALGORITHM_DESIGN_V1.md 的 TCAIL 部分；然后由独立审查重新检查数学、统计和 novelty baseline。规格复审通过之前，不实现正式 Phase 0，不调用真实 LLM，不启动 CI-GOM，不启动第三项，不写硕士大论文正文。
+
+### 接班提示词的最新补充
+先读 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md、16_TCAIL_SPECIFICATION_AUDIT_R1.md、14_FORMAL_ALGORITHM_DESIGN_V1.md。当前只做 TCAIL 规格修订。注意 Bayesian D-optimal 对照、背景平均 pair estimand、structural vs sample identifiability、Bernoulli/Beta expected information、Bayesian FDR 和大规模 synthetic landscapes。不要把 REQUEST REVISION 写成算法已失败，也不要把算法设计写成已验证创新；这是实现前规格审计发现的可修订缺口。
