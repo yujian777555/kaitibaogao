@@ -127,3 +127,23 @@ EvoMAS 已做配置空间中的 feedback-conditioned crossover/mutation；AgentE
 - 小论文三（任务条件化交互图迁移）必须区别于 Evo-Harness、TTHE 等已有在线 harness/test-time evolution。
 
 当前仍是候选方向，不得将本文件中的草案直接写成已确认创新点。
+
+
+## 9. 第四轮严格修订：从普通交互感知交叉转为 constrained optimal mixing
+
+新增先行工作 Liu (2026) CCI 和 Lauziere et al. (2026) Prompt component regression，说明普通交互分析已被覆盖。经典 GOMEA、CGOMEA、DSMGA-II、LK-GOMEA 又说明 linkage learning 和 optimal mixing 已是成熟 EC 方法。
+
+因此候选 G 的可行形式不能是“计算 ε_ij → 画交互图 → 普通交叉”。修订为：
+
+**面向类型约束 Agent 配置的交互结构驱动约束最优混合（interaction-guided constrained optimal mixing）。**
+
+必须同时处理：
+1. Agent 模块的混合类型基因；
+2. 组件接口、调用关系和控制流依赖；
+3. 从 noisy/expensive rollout 学到的 linkage；
+4. donor block 替换后的最小化 contract repair；
+5. 配对/序贯接受规则，避免随机 fitness 下误接受有害 offspring。
+
+强基线必须包含 standard GOMEA/GOM、CGOMEA、DSMGA-II、LK-GOMEA、AgentSquare、ARTEMIS、Hu-EvoMAS、AgentEvo、MESH-Harness。
+
+**状态：HOLD / 优先预实验。** 如果只是在固定模块槽位上套 GOMEA，或只增加接口检查而没有新的 linkage/acceptance 机制，则 NO-GO。
