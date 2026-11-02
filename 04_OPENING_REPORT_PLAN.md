@@ -235,3 +235,7 @@ MESH-Harness、ARTEMIS、EvoMAS、AgentEvo、Evo-Harness 已补入文献总表�
 ## 13. 开题内容状态更新（2026-11-02）
 
 当前不写硕士大论文正文。TCAIL V2 尚未独立复审，相关工作新颖性尚未成立。开题报告中不能把 TCAIL 写成已确认创新，也不能把它单独等同于演化计算算法。待 TCAIL 及后续 EC 搜索机制有证据后，再确定其在毕业论文中的位置。
+
+## 14. TCAIL V2.1 复审状态（2026-11-02）
+
+TCAIL V2 第二轮数学复核 REQUEST CHANGES，相关澄清已补入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节，详见 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md。当前 V2.1 尚待独立复审，不能写成已确认创新，也不能写成已验证的演化计算方法。继续暂停大论文正文。
