@@ -121,3 +121,15 @@
 - EvoSkills 通过 Skill Generator 与 Surrogate Verifier 的协同演化改进多文件技能包；MemEvolve、MemSkill、Live-Evo、AgentFactory 等使记忆/技能持续演化成为密集研究方向。
 - 本轮调整：候选 A（任务分布泛化 + QD）与 B（过程归因）继续保留但不再优先；新增候选 D（跨任务序列的测试时演化自适应）作为当前优先审查对象。
 - 当前检索仍不是全领域穷尽式系统综述；下一轮需从综述参考文献、ICLR/ICML/NeurIPS/GECCO/ACL/AAAI 论文集继续追踪，并特别补充国内研究和中文学术数据库来源。
+
+
+### 2026-11-02 — 第三轮检索
+新增检索词：test-time harness evolution、Meta-TTL、TacoMAS、Inherit-MAS、EvolveNet、DarwinX、multi-objective Agent evolution、SkillMOO、MOCHA、MOAE、AgentBreeder、Huxley-Gödel Machine、metaproductivity、population-centered evolution、FreeEvolve、Agent evaluator calibration、selection regret、counterfactual component interaction、epistasis-aware crossover、linkage learning for Agent configuration。
+
+主要结论：
+- D 的宽泛跨任务 TTL 已被 TTHE、Meta-TTL、TacoMAS、Inherit-MAS、EvolveNet、DarwinX 覆盖，降为 NO-GO。
+- 普通多目标 Agent 优化已被 MOAE、SkillMOO、MOCHA、AgentBreeder、ParetoPO 等覆盖。
+- evolvability/offspring potential 已有 HGM CMP、Evolvability Search、Evolvability ES、CATArena、PCE、FreeEvolve。
+- Agent 评价器和反馈可靠性已有 TTHE、DarwinX、RQGM、Certified Selective Automation、Calibrating the Evaluator 等相关工作。
+- 当前新候选 G 是组件交互感知的演化重组，核心是估计配置组件间的 epistasis/linkage，并将其用于 crossover。必须与 EvoMAS、HFlow、AgentSquare、AgentBreeder、DarwinX、SERO、HiveMind、EvoCF、Optimas 比较。
+- 文献表目前 104 条，仍非全领域穷尽；下一轮需重点审计 crossover/interaction 机制和经典 linkage learning，不能只继续堆论文数量。
