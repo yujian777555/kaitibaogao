@@ -662,3 +662,20 @@ Output:
 - 参数控制：irace 离线调少量参数，discounted-UCB 在线选择动作；AOS 不单独算创新。
 
 **仍未证明：** 这两个方法是否优于强基线、是否有足够学术新颖性、是否能在真实 Agent 环境中提高成功率。下一步必须实现并运行 Phase 0 合成实验，不能仅凭公式确认创新成立。
+
+
+---
+
+## 18. 2026-11-02 Addendum — CI-GOM linkage interface under revision
+
+**状态：HISTORICAL DESIGN / FROZEN / DO NOT IMPLEMENT AS WRITTEN.**
+
+Part B Section 10 currently defines \(q_{ij}(z)=P(|\Delta_{ij}(z)|>\delta_{\rm link}\mid D)\) and directly turns these edges into pairwise FOS blocks. This interface is under revision because:
+- the signed reference-mean contrast can cancel when conditional interactions change sign across backgrounds;
+- a global task-conditioned edge is not automatically the correct local linkage for every parent;
+- a pairwise VIG is not itself a complete FOS, especially with higher-order or overlapping dependencies;
+- FBL, DLED/cDLED, conditional GOMEA, LMM and ALI/AIM are direct prior art.
+
+See 21_GOMEA_LINKAGE_AND_NOISY_INTERACTION_RELATED_WORK_AUDIT_R1.md and 22_TCAIL_LINKAGE_INTERFACE_REVISION_PROPOSAL_R1.md. The latter is a proposal only and is not yet integrated into the authoritative TCAIL specification.
+
+CI-GOM remains frozen. Do not implement Part B based on the old Section 10 linkage interface until a revised specification has passed independent review.
