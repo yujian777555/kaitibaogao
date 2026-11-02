@@ -350,3 +350,45 @@ GOMEA/LTGA 已有 Linkage Tree 与 Gene-pool Optimal Mixing；CGOMEA 利用条�
 先用固定 4 槽位、每槽位 2 个实现的 16 配置空间，在合成已知交互地形中验证估计器，再进入 ToolSandbox/AppWorld/tau-bench 真实工具任务。不要第一版就做任意 DAG 或开放式代码搜索。下一轮请先形成创新一和创新二的数学定义、算法伪代码、复杂度/评价预算估算和最小可证伪实验，再决定是否启动真实模型评估。
 
 所有结论区分论文事实、研究推断和待验证假设。每轮更新本仓库并维护接班提示词。
+
+
+## 14. 两个核心算法的最小规格已建立（2026-11-02）
+
+新增文件：12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md。
+
+核心定义：
+- Agent genotype 为固定功能槽位的 categorical module IDs，合法集合受类型、接口、控制流/数据流依赖约束；
+- 任务上下文 z 与随机执行 ω 下的回报为 Y(x,z,ω)；
+- Paper 1 候选：任务条件化主效应 + 稀疏 pairwise interaction + 主动合法配置探测 + 配对/序贯噪声估计；
+- Paper 2 候选：从交互图构造 FOS/linkage blocks，进行 contract-aware donor mixing、最小 repair 和 noisy sequential acceptance；
+- 第一阶段 4 槽位 × 2 实现 = 16 配置，先在已知交互真值的合成地形中验证，再进入 ToolSandbox/AppWorld/tau-bench。
+
+注意：这些是待验证算法规格，不是已实现代码或实验结果。Paper 1、Paper 2 仍 HOLD。
+
+### 下一会话具体任务
+1. 只读写唯一仓库 yujian777555/kaitibaogao。
+2. 读取最新的 11_INNOVATION_FEASIBILITY_AUDIT.md 与 12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md。
+3. 将 Paper 1 的主动采样 acquisition 具体化：明确 posterior/估计器、IG 计算、合法配置候选生成、噪声/置信区间校准。
+4. 将 Paper 2 的 FOS 构造、donor 兼容性、repair delta 和序贯接受规则写成伪代码。
+5. 设计可复现的合成真值地形（主效应、正/负二阶交互、少量任务条件交互、噪声）和生成脚本规格；先不要调用真实 LLM。
+6. 做预算敏感性分析，比较 full factorial、main effects、pairwise OLS、sparse interaction、fixed design、active design。
+7. 只有 Phase 0 通过后再选 ToolSandbox/AppWorld/tau-bench 的 pilot 任务；不要读取这些基准的 GitHub 代码仓库，公开论文/官方文档页面可以检索。
+8. 每轮更新文献、机制比较、开题计划、决策日志、可行性审计、算法设计和接班提示词，提交并核验 main。
+
+### 最新接班提示词
+你是我的河北工业大学计算机技术硕士开题研究助手。研究主线是 Evolutionary Computation for AI Agents。唯一允许读取和维护的 GitHub 仓库是 yujian777555/kaitibaogao，严禁读取任何其他 GitHub 仓库或将其他项目内容混入。
+
+用户要求硕士论文有 2–3 个创新点，每个创新点独立形成一篇小论文。当前按 2 个核心创新候选 + 1 个储备方向推进，不能凑三篇。
+
+总题目工作稿：《面向大语言模型智能体的交互感知演化优化方法研究》。
+
+关键否证：普通组件交互效应估计已经被 Liu (2026) CCI（arXiv:2605.05716）覆盖全因子组合、Shapley、pairwise regression 和探索性三阶交互；Lauziere et al. (2026) 也做了 Prompt component regression。原创新点一普通交互估计 NO-GO。MESH-Harness 的均值预测为 additive slot-wise，但 full covariance 利用共同出现信息估计不确定性，是强组合搜索基线。GOMEA/CGOMEA/LK-GOMEA/DSMGA-II/DG2/RDG 已覆盖经典 linkage learning 与 optimal mixing。
+
+修订创新候选：
+1. 预算受限、任务条件化的稀疏 Agent 组件交互链路学习（HOLD）：必须含主动合法配置探测、层级稀疏交互、不确定性校准、配对/序贯随机评估；同预算优于 CCI full factorial subset、main-effects、pairwise OLS 和 MESH additive LinUCB。
+2. 交互链路驱动的 Agent 约束最优混合演化（HOLD / 优先）：必须含 typed genotype、interaction FOS、contract-aware donor mixing/repair、noisy sequential acceptance；同预算优于 GOMEA/GOM、CGOMEA、LK-GOMEA、DSMGA-II 和 Agent crossover。
+3. 跨任务 linkage transfer 暂缓，除非前两项通过且出现可重复的共享/任务特定交互结构。
+
+最新规格在 12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md。下一步先完成 Paper 1 acquisition 和 Paper 2 mixing 的伪代码，再设计 4 槽位 × 2 实现的 16 配置合成真值地形，含主效应、正负二阶交互、少量任务条件符号变化和噪声。比较 full factorial、main-effects、pairwise OLS、sparse interaction、fixed design 和 active design。先不调用真实 LLM，不读 benchmark 代码仓库。Phase 0 通过后再做真实 Agent pilot。
+
+所有结论必须区分论文事实、研究推断和待验证假设；每轮更新唯一仓库并核验 main。
