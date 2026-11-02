@@ -117,3 +117,28 @@ MOAE、SkillMOO、MOCHA、AgentBreeder、HGM、PCE、FreeEvolve、SERO 等已覆
 - Evo-Harness 已做上下文到技能 harness 的在线编译与跨任务使用。
 
 因此候选 G 不能未经审查直接升级为创新点二；创新点三也必须区别于 Evo-Harness、TTHE 等工作。
+
+
+## 2026-11-02 决策 D-016：普通组件交互估计 NO-GO
+
+新增直接工作：
+- Liu (2026), More Is Not Always Better: Cross-Component Interference in LLM Agent Scaffolding, arXiv:2605.05716：32 种组件组合、Shapley、pairwise regression 和探索性三阶交互；
+- Lauziere et al. (2026), A Regression Framework for Understanding Prompt Component Impact on LLM Performance, EXPLAINABILITY 2026。
+
+原创新点一若只是“组件交互效应估计/差分公式/交互图”，已经不足以构成独立创新。且 CCI 论文中 pairwise model 的 LOOCV 低于 main-effects model，提示简单加交互项可能过拟合。
+
+**决策：原表述 NO-GO；修订后的预算受限、任务条件化稀疏交互发现 HOLD。**
+
+## 2026-11-02 决策 D-017：交互驱动的约束最优混合演化 HOLD / 优先预实验
+
+AgentSquare、ARTEMIS、Hu-EvoMAS、Wei-EvoMAS、AgentEvo、HFlow 已覆盖大量 Agent crossover/模块重组；GOMEA/LTGA/CGOMEA/DSMGA-II/LK-GOMEA 已覆盖经典 linkage learning 与 optimal mixing。
+
+仅在提出并验证适用于 Agent 混合类型、接口/控制流依赖、随机昂贵 fitness 的实质新机制时才可能成立。不得直接把 GOMEA 套到 Agent 配置后宣称新算法。
+
+## 2026-11-02 决策 D-018：第三创新点暂缓
+
+跨任务 linkage 迁移与 LK-GOMEA、HFlow、EvoMAS curriculum、Evo-Harness、TTHE 等有交叉，尚未证明独立科学问题。暂不写入正式创新点，等待前两项预实验显示跨任务结构规律后再评估。
+
+## 2026-11-02 决策 D-019：核心产出目标调整
+
+以 **2 个核心创新候选 + 1 个有条件的扩展方向**推进。Paper 1 和 Paper 2 各自必须具备独立方法贡献和实验；第三篇不是当前承诺。完整可行性矩阵与实验 Gate 见 11_INNOVATION_FEASIBILITY_AUDIT.md。
