@@ -392,3 +392,69 @@ GOMEA/LTGA 已有 Linkage Tree 与 Gene-pool Optimal Mixing；CGOMEA 利用条�
 最新规格在 12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md。下一步先完成 Paper 1 acquisition 和 Paper 2 mixing 的伪代码，再设计 4 槽位 × 2 实现的 16 配置合成真值地形，含主效应、正负二阶交互、少量任务条件符号变化和噪声。比较 full factorial、main-effects、pairwise OLS、sparse interaction、fixed design 和 active design。先不调用真实 LLM，不读 benchmark 代码仓库。Phase 0 通过后再做真实 Agent pilot。
 
 所有结论必须区分论文事实、研究推断和待验证假设；每轮更新唯一仓库并核验 main。
+
+
+## 15. 第五轮：演化计算参数调节策略已确定（2026-11-02）
+
+新增文档：13_EC_PARAMETER_CONTROL_PLAN.md。文献总表新增 118–124 条，覆盖 Eiben 参数控制分类、Eiben & Smit 离线调参、Aleti & Moser 自适应控制综述、irace、AOS、SHADE 和 L-SHADE。
+
+### 用户本轮核心要求
+继续开题研究，并明确“演化计算如何调参”。下一轮必须把调参机制落实到算法和实验，不能只列参数名字。
+
+### 本轮结论
+采用三层参数策略：
+1. **离线调参：** 用 irace/iterated racing 在训练任务上选择少量数值/类别参数；
+2. **在线自适应控制：** discounted-UCB/AOS 根据配对改进的置信下界 / rollout cost，调整 mutation intensity 和 operator action；
+3. **统计门禁固定：** \(\alpha\)、\(\delta_{\min}\)、硬约束不根据 test 结果调节。
+
+主算法是 categorical genotype + GOM，不是 DE，因此不把 DE 专属 F、CR 移植进来。SHADE 仅借鉴成功历史思想，不能直接照搬数值参数机制。
+
+### 当前参数决策
+- Phase 0 四槽位固定 \(N=8\)，敏感性 \(N=4,8,12\)；扩大后比较 IMS/P3；
+- \(K\in\{1,2,3\}\) 表示一次变异改变的槽位数，由在线控制器选择；\(p_m=1/m=0.25\) 仅为四槽位普通 GA 基线；
+- FOS 第一版为 singleton + 可信正向 pairwise edges，最大块 2；
+- 负交互是软兼容性信号，不是硬约束；类型/接口/调用依赖是硬约束；
+- FOS 顺序、donor 策略、稀疏正则 \(\lambda\)、UCB \(c\)、历史折扣 \(\rho\)、图更新间隔通过训练任务离线调参；
+- 序贯评价的显著性和最小实际改进门槛预先锁定。
+
+### 重要相关工作限制
+- GOMEA 已研究 IMS/P3 等 population-size-free schemes；parameterless 不等于无任何参数。原论文仍比较了多种算法设计组合。
+- SHADE 已有 success-history adaptation；
+- AOS 已有 credit assignment + multi-armed bandit；
+- Wei et al. EvoMAS 已有七种策略和 adaptive strategy selection。
+因此 UCB/AOS 只作为辅助控制，不单独写成创新点。核心差异仍是交互估计、Agent 约束 FOS/mixing 和噪声感知接受。
+
+### 必须完成的参数控制消融
+A：默认参数 + 固定算子概率；
+B：irace 离线调参 + 固定算子概率；
+C：默认参数 + 在线 discounted-UCB/AOS；
+D：irace + 在线控制。
+所有算法同一 rollout/FE budget，所有 baseline 也必须获得相同调参预算。若 D 不优于 B，则去掉在线控制。
+
+### 下一轮任务
+1. 只维护 yujian777555/kaitibaogao。
+2. 读取 13_EC_PARAMETER_CONTROL_PLAN.md、12_ALGORITHM_DESIGN_AND_MINIMUM_PILOT.md、11_INNOVATION_FEASIBILITY_AUDIT.md。
+3. 把 Phase 0 合成真值 landscape 写成精确生成规则：主效应、正/负交互、任务条件交互、噪声方差、合法组合。
+4. 生成 Paper 1 active interaction estimator 的伪代码和 Paper 2 parameter-controlled constrained GOM 的伪代码。
+5. 做参数敏感性设计，至少覆盖 sparse lambda、N、K、FOS order、donor strategy、UCB c/rho、graph update interval。
+6. 对照 full factorial、main effects、pairwise OLS、MESH additive surrogate、GOMEA/CGOMEA、fixed parameter GOM、AOS baseline。
+7. 先跑合成实验，不调用真实 LLM，不读其他 GitHub 仓库。
+8. 若在线 AOS 无法在同预算下优于离线调参固定策略，删除它，不强行保留自适应模块。
+9. 每轮更新 README、文献总表、机制比较、开题计划、决策日志、算法设计、参数控制文档和接班提示词。
+
+### 可直接复制的接班提示词
+你是我的河北工业大学计算机技术硕士开题研究助手。研究主线是 Evolutionary Computation for AI Agents。唯一允许维护的仓库为 yujian777555/kaitibaogao，严禁读取其他 GitHub 仓库或混用其他项目成果。
+
+当前题目工作稿：《面向大语言模型智能体的交互感知演化优化方法研究》。论文目标为 2–3 个独立创新点；目前两个核心候选均 HOLD，第三项跨任务迁移暂缓。
+
+普通组件交互估计 NO-GO。修订候选一为预算受限、任务条件化的稀疏交互结构识别；候选二为交互链路驱动的 Agent 约束最优混合演化。相关工作包括 CCI、MESH-Harness、AgentSquare、ARTEMIS、两篇 EvoMAS、AgentEvo、GOMEA/CGOMEA/LK-GOMEA。
+
+演化计算调参已经决定为：
+- 离线：irace/iterated racing 在训练任务上调少量参数；
+- 在线：discounted-UCB/AOS 根据配对改进的置信下界 / rollout cost 调整变异强度和算子选择；
+- 统计门禁固定：alpha、delta_min、硬约束不按 test 调整。
+主算法是 categorical GOM，不使用 DE 专属 F/CR。Phase 0 固定 N=8，敏感性比较 N=4/8/12；K={1,2,3} 为一次变异改变的槽位数；FOS 首版为 singleton + 可信正向 pairwise edges，最大块 2；负交互是软 donor compatibility 信号，不是硬约束。
+
+本轮新增 13_EC_PARAMETER_CONTROL_PLAN.md，包含参数表、初始策略、irace、UCB/AOS 公式、A/B/C/D 消融和停止条件。在线 AOS 不单独算创新；如果不优于离线调参固定策略就删除。
+
+下一步先完成合成真值 landscape 精确定义、伪代码、参数敏感性实验；不调用真实 LLM，不读其他 GitHub 仓库。所有结论必须区分论文事实、推断和待验证假设。每轮更新唯一仓库并核验 main。
