@@ -212,3 +212,13 @@
 首轮结论：TCAIL V1 不能直接实现；V2 已完成纸面修订，但仍待独立复审。interaction-only IG / Bayesian D-optimal、Bayesian FDR、组件交互回归和预算约束 Agent harness search 均有既有先例。TCAIL V2 仍是条件性候选，不能宣称新颖性已成立。
 
 特别说明：TCAIL 是统计建模/主动实验设计模块，本身不是完整 EC 算法。其能否成为毕业论文创新点，取决于是否对后续演化搜索提供独立、可测量的价值。当前不实现、不运行正式 Phase 0。
+
+## 2026-11-02 TCAIL V2 规格修订与相关工作审查
+
+新增：
+- 17_TCAIL_FORMAL_SPECIFICATION_V2.md：修订 pairwise estimand、reference background、link-scale/reward-scale、identifiability state machine、Gaussian/Bernoulli/Beta likelihood、Bayesian FDR、decision-risk acquisition 和 8/10/12-slot 实验协议。
+- 18_TCAIL_RELATED_WORK_AUDIT_R1.md：首轮相关工作与新颖性审查。
+
+首轮结论：TCAIL V1 不能直接实现；V2 已完成纸面修订，但仍待独立复审。interaction-only IG / Bayesian D-optimal、Bayesian FDR、组件交互回归和预算约束 Agent harness search 均有既有先例。TCAIL V2 仍是条件性候选，不能宣称新颖性已成立。
+
+特别说明：TCAIL 是统计建模/主动实验设计模块，本身不是完整 EC 算法。其能否成为毕业论文创新点，取决于是否对后续演化搜索提供独立、可测量的价值。当前不实现、不运行正式 Phase 0。
