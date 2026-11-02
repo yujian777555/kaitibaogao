@@ -205,3 +205,16 @@ MESH-Harness、ARTEMIS、EvoMAS、AgentEvo、Evo-Harness 已补入文献总表�
 主算法为离散模块配置 + GOM，不引入 DE 专属 \(F,CR\)。四槽位合成实验先固定 \(N=8\)，做 \(N=4,8,12\) 敏感性；扩大规模后再比较 IMS/P3。详细算法和参数域见 13_EC_PARAMETER_CONTROL_PLAN.md。
 
 必须做 A/B/C/D 四组对照：默认固定、离线调参固定、仅在线控制、离线+在线控制。若在线控制不能显著优于离线调参固定策略，则删除在线控制，不将“自适应”作为创新点。
+
+
+## 11. 核心算法形式化设计（2026-11-02）
+
+算法规格见 14_FORMAL_ALGORITHM_DESIGN_V1.md。
+
+研究内容一暂定为 TCAIL：采用任务条件化类别效应编码、Group-ARD 稀疏交互估计、合法配置可识别性门禁和 interaction-only posterior information gain 主动采样，输出带方向/置信度/abstention 的交互图。
+
+研究内容二暂定为 CI-GOM：采用可信非加性交互构造 FOS、contract-aware deterministic minimal repair、posterior-aware donor selection 和 paired sequential acceptance；discounted-UCB 仅作为可选在线动作控制。
+
+重要方法约束：正负交互均可构成 linkage；交互符号不等于硬约束。类型、接口、权限和调用依赖才是硬约束。若合法空间不支持识别某条边，必须明确 abstain。
+
+以上均为待验证方法设计，开题报告使用“拟研究/拟提出”，不能写成已实现或已证明优于现有方法。
