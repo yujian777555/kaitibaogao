@@ -85,3 +85,21 @@ EvoMAS (Hu et al.)、EvoMAS (Wei et al.)、HFlow、AgentSquare、AgentBreeder、
 3. 任务分布变化下交互结构迁移（条件性）。
 
 候选 G 仍为 HOLD / PRIORITY FOR AUDIT。尤其要精读 ARTEMIS 和 MESH-Harness 的组件表示、交互建模、选择、交叉和消融。只有确认没有等价机制后，创新点一、二才能 GO。
+
+
+## 10. 第四轮审查：候选 G 的可行性重新判定
+
+### 10.1 直接交互分析已被覆盖
+Liu (2026) 的 CCI 研究已做五组件全因子 32 配置实验、Shapley、pairwise regression 和探索性三阶交互。其 pairwise regression 在主要设置中 LOOCV 反而低于 main-effects model。Lauziere et al. (2026) 也已做 Prompt component regression。
+
+因此，普通交互效应估计和交互图可视化不能再作为创新点。
+
+### 10.2 修订后的两个核心候选
+- **G1：预算受限、任务条件化的稀疏 Agent 组件交互结构识别。** 核心差异是多实现/混合类型/可执行模块、随机 rollout、主动实验设计和不确定性交互筛选；HOLD。
+- **G2：交互结构驱动的约束最优混合演化。** 核心差异是 Agent 类型/接口/控制流约束、linkage-aware block mixing、噪声感知接受；必须与 GOMEA/CGOMEA/LK-GOMEA 及 Agent crossover 强基线比较；HOLD，优先预实验。
+
+### 10.3 第三个候选暂缓
+跨任务 linkage transfer 受 LK-GOMEA、HFlow、EvoMAS、Evo-Harness、TTHE 等影响，尚无清楚的独立贡献；不进入当前核心开题创新点。
+
+### 10.4 总体可行性
+两个核心候选都能实现最小版本，但学术新颖性尚未确认。先用固定槽位小规模配置做可证伪实验，不能先写三篇论文再补实验。
