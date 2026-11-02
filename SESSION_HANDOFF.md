@@ -661,3 +661,29 @@ TCAIL 是统计建模和主动实验设计模块，不是完整 EC 算法。它�
 V1 的 TCAIL 已被 V2 替代。V2 已修订但尚未独立复审。请独立检查所有数学定义、Beta Fisher information、Gaussian/GLM posterior、ARD evidence、identifiability row-space test、reference distribution、BFDR 和 acquisition。不得直接实现或跑正式实验。
 
 特别审查 EC 主线定位：TCAIL 是统计/实验设计模块，不是完整 EC 算法；不能将其独立写成 EC 创新，除非证明它对演化搜索有独立贡献。首轮相关工作已发现 interaction group screening、GDS-ARM、Bayesian OED、Bayesian FDR、Agent 组件全因子/回归、harness-aware evaluation、预算约束 Agent harness 进化优化均有先例。新颖性未成立。只有独立复审通过后才能进入代码；合成通过后仍必须做真实 Agent 验证。
+
+## 22. TCAIL V2 第二轮复核 REQUEST CHANGES（2026-11-02）
+
+新增：
+- 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md：第二轮数学/统计复核；
+- 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节：V2.1 澄清。
+
+### 第二轮结论
+Beta Fisher information、Gaussian posterior update、row-space estimability 和 Bayesian FDR 的基本数学形式通过纸面检查。但 V2 仍有以下实现前缺口：
+1. Pairwise-only model 在自适应非均匀设计下可能把遗漏高阶效应投影到 pairwise coefficients；M3 必须进入边结论敏感性门禁；
+2. 显式构造 reference-standardized contrast vector l_e；
+3. 连续 context 的全局 BFDR 检验族需固定有限 anchor set；
+4. edge-decision risk acquisition 需明确 posterior predictive MC、posterior refit、MCSE 和 common random numbers；
+5. full-factorial budget denominator 需按 legal configs × anchors × task-block repeats 定义。
+
+V2.1 澄清已写入规格，但还没有独立复审。没有代码、没有实验、没有性能结果、没有 Gate-1 PASS。
+
+### 下一轮唯一任务
+只复审 17_TCAIL_FORMAL_SPECIFICATION_V2.md 的 V2.1 内容与 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md。重点检查新增 M2/M3 gate、l_e 构造、anchor BFDR、risk acquisition MC 和 budget denominator 是否真正闭合。不要实现、不要启动 API、不要跑正式 Phase 0。
+
+### 最新接班提示词
+你是我的硕士研究 Planner，唯一仓库 yujian777555/kaitibaogao。先读 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md、16_TCAIL_SPECIFICATION_AUDIT_R1.md、17_TCAIL_FORMAL_SPECIFICATION_V2.md、18_TCAIL_RELATED_WORK_AUDIT_R1.md、19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md 和本 handoff。
+
+当前只做 TCAIL V2.1 独立复审。V1 已被 V2 替代；V2 第二轮结论 REQUEST CHANGES，V2.1 澄清刚写入但尚未复审。检查所有数学、统计和实现定义，尤其 M2/M3 model-order sensitivity、reference-standardized l_e、有限 context anchors 的 BFDR、edge-risk acquisition MC 估计、task-block 预算口径。若仍有问题继续修规格；通过前不实现或跑正式实验。
+
+同时牢记：TCAIL 是统计/实验设计模块，不是完整 EC 算法。它是否能成为毕业论文创新，必须证明其输出对后续演化搜索有独立作用。CI-GOM 和迁移仍冻结，大论文正文仍暂停。
