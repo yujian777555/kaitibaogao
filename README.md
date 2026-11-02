@@ -228,3 +228,9 @@
 新增 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md。V2 的基础公式大部分通过纸面检查，但发现高阶模型失配尚未进入主要边估计、reference-standardized contrast vector 未显式构造、连续 task context 的 BFDR 检验族未有限化、edge-risk acquisition 缺少完整 Monte Carlo 估计协议、预算分母需精确定义等问题。
 
 已将相应 V2.1 澄清补入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节。当前状态为 V2.1 / PENDING INDEPENDENT REVIEW；没有实现、没有正式实验、没有 Gate-1 PASS。
+
+## 仓库长期维护约定（2026-11-02）
+
+后续每轮研究均须按 [REPOSITORY_MAINTENANCE_POLICY.md](REPOSITORY_MAINTENANCE_POLICY.md) 执行：开始前读取远端状态和接班记录；结束时更新研究记录、决策日志、项目状态与完整接班提示词；推送后核验远端 HEAD。不得只在聊天中汇报，也不得与其他独立研究仓库混用。
+
+当前唯一进行中的任务：TCAIL V2.1 独立规格复审。CI-GOM 和第三项迁移冻结；复审通过前不实现代码、不跑正式 Phase 0、不调用真实 LLM。
