@@ -107,3 +107,17 @@
 每次新增论文时记录：检索日期、检索式、数据库/来源、完整题名、作者、年份、venue、DOI/arXiv、论文类型、研究对象、演化机制、主要结论、局限、与本课题的关系、核验状态。
 
 每轮结束更新本文件和 02_LITERATURE_REGISTER.md；不允许只在聊天中报告而不入库。
+
+
+### 2026-11-02 — 第二轮检索与关键论文深读
+- 新增检索：evolutionary test-time learning、agent system evolution、instruction-policy co-evolution、agent team evolution、memory harness evolution、skill evolution、adversarial policy-environment co-evolution。
+- EvoTest（ICLR 2026）给出 J-TTL，并演化完整配置 χ=(p,M,h,u)。每轮 Actor 执行一个 episode，Evolver 生成候选配置，再以 UCB 在父代和子代中选择。
+- EvoTest 的正式论文明确列出 (1+m) 策略、局部最优、单任务过拟合和 frozen backbone 限制；作者建议研究更复杂的种群 EA、QD 和自动程序综合。
+- COvolve（GECCO 2026）已研究 LLM 生成策略与环境的两人零和协同演化，并使用混合策略纳什均衡维持旧任务能力。
+- CATArena（ICML 2026）提供代码 Agent 多轮迭代锦标赛，区分静态代码生成能力与持续演化能力。
+- M*（NeurIPS 2026）通过可执行 Python memory program 的种群式反思搜索为任务演化记忆系统。
+- EvoTeam（2026-10-29 arXiv）联合演化团队组织、交互规则和个体技能；Evolving Agent Teams（2026-10-27 arXiv）通过 supervisor 诊断局部最优并重构团队，但不是经典种群 EA。
+- E-SPL（ICML 2026 FoGen workshop）联合演化 system prompt 与 RL 模型权重；INSPO 将 instruction population 放入 RLVR 循环；SkillRL 使 skill library 与 policy 在 RL 中递归协同演化。
+- EvoSkills 通过 Skill Generator 与 Surrogate Verifier 的协同演化改进多文件技能包；MemEvolve、MemSkill、Live-Evo、AgentFactory 等使记忆/技能持续演化成为密集研究方向。
+- 本轮调整：候选 A（任务分布泛化 + QD）与 B（过程归因）继续保留但不再优先；新增候选 D（跨任务序列的测试时演化自适应）作为当前优先审查对象。
+- 当前检索仍不是全领域穷尽式系统综述；下一轮需从综述参考文献、ICLR/ICML/NeurIPS/GECCO/ACL/AAAI 论文集继续追踪，并特别补充国内研究和中文学术数据库来源。
