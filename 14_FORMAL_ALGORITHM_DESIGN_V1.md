@@ -452,16 +452,17 @@ d_s=Y(x',t_s)-Y(x,t_s)\in[-1,1].
 使用 anytime-valid Hoeffding confidence sequence 的简单实现。令：
 
 \[
-\alpha_n=\frac{6\alpha}{\pi^2n^2},\quad
+\alpha_k=\frac{6\alpha_{\mathrm{total}}}{\pi^2k^2},\quad
+\alpha_{k,n}=\frac{6\alpha_k}{\pi^2n^2},\quad
 \bar d_n=\frac1n\sum_{s=1}^n d_s,\quad
-r_n=\sqrt{\frac{2\ln(2/\alpha_n)}{n}}.
+r_{k,n}=\sqrt{\frac{2\ln(2/\alpha_{k,n})}{n}}.
 \]
 
 \[
 LCB_n=\bar d_n-r_n,\qquad UCB_n=\bar d_n+r_n.
 \]
 
-在独立任务块、有界差值的假设下，\(\sum_n\alpha_n=\alpha\)，通过 union bound 控制反复查看造成的错误率。若同一任务的多个 rollout 相关，先聚合成 task-level block，再将独立任务/任务簇作为统计单位。
+对第 \(k\) 个 offspring proposal 分配 \(\alpha_k\)，对该 proposal 的第 \(n\) 次序贯查看分配 \(\alpha_{k,n}\)。因为 \(\sum_k\alpha_k=\alpha_{\mathrm{total}}\)，且每个 proposal 内 \(\sum_n\alpha_{k,n}=\alpha_k\)，union bound 同时控制跨 proposal 和重复查看的错误率。该结论要求每个 task-block difference 有界，且 task blocks 独立，或满足所用 martingale confidence bound 的条件。若同一任务的多个 rollout 相关，先聚合成 task-level block；若任务来自相关簇，则以 task family/cluster 作为统计单位。
 
 决策：
 - 若 \(LCB_n>\delta_{\min}\)：接受 offspring；
@@ -537,27 +538,29 @@ Output:
 1. Initialize discounted-UCB statistics for available operator arms
 2. for each generation while budget remains:
 3.     for each target parent x in P:
-4.         z <- current training/evaluation task context
-5.         FOS <- singleton blocks + identifiable credible interaction pairs from G(z)
-6.         choose one available proposal arm a using discounted-UCB
-7.         choose block B according to arm a (singleton, random k-set, or learned pair)
-8.         select donor d from P using uniform-compatible or posterior-aware rule
-9.         construct raw mixed genotype x_tilde
-10.        compute dependency closure C(B,x,d)
-11.        x_child <- deterministic minimum repair within C
-12.        if no feasible repair or repair exceeds r_max:
-13.            reject proposal; assign invalid-proposal feedback to arm a; continue
-14.        evaluate parent/child on paired task blocks
-15.        update LCB/UCB confidence sequence after each task block
-16.        if LCB > delta_min: accept child and replace target parent
-17.        else if UCB <= delta_min: reject child
-18.        else continue until n_max or budget; unresolved -> reject
-19.        compute bounded conservative reward and update arm a
-20.     if graph update interval reached:
-21.         update TCAIL posterior/graph using only training observations
-22.     record population diversity, valid-offspring rate, repair, accept rate,
+4.         FOS <- singleton blocks + identifiable credible interaction pairs from G(z)
+5.         shuffle FOS order using the selected FOS-order policy
+6.         for proposal index l = 1...L while budget remains:
+7.             z <- current training/evaluation task context
+8.             choose one available proposal arm a using discounted-UCB
+9.             choose block B according to arm a (singleton, random k-set, or learned pair)
+10.            select donor d from P using uniform-compatible or posterior-aware rule
+11.            construct raw mixed genotype x_tilde
+12.            compute dependency closure C(B,x,d)
+13.            x_child <- deterministic minimum repair within C
+14.            if no feasible repair or repair exceeds r_max:
+15.                reject proposal; assign invalid-proposal feedback to arm a; continue
+16.            evaluate parent/child on paired task blocks
+17.            update proposal-specific LCB/UCB after each task block using alpha_{k,n}
+18.            if LCB > delta_min: accept child and replace target parent
+19.            else if UCB <= delta_min: reject child
+20.            else continue until n_max or budget; unresolved -> reject
+21.            compute bounded conservative reward and update arm a
+22.     if graph update interval reached:
+23.         update TCAIL posterior/graph using only training observations
+24.     record population diversity, valid-offspring rate, repair, accept rate,
            edge version, operator usage, rollout/token/time cost
-23. return best legal configuration and complete audit trail
+25. return best legal configuration and complete audit trail
 ~~~
 
 ## 16. 两篇论文的独立性与实验拆分
