@@ -272,3 +272,17 @@ F(x,z)=\beta_0(z)+\sum_i f_i(x_i,z)+\sum_{i<j}g_{ij}(x_i,x_j,z)+\epsilon.
 3. 交互结构驱动的约束最优混合演化是目前最值得优先验证的 EC 算法贡献，但不能只是 GOMEA 的直接应用。
 4. 第三个跨任务迁移创新点暂缓，当前不具备足够独立性。
 5. 因而本项目目前的合理目标是 **2 个核心创新点 + 1 个有条件的扩展方向**。这符合用户要求的 2–3 个创新点，但不虚构研究成果。
+
+
+## 9. 第五轮：演化参数控制可行性（2026-11-02）
+
+演化参数方案已独立形成，详见 13_EC_PARAMETER_CONTROL_PLAN.md。当前确定采用：
+- 离线 irace/iterated racing 调参；
+- 在线 discounted-UCB/AOS 控制变异强度与算子动作；
+- 统计门禁预先锁定；
+- 主算法 categorical GOM 不使用 DE 的 \(F,CR\)；
+- Phase 0 固定种群并做敏感性，后续才比较 IMS/P3。
+
+参数控制本身是成熟研究领域，且 Wei et al. EvoMAS 已使用 adaptive strategy selection。故本课题不能把 UCB/AOS 或 parameterless population management 单独作为创新点。只有当交互置信度与 Agent 约束重组的结合，在同预算实验中产生独立、可重复收益时，才保留相应方法。
+
+当前创新点一和二仍为 HOLD；参数策略解决的是“如何公平、可复现地设定和控制算法参数”，并不自动证明创新性。
