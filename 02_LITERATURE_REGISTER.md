@@ -374,3 +374,31 @@
 
 109. **Hu, Y. et al. (2026). Evolutionary Generation of Multi-Agent Systems. ICML 2026.** [arXiv](https://arxiv.org/abs/2602.06511)  
      类型：PUBLISHED / DIRECT-CORE。EvoMAS 将 MAS 生成建模为结构化配置空间中的演化，使用执行轨迹引导的 feedback-conditioned mutation 和 crossover，并维护候选池与经验记忆。是结构化 Agent 演化的强基线。
+
+
+## K. 第四轮：交互效应审查、经典 Linkage Learning 与 Agent 评测基准（2026-11-02）
+
+110. **Liu, M. (2026). More Is Not Always Better: Cross-Component Interference in LLM Agent Scaffolding. arXiv:2605.05716.** [arXiv](https://arxiv.org/abs/2605.05716)  
+     类型：PREPRINT / DIRECT-CORE。对 Planning、Tool Use、Memory、Structured Reasoning、Reflection 五个组件做 \(2^5=32\) 种全因子实验，使用 HotpotQA/GSM8K 和多个模型规模；计算 Shapley 并分析 pairwise / three-body interaction。论文在一个主要设置中发现 main-effects LOOCV \(R^2=0.872\)，pairwise regression LOOCV \(R^2=0.748\)，提示无约束增加交互项会过拟合。其研究主要是静态 prompt-based scaffolding 的交互分析，不是预算受限的可执行模块演化算法。
+
+111. **Lauziere, A., Daugherty, J., & Kushner, T. (2026). A Regression Framework for Understanding Prompt Component Impact on LLM Performance. EXPLAINABILITY 2026, IARIA, pp. 1–10.** [Conference page](https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2026/explainability_2026_1_10_10007.html) · [arXiv:2603.26830](https://arxiv.org/abs/2603.26830)  
+     类型：PUBLISHED / ADJACENT。用回归模型估计 Prompt 组件特征对 LLM 性能的影响，涉及 pairwise interaction model；进一步说明静态 prompt 组件回归不能作为本课题独立创新。
+
+112. **Dushatskiy, A., Virgolin, M., Bouter, A., Thierens, D., & Bosman, P. A. N. (2024). Parameterless Gene-Pool Optimal Mixing Evolutionary Algorithms. Evolutionary Computation, 32(4), 371–397.** DOI: 10.1162/evco_a_00338. [arXiv:2109.05259](https://arxiv.org/abs/2109.05259)  
+     类型：FOUNDATION / PUBLISHED。系统研究 GOMEA、Linkage Tree、Gene-pool Optimal Mixing、Conditional GOM（CGOM）及参数无关种群管理。GOM 按 linkage subset 从 donor 引入基因并尝试接受；CGOM 进一步利用条件依赖筛选 mating。是交互感知重组必须比较的核心 EC 基线。
+
+113. **Guijt, A., Thierens, D., Alderliesten, T., & Bosman, P. A. N. (2022). Solving Multi-Structured Problems by Introducing Linkage Kernels into GOMEA. GECCO 2022, pp. 703–711.** DOI: 10.1145/3512290.3528828. [TU Delft record](https://repository.tudelft.nl/record/uuid%3A6dcc4963-eb72-4f30-be0d-14277f2bc54a)  
+     类型：FOUNDATION / PUBLISHED。提出 Linkage Kernels，为每个解在局部邻域中学习不同 linkage structure，以处理多结构/多模态依赖。对第三创新点的 task-conditioned/local linkage transfer 是重要先行工作。
+
+114. **Omidvar, M. N., Yang, M., Mei, Y., Li, X., & Yao, X. (2017). DG2: A Faster and More Accurate Differential Grouping for Large-Scale Black-Box Optimization. IEEE Transactions on Evolutionary Computation.** DOI: 10.1109/TEVC.2017.2694221. [University of Leeds record](https://eprints.whiterose.ac.uk/id/eprint/154094/)  
+     类型：FOUNDATION / PUBLISHED。基于适应度差分识别变量交互，自动估计阈值，检测重叠子问题；适用于比较 Agent 组件交互识别方法的经典基线思想，但原方法面向数值黑盒优化，不能不加修改地套用于随机、混合类型 Agent 评价。
+
+115. **Lu, J. et al. (2025). ToolSandbox: A Stateful, Conversational, Interactive Evaluation Benchmark for LLM Tool Use Capabilities. Findings of NAACL 2025, pp. 1160–1183.** DOI: 10.18653/v1/2025.findings-naacl.65. [ACL Anthology](https://aclanthology.org/2025.findings-naacl.65/)  
+     类型：BENCHMARK / PUBLISHED。支持有状态工具执行、工具间隐式状态依赖、on-policy 用户模拟和轨迹过程中的动态评价。适合检验 Agent 模块之间的可执行依赖与交互。
+
+116. **Yao, S., Shinn, N., Razavi, P., & Narasimhan, K. (2025). \(\tau\)-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains. ICLR 2025.** [ICLR paper page](https://proceedings.iclr.cc/paper_files/paper/2025/hash/1b126cc38b8638e07bef37e7b2bb72bf-Abstract-Conference.html)  
+     类型：BENCHMARK / PUBLISHED。包含 airline 和 retail 两类工具任务，使用模拟用户和领域 API，并通过最终数据库状态与目标状态比较评估任务完成情况；提出 pass^k 衡量多次执行可靠性。
+
+117. **Trivedi, H. et al. (2024). AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents. ACL 2024.** [ACL Anthology](https://aclanthology.org/2024.acl-long.850/)  
+     类型：BENCHMARK / PUBLISHED。提供 9 个日常应用、457 个 API 和 750 个任务，使用程序化状态检查评价任务完成及意外副作用；可作为多工具、有状态 Agent 配置演化的外部验证基准。
+
