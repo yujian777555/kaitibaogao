@@ -687,3 +687,17 @@ V2.1 澄清已写入规格，但还没有独立复审。没有代码、没有实
 当前只做 TCAIL V2.1 独立复审。V1 已被 V2 替代；V2 第二轮结论 REQUEST CHANGES，V2.1 澄清刚写入但尚未复审。检查所有数学、统计和实现定义，尤其 M2/M3 model-order sensitivity、reference-standardized l_e、有限 context anchors 的 BFDR、edge-risk acquisition MC 估计、task-block 预算口径。若仍有问题继续修规格；通过前不实现或跑正式实验。
 
 同时牢记：TCAIL 是统计/实验设计模块，不是完整 EC 算法。它是否能成为毕业论文创新，必须证明其输出对后续演化搜索有独立作用。CI-GOM 和迁移仍冻结，大论文正文仍暂停。
+
+## 23. 固定仓库维护要求（2026-11-02）
+
+用户明确要求后续每轮都维护本仓库。具体流程已独立写入 REPOSITORY_MAINTENANCE_POLICY.md；它是长期工作约束，不是一次性提醒。
+
+每轮开始先核对远端 main HEAD 并阅读项目状态、决策日志、handoff 和当前创新点规格；每轮结束必须更新研究记录、README/状态、必要时的决策日志，以及 SESSION_HANDOFF 中的完整接班提示词；提交推送后必须重新核验远端 HEAD 和关键文件。未成功推送或核验时如实报告。
+
+项目隔离：本仓库只维护 kaitibaogao 毕业论文开题研究，不得混入 openissue、agentfotagent、GLEPPO 等独立项目的研究内容。
+
+当前研究状态和门禁以本 handoff 最新部分及 REPOSITORY_MAINTENANCE_POLICY.md 为准：只做 TCAIL V2.1 独立规格复审；CI-GOM 和第三项迁移冻结；规格复审通过前不实现、不跑正式 Phase 0、不调用真实 LLM。
+
+### 下轮 Planner 提示词附加要求
+
+除完成当前 TCAIL V2.1 独立复审外，必须遵守 REPOSITORY_MAINTENANCE_POLICY.md：开始前读取远端状态，结束时更新研究记录、决策日志、README/状态和 SESSION_HANDOFF，写入下一轮完整接班提示词，推送并核验远端。
