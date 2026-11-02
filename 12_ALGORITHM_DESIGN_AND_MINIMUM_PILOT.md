@@ -277,3 +277,9 @@ Phase 0 真值函数、噪声模型、全合法/受约束空间、伪代码、�
 旧计划中同时实现 TCAIL 与 CI-GOM 的描述不再是当前执行指令。用户已决定逐项验证创新点。
 
 **当前只实现/验证 TCAIL。** CI-GOM 规格保留但冻结；第三项迁移研究冻结。TCAIL Gate-1 完整通过（包括可信 Agent 场景验证）后，再启动 CI-GOM。完整 Gate 指标、强基线、消融和停止规则见 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md。
+
+## 11. TCAIL V2 规格替代关系（2026-11-02）
+
+当前执行依据不再是本文件中的旧 TCAIL 草案，而是 17_TCAIL_FORMAL_SPECIFICATION_V2.md。首轮审计及文献审查见 16_TCAIL_SPECIFICATION_AUDIT_R1.md、18_TCAIL_RELATED_WORK_AUDIT_R1.md。
+
+**不得按 V1 直接实现。** V2 尚待独立复审；通过前不启动正式 Phase 0。TCAIL 是否构成毕业论文 EC 创新，必须等待其下游演化搜索价值证据。
