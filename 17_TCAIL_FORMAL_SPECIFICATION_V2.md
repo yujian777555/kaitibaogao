@@ -811,3 +811,84 @@ Null 与 three-way-only 场景尤其重要：TCAIL 必须控制 false edge，不
 | Implementation / experiments | NOT STARTED |
 
 **本文件不宣称 TCAIL 已经通过 Gate。下一步是独立复审本规格；通过后才进入实现。**
+
+
+---
+
+# 12. V2.1 第二轮复核后的强制澄清（2026-11-02）
+
+本节覆盖 V2 中任何可能被理解为“只做报告性高阶诊断”的表述。
+
+## 12.1 Reference-standardized contrast 向量
+
+对边 e=(i,j,z)，在预注册共同支持 Ω_ij 上定义：
+
+\[
+l_e=
+\sum_{u\in\Omega_{ij}}
+\pi_{\mathrm{ref}}(u\mid z,i,j)
+[
+\phi(+1,+1,u,z)-\phi(+1,-1,u,z)
+-\phi(-1,+1,u,z)+\phi(-1,-1,u,z)
+].
+\]
+
+因此在指定线性 predictor basis 下：
+
+\[
+\bar\Delta^\eta_e=l_e^\top\theta.
+\]
+
+reward-scale contrast 对 Bernoulli / Beta 是非线性 posterior functional，必须从每个 posterior draw 的 inverse-link predictions 逐次计算，不得套用该线性向量公式。
+
+## 12.2 M2 / M3 model-order sensitivity gate
+
+对每个边同时拟合：
+- M2：task-conditioned pairwise model；
+- M3：M2 + 所有三阶项的 hierarchical sparse diagnostic model。
+
+两种模型均按同一个 reference distribution 计算 posterior-standardized edge contrast。
+
+若 M2 与 M3 对任一边的方向、是否超过 δ_link 或最终 BFDR 决策给出实质不同的结论，则附加状态 MODEL_ORDER_SENSITIVE。该边：
+- 不得进入高置信度输出图；
+- 不得直接作为后续 CI-GOM linkage；
+- 应继续采样以降低模型阶数不确定性，或报告 abstention；
+- 不能选择更有利的模型结果单独报告。
+
+M2/M3 的实质差异容差必须通过训练/验证模拟预先确定。完整均匀参考分布下高阶项可能抵消；受约束或非均匀参考分布下不能假设其抵消。
+
+## 12.3 有限 context anchor set
+
+连续 context features 仍可进入响应模型，但所有 edge selection / BFDR 必须在预先固定的有限 anchor set \(Z_{\mathrm{anchor}}\) 上执行。
+
+Anchor set 可由：
+- 每个 task-family 的预注册代表上下文；
+- 或训练阶段定义、测试前冻结的连续特征网格
+
+构成。不得根据测试标签或观察到的有利边来选择 anchors。全局 BFDR 检验族定义为所有可识别的 pair × anchor 组合。
+
+## 12.4 Edge-risk acquisition 的可执行估计
+
+对每个候选 d：
+1. 从当前 posterior（必要时使用 task-cluster bootstrap bagged posterior）抽取 S 组参数；
+2. 从 posterior predictive distribution 生成候选观测；
+3. 对每个候选观测按相应 likelihood 更新 posterior，并重新估计非 Gaussian ARD hyperparameters；
+4. 计算更新后的 \(R_{\mathrm{edge}}\)；
+5. 对风险下降取均值并报告 Monte Carlo standard error；
+6. 候选之间使用相同 posterior draws / common random numbers，降低排序噪声。
+
+Bernoulli 可对 y=0、1 两种结果精确求和；Beta 使用预先冻结的 Monte Carlo 或 quadrature 方案；Gaussian 使用解析或 Monte Carlo。若两个候选的风险下降差异小于预先规定的 Monte Carlo uncertainty margin，按平局处理，再用 IG 或成本规则排序。
+
+## 12.5 预算 reference denominator
+
+令预注册 context anchor set 为 \(Z_{\mathrm{anchor}}\)，每个配置/anchor 的独立 task-block 数为 R。定义：
+
+\[
+B_{\mathrm{full}}
+=
+|\mathcal X_{\mathrm{valid}}|
+\times |Z_{\mathrm{anchor}}|
+\times R.
+\]
+
+5%、10%、20%、40% 预算均以此 reference full-factorial cost 计算。实际执行成本按真实 task-block / rollout-equivalent 记录，重复 rollout、缓存命中和失败任务均不得隐去。
