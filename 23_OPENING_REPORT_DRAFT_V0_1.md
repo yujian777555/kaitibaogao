@@ -91,7 +91,7 @@ ReAct 将推理与行动交替组织，使语言模型能够根据环境观察�
 
 智能体由多个模块共同完成任务，单独评价模块贡献存在一定局限。模块的效果可能依赖其他模块的配置：某种规划策略只有与特定工具路由方式组合时才有效；某种记忆机制可能提高长任务表现，却增加工具调用和上下文干扰；验证机制可能在部分任务上改善可靠性，但在另一些任务上引入额外步骤。若只估计模块主效应，可能忽略组合层面的协同或拮抗作用。
 
-现有研究已从不同角度分析组件贡献和交互。Optimas 研究如何为系统组件构造与全局表现对齐的局部奖励[28]；HiveMind 使用贡献估计指导多智能体系统中的 Prompt 优化[95]；CCI 等工作对多个 Agent scaffold 组件进行因子组合实验，并分析主效应和组件间交互[110]；Prompt 组件回归研究则使用统计模型分析提示词组成部分对模型表现的影响[111]。这些工作说明，组件贡献和交互并非空白领域。
+现有研究已从不同角度分析组件贡献和交互。Optimas 研究如何为系统组件构造与全局表现对齐的局部奖励[45]；HiveMind 使用贡献估计指导多智能体系统中的 Prompt 优化[46]；CCI 等工作对多个 Agent scaffold 组件进行因子组合实验，并分析主效应和组件间交互[47]；Prompt 组件回归研究则使用统计模型分析提示词组成部分对模型表现的影响[48]。这些工作说明，组件贡献和交互并非空白领域。
 
 本课题不拟重复普通组件消融、Shapley 贡献分配或简单 pairwise 回归，而是关注交互估计如何与演化计算中的 linkage 结构建立可执行接口。具体而言，需要区分三个问题：第一，某两个模块是否在统计意义上相关；第二，在给定其他模块背景和任务上下文时，两个模块是否对目标效用产生非加性影响；第三，该非加性影响是否足以支持演化算法将两个模块作为联合重组单元。三个问题相关但不等价，必须通过明确的估计量、合法配置支持和演化搜索实验进行验证。
 
@@ -297,7 +297,7 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 
 （3）**交互估计与统计基线：** 主效应模型、pairwise OLS、稀疏交互回归、fitness-based linkage learning、DLED/cDLED、LMM、ALI/AIM、固定设计和主动信息设计。所有方法使用相同的合法配置集合、任务块和评价预算。
 
-（4）**Agent 自动设计方法：** EvoAgent、两篇不同的 EvoMAS、AgentSquare、ADAS、AFlow、HFlow、GEPA、ARTEMIS、AgentEvo 和 MESH-Harness 等。若无法直接复现某个方法，则应说明使用论文公开设置进行的可比适配，不夸大复现程度。
+（4）**Agent 自动设计方法：** EvoAgent、两篇不同的 EvoMAS、AgentSquare、ADAS、AFlow、HFlow、GEPA、ARTEMIS、AgentEvo 和 MESH-Harness[49]、ARTEMIS[50] 等。若无法直接复现某个方法，则应说明使用论文公开设置进行的可比适配，不夸大复现程度。
 
 ### 6.8 评价指标
 
@@ -521,3 +521,16 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 7. 封面中的导师姓名、学号和姓名待补；研究计划月份需按学院正式毕业时间表调整。
 
 [44] Zhou S, et al. WebArena: A Realistic Web Environment for Building Autonomous Agents[C]//International Conference on Learning Representations. 2024.
+
+
+[45] Wang S, et al. Optimas: Optimizing Compound AI Systems with Globally Aligned Local Rewards[EB/OL]. arXiv:2507.03041, 2025.
+
+[46] Xia Y, et al. HiveMind: Contribution-Guided Online Prompt Optimization of LLM Multi-Agent Systems[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2026, 40(35): 29767-29774.
+
+[47] Liu M. More Is Not Always Better: Cross-Component Interference in LLM Agent Scaffolding[EB/OL]. arXiv:2605.05716, 2026.
+
+[48] Lauziere A, Daugherty J, Kushner T. A Regression Framework for Understanding Prompt Component Impact on LLM Performance[C]//EXPLAINABILITY 2026. IARIA, 2026: 1-10. arXiv:2603.26830.
+
+[49] Shang Z, et al. MESH-Harness: Self-Improving Agent Harnesses via Bandit-Guided Compositional Evolution[EB/OL]. arXiv:2610.05300, 2026.
+
+[50] Brookes P, et al. Evolving Excellence: Automated Optimization of LLM-Based Agents[EB/OL]. arXiv:2512.09108, 2025.
