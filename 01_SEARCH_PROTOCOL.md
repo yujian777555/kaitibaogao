@@ -155,3 +155,23 @@
 5. ToolSandbox、AppWorld、tau-bench 可为可执行、有状态工具 Agent 的组件交互与演化提供程序化评估环境。
 
 研究决策：普通组件交互估计 NO-GO；预算受限、任务条件化、稀疏交互主动发现 HOLD；Agent constrained optimal mixing HOLD；跨任务 linkage transfer 暂缓。详见 11_INNOVATION_FEASIBILITY_AUDIT.md。
+
+
+## 10. 第五轮检索日志：演化算法参数控制（2026-11-02）
+
+新增检索式：
+- "parameter control evolutionary algorithms deterministic adaptive self-adaptive"
+- "systematic review adaptive parameter control evolutionary algorithms"
+- "parameter tuning configuring evolutionary algorithms irace"
+- "success history based parameter adaptation SHADE"
+- "parameterless GOMEA IMS P3 population management"
+- "adaptive operator selection dynamic multi-armed bandits"
+
+新增关键结论：
+1. Eiben et al. 区分离线参数调优与运行时控制，后者包括 deterministic、adaptive、self-adaptive。
+2. irace 使用 iterated racing 对候选算法配置在多个训练实例上进行评价和筛选，适合本项目的混合类别/数值参数。
+3. SHADE 用成功历史更新 DE 的 F、CR，但这些参数不适用于 categorical GOM。
+4. GOMEA 已有 IMS/P3 population-size-free schemes，但仍需对 FOS、donor search、hill climber、FOS order 等做选择；“parameterless”不代表零调参。
+5. AOS 已有信用分配 + multi-armed bandit 算子选择；Wei et al. EvoMAS 也有 adaptive strategy selection，因此不作为独立创新。
+
+决策：主算法使用离线 irace + 在线 discounted-UCB/AOS + 固定统计门禁；完整参数域和消融见 13_EC_PARAMETER_CONTROL_PLAN.md。
