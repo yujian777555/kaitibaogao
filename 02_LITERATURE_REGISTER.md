@@ -427,3 +427,32 @@
 124. **Tanabe, R., & Fukunaga, A. (2014). Improving the search performance of SHADE using linear population size reduction. IEEE Congress on Evolutionary Computation 2014.** DOI: 10.1109/CEC.2014.6900380. [DOI](https://doi.org/10.1109/CEC.2014.6900380)  
      类型：FOUNDATION / METHOD。L-SHADE 在 SHADE 基础上加入线性种群规模缩减，作为 DE 中种群规模动态控制的代表工作；仅用于 DE baseline 和参数控制背景，不作为本课题 GOM 的直接参数方案。
 
+
+
+## M. 第六轮：Fitness-Based Linkage、Conditional Linkage 与噪声分解（2026-11-02）
+
+125. **Olieman, C., Bouter, A., & Bosman, P. A. N. (2021). Fitness-Based Linkage Learning in the Real-Valued Gene-Pool Optimal Mixing Evolutionary Algorithm. IEEE Transactions on Evolutionary Computation, 25(2), 358–370.** DOI: 10.1109/TEVC.2020.3039698. [CWI author manuscript](https://ir.cwi.nl/pub/30301)  
+     类型：FOUNDATION / DIRECT BASELINE。通过 fitness perturbation / differential-grouping 思想估计变量依赖，构造 RV-GOMEA linkage tree。它说明 FBL 已经存在；不能把“根据目标函数交互学习 linkage”作为本项目新颖性。
+
+126. **Andreadis, G., Alderliesten, T., & Bosman, P. A. N. (2024). Fitness-Based Linkage Learning and Maximum-Clique Conditional Linkage Modelling for Gray-Box Optimization with RV-GOMEA. GECCO 2024.** DOI: 10.1145/3638529.3654103. [CWI manuscript](https://ir.cwi.nl/pub/34532/34532.pdf)  
+     类型：PUBLISHED / DIRECT BASELINE。将 fitness-based dependency tests、DSM/VIG、conditional linkage modelling 和 maximum-clique 结构结合，处理重叠依赖。不能宣称首次将 fitness linkage 接入 conditional GOMEA。
+
+127. **Przewozniczek, M. W., Komarnicki, M. M., & Frej, B. (2021). Direct Linkage Discovery with Empirical Linkage Learning. GECCO 2021, pp. 609–617.** DOI: 10.1145/3449639.3459333. [PDF](https://www.cs.put.poznan.pl/mkomosinski/lectures/optimization/extras/DLED-epistasis-GECCO2021.pdf)  
+     类型：PUBLISHED / DIRECT BASELINE。DLED 在给定 binary genotype 上翻转两个变量并比较四个 fitness 值，检测直接依赖；与传统种群统计 SLL 是不同概念。
+
+128. **Przewozniczek, M. W., Bosman, P. A. N., Bouter, A., Guijt, A., Komarnicki, M. M., & Thierens, D. (2025). Conditional Direct Empirical Linkage Discovery for Solving Multi-Structured Problems. FOGA 2025.** DOI: 10.1145/3729878.3746624. [CWI PDF](https://ir.cwi.nl/pub/35838/35838.pdf)  
+     类型：PUBLISHED / DIRECT BASELINE。cDLED 为不同个体学习局部依赖结构，并据此限制 mating；必须作为任务/搜索位置条件化 linkage 的强对照。
+
+129. **Zhong, R., Zhang, E., & Munetomo, M. (2023). Cooperative Coevolutionary Differential Evolution with Linkage Measurement Minimization for Large-Scale Optimization Problems in Noisy Environments. Complex & Intelligent Systems, 9, 4439–4456.** DOI: 10.1007/s40747-022-00957-6. [Springer](https://link.springer.com/article/10.1007/s40747-022-00957-6)  
+     类型：PUBLISHED / DIRECT BASELINE。LMM 将 linkage decomposition 表示为组合优化，并在噪声环境中搜索分解结构；“噪声下 linkage 识别”本身不是空白。
+
+130. **Zhong, R., Tu, B., Zhang, E., & Munetomo, M. (2024). Cooperative Coevolutionary Differential Evolution with Adjacent Intensity Matrix with Linkage Identification for Large-Scale Optimization Problems in Noisy Environments. Evolutionary Intelligence, 17, 3483–3503.** DOI: 10.1007/s12065-024-00941-8. [Springer](https://link.springer.com/article/10.1007/s12065-024-00941-8)  
+     类型：PUBLISHED / DIRECT BASELINE。ALI/AIM 使用 additive identification criterion、相对 intensity 与 significant intensity 分类噪声下的变量依赖；本项目不能把“相对强度抗噪”单独宣称为创新。
+
+131. **Tinós, R., Chicano, F., Przewozniczek, M. W., & Whitley, D. (2026). Learning Variable Importance and Interaction in Genetic Algorithms for Pseudo-Boolean Optimization. Evolutionary Computation, online ahead of print, 2026-09-15.** DOI: 10.1162/EVCO.a.406. [PubMed](https://pubmed.ncbi.nlm.nih.gov/42743398/)  
+     类型：PUBLISHED / DIRECT BASELINE。论文摘要报告从 GA 搜索过程副产物估计变量重要性和交互，无需额外 fitness evaluations，并将信息用于 reproduction operators。需获取全文精读；当前仅按摘要登记，不能扩展推断其噪声处理能力。
+
+132. **Guijt, A., Thierens, D., Alderliesten, T., & Bosman, P. A. N. (2022). Solving Multi-Structured Problems by Introducing Linkage Kernels into GOMEA. GECCO 2022, pp. 703–711.** DOI: 10.1145/3512290.3528828. [CWI](https://ir.cwi.nl/pub/31980/)  
+     类型：PUBLISHED / DIRECT BASELINE。为每个解在其局部邻域学习 linkage kernel，解决多结构问题；TCAIL 的 task-conditioned graph 不能忽略 solution-conditioned/local linkage 先例。
+
+**本轮登记边界：** Tinós et al. 2026 当前依据 PubMed 摘要登记，尚未完成全文精读；Andreadis et al. 2024、DLED/cDLED、LMM、ALI 已核对公开论文/摘要/方法片段。相关工作矩阵与 21 号补充审计同步更新前，不得宣称已完成穷尽检索。
