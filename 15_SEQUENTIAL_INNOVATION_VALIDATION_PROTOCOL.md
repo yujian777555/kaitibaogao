@@ -317,3 +317,8 @@ D. irace + online discounted-UCB。
 
 **当前阶段状态：** TCAIL_SPECIFICATION_REVIEW_PENDING  
 **下一项可交付成果：** TCAIL 规格审计报告 + Phase 0 实现与测试，不是毕业论文正文。
+
+
+## 6. TCAIL Gate 前的最新状态更新（2026-11-02）
+
+TCAIL 首轮规格审计见 16_TCAIL_SPECIFICATION_AUDIT_R1.md，结论 REQUEST REVISION。当前状态更新为 SPECIFICATION_REVISION_REQUIRED；尚未进入正式 Phase 0 性能实验。下一步先完成该审计列出的七项阻塞修订，再做独立规格复审。
