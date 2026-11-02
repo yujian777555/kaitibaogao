@@ -106,3 +106,24 @@ offspring validity / execution success、offspring task success、improvement pr
 6. 精读 EvoCF、Optimas、SERO；
 7. 检索并比较 GOMEA、LTGA、DSMGA-II、Bayesian Optimization Algorithm 等 linkage-learning EC 方法；
 8. 再决定候选 G 是 GO、HOLD 还是 NO-GO。
+
+## 8. 新增直接工作与候选 G 的收紧条件（2026-11-02）
+
+### MESH-Harness
+MESH-Harness (arXiv:2610.05300) 已将 harness 划分为固定接口槽位，维护各槽位实现池，并用 full-covariance LinUCB 和 mixed-start coordinate ascent 选择模块组合，再用执行轨迹引导模块编辑。其预测均值仍是 additive slot-wise sum；full covariance 主要保留跨槽位共同出现统计并估计组合不确定性。因此：
+- 不能声称“此前没有模块组合搜索”；
+- 不能把 full covariance 简单说成已显式估计 epistasis；
+- 候选 G 必须证明显式非加性交互估计对重组决策的增量价值。
+
+### ARTEMIS
+ARTEMIS (arXiv:2512.09108) 已做 semantic-aware genetic operators 和 Agent 配置联合演化。必须精读其组件自动发现、语义交叉、组件依赖处理和消融。若其已显式建模组件间非加性交互并指导重组，候选 G 的核心机制可能被覆盖。
+
+### EvoMAS / AgentEvo
+EvoMAS 已做配置空间中的 feedback-conditioned crossover/mutation；AgentEvo 已做 workflow subgraph graft、prompt fusion 和多阶段演化。候选 G 必须在机制上超过通用 crossover 与结构化 workflow recombination。
+
+### 对三篇论文的影响
+- 小论文一（交互效应估计）必须证明估计器本身可独立验证，不只是给 crossover 提供的中间模块。
+- 小论文二（交互感知重组）必须证明交互图比 MESH 的组合选择、ARTEMIS 的语义遗传算子和 EvoMAS/AgentEvo 的交叉有独立增益。
+- 小论文三（任务条件化交互图迁移）必须区别于 Evo-Harness、TTHE 等已有在线 harness/test-time evolution。
+
+当前仍是候选方向，不得将本文件中的草案直接写成已确认创新点。
