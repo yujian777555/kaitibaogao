@@ -214,3 +214,72 @@ EvoTest 将完整 Agent 配置表示为 χ=(p,M,h,u)，每轮执行一个 episod
 - 新增文件：08_CANDIDATE_SCREENING.md、09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION.md。
 - 当前候选 G 仅为优先审查对象，未批准为最终题目。
 - 严格仓库边界：只允许读取和维护 yujian777555/kaitibaogao；不得读取其他仓库。
+
+
+## 12. 最新研究状态（2026-11-02）：硕士论文 2–3 创新点 / 小论文规划
+
+### 用户明确的硬性要求
+硕士毕业论文必须有 **2–3 个创新点**，并且**每个创新点分别形成一篇独立小论文投稿**。不能把同一算法简单拆成三篇，也不能只在开题报告里凑出三个名字。每篇小论文必须有独立科学问题、算法贡献、相关工作差异、实验假设、强基线、消融和统计检验。
+
+### 总题目工作稿
+**《面向大语言模型智能体的交互感知演化优化方法研究》**
+
+此题目比此前“交互感知演化重组方法研究”更宽，能够覆盖组件交互估计、演化重组和交互结构更新。它仍是工作题目，需由相关工作审查和实验结果最终确定。
+
+### 三篇小论文的研究结构
+1. **小论文一：任务条件化的 Agent 组件交互效应估计方法。**
+   - 核心：区分组件主效应与协同/拮抗效应，处理随机 rollout、任务异质性、组件依赖和估计不确定性。
+   - 必须形成独立估计器，并用已知交互真值的受控环境及真实 Agent 任务验证。
+   - 指标：估计偏差/RMSE、交互符号准确率、交互图 Precision/Recall、跨种子稳定性、未执行组合预测增益。
+
+2. **小论文二：基于组件交互链路学习的 Agent 演化重组算法。**
+   - 核心：将交互图转为 linkage blocks，设计协同块继承、交叉和依赖约束修复。
+   - 必须证明收益来自交互感知重组，而不是额外评价次数、repair 或更强 LLM。
+   - 强基线：mutation-only、random/LLM crossover、EvoMAS、AgentSquare、AgentBreeder、ARTEMIS、AgentEvo、MESH-Harness。
+
+3. **小论文三（条件性）：任务分布变化下交互结构迁移与自适应演化。**
+   - 核心：分离共享与任务条件化交互，检测结构漂移，决定何时迁移、何时更新 linkage。
+   - 必须区别于一般 test-time evolution 和 online harness learning。
+   - 强基线：固定图、从零重建、直接迁移不更新、独立任务演化、Evo-Harness、TTHE 等。
+   - 若不能证明独立新颖性和实验增益，则不强行凑第三篇；前两篇必须扎实成立。
+
+### 新增文献与重要限制
+文献总表新增至 109 条，补入：
+- MESH-Harness (arXiv:2610.05300)
+- Evo-Harness (EMNLP 2026)
+- AgentEvo (2026)
+- ARTEMIS (arXiv:2512.09108)
+- EvoMAS (ICML 2026)
+
+**MESH-Harness 的精确机制：** 它将 Agent harness 划分为固定接口槽位，以模块池和 full-covariance LinUCB 选择组合，并通过执行轨迹编辑模块。其预测均值仍是 slot-wise additive model；full covariance 主要用于保留跨槽位共同出现统计及组合不确定性。因此不能说它已直接拟合非加性 epistasis，但它是强组合搜索基线，必须纳入比较。
+
+**ARTEMIS 的威胁：** 已有 semantic-aware genetic operators 和 Agent 配置联合演化。必须精读其组件发现、依赖识别、交叉和消融，不能把语义交叉重新包装成创新。
+
+**EvoMAS / AgentEvo：** 已有结构化 Agent 配置 crossover、workflow subgraph graft、prompt fusion 和多阶段演化。
+
+**Evo-Harness：** 已有基于执行上下文的 skill harness 编译与跨任务复用，第三创新点必须区别于此类在线 harness learning。
+
+### 下一会话的严格执行顺序
+1. 只读取和维护 yujian777555/kaitibaogao，严禁读取其他仓库。
+2. 先读 README、00_PROJECT_CHARTER、01_SEARCH_PROTOCOL、02_LITERATURE_REGISTER、03_MECHANISM_COMPARISON、04_OPENING_REPORT_PLAN、05_DECISION_LOG、08_CANDIDATE_SCREENING、09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION、10_THESIS_INNOVATION_AND_PAPER_ROADMAP、SESSION_HANDOFF。
+3. 精读 MESH-Harness 与 ARTEMIS 全文，核对它们是否已显式估计组件非加性交互并将其用于遗传重组。
+4. 精读 EvoMAS、AgentSquare、AgentBreeder、AgentEvo、Evo-Harness、TTHE，建立机制级对照表。
+5. 对小论文一、二、三分别做 GO/HOLD/NO-GO；不得因题目或路线图已经写出而强行 GO。
+6. 对小论文一设计可复现的组件交互估计器与真值实验；对小论文二设计 linkage-aware crossover 并进行同预算强基线实验；对小论文三做任务分布漂移和迁移实验。
+7. 将每篇论文的相关工作、算法、实验和失败条件写入仓库；每轮更新文献登记、机制对比、决策日志和接班提示词。
+
+### 最新接班提示词
+你是我的河北工业大学计算机技术硕士开题研究助手。我的研究主线是 Evolutionary Computation for AI Agents（演化计算用于改进 AI Agent）。唯一允许读取和维护的 GitHub 仓库是 yujian777555/kaitibaogao，严禁读取任何其他仓库。
+
+用户的硬性要求：硕士论文必须有 2–3 个创新点，每个创新点分别形成一篇独立小论文投稿。不能把同一算法拆成三篇，也不能为数量凑创新点。总题目当前工作稿为《面向大语言模型智能体的交互感知演化优化方法研究》。
+
+当前三篇路线：
+1. 任务条件化的 Agent 组件交互效应估计方法（独立估计器论文）；
+2. 基于组件交互链路学习的 Agent 演化重组算法（独立 EC 算法论文）；
+3. 任务分布变化下交互结构迁移与自适应演化（条件性第三篇，必须过独立新颖性 Gate）。
+
+新增直接工作 MESH-Harness、ARTEMIS、EvoMAS、AgentEvo、Evo-Harness 已登记。特别注意：MESH-Harness 的 full-covariance LinUCB 使用跨槽位共同出现信息和组合不确定性，但其预测均值仍为加性 slot-wise sum；它是强组合搜索基线，不可误称为已直接拟合非加性 epistasis。ARTEMIS 已做 semantic-aware genetic operators，必须精读其实际算子与组件依赖处理。
+
+下一步先精读 MESH-Harness 与 ARTEMIS 全文，再逐项比较 EvoMAS、AgentSquare、AgentBreeder、AgentEvo、Evo-Harness、TTHE。核心问题是：已有工作是否显式估计 Agent 配置组件间非加性交互，并用其指导 linkage-aware crossover？如果已有等价方法，候选 G 必须否证或改变问题。
+
+每篇小论文必须有独立科学问题、方法贡献、实验假设、强基线、消融和统计检验。小论文一要证明估计器本身可独立验证；小论文二要证明交互感知重组算子带来增量收益；小论文三要证明任务条件化交互结构迁移区别于普通 test-time evolution。所有结论必须可证伪。每轮更新文献、机制比较、开题报告计划、决策日志、接班提示词并推送到唯一仓库。
