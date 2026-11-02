@@ -283,3 +283,7 @@ Phase 0 真值函数、噪声模型、全合法/受约束空间、伪代码、�
 当前执行依据不再是本文件中的旧 TCAIL 草案，而是 17_TCAIL_FORMAL_SPECIFICATION_V2.md。首轮审计及文献审查见 16_TCAIL_SPECIFICATION_AUDIT_R1.md、18_TCAIL_RELATED_WORK_AUDIT_R1.md。
 
 **不得按 V1 直接实现。** V2 尚待独立复审；通过前不启动正式 Phase 0。TCAIL 是否构成毕业论文 EC 创新，必须等待其下游演化搜索价值证据。
+
+## 12. TCAIL V2.1 独立复审前禁止实现（2026-11-02）
+
+17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节已加入 V2.1 澄清；第二轮复核记录在 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md。当前仍为 PENDING INDEPENDENT REVIEW。V2.1 复审通过前不实现代码、不启动正式 Phase 0、不调用真实 LLM。
