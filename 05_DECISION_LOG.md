@@ -91,3 +91,29 @@ MOAE、SkillMOO、MOCHA、AgentBreeder、HGM、PCE、FreeEvolve、SERO 等已覆
 
 ### 决策 D-014：候选 G 尚未通过审查
 必须精读 EvoMAS、HFlow、AgentSquare、AgentBreeder、DarwinX、SERO、HiveMind、EvoCF、Optimas，确认是否已有等价机制；必须把反事实估计误差和执行成本纳入可行性判断。
+
+
+## 2026-11-02 决策 D-015：确立硕士论文 2–3 创新点与独立投稿约束
+
+用户明确要求：硕士论文必须有 2–3 个创新点，每个创新点分别形成一篇小论文投稿。该要求作为项目硬约束。
+
+### 总题目工作稿调整
+由较窄的“面向大语言模型智能体的交互感知演化重组方法研究”调整为更能覆盖完整论文的：
+
+**《面向大语言模型智能体的交互感知演化优化方法研究》**
+
+### 规划的三层研究
+1. 任务条件化 Agent 组件交互效应估计（独立估计器论文）；
+2. 交互感知演化重组算子（独立 EC 算法论文）；
+3. 任务分布变化下交互结构迁移与自适应演化（条件性第三篇）。
+
+当前目标是争取三篇，但至少必须保证前两篇各自具备独立算法贡献和独立实验。第三篇必须通过新颖性与独立性 Gate，不能为了数量凑数。
+
+### 新增相关工作带来的限制
+- MESH-Harness 已做模块槽位组合、full-covariance LinUCB、coordinate ascent 和 trace-driven module evolution；其预测均值为 additive，full covariance 主要用于共同出现统计/不确定性，需精确区分。
+- ARTEMIS 已做 semantic-aware genetic operators 和 Agent 配置联合演化。
+- EvoMAS 已做结构化配置空间中的反馈引导 mutation/crossover。
+- AgentEvo 已做多阶段 workflow evolution、subgraph graft、prompt fusion 和 Pareto cost-performance。
+- Evo-Harness 已做上下文到技能 harness 的在线编译与跨任务使用。
+
+因此候选 G 不能未经审查直接升级为创新点二；创新点三也必须区别于 Evo-Harness、TTHE 等工作。
