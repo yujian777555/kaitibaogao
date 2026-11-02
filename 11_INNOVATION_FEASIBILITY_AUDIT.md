@@ -344,3 +344,16 @@ TCAIL 当前状态由 SPECIFICATION_REVISION_REQUIRED 更新为 REVISED_SPEC_PEN
 - TCAIL 不是独立 EC 算法，必须证明其对演化搜索的下游作用，才与毕业论文 EC 主线闭环。
 
 当前不启动实现或正式实验。
+
+## 15. TCAIL V2.1 第二轮复核（2026-11-02）
+
+新增 19_TCAIL_V2_SECOND_PASS_REVIEW_R1.md，结论 REQUEST CHANGES。V2.1 澄清已补入 17_TCAIL_FORMAL_SPECIFICATION_V2.md 第 12 节。
+
+需要重点关注的修订：
+- M2/M3 model-order sensitivity 必须影响主要边输出，MODEL_ORDER_SENSITIVE 不得进入高置信度图；
+- 明确 l_e 如何由 reference distribution 和 feature contrasts 构造；
+- 连续 context 的 BFDR 使用预注册有限 anchor set；
+- edge-risk acquisition 采用明确 posterior predictive Monte Carlo / refit / MCSE；
+- 固定 full-factorial reference budget denominator。
+
+当前仍未实现和实验。TCAIL 的 EC 主线价值也未建立。
