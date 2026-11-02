@@ -101,3 +101,21 @@ LLM Agent 的规划、记忆、工具路由、验证、恢复和工作流控制�
 ## 8. 总体判断
 
 当前三层结构是用于研究和开题论证的工作架构，不代表三个创新点均已通过新颖性审查。当前优先保证创新点一和二形成两篇可投稿的独立方法论文；创新点三为目标方向，但必须通过独立 Gate。
+
+
+## 9. 第四轮可行性审查覆盖前述路线图（2026-11-02）
+
+本节优先级高于前文初始三篇规划；后续开题和研究决策以本节及 11_INNOVATION_FEASIBILITY_AUDIT.md 为准。
+
+### 9.1 创新点一原表述撤销
+“组件交互效应估计”本身不再作为创新点。Liu (2026) CCI 已做 32 种组件组合、Shapley、pairwise regression 和探索性三阶交互；Lauziere et al. (2026) 已做 prompt component regression。新研究必须转向预算受限、任务条件化、可执行多实现模块的主动交互识别，并处理随机 rollout 和模型不确定性。
+
+### 9.2 两个核心创新候选（均需预实验）
+1. **预算受限的任务条件化 Agent 组件交互结构识别方法。** 独立论文需要证明主动交互探测/稀疏层级估计器在相同预算下优于全因子子集、main-effects、pairwise OLS 和 MESH additive LinUCB。
+2. **交互结构驱动的 Agent 约束最优混合演化算法。** 独立论文需要证明在模块类型、接口/控制流依赖和随机昂贵 fitness 下的新型 constrained mixing/acceptance 机制优于 standard GOM/GOMEA、CGOMEA、LK-GOMEA、DSMGA-II 和 Agent crossover 基线。
+
+### 9.3 第三个创新点降为储备
+跨任务交互结构迁移暂缓。LK-GOMEA 已做 local linkage kernels，CCI 发现交互任务依赖，HFlow/EvoMAS/Evo-Harness/TTHE 已有跨任务经验/在线适应。必须先有前两项结果，再判断它能否成为独立第三篇。
+
+### 9.4 当前产出目标
+**2 个核心创新候选 + 1 个储备扩展方向。** 这满足硕士论文 2–3 个创新点的数量要求，不意味着现在已经确认两项创新。所有 Gate 见 11_INNOVATION_FEASIBILITY_AUDIT.md。
