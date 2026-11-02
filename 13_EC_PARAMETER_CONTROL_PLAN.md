@@ -298,3 +298,10 @@ CI-GOM 每个 target 可执行多个 proposal，每个 proposal 只归因给一�
 \alpha_{k,n}=\frac{6\alpha_k}{\pi^2 n^2}.
 \]
 第一层控制跨 offspring proposals，第二层控制单个 proposal 内反复查看。该结论要求 task-block differences 有界，且 task blocks 独立或满足对应 martingale 条件。统计门槛不能交给 irace 调优。
+
+
+## 12. 调参工作也按创新点顺序推进（2026-11-02）
+
+当前阶段只处理 TCAIL 所需参数及统计校准：Group-ARD prior / sparsity、interaction threshold、acquisition batch、noise model 与 posterior calibration。阈值必须通过训练/验证和 null simulation 冻结，不能看测试集调参。
+
+CI-GOM 的 N、K、c、rho、donor strategy、FOS update interval 等参数暂不启动大规模 irace；待 Gate-1 通过后再进行。跨任务迁移参数等待 Gate-2。禁止为多个尚未验证的候选同时开展大规模调参，避免成本和结论混乱。
