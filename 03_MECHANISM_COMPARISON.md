@@ -127,3 +127,58 @@ AgentSquare 已使用 Planning、Reasoning、Tool Use、Memory 四类模块；Ag
 3. 精读 Optimas、Q-Evolve、TPGO、SWIFT，明确局部信用、过程反馈和跨任务迁移已有程度。
 4. 将所有论文的 genotype、phenotype、fitness、selection、variation、survival、archive、transfer、test split 字段补齐。
 5. 对 A/B/C 各写出至少一个强反例和停止条件；不通过则不进入实验。
+
+
+## 7. 第二轮重大更新：EvoTest 直接给出算法改进线索
+
+### 7.1 原文事实
+
+EvoTest（ICLR 2026）将 Agent 配置表示为 χ=(p,M,h,u)，分别对应策略 Prompt、部署时记忆、超参数和工具使用例程。每轮由 Actor 执行一个 episode，Evolver 分析完整轨迹并生成候选配置，再通过 UCB 从父代和子配置中选出下一轮配置。
+
+其 Appendix A 明确指出：
+- 当前是简单的 (1+m) evolutionary strategy + UCB；
+- 复杂配置空间可能局部收敛；
+- 单任务重复学习会产生 task-specific overfitting；
+- 作者建议未来探索更复杂的 population-based EA、Quality-Diversity 和 automated program synthesis。
+
+### 7.2 为什么这比泛泛的研究空白更具体
+
+它提供了已发表的直接基线、明确的 Agent 个体表示、明确的选择公式、明确的任务协议与 AUC，以及明确的算法局限和作者未来方向。
+
+### 7.3 但不能忽略的竞争工作
+
+- COvolve（GECCO 2026）已对 LLM 生成策略与环境进行两人零和协同演化，并用混合策略纳什均衡缓解遗忘；
+- M*（NeurIPS 2026）已通过可执行程序种群搜索演化任务专用 memory harness；
+- MemEvolve 已做记忆架构元演化和跨任务/跨 LLM 泛化；
+- E-SPL 已把 system prompt 遗传演化与 RL 权重更新结合；
+- INSPO 已把 instruction population 放入 RLVR 循环；
+- SkillRL 已使技能库和 policy 递归协同演化；
+- Live-Evo 已研究连续反馈和在线分布变化下的记忆更新；
+- EvoTeam 已联合演化多 Agent 团队组织、交互规则和技能；
+- EvoSkills 已通过 Skill Generator 与 Surrogate Verifier 协同演化技能和验证反馈。
+
+因此，候选 D 必须聚焦于**跨任务序列中的测试时演化**，而不是泛化的记忆、技能或团队演化。
+
+## 8. 当前候选排序调整（覆盖旧排序）
+
+| 候选 | 状态 | 理由 |
+|---|---|---|
+| D：跨任务序列的演化测试时自适应 | PRIORITY FOR AUDIT | EvoTest 提供明确的 (1+m) + UCB 局限和作者未来方向 |
+| A：任务分布泛化 + QD | 保留为 D 的子机制候选 | 单独提出 QD 风险较高，且 COvolve、GEPA、HFlow 等有相关覆盖 |
+| B：执行过程归因 + 演化 | 暂缓 | Optimas、Q-Evolve、TPGO、EvoCF、EvoSkills 等已覆盖多种过程/组件反馈机制 |
+| C：Agent 与演化算子协同适应 | 暂缓 | EvoMAS（Wei et al.）已有七种策略和自适应策略选择 |
+
+## 9. 候选 D 的待验证算法框架
+
+工作代号 TC-QD-ETTA：
+- 个体：结构化 Agent 配置；
+- 任务签名：只使用部署时可观察的任务特征；
+- 行为描述符：从工具调用、规划、验证、恢复、记忆使用等轨迹特征提取；
+- 档案：维护不同任务/行为区域中的高质量配置；
+- 选择：新任务到来时检索相似任务区域中的父代，兼顾质量和多样性；
+- 变异/重组：对配置模块进行受约束变异和兼容性重组；
+- 评价：同一 backbone、固定任务协议下测 AUC、held-out 成功率、最差任务组表现、负迁移率和任务切换恢复速度。
+
+这只是待验证框架。需要先证明任务签名、行为描述符和 QD 档案比 UCB、标准 EA 和已有记忆档案确实更有效。
+
+详细定义见 07_CANDIDATE_D_TEST_TIME_ADAPTATION.md。
