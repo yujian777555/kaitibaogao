@@ -261,3 +261,53 @@ MOAE 已做完整 Agent rollout 的 Pareto-preserving evolutionary search；Skil
 **《面向大语言模型智能体的交互感知演化优化方法研究》**
 
 该题目比“交互感知演化重组”更能覆盖估计、重组和交互结构更新。最终仍须以相关工作审查和实验结果为准。
+
+
+## 13. 第四轮机制审查：交互分析先行工作与经典 Linkage Learning（2026-11-02）
+
+### 13.1 新发现的直接先行工作
+
+**More Is Not Always Better: Cross-Component Interference in LLM Agent Scaffolding (Liu, arXiv:2605.05716)**：
+- 五个静态 prompt/scaffolding 组件的全因子 \(2^5=32\) 组合；
+- 计算 exact Shapley，比较 main-effects 与 pairwise regression；
+- 报告一个探索性的三阶 Harsanyi dividend；
+- 在一个主要设置中 main-effects LOOCV \(R^2=0.872\)，pairwise LOOCV \(R^2=0.748\)，pairwise 项出现过拟合迹象；
+- 论文指出交互模式依赖任务和模型规模，且实验主要为静态 prompt-based scaffolding、有限步数。
+
+**结论：** “组件交互存在”“全因子组合分析”“Shapley”“pairwise regression”“高阶交互观察”均不能作为本课题单独创新。
+
+**A Regression Framework for Understanding Prompt Component Impact on LLM Performance (Lauziere et al., EXPLAINABILITY 2026)**：
+- 研究 Prompt 特征与性能的回归建模，并涉及 pairwise interaction；
+- 不能把 prompt 组件回归改名后作为 Agent 交互估计创新。
+
+### 13.2 MESH-Harness 机制核实
+
+MESH-Harness 的配置表示为多个功能槽位 embedding 拼接；full-covariance LinUCB 的均值预测为 slot-wise additive，协方差 off-diagonal blocks 保留槽位共同出现信息并影响不确定性。它没有显式 pairwise reward interaction features。
+
+**研究差异必须这样表述：** MESH 已经做了预算受限模块组合搜索与共享 surrogate；候选方法只有在任务条件化、稀疏非加性交互模型、主动探测和同预算预测/搜索增益上有实证提升，才有贡献。不能把“full covariance 不等于交互”当作唯一创新理由。
+
+### 13.3 经典 EC Linkage Learning
+
+| 方法 | 核心机制 | 对本课题的约束 |
+|---|---|---|
+| GOMEA / LTGA | MI/NMI 学习 Linkage Tree；GOM 按 FOS 子集从 donor mixing 并进行 fitness acceptance | 不能只把 Agent 模块做成基因后直接套 GOM |
+| CGOMEA | Conditional GOM 利用变量集合的条件依赖过滤 donor mating | 必须比较条件依赖与 Agent 模块接口依赖的区别 |
+| DSMGA-II | Dependency Structure Matrix 图模型 | 必须作为 linkage 基线 |
+| LK-GOMEA | 对不同解的局部邻域学习不同 linkage structure，处理多结构 landscape | 第三创新点“任务条件化/局部 linkage”已有强 EC 先行 |
+| DG2 / RDG | 通过 fitness difference / nonlinearity detection 识别变量交互/分组 | 交互识别并非新思想；需解决 Agent 随机 rollout、混合类型和昂贵评价 |
+
+### 13.4 机制级结论
+
+- 普通交互分析：已有直接 Agent 论文覆盖，NO-GO。
+- 预算受限、任务条件化、稀疏交互识别：尚有可研究差异，但必须形成主动实验设计和噪声处理算法，HOLD。
+- 交互驱动的 Agent constrained optimal mixing：Agent 相关工作有 crossover，EC 有 GOMEA/CGOMEA/LK-GOMEA；只有语义类型/接口约束 + 交互 linkage + 噪声感知接受的实质新机制成立才可能有创新，HOLD。
+- 跨任务 linkage 迁移：LK-GOMEA、HFlow、EvoMAS、Evo-Harness、TTHE 等使宽泛方案不够新，暂缓。
+
+### 13.5 新的实验平台建议
+
+优先使用有程序化终态评估的有状态工具任务：
+- ToolSandbox：工具间隐式状态依赖、用户模拟、轨迹过程评价；
+- AppWorld：9 个应用、457 APIs、750 tasks、程序化状态检查；
+- tau-bench：airline/retail 工具交互，最终数据库状态评价和 pass^k。
+
+建议先固定一个执行模型与工具集，在 4 个固定功能槽位、每槽位 2 个实现的 16 配置空间中做可控试验，再逐步扩大；不要第一版就做任意 Agent DAG。
