@@ -270,3 +270,10 @@ Paper 2 工作代号 CI-GOM：
 **本轮重要纠正：** 负交互同样代表非加性依赖，不能只把正交互放进 FOS。V1 按 \(P(|\Delta_{ij}|>\delta)\) 建边，正/负符号只用于解释和 donor score；负交互绝不等同于硬约束。类型/接口/权限/调用依赖才是硬约束。
 
 Phase 0 真值函数、噪声模型、全合法/受约束空间、伪代码、复杂度和 GO/HOLD/NO-GO 详见 14_FORMAL_ALGORITHM_DESIGN_V1.md。当前仍是设计稿，未实现、未运行、未证明优于基线。
+
+
+## 10. 执行顺序覆盖更新（2026-11-02）
+
+旧计划中同时实现 TCAIL 与 CI-GOM 的描述不再是当前执行指令。用户已决定逐项验证创新点。
+
+**当前只实现/验证 TCAIL。** CI-GOM 规格保留但冻结；第三项迁移研究冻结。TCAIL Gate-1 完整通过（包括可信 Agent 场景验证）后，再启动 CI-GOM。完整 Gate 指标、强基线、消融和停止规则见 15_SEQUENTIAL_INNOVATION_VALIDATION_PROTOCOL.md。
