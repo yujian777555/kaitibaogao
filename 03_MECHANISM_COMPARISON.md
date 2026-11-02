@@ -230,3 +230,34 @@ MOAE 已做完整 Agent rollout 的 Pareto-preserving evolutionary search；Skil
 候选算法名称：Interaction-Aware Evolutionary Recombination for Agent Configurations（IAER-AC），仅为工作代号。
 
 证伪条件：若 ε_ij 无预测力，或 linkage-aware crossover 不优于随机模块交叉、LLM crossover、mutation-only，则停止；若已有工作显式使用组件交互图指导 Agent crossover，则候选 G 需改题或 NO-GO。
+
+
+## 12. 面向 2–3 篇小论文的创新结构与直接工作补充（2026-11-02）
+
+### 12.1 新增强基线及必须区分的机制
+
+- **MESH-Harness (arXiv:2610.05300)**：模块槽位 + 实现池 + full-covariance LinUCB + mixed-start coordinate ascent + trace-driven module evolution。其 full covariance 保留跨槽位共同出现信息并估计组合不确定性，但预测均值仍是各槽位表示的加性和。因此它是强组合搜索基线，不能误称其已经显式拟合非加性 epistasis；同时也不能忽略它对模块组合搜索的覆盖。
+- **ARTEMIS (arXiv:2512.09108)**：自动发现 Agent 可配置组件，使用 semantic-aware genetic operators 联合优化 Agent 配置。需要精读其依赖识别与算子定义，不能将“语义感知遗传算子”重新包装成创新。
+- **EvoMAS (ICML 2026)**：结构化 MAS 配置空间中的反馈引导 mutation/crossover。
+- **AgentEvo (2026)**：多阶段 workflow evolution，已有 subgraph graft、prompt fusion 和 Pareto performance-cost selection。
+- **Evo-Harness (EMNLP 2026)**：单次执行上下文编译为可复用 harness skill，和第三创新点的任务迁移/经验更新高度相关。
+
+### 12.2 三个创新点的独立分工
+
+| 创新点 | 方法对象 | 预期独立贡献 | 独立实验 |
+|---|---|---|---|
+| I：任务条件化组件交互效应估计 | 估计器 | 从主效应中分离协同/拮抗，得到稀疏且带不确定性的交互图 | 合成真值环境 + 真实 Agent；估计偏差、符号准确率、图恢复率 |
+| II：交互感知演化重组 | EC 交叉算子 | 将交互图转为 linkage blocks，设计协同块继承和依赖约束修复 | 固定评价次数和种群，对比 mutation-only、随机/LLM crossover、EvoMAS、ARTEMIS、MESH |
+| III：任务分布变化下交互结构迁移 | 结构更新机制 | 分离共享/任务条件化交互，识别结构漂移并更新 linkage | 任务家族迁移、负迁移、结构恢复速度、旧任务回退 |
+
+### 12.3 不能将三个实现步骤伪装成三个创新点
+
+“交互估计→构图→图引导交叉”如果仅是一个方法的连续实现步骤，不能自动拆成三个创新点。创新点 I 必须有独立的估计算法与真值/预测实验；创新点 II 必须有独立的演化算子与受控搜索实验；创新点 III 必须有独立的任务分布变化问题和迁移实验。
+
+### 12.4 题目调整
+
+总题目工作稿调整为：
+
+**《面向大语言模型智能体的交互感知演化优化方法研究》**
+
+该题目比“交互感知演化重组”更能覆盖估计、重组和交互结构更新。最终仍须以相关工作审查和实验结果为准。
