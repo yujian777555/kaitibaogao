@@ -322,3 +322,23 @@ D. irace + online discounted-UCB。
 ## 6. TCAIL Gate 前的最新状态更新（2026-11-02）
 
 TCAIL 首轮规格审计见 16_TCAIL_SPECIFICATION_AUDIT_R1.md，结论 REQUEST REVISION。当前状态更新为 SPECIFICATION_REVISION_REQUIRED；尚未进入正式 Phase 0 性能实验。下一步先完成该审计列出的七项阻塞修订，再做独立规格复审。
+
+## 7. TCAIL V2 修订状态（2026-11-02）
+
+首轮规格审计 REQUEST REVISION 后，已形成：
+- 17_TCAIL_FORMAL_SPECIFICATION_V2.md；
+- 18_TCAIL_RELATED_WORK_AUDIT_R1.md。
+
+V2 状态：REVISED SPECIFICATION / PENDING INDEPENDENT REVIEW。当前仍不实现、不运行正式 Phase 0。
+
+新增关键要求：
+- 平均 pairwise interaction 必须绑定预先指定 reference background distribution；
+- 输出背景异质性和共同支持质量；
+- 使用四种 identifiability 状态；
+- 非 Gaussian 模型使用对应 Laplace posterior / expected Fisher，不复用 Gaussian 精确更新；
+- interaction-only IG 是 Bayesian D-optimal 基线；
+- edge-decision risk reduction 只作为待比较候选，不作为已证实新颖机制；
+- 扩展 8/10/12-slot landscape；
+- null、additive-only、three-way-only 和 mixed-order 都必须覆盖。
+
+相关工作审查指出，Agent 组件交互、全因子分析、回归、Bayesian OED、FDR 和预算约束 harness search 已有直接先例。TCAIL 新颖性仍需通过方法级比较证明。
