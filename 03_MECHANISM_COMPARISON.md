@@ -311,3 +311,31 @@ MESH-Harness 的配置表示为多个功能槽位 embedding 拼接；full-covari
 - tau-bench：airline/retail 工具交互，最终数据库状态评价和 pass^k。
 
 建议先固定一个执行模型与工具集，在 4 个固定功能槽位、每槽位 2 个实现的 16 配置空间中做可控试验，再逐步扩大；不要第一版就做任意 Agent DAG。
+
+
+## 14. 第五轮：EC 参数调优与在线参数控制机制审查（2026-11-02）
+
+### 14.1 基础分类
+- Eiben et al. (2007)：参数设置 vs 运行时控制；控制包括 deterministic、adaptive、self-adaptive。
+- Eiben & Smit (2011)：将调参视为 problem–EA–tuner 三层配置问题，强调性能和鲁棒性。
+- Aleti & Moser (2016)：系统梳理 adaptive parameter control。
+- irace（López-Ibáñez et al., 2016）：通过候选配置和 iterated racing 在多个训练实例上筛除较差参数。
+- SHADE（Tanabe & Fukunaga, 2013）：成功历史参数适应；只适用于 DE 的 F/CR 设计，不能直接移植给 categorical GOM。
+- AOS（Da Costa et al., 2008）：信用分配 + 多臂老虎机选择算子。
+
+### 14.2 GOMEA 对“参数无关”的实际边界
+Parameterless GOMEA 研究了 IMS、P3 等 population-size-free scheme，但仍需决定 forced improvements、donor search、hill climber、linkage tree / similarity measure、FOS ordering、tournament selection、population scheme 等设计。论文还对 96 种 GOMEA 组合进行大规模参数搜索。
+
+因此本课题不能说“采用 parameterless GOMEA 就不需要调参”。Population-size-free 只减少/移除固定种群规模这一维参数，不会消除全部算法配置。
+
+### 14.3 本课题的确定方案
+- 主算法是 categorical genotype + GOM，不使用 DE 专属 \(F,CR\)；
+- Phase 0 固定种群，先控制变量；4 槽位默认 \(N=8\)，对 \(N=4,8,12\) 做敏感性；
+- mutation intensity \(K\in\{1,2,3\}\) 作为动作，由历史收益控制器选择；\(p_m=1/m=0.25\) 仅作普通 GA 基线；
+- FOS 第一版为 singleton + 置信可靠的正向 pairwise edges，最大块 2；负交互只作为软条件 donor filter；
+- 离线调参用 irace；在线控制用 discounted-UCB/AOS，reward 用配对改进的置信下界 / rollout cost；
+- \(\alpha\)、\(\delta_{\min}\)、硬约束门禁预先锁定，不用最终测试集调节；
+- 后续比较 fixed-N、IMS、P3，不把人口管理方法本身宣称为创新。
+
+### 14.4 与 Agent 相关工作的重复风险
+Wei et al. 的 EvoMAS 已有七种策略与 adaptive strategy selection。故 AOS/UCB 仅是辅助控制，不构成本课题独立创新。我们的潜在差异仍需落在 interaction-derived linkage、Agent 类型/接口约束和噪声感知的 constrained mixing 上。
