@@ -288,3 +288,13 @@ irace 使用 iterated racing 对算法配置进行自动调优：先产生候选
 每个 proposal 只选择一个 action，避免一次 offspring 同时经过多个算子后无法做信用分配。若当前没有可识别的 pair edge，\(a_4,a_5\) 暂不可用。reward 使用配对改进 LCB 减去 \(\delta_{\min}\)，再按 rollout-equivalent 成本归一化；非法 repair、无 donor 等情况按预先定义的负反馈记录。
 
 重要修正：FOS 建边依据是可信非加性强度的绝对值，不是只看正交互。正/负符号进入 donor score；负交互不能直接作为硬拒绝条件。
+
+
+## 11. CI-GOM V1 的动作归因与多重序贯检验补充（2026-11-02）
+
+CI-GOM 每个 target 可执行多个 proposal，每个 proposal 只归因给一个 operator arm；每次提案有独立 proposal index。为避免“每个 proposal 各自用 alpha=0.05”导致跨提案累计误接受，14_FORMAL_ALGORITHM_DESIGN_V1.md 已采用两层 alpha spending：
+\[
+\alpha_k=\frac{6\alpha_{\mathrm{total}}}{\pi^2 k^2},\quad
+\alpha_{k,n}=\frac{6\alpha_k}{\pi^2 n^2}.
+\]
+第一层控制跨 offspring proposals，第二层控制单个 proposal 内反复查看。该结论要求 task-block differences 有界，且 task blocks 独立或满足对应 martingale 条件。统计门槛不能交给 irace 调优。
