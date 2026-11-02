@@ -101,3 +101,14 @@
 | 07_CANDIDATE_D_TEST_TIME_ADAPTATION.md | 候选 D 的问题定义、算法假设、实验设计和停止条件 |
 
 当前文献登记为 72 条，但仍不是穷尽式综述；下一轮继续追踪综述引用、正式会议论文集和国内研究。
+
+
+## 9. 第三轮研究状态（2026-11-02）
+
+文献登记已扩充至 104 条。新增研究显示，测试时 Agent 演化、Agent harness 演化、技能多目标优化、Agent 团队演化、可进化性选择和 evaluator co-evolution 均已有直接工作。因此候选 D 已降为 NO-GO（宽泛表述），当前仅优先审查候选 G：组件交互感知的演化重组。
+
+新增文件：
+- 08_CANDIDATE_SCREENING.md：D/E/F/G 候选筛选和状态；
+- 09_CANDIDATE_G_INTERACTION_AWARE_RECOMBINATION.md：组件 epistasis 估计与 linkage-aware crossover 方案。
+
+候选 G 尚未通过相关工作审查，不得写入最终开题题目或创新点。
