@@ -241,3 +241,23 @@ V2 修订：
 已新增 REPOSITORY_MAINTENANCE_POLICY.md，并在 README.md 与 SESSION_HANDOFF.md 中登记。每轮开始核对远端状态、读取项目上下文；每轮结束更新研究记录、项目状态、决策日志和完整接班提示词；提交推送后复核远端 HEAD 与关键文件。若推送/核验失败，必须如实报告。
 
 项目隔离规则继续有效：kaitibaogao 不与 openissue、agentfotagent、GLEPPO 等独立项目混用。
+
+## 决策 D-028：TCAIL V2.1 第三轮独立复审 REQUEST CHANGES（2026-11-02）
+
+复审报告：20_TCAIL_V2_1_INDEPENDENT_REVIEW_R1.md。
+
+V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检查通过：reference-standardized contrast vector 在固定线性 predictor basis 下成立；固定 Beta concentration 的 Fisher information 正确；线性 contrast 的 row-space 判据正确；posterior local null probability 校准且检验族固定时，BFDR 基本公式正确。
+
+但规格仍未达到可实现状态，主要阻塞：
+1. 当前边假设检验的是 reference-background 平均有符号交互，可能因背景符号抵消而漏掉对演化 linkage 有意义的条件依赖；背景异质性尚未进入边决策。
+2. M2/M3 gate 未进入算法伪代码和状态机；M3 仅含三阶项，无法排除四阶及以上失配；strong-heredity 定义可能与 three-way-only 测试场景冲突；M2/M3 最终 posterior/BFDR 规则未定义。
+3. acquisition 的逐边 Bayes classification risk 与最终全局 BFDR 选择规则不一致。
+4. task-block 的跨配置配对、随机种子、任务内相关、随机效应及 cluster posterior/calibration 尚未形成可执行统计模型。
+5. Beta concentration κ 未知时的联合 nuisance posterior/Fisher 处理未定义；Gaussian 方差也需明确冻结或估计方案。
+6. identifiability 需按 model basis × anchor 构造 legal/observed design matrix，并区分代数可识别与 GLM practical weak identification；低共同支持 abstention 规则未定义。
+7. BFDR 检验族在 task-family × pair 与 pair × anchor 两种索引之间不一致。
+8. full-factorial task-block 计数只有在等成本协议下才等价于 rollout-equivalent budget。
+
+新颖性与 EC 定位仍未成立：TCAIL 是统计建模/主动实验设计模块；Group-ARD、Bayesian OED、BFDR 和 decision-theoretic acquisition 均有成熟先例。只有证明其对后续 GOM linkage/mixing/search 带来独立收益，才能闭合 EC 主线。当前不能把 TCAIL 写成已成立的独立创新点。
+
+**决定：TCAIL 保持 HOLD / SPECIFICATION REVISION REQUIRED；IMPLEMENTATION BLOCKED。** 本次不是算法实验失败，因为尚无代码和实验。下一轮只按 20 号报告修订规格；修订后再独立复审。CI-GOM、第三项迁移、正式 Phase 0、真实 LLM 和大论文正文继续冻结。
