@@ -234,3 +234,24 @@
 后续每轮研究均须按 [REPOSITORY_MAINTENANCE_POLICY.md](REPOSITORY_MAINTENANCE_POLICY.md) 执行：开始前读取远端状态和接班记录；结束时更新研究记录、决策日志、项目状态与完整接班提示词；推送后核验远端 HEAD。不得只在聊天中汇报，也不得与其他独立研究仓库混用。
 
 当前唯一进行中的任务：TCAIL V2.1 独立规格复审。CI-GOM 和第三项迁移冻结；复审通过前不实现代码、不跑正式 Phase 0、不调用真实 LLM。
+
+## 2026-11-02 第三轮：TCAIL V2.1 独立规格复审
+
+新增文件：
+- 20_TCAIL_V2_1_INDEPENDENT_REVIEW_R1.md：对 V2.1 第 12 节及全文接口进行独立数学、统计和算法闭合性复审。
+
+**结论：REQUEST CHANGES / IMPLEMENTATION BLOCKED。**
+
+V2.1 已正确补充 reference-standardized contrast vector、有限 context anchors、M2/M3 敏感性思路、posterior predictive Monte Carlo acquisition 流程和预算分母。固定 concentration 的 Beta Fisher information、线性 contrast 的 row-space 判据和基本 BFDR 公式通过纸面检查。
+
+但仍有以下阻塞：
+1. 平均有符号交互可能因背景异质性而抵消，当前边定义未必等价于 EC linkage；
+2. M2/M3 gate 未进入算法伪代码，M3 仅含三阶项，strong-heredity 与 three-way-only 场景可能冲突；
+3. per-edge Bayes risk acquisition 与最终全局 BFDR 选择不一致；
+4. task-block 配对、任务内相关和随机效应没有形成完整执行/统计模型；
+5. 未知 Beta concentration \`κ\` 的 nuisance uncertainty 未进入 Fisher/acquisition；
+6. M2/M3 × anchor 的合法设计矩阵、GLM practical information 和低共同支持 abstention 仍需定义；
+7. BFDR 检验族在 task-family × pair 与 pair × anchor 两种写法之间尚未统一；
+8. full-factorial 计数预算与 rollout-equivalent cost 的等价条件需要补充。
+
+**当前状态：** TCAIL 继续 HOLD；尚未实现、未运行实验、未通过 Gate-1。下一轮只修订规格，不编码、不启动正式 Phase 0、不调用真实 LLM。CI-GOM、第三项迁移和大论文正文继续冻结。具体复审见 20 号报告。
