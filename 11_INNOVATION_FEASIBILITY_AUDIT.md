@@ -366,3 +366,14 @@ ShapleyFlow（Findings ACL 2026）对固定四组件 workflow 的全部 2^4 模�
 ## AHE 单次 campaign 的统计限制（2026-11-03）
 
 AHE 原文报告一次十轮演化 campaign，并明确揭示 harness 组件非加性交互和回归预测盲区。它证明了机制可行性，但单次 campaign 不能估计独立演化运行间方差。TCAIL/CI-GOM 后续实验必须预先固定多个随机种子、同一任务配对、相同 rollout 预算和完整回归指标；不能用单次最佳运行宣称算法优越。
+
+
+## 2026-11-03 RSI 与第三创新点更新
+
+导师要求加入 RSI 后，论文主线改为系统级 Agent RSI + 演化计算。三个候选创新点分别是 RSI 轨迹驱动的任务/父代条件化交互学习、交互感知约束 GOM、跨轮次交互记忆与能力保持约束演化。
+
+第三创新点新颖性风险显著：CPE 已覆盖能力保持，HarnessEvolve 已覆盖当前/近期批次性能门，EvolveNet 已覆盖多客户端经验聚合，DGM 已做全 Agent 档案，ReasoningBank/GEPA/Meta-Harness 已被 task-free continual stream 研究比较，并发现 global edit interference 和 retrieval collision。故第三项必须收敛为可观察上下文与局部交互签名联合条件化的 drift-aware linkage-block memory/transfer，且在线算法不得直接读取 task-family 标签和任务流 block 边界。
+
+强基线：DGM、CPE、HarnessEvolve、EvolveNet、ReasoningBank、GEPA、Meta-Harness、AHE/Meta-Harness continual adaptation。若第三项不能在同预算下提高新任务适应并降低历史能力退化，不独立成篇。
+
+状态不变：TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；第三项无正式算法规格。V0.3 和审计见 27、28 号文件。
