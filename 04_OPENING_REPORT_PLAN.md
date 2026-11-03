@@ -332,3 +332,9 @@ V0.3 主要调整：
 ### 19.2 三创新点参数调节与实验 Gate
 
 参数调节顺序、候选范围、A800 轻量迁移预测器条件、同预算比较和各项停止规则见 `29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md`。所有参数只在 train/validation 任务流上调节；硬约束不可作为软惩罚；在线算法不读取任务家族标签和 stream boundaries。
+
+## 20. Word V0.3 RSI 初稿生成（2026-11-03）
+
+已根据 `27_OPENING_REPORT_DRAFT_V0_3_RSI.md` 生成学校模板风格 Word 工作初稿 `河北工业大学硕士学位论文开题报告_V0.3_RSI_初稿.docx`。保留原模板封面元信息表、进度表、A4 页面和宋体小四/1.5 倍行距；加入 RSI 研究现状、三个创新点、IMCE-RSI 候选方案、SWE-bench Verified 首选任务平台和 68 条参考文献。结构检查通过。
+
+**后续未完成项：** Word/Markdown 逐段逐表一致性审计；公式与表格分页复核；68 条参考文献元数据和 GB/T 7714 逐条核验。详细记录见 `30_WORD_V0_3_BUILD_REPORT.md`。当前算法 Gate 状态不变。
