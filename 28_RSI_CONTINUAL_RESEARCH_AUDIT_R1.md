@@ -140,3 +140,35 @@ Chen et al. 的 task-free setting 不向算法提供 task-family 标签或 block
 - CI-GOM：未实现、未实验。
 - 本轮未启动 Phase 0、未调用 DeepSeek API、未训练模型。
 
+
+
+## 8. 第三创新点进一步收敛：双键交互记忆检索与冲突检测
+
+单纯“可观察任务上下文 + 交互签名”仍需要落实为可执行机制。候选 IMCE-RSI 可采用双键检索：
+
+- **上下文键**：只由任务输入、可见工具 schema、仓库/环境元数据和已观察轨迹构造，不包含隐藏 task id、benchmark 标签或未来任务边界；
+- **交互键**：由创新点一估计得到的局部边后验、方向、不确定性、共同支持状态和 FOS/linkage block 组成。
+
+对历史记忆项 (m)，候选检索分数可写为：
+
+\[
+S(m\mid z_t,G_t)=
+\lambda_z\,\mathrm{sim}(z_t,z_m)
++\lambda_G\,\mathrm{compat}(G_t,G_m)
+-\lambda_u\,\mathrm{uncertainty}(m).
+\]
+
+其中，(z_t) 为当前可观察上下文，(G_t) 为当前局部交互后验。若语义相似的历史项具有冲突的交互方向、工作流依赖或迁移结果，则标记为 retrieval collision，不把最相似的一条经验直接注入 Agent。
+
+候选执行步骤：
+1. 通过上下文键召回多个历史候选；
+2. 比较交互键，过滤结构不兼容或历史负迁移的 linkage blocks；
+3. 若候选间冲突或预测不确定性过高，执行有限的合法配对探测；探测预算由预注册规则限制；
+4. 若仍不能区分，则 abstain，退回无迁移基线或从头估计；
+5. 只有在预测迁移收益的置信下界为正且历史能力保持约束通过时，才将 block 纳入 GOM donor/mixing 候选。
+
+漂移检测不依赖 task-family 标签或 block 边界；在滚动窗口中比较上下文分布和交互后验分布，可采用预注册的两样本检验/变化点检测。任务家族标签只用于离线计算漂移识别指标。
+
+**新增消融：** context-only retrieval、interaction-only retrieval、dual-key retrieval、dual-key without collision detection、dual-key without active probe、no retention constraint。新增指标：retrieval collision rate、memory precision、negative-transfer rate、abstention rate、probe cost 和 transfer calibration。
+
+该机制仍是待验证候选。必须证明 dual-key retrieval 比 ReasoningBank-style similarity retrieval 和 whole-agent archive 更能避免冲突迁移，并在同预算下提升持续任务流表现；否则第三创新点不成立。
