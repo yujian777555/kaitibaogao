@@ -1026,3 +1026,8 @@ AHE 原文 PDF 确认主结果来自单次十轮 evolution campaign，并明确�
 新增细节已写入 26_RSI_THREE_INNOVATION_RESEARCH_DESIGN_R1.md、27_OPENING_REPORT_DRAFT_V0_3_RSI.md 和 28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。SWE-bench Verified 已明确为首个真实编码 Agent 主平台；SWT-Bench/FeatureBench 用于连续任务流候选。AppWorld/Terminal-Bench 不作为当前首选主实验。
 
 下一轮优先：完成 V0.3 Word 版、逐段一致性检查和 68 条参考文献 GB/T 7714 审计；不得因开题文稿修改而改变 TCAIL/CI-GOM 的 Gate 状态。
+
+
+## 32. 三创新点参数调节与 Gate 设计（2026-11-03）
+
+新增 `29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md`，列出 TCAIL、CI-GOM、IMCE-RSI 的参数含义、候选调节顺序、A800 轻量迁移预测器训练条件、同预算基线要求和各阶段停止标准。下一轮在 Word V0.3 生成后，应同步核对 29 号文件与报告中的参数描述。当前仍未启动 Phase 0、API 调用或 GPU 训练。
