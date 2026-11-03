@@ -371,7 +371,7 @@ Group-ARD、Bayesian information gain、GOM、softmax donor、UCB 和 confidence
 | ShapleyFlow (Findings ACL 2026) | 固定四组件 workflow 的 2^4 模型升级组合；Shapley 归因；交互感知 model allocation | 已覆盖组件升级层面的交互感知归因；不是局部 fitness linkage，也不直接构造 FOS | CCI、pairwise OLS、MESH additive surrogate、ShapleyFlow |
 | FusionFlow (ACL 2026) | 融合多个独立演化的 workflows；局部优化、任务差异化、动态调度 | 已覆盖 workflow fusion 带来的结构跃迁；不是单 Agent 内部组件 linkage-aware GOM | random/LLM crossover、EvoMAS、FusionFlow、AgentSquare |
 | SkillFlow (arXiv:2605.14089) | Tempered Trajectory Balance 训练编排策略；flow diagnostics 驱动递归技能创建/剪枝 | 通用 skill evolution 不再是空白；不是经典种群 EA | SkillFlow、AHE、Evo-Harness、MESH-Harness |
-| AHE (arXiv:2604.25850) | 组件/经验/决策可观测性；编辑预测契约；后续任务核验 | 直接覆盖 coding-agent harness 自我演进 | AHE、MESH-Harness、Evo-Harness |
+| AHE (arXiv:2604.25850) | 组件/经验/决策可观测性；编辑预测契约；后续任务核验；报告组件非加性收益与 regression blindness | 直接覆盖 coding-agent harness 自我演进；主结果来自单次十轮 campaign，未证明跨独立 seeds 的重复性 | AHE、MESH-Harness、Evo-Harness；本课题必须多 seed 配对验证 |
 | MAESD (JCIM 2026) | 多智能体 + 演化式蛋白质序列设计 | 国内团队的 EC+MAS 应用；优化对象为序列而非 Agent 配置 | 作为相邻研究，不作为 Agent harness baseline |
 | BIOME (计算机应用 2026) | LLM 辅助群体智能算法生成与进化 | 方向为 LLM→EC，区别于本课题 EC→Agent | 作为反向方向背景 |
 | 国内 Agent 应用研究（2024–2026） | 教育 Agent、智慧城市 Agent、电力仿真 Agent 的规划、记忆、技能库与动态演进 | 多为系统框架/应用方法，不等同于基于种群的 EC linkage 搜索 | 国内研究现状段落引用，不夸大为直接 EA baseline |
