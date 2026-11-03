@@ -1054,3 +1054,32 @@ AHE 原文 PDF 确认主结果来自单次十轮 evolution campaign，并明确�
 2. 完成 68 条参考文献的元数据和 GB/T 7714 审计。
 3. 开始创新点一的独立算法审查，重点处理 TCAIL V2.1 REQUEST CHANGES 中的 estimand、模型阶数敏感性、任务块相关、局部 linkage 和最终边决策问题。
 4. 继续遵守：22 号接口提案待独立复审；CI-GOM 未实现；IMCE-RSI 无正式规格；无 Phase 0、真实 API 实验或 A800 训练。不得因 Word 初稿生成而把研究设想写成已验证结果。
+
+
+## 33. TCAIL Linkage Interface 独立复审 R2（2026-11-03）
+
+### 结论
+
+22 号 proposal 的 B1 方向部分成立，但未关闭：
+- conditional fitness interaction、global RMS energy、parent/task local posterior 应分开；
+- `q=P(|Δ|>δ_local|D)` 是 edge evidence probability，不是 FOS clustering strength；
+- V2.2 必须分开 `δ_local`、`τ_edge`、连续 FOS weight `w)，并冻结 FOS builder；
+- B2–B8 仍需闭合；
+- TCAIL overall 仍 HOLD / IMPLEMENTATION BLOCKED。
+
+### 新增文件
+
+- `31_TCAIL_LINKAGE_INTERFACE_INDEPENDENT_REVIEW_R2.md`：完整独立审查、公式建议、B1–B8 修订要求和新颖性边界；
+- `32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`：V2.2 规格修订任务与可复制 Executor 提示词。
+
+### 新增直接先行工作
+
+P150–P153：Olieman et al. 2021 FBL；Dushatskiy et al. 2024 CGOMEA；Przewozniczek et al. 2025 cDLED；Tinós et al. 2026 GA-side-effect interaction learning。不得把 fitness-based linkage、conditional/local linkage 或搜索副产物交互学习本身作为创新。
+
+### 下一步
+
+只进行规格修订：新建 `33_TCAIL_FORMAL_SPECIFICATION_V2_2_DRAFT.md` 和 `34_TCAIL_V2_2_CHANGELOG_AND_CLOSURE_MATRIX.md`，不覆盖 17 号权威 V2；逐项关闭 B1–B8 后再交独立审查。不得编码、调用 DeepSeek API、启动 Phase 0、训练 A800 模型。
+
+### 下一会话可复制提示词
+
+你是我的河北工业大学计算机技术硕士开题研究 Planner。唯一允许维护的仓库是 `yujian777555/kaitibaogao`。先核验 main HEAD，读取 README、05_DECISION_LOG、SESSION_HANDOFF、17、20、21、22、29、31、32 号文件。当前 TCAIL 状态是 B1_PARTIALLY_ACCEPTED / overall HOLD / IMPLEMENTATION BLOCKED。你的唯一任务是监督 Executor 按 32 号任务创建新的 33 号 TCAIL V2.2 完整规格草稿和 34 号 B1–B8 closure matrix，不覆盖 17 号权威 V2。重点解决 q 与 FOS weight、FOS builder、M2/M3/高阶/heredity、BFDR 与 acquisition、task-block 配对模型、nuisance uncertainty、basis×anchor practical identifiability、parent/anchor/generation 检验族、rollout-equivalent budget。所有公式和伪代码必须一致；未解决项标记 OPEN，不得宣布 PASS。不得编码、不得调用 DeepSeek API、不得启动 Phase 0、不得训练模型。完成后更新仓库、提交并核验 main。
