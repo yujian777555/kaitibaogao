@@ -328,3 +328,6 @@ V0.2 将参考文献扩充至 61 条，补入国内 Agent 综述与应用研究�
 V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、HarnessEvolve、EvolveNet、2026-11-02 continual harness study、2026-10-19 Are Self-Evolving Agents Continual Learners? 等直接相关工作。第三创新点不能只是 memory/archive/performance gate，必须与 ReasoningBank、GEPA、Meta-Harness 等进行强基线比较，并采用 task-free / observable-context 设定。
 
 **当前状态：** V0.3 是开题研究方案初稿，Word 版和最终 GB/T 7714 审计尚未完成。TCAIL V2.1 仍 REQUEST CHANGES / IMPLEMENTATION BLOCKED；22 号接口提案待独立复审；CI-GOM 未实现；第三项尚无正式算法规格。本轮无 Phase 0、无真实 LLM API 调用、无 GPU 训练。
+
+
+**IMCE-RSI 第三项进一步收敛（2026-11-03）：** 不做普通 memory/archive/performance gate，改为上下文键 + 局部交互签名键的双键 linkage-block 检索；相似查询对应冲突交互时检测 retrieval collision；高不确定性时有限探测或 abstain。在线算法不得读取 task-family labels 或 task-stream block boundaries。首个真实编码 Agent 平台明确为 SWE-bench Verified；SWT-Bench/FeatureBench 为连续任务流候选。细节见 28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。
