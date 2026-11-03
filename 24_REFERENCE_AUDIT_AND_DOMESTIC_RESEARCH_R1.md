@@ -97,3 +97,8 @@ https://aclanthology.org/2026.acl-long.1278/
 ## 7. Word V0.2 交付状态
 
 已基于原学校 Word 模板生成 `河北工业大学硕士开题报告_初稿V0.2.docx`。Word 正文非空白字符约 22,808，参考文献编号 [1]–[61] 连续，A4/宋体小四/1.5 倍行距沿用原模板。Word 与 Markdown 的主要章节和新增参考文献已对应，但逐段逐字一致性仍待下一轮核对；Word 文件尚未提交为 GitHub 二进制文件。
+
+
+### AHE 复现性限制补充（2026-11-03）
+
+已核对 AHE 原文 PDF：论文明确称主实验为一次十轮 evolution campaign，而不是多次独立 campaign。其贡献是证明 observability-driven harness evolution 可行，并展示组件非加性交互与 regression blindness；但单次 campaign 不足以给出独立运行间方差。故本课题的实验协议必须使用多个随机种子、配对任务实例、相同 rollout 预算，并同时报告修复与回归预测/误差，不能仅比较一次最佳运行。
