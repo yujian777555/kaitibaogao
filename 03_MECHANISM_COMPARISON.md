@@ -397,3 +397,18 @@ Group-ARD、Bayesian information gain、GOM、softmax donor、UCB 和 confidence
 **第三创新点收敛：** Interaction-Memory-Aware Continual Evolution (IMCE-RSI)：跨轮次保存任务/父代条件化局部交互后验与 linkage blocks；根据可观察上下文和交互签名做漂移检测；仅迁移有证据支持的 block；在历史能力保持约束下进行多目标种群选择。它必须优于 CPE、HarnessEvolve、DGM、EvolveNet、ReasoningBank、GEPA、Meta-Harness，才能独立成篇。
 
 **任务标签规则：** task-family 标签仅用于离线切分和结果分析，不作为在线输入；任务流 block 边界不向算法揭示。若加入 task-aware oracle，只能作为上界基线。
+
+## 2026-11-03：TCAIL Linkage Interface 独立复审 R2
+
+| 先行工作 | 直接覆盖 | TCAIL 的差异化要求 |
+|---|---|---|
+| Olieman et al. 2021 FBL | fitness perturbation / differential-grouping 学习 RV-GOMEA linkage | 不得宣称首次使用 fitness difference 学习 linkage |
+| Dushatskiy et al. 2024 CGOMEA | conditional dependencies 与 solution mating filter | 必须与 conditional mating / FOS 比较 |
+| Przewozniczek et al. 2025 cDLED | 当前个体条件化局部依赖、多结构 mating restriction | parent-specific local graph 本身不是创新 |
+| Tinós et al. 2026 GAwLL2 | 从 GA 搜索副产物学习交互，不增加 fitness evaluations | 必须纳入 zero-extra-evaluation side-effect learning 基线 |
+
+22 号 proposal 的 B1 修订方向部分成立：区分条件有限差分、全局 RMS 交互能量和 parent/task local posterior；但 q 是 edge evidence probability，不是 FOS clustering strength。建议把 `δ_local`（实际意义阈值）、`τ_edge`（后验 edge 门限）和连续权重 `w=E[(|Δ|-δ_local)_+|D]` 分开，q 负责 edge inclusion/abstention，w 负责 FOS builder 输入。该权重仍需合成真值和下游搜索验证。
+
+独立复审文件：`31_TCAIL_LINKAGE_INTERFACE_INDEPENDENT_REVIEW_R2.md`。下一规格任务：`32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`。
+
+**状态：** B1_PARTIALLY_ACCEPTED；TCAIL overall HOLD / IMPLEMENTATION BLOCKED。B2–B8 未关闭；不编码、不运行 Phase 0、不调用真实 API。
