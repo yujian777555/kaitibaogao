@@ -316,3 +316,27 @@ Gate 顺序不可跳过。第三项可先做问题定义和文献审查，但不
 第三项强基线补充：DGM、CPE、HarnessEvolve、EvolveNet、ReasoningBank、GEPA、Meta-Harness、AHE/Meta-Harness continual adaptation。若无法官方复现，必须标记 paper-setting adaptation。
 
 **研究状态不变：** 本文件仍为研究设计候选；TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；IMCE-RSI 尚无正式算法规格。
+
+## 14. IMCE-RSI 的双键记忆检索与 retrieval-collision 处理
+
+为避免第三项停留在泛化的“交互记忆”，进一步将历史 linkage block 的检索设计为上下文键与交互键联合条件化。
+
+当前任务的上下文键 (z_t) 只由可观察输入、工具 schema、环境元数据和执行轨迹摘要构成；交互键 (G_t) 来自创新点一估计的局部交互后验、方向、不确定性、共同支持状态和 FOS。候选记忆检索可按以下兼容性评分：
+
+\[
+S(m\mid z_t,G_t)=
+\lambda_z\,\mathrm{sim}(z_t,z_m)
++\lambda_G\,\mathrm{compat}(G_t,G_m)
+-\lambda_u\,\mathrm{uncertainty}(m).
+\]
+
+候选流程：
+1. 根据可观察上下文召回多个历史记忆；
+2. 使用交互签名检查 linkage block 兼容性和历史收益；
+3. 如果语义相似的历史记忆具有冲突的交互方向、工作流依赖或迁移结果，触发 retrieval-collision 标记；
+4. 对高不确定性或冲突候选执行有限的合法配对探测；预算不足时 abstain，不强制迁移；
+5. 只有迁移收益置信下界为正且历史能力保持约束通过，才将该 block 加入 GOM donor/mixing 候选。
+
+漂移检测只依赖滚动窗口中的可观察上下文和交互后验，不依赖任务家族标签或 block 边界。标签仅用于离线评价。必须比较 context-only、interaction-only、dual-key、dual-key without collision detection 和 dual-key without active probe。
+
+新增指标：retrieval collision rate、memory precision、negative-transfer rate、abstention rate、probe cost、transfer calibration。若 dual-key 检索不能优于 ReasoningBank-style similarity retrieval 和 DGM whole-agent archive，则不保留该机制。
