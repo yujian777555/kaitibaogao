@@ -101,7 +101,9 @@ RSI 的持续演化还涉及能力保持问题。Yu 等提出 Capability-Preserv
 
 2026 年 11 月 2 日公开的持续 harness 演化研究进一步构造了代码修复、测试生成和功能实现之间的连续任务流，评估 AHE 和 Meta-Harness 的跨任务演化，并从 520 余条轨迹中归纳出验证冲突、工作流冲突和预算策略冲突[67]。该研究主要是问题定义、实证分析和冲突归因，为本课题第三个研究内容提供了明确的任务流设置与强对照依据，但并未直接提出本课题所拟研究的交互结构漂移感知和 linkage block 条件化迁移算法。
 
-据此，本课题拟将 RSI 的研究重点从“能否递归修改 Agent”推进到“演化计算如何在递归修改中识别组件交互、产生有效重组，并在任务变化时复用历史交互结构和保持既有能力”。该切入点必须与 DGM、CPE、HarnessEvolve、EvolveNet、AHE、SkillFlow 及持续 harness 演化研究进行机制级比较，并通过多轮任务流实验验证增量收益。
+Chen 等进一步研究自进化 Agent 是否能够成为持续学习系统，在 BIRD、BFCL 和 ScienceWorld 构造 topic、workflow、domain 和 compound 四类漂移任务流，比较 ReasoningBank、GEPA 和 Meta-Harness[68]。研究发现，全局 Prompt/workspace 修改会产生跨任务干扰和知识覆盖；相似度检索虽然能够局部化更新，但仍会在未见任务中检索不相关记忆，并在相似查询对应不同工作流时发生 retrieval collision[68]。因此，第三项研究不能只做语义相似度记忆检索，而应研究任务可观察上下文与局部交互签名联合条件化的 linkage block 记忆和迁移。
+
+据此，本课题拟将 RSI 的研究重点从“能否递归修改 Agent”推进到“演化计算如何在递归修改中识别组件交互、产生有效重组，并在任务变化时复用历史交互结构和保持既有能力”。该切入点必须与 DGM、CPE、HarnessEvolve、EvolveNet、AHE、SkillFlow、ReasoningBank、GEPA、Meta-Harness 及持续 harness 演化研究进行机制级比较，并通过多轮任务流实验验证增量收益。
 
 ### 3.4 组件贡献、交互效应与信用分配研究
 
@@ -149,7 +151,7 @@ GOMEA 通过学习变量依赖结构构造 Family of Subsets（FOS），并利�
 
 第三，Agent 系统级 RSI 已有 DGM、AHE、SkillFlow、CPE、HarnessEvolve、EvolveNet 等多条路线覆盖[58-59,62-66]。因此，通用的执行反馈更新、技能递归演化、Agent 档案维护、经验积累或候选编辑都不能单独作为创新。候选方法必须证明局部 linkage 学习和约束最优混合机制具有不同于这些方法的可验证增量收益。
 
-第四，RSI 的跨轮次能力保持已成为直接研究问题。CPE 已提出不同演化通道的能力保持原则，HarnessEvolve 已使用当前批次与近期批次的性能门，EvolveNet 已研究本地经验聚合和互补修改整合[64-66]；最新持续 harness 研究还实证识别出验证、工作流和预算策略冲突[67]。因此，简单增加 replay、性能回归门或普通 Pareto 档案不足以构成第三个创新。仍需验证的窄问题是：按任务和父代条件化的局部交互结构是否能指导历史 linkage block 的选择性迁移，并与保留能力约束下的种群选择结合，优于现有保持与档案方法。
+第四，RSI 的跨轮次能力保持已成为直接研究问题。CPE 已提出不同演化通道的能力保持原则，HarnessEvolve 已使用当前批次与近期批次的性能门，EvolveNet 已研究本地经验聚合和互补修改整合[64-66]；最新持续 harness 研究还实证识别出验证、工作流和预算策略冲突[67]。因此，简单增加 replay、性能回归门、普通 Pareto 档案或仅按 query embedding 检索记忆不足以构成第三个创新。仍需验证的窄问题是：在不向算法泄露任务家族标签和任务流边界的条件下，能否联合使用可观察任务上下文与局部交互签名，识别历史 linkage block 的适用范围和结构漂移，并指导选择性迁移；该机制能否与保留能力约束下的种群选择结合，优于 CPE、HarnessEvolve、ReasoningBank、GEPA、Meta-Harness、DGM 和 EvolveNet 等方法。
 
 第五，交互结构会随任务家族、当前 Agent 父代和 RSI 轮次变化。统计上可检测的交互不一定适合当前搜索个体的局部重组；旧任务中有效的组件依赖也可能在新任务中发生符号翻转或结构漂移。因此，需要区分稳定共享交互、任务特定交互、结构漂移和证据不足，并在迁移与重新估计之间建立可检验的决策规则。
 
@@ -210,7 +212,7 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 
 ### 4.4 研究内容三：面向跨轮次 RSI 的交互记忆与保留能力约束演化
 
-该部分拟研究 Agent 在多个 RSI 轮次和任务家族连续变化时，如何利用历史演化经验和交互结构，同时避免新任务改进破坏既有能力。近期研究已表明持续 harness 演化会发生明显能力遗忘，且验证规则、工作流和预算策略之间可能产生任务冲突[64-67]。因此，本研究不把第三个内容简化为普通经验库或回归检查，而聚焦于演化计算可发挥作用的交互结构记忆和条件化重组。
+该部分拟研究 Agent 在多个 RSI 轮次和任务流连续变化时，如何利用历史演化经验和交互结构，同时避免新任务改进破坏既有能力。近期研究已表明持续 harness 演化会发生明显能力遗忘，且验证规则、工作流和预算策略之间可能产生任务冲突[64-67]；另有研究发现全局修改会产生跨任务干扰，而单纯相似度记忆检索会发生外来记忆注入和 retrieval collision[68]。因此，本研究不把第三个内容简化为普通经验库、语义检索或回归检查，而聚焦于可观察任务上下文与局部交互签名联合条件化的演化记忆和块级重组。
 
 首先，建立跨轮次 Agent 演化档案。每个候选 Agent 除了保存模块配置和任务表现，还记录不同任务家族下的局部交互后验、FOS、演化谱系、父代/供体关系、编辑证据和评价成本。档案既保留整体 Agent 版本，也保留经验证的局部 linkage block 及其适用任务上下文。
 
@@ -256,7 +258,7 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 
 针对 Agent 在连续任务演化中可能发生能力遗忘、旧任务有效组件组合与新任务修改产生冲突的问题，拟研究交互结构记忆与保留能力约束下的跨轮次演化机制。该方法在 Agent 档案中保存任务家族条件化的局部交互后验、有效 linkage block、演化谱系和历史改进证据；通过交互漂移检测决定复用历史结构或重新估计；通过条件化 donor 选择和块级迁移复用具有可靠跨任务收益的结构；通过历史任务保持约束和多目标档案控制新任务适应与旧任务性能回退。
 
-预期贡献不在于首次提出 Agent 档案、能力保持正则或性能回归门，而在于研究局部交互结构如何跨 RSI 轮次积累、判断漂移并指导选择性 linkage block 迁移，以及该机制如何与保留能力约束下的演化种群选择结合。该方法将与 DGM、CPE、HarnessEvolve、EvolveNet 和最新持续 harness 演化研究进行直接比较[63-67]。只有在相同任务序列和评价预算下同时提高新任务适应、降低历史任务遗忘，并优于上述强基线，才确认该创新点成立。
+预期贡献不在于首次提出 Agent 档案、能力保持正则或性能回归门，而在于研究局部交互结构如何跨 RSI 轮次积累、判断漂移并指导选择性 linkage block 迁移，以及该机制如何与保留能力约束下的演化种群选择结合。该方法将与 DGM、CPE、HarnessEvolve、EvolveNet、ReasoningBank、GEPA、Meta-Harness 和最新持续 harness 演化研究进行直接比较[63-68]。只有在相同任务序列和评价预算下同时提高新任务适应、降低历史任务遗忘，并优于上述强基线，才确认该创新点成立。
 
 ## 六、研究方案及可行性分析
 
@@ -320,7 +322,7 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 
 （5）**新版本递归进入下一轮。** 经过硬约束、质量检查和独立性能验证的 Agent 版本进入档案并成为下一轮父代候选；未通过的修改回滚，不允许将未验证版本自动覆盖当前可用 Agent。
 
-（6）**强基线与消融。** 比较 latest-only、DGM archive、CPE、HarnessEvolve、EvolveNet、AHE/Meta-Harness 持续演化适配，以及无交互记忆、无漂移检测、无 retention constraint 和无迁移预测器的消融。只有当本方法在相同任务流、随机种子和 rollout-equivalent 预算下同时提高新任务适应并降低历史能力遗忘，才保留为第三个创新点。
+（6）**强基线与消融。** 比较 latest-only、DGM archive、CPE、HarnessEvolve、EvolveNet、ReasoningBank、GEPA、Meta-Harness 和 AHE 的持续演化适配，以及无交互记忆、无漂移检测、无 retention constraint 和无迁移预测器的消融。只有当本方法在相同任务流、随机种子和 rollout-equivalent 预算下同时提高新任务适应并降低历史能力遗忘，才保留为第三个创新点。
 
 
 
@@ -363,7 +365,7 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 
 （4）**单轮 Agent 自动设计与 RSI 方法：** EvoAgent、两篇不同的 EvoMAS、AgentSquare、ADAS、AFlow、HFlow、GEPA、AgentEvo、MESH-Harness[49]、ARTEMIS[50]、AHE[58]、SkillFlow[59]、ShapleyFlow[60] 和 FusionFlow[61] 等。
 
-（5）**跨轮次 RSI 与能力保持方法：** DGM archive[63]、CPE[64]、HarnessEvolve[65]、EvolveNet[66]，以及 AHE/Meta-Harness 在连续任务流上的可比适配和 2026 年 11 月持续 harness 演化研究[67]。同时设置 latest-only sequential evolution、no-interaction-memory、no-drift-detection 和 no-retention-constraint 消融。
+（5）**跨轮次 RSI 与能力保持方法：** DGM archive[63]、CPE[64]、HarnessEvolve[65]、EvolveNet[66]、ReasoningBank、GEPA、Meta-Harness[68]，以及 AHE/Meta-Harness 在连续任务流上的可比适配和 2026 年 11 月持续 harness 演化研究[67]。同时设置 latest-only sequential evolution、no-interaction-memory、no-drift-detection 和 no-retention-constraint 消融。
 
 若无法直接复现某个方法，则应说明使用论文公开设置进行的可比适配，不夸大复现程度。
 
@@ -373,7 +375,7 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 
 单轮演化层面主要报告：任务成功率、合法子代比例、有效重组比例、子代配对改进概率、误接受率、harmful recombination rate、best-so-far performance、达到指定成功率所需 rollout 数、不同任务家族上的泛化表现，以及修复次数和修复幅度。
 
-跨轮次 RSI 层面还需报告：新任务适应增益、历史任务绝对/相对遗忘率、平均累计性能、最差任务家族表现、forward transfer、backward retention、负迁移率、交互结构漂移检测准确率、linkage block 迁移收益和多轮运行间方差。不得只报告 best-so-far 或总体平均成功率而掩盖历史任务退化。
+跨轮次 RSI 层面还需报告：新任务适应增益、历史任务绝对/相对遗忘率、平均累计性能、最差任务家族表现、forward transfer、backward retention、跨任务干扰（pre-block interference）、retrieval collision rate、负迁移率、交互结构漂移检测准确率、linkage block 迁移收益和多轮运行间方差。不得只报告 best-so-far 或总体平均成功率而掩盖历史任务退化。
 
 资源指标包括 rollout 数、工具调用次数、token 数、wall-clock 时间和货币成本。不同单位分别报告，不将它们随意相加形成缺乏解释的综合成本。所有方法应在相同任务、模型、初始化和评价预算下比较。
 
@@ -620,6 +622,20 @@ J(++u,z)-J(+-u,z)-J(-+u,z)+J(--u,z).
 [60] Yang Y, Huang B, Qi S, et al. Attribution-Based Analysis and Optimization of Modular Agentic Workflows[C]//Findings of the Association for Computational Linguistics: ACL 2026. 2026: 7247-7264. DOI: 10.18653/v1/2026.findings-acl.359.
 
 [61] Wang X, Yang Z, Hong Z, et al. FusionFlow: Enabling Deep Structural Exploration for Automated Agentic Workflow Generation[C]//Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics. 2026: 27718-27760. DOI: 10.18653/v1/2026.acl-long.1278.
+
+[62] Fang J, Peng Y, Zhang X, et al. A Comprehensive Survey of Self-Evolving AI Agents: A New Paradigm Bridging Foundation Models and Lifelong Agentic Systems[EB/OL]. arXiv:2508.07407, 2025.
+
+[63] Zhang J, Hu S, Lu C, Lange R, Clune J. Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents[EB/OL]. arXiv:2505.22954, 2025.
+
+[64] Yu Y, Yuan X, Jin H, Liu H, Yu Y, Wang H. Do Self-Evolving Agents Forget? Capability Degradation and Preservation in Lifelong LLM Agent Adaptation[EB/OL]. arXiv:2605.09315, 2026.
+
+[65] Jiang W, Chu M, Tian Y, et al. HarnessEvolve: Learning from Reference Trajectories for Reliable Agent Self-Evolution[EB/OL]. arXiv:2609.00829, 2026.
+
+[66] Nie J, Zhang Y, Cai Q, Cheung Y M, Tian X, Han B. EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement[EB/OL]. arXiv:2608.04968, 2026.
+
+[67] Zhao S, Zhang Y, Li J. Can Coding Agents Sustain Continual Evolution without Forgetting?[EB/OL]. arXiv:2611.03219, 2026.
+
+[68] Chen X, Huang Y, Xu Y, Zhao Z, McQuinn E, Liu J, Yao H. Are Self-Evolving Agents Continual Learners?[EB/OL]. arXiv:2610.25858, 2026.
 
 ## 初稿自检与待补事项
 
