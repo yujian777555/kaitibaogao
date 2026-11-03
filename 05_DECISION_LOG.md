@@ -340,3 +340,9 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 5. 本轮无代码实现、无 Phase 0、无真实 LLM 调用、无新的算法 Gate 结果。
 
 新增文件：24_REFERENCE_AUDIT_AND_DOMESTIC_RESEARCH_R1.md、25_OPENING_REPORT_DRAFT_V0_2.md。原始 V0.1 保留不覆盖。
+
+## 决策 D-032：Word V0.2 初稿生成（2026-11-03）
+
+已基于原学校模板 Word 文件生成 `河北工业大学硕士开题报告_初稿V0.2.docx`。Word 正文非空白字符约 22,808，参考文献编号 [1]–[61] 连续；格式沿用 A4、宋体小四、1.5 倍行距。Word 版已纳入国内研究现状和 AHE、SkillFlow、ShapleyFlow、FusionFlow 等新增工作。
+
+限制：本轮完成了章节和引用层面的同步，但尚未进行 Word 与 Markdown 的逐段逐字比对；61 条文献也未全部完成最终 GB/T 7714 审计。该文件尚未作为二进制文件提交到 GitHub，仅作为本轮会话附件供下载。研究算法 Gate 状态不变。
