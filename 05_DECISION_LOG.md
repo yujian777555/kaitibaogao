@@ -367,3 +367,11 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 报告和设计文件：27_OPENING_REPORT_DRAFT_V0_3_RSI.md、26_RSI_THREE_INNOVATION_RESEARCH_DESIGN_R1.md、28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。
 
 算法状态未改变：TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；第三项尚无正式算法规格。
+
+## D-035：IMCE-RSI 第三创新点采用双键交互记忆检索（2026-11-03）
+
+在补充审查 arXiv:2610.25858 后，发现仅靠 query similarity 的历史经验检索会出现 retrieval collision。第三创新点进一步收敛为双键检索：一是由输入、工具 schema、环境元数据和可观察轨迹构成的上下文键；二是由局部交互后验、交互方向、不确定性、共同支持和 FOS 构成的交互键。若语义相似的记忆对应冲突的交互结构，则标记 collision；高不确定性时有限探测或 abstain；只有迁移收益置信下界为正且保留能力约束通过，才允许作为 GOM donor。
+
+在线算法不得读取 task-family labels 或任务流 block boundaries；它们仅用于离线评估。SWE-bench Verified 作为首个真实编码 Agent 主平台，SWT-Bench 和 FeatureBench 作为连续任务流候选。
+
+此为待验证机制，不代表创新已成立。需与 ReasoningBank、GEPA、Meta-Harness、DGM、CPE、HarnessEvolve、EvolveNet 比较。
