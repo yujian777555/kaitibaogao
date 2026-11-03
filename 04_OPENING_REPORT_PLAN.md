@@ -338,3 +338,16 @@ V0.3 主要调整：
 已根据 `27_OPENING_REPORT_DRAFT_V0_3_RSI.md` 生成学校模板风格 Word 工作初稿 `河北工业大学硕士学位论文开题报告_V0.3_RSI_初稿.docx`。保留原模板封面元信息表、进度表、A4 页面和宋体小四/1.5 倍行距；加入 RSI 研究现状、三个创新点、IMCE-RSI 候选方案、SWE-bench Verified 首选任务平台和 68 条参考文献。结构检查通过。
 
 **后续未完成项：** Word/Markdown 逐段逐表一致性审计；公式与表格分页复核；68 条参考文献元数据和 GB/T 7714 逐条核验。详细记录见 `30_WORD_V0_3_BUILD_REPORT.md`。当前算法 Gate 状态不变。
+
+
+## 21. TCAIL Linkage Interface 独立复审 R2（2026-11-03）
+
+本轮审查 22 号 proposal，结论为 B1_PARTIALLY_ACCEPTED，但 TCAIL overall 仍 HOLD / IMPLEMENTATION BLOCKED。修订方向将条件 fitness interaction、global RMS energy 和 parent/task local posterior 分开；尚未明确 q 与连续 FOS weight 的分工，也未冻结 FOS builder。B2–B8 仍需闭合。
+
+新增文件：
+- `31_TCAIL_LINKAGE_INTERFACE_INDEPENDENT_REVIEW_R2.md`：独立复审结果和建议公式；
+- `32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`：V2.2 规格修订任务与 Executor 提示词。
+
+新增直接先行工作 P150–P153：Olieman et al. 2021 FBL、Dushatskiy et al. 2024 CGOMEA、Przewozniczek et al. 2025 cDLED、Tinós et al. 2026 GA-side-effect interaction learning。TCAIL 必须与这些方法比较，尤其是 cDLED 和零额外 fitness evaluation 的在线副产物学习。
+
+下一步仅修订规格：新建 V2.2 draft 和 closure matrix，不覆盖 17 号权威 V2；不编码、不调用 API、不启动 Phase 0、不训练模型。
