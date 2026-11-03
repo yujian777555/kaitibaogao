@@ -389,3 +389,16 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 **边界：** 这是可供导师审阅的工作初稿，不是最终提交版；Word/Markdown 逐段一致性和 68 条书目元数据/GB/T 7714 审计尚未完成。构建细节见 `30_WORD_V0_3_BUILD_REPORT.md`。
 
 算法状态没有改变：TCAIL V2.1 REQUEST CHANGES；22 号 Linkage/FOS 接口提案待独立复审；CI-GOM 未实现；IMCE-RSI 无正式规格；无 Phase 0、真实 API 实验或 GPU 训练。
+
+
+## D-037：TCAIL Linkage Interface 独立复审 R2（2026-11-03）
+
+审查 22 号 B1 proposal 后决定：**B1_PARTIALLY_ACCEPTED；TCAIL overall 仍 HOLD / IMPLEMENTATION BLOCKED。**
+
+接受的方向：把条件 fitness interaction、global RMS interaction energy 和 parent/task local linkage posterior 分开；objective-scale local finite difference 比 reference-background average signed contrast 更适合表达当前 parent 下的非加性依赖；VIG 不等于 FOS。
+
+未关闭的关键点：q 是 edge evidence probability，不是 FOS clustering strength；必须分别定义 `δ_local`、`τ_edge` 和连续 FOS weight，并冻结 FOS builder；B2–B8（M2/M3、高阶、BFDR/acquisition、task-block、nuisance、practical identifiability、检验族、预算）仍需规格闭合。
+
+外部核验的直接先行工作新增 P150–P153：Olieman et al. 2021 FBL、Dushatskiy et al. 2024 CGOMEA、Przewozniczek et al. 2025 cDLED、Tinós et al. 2026 GA-side-effect interaction learning。故 TCAIL 不得将 fitness-based、conditional/local linkage 或从 GA 轨迹副产物学习交互本身作为新颖性主张。
+
+新增文件：`31_TCAIL_LINKAGE_INTERFACE_INDEPENDENT_REVIEW_R2.md`、`32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`。下一步仅允许形成新的 V2.2 规格草稿和 B1–B8 closure matrix；不修改 17 号权威历史规格，不编码、不调用 API、不启动 Phase 0、不训练模型。
