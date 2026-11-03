@@ -357,3 +357,8 @@ TCAIL 当前状态由 SPECIFICATION_REVISION_REQUIRED 更新为 REVISED_SPEC_PEN
 - 固定 full-factorial reference budget denominator。
 
 当前仍未实现和实验。TCAIL 的 EC 主线价值也未建立。
+
+
+## 2026-11-03 新近先行工作补充
+
+ShapleyFlow（Findings ACL 2026）对固定四组件 workflow 的全部 2^4 模型升级组合进行 Shapley 归因，属于组件交互归因强基线；FusionFlow（ACL 2026）通过融合多个独立演化 workflow 扩展结构搜索深度；AHE（arXiv:2604.25850）通过可观测编辑契约演进 coding-agent harness；SkillFlow（arXiv:2605.14089）通过 flow-based 训练信号递归演进 skills。它们不等同于任务条件化局部 fitness linkage + constrained GOM，但显著提高了 TCAIL/CI-GOM 的新颖性门槛。普通交互归因继续 NO-GO，TCAIL 继续 HOLD，CI-GOM 和跨任务迁移继续冻结。详细机制和书目见 02_LITERATURE_REGISTER.md P133–P135、24_REFERENCE_AUDIT_AND_DOMESTIC_RESEARCH_R1.md。
