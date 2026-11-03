@@ -328,3 +328,7 @@ V0.3 主要调整：
 ### 19.1 IMCE-RSI 双键交互记忆补充
 
 根据 arXiv:2610.25858 暴露的 retrieval collision 问题，第三创新点进一步采用上下文键 + 局部交互签名键联合检索历史 linkage blocks。若语义相似的历史记忆对应冲突的交互结构或工作流，则标记 collision；高不确定性时有限探测或 abstain。在线算法不得读取任务家族标签和任务流 block boundaries。主实验平台优先 SWE-bench Verified，连续任务流候选为 SWE-bench Verified、SWT-Bench、FeatureBench。详细设计见 26、28 号文件。
+
+### 19.2 三创新点参数调节与实验 Gate
+
+参数调节顺序、候选范围、A800 轻量迁移预测器条件、同预算比较和各项停止规则见 `29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md`。所有参数只在 train/validation 任务流上调节；硬约束不可作为软惩罚；在线算法不读取任务家族标签和 stream boundaries。
