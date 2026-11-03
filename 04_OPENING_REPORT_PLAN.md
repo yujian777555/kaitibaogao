@@ -324,3 +324,7 @@ V0.3 主要调整：
 7. 研究算法 Gate 状态不变：TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；第三项无正式算法规格。
 
 **状态：** V0.3 是纳入导师 RSI 意见后的研究方案初稿，尚未完成 Word 版生成、逐段一致性审计、68 条书目最终 GB/T 7714 审计或导师二次确认。无正式 Phase 0，无真实 Agent RSI 实验。
+
+### 19.1 IMCE-RSI 双键交互记忆补充
+
+根据 arXiv:2610.25858 暴露的 retrieval collision 问题，第三创新点进一步采用上下文键 + 局部交互签名键联合检索历史 linkage blocks。若语义相似的历史记忆对应冲突的交互结构或工作流，则标记 collision；高不确定性时有限探测或 abstain。在线算法不得读取任务家族标签和任务流 block boundaries。主实验平台优先 SWE-bench Verified，连续任务流候选为 SWE-bench Verified、SWT-Bench、FeatureBench。详细设计见 26、28 号文件。
