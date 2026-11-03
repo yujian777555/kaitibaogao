@@ -324,3 +324,19 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 - 修正组件贡献与交互研究段落中 Optimas/HiveMind/CCI/Prompt 回归的引用编号；
 - 补充 NSGA-II、MOEA/D、MAP-Elites、噪声演化优化综述和 F-Race 的正文引用；
 - 已生成按 A4、宋体小四、1.5 倍行距排版的 Word 初稿，封面个人信息保留待填写项。
+
+
+## 决策 D-031：开题报告 V0.2 文献核验与国内研究补充（2026-11-03）
+
+用户提供的最新交接记录要求优先完成开题报告初版修订。本轮核对发现 V0.1 的正文已实际引用 [1]–[50]，但自检仍写 43 篇；[44]–[50] 还位于自检段落之后；Agent 自动设计基线重复列举 ARTEMIS。已在 V0.2 中修正结构与统计。
+
+本轮补入国内研究代表性来源（自主 Agent 综述、智能体产业实践、教学 Agent、垂直领域 Agent 设计、电力仿真技能库），并补入国内研究团队的 MAESD 和反向方向 BIOME。新增 2026 直接相关工作 AHE、SkillFlow、ShapleyFlow、FusionFlow，分别覆盖 harness 演进、技能递归演化、组件交互归因和 workflow fusion。
+
+关键判断：
+1. [50] 的题名为 Evolving Excellence，正文将其框架称为 ARTEMIS，ARTEMIS[50] 的引用对应正确；V0.1 问题是重复列举，不是编号错配。
+2. ShapleyFlow 提高了组件交互归因创新门槛；FusionFlow 提高了 workflow recombination 创新门槛；AHE/SkillFlow 提高了 Agent harness/skill evolution 创新门槛。
+3. 普通组件交互估计仍 NO-GO；TCAIL 修订候选仍 HOLD；CI-GOM 与第三项迁移继续冻结。
+4. 参考文献扩充至 61 条，正文引用编号完整匹配；但全量 GB/T 7714 最终审计尚未完成，不能声称 61 条全部通过。
+5. 本轮无代码实现、无 Phase 0、无真实 LLM 调用、无新的算法 Gate 结果。
+
+新增文件：24_REFERENCE_AUDIT_AND_DOMESTIC_RESEARCH_R1.md、25_OPENING_REPORT_DRAFT_V0_2.md。原始 V0.1 保留不覆盖。
