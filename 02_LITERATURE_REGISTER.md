@@ -456,3 +456,38 @@
      类型：PUBLISHED / DIRECT BASELINE。为每个解在其局部邻域学习 linkage kernel，解决多结构问题；TCAIL 的 task-conditioned graph 不能忽略 solution-conditioned/local linkage 先例。
 
 **本轮登记边界：** Tinós et al. 2026 当前依据 PubMed 摘要登记，尚未完成全文精读；Andreadis et al. 2024、DLED/cDLED、LMM、ALI 已核对公开论文/摘要/方法片段。相关工作矩阵与 21 号补充审计同步更新前，不得宣称已完成穷尽检索。
+
+
+## N. 第七轮：国内 Agent 研究与 2026 新近工作补充（2026-11-03）
+
+133. **Zhang, M., Shen, T., Luo, H., Liu, W., Xiao, Z., Cambria, E., & Tang, X. (2026). SkillFlow: Flow-Driven Recursive Skill Evolution for Agentic Orchestration. arXiv:2605.14089.** [arXiv](https://arxiv.org/abs/2605.14089)  
+     类型：PREPRINT / DIRECT-ADJACENT。采用 Tempered Trajectory Balance 学习多轮任务编排策略，并利用 flow diagnostics 驱动技能创建和剪枝。不是经典种群 EA，但直接覆盖递归技能演化；注意与同名 SkillFlow benchmark 区分。
+
+134. **Yang, Y. et al. (2026). Attribution-Based Analysis and Optimization of Modular Agentic Workflows. Findings of ACL 2026, pp. 7247–7264.** DOI: 10.18653/v1/2026.findings-acl.359. [ACL Anthology](https://aclanthology.org/2026.findings-acl.359/)  
+     类型：PUBLISHED / DIRECT-BASELINE。ShapleyFlow 将组件模型升级视为合作博弈参与者，在四组件固定工作流中评估全部 2^4 种升级组合并计算 Shapley 值，支持交互感知归因和模型分配。是组件交互归因强基线，但不直接学习 EC linkage/FOS。
+
+135. **Wang, X., Yang, Z., Hong, Z., Zhang, S., & Wei, W. (2026). FusionFlow: Enabling Deep Structural Exploration for Automated Agentic Workflow Generation. ACL 2026, pp. 27718–27760.** DOI: 10.18653/v1/2026.acl-long.1278. [ACL Anthology](https://aclanthology.org/2026.acl-long.1278/)  
+     类型：PUBLISHED / DIRECT-BASELINE。通过融合多个独立演化的 workflows 实现结构跃迁，结合局部优化、任务差异化和动态调度；提高 workflow fusion / recombination 创新门槛。
+
+136. **陈旭（2024）. 基于大语言模型的自主智能体概述. 第二十三届中国计算语言学大会论文集（第2卷：前沿论坛）, pp. 141–150.** [ACL Anthology](https://aclanthology.org/2024.ccl-2.8/)  
+     类型：DOMESTIC / SURVEY。梳理 Agent 设定、记忆、规划、行动模块及多智能体交互；用于国内研究背景。
+
+137. **周涛、李鑫、周俊临、李奕（2024）. 大模型智能体：概念、前沿和产业实践. 电子科技大学学报（社科版）, 26(4), 57–62.** DOI: 10.14071/j.1008-8105(2024)-1006. [Journal](https://www.social.uestc.edu.cn/cn/article/doi/10.14071/j.1008-8105%282024%29-1006)  
+     类型：DOMESTIC / SURVEY。总结大模型智能体概念、前沿与产业实践。
+
+138. **卢宇、余京蕾、陈鹏鹤（2024）. 基于大模型的教学智能体构建与应用研究. 中国电化教育, 2024(7), 99–108.** [CNKI journal page](https://zdjy.cbpt.cnki.net/portal/journal/portal/client/paper/0b0cc76950eec87762cfc7a999ae70ae)  
+     类型：DOMESTIC / APPLICATION. 教学 Agent 框架包括任务设定、规划、能力拓展、记忆反思与交互动态进化；未提出种群式 EA 搜索。
+
+139. **黄悦欣、周雨琪、覃京燕、杨胡尧、王建元（2025）. 大语言模型AI智能体的设计方法研究. 工业工程设计, 7(6), 6–15.** DOI: 10.19798/j.cnki.2096-6946.2025.06.002. [Journal](https://www.designresearchj.com/CN/10.19798/j.cnki.2096-6946.2025.06.002)  
+     类型：DOMESTIC / APPLICATION. 面向智慧城市 Agent，研究多源数据、混合检索、多路径推理和提示优化。
+
+140. **袁雪峰、丁俐夫、陈颖、肖谭南、黄少伟（2026）. 基于大语言模型的电力仿真智能体及其技能库设计方法. 电力系统自动化, 2026(13), 177–188.** DOI: 10.7500/AEPS20250328001. [National Science and Technology Journals Platform](https://coaa.istic.ac.cn/openjournal/periodicalArticle/0120260801619295)  
+     类型：DOMESTIC / APPLICATION. 提出决策—执行—反馈—学习闭环、动态技能提取和技能成功率评估；属于 Agent 技能学习应用，不等同于 EC linkage search。
+
+141. **Song, Z., Yang, H., Deng, Z., et al. (2026). MAESD: A Unified Multi-Agent Evolutionary Framework for Protein Sequence Design. Journal of Chemical Information and Modeling, 66(7), 3464–3479.** DOI: 10.1021/acs.jcim.5c02580.  
+     类型：DOMESTIC-TEAM / ADJACENT. 国内研究团队将多智能体与演化式优化用于蛋白质序列设计；优化对象是蛋白质序列，不是 Agent 结构。
+
+142. **佘维、徐亚涛、薛兴亮、李均剑、孔德锋（2026）. 大语言模型引导的群体智能优化算法进化框架. 计算机应用.** DOI: 10.11772/j.issn.1001-9081.2026060735. [DOI](https://doi.org/10.11772/j.issn.1001-9081.2026060735)  
+     类型：DOMESTIC / REVERSE-DIRECTION. 研究 LLM 赋能群体智能优化算法设计，方向与本课题“EC 优化 Agent”相反，作为相邻交叉研究登记。
+
+**既有 P85 更新说明：** AHE（arXiv:2604.25850）在本轮全文摘要核验，明确使用 component/experience/decision observability 和可证伪编辑契约；保持原编号，不重复登记。
