@@ -377,3 +377,5 @@ AHE 原文报告一次十轮演化 campaign，并明确揭示 harness 组件非�
 强基线：DGM、CPE、HarnessEvolve、EvolveNet、ReasoningBank、GEPA、Meta-Harness、AHE/Meta-Harness continual adaptation。若第三项不能在同预算下提高新任务适应并降低历史能力退化，不独立成篇。
 
 状态不变：TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；第三项无正式算法规格。V0.3 和审计见 27、28 号文件。
+
+**第三项新增机制边界：** IMCE-RSI 不做简单 query embedding 记忆检索，而采用可观察上下文键 + 局部交互签名键双键检索；检测语义相似但交互结构冲突的 retrieval collision，高不确定性时有限探测或 abstain。在线算法不得读取 task-family labels 或 stream block boundaries。必须与 ReasoningBank、GEPA、Meta-Harness 直接比较。
