@@ -381,3 +381,19 @@ Group-ARD、Bayesian information gain、GOM、softmax donor、UCB 和 confidence
 - TCAIL 修订版继续 HOLD；必须证明在任务条件、合法配置和随机 rollout 下的稀疏局部交互识别，优于 CCI、ShapleyFlow、MESH 等同预算基线，并能改善下游 EC 搜索。
 - CI-GOM 继续冻结；若后续启动，必须把 FusionFlow、AHE、SkillFlow 等纳入差异审查，并证明收益来自局部 linkage/FOS + constrained mixing。
 - 第三项跨任务迁移继续冻结；AHE/SkillFlow 等进一步提高其新颖性门槛。
+
+## 2026-11-03：RSI 系统级自进化、持续学习和第三创新点边界
+
+| 工作 | 已覆盖机制/发现 | 对本课题的约束 | 本课题必须比较 |
+|---|---|---|---|
+| Self-Evolving Agent Survey (arXiv:2508.07407) | System Inputs–Agent–Environment–Optimisers 反馈框架 | RSI 定义和范围不能泛化为任意反思 | 作为问题框架 |
+| DGM (arXiv:2505.22954) | 冻结 FM、自修改、全 Agent archive、开放式父代选择 | 普通全 Agent 档案与 open-ended search 不是创新 | DGM archive / latest-only |
+| CPE (arXiv:2605.09315) | workflow/skill/model/memory 的能力保持机制 | 普通 retention regularizer / capability protection 不是创新 | CPE |
+| HarnessEvolve (arXiv:2609.00829) | reference trajectory、error clustering、quality gate、current+recent performance gate | 普通回归门、快照池不是创新 | HarnessEvolve |
+| EvolveNet (arXiv:2608.04968) | local parallel evolution、scope-typed aggregation、shared harness redistribution | 普通跨 workload aggregation 不是创新 | EvolveNet |
+| Continual Harness Evolution (arXiv:2611.03219) | SWE-bench Verified/SWT-Bench/FeatureBench 任务流；verification/workflow/budget conflicts | 遗忘和任务冲突已有直接实证 | AHE/Meta-Harness continual adaptation |
+| Are Self-Evolving Agents Continual Learners? (arXiv:2610.25858) | BIRD/BFCL/ScienceWorld task-free drift streams；ReasoningBank/GEPA/Meta-Harness；plasticity-stability trade-off 和 retrieval collision | 不能把任务标签/边界直接输入算法；不能只做 query embedding retrieval | ReasoningBank、GEPA、Meta-Harness |
+
+**第三创新点收敛：** Interaction-Memory-Aware Continual Evolution (IMCE-RSI)：跨轮次保存任务/父代条件化局部交互后验与 linkage blocks；根据可观察上下文和交互签名做漂移检测；仅迁移有证据支持的 block；在历史能力保持约束下进行多目标种群选择。它必须优于 CPE、HarnessEvolve、DGM、EvolveNet、ReasoningBank、GEPA、Meta-Harness，才能独立成篇。
+
+**任务标签规则：** task-family 标签仅用于离线切分和结果分析，不作为在线输入；任务流 block 边界不向算法揭示。若加入 task-aware oracle，只能作为上界基线。
