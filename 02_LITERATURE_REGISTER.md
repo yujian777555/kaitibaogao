@@ -516,3 +516,19 @@
      类型：CONTINUAL RSI / STRONG BASELINE. 在 BIRD、BFCL、ScienceWorld 上构造 topic、workflow、domain、compound drift streams，比较 ReasoningBank、GEPA、Meta-Harness；发现 global self-modification 的跨任务干扰和相似度记忆检索的 retrieval collision。任务流算法不能直接读取 task-family 标签或 block 边界。
 
 **对 P143–P149 的共同决策：** RSI 必须成为论文主线；基础模型冻结、Agent harness 系统级改进作为可控研究边界。第三创新点不能写成普通 memory/archive/performance gate，而应进一步审查“可观察任务上下文 + 局部交互签名”的 drift-aware linkage block 记忆和条件化迁移。
+
+## O. 第九轮：Fitness-based / conditional linkage 直接先行工作复核（2026-11-03）
+
+150. **Olieman, C., Bouter, A., & Bosman, P. A. N. (2021). Fitness-based Linkage Learning in the Real-Valued Gene-pool Optimal Mixing Evolutionary Algorithm. IEEE Transactions on Evolutionary Computation, 25(2), 358–370. DOI: 10.1109/TEVC.2020.3039698.** [CWI](https://ir.cwi.nl/pub/30301)  
+     类型：DIRECT EC PRIOR ART / STRONG BASELINE。通过 fitness perturbation / differential-grouping 思路学习 RV-GOMEA linkage。TCAIL 不得宣称首次使用 fitness difference 学习 linkage。
+
+151. **Dushatskiy, A., Virgolin, M., Bouter, A., Thierens, D., & Bosman, P. A. N. (2024). Parameterless Gene-Pool Optimal Mixing Evolutionary Algorithms. Evolutionary Computation, 32(4), 371–397. DOI: 10.1162/evco_a_00338.** [PubMed](https://pubmed.ncbi.nlm.nih.gov/37390224/)  
+     类型：DIRECT EC PRIOR ART / STRONG BASELINE。提出并评估 CGOMEA，通过 conditional dependencies 过滤 solution mating；必须纳入 conditional linkage/mating 基线。
+
+152. **Przewozniczek, M. W., Bosman, P. A. N., Bouter, A., Guijt, A., Komarnicki, M. M., & Thierens, D. (2025). Conditional Direct Empirical Linkage Discovery for Solving Multi-Structured Problems[C]//Proceedings of the 18th ACM/SIGEVO Conference on Foundations of Genetic Algorithms (FOGA 2025). 2025: 238–249. DOI: 10.1145/3729878.3746624.** [CWI](https://ir.cwi.nl/pub/35838)  
+     类型：DIRECT EC PRIOR ART / STRONG BASELINE。对当前个体发现条件化局部依赖，并用于多结构问题的 mating restriction。不能只把全局图改为 parent-specific 图就声称新颖。
+
+153. **Tinós, R., Chicano, F., Przewozniczek, M. W., & Whitley, D. (2026). Learning Variable Importance and Interaction in Genetic Algorithms for Pseudo-Boolean Optimization. Evolutionary Computation, online 2026-09-15, 1–36. DOI: 10.1162/EVCO.a.406.** [PubMed](https://pubmed.ncbi.nlm.nih.gov/42743398/)  
+     类型：DIRECT EC PRIOR ART / STRONG BASELINE。利用 GA 搜索过程副产物学习变量重要性与交互，无需额外 fitness evaluations，并将结果用于 reproduction operators。TCAIL 必须比较零额外评价成本的在线交互学习路线。
+
+**对 P150–P153 的共同决策：** Fitness-based linkage、conditional/local linkage 和 GA-side-effect interaction learning 均已有直接先例。TCAIL 的候选差异只能落在 task-context + current-parent 双条件化、随机 task-block 配对、合法配置支持、posterior uncertainty/abstention、主动评价预算及其下游 GOM 搜索收益的联合机制上；新颖性仍待实验验证。
