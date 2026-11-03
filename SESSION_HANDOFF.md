@@ -1011,3 +1011,18 @@ AHE 原文 PDF 确认主结果来自单次十轮 evolution campaign，并明确�
 当前算法 Gate 不变：TCAIL V2.1 REQUEST CHANGES / IMPLEMENTATION BLOCKED；22 号 linkage/FOS 接口提案待独立复审；CI-GOM 未实现；第三项无正式算法规格。不得启动 Phase 0、调用真实 API 或训练模型，除非用户明确授权且相关 Gate 通过。
 
 下一步优先生成 V0.3 Word 版并完成 Word/Markdown 一致性核对与 68 条参考文献 GB/T 7714 审计。每轮更新本仓库文献、机制比较、报告、决策日志和接班提示词，提交并核验远端 main。所有结论区分论文原文事实、研究推断和待验证假设。
+
+
+## 31. IMCE-RSI 第三创新点机制进一步收敛（2026-11-03）
+
+第三项不只是“交互记忆”，进一步收敛为**双键交互记忆检索与 retrieval-collision 处理**：
+- 上下文键：任务输入、可见工具 schema、环境元数据和可观察轨迹；
+- 交互键：局部交互后验、方向、不确定性、共同支持状态和 FOS；
+- 语义相似但交互结构冲突时，标记 retrieval collision；
+- 高不确定性时执行有限合法配对探测，预算不足则 abstain；
+- 只有迁移收益置信下界为正且保留能力约束通过，才将历史 block 作为 donor。
+任务家族标签和 stream block boundaries 只用于离线分析，在线算法不得读取。
+
+新增细节已写入 26_RSI_THREE_INNOVATION_RESEARCH_DESIGN_R1.md、27_OPENING_REPORT_DRAFT_V0_3_RSI.md 和 28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。SWE-bench Verified 已明确为首个真实编码 Agent 主平台；SWT-Bench/FeatureBench 用于连续任务流候选。AppWorld/Terminal-Bench 不作为当前首选主实验。
+
+下一轮优先：完成 V0.3 Word 版、逐段一致性检查和 68 条参考文献 GB/T 7714 审计；不得因开题文稿修改而改变 TCAIL/CI-GOM 的 Gate 状态。
