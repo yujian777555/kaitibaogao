@@ -92,3 +92,8 @@ https://aclanthology.org/2026.acl-long.1278/
 - 新增国内研究现状段落和 AHE、SkillFlow、ShapleyFlow、FusionFlow 机制对照。
 - 没有实现 TCAIL/CI-GOM，没有运行 Phase 0，没有调用真实 LLM，没有通过任何新的算法 Gate。
 - TCAIL V2.1 继续 HOLD / IMPLEMENTATION BLOCKED；CI-GOM 和第三项迁移继续冻结。
+
+
+## 7. Word V0.2 交付状态
+
+已基于原学校 Word 模板生成 `河北工业大学硕士开题报告_初稿V0.2.docx`。Word 正文非空白字符约 22,808，参考文献编号 [1]–[61] 连续，A4/宋体小四/1.5 倍行距沿用原模板。Word 与 Markdown 的主要章节和新增参考文献已对应，但逐段逐字一致性仍待下一轮核对；Word 文件尚未提交为 GitHub 二进制文件。
