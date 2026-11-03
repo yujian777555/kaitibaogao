@@ -301,3 +301,8 @@ V2.1 已正确补充 reference-standardized contrast vector、有限 context anc
 V0.2 将参考文献扩充至 61 条，补入国内 Agent 综述与应用研究，并加入 AHE、SkillFlow、ShapleyFlow、FusionFlow 等 2026 相关工作；修正 V0.1 参考文献统计和排列错误。具体书目核验范围及未完成项见 24 号报告。
 
 **当前状态：** 开题报告 V0.2 已完成结构、国内研究现状和引用一致性修订；全部 61 条参考文献的最终 GB/T 7714 逐条审计尚未完成，导师反馈和封面个人信息待补。TCAIL V2.1 仍 HOLD / IMPLEMENTATION BLOCKED；CI-GOM 与第三项迁移继续冻结；本轮未实现算法、未运行 Phase 0、未调用真实 LLM。
+
+
+### Word V0.2 生成状态（2026-11-03）
+
+已基于原学校模板 Word 初稿生成 `河北工业大学硕士开题报告_初稿V0.2.docx`。Word 正文非空白字符约 22,808，参考文献编号连续为 [1]–[61]。该 Word 文件作为本轮会话交付提供下载，尚未作为二进制文件提交到 GitHub；Word 与 Markdown 的逐段一致性仍需下一轮复核。
