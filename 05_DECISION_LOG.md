@@ -351,3 +351,19 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 ## 决策 D-033：AHE 原文复核与多种子实验要求（2026-11-03）
 
 对 AHE（arXiv:2604.25850）原文 PDF 复核确认：论文报告的是单次十轮演化 campaign；其主要发现包括组件非加性交互、有效组件收益不能简单相加，以及自归因对修复比对回归更可靠。该工作进一步说明本课题不能只做单次运行或最佳运行比较。后续 TCAIL/CI-GOM 实验必须采用多 seed、配对任务实例、同 rollout budget，并同时报告修复/回归和统计不确定性。创新状态不变：普通交互估计 NO-GO，TCAIL HOLD，CI-GOM 冻结。
+
+
+## D-034：RSI 主线与三个研究方向（2026-11-03）
+
+根据导师意见，论文工作题目调整为《面向大语言模型智能体递归自我改进的交互感知演化优化方法研究》。研究范围限定为冻结基础 LLM 的 Agent 系统级 RSI；Agent harness 和模块配置作为演化对象，演化计算负责种群搜索、交互结构利用、约束重组和跨轮次选择。
+
+三个候选创新点：
+1. RSI 轨迹驱动的任务/父代条件化组件交互结构学习；
+2. 交互感知的类别型 Agent 约束最优混合演化；
+3. 跨轮次交互记忆、结构漂移检测、linkage block 条件化迁移和保留能力约束演化。
+
+新增文献 P143–P149 已登记。CPE、HarnessEvolve、EvolveNet、DGM、ReasoningBank、GEPA、Meta-Harness 和两篇持续 RSI 研究提高了第三项的新颖性门槛。第三项不能只做普通记忆库、档案或性能回归门；在线算法不得读取 task-family 标签或任务流 block 边界。
+
+报告和设计文件：27_OPENING_REPORT_DRAFT_V0_3_RSI.md、26_RSI_THREE_INNOVATION_RESEARCH_DESIGN_R1.md、28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。
+
+算法状态未改变：TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；第三项尚无正式算法规格。
