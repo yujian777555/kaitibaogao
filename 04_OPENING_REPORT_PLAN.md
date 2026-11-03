@@ -305,3 +305,22 @@ V0.2 修订：
 ## 18. AHE 复现性限制与本课题实验要求（2026-11-03）
 
 AHE 主实验为单次十轮演化 campaign。其非加性交互和 regression blindness 对本课题有直接启发，但不提供独立 campaign 间方差。TCAIL/CI-GOM 后续必须采用多 seed、配对任务、同 rollout budget 和完整回归评价，不能以单次最佳运行作为提升证据。
+
+
+## 19. 开题报告 V0.3：纳入 RSI 与三个创新点（2026-11-03）
+
+新增文件：
+- `26_RSI_THREE_INNOVATION_RESEARCH_DESIGN_R1.md`：三个创新点机制级研究设计；
+- `27_OPENING_REPORT_DRAFT_V0_3_RSI.md`：纳入 RSI 后的新报告草稿；
+- `28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md`：持续 RSI 文献与第三创新点审计。
+
+V0.3 主要调整：
+1. 题目改为《面向大语言模型智能体递归自我改进的交互感知演化优化方法研究》；
+2. 明确研究范围为冻结基础 LLM 的 Agent 系统级 RSI，harness/模块配置持续演化；
+3. 将三个创新点确定为：RSI 轨迹驱动的任务条件化交互结构学习；交互感知约束 GOM；跨轮次交互记忆与保留能力约束演化；
+4. 增加 RSI 国内外研究现状和 DGM、CPE、HarnessEvolve、EvolveNet、持续 harness 演化、Are Self-Evolving Agents Continual Learners? 等强基线；
+5. 参考文献由 61 条扩展至 68 条，正文引用编号连续并机器检查无漏引；
+6. 第三创新点不再是泛化的跨任务迁移，而收敛为 task-free / observable-context conditioned interaction memory、drift detection 和 linkage-block transfer；
+7. 研究算法 Gate 状态不变：TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；第三项无正式算法规格。
+
+**状态：** V0.3 是纳入导师 RSI 意见后的研究方案初稿，尚未完成 Word 版生成、逐段一致性审计、68 条书目最终 GB/T 7714 审计或导师二次确认。无正式 Phase 0，无真实 Agent RSI 实验。
