@@ -305,3 +305,14 @@ Gate 顺序不可跳过。第三项可先做问题定义和文献审查，但不
 - 本轮仅调整开题研究框架，不调用 DeepSeek API，不启动 GPU 训练。
 
 **当前决策：** 将论文方向调整为 RSI 系统级自我改进；把三个创新点正式作为开题阶段的三个研究目标；仍以证据 Gate 决定每项是否成立，不预先写成既有成果。
+
+
+## 13. 2026-11-03 持续 RSI 相关工作复审补充
+
+新增直接相关工作包括 CPE（arXiv:2605.09315）、HarnessEvolve（arXiv:2609.00829）、EvolveNet（arXiv:2608.04968）、Can Coding Agents Sustain Continual Evolution without Forgetting?（arXiv:2611.03219）和 Are Self-Evolving Agents Continual Learners?（arXiv:2610.25858）。完整机制对照见 28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。
+
+尤其是 Chen et al. (2026) 对 ReasoningBank、GEPA、Meta-Harness 的 task-free drift-stream 比较显示：全局 prompt/workspace 修改会导致跨任务干扰和知识覆盖；相似度检索会出现 foreign-memory injection 与 retrieval collision。因此第三创新点进一步限定为“可观察任务上下文 + 局部交互签名”联合条件化的 linkage-block memory 与漂移感知迁移，不能只依赖 query embedding，也不能读取 task-family 标签或任务流 block boundaries。
+
+第三项强基线补充：DGM、CPE、HarnessEvolve、EvolveNet、ReasoningBank、GEPA、Meta-Harness、AHE/Meta-Harness continual adaptation。若无法官方复现，必须标记 paper-setting adaptation。
+
+**研究状态不变：** 本文件仍为研究设计候选；TCAIL V2.1 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；IMCE-RSI 尚无正式算法规格。
