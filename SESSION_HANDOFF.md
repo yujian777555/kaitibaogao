@@ -954,3 +954,60 @@ B2–B8 仍未解决；TCAIL 仍 HOLD。CI-GOM 与第三项迁移继续冻结。
 ## 29. AHE 原文统计限制纳入实验协议（2026-11-03）
 
 AHE 原文 PDF 确认主结果来自单次十轮 evolution campaign，并明确报告组件非加性交互、单组件收益不能简单相加，以及自归因对 regression 预测较弱。该结果是重要先行证据，但不能证明独立运行间可重复。后续 TCAIL/CI-GOM 实验必须采用多个随机种子、同一任务配对、相同 rollout 预算，报告运行间方差、置信区间和回归指标。详见 24_REFERENCE_AUDIT_AND_DOMESTIC_RESEARCH_R1.md 与 D-033。
+
+
+## 30. 导师要求加入 RSI：V0.3 与三创新点更新（2026-11-03）
+
+### 最新研究主线
+
+论文题目工作版本：**《面向大语言模型智能体递归自我改进的交互感知演化优化方法研究》**。
+
+研究范围：系统级 Agent RSI。基础 LLM 暂时冻结；Agent harness / Prompt / planning / tool routing / memory / verification-recovery / workflow 作为演化对象。LLM API 负责任务执行、轨迹分析和候选修改建议；演化计算负责种群、linkage/FOS、GOM、约束选择和跨轮次档案。
+
+### 三个候选创新点
+
+1. RSI 轨迹驱动的任务/父代条件化 Agent 组件交互结构学习；
+2. 交互感知的类别型 Agent 约束最优混合演化；
+3. 面向跨轮次 RSI 的交互记忆、结构漂移检测、linkage block 条件化迁移和保留能力约束演化。
+
+第三项不允许退化为普通 memory/archive/performance gate。CPE、HarnessEvolve、EvolveNet、DGM、ReasoningBank、GEPA、Meta-Harness 均已覆盖相邻机制；2026-10-19 的 task-free continual study 还发现 similarity retrieval collision，2026-11-02 的 coding harness study 发现 verification/workflow/budget conflicts。算法不得直接读取 task-family labels 或 block boundaries。
+
+### 本轮文件
+
+- `26_RSI_THREE_INNOVATION_RESEARCH_DESIGN_R1.md`
+- `27_OPENING_REPORT_DRAFT_V0_3_RSI.md`（RSI 版开题报告初稿，68 条参考文献）
+- `28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md`
+- 文献登记新增 P143–P149，机制比较、可行性、决策日志和本文件均需同步。
+
+### 研究状态与禁止事项
+
+- TCAIL V2.1：REQUEST CHANGES / IMPLEMENTATION BLOCKED；
+- 22 号 local-linkage/FOS 接口：待独立复审；
+- CI-GOM：未实现、未实验；
+- IMCE-RSI 第三项：研究候选，无正式算法规格；
+- 无本课题 Phase 0、无真实 LLM API 实验、无 GPU 训练；
+- 用户偏好 DeepSeek-Flash；不得改用 DeepSeek-V4-Pro。
+
+### 下一轮优先任务
+
+1. 完成 V0.3 Word 版，沿用学校原始模板；逐段核对 Word 与 Markdown；
+2. 审计 68 条文献元数据与 GB/T 7714 格式，不能声称全部通过；
+3. 复审三个创新点的独立边界，重点审计第三项与 CPE/HarnessEvolve/EvolveNet/DGM/ReasoningBank/GEPA/Meta-Harness 的差异；
+4. 设计 task-free 任务流实验协议，标签和 block boundaries 仅用于离线评估；
+5. 更新本仓库 README、literature register、mechanism comparison、decision log、status 和 handoff。
+
+### 可直接复制的接班提示词
+
+你是我的河北工业大学计算机技术硕士开题研究 Planner。唯一允许维护的 GitHub 仓库是 `yujian777555/kaitibaogao`，严禁混用其他项目。
+
+先核验 main 最新 HEAD，再读取 README.md、04_OPENING_REPORT_PLAN.md、05_DECISION_LOG.md、SESSION_HANDOFF.md、02_LITERATURE_REGISTER.md、03_MECHANISM_COMPARISON.md、11_INNOVATION_FEASIBILITY_AUDIT.md、26_RSI_THREE_INNOVATION_RESEARCH_DESIGN_R1.md、27_OPENING_REPORT_DRAFT_V0_3_RSI.md、28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。
+
+导师明确要求开题加入 RSI。论文工作题目为《面向大语言模型智能体递归自我改进的交互感知演化优化方法研究》。研究范围是冻结基础 LLM 的 Agent 系统级 RSI，演化对象为 Agent harness / Prompt / planning / tool routing / memory / verification / workflow。LLM API 执行任务和提出候选修改，演化计算负责搜索、重组、约束、选择和多轮记忆。
+
+三个候选创新点：I. RSI 轨迹驱动的任务/父代条件化组件交互结构学习；II. 交互感知约束 GOM；III. 跨轮次交互记忆、漂移检测、linkage block 条件化迁移和能力保持约束演化。第三项必须与 DGM、CPE、HarnessEvolve、EvolveNet、ReasoningBank、GEPA、Meta-Harness 和 2026 年两篇 continual RSI 研究进行机制级比较；不得只做普通记忆库、档案或性能回归门。
+
+任务流在线算法不得直接读取 task-family labels 或 block boundaries；只允许使用输入、工具 schema 和可观察轨迹。标签只用于离线分层分析。SWE-bench Verified、SWT-Bench、FeatureBench 是编码 Agent 连续任务流候选；样本量须经本课题 pilot 决定。
+
+当前算法 Gate 不变：TCAIL V2.1 REQUEST CHANGES / IMPLEMENTATION BLOCKED；22 号 linkage/FOS 接口提案待独立复审；CI-GOM 未实现；第三项无正式算法规格。不得启动 Phase 0、调用真实 API 或训练模型，除非用户明确授权且相关 Gate 通过。
+
+下一步优先生成 V0.3 Word 版并完成 Word/Markdown 一致性核对与 68 条参考文献 GB/T 7714 审计。每轮更新本仓库文献、机制比较、报告、决策日志和接班提示词，提交并核验远端 main。所有结论区分论文原文事实、研究推断和待验证假设。
