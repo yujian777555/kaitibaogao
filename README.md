@@ -331,3 +331,5 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 
 
 **IMCE-RSI 第三项进一步收敛（2026-11-03）：** 不做普通 memory/archive/performance gate，改为上下文键 + 局部交互签名键的双键 linkage-block 检索；相似查询对应冲突交互时检测 retrieval collision；高不确定性时有限探测或 abstain。在线算法不得读取 task-family labels 或 task-stream block boundaries。首个真实编码 Agent 平台明确为 SWE-bench Verified；SWT-Bench/FeatureBench 为连续任务流候选。细节见 28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。
+
+参数调节与实验 Gate 已整理到 `29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md`，分别覆盖 TCAIL、CI-GOM、IMCE-RSI 的参数、同预算对照、A800 轻量迁移预测器条件和停止规则。该文件是设计，不代表实验已经启动。
