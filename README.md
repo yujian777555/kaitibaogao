@@ -339,3 +339,14 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 已生成学校模板风格的 Word 工作初稿：`河北工业大学硕士学位论文开题报告_V0.3_RSI_初稿.docx`。本轮结构检查通过：A4、宋体小四、1.5 倍行距、2 个原模板表格保留、68 条参考文献编号连续；正文已纳入 RSI 和三个候选创新点。详细构建记录见 `30_WORD_V0_3_BUILD_REPORT.md`。
 
 **注意：** Word 仍是 V0.3 工作初稿，尚未完成与 Markdown 的逐段/逐表一致性审计，68 条文献元数据和 GB/T 7714 格式也尚未逐条审计。TCAIL V2.1 仍 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；IMCE-RSI 尚无正式规格；无 Phase 0、真实 API 实验或 GPU 训练。
+
+
+## 2026-11-03 TCAIL 独立复审 R2
+
+已完成对 22 号 Linkage 接口 proposal 的独立复审：B1 仅部分接受，TCAIL overall 仍 HOLD / IMPLEMENTATION BLOCKED。主要未闭合点是局部 posterior edge probability 到连续 FOS weight 的映射、FOS builder、M2/M3、高阶、BFDR/acquisition、task-block 统计、practical identifiability 和 rollout-equivalent budget。
+
+新增：
+- `31_TCAIL_LINKAGE_INTERFACE_INDEPENDENT_REVIEW_R2.md`
+- `32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`
+
+新增先行文献 P150–P153：FBL 2021、CGOMEA 2024、cDLED 2025、GA-side-effect interaction learning 2026。下一步只修订新的 V2.2 规格草稿，不编码、不运行 Phase 0、不调用真实 API、不训练模型。
