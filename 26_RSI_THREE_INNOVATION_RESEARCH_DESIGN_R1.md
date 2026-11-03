@@ -340,3 +340,8 @@ S(m\mid z_t,G_t)=
 漂移检测只依赖滚动窗口中的可观察上下文和交互后验，不依赖任务家族标签或 block 边界。标签仅用于离线评价。必须比较 context-only、interaction-only、dual-key、dual-key without collision detection 和 dual-key without active probe。
 
 新增指标：retrieval collision rate、memory precision、negative-transfer rate、abstention rate、probe cost、transfer calibration。若 dual-key 检索不能优于 ReasoningBank-style similarity retrieval 和 DGM whole-agent archive，则不保留该机制。
+
+
+## 15. 参数调节与实验 Gate
+
+三个创新点的参数、候选范围、调参顺序、A800 轻量迁移预测器条件、同预算基线和停止规则详见 `29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md`。该文件只定义实验设计，不代表已执行。
