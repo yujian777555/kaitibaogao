@@ -897,3 +897,42 @@ B2–B8 仍未解决；TCAIL 仍 HOLD。CI-GOM 与第三项迁移继续冻结。
 6. 制作 A4、宋体小四、1.5 倍行距的 Word 版。
 
 除非用户要求，不要自动切回算法开发；先把开题报告修到可以给导师审阅。
+
+
+## 27. 第七轮：开题报告 V0.2 文献与国内研究修订（2026-11-03）
+
+### 本轮交付
+
+- 新增 `24_REFERENCE_AUDIT_AND_DOMESTIC_RESEARCH_R1.md`；
+- 新增 `25_OPENING_REPORT_DRAFT_V0_2.md`，原 V0.1 保留；
+- 参考文献扩展至 61 条，正文引用编号 [1]–[61] 全部匹配；
+- 补充国内 Agent 综述、教学 Agent、垂直领域 Agent、电力仿真技能库、MAESD、BIOME；
+- 补入 AHE、SkillFlow、ShapleyFlow、FusionFlow 并更新强基线；
+- 修正 V0.1 的 43/50 统计矛盾、[44]–[50] 错位、ARTEMIS 重复列举及若干书目元数据。
+
+### 关键结论
+
+- [50] Evolving Excellence 是 ARTEMIS 论文，正文写 ARTEMIS[50] 对应正确；只删除重复列举。
+- ShapleyFlow 已做固定 workflow 组件升级的全组合 Shapley 交互归因；FusionFlow 已做 workflow fusion；AHE/SkillFlow 已做 harness/skill 演进。这些工作显著提高创新门槛。
+- 普通组件交互估计 NO-GO；修订 TCAIL 继续 HOLD；CI-GOM 冻结；第三项迁移冻结。
+- 61 条参考文献已完成编号/正文引用一致性检查，但并非全部完成最终 GB/T 7714 全量审计。
+- TCAIL V2.1 状态不变：REQUEST CHANGES / IMPLEMENTATION BLOCKED；22 号接口修订提案仍待独立复审。
+- 本轮无算法实现、无 Phase 0、无真实 LLM 调用、无新 Gate PASS。
+
+### 下一轮唯一优先任务
+
+先完成剩余参考文献逐条 GB/T 7714 审计和 Word V0.2 与 Markdown V0.2 的一致性核对；若用户提供导师反馈，优先按导师意见修订题目、研究内容和创新点。个人信息、正式开题日期和学院时间表仍待用户补充。不得擅自填写。
+
+### 可直接复制的接班提示词
+
+你是我的河北工业大学计算机技术硕士开题报告助手。唯一允许读取和维护的 GitHub 仓库是 `yujian777555/kaitibaogao`，严禁读取或混用我的其他仓库。
+
+先核验 main 最新 HEAD，再读取 README.md、04_OPENING_REPORT_PLAN.md、05_DECISION_LOG.md、SESSION_HANDOFF.md、24_REFERENCE_AUDIT_AND_DOMESTIC_RESEARCH_R1.md、25_OPENING_REPORT_DRAFT_V0_2.md、02_LITERATURE_REGISTER.md、03_MECHANISM_COMPARISON.md、11_INNOVATION_FEASIBILITY_AUDIT.md，以及 TCAIL V2.1 和 22 号接口提案相关审计文件。
+
+当前工作题目：《面向大语言模型智能体的交互感知演化优化方法研究》。研究主线是 Evolutionary Computation for AI Agents。开题报告 V0.2 已有 61 条参考文献和国内研究现状，但最终 GB/T 7714 全量审计仍未完成；Word V0.2 与 Markdown V0.2 需要核对一致性。先完成书目元数据、文献类型、页码、DOI、正文引用、近五年和外文比例复核，不能声称未核验的条目已通过。
+
+新增直接相关工作必须纳入差异审查：AHE（arXiv:2604.25850）、SkillFlow（arXiv:2605.14089）、ShapleyFlow（Findings ACL 2026）、FusionFlow（ACL 2026）。国内来源包括 CCL 2024 Agent 综述、教学 Agent、电力仿真 Agent 技能库、垂直领域 Agent 设计、MAESD 和 BIOME。注意 BIOME 是 LLM→EC，方向与本课题相反；MAESD 优化的是蛋白质序列，不是 Agent 配置。
+
+研究状态不得改变：普通组件交互估计 NO-GO；TCAIL V2.1 REQUEST CHANGES / IMPLEMENTATION BLOCKED；22 号 linkage 接口修订提案待独立复审；CI-GOM 和第三项迁移冻结。不要实现算法、不要启动 Phase 0、不要调用真实 LLM，除非后续用户明确授权且相关 Gate 通过。
+
+每轮继续只维护本仓库，更新文献登记、机制比较、开题报告、决策日志和接班提示词，提交并核验远端 main。所有结论区分论文原文事实、研究推断和待验证假设。
