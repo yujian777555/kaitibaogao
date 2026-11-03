@@ -491,3 +491,28 @@
      类型：DOMESTIC / REVERSE-DIRECTION. 研究 LLM 赋能群体智能优化算法设计，方向与本课题“EC 优化 Agent”相反，作为相邻交叉研究登记。
 
 **既有 P85 更新说明：** AHE（arXiv:2604.25850）在本轮全文摘要核验，明确使用 component/experience/decision observability 和可证伪编辑契约；保持原编号，不重复登记。
+
+## N. 第八轮：RSI、能力保持与持续演化研究补充（2026-11-03）
+
+143. **Fang, J., Peng, Y., Zhang, X., Wang, Y., Yi, X., Zhang, G., et al. (2025). A Comprehensive Survey of Self-Evolving AI Agents: A New Paradigm Bridging Foundation Models and Lifelong Agentic Systems. arXiv:2508.07407.** [arXiv](https://arxiv.org/abs/2508.07407)  
+     类型：SURVEY / CORE BACKGROUND。提出 System Inputs、Agent System、Environment、Optimisers 的统一自进化 Agent 反馈框架，覆盖 Agent 组件和系统演化方式。
+
+144. **Zhang, J., Hu, S., Lu, C., Lange, R., & Clune, J. (2025). Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents. arXiv:2505.22954.** [arXiv](https://arxiv.org/abs/2505.22954)  
+     类型：DIRECT RSI / STRONG BASELINE。冻结基础模型，通过 Agent 自修改、基准验证和全 Agent 档案开展开放式演化；父代选择结合性能和后代数量。普通 Agent archive / open-ended exploration 已有先例。
+
+145. **Yu, Y., Yuan, X., Jin, H., Liu, H., Yu, Y., & Wang, H. (2026). Do Self-Evolving Agents Forget? Capability Degradation and Preservation in Lifelong LLM Agent Adaptation. arXiv:2605.09315.** [arXiv](https://arxiv.org/abs/2605.09315)  
+     类型：DIRECT RSI / STRONG BASELINE。识别 workflow、skill、model、memory 演化中的 capability erosion，提出 Capability-Preserving Evolution (CPE)。普通 retention regularizer / memory protection 不能作为创新。
+
+146. **Jiang, W., Chu, M., Tian, Y., et al. (2026). HarnessEvolve: Learning from Reference Trajectories for Reliable Agent Self-Evolution. arXiv:2609.00829.** [arXiv](https://arxiv.org/abs/2609.00829)  
+     类型：DIRECT RSI / STRONG BASELINE。参考轨迹诊断、错误聚类、质量门和“当前 batch 提升且近期 batch 不退化”的性能门。普通 performance gate 不能作为创新。
+
+147. **Nie, J., Zhang, Y., Cai, Q., Cheung, Y.-M., Tian, X., & Han, B. (2026). EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement. arXiv:2608.04968.** [arXiv](https://arxiv.org/abs/2608.04968)  
+     类型：DIRECT RSI / STRONG ADJACENT BASELINE。多客户端本地 workload 并行演化，使用 scope-typed、evidence-guided program aggregation 合并互补修改。普通跨 workload aggregation 不能作为创新。
+
+148. **Zhao, S., Zhang, Y., & Li, J. (2026). Can Coding Agents Sustain Continual Evolution without Forgetting? arXiv:2611.03219.** [arXiv](https://arxiv.org/abs/2611.03219)  
+     类型：CONTINUAL RSI / EMPIRICAL PROBLEM DEFINITION. 2026-11-02 公开；在 SWE-bench Verified、SWT-Bench、FeatureBench 上研究连续 harness 演化，分析 520 余条轨迹，归纳 verification、workflow、budget-strategy conflicts。为编码 Agent task stream 提供直接基线和任务设置。
+
+149. **Chen, X., Huang, Y., Xu, Y., Zhao, Z., McQuinn, E., Liu, J., & Yao, H. (2026). Are Self-Evolving Agents Continual Learners? arXiv:2610.25858.** [arXiv](https://arxiv.org/abs/2610.25858)  
+     类型：CONTINUAL RSI / STRONG BASELINE. 在 BIRD、BFCL、ScienceWorld 上构造 topic、workflow、domain、compound drift streams，比较 ReasoningBank、GEPA、Meta-Harness；发现 global self-modification 的跨任务干扰和相似度记忆检索的 retrieval collision。任务流算法不能直接读取 task-family 标签或 block 边界。
+
+**对 P143–P149 的共同决策：** RSI 必须成为论文主线；基础模型冻结、Agent harness 系统级改进作为可控研究边界。第三创新点不能写成普通 memory/archive/performance gate，而应进一步审查“可观察任务上下文 + 局部交互签名”的 drift-aware linkage block 记忆和条件化迁移。
