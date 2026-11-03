@@ -375,3 +375,7 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 在线算法不得读取 task-family labels 或任务流 block boundaries；它们仅用于离线评估。SWE-bench Verified 作为首个真实编码 Agent 主平台，SWT-Bench 和 FeatureBench 作为连续任务流候选。
 
 此为待验证机制，不代表创新已成立。需与 ReasoningBank、GEPA、Meta-Harness、DGM、CPE、HarnessEvolve、EvolveNet 比较。
+
+## D-036：三个 RSI 创新点参数调节与实验 Gate（2026-11-03）
+
+新增 29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md，分别定义 TCAIL、CI-GOM、IMCE-RSI 的参数组、调节顺序、同预算基线、A800 轻量迁移预测器训练条件和停止规则。原则为先离线调参、后在线控制；硬约束 fail-closed；task-family labels 和 stream boundaries 不作为在线输入；训练/验证/测试隔离。该文件仅为实验设计，不授权 Phase 0、API 调用或 GPU 训练。
