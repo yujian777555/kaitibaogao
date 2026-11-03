@@ -333,3 +333,9 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 **IMCE-RSI 第三项进一步收敛（2026-11-03）：** 不做普通 memory/archive/performance gate，改为上下文键 + 局部交互签名键的双键 linkage-block 检索；相似查询对应冲突交互时检测 retrieval collision；高不确定性时有限探测或 abstain。在线算法不得读取 task-family labels 或 task-stream block boundaries。首个真实编码 Agent 平台明确为 SWE-bench Verified；SWT-Bench/FeatureBench 为连续任务流候选。细节见 28_RSI_CONTINUAL_RESEARCH_AUDIT_R1.md。
 
 参数调节与实验 Gate 已整理到 `29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md`，分别覆盖 TCAIL、CI-GOM、IMCE-RSI 的参数、同预算对照、A800 轻量迁移预测器条件和停止规则。该文件是设计，不代表实验已经启动。
+
+## 2026-11-03 Word V0.3（RSI）初稿已生成
+
+已生成学校模板风格的 Word 工作初稿：`河北工业大学硕士学位论文开题报告_V0.3_RSI_初稿.docx`。本轮结构检查通过：A4、宋体小四、1.5 倍行距、2 个原模板表格保留、68 条参考文献编号连续；正文已纳入 RSI 和三个候选创新点。详细构建记录见 `30_WORD_V0_3_BUILD_REPORT.md`。
+
+**注意：** Word 仍是 V0.3 工作初稿，尚未完成与 Markdown 的逐段/逐表一致性审计，68 条文献元数据和 GB/T 7714 格式也尚未逐条审计。TCAIL V2.1 仍 REQUEST CHANGES；22 号接口提案待独立复审；CI-GOM 未实现；IMCE-RSI 尚无正式规格；无 Phase 0、真实 API 实验或 GPU 训练。
