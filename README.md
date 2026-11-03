@@ -233,7 +233,7 @@
 
 后续每轮研究均须按 [REPOSITORY_MAINTENANCE_POLICY.md](REPOSITORY_MAINTENANCE_POLICY.md) 执行：开始前读取远端状态和接班记录；结束时更新研究记录、决策日志、项目状态与完整接班提示词；推送后核验远端 HEAD。不得只在聊天中汇报，也不得与其他独立研究仓库混用。
 
-当前唯一进行中的任务：TCAIL V2.1 独立规格复审。CI-GOM 和第三项迁移冻结；复审通过前不实现代码、不跑正式 Phase 0、不调用真实 LLM。
+当前算法状态：TCAIL V2.1 仍待独立复审，CI-GOM 和第三项迁移冻结；算法 Gate 通过前不实现代码、不跑正式 Phase 0、不调用真实 LLM。当前交付优先级转为开题报告 V0.2 的书目审计、Word 核对和导师意见修订。
 
 ## 2026-11-02 第三轮：TCAIL V2.1 独立规格复审
 
@@ -290,3 +290,14 @@ V2.1 已正确补充 reference-standardized contrast vector、有限 context anc
 **重要边界：** TCAIL 规格审查仍有待解决项，B1 linkage 接口提案尚待独立复审；CI-GOM 尚未实现和验证；第三项暂缓。初稿统一使用“拟研究/预期创新”，没有把设计写成实验成果，也没有混入其他项目成果。
 
 学校模板要求正文不少于 6000 字、参考文献不少于 30 篇、外文及近五年文献比例均不少于 30%。当前 Markdown 初稿正文约 22,100 个非空白字符、列出 44 篇外文文献；最终仍需按学校统计口径和 GB/T 7714 规范复核。
+
+
+## 2026-11-03 开题报告 V0.2 与国内研究补充
+
+本轮在保留 V0.1 的基础上新增：
+- `24_REFERENCE_AUDIT_AND_DOMESTIC_RESEARCH_R1.md`
+- `25_OPENING_REPORT_DRAFT_V0_2.md`
+
+V0.2 将参考文献扩充至 61 条，补入国内 Agent 综述与应用研究，并加入 AHE、SkillFlow、ShapleyFlow、FusionFlow 等 2026 相关工作；修正 V0.1 参考文献统计和排列错误。具体书目核验范围及未完成项见 24 号报告。
+
+**当前状态：** 开题报告 V0.2 已完成结构、国内研究现状和引用一致性修订；全部 61 条参考文献的最终 GB/T 7714 逐条审计尚未完成，导师反馈和封面个人信息待补。TCAIL V2.1 仍 HOLD / IMPLEMENTATION BLOCKED；CI-GOM 与第三项迁移继续冻结；本轮未实现算法、未运行 Phase 0、未调用真实 LLM。
