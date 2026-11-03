@@ -379,3 +379,13 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 ## D-036：三个 RSI 创新点参数调节与实验 Gate（2026-11-03）
 
 新增 29_PARAMETER_TUNING_AND_EXPERIMENT_GATES_R1.md，分别定义 TCAIL、CI-GOM、IMCE-RSI 的参数组、调节顺序、同预算基线、A800 轻量迁移预测器训练条件和停止规则。原则为先离线调参、后在线控制；硬约束 fail-closed；task-family labels 和 stream boundaries 不作为在线输入；训练/验证/测试隔离。该文件仅为实验设计，不授权 Phase 0、API 调用或 GPU 训练。
+
+## D-035：生成 RSI 开题报告 Word V0.3 工作初稿（2026-11-03）
+
+已使用河北工业大学原始 Word 模板的 V0.2 工作副本生成 `河北工业大学硕士学位论文开题报告_V0.3_RSI_初稿.docx`。主要完成封面/页眉、RSI 研究现状、三项研究内容与创新点、IMCE-RSI 候选算法、SWE-bench Verified 任务平台、跨轮次评价、进度表和 68 条参考文献。
+
+结构验收：DOCX 可重新打开；A4；Normal 样式宋体 12 pt、1.5 倍行距；2 个模板表格保留；68 条参考文献编号连续；关键 RSI 标题和 task-free 限制存在。
+
+**边界：** 这是可供导师审阅的工作初稿，不是最终提交版；Word/Markdown 逐段一致性和 68 条书目元数据/GB/T 7714 审计尚未完成。构建细节见 `30_WORD_V0_3_BUILD_REPORT.md`。
+
+算法状态没有改变：TCAIL V2.1 REQUEST CHANGES；22 号 Linkage/FOS 接口提案待独立复审；CI-GOM 未实现；IMCE-RSI 无正式规格；无 Phase 0、真实 API 实验或 GPU 训练。
