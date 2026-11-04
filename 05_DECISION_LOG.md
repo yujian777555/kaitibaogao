@@ -402,3 +402,22 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 外部核验的直接先行工作新增 P150–P153：Olieman et al. 2021 FBL、Dushatskiy et al. 2024 CGOMEA、Przewozniczek et al. 2025 cDLED、Tinós et al. 2026 GA-side-effect interaction learning。故 TCAIL 不得将 fitness-based、conditional/local linkage 或从 GA 轨迹副产物学习交互本身作为新颖性主张。
 
 新增文件：`31_TCAIL_LINKAGE_INTERFACE_INDEPENDENT_REVIEW_R2.md`、`32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`。下一步仅允许形成新的 V2.2 规格草稿和 B1–B8 closure matrix；不修改 17 号权威历史规格，不编码、不调用 API、不启动 Phase 0、不训练模型。
+
+
+## 决策 D-035：TCAIL V2.2 增补 B9–B12 并收紧新颖性边界（2026-11-04）
+
+本轮在 31 号独立复审和 32 号规格修订任务基础上，完成 FBL、cDLED、CGOMEA、Tinós et al. 2026 的原文级机制核验，新增 35_TCAIL_V2_2_PLANNER_ADDENDUM_R1.md。
+
+### 新发现的规格阻塞
+1. **B9：非线性 objective-scale estimand 可识别性。** 若主目标是 inverse-logit 后的成功概率交互，线性 predictor contrast 的 row-space 判据不能自动证明 probability-scale 四格差分可识别。需要四个 cell predictor 分别可识别的保守充分条件，或直接 estimand-invariance 检验。
+2. **B10：acquisition 的设计单位。** 应是带 parent/context/pair/background/task-block 的四格观测向量；明确 CRN 可行条件、任务随机效应、随机执行顺序、未来 task-block 分布和缓存复用后的唯一 episode-equivalent 成本。
+3. **B11：FOS 缺失边处理。** unsupported / pending / model-order-sensitive 不能填 0 伪装成真实无边；必须定义 missingness-aware builder、singleton/forest/fallback 和确定性 tie-break。
+4. **B12：posterior 先验敏感性。** q 与 w 必须进行 null prior-predictive calibration、prior-scale sensitivity 和低样本行为验证，避免宽先验导致伪高置信 edge。
+
+### 先行工作带来的新颖性收紧
+- FBL 已有 scaled fitness dependency、Linkage Tree / marginal-product FOS 和 incremental pair probing；
+- cDLED 已有 individual-local DLED、conditional eVIG、子结构识别和 donor mating restriction；
+- CGOMEA 已有 conditional linkage 与 solution mating filter；
+- Tinós et al. 2026 已有零额外 fitness-evaluation 的 GA-side-effect interaction learning。
+
+**决定：** 35 号作为 32 号任务的强制补充。V2.2 必须同时处理 B1–B12；不能把 FBL/cDLED 的贝叶斯化或加上通用 OED 直接视为创新。TCAIL 仍 HOLD / IMPLEMENTATION BLOCKED；不编码、不启动 Phase 0、不调用真实 LLM、不训练 A800 模型。CI-GOM、IMCE-RSI 继续冻结。若最终方法不能在同预算下优于 FBL incremental、cDLED-P3M、CGOMEA、LMM/ALI 与 Tinós/GAwLL2，并改善下游 GOM 搜索，则应 NO-GO 或进一步收窄。
