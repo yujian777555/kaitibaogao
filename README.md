@@ -407,3 +407,16 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 33、34、36 号历史文件未覆盖。此前单独的 D-039 决策已合并回主 `05_DECISION_LOG.md`，主 `SESSION_HANDOFF.md` 已更新。当前状态为 `PENDING R2 INDEPENDENT REVIEW / HOLD / IMPLEMENTATION BLOCKED`；规格完整不等于算法验证、创新或 EC 收益成立。
 
 本轮未实现算法，未启动 Phase 0，未调用 DeepSeek/真实 LLM API，未训练模型，未启动 CI-GOM 或 IMCE-RSI。下一步只能由新的独立审查会话进行 R2 复审。
+
+
+## 2026-11-04：TCAIL V2.2 Revision R1 独立复审 R2 — REQUEST CHANGES
+
+新增 [39_TCAIL_V2_2_INDEPENDENT_REVIEW_R2.md](39_TCAIL_V2_2_INDEPENDENT_REVIEW_R2.md)。审查基线为 4f15ac303936817cc2bf122e649fff2331c9b1dc，复核 37/38 号及 33/34/36 号历史约束。
+
+R1 的鲁棒 posterior loss、worst-expected fantasy 聚合、边际 Fisher 完整秩门和 acquisition cycle 冻结有实质进步；但 R2 不通过，仍有四类关键缺口：
+- acquisition A_L/A_U 未计入当前基准风险 R(D) 自身的 posterior MC 误差；模型/候选 alpha allocation 和 nested MCSE 不完整；
+- base-key ledger 的 REUSABLE 状态遇到 cache miss 时可能计划 continuation、执行时却 BREAK 并返回 OK；crash-consistent reservation 状态未定义；
+- FOS 将 Q_g 中已通过基础门的 NOT_SELECTED 当作 unknown，rho_support 因而不是数据支持覆盖率；
+- Fisher 连续参数向量、paired CRN 映射和 generation/cycle 索引仍需澄清。
+
+**决定：REQUEST CHANGES / HOLD / IMPLEMENTATION BLOCKED。** B3、B8、B10、B11 需修订；其余 B 项保持 PARTIAL。下一步只做 corrective specification revision R2，不编码、不启动 Phase 0、不调用真实 LLM API、不训练模型；CI-GOM 与 IMCE-RSI 继续冻结。
