@@ -57,7 +57,7 @@ def simulate_seed(seed,n_pairs=200,b_full=128,b_low=8):
             if pair_id in unsupported:
                 rows.append({
                     "seed":seed,"pair":pair_id,"context":context,"class":cls,
-                    "true_delta":np.nan,"supported":0,"n_blocks":0,"block_contrasts":"",
+                    "true_delta":np.nan,"supported":0,"n_blocks":0,"block_contrasts":"","block_cell_outcomes":"",
                     "mean_d":np.nan,"se":np.nan,"mean_i_j0":np.nan,"mean_i_j1":np.nan,
                     "q_student":np.nan,"w_student":np.nan,"raw":np.nan,"zscore":np.nan,
                     "fbl_scaled":np.nan,"pooled_abs":np.nan,"label":np.nan,
@@ -92,6 +92,7 @@ def simulate_seed(seed,n_pairs=200,b_full=128,b_low=8):
                 "seed":seed,"pair":pair_id,"context":context,"class":cls,
                 "true_delta":target,"supported":1,"n_blocks":n_blocks,
                 "block_contrasts":";".join(map(str,d.tolist())),
+                "block_cell_outcomes":";".join(",".join(map(str,row.tolist())) for row in ymat),
                 "mean_d":mean_d,"se":se,"mean_i_j0":mean0,"mean_i_j1":mean1,
                 "q_student":q_s,"w_student":w_s,"raw":abs(mean_d),
                 "zscore":zscore,"fbl_scaled":float(fbl_scaled),
