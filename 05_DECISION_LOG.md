@@ -526,3 +526,34 @@ Held-out AUPRC：Normal empirical-Bayes posterior q=0.802，w=0.797，local stan
 **重要限制：** FBL 是针对 Bernoulli task-block 的 paper-setting adaptation，不是原论文复现；EB q/w 是 Normal-normal paired-contrast proxy，不是完整 TCAIL M2/M3 GLMM。未比较 cDLED-P3M、CGOMEA、GAwLL2；未运行 FOS/GOM 下游；8-block low-support AUPRC 仍仅 0.353。不得写成 TCAIL 已证明或已优于原始 FBL。
 
 下一步只做同数据/同预算下的 paper-faithful FBL/scaled-FBLT、cDLED-P3M 和 GAwLL2 比较，并实现/校准主规格所需的 task-block Bernoulli 模型。若优势在强基线或低支持场景消失，则停止/收窄；通过估计器 gate 后再测 active acquisition。
+
+
+## 决策 D-042：停止无关规格扩张，优先证明 TCAIL 对 EC 搜索的独立收益（2026-11-04）
+
+用户明确要求尽快证明，不再做无关工作。新增 42_TCAIL_ESTIMATOR_TO_GOM_CONFIRMATORY_GATE_R1.md，作为当前研究执行优先级，优先于继续扩写完整 acquisition/retry 规格。
+
+### 决策
+TCAIL 的核心命题不是“统计模型更复杂”，而是：在同样 task-block 四格观测和同样总 episode-equivalent 预算下，TCAIL 局部交互后验能否优于强 linkage 基线，并通过 FOS 改善 GOM 搜索。
+
+### 证据现状
+- Oracle FOS pilot：在一个 40-bit concatenated deceptive-trap 简化 GOM 场景中 13/20 成功；仅证明该场景存在 linkage 上界价值。
+- EB q/w pilot：AUPRC 0.802/0.797，但为 Normal-Normal empirical-Bayes proxy，不是完整 M2/M3 Bernoulli GLMM。
+- scaled-FBL binary task-block 对照 AUPRC 0.414，是适配版本，不是原论文复现。
+- 低支持 8-block 子集 AUPRC 0.353，必须保留 abstention，不得宣称低支持鲁棒。
+
+### 唯一执行链
+1. clean rerun 并审计现有两个 pilot 的代码、原始数据、预算和摘要；
+2. 实现并校准 Bernoulli task-block M2/M3 posterior q/w；
+3. 在同一四格数据/预算上比较 FBL/scaled-FBLT、cDLED-P3M、CGOMEA linkage、local/global、random 和 oracle；
+4. estimator gate 通过后，才用独立 discovery/evaluation blocks 进行 FOS→GOM 下游验证；
+5. 下游总预算必须计入 discovery 与 search，按 held-out seed 配对。
+
+### GO/NO-GO
+- Estimator：held-out 五情景 macro-AUPRC 对 validation-selected strongest non-oracle baseline 的 paired seed 95% CI 下界必须大于 0；null false-link、posterior calibration、sign-flip、FOS recovery 和低支持 abstention 同时报出。
+- Downstream EC：相同总 episode-equivalent budget 下，TCAIL-FOS 对 strongest non-oracle linkage baseline 的 held-out GOM objective/success paired 95% CI 下界必须大于 0。
+- 估计器提升但 GOM 不提升：不允许声称 EC 搜索创新成立。
+- Oracle 不提升：停止该任务族的 linkage-to-GOM 主张。
+- TCAIL 不胜强基线：停止其 estimator 新颖性主张。
+
+### 边界
+这只授权固定 full-factorial 的合成研究原型与隔离 GOM research prototype；不授权完整 active acquisition、生产 retry、真实 Agent API、A800 训练、CI-GOM 或 IMCE-RSI。所有实验结果必须如实标为 NOT RUN / PILOT / CONFIRMATORY。
