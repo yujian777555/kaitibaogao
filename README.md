@@ -371,3 +371,17 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 因此不能把上述机制单独作为 TCAIL 创新。候选贡献只能在随机昂贵 Agent rollout、task-block 相关、合法配置支持、后验校准/abstention、主动预算决策与下游 GOM 搜索收益的联合场景中接受可证伪检验。详细内容见 [35_TCAIL_V2_2_PLANNER_ADDENDUM_R1.md](35_TCAIL_V2_2_PLANNER_ADDENDUM_R1.md)。
 
 **执行边界不变：** 只修订规格；不编码、不调用 DeepSeek API、不运行 Phase 0、不训练 A800 模型；CI-GOM 与跨轮次迁移继续冻结。V2.2 草稿和 closure matrix 完成后必须交独立复审。
+
+
+## 2026-11-04：TCAIL V2.2 完整规格草稿已交付
+
+本轮开始时核验远端 `main` HEAD 为 `85414664a902724fc5610e606f05667ddc74b635`。已按 32 号任务和 35 号强制补充新增：
+
+- [33_TCAIL_FORMAL_SPECIFICATION_V2_2_DRAFT.md](33_TCAIL_FORMAL_SPECIFICATION_V2_2_DRAFT.md)：完整 V2.2 数学、统计、观测、BFDR/acquisition、FOS、预算、强基线与伪代码规格；
+- [34_TCAIL_V2_2_CHANGELOG_AND_CLOSURE_MATRIX.md](34_TCAIL_V2_2_CHANGELOG_AND_CLOSURE_MATRIX.md)：B1–B12 逐项变更、章节/公式/伪代码映射、OPEN 项和强基线公平性矩阵。
+
+草稿已将 local objective-scale estimand、q/w 分工、M2/M3 与高阶门禁、四格 task-block GLMM、非线性可识别性、per-graph BFDR 一致风险、missingness-aware FOS、唯一新增 episode-equivalent、prior sensitivity/null calibration 纳入同一控制流。SLL-MI、FBL、FBL incremental、DLED、cDLED-P3M、CGOMEA、LMM、ALI/AIM、Tinós 2026 GAwLL2、random/oracle linkage 均已登记，并区分原论文复现与 paper-setting adaptation。
+
+**当前状态：** V2.2 为 `DRAFT / PENDING INDEPENDENT REVIEW`；B1–B12 只能标为规格层 `PARTIAL`，所有校准、复现、实现和实验事项仍为 `OPEN`。编写过程中的符合性/质量复核不是正式独立数学 PASS。TCAIL 继续 `HOLD / IMPLEMENTATION BLOCKED`，CI-GOM 与 IMCE-RSI 继续冻结；规格完成不等于创新或 EC 收益成立。
+
+本轮未编写算法实现、未启动 Phase 0、未调用 DeepSeek/真实 LLM API、未训练模型。下一步唯一任务是由新的独立审查会话复核 33/34 号并给出明确处置。

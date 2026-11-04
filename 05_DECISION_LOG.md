@@ -421,3 +421,24 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 - Tinós et al. 2026 已有零额外 fitness-evaluation 的 GA-side-effect interaction learning。
 
 **决定：** 35 号作为 32 号任务的强制补充。V2.2 必须同时处理 B1–B12；不能把 FBL/cDLED 的贝叶斯化或加上通用 OED 直接视为创新。TCAIL 仍 HOLD / IMPLEMENTATION BLOCKED；不编码、不启动 Phase 0、不调用真实 LLM、不训练 A800 模型。CI-GOM、IMCE-RSI 继续冻结。若最终方法不能在同预算下优于 FBL incremental、cDLED-P3M、CGOMEA、LMM/ALI 与 Tinós/GAwLL2，并改善下游 GOM 搜索，则应 NO-GO 或进一步收窄。
+
+
+## 决策 D-038：TCAIL V2.2 完整草稿形成，但继续保持 HOLD（2026-11-04）
+
+新增 `33_TCAIL_FORMAL_SPECIFICATION_V2_2_DRAFT.md` 与 `34_TCAIL_V2_2_CHANGELOG_AND_CLOSURE_MATRIX.md`，完成 32 号任务和 35 号补充要求的规格层交付，不覆盖 17、20、22、31、32、35 号历史文件。
+
+### 本版固定的重要规格决策
+
+1. **局部 estimand 与权重分离。** 主要对象为 `g=(r,parent_id,a)` 下 objective-scale 四格差分；`q` 用于证据、资格和边决策，不直接作为连续 FOS 权重；主候选权重为 posterior expected excess magnitude，global RMS 仅作描述/筛查/预算优先级。
+2. **双模型与高阶门禁。** M2/M3 保留低阶父项但允许父系数为零；只有双 base pass 后才进行模型阶数比较。主候选采用保守 local-null/q/w 合并，四阶以上必须压力测试；该校准和高阶覆盖仍 OPEN。
+3. **最终决策与 acquisition 对齐。** 当前和 fantasy 数据均使用同一个带 `τ_edge` 资格的 per-graph BFDR-constrained set decision 与实际所选集合风险；per-edge 方法仅保留为 surrogate 对照。
+4. **四格观测与成本。** 主分析为 task/block 随机效应 Bernoulli GLMM；候选是固定 task-block 上四格结果向量，明确三类条件预测路径。缓存复用与 attempt/retry 分开，预算只计唯一新增 episode-equivalent，另报完整资源成本。
+5. **非线性与实际可识别性。** 线性 row-space 不直接证明 probability-scale estimand；采用四 cell 行充分条件和 observationally-equivalent 参数下的 invariance，并分离共同支持、Fisher effective information、conditioning 和区间门。
+6. **缺失感知 FOS。** unsupported、unresolved 与 supported practical zero 不混码、不填零；主 builder 使用 supported cross edges 的 weighted average-linkage，保留 partial forest 和 singleton safe fallback。
+7. **校准与强基线。** prior-predictive、null/posterior calibration 和 prior-scale sensitivity 是强制 Gate；全部指定强基线必须区分 original reproduction 与 paper-setting adaptation，并尽可能共用同一 FOS builder。
+
+### 状态决定
+
+B1–B12 在本轮均只能记为 `PARTIAL（规格已处理）`，其独立审查、阈值、校准、复现、实现或实验部分仍为 `OPEN`。编写过程中的规格符合性和文档质量复核不构成正式独立数学 PASS。
+
+**决定：下一步只进行新的独立 V2.2 规格复审。TCAIL 继续 HOLD / IMPLEMENTATION BLOCKED；CI-GOM、IMCE-RSI、Phase 0、真实 LLM/DeepSeek API 和模型训练继续冻结。规格草稿完成不等于算法实现、Gate 通过、创新成立或 EC 搜索收益成立。**

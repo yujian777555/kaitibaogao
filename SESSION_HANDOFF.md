@@ -1120,3 +1120,43 @@ P150–P153：Olieman et al. 2021 FBL；Dushatskiy et al. 2024 CGOMEA；Przewozn
 - 不把规格草稿写成已验证算法或已成立创新。
 
 完成 33/34 后必须交独立审查；审查者不得是刚刚撰写该规格的同一 Planner 会话。若 V2.2 只是 FBL/cDLED 的 Bayesian/OED 包装，或没有同预算下游 GOM 增益，应 NO-GO/继续收窄。
+
+
+## 35. TCAIL V2.2 Executor 完整草稿已交付（2026-11-04）
+
+本节覆盖此前“创建 33/34 号”的下一步指令。当前唯一任务是**由新的独立审查会话复核 V2.2**，不是开始实现。
+
+### 本轮开始状态与交付
+
+- 本轮开始及克隆基线的远端 `main` HEAD：`85414664a902724fc5610e606f05667ddc74b635`。
+- 新增 `33_TCAIL_FORMAL_SPECIFICATION_V2_2_DRAFT.md`：完整规格，含统一数学定义、观测/成本模型、非线性门禁、M2/M3 与高阶、per-graph BFDR、constrained-risk acquisition、missingness-aware FOS、完整伪代码、校准、强基线和 Gate。
+- 新增 `34_TCAIL_V2_2_CHANGELOG_AND_CLOSURE_MATRIX.md`：B1–B12 逐项映射、跨机制一致性、强基线 original/adaptation 和 OPEN 清单。
+- 更新 README 与 05_DECISION_LOG（D-038）；17、20、22、31、32、35 号历史文件未覆盖。
+
+### 当前真实状态
+
+- B1–B12：均为 `PARTIAL（规格已处理）`，不是独立研究 PASS；每项尚需的审查、校准、复现、实现或实验在 34 号中标为 `OPEN`。
+- 编写过程中已做规格符合性和文档质量复核，并修正 fantasy 生成、条件随机效应、缓存/重试成本、Fisher 维度、双模型状态、BFDR 风险语义和 Monte Carlo 控制流。这些只是起草过程检查，不得冒充正式独立数学复审。
+- TCAIL：`DRAFT / PENDING INDEPENDENT REVIEW / HOLD / IMPLEMENTATION BLOCKED`。
+- CI-GOM、IMCE-RSI：继续冻结。
+- 未编写算法实现，未启动 Phase 0，未调用 DeepSeek/真实 LLM API，未训练模型；无性能结果、无 Gate-1 PASS。
+- 独立新颖性、真实 Agent 有效性和 EC 搜索收益均 `NOT ESTABLISHED`；规格完成不等于创新成立。
+
+### 下一轮独立审查重点
+
+1. 检查 objective-scale nonlinear estimand 的充分条件、invariance 充要条件、GLMM nuisance 认证和 practical-information 公式是否正确且可执行。
+2. 检查每模型 base state 与每边 joint state 是否穷尽，结构冲突/零支持是否绝不进入采样或高置信图，高阶失败边界是否诚实。
+3. 检查 model-specific 双 fantasy、双重拟合、max-risk/max-cost 是否有明确概率意义；其校准和计算可行性必须保持 OPEN，不能因公式完整而接受为定理。
+4. 检查最终 BFDR 集合、近似最优风险、acquisition、FOS 和预算是否使用同一状态与成本；逐图 BFDR 不得推出全局 FDR。
+5. 检查四格 task-block、缓存键、唯一新增 episode、失败/重试和实际资源账是否无重复或漏计。
+6. 检查全部强基线及 original-paper reproduction 与 paper-setting adaptation 是否足以排除 FBL/cDLED/CGOMEA/GAwLL2 等先行机制的包装。
+
+### 可直接复制的独立审查接班提示词
+
+你是 `yujian777555/kaitibaogao` 的独立数学、统计与 EC 规格审查者。唯一允许读取和维护的仓库是 `yujian777555/kaitibaogao`，不得读取其他项目仓库。先核验远端 `main` HEAD，再读取 README、05_DECISION_LOG、SESSION_HANDOFF、17、20、21、22、29、31、32、33、34、35 号文件。
+
+你的唯一任务是对 `33_TCAIL_FORMAL_SPECIFICATION_V2_2_DRAFT.md` 和 `34_TCAIL_V2_2_CHANGELOG_AND_CLOSURE_MATRIX.md` 做正式独立复审，并形成新的审查报告。不要把 34 号记录的起草过程复核当作独立 PASS，也不要因 B1–B12 有文字条款就自动关闭它们。
+
+逐项审查 B1–B12 的数学正确性、统计校准前提、EC linkage/FOS 语义和伪代码可执行性；特别检查 probability-scale 非线性可识别性、task/block GLMM、M2/M3 与高阶、model-specific acquisition 与最终 BFDR 的一致性、unsupported edge 的 missingness-aware FOS、唯一新增 episode-equivalent、prior sensitivity/null calibration 和所有强基线。对每个问题给出 ACCEPT / REQUEST CHANGES 及具体章节/公式/伪代码证据；未解决项保持 OPEN。
+
+严格禁止：不编写 TCAIL/CI-GOM 实现，不启动 Phase 0，不调用 DeepSeek/真实 LLM API，不训练模型，不启动 CI-GOM 或 IMCE-RSI。不得把规格完成、文档静态检查或审查通过等同于创新成立；即使规格审查通过，后续实现和合成/真实/下游 EC Gate 仍须分别验证。完成后按 REPOSITORY_MAINTENANCE_POLICY.md 更新审查报告、README、05_DECISION_LOG 和 SESSION_HANDOFF，提交并核验远端 main。
