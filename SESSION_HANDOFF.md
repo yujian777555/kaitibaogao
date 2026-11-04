@@ -1269,3 +1269,26 @@ B3、B8、B10、B11 为 REQUEST CHANGES；其余 B1/B2/B4/B5/B6/B7/B9/B12 保持
 要求所有公式、状态机、伪代码和主控制流跨章节一致；每项给出边界反例；所有经验校准保持 OPEN；不得把规格修订写成算法 PASS。
 
 严格禁止：不写算法实现、不启动 Phase 0、不调用 DeepSeek/真实 LLM API、不训练模型、不启动 CI-GOM 或 IMCE-RSI。完成后更新 README、05_DECISION_LOG、SESSION_HANDOFF，提交并推送 main，重新核验远端 HEAD 和文件内容，返回完整 SHA 与验证结果。
+
+
+## 38. TCAIL 研究转向证据优先（2026-11-04）
+
+用户明确要求尽快证明方法，不再进行无关规格扩展。当前只围绕 TCAIL 的核心可证伪链条推进。
+
+### 已有证据：Oracle Linkage Gate
+- 实验目录：experiments/tcail_oracle_gate_pilot/
+- 20 个配对种子，40 维 deceptive 4-bit trap，最大 5,000 objective evaluations。
+- Oracle FOS：39.55/40；population-MI LT：38.55/40；配对 Wilcoxon 单侧 p=0.000919；配对 bootstrap 95% CI [0.55,1.45]。
+- Oracle 13/20 达到全局最优；Learned LT 2/20。
+- 12-seed additive control 中四种方法均 12/12 达到最优。
+- 解释边界：简化 GOM 原型上的 Oracle 上界试验；不是 TCAIL estimator 的结果，也不是正式 GOMEA/真实 Agent 结果。
+
+### 下一步唯一实验
+执行 fixed full-factorial estimator-only synthetic gate，暂不引入 active acquisition/retry：
+1. 生成 parent-conditioned、task-block Bernoulli 四格结果；包括 null、弱/强交互、正负方向和 parent/task sign flip、unsupported/low-support。
+2. 对所有估计器提供完全相同的四格 task-block 数据和成本。
+3. 比较 local posterior q/w、FBL/scaled-FBLT adaptation、pooled/global interaction score 和 oracle。
+4. 报告 edge AUPRC、null false-link rate、方向/翻转恢复、posterior calibration、abstention、FOS recovery。
+5. 只有 TCAIL q/w 在校准且同预算优于强基线后，才进入 active acquisition 对照；若无增量，停止或收窄。
+
+不得把本轮 Oracle 结果写成 TCAIL 已验证。继续不调用真实 LLM API、不训练 A800 模型、不启动 CI-GOM/IMCE-RSI。不要再先写大规格；只实现并运行上述最小估计器实验，结果必须记录每个 seed 和原始数据。
