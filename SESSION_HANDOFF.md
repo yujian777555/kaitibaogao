@@ -1292,3 +1292,31 @@ B3、B8、B10、B11 为 REQUEST CHANGES；其余 B1/B2/B4/B5/B6/B7/B9/B12 保持
 5. 只有 TCAIL q/w 在校准且同预算优于强基线后，才进入 active acquisition 对照；若无增量，停止或收窄。
 
 不得把本轮 Oracle 结果写成 TCAIL 已验证。继续不调用真实 LLM API、不训练 A800 模型、不启动 CI-GOM/IMCE-RSI。不要再先写大规格；只实现并运行上述最小估计器实验，结果必须记录每个 seed 和原始数据。
+
+
+## 39. TCAIL 估计器证据优先：第二轮小型诊断（2026-11-04）
+
+新增实验目录 experiments/tcail_estimator_gate_pilot/，含脚本、结果和依赖。
+
+实验使用 20 个种子，0–9 只估计 Normal empirical-Bayes prior scale，10–19 作为 held-out；每个 seed 200 个 pair × 2 parent contexts。四格 Bernoulli 结果在 task-block 内配对，含 positive/negative/weak/null、parent sign flip、unsupported 和 low support。
+
+Held-out 结果：
+- EB posterior q AUPRC 0.802；EB posterior w 0.797；
+- local standardized contrast 0.785；Student-t q 0.767；
+- raw local contrast 0.619；context-pooled contrast 0.598；
+- q Brier 0.153；q≥0.8 precision 91.1%、recall 38.1%、FPR 1.57%；
+- q AUPRC 在 10 个 held-out seed 均高于 standardized contrast，平均差 +0.0169，bootstrap 95% CI [0.0120,0.0221]；
+- 低支持 8-block 子集 AUPRC 0.353，不能据此放松 abstention 门。
+
+**严格解释：** 这是 paired task-block normal-normal empirical-Bayes proxy，不是完整 TCAIL M2/M3 GLMM；不是 paper-exact FBL/scaled-FBLT/cDLED 对照；生成器也不是 logistic GLMM。仅为小幅正向研究信号。
+
+### 下一步唯一任务
+不要写更多规格，不要启动 acquisition。只做 paper-faithful 强基线和校准：
+1. 复现/适配 FBL 与 scaled-FBLT，另加 cDLED-P3M 对照；
+2. 所有方法使用相同 task-block 四格数据、相同预算和相同 held-out seeds；
+3. 进行 posterior calibration、null false-link、sign-flip、abstention 和 FOS recovery；
+4. 保留每 pair/context 原始四格数据及每 seed 结果；
+5. 若 EB q/w 不能稳定优于强基线，或低支持下不能安全 abstain，则停止/收窄 TCAIL；
+6. 只有估计器 gate 通过后，才设计 active acquisition 对照。
+
+当前 TCAIL 仍 HOLD；未实现完整 GLMM、未调用真实 LLM API、未训练 A800、未启动 CI-GOM/IMCE-RSI。
