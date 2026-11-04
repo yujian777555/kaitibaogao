@@ -390,3 +390,6 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 ## 2026-11-04 独立复审 R1
 
 新增 36_TCAIL_V2_2_INDEPENDENT_REVIEW_R1.md。审查结论：REQUEST CHANGES；TCAIL 继续 HOLD / IMPLEMENTATION BLOCKED。下一步只做规格修订，不实现、不实验、不调用真实 API、不训练模型。CI-GOM 与 IMCE-RSI 继续冻结。
+
+
+本轮详细交接补充见：D039_TCAIL_V2_2_INDEPENDENT_REVIEW_DECISION.md、SESSION_HANDOFF_V2_2_CORRECTIVE_R1.md。注意：本轮对 05_DECISION_LOG.md 与 SESSION_HANDOFF.md 的原文件追加未完成；请以新增 D039 决策记录和 corrective handoff 为准，下一维护轮合并回主日志/主交接文件。
