@@ -1347,3 +1347,65 @@ Held-out 结果：
 6. 只有估计器 gate 通过，才转 active acquisition。
 
 不再扩写规格，不先启动 active acquisition，不调用真实 Agent API、不训练 A800、不启动 CI-GOM/IMCE-RSI。
+
+
+## 41. 当前唯一优先任务：TCAIL estimator-to-GOM confirmatory evidence（2026-11-04）
+
+用户明确要求“抓紧证明，不要做不相关的事情”。本节覆盖此前继续修订完整 acquisition/retry 规格的优先级；不要再先写 40/41 号规格来延长文档循环。
+
+### 当前仓库基线
+- 本轮实验 pilot 已在当前 main：experiments/tcail_oracle_gate_pilot/、experiments/tcail_estimator_gate_pilot/。
+- 详细确认性协议：42_TCAIL_ESTIMATOR_TO_GOM_CONFIRMATORY_GATE_R1.md。
+- 研究决策：D-042。
+- 现有结果仍是 exploratory，不是 TCAIL 证明。
+
+### 已有 pilot 的正确解释
+1. Oracle FOS 在 40-bit deceptive trap 简化 GOM 上 13/20 成功，支持该特定任务有可利用 linkage 上界；不是 TCAIL estimator 证据，也不是 official GOMEA 结果。
+2. EB q/w AUPRC 0.802/0.797；模型是 Normal-Normal EB proxy，不是指定的 M2/M3 Bernoulli task-block GLMM。
+3. scaled-FBL binary adaptation AUPRC 0.414；不是原论文复现。当前 epsilon gate 与 local four-cell contrast 同源，需审计其与原 FBL tolerance 的映射。
+4. 8-block low-support AUPRC 0.353，必须作为失败边界，支持不足时 abstain。
+5. 两个 pilot 均需 clean rerun，不能只引用 README 汇总。
+
+### 下一轮 Executor 唯一任务
+按 42 号文件执行，不要写新的大段理论：
+1. clean rerun 现有 Oracle 和 estimator pilots，校验 raw CSV/JSON/报告；
+2. 审计 FBL 公式、cell 顺序、epsilon gate、随机种子、初始评价预算和停止规则；
+3. 建立 logistic task/block random-effects Bernoulli generator，计算 probability-scale 真值四格差分；
+4. 实现并校准 Bernoulli task-block M2/M3 posterior q/w；
+5. 在相同四格 observations、held-out seeds 和 episode-equivalent budget 下比较 FBL/scaled-FBLT、cDLED-P3M、CGOMEA linkage、local contrast、global pooling、random、oracle；
+6. 完成 Estimator Gate 后，才执行独立 discovery/evaluation blocks 上的 FOS→GOM 下游 Gate，并把 discovery cost 计入总预算。
+
+### 强制报告
+- 所有 per-seed/per-pair/per-context/per-block 原始数据；
+- posterior q calibration、Brier、AUPRC、null false-link、sign-flip recovery；
+- low-support risk-coverage/abstention；
+- FOS pair co-clustering recovery；
+- GOM held-out objective/success 与总 episode-equivalent 成本；
+- baseline reproduction/adaptation 边界；
+- 配置、环境、Git SHA、命令、日志和 clean rerun 结果。
+
+### GO/NO-GO
+- Estimator：五情景 macro-AUPRC 相对 validation-selected strongest non-oracle baseline 的 paired seed 95% CI 下界 > 0；并检查 null、sign-flip、calibration、FOS 和 low-support abstention。
+- Downstream：同总 episode-equivalent budget 下，TCAIL-FOS 的 held-out GOM objective/success 相对 strongest non-oracle linkage baseline 的 paired 95% CI 下界 > 0。
+- 若 estimator 提升但 GOM 不提升，不得声称 EC 搜索创新。
+- Oracle 无收益则停止该任务族 linkage-to-GOM 主张。
+- TCAIL 不胜强基线则停止其 estimator 新颖性主张。
+
+### 执行边界
+只允许 CPU 合成实验和隔离 GOM research prototype。不得调用真实 LLM API，不训练 A800，不启动 CI-GOM 或 IMCE-RSI。不要把此授权解释为完整 active acquisition、生产 retry 或 Phase 0 获批。
+
+### 可直接复制的 Executor 提示词
+
+你是 yujian777555/kaitibaogao 的实验 Executor。唯一仓库是该仓库 main。先核验最新远端 HEAD，读取 README、05_DECISION_LOG、SESSION_HANDOFF、REPOSITORY_MAINTENANCE_POLICY、42 号协议，以及现有两个 pilot 的全部脚本、requirements、原始结果和报告。
+
+用户要求尽快证明 TCAIL 的 EC 收益。不要继续扩写完整 acquisition/retry 规格，不要做与 estimator→FOS→GOM 证据链无关的工作。
+
+严格按 42 号协议执行：
+A. clean rerun 两个 pilot；审计公式、预算、seed、cell 顺序、统计检验和原始数据一致性。发现错误先修复并记录。
+B. 构建 logistic task/block Bernoulli generator，确保 ground truth 是 probability-scale 四格差分；覆盖 additive/null、sparse pairwise、parent sign-flip、overlapping/higher-order、low-support/drift。
+C. 实现 Bernoulli task-block M2/M3 posterior q/w，做 posterior calibration、null calibration、prior sensitivity、abstention；不得用 Normal-Normal proxy 冒充正式 TCAIL。
+D. 同预算比较 FBL/scaled-FBLT、cDLED-P3M、CGOMEA linkage、local/global、random、oracle；严格标明原论文复现与适配。
+E. Estimator Gate 通过后才做独立 discovery/evaluation blocks 的 FOS→GOM；总预算包含 discovery 与 search。
+F. 按 42 号 GO/NO-GO 规则作结论。失败也要如实报告，不得调阈值直到通过，不得查看 held-out 后再改方法。
+
+维护要求：全部 raw data、per-seed results、配置、依赖、Git SHA、命令和日志入仓库；更新 README、05_DECISION_LOG、SESSION_HANDOFF，提交推送并复核远端。未完成事项明确标记 NOT RUN。严禁真实 LLM API、A800 训练、CI-GOM、IMCE-RSI 和完整 active acquisition。
