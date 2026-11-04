@@ -1,6 +1,6 @@
 # SESSION HANDOFF — 开题研究项目
 
-**最后更新：** 2026-11-02  
+**最后更新：** 2026-11-04  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  
 **当前阶段：** 文献系统检索 + 核心机制精读 + 创新候选否证  
@@ -1083,3 +1083,40 @@ P150–P153：Olieman et al. 2021 FBL；Dushatskiy et al. 2024 CGOMEA；Przewozn
 ### 下一会话可复制提示词
 
 你是我的河北工业大学计算机技术硕士开题研究 Planner。唯一允许维护的仓库是 `yujian777555/kaitibaogao`。先核验 main HEAD，读取 README、05_DECISION_LOG、SESSION_HANDOFF、17、20、21、22、29、31、32 号文件。当前 TCAIL 状态是 B1_PARTIALLY_ACCEPTED / overall HOLD / IMPLEMENTATION BLOCKED。你的唯一任务是监督 Executor 按 32 号任务创建新的 33 号 TCAIL V2.2 完整规格草稿和 34 号 B1–B8 closure matrix，不覆盖 17 号权威 V2。重点解决 q 与 FOS weight、FOS builder、M2/M3/高阶/heredity、BFDR 与 acquisition、task-block 配对模型、nuisance uncertainty、basis×anchor practical identifiability、parent/anchor/generation 检验族、rollout-equivalent budget。所有公式和伪代码必须一致；未解决项标记 OPEN，不得宣布 PASS。不得编码、不得调用 DeepSeek API、不得启动 Phase 0、不得训练模型。完成后更新仓库、提交并核验 main。
+
+
+## 34. TCAIL V2.2 Planner Addendum R1（2026-11-04）
+
+本节覆盖上一节“仅处理 B1–B8”的 Executor 指令：**V2.2 当前必须处理 B1–B12**。唯一仓库仍为 `yujian777555/kaitibaogao`；本轮开始时远端 main HEAD 为 `903e62aa4b846ea20950b3be81c355688e0065e3`。
+
+### 新增文档
+- `35_TCAIL_V2_2_PLANNER_ADDENDUM_R1.md`：FBL/cDLED/CGOMEA/Tinós 原文机制精读、新增 B9–B12、强基线和执行要求。
+
+### 本轮原文级结论
+- FBL 已有 fitness-based contrast、scaled dependency strength、LT/MP FOS、incremental pair probing；
+- cDLED 已有 individual-local DLED、conditional eVIG、局部子结构识别和 donor mating restriction，且其原文报告 DLED 分解成本在部分问题上达到 5%–78%；
+- CGOMEA 已有 conditional linkage 与 solution mating filter；
+- Tinós et al. 2026 已有 GA-side-effect interaction learning，无需额外 fitness evaluations。
+
+### 新增 B9–B12
+- B9：objective-scale probability interaction 是 inverse-link 后的非线性 estimand；row-space 线性 contrast 检验不足以自动证明其可识别；
+- B10：acquisition design 必须是四格 task-block 观测向量，明确 CRN 可行性、任务随机效应和缓存后的唯一 episode-equivalent cost；
+- B11：unsupported edge 不得填 0；明确 missingness-aware FOS、forest/singleton/fallback；
+- B12：posterior q/w 需 prior sensitivity 和 null calibration，防止低样本宽先验造成伪高置信。
+
+### 下一会话唯一任务
+监督 Executor 按 32 号任务 + 35 号补充创建：
+1. `33_TCAIL_FORMAL_SPECIFICATION_V2_2_DRAFT.md`（完整规格）；
+2. `34_TCAIL_V2_2_CHANGELOG_AND_CLOSURE_MATRIX.md`（B1–B12 逐项矩阵）。
+
+不得覆盖 17 号 V2 权威历史文件、20 号 REQUEST CHANGES 复审、22 号 B1 proposal、31 号独立复审、32 号执行任务或 35 号 Planner Addendum。每项需标明 PASS/PARTIAL/OPEN 和对应章节/公式/伪代码位置。若某项需要新增假设，显式写出并给出可证伪测试；不得默认其成立。
+
+### 严格禁止
+- 不编码 TCAIL/CI-GOM；
+- 不运行正式 Phase 0；
+- 不调用 DeepSeek API；
+- 不训练 A800 模型；
+- 不启动 CI-GOM 或 IMCE-RSI；
+- 不把规格草稿写成已验证算法或已成立创新。
+
+完成 33/34 后必须交独立审查；审查者不得是刚刚撰写该规格的同一 Planner 会话。若 V2.2 只是 FBL/cDLED 的 Bayesian/OED 包装，或没有同预算下游 GOM 增益，应 NO-GO/继续收窄。
