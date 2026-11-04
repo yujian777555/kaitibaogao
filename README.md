@@ -445,3 +445,14 @@ Held-out AUPRC：EB posterior q 0.802，EB posterior w 0.797，local standardize
 Held-out AUPRC：EB q=0.802，EB w=0.797，local z-score=0.784，scaled-FBL adaptation=0.414，raw contrast=0.619，context-pooled=0.598。EB q 与 scaled-FBL adaptation 的 per-seed AUPRC 差为 +0.3845，10/10 held-out seeds 胜，seed-level bootstrap 95% CI [0.3704,0.3990]。在训练 null 95th-percentile 匹配阈值下，EB q precision/recall/FPR=81.5%/58.7%/5.62%；scaled-FBL adaptation=69.7%/31.5%/5.81%。
 
 **边界：** scaled-FBL 是 binary task-block adaptation，不是原论文复现；EB q/w 是 Normal-normal proxy，不是完整 TCAIL M2/M3 GLMM；尚未比较 cDLED-P3M、CGOMEA、GAwLL2，也未验证 FOS/GOM 下游收益。低支持 8-block 子集 AUPRC=0.353。结果仅为正向合成信号。
+
+
+## 2026-11-04：研究优先级调整——直接验证 TCAIL → FOS → GOM（优先于继续扩写规格）
+
+用户明确要求尽快证明演化计算收益，不再做无关规格扩展。新增 [42_TCAIL_ESTIMATOR_TO_GOM_CONFIRMATORY_GATE_R1.md](42_TCAIL_ESTIMATOR_TO_GOM_CONFIRMATORY_GATE_R1.md)，将下一阶段收敛为固定 full-factorial 的 estimator-to-GOM 证据链。
+
+现有 Oracle GOM、Normal-Normal EB q/w 和 scaled-FBL binary adaptation 仅为 exploratory pilots。它们没有证明完整 TCAIL、paper-faithful baseline superiority 或 GOM 下游收益。尤其 EB q/w 不是 M2/M3 Bernoulli GLMM，scaled-FBL 是 adaptation，8-block low-support AUPRC=0.353 是明确失败边界。
+
+**下一步不再先修完整 active-acquisition/retry 规格。** 先 clean rerun 与代码审计，再实现/校准 Bernoulli task-block estimator，公平比较 FBL/scaled-FBLT、cDLED-P3M、CGOMEA linkage；只有 estimator gate 通过才跑下游 GOM。下游总预算必须包含 discovery episodes 和 search episodes。所有方法共用 held-out task blocks、seed 和 episode-equivalent 预算。
+
+TCAIL 仍未证明；这是一项有限的合成研究原型证据任务，不授权真实 Agent API、A800 训练、CI-GOM 或 IMCE-RSI。具体 generator、split、metrics、GO/NO-GO 和停止规则见 42 号文件。
