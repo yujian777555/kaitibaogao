@@ -478,3 +478,20 @@ B1–B12 在本轮均只能记为 `PARTIAL（规格已处理）`，其独立审�
 R1–R7 及 B1–B12 均只能标为 `PARTIAL（修订规格已处理）`，所有未校准、未认证、未复现、未实现和未实验事项保持 OPEN。起草过程的符合性与质量复核不构成 R2 独立复审或研究 PASS。
 
 **决定：TCAIL 继续 HOLD / IMPLEMENTATION BLOCKED。下一步由不同会话执行 R2 独立规格复审；CI-GOM、IMCE-RSI、Phase 0、真实 LLM/DeepSeek API 和模型训练继续冻结。规格修订不等于算法验证、创新成立或 EC 搜索收益成立。**
+
+
+## 决策 D-041：TCAIL V2.2 Revision R1 独立复审 R2 — REQUEST CHANGES（2026-11-04）
+
+独立审查报告：39_TCAIL_V2_2_INDEPENDENT_REVIEW_R2.md。审查基线：4f15ac303936817cc2bf122e649fff2331c9b1dc。
+
+37/38 号的鲁棒 posterior loss、worst-expected fantasy 聚合、边际 GLMM Fisher 完整秩门和 acquisition cycle 冻结有实质进步，但仍不能验收。
+
+关键阻塞：
+1. Acquisition A_L/A_U 未纳入当前基准风险 R(D) 的 posterior Monte Carlo 误差；sign alpha 未明确分配两个生成模型，rank alpha 未给出全部 rival 比较的完整分配；nested MCSE/自相关处理未冻结。
+2. Base-key ledger 在 status=REUSABLE 但 cache miss 时可能错误规划 continuation，执行器 BREAK 后仍返回 OK；crash-consistent IN_FLIGHT/UNKNOWN_OUTCOME 状态缺失。
+3. FOS 将 Q_g 中已经通过基础支持/信息门的 NOT_SELECTED 计入 unknown density，rho_support 因而低估真实数据支持覆盖率。
+4. Fisher Hessian 参数向量中的离散 nuisance 含义不清；paired MCSE 的跨候选 CRN 映射及 generation/cycle 索引需明确。
+
+**决定：REQUEST CHANGES / HOLD / IMPLEMENTATION BLOCKED。** R1/R6 主定义可保留；R2、R3、R5 必须修订；R4、R6、R7 补足定义。B3、B8、B10、B11 为 REQUEST CHANGES，其余 B 项保持 PARTIAL。
+
+下一步唯一任务：只做 TCAIL V2.2 corrective specification revision R2，新增 40/41 号文件；保留 37/38/39 历史文件，不编码、不实验、不启动 Phase 0、不调用真实 LLM API、不训练模型；CI-GOM 与 IMCE-RSI 继续冻结。修订后交不同会话独立复审。
