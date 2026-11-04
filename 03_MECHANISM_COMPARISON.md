@@ -412,3 +412,29 @@ Group-ARD、Bayesian information gain、GOM、softmax donor、UCB 和 confidence
 独立复审文件：`31_TCAIL_LINKAGE_INTERFACE_INDEPENDENT_REVIEW_R2.md`。下一规格任务：`32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`。
 
 **状态：** B1_PARTIALLY_ACCEPTED；TCAIL overall HOLD / IMPLEMENTATION BLOCKED。B2–B8 未关闭；不编码、不运行 Phase 0、不调用真实 API。
+
+
+## 13. TCAIL 直接先行工作机制精读补充（2026-11-04）
+
+### 13.1 FBL：fitness-based linkage 已包含连续相对强度和增量探测
+
+Olieman et al. (2021) 不只是四点 interaction test。其 FBL 从 fitness perturbation 差分构造 pairwise dependency strength，缩放后用于比较不同 pair，并构造 fitness-based Linkage Tree / marginal-product FOS；另有 incremental dependency updating：每代只探测部分 pair，维护 dependency matrix，并根据发现依赖情况安排 dependency cycles。其论文还讨论利用共享扰动点和 partial evaluation 降低额外成本。
+
+**对 TCAIL 的约束：** `w_ij`、weighted LT、active/partial pair probing 不能单独作为创新。必须比较 scaled FBLT 和 incremental FBL update，而非只比较 binary FBL threshold。
+
+### 13.2 cDLED：individual-local linkage 与 donor restriction 已有直接覆盖
+
+Przewozniczek et al. (2025) 的 DLED 在给定个体附近翻转两个基因及其组合，使用四点 fitness 关系检测该个体的直接依赖。cDLED 进一步用 probe link 识别当前个体所处子结构，对选定个体执行完整 DLED，构造 conditional eVIG，与 SLL-DSM 组合构造 LT clusters，并按 conditional dependency 过滤 donor。作者报告 DLED decomposition 在部分问题上占总运行时间 5%–78%，并把降低 ELL 成本列为未来方向。
+
+**对 TCAIL 的约束：** parent-specific local graph、四格局部差分、conditional eVIG 和 donor matching 均不是新机制。TCAIL 必须证明随机 Agent 任务上的 posterior calibration、task-block modelling、合法支持门和主动预算决策带来超出 cDLED 的增量。
+
+### 13.3 CGOMEA 与 Tinós et al. 2026
+
+- CGOMEA 已通过 conditional dependencies 改进 linkage-based variation，并过滤 solution mating。
+- Tinós et al. (2026) 已从 GA 优化过程副产物估计变量重要性与交互，不增加 fitness evaluations，并将结果用于 reproduction operators。
+
+**对 TCAIL 的约束：** 必须分别比较 conditional mating 和 zero-extra-evaluation interaction learning。若 TCAIL 需要额外 Agent rollout，必须用同预算搜索收益证明额外成本值得。
+
+### 13.4 新的比较要求
+
+所有 estimator 尽量共用同一 FOS builder，以隔离 estimator 的增量价值；另做 builder sensitivity。至少包含 SLL-MI/LT-GOMEA、FBL/scaled FBLT、FBL incremental、DLED/cDLED-P3M、CGOMEA、LMM、ALI/AIM、Tinós/GAwLL2、random linkage、oracle local linkage。所有原论文复现与 paper-setting adaptation 必须分开报告。
