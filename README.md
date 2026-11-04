@@ -427,3 +427,12 @@ R1 的鲁棒 posterior loss、worst-expected fantasy 聚合、边际 Fisher 完�
 新增 experiments/tcail_oracle_gate_pilot/，包含可复现实验脚本、依赖和结果报告。20 个配对种子、40 维 concatenated deceptive trap、最大 5,000 objective evaluations：Oracle FOS 平均 39.55/40，population-MI LT 平均 38.55/40；13 胜、6 平、1 负，paired Wilcoxon one-sided p=0.000919，bootstrap 95% CI [0.55,1.45]。Oracle 全局最优命中 13/20，Learned LT 为 2/20。12-seed additive control 中四种方法均 12/12 达到最优。
 
 **结论边界：** 这只支持 Oracle local linkage 对简化 GOM 原型在该 deceptive-trap 场景有上界价值；不是 TCAIL estimator、FBL/cDLED 对比、主动采样或真实 Agent 的验证。下一步不继续扩写理论规格，直接做 fixed full-factorial 的 estimator-only synthetic gate，比较局部 posterior q/w 与 FBL/scaled-FBLT 风格对照；active acquisition 和 retry 暂不纳入该 gate。TCAIL 整体仍 HOLD，未授权真实 API/A800/CI-GOM。
+
+
+## 2026-11-04 TCAIL：Estimator-only q/w 代理诊断
+
+新增 experiments/tcail_estimator_gate_pilot/。在 20 个合成种子中，前 10 个估计 Normal empirical-Bayes prior scale，后 10 个留出测试。每 seed 200 pairs × 2 parent contexts，包含正/负/弱/null、跨 parent sign flip、unsupported 和 8/128 task-block 支持。
+
+Held-out AUPRC：EB posterior q 0.802，EB posterior w 0.797，local standardized contrast 0.785，Student-t q 0.767，local raw contrast 0.619，context-pooled contrast 0.598。q 的 Brier 0.153；q≥0.8 时 precision 91.1%、recall 38.1%、FPR 1.57%。10 个 held-out seed 的 q AUPRC 均高于 standardized contrast，平均差 +0.0169，seed-level bootstrap 95% CI [0.0120,0.0221]。
+
+**边界：** 这是 paired task-block normal-normal empirical-Bayes q/w proxy，不是完整 M2/M3 GLMM；对照不是 paper-exact FBL/scaled-FBLT；生成器也不是 logistic GLMM。8-block low-support 子集 AUPRC 仅 0.353。该结果是小幅正向信号，不是 TCAIL 已验证。下一步必须做 paper-faithful FBL/scaled-FBLT/cDLED 对照、校准与 FOS recovery；不转入 active acquisition，除非估计器 gate 先通过。
