@@ -442,3 +442,39 @@ V2.1 对第二轮提出的五项规格缺口做了实质补充。以下数学检
 B1–B12 在本轮均只能记为 `PARTIAL（规格已处理）`，其独立审查、阈值、校准、复现、实现或实验部分仍为 `OPEN`。编写过程中的规格符合性和文档质量复核不构成正式独立数学 PASS。
 
 **决定：下一步只进行新的独立 V2.2 规格复审。TCAIL 继续 HOLD / IMPLEMENTATION BLOCKED；CI-GOM、IMCE-RSI、Phase 0、真实 LLM/DeepSeek API 和模型训练继续冻结。规格草稿完成不等于算法实现、Gate 通过、创新成立或 EC 搜索收益成立。**
+
+
+## 决策 D-039：TCAIL V2.2 独立复审 R1 REQUEST CHANGES（2026-11-04）
+
+本条将 `D039_TCAIL_V2_2_INDEPENDENT_REVIEW_DECISION.md` 合并回主决策日志；完整审查证据见 `36_TCAIL_V2_2_INDEPENDENT_REVIEW_R1.md`，审查基线为 `11cccf45c7533782f2673612b4bd52930541c9bc`。
+
+独立复审确认三层 estimand、非线性识别方向、task-block 结构和未决边不填零等定义层面的进展，但提出 R1–R7：
+
+1. Conservative local-null envelope 与 posterior expected loss 语义不一致；
+2. Acquisition 非正停止未使用 MCSE；
+3. 同一 base key 的 retry 配额可能跨轮重置；
+4. Practical-information rank 门忽略零方向，边际 GLMM Fisher 未冻结；
+5. 旧 `rho_AB` 是正边密度而非支持覆盖率；
+6. 双模型逐样本 max-risk/max-cost 缺少概率 coupling 解释；
+7. 活动图集合与权重的周期更新未定义。
+
+**决定：REQUEST CHANGES / HOLD / IMPLEMENTATION BLOCKED。** 33/34 保留为 R0，不覆盖；下一步仅允许 V2.2 corrective specification revision R1，不授权实现、Phase 0、真实 API、模型训练、CI-GOM 或 IMCE-RSI。
+
+
+## 决策 D-040：TCAIL V2.2 Revision R1 草稿形成并交 R2 复审（2026-11-04）
+
+新增 `37_TCAIL_FORMAL_SPECIFICATION_V2_2_REVISION_R1.md` 与 `38_TCAIL_V2_2_REVISION_CHANGELOG_AND_CLOSURE_MATRIX_R1.md`，逐项处理 36 号 R1–R7，不覆盖 33、34、36 号历史文件。
+
+### 固定修订决策
+
+1. **鲁棒风险：** `ell_env/q_env` 仅作保守约束；每模型使用自身 posterior 计算 `L_M`，最终最小化 `max_M L_M`，不再把包络代入损失后称为 posterior expected loss。
+2. **MC 停止：** 只有所有候选收益上界 `A_U≤0` 才能非正停止；执行需 `A_L>0`；`S_max` 无法判断时为 `STOP_ACQUISITION_UNCERTAIN`。符号与排名采用预注册 MCSE/alpha-spending 工作规则，校准仍 OPEN。
+3. **Retry 账本：** base-key 终身保存 attempt、已耗 retry、失败、reusable、terminal/exhausted 和剩余 allowance；continuation 不再被计为新的 initial，跨轮不重置。
+4. **Practical information：** 使用边际 GLMM expected Fisher、完整 target rank 与 draw-wise `λ_min` 低分位；广义逆只可在明确 nuisance/行空间条件下作为 asymptotic proxy。
+5. **FOS：** 分离 support coverage、selected-positive density 和 unknown；supported practical-null 是有支持零边，NOT_SELECTED/UNRESOLVED 不填零。
+6. **Fantasy 聚合：** 主规则为 worst-expected `max_m E_m[H]`；模型平均和 product-coupled `E[max]` 仅作预注册比较，不能混称。
+7. **活动图周期：** 集合与权重在每个 acquisition cycle 开始前冻结，新 parent/generation 只在边界进入；切换使旧 assessment/decision 失效，跨期风险不直接比较。
+
+R1–R7 及 B1–B12 均只能标为 `PARTIAL（修订规格已处理）`，所有未校准、未认证、未复现、未实现和未实验事项保持 OPEN。起草过程的符合性与质量复核不构成 R2 独立复审或研究 PASS。
+
+**决定：TCAIL 继续 HOLD / IMPLEMENTATION BLOCKED。下一步由不同会话执行 R2 独立规格复审；CI-GOM、IMCE-RSI、Phase 0、真实 LLM/DeepSeek API 和模型训练继续冻结。规格修订不等于算法验证、创新成立或 EC 搜索收益成立。**

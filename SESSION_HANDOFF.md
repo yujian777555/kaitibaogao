@@ -1160,3 +1160,54 @@ P150–P153：Olieman et al. 2021 FBL；Dushatskiy et al. 2024 CGOMEA；Przewozn
 逐项审查 B1–B12 的数学正确性、统计校准前提、EC linkage/FOS 语义和伪代码可执行性；特别检查 probability-scale 非线性可识别性、task/block GLMM、M2/M3 与高阶、model-specific acquisition 与最终 BFDR 的一致性、unsupported edge 的 missingness-aware FOS、唯一新增 episode-equivalent、prior sensitivity/null calibration 和所有强基线。对每个问题给出 ACCEPT / REQUEST CHANGES 及具体章节/公式/伪代码证据；未解决项保持 OPEN。
 
 严格禁止：不编写 TCAIL/CI-GOM 实现，不启动 Phase 0，不调用 DeepSeek/真实 LLM API，不训练模型，不启动 CI-GOM 或 IMCE-RSI。不得把规格完成、文档静态检查或审查通过等同于创新成立；即使规格审查通过，后续实现和合成/真实/下游 EC Gate 仍须分别验证。完成后按 REPOSITORY_MAINTENANCE_POLICY.md 更新审查报告、README、05_DECISION_LOG 和 SESSION_HANDOFF，提交并核验远端 main。
+
+
+## 36. TCAIL V2.2 独立复审 R1 与 Corrective Revision R1（2026-11-04）
+
+本节覆盖此前所有要求复审 33/34 或继续创建 37/38 的旧指令。当前唯一任务是**由新的独立会话对 37/38 号进行 R2 复审**，不是实现算法。
+
+### 远端基线与历史审查
+
+- 本轮开始远端 `main` HEAD：`ea5c8f7500848baf7a4f3a345f362d0573e59a2b`。
+- `36_TCAIL_V2_2_INDEPENDENT_REVIEW_R1.md` 对 33/34 给出 REQUEST CHANGES，提出 R1–R7。
+- `D039_TCAIL_V2_2_INDEPENDENT_REVIEW_DECISION.md` 和 `SESSION_HANDOFF_V2_2_CORRECTIVE_R1.md` 是相应补充记录；D-039 已合并回主 `05_DECISION_LOG.md`。
+- 33、34、36 号及其审查基线均未覆盖。
+
+### 本轮交付
+
+1. `37_TCAIL_FORMAL_SPECIFICATION_V2_2_REVISION_R1.md`：完整 V2.2 Revision R1 规格，包含数学定义、状态机、完整伪代码、主控制流、参数表和 OPEN 清单。
+2. `38_TCAIL_V2_2_REVISION_CHANGELOG_AND_CLOSURE_MATRIX_R1.md`：R1–R7 逐项修订、公式/伪代码/边界映射、B1–B12 承接和一致性矩阵。
+3. README、05_DECISION_LOG（D-039/D-040）和本交接文件已更新。
+
+### R1–R7 当前处置
+
+- R1：`ell_env/q_env` 只作保守约束；最终风险为各模型自身 posterior loss 的 `max_M`，鲁棒集合优化无证书则 fail-closed。
+- R2：使用模型内 MCSE、`A_U/A_L` 与预注册 alpha-spending；点估计不再直接触发非正停止，无法判断时为 `STOP_ACQUISITION_UNCERTAIN`。
+- R3：base-key 终身 retry/continuation/terminal/exhausted 状态持久化，fantasy 与真实执行共用规则。
+- R4：使用边际 GLMM expected Fisher、nuisance/PSD guard、完整 target rank 和 draw-wise `λ_min` 低分位；广义逆不再冒充 posterior covariance。
+- R5：support coverage、selected-positive density、unknown density 分离，known-zero 与 NA 不再混淆。
+- R6：主规则为 worst-expected model objective；model-average 和 product-coupled envelope 分开报告，不混用 MCSE。
+- R7：活动图集合/权重在 cycle 内冻结，新图只在边界进入，切换立即使旧 assessment/decision 失效。
+
+所有项仍为 `PARTIAL（修订规格已处理）`，不是独立数学 PASS。所有阈值、校准、形式认证、强基线复现、实现和实验继续 OPEN。独立新颖性、真实 Agent 有效性和 EC 搜索收益仍 NOT ESTABLISHED。
+
+### 当前禁止事项
+
+- 不编写 TCAIL/CI-GOM 实现；
+- 不启动 Phase 0；
+- 不调用 DeepSeek 或其他真实 LLM API；
+- 不训练模型；
+- 不启动 CI-GOM 或 IMCE-RSI；
+- 不把起草复核、规格完整或文档静态检查写成算法验证或创新成立。
+
+TCAIL 继续 `HOLD / IMPLEMENTATION BLOCKED`；CI-GOM 和 IMCE-RSI 继续冻结。
+
+### 可直接复制的 R2 独立审查接班提示词
+
+你是 `yujian777555/kaitibaogao` 的新独立数学、统计与 EC 规格审查者。唯一允许读取和维护的仓库是 `yujian777555/kaitibaogao`，不得读取其他项目仓库。先核验远端 `main` HEAD，再读取 README、05_DECISION_LOG、SESSION_HANDOFF、33、34、36、37、38 号以及 31、32、35 号历史约束文件。
+
+你的唯一任务是对 `37_TCAIL_FORMAL_SPECIFICATION_V2_2_REVISION_R1.md` 与 `38_TCAIL_V2_2_REVISION_CHANGELOG_AND_CLOSURE_MATRIX_R1.md` 做正式 R2 独立复审，并形成新的审查报告。不要把 38 号中的起草过程复核当作独立 PASS，也不要因 R1–R7 有规格条款就自动关闭它们。
+
+逐项检查：R1 鲁棒集合与每模型损失；R2 MCSE 区间方向、非正停止、正收益资格和重复查看；R3 多轮 retry/continuation/terminal 账本；R4 边际 GLMM Fisher、Schur 条件、完整秩和 draw-wise 分位门；R5 support/positive/unknown 与 FOS 更新；R6 worst-expected/model-average/product coupling 及 MCSE；R7 活动图集合、权重、cycle ID 和旧快照失效。检查公式、状态机、伪代码和主控制流是否一致，并检查 B1–B12 的 OPEN 项是否被保留。
+
+对每个问题给出 ACCEPT / REQUEST CHANGES 及具体章节、公式和伪代码证据；未解决项保持 OPEN。不要实现算法、启动 Phase 0、调用真实 LLM API、训练模型或启动 CI-GOM/IMCE-RSI。规格审查通过也不等于创新成立；后续实现、合成、真实 Agent 和下游 EC Gate 仍须分别验证。完成后按 REPOSITORY_MAINTENANCE_POLICY.md 更新审查报告、README、05_DECISION_LOG 和 SESSION_HANDOFF，提交并核验远端 main。

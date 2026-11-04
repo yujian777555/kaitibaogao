@@ -393,3 +393,17 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 
 
 本轮详细交接补充见：D039_TCAIL_V2_2_INDEPENDENT_REVIEW_DECISION.md、SESSION_HANDOFF_V2_2_CORRECTIVE_R1.md。注意：本轮对 05_DECISION_LOG.md 与 SESSION_HANDOFF.md 的原文件追加未完成；请以新增 D039 决策记录和 corrective handoff 为准，下一维护轮合并回主日志/主交接文件。
+
+
+## 2026-11-04：TCAIL V2.2 Corrective Revision R1 草稿
+
+本轮开始时远端 `main` HEAD 为 `ea5c8f7500848baf7a4f3a345f362d0573e59a2b`，已包含 36 号独立复审的 REQUEST CHANGES。现新增：
+
+- [37_TCAIL_FORMAL_SPECIFICATION_V2_2_REVISION_R1.md](37_TCAIL_FORMAL_SPECIFICATION_V2_2_REVISION_R1.md)：完整 V2.2 Revision R1 规格；
+- [38_TCAIL_V2_2_REVISION_CHANGELOG_AND_CLOSURE_MATRIX_R1.md](38_TCAIL_V2_2_REVISION_CHANGELOG_AND_CLOSURE_MATRIX_R1.md)：R1–R7 数学定义、伪代码、边界条件、B1–B12 承接和 OPEN 矩阵。
+
+本轮修订采用鲁棒 posterior 风险、MCSE 不确定停止、跨轮 retry 持久账本、边际 GLMM Fisher 完整秩门、FOS support/positive/unknown 分离、worst-expected fantasy 主聚合，以及 acquisition cycle 内冻结的活动图集合/权重。所有校准、形式认证、复现、实现和实验事项继续 OPEN。
+
+33、34、36 号历史文件未覆盖。此前单独的 D-039 决策已合并回主 `05_DECISION_LOG.md`，主 `SESSION_HANDOFF.md` 已更新。当前状态为 `PENDING R2 INDEPENDENT REVIEW / HOLD / IMPLEMENTATION BLOCKED`；规格完整不等于算法验证、创新或 EC 收益成立。
+
+本轮未实现算法，未启动 Phase 0，未调用 DeepSeek/真实 LLM API，未训练模型，未启动 CI-GOM 或 IMCE-RSI。下一步只能由新的独立审查会话进行 R2 复审。
