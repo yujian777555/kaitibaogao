@@ -1320,3 +1320,30 @@ Held-out 结果：
 6. 只有估计器 gate 通过后，才设计 active acquisition 对照。
 
 当前 TCAIL 仍 HOLD；未实现完整 GLMM、未调用真实 LLM API、未训练 A800、未启动 CI-GOM/IMCE-RSI。
+
+
+## 40. TCAIL 与 scaled-FBL task-block 适配的直接合成比较（2026-11-04）
+
+新增 experiments/tcail_estimator_gate_pilot/run_fbl_comparison.py 与 FBL_COMPARISON_RESULTS.md。脚本保留每个 pair/context 的原始四格 block outcomes、block contrasts、模型输入和 held-out 指标。
+
+### Held-out 结果
+- EB q AUPRC 0.802；EB w 0.797；
+- local z-score 0.784；
+- scaled-FBL binary task-block adaptation 0.414；
+- raw contrast 0.619；context-pooled 0.598。
+- EB q 对 scaled-FBL 的 per-seed AUPRC 差 +0.3845，10/10 held-out seeds 胜，bootstrap 95% CI [0.3704,0.3990]。
+- 训练 null 95th-percentile matched thresholds：EB q precision/recall/FPR 81.5%/58.7%/5.62%；scaled-FBL 69.7%/31.5%/5.81%。
+- 8-block low-support AUPRC 0.353，仍是明显失败边界。
+
+### 结论边界
+这是正向合成信号，但 scaled-FBL 是二元 task-block adaptation，不是原论文 reproduction；EB q/w 是 Normal-normal proxy，不是完整 TCAIL M2/M3 GLMM。还未比较 cDLED-P3M、CGOMEA、GAwLL2；还未验证 FOS/GOM 下游收益。不得宣称 TCAIL 已证明。
+
+### 下一步唯一任务
+1. 做 paper-faithful FBL/scaled-FBLT 复现或清楚标注适配差异；
+2. 加入 cDLED-P3M 与 GAwLL2 的直接基线；
+3. 用相同 task-block 原始四格数据和成本比较；
+4. 实现并校准完整 Bernoulli task-block 模型，保留 held-out seeds；
+5. 测试低支持 abstention 和 FOS recovery；
+6. 只有估计器 gate 通过，才转 active acquisition。
+
+不再扩写规格，不先启动 active acquisition，不调用真实 Agent API、不训练 A800、不启动 CI-GOM/IMCE-RSI。
