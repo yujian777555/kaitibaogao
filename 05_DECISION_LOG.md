@@ -495,3 +495,12 @@ R1–R7 及 B1–B12 均只能标为 `PARTIAL（修订规格已处理）`，所�
 **决定：REQUEST CHANGES / HOLD / IMPLEMENTATION BLOCKED。** R1/R6 主定义可保留；R2、R3、R5 必须修订；R4、R6、R7 补足定义。B3、B8、B10、B11 为 REQUEST CHANGES，其余 B 项保持 PARTIAL。
 
 下一步唯一任务：只做 TCAIL V2.2 corrective specification revision R2，新增 40/41 号文件；保留 37/38/39 历史文件，不编码、不实验、不启动 Phase 0、不调用真实 LLM API、不训练模型；CI-GOM 与 IMCE-RSI 继续冻结。修订后交不同会话独立复审。
+
+
+## 决策 D-042：先执行 Oracle Linkage G2 Pilot，再转向估计器证据（2026-11-04）
+
+新增 experiments/tcail_oracle_gate_pilot/run_oracle_gate.py、RESULTS.md、requirements.txt。在简化 GOM 原型上完成 40 维 concatenated deceptive 4-bit trap 的 20 个配对种子比较，最大评价预算 5,000；Oracle FOS 39.55/40，population-MI LT 38.55/40，配对差值 +1.00，13/20 胜、6 平、1 负，Wilcoxon 单侧 p=0.000919，配对 bootstrap 95% CI [0.55,1.45]。Oracle optimum 13/20，Learned LT 2/20。12-seed additive control 四种方法均 12/12 达到最优。
+
+**决策：G2 Oracle precondition 在该合成景观上为 POSITIVE，但只证明正确 linkage 有上界价值，不证明 TCAIL 能学到它。** 该实现为简化 GOM 原型，不是官方 GOMEA；实验是 exploratory pilot，需独立 clean rerun 和更多景观族复核。
+
+下一步只做 fixed full-factorial estimator-only synthetic gate：在相同 task-block 四格数据下比较局部 posterior q/w、FBL/scaled-FBLT 风格估计、pooled/global score 和 oracle；检查 null false-link、edge AUPRC、sign-flip、abstention、FOS recovery。此 gate 暂不包含 active acquisition、retry ledger、真实 Agent 或 API，以隔离核心局部交互估计机制。若 q/w 未能在校准与强基线比较中体现增量，停止或收窄 TCAIL，不继续堆叠模块。
