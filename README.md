@@ -3,7 +3,7 @@
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
 **当前阶段：** 开题研究 / 文献系统检索与机制审查  
-**状态日期：** 2026-11-02
+**状态日期：** 2026-11-04
 
 ## 1. 项目边界（必须遵守）
 
@@ -350,3 +350,24 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 - `32_TCAIL_V2_2_SPEC_REVISION_TASK_R1.md`
 
 新增先行文献 P150–P153：FBL 2021、CGOMEA 2024、cDLED 2025、GA-side-effect interaction learning 2026。下一步只修订新的 V2.2 规格草稿，不编码、不运行 Phase 0、不调用真实 API、不训练模型。
+
+
+## 2026-11-04：TCAIL V2.2 前置精读补充（Planner Addendum R1）
+
+当前唯一算法任务仍为 TCAIL V2.2 完整规格修订；远端 main HEAD 在本轮开始时为 `903e62aa4b846ea20950b3be81c355688e0065e3`。31 号复审结论保持：B1 部分接受，TCAIL overall HOLD / IMPLEMENTATION BLOCKED。32 号 Executor 任务已存在，33/34 号草稿尚未交付。
+
+本轮对 FBL、cDLED、CGOMEA、Tinós et al. 2026 进行了原文级机制补充核验。新增 35 号 Planner Addendum，增加 B9–B12：
+- probability-scale nonlinear estimand 的 structural/practical identifiability；
+- 四格 task-block acquisition design、CRN 可行性与唯一 episode-equivalent 成本；
+- unsupported edge 与真实无边的区分，以及 missingness-aware FOS；
+- posterior prior sensitivity 与 null calibration。
+
+重要新颖性边界：
+- FBL 已有 fitness-based contrast、scaled dependency strength、LT/MP FOS 与 incremental pair probing；
+- cDLED 已有 individual-local DLED、conditional eVIG、局部结构识别和 donor mating restriction；
+- CGOMEA 已有 conditional linkage 与 solution mating filter；
+- Tinós et al. 2026 已从 GA 搜索副产物学习交互而无需额外 fitness evaluations。
+
+因此不能把上述机制单独作为 TCAIL 创新。候选贡献只能在随机昂贵 Agent rollout、task-block 相关、合法配置支持、后验校准/abstention、主动预算决策与下游 GOM 搜索收益的联合场景中接受可证伪检验。详细内容见 [35_TCAIL_V2_2_PLANNER_ADDENDUM_R1.md](35_TCAIL_V2_2_PLANNER_ADDENDUM_R1.md)。
+
+**执行边界不变：** 只修订规格；不编码、不调用 DeepSeek API、不运行 Phase 0、不训练 A800 模型；CI-GOM 与跨轮次迁移继续冻结。V2.2 草稿和 closure matrix 完成后必须交独立复审。
