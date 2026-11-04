@@ -385,3 +385,8 @@ V0.3 报告列出 68 条参考文献，正文引用编号连续。新增 CPE、H
 **当前状态：** V2.2 为 `DRAFT / PENDING INDEPENDENT REVIEW`；B1–B12 只能标为规格层 `PARTIAL`，所有校准、复现、实现和实验事项仍为 `OPEN`。编写过程中的符合性/质量复核不是正式独立数学 PASS。TCAIL 继续 `HOLD / IMPLEMENTATION BLOCKED`，CI-GOM 与 IMCE-RSI 继续冻结；规格完成不等于创新或 EC 收益成立。
 
 本轮未编写算法实现、未启动 Phase 0、未调用 DeepSeek/真实 LLM API、未训练模型。下一步唯一任务是由新的独立审查会话复核 33/34 号并给出明确处置。
+
+
+## 2026-11-04 独立复审 R1
+
+新增 36_TCAIL_V2_2_INDEPENDENT_REVIEW_R1.md。审查结论：REQUEST CHANGES；TCAIL 继续 HOLD / IMPLEMENTATION BLOCKED。下一步只做规格修订，不实现、不实验、不调用真实 API、不训练模型。CI-GOM 与 IMCE-RSI 继续冻结。
