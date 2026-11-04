@@ -515,3 +515,14 @@ Held-out AUPRC：Normal empirical-Bayes posterior q=0.802，w=0.797，local stan
 **解释：** 该结果只说明一个简单的 task-block normal-normal empirical-Bayes q/w proxy 在这个合成分布中出现小幅增量；它不是 TCAIL 的 M2/M3 GLMM，也未与 paper-faithful FBL/scaled-FBLT/cDLED 比较。不得宣称 TCAIL 已成立。
 
 下一步只做强基线验证与模型校准：复现/适配 FBL、scaled-FBLT、cDLED；在独立 held-out seeds 上检验 q/w 的 calibration、null false-link、sign-flip、abstention 和 FOS recovery。若增益消失或低支持下无法安全 abstain，则停止或收窄。Active acquisition 暂不启动。
+
+
+## 决策 D-044：EB 局部 q/w 代理在合成 task-block 设定中优于 scaled-FBL 二元适配（2026-11-04）
+
+新增 experiments/tcail_estimator_gate_pilot/run_fbl_comparison.py 与 FBL_COMPARISON_RESULTS.md，并保留完整 per-pair/context 四格数据导出能力。
+
+在 seeds 0–9 估计 prior scale 和训练-null thresholds、seeds 10–19 held-out 的设定下，EB q AUPRC=0.802，EB w=0.797，local z-score=0.784，scaled-FBL binary adaptation=0.414，raw contrast=0.619，context-pooled=0.598。EB q 对 scaled-FBL 的 held-out per-seed AUPRC 差 +0.3845，10/10 种子胜，bootstrap 95% CI [0.3704,0.3990]。两种阈值均由训练 null 的 95th percentile 校准：EB q precision/recall/FPR=81.5%/58.7%/5.62%；scaled-FBL adaptation=69.7%/31.5%/5.81%。
+
+**重要限制：** FBL 是针对 Bernoulli task-block 的 paper-setting adaptation，不是原论文复现；EB q/w 是 Normal-normal paired-contrast proxy，不是完整 TCAIL M2/M3 GLMM。未比较 cDLED-P3M、CGOMEA、GAwLL2；未运行 FOS/GOM 下游；8-block low-support AUPRC 仍仅 0.353。不得写成 TCAIL 已证明或已优于原始 FBL。
+
+下一步只做同数据/同预算下的 paper-faithful FBL/scaled-FBLT、cDLED-P3M 和 GAwLL2 比较，并实现/校准主规格所需的 task-block Bernoulli 模型。若优势在强基线或低支持场景消失，则停止/收窄；通过估计器 gate 后再测 active acquisition。
