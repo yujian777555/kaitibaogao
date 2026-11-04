@@ -420,3 +420,10 @@ R1 的鲁棒 posterior loss、worst-expected fantasy 聚合、边际 Fisher 完�
 - Fisher 连续参数向量、paired CRN 映射和 generation/cycle 索引仍需澄清。
 
 **决定：REQUEST CHANGES / HOLD / IMPLEMENTATION BLOCKED。** B3、B8、B10、B11 需修订；其余 B 项保持 PARTIAL。下一步只做 corrective specification revision R2，不编码、不启动 Phase 0、不调用真实 LLM API、不训练模型；CI-GOM 与 IMCE-RSI 继续冻结。
+
+
+## 2026-11-04 TCAIL：Oracle Linkage Gate 首轮合成实验
+
+新增 experiments/tcail_oracle_gate_pilot/，包含可复现实验脚本、依赖和结果报告。20 个配对种子、40 维 concatenated deceptive trap、最大 5,000 objective evaluations：Oracle FOS 平均 39.55/40，population-MI LT 平均 38.55/40；13 胜、6 平、1 负，paired Wilcoxon one-sided p=0.000919，bootstrap 95% CI [0.55,1.45]。Oracle 全局最优命中 13/20，Learned LT 为 2/20。12-seed additive control 中四种方法均 12/12 达到最优。
+
+**结论边界：** 这只支持 Oracle local linkage 对简化 GOM 原型在该 deceptive-trap 场景有上界价值；不是 TCAIL estimator、FBL/cDLED 对比、主动采样或真实 Agent 的验证。下一步不继续扩写理论规格，直接做 fixed full-factorial 的 estimator-only synthetic gate，比较局部 posterior q/w 与 FBL/scaled-FBLT 风格对照；active acquisition 和 retry 暂不纳入该 gate。TCAIL 整体仍 HOLD，未授权真实 API/A800/CI-GOM。
