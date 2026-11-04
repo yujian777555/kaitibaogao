@@ -504,3 +504,14 @@ R1–R7 及 B1–B12 均只能标为 `PARTIAL（修订规格已处理）`，所�
 **决策：G2 Oracle precondition 在该合成景观上为 POSITIVE，但只证明正确 linkage 有上界价值，不证明 TCAIL 能学到它。** 该实现为简化 GOM 原型，不是官方 GOMEA；实验是 exploratory pilot，需独立 clean rerun 和更多景观族复核。
 
 下一步只做 fixed full-factorial estimator-only synthetic gate：在相同 task-block 四格数据下比较局部 posterior q/w、FBL/scaled-FBLT 风格估计、pooled/global score 和 oracle；检查 null false-link、edge AUPRC、sign-flip、abstention、FOS recovery。此 gate 暂不包含 active acquisition、retry ledger、真实 Agent 或 API，以隔离核心局部交互估计机制。若 q/w 未能在校准与强基线比较中体现增量，停止或收窄 TCAIL，不继续堆叠模块。
+
+
+## 决策 D-043：Estimator-only q/w 代理出现小幅正向信号，但 TCAIL 仍未证实（2026-11-04）
+
+新增 experiments/tcail_estimator_gate_pilot/run_estimator_pilot.py、RESULTS.md、requirements.txt。采用 20 个合成种子（0–9 训练先验尺度，10–19 held-out），每 seed 200 pairs × 2 parent contexts，含 task-block Bernoulli 四格数据、parent sign flip、null/weak/strong 和 unsupported/low-support。
+
+Held-out AUPRC：Normal empirical-Bayes posterior q=0.802，w=0.797，local standardized contrast=0.785，Student-t q=0.767，raw local contrast=0.619，context-pooled contrast=0.598。q 的 Brier=0.153；q≥0.8 时 precision=91.1%、recall=38.1%、FPR=1.57%。10/10 held-out seeds 的 q AUPRC 高于 standardized contrast，平均差 +0.0169，seed-level bootstrap 95% CI [0.0120,0.0221]。但 8-block low-support 子集 AUPRC=0.353。
+
+**解释：** 该结果只说明一个简单的 task-block normal-normal empirical-Bayes q/w proxy 在这个合成分布中出现小幅增量；它不是 TCAIL 的 M2/M3 GLMM，也未与 paper-faithful FBL/scaled-FBLT/cDLED 比较。不得宣称 TCAIL 已成立。
+
+下一步只做强基线验证与模型校准：复现/适配 FBL、scaled-FBLT、cDLED；在独立 held-out seeds 上检验 q/w 的 calibration、null false-link、sign-flip、abstention 和 FOS recovery。若增益消失或低支持下无法安全 abstain，则停止或收窄。Active acquisition 暂不启动。
