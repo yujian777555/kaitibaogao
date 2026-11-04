@@ -436,3 +436,12 @@ R1 的鲁棒 posterior loss、worst-expected fantasy 聚合、边际 Fisher 完�
 Held-out AUPRC：EB posterior q 0.802，EB posterior w 0.797，local standardized contrast 0.785，Student-t q 0.767，local raw contrast 0.619，context-pooled contrast 0.598。q 的 Brier 0.153；q≥0.8 时 precision 91.1%、recall 38.1%、FPR 1.57%。10 个 held-out seed 的 q AUPRC 均高于 standardized contrast，平均差 +0.0169，seed-level bootstrap 95% CI [0.0120,0.0221]。
 
 **边界：** 这是 paired task-block normal-normal empirical-Bayes q/w proxy，不是完整 M2/M3 GLMM；对照不是 paper-exact FBL/scaled-FBLT；生成器也不是 logistic GLMM。8-block low-support 子集 AUPRC 仅 0.353。该结果是小幅正向信号，不是 TCAIL 已验证。下一步必须做 paper-faithful FBL/scaled-FBLT/cDLED 对照、校准与 FOS recovery；不转入 active acquisition，除非估计器 gate 先通过。
+
+
+## 2026-11-04 TCAIL：加入 scaled-FBL task-block 二元适配对照
+
+新增 experiments/tcail_estimator_gate_pilot/run_fbl_comparison.py 与 FBL_COMPARISON_RESULTS.md。该实验在同一四格 task-block Bernoulli 数据上比较 EB posterior q/w 与 scaled-FBL 的二元任务块适配；训练 seeds 0–9 仅用于 EB prior scale 与两种 null threshold 校准，seeds 10–19 为 held-out。
+
+Held-out AUPRC：EB q=0.802，EB w=0.797，local z-score=0.784，scaled-FBL adaptation=0.414，raw contrast=0.619，context-pooled=0.598。EB q 与 scaled-FBL adaptation 的 per-seed AUPRC 差为 +0.3845，10/10 held-out seeds 胜，seed-level bootstrap 95% CI [0.3704,0.3990]。在训练 null 95th-percentile 匹配阈值下，EB q precision/recall/FPR=81.5%/58.7%/5.62%；scaled-FBL adaptation=69.7%/31.5%/5.81%。
+
+**边界：** scaled-FBL 是 binary task-block adaptation，不是原论文复现；EB q/w 是 Normal-normal proxy，不是完整 TCAIL M2/M3 GLMM；尚未比较 cDLED-P3M、CGOMEA、GAwLL2，也未验证 FOS/GOM 下游收益。低支持 8-block 子集 AUPRC=0.353。结果仅为正向合成信号。
