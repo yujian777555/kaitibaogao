@@ -1211,3 +1211,61 @@ TCAIL 继续 `HOLD / IMPLEMENTATION BLOCKED`；CI-GOM 和 IMCE-RSI 继续冻结�
 逐项检查：R1 鲁棒集合与每模型损失；R2 MCSE 区间方向、非正停止、正收益资格和重复查看；R3 多轮 retry/continuation/terminal 账本；R4 边际 GLMM Fisher、Schur 条件、完整秩和 draw-wise 分位门；R5 support/positive/unknown 与 FOS 更新；R6 worst-expected/model-average/product coupling 及 MCSE；R7 活动图集合、权重、cycle ID 和旧快照失效。检查公式、状态机、伪代码和主控制流是否一致，并检查 B1–B12 的 OPEN 项是否被保留。
 
 对每个问题给出 ACCEPT / REQUEST CHANGES 及具体章节、公式和伪代码证据；未解决项保持 OPEN。不要实现算法、启动 Phase 0、调用真实 LLM API、训练模型或启动 CI-GOM/IMCE-RSI。规格审查通过也不等于创新成立；后续实现、合成、真实 Agent 和下游 EC Gate 仍须分别验证。完成后按 REPOSITORY_MAINTENANCE_POLICY.md 更新审查报告、README、05_DECISION_LOG 和 SESSION_HANDOFF，提交并核验远端 main。
+
+
+## 37. TCAIL V2.2 Revision R1 独立复审 R2 — REQUEST CHANGES（2026-11-04）
+
+### 审查基线与交付
+- R2 审查基线：4f15ac303936817cc2bf122e649fff2331c9b1dc。
+- 新增 39_TCAIL_V2_2_INDEPENDENT_REVIEW_R2.md。
+- README 已更新；决策记录为 D-041。
+- 37/38 号规格与矩阵未修改；33/34/36 号历史文件未修改。
+
+### 结论
+**REQUEST CHANGES / HOLD / IMPLEMENTATION BLOCKED。**
+
+已接受的规格进步：R1 的 max_M L_M 鲁棒决策、worst-expected max_m E_m[H] 主聚合、边际 GLMM Fisher 完整 target-rank 门、acquisition cycle 冻结原则。
+
+仍需修订：
+1. **R2-A：** A_L/A_U 必须纳入当前基准风险 R(D) 的 posterior MCSE、优化误差和数值误差；若有精确证书则明确给出。
+2. **R2-B：** sign alpha 明确分配两个模型、N 个候选和所有 looks；rank alpha 明确分配所有候选/rival comparisons；定义 PRE_REGISTERED_MC_Z。
+3. **R2-C：** 说明 posterior/fantasy draws 的 IID 或 MCMC 性质；对自相关、nested posterior fitting、quadrature 和 solver error 给出 MCSE/误差处理。
+4. **R3-A：** REUSABLE 状态但 cache miss 必须 fail-closed 或从不可变 attempt record 安全重建；不得被计划为 retry continuation 后由执行器 BREAK 并返回 OK。
+5. **R3-B：** 明确执行前持久化 attempt reservation/IN_FLIGHT；崩溃恢复使用 UNKNOWN_OUTCOME/reconciliation，不得复用 attempt ID 或漏计成本。
+6. **R4-A：** Fisher Hessian 的参数向量只含连续可微参数；离散 nuisance 需边际化或逐状态计算。
+7. **R5-A：** 将 NOT_SELECTED 与 UNRESOLVED 分开；NOT_SELECTED 属于 Q_g，已经通过基础支持/信息门，不能直接计为 unknown。分别定义 data-support coverage 和 similarity-resolved coverage。
+8. **R6-A：** 冻结跨候选计算层 CRN 的底层随机变量映射，或不使用 paired MCSE。
+9. **R7-A：** generation/RSI-round index 与 acquisition-cycle index 使用不同符号，并定义两者映射。
+
+B3、B8、B10、B11 为 REQUEST CHANGES；其余 B1/B2/B4/B5/B6/B7/B9/B12 保持 PARTIAL。所有校准、认证、实现和实验继续 OPEN。
+
+### 下一轮唯一任务
+只做 **TCAIL V2.2 corrective specification revision R2**，创建：
+- 40_TCAIL_FORMAL_SPECIFICATION_V2_2_REVISION_R2.md
+- 41_TCAIL_V2_2_REVISION_CHANGELOG_AND_CLOSURE_MATRIX_R2.md
+
+保留 37/38/39 号及所有历史文件，不覆盖。每个修订必须同步公式、伪代码、状态机和边界反例；未校准事项保持 OPEN。完成后交不同会话进行下一轮独立复审。
+
+### 可直接复制的 Executor 提示词
+
+你是 yujian777555/kaitibaogao 项目的规格修订 Executor。唯一仓库是该仓库 main，不得混入 openissue、agentfotagent、GLEPPO 或其他项目。
+
+先核验远端 main HEAD，读取 README、05_DECISION_LOG、SESSION_HANDOFF、REPOSITORY_MAINTENANCE_POLICY，以及 33、34、36、37、38、39 号文件和相关 31、32、35 号历史约束。
+
+唯一任务：依据 39 号独立复审报告，对 TCAIL V2.2 做 corrective specification revision R2，创建 40 号完整规格和 41 号变更/闭合矩阵。不得覆盖 33/34/36/37/38/39 历史文件。
+
+必须修复：
+- 当前基准风险 R(D) 的 MCSE/数值/优化误差纳入 acquisition A_L/A_U；
+- sign alpha 对两个生成模型、所有候选和 look 的完整分配；
+- rank alpha 对所有 rival comparisons 的完整分配，并定义 PRE_REGISTERED_MC_Z；
+- posterior/fantasy IID 或 MCMC 抽样条件、autocorrelation、nested MCSE 和 quadrature/solver error；
+- REUSABLE ledger 与 cache miss 的 fail-closed/recovery；
+- 外部执行前的 durable attempt reservation、IN_FLIGHT、UNKNOWN_OUTCOME 和 crash reconciliation；
+- Fisher Hessian 的连续可微参数向量与离散 nuisance 处理；
+- NOT_SELECTED、SUPPORTED_PRACTICAL_NULL、SELECTED_SUPPORTED、UNRESOLVED 四类边的分离，重新定义 data-support coverage 与 similarity-resolved coverage；
+- paired MCSE 的底层 CRN 映射；
+- generation index 与 acquisition-cycle index 的分离。
+
+要求所有公式、状态机、伪代码和主控制流跨章节一致；每项给出边界反例；所有经验校准保持 OPEN；不得把规格修订写成算法 PASS。
+
+严格禁止：不写算法实现、不启动 Phase 0、不调用 DeepSeek/真实 LLM API、不训练模型、不启动 CI-GOM 或 IMCE-RSI。完成后更新 README、05_DECISION_LOG、SESSION_HANDOFF，提交并推送 main，重新核验远端 HEAD 和文件内容，返回完整 SHA 与验证结果。
