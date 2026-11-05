@@ -185,4 +185,4 @@ if __name__=="__main__":
     print(rendered)
     from pathlib import Path
     output = Path(__file__).parent / "pilot_a2_summary.json"
-    output.write_text(rendered + "\\n", encoding="utf-8")
+    output.write_text(rendered + "\n", encoding="utf-8")
