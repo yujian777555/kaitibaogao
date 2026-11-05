@@ -507,3 +507,5 @@ TCAIL R1 的确认性 Estimator Gate 已失败（TCAIL q macro-AUPRC 0.6736 vs s
 **Gate：CONDITIONAL HOLD。** 该小型确定性场景中，手工状态规则已达到 oracle 的成功/安全表现，尚未证明足够的成功率优化空间；仅剩动作效率差距，且 oracle 使用隐藏信息。因此暂不启动 A800 训练、ARWM 或正式 EC 搜索。下一步只允许 bounded Pilot A-2：多工具幂等契约、同观测下复合/潜在故障、变化的读延迟与补偿可用性、按 task/fault family 隔离的测试。若简单规则仍匹配 oracle，则停止该方向。
 
 CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作后的文本状态，并与 Agent 策略闭环自蒸馏共演化；HarnessMDP 学习冻结 LLM 的外部 harness controller；TRACE/SENTINEL 已覆盖失败驱动的 Agent 训练；EvoTool 已覆盖 blame-aware tool policy evolution。新贡献不能是泛化的“world model + EA”或“失败轨迹训练”。A800 训练候选必须证明配对反事实动作后果数据、多任务副作用风险校准与不确定性门控确实改善固定真实 rollout 预算下的约束演化搜索。
+
+- `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`：ARWM 训练目标、与 EC 的接口、强基线和 M1–M3 停止门。
