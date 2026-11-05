@@ -1,0 +1,425 @@
+{
+  "metadata": {
+    "status": "EXPLORATORY_PILOT_A2",
+    "total_policy_episodes": 41600,
+    "episodes_per_policy": 5200,
+    "tools": {
+      "inventory": {
+        "idempotency": "native",
+        "compensable": true,
+        "consistency": "strong",
+        "max_visibility_delay": 0
+      },
+      "order": {
+        "idempotency": "keyed",
+        "compensable": true,
+        "consistency": "eventual",
+        "max_visibility_delay": 3
+      },
+      "calendar": {
+        "idempotency": "none",
+        "compensable": true,
+        "consistency": "eventual",
+        "max_visibility_delay": 5
+      },
+      "ledger": {
+        "idempotency": "native",
+        "compensable": false,
+        "consistency": "strong",
+        "max_visibility_delay": 0
+      }
+    },
+    "task_families": {
+      "inventory": "reserve_stock",
+      "order": "create_order",
+      "calendar": "book_appointment",
+      "ledger": "post_ledger_entry"
+    },
+    "fault_profiles": [
+      "timeout_before",
+      "timeout_after",
+      "partial_commit",
+      "delayed_commit_timeout",
+      "timeout_rate_before",
+      "timeout_rate_after",
+      "partial_delayed_rate",
+      "schema_before",
+      "schema_rate_before",
+      "permission_before",
+      "permission_timeout_before",
+      "partial_timeout_delayed",
+      "partial_compensation_unavailable"
+    ],
+    "policies": [
+      "blind_retry",
+      "verify_then_retry",
+      "idempotency_only",
+      "conservative_escalate",
+      "contract_basic",
+      "contract_bounded",
+      "contract_optimized",
+      "oracle_upper_bound"
+    ],
+    "seeds": {
+      "train": [
+        0,
+        39
+      ],
+      "validation": [
+        40,
+        59
+      ],
+      "heldout_test": [
+        60,
+        99
+      ]
+    },
+    "heldout_tool": "ledger",
+    "oracle_uses_hidden_state": true,
+    "policy_observation_fields": [
+      "tool",
+      "task_family",
+      "declared_contract",
+      "public_failure_signals",
+      "schema_valid",
+      "permission",
+      "retry_after"
+    ],
+    "no_llm_api": true,
+    "no_a800_training": true,
+    "no_evolutionary_search": true,
+    "limitations": [
+      "synthetic deterministic simulator; not a real production tool environment",
+      "single-operation recovery episodes; no multi-step cross-tool transaction yet",
+      "train/validation/test seed ranges are parameter splits, not learned-model splits",
+      "ledger is a single held-out tool family; transfer evidence is preliminary",
+      "oracle upper bound reads hidden simulator state and is not implementable"
+    ]
+  },
+  "all_episodes": {
+    "blind_retry": {
+      "task_success": 0.230769,
+      "safe_resolution": 0.230769,
+      "duplicate_side_effect": 0.192308,
+      "invariant_violation": 0.192308,
+      "unresolved": 0.769231,
+      "escalated": 0.0,
+      "compensated": 0.0,
+      "tool_actions": 1.0,
+      "wait_units": 0.0
+    },
+    "verify_then_retry": {
+      "task_success": 0.346154,
+      "safe_resolution": 0.346154,
+      "duplicate_side_effect": 0.076923,
+      "invariant_violation": 0.076923,
+      "unresolved": 0.653846,
+      "escalated": 0.0,
+      "compensated": 0.091731,
+      "tool_actions": 1.937885,
+      "wait_units": 0.0
+    },
+    "idempotency_only": {
+      "task_success": 0.288462,
+      "safe_resolution": 0.480769,
+      "duplicate_side_effect": 0.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.519231,
+      "escalated": 0.25,
+      "compensated": 0.0,
+      "tool_actions": 1.0,
+      "wait_units": 0.0
+    },
+    "conservative_escalate": {
+      "task_success": 0.230769,
+      "safe_resolution": 1.0,
+      "duplicate_side_effect": 0.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.0,
+      "escalated": 1.0,
+      "compensated": 0.0,
+      "tool_actions": 1.0,
+      "wait_units": 0.0
+    },
+    "contract_basic": {
+      "task_success": 0.618654,
+      "safe_resolution": 0.915385,
+      "duplicate_side_effect": 0.058654,
+      "invariant_violation": 0.058654,
+      "unresolved": 0.084615,
+      "escalated": 0.296731,
+      "compensated": 0.110385,
+      "tool_actions": 2.158462,
+      "wait_units": 0.612885
+    },
+    "contract_bounded": {
+      "task_success": 0.699808,
+      "safe_resolution": 1.0,
+      "duplicate_side_effect": 0.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.0,
+      "escalated": 0.300192,
+      "compensated": 0.161346,
+      "tool_actions": 2.5,
+      "wait_units": 1.9975
+    },
+    "contract_optimized": {
+      "task_success": 0.699808,
+      "safe_resolution": 1.0,
+      "duplicate_side_effect": 0.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.0,
+      "escalated": 0.300192,
+      "compensated": 0.161346,
+      "tool_actions": 2.346154,
+      "wait_units": 1.709038
+    },
+    "oracle_upper_bound": {
+      "task_success": 0.699808,
+      "safe_resolution": 1.0,
+      "duplicate_side_effect": 0.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.0,
+      "escalated": 0.300192,
+      "compensated": 0.161346,
+      "tool_actions": 1.392115,
+      "wait_units": 0.612885
+    }
+  },
+  "split_summary": {
+    "train_seed_range": [
+      0,
+      39
+    ],
+    "validation_seed_range": [
+      40,
+      59
+    ],
+    "heldout_test_seed_range": [
+      60,
+      99
+    ],
+    "heldout_test_all_tools": {
+      "blind_retry": {
+        "task_success": 0.230769,
+        "safe_resolution": 0.230769,
+        "duplicate_side_effect": 0.192308,
+        "invariant_violation": 0.192308,
+        "unresolved": 0.769231,
+        "escalated": 0.0,
+        "compensated": 0.0,
+        "tool_actions": 1.0,
+        "wait_units": 0.0
+      },
+      "verify_then_retry": {
+        "task_success": 0.346154,
+        "safe_resolution": 0.346154,
+        "duplicate_side_effect": 0.076923,
+        "invariant_violation": 0.076923,
+        "unresolved": 0.653846,
+        "escalated": 0.0,
+        "compensated": 0.091827,
+        "tool_actions": 1.937981,
+        "wait_units": 0.0
+      },
+      "idempotency_only": {
+        "task_success": 0.288462,
+        "safe_resolution": 0.480769,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.519231,
+        "escalated": 0.25,
+        "compensated": 0.0,
+        "tool_actions": 1.0,
+        "wait_units": 0.0
+      },
+      "conservative_escalate": {
+        "task_success": 0.230769,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 1.0,
+        "compensated": 0.0,
+        "tool_actions": 1.0,
+        "wait_units": 0.0
+      },
+      "contract_basic": {
+        "task_success": 0.622115,
+        "safe_resolution": 0.917788,
+        "duplicate_side_effect": 0.056731,
+        "invariant_violation": 0.056731,
+        "unresolved": 0.082212,
+        "escalated": 0.295673,
+        "compensated": 0.113942,
+        "tool_actions": 2.161058,
+        "wait_units": 0.603846
+      },
+      "contract_bounded": {
+        "task_success": 0.7,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 0.3,
+        "compensated": 0.161538,
+        "tool_actions": 2.5,
+        "wait_units": 1.988462
+      },
+      "contract_optimized": {
+        "task_success": 0.7,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 0.3,
+        "compensated": 0.161538,
+        "tool_actions": 2.346154,
+        "wait_units": 1.7
+      },
+      "oracle_upper_bound": {
+        "task_success": 0.7,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 0.3,
+        "compensated": 0.161538,
+        "tool_actions": 1.392308,
+        "wait_units": 0.603846
+      }
+    },
+    "heldout_test_ledger_tool": {
+      "blind_retry": {
+        "task_success": 0.307692,
+        "safe_resolution": 0.307692,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.692308,
+        "escalated": 0.0,
+        "compensated": 0.0,
+        "tool_actions": 1.0,
+        "wait_units": 0.0
+      },
+      "verify_then_retry": {
+        "task_success": 0.307692,
+        "safe_resolution": 0.307692,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.692308,
+        "escalated": 0.0,
+        "compensated": 0.0,
+        "tool_actions": 1.769231,
+        "wait_units": 0.0
+      },
+      "idempotency_only": {
+        "task_success": 0.307692,
+        "safe_resolution": 0.307692,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.692308,
+        "escalated": 0.0,
+        "compensated": 0.0,
+        "tool_actions": 1.0,
+        "wait_units": 0.0
+      },
+      "conservative_escalate": {
+        "task_success": 0.230769,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 1.0,
+        "compensated": 0.0,
+        "tool_actions": 1.0,
+        "wait_units": 0.0
+      },
+      "contract_basic": {
+        "task_success": 0.538462,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 0.461538,
+        "compensated": 0.0,
+        "tool_actions": 1.923077,
+        "wait_units": 0.6
+      },
+      "contract_bounded": {
+        "task_success": 0.538462,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 0.461538,
+        "compensated": 0.0,
+        "tool_actions": 1.923077,
+        "wait_units": 0.6
+      },
+      "contract_optimized": {
+        "task_success": 0.538462,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 0.461538,
+        "compensated": 0.0,
+        "tool_actions": 1.846154,
+        "wait_units": 0.6
+      },
+      "oracle_upper_bound": {
+        "task_success": 0.538462,
+        "safe_resolution": 1.0,
+        "duplicate_side_effect": 0.0,
+        "invariant_violation": 0.0,
+        "unresolved": 0.0,
+        "escalated": 0.461538,
+        "compensated": 0.0,
+        "tool_actions": 1.230769,
+        "wait_units": 0.6
+      }
+    }
+  },
+  "paired_bootstrap": {
+    "heldout_all_tools_success_contract_optimized_vs_contract_bounded": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "independent_unit": "seed; paired across policies",
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "heldout_all_tools_actions_contract_optimized_vs_contract_bounded": {
+      "mean_difference_A_minus_B": -0.153846,
+      "ci95": [
+        -0.153846,
+        -0.153846
+      ],
+      "independent_unit": "seed; paired across policies",
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "heldout_all_tools_success_contract_optimized_vs_oracle": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "independent_unit": "seed; paired across policies",
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "heldout_all_tools_actions_contract_optimized_vs_oracle": {
+      "mean_difference_A_minus_B": 0.953846,
+      "ci95": [
+        0.950481,
+        0.957692
+      ],
+      "independent_unit": "seed; paired across policies",
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    }
+  }
+}
