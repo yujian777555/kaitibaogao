@@ -331,7 +331,7 @@ def summarize(rows):
     return m
 
 def main():
-    global TASK_SUCCESS_FLOOR
+    global TASK_SUCCESS_FLOOR, ESCALATION_CEILING
     parser=argparse.ArgumentParser()
     parser.add_argument("--output-dir",default="experiments/pilot_b3_saga_evolution/results")
     args=parser.parse_args()
