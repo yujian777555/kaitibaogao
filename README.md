@@ -456,3 +456,14 @@ Held-out AUPRC：EB q=0.802，EB w=0.797，local z-score=0.784，scaled-FBL adap
 **下一步不再先修完整 active-acquisition/retry 规格。** 先 clean rerun 与代码审计，再实现/校准 Bernoulli task-block estimator，公平比较 FBL/scaled-FBLT、cDLED-P3M、CGOMEA linkage；只有 estimator gate 通过才跑下游 GOM。下游总预算必须包含 discovery episodes 和 search episodes。所有方法共用 held-out task blocks、seed 和 episode-equivalent 预算。
 
 TCAIL 仍未证明；这是一项有限的合成研究原型证据任务，不授权真实 Agent API、A800 训练、CI-GOM 或 IMCE-RSI。具体 generator、split、metrics、GO/NO-GO 和停止规则见 42 号文件。
+
+
+## 2026-11-05：R1-A 三个现有 pilot 已 clean rerun 并完成修正版审计
+
+新增 `experiments/tcail_confirmatory_r1/`。原始代码与修正版输出分离保存，含原始 CSV/JSON、运行日志、独立重算、环境锁和 R1A_AUDIT_RESULTS.md。
+
+原报告数值均可从原始 CSV 独立重算。FBL 四格顺序和 gate 恒等式在 438,400 个 block 上误差为 0；但现有 scaled score 是绝对值比率适配，不是论文 signed Eq.(7)，训练-null epsilon=0.25 也不是原论文机器精度阈值。无 gate/零 epsilon 的绝对值适配 AUPRC 为 0.379；signed Eq.(7) 有 2,811/3,800 个领域违规输出，不能作完整公平基线。
+
+Oracle 修正版统一跨方法 mixing seed，并验证初始种群哈希一致。Oracle−Learned LT 的配对均值从原代码 +1.00 变为修正版 +1.30，95% bootstrap CI [0.60,2.00]；这只保留 Oracle 上界信号，不证明 TCAIL。
+
+**当前状态：** 真正 Bernoulli task/block M2/M3、Estimator Gate 和 TCAIL-FOS GOM Gate 尚未完成；不得将 R1-A 写成 GO。下一步直接实现并校准核心估计器。

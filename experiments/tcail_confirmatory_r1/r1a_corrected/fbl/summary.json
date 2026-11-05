@@ -1,0 +1,208 @@
+{
+  "design": {
+    "train_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "test_seeds": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "pairs_per_seed": 200,
+    "contexts": 2,
+    "delta_local": 0.08,
+    "strong_delta": 0.2,
+    "weak_delta": 0.04,
+    "full_task_blocks": 128,
+    "low_support_blocks": 8,
+    "unsupported_pairs_per_seed": 10,
+    "shared_probability_shift_sd": 0.04,
+    "eb_prior": "Normal(0,tau^2); method-of-moments tau fitted on train seeds only",
+    "tau": 0.11131319939716265,
+    "q_threshold_from_train_null_95pct": 0.6505319243015749,
+    "fbl_epsilon_from_train_null_95pct": 0.25
+  },
+  "heldout": {
+    "n_supported_pair_contexts": 3800,
+    "positive_labels": 1130,
+    "auprc": {
+      "eb_q": 0.8015013530322979,
+      "eb_w": 0.797403416694798,
+      "scaled_fbl_adaptation": 0.4137607399897001,
+      "scaled_fbl_abs_ungated": 0.37921717482012807,
+      "scaled_fbl_abs_epsilon_zero": 0.37921717482012807,
+      "fbl_paper_signed_valid_only": 0.5273122322737767,
+      "student_t_q": 0.7665278657577131,
+      "local_zscore": 0.7841372551312504,
+      "local_raw_contrast": 0.6192286880950574,
+      "context_pooled": 0.5978360502182086
+    },
+    "fbl_paper_signed_domain": {
+      "valid_n": 989,
+      "total_supported_n": 3800,
+      "violation_n": 2811,
+      "warning": "Valid-only AUPRC excludes undefined/out-of-range Eq.(7) outputs and is not a complete fair baseline result."
+    },
+    "brier_q": {
+      "eb_q": 0.15329601288907355,
+      "student_t_q": 0.2551438846783575
+    },
+    "matched_null_calibration_operating_points": {
+      "eb_q": {
+        "precision": 0.8154981549815498,
+        "recall": 0.5867256637168141,
+        "fpr": 0.056179775280898875,
+        "selected": 813
+      },
+      "scaled_fbl_adaptation": {
+        "precision": 0.6966731898238747,
+        "recall": 0.31504424778761064,
+        "fpr": 0.05805243445692884,
+        "selected": 511
+      }
+    },
+    "low_support_eb_q_auprc": 0.3527751860344952,
+    "full_support_eb_q_auprc": 0.8295180173509906,
+    "per_seed": [
+      {
+        "seed": 10,
+        "ap_q_eb": 0.8361342166596831,
+        "ap_fbl_scaled": 0.42844097504951806,
+        "ap_fbl_abs_ungated": 0.38817495416508563,
+        "ap_fbl_abs_epsilon_zero": 0.38817495416508563,
+        "ap_fbl_paper_signed": 0.5608423311761055,
+        "paper_valid_n": 93,
+        "ap_zscore": 0.8242724273780327
+      },
+      {
+        "seed": 11,
+        "ap_q_eb": 0.81316596737813,
+        "ap_fbl_scaled": 0.38382787705174704,
+        "ap_fbl_abs_ungated": 0.3839404811783668,
+        "ap_fbl_abs_epsilon_zero": 0.3839404811783668,
+        "ap_fbl_paper_signed": 0.5271115265260408,
+        "paper_valid_n": 101,
+        "ap_zscore": 0.7945964348703489
+      },
+      {
+        "seed": 12,
+        "ap_q_eb": 0.7980074341847212,
+        "ap_fbl_scaled": 0.4044885035566706,
+        "ap_fbl_abs_ungated": 0.37054813258614083,
+        "ap_fbl_abs_epsilon_zero": 0.37054813258614083,
+        "ap_fbl_paper_signed": 0.6195480422635077,
+        "paper_valid_n": 100,
+        "ap_zscore": 0.7911836349061786
+      },
+      {
+        "seed": 13,
+        "ap_q_eb": 0.8261013509408557,
+        "ap_fbl_scaled": 0.43630971966239945,
+        "ap_fbl_abs_ungated": 0.41317504018829987,
+        "ap_fbl_abs_epsilon_zero": 0.41317504018829987,
+        "ap_fbl_paper_signed": 0.5606218409207985,
+        "paper_valid_n": 104,
+        "ap_zscore": 0.8085178422994538
+      },
+      {
+        "seed": 14,
+        "ap_q_eb": 0.8058445497320189,
+        "ap_fbl_scaled": 0.4205855034871164,
+        "ap_fbl_abs_ungated": 0.39375890514126893,
+        "ap_fbl_abs_epsilon_zero": 0.39375890514126893,
+        "ap_fbl_paper_signed": 0.4775341754785928,
+        "paper_valid_n": 98,
+        "ap_zscore": 0.7745879296567959
+      },
+      {
+        "seed": 15,
+        "ap_q_eb": 0.784931061662435,
+        "ap_fbl_scaled": 0.4193977170105888,
+        "ap_fbl_abs_ungated": 0.38481163291705867,
+        "ap_fbl_abs_epsilon_zero": 0.38481163291705867,
+        "ap_fbl_paper_signed": 0.5620747822304396,
+        "paper_valid_n": 100,
+        "ap_zscore": 0.7672546311156877
+      },
+      {
+        "seed": 16,
+        "ap_q_eb": 0.8128913801059096,
+        "ap_fbl_scaled": 0.42755917764034795,
+        "ap_fbl_abs_ungated": 0.3291469020164714,
+        "ap_fbl_abs_epsilon_zero": 0.3291469020164714,
+        "ap_fbl_paper_signed": 0.43251106559267116,
+        "paper_valid_n": 91,
+        "ap_zscore": 0.7844992592720457
+      },
+      {
+        "seed": 17,
+        "ap_q_eb": 0.8494510568844555,
+        "ap_fbl_scaled": 0.463108528413209,
+        "ap_fbl_abs_ungated": 0.4294780294963086,
+        "ap_fbl_abs_epsilon_zero": 0.4294780294963086,
+        "ap_fbl_paper_signed": 0.6781269825739581,
+        "paper_valid_n": 116,
+        "ap_zscore": 0.8306259118866142
+      },
+      {
+        "seed": 18,
+        "ap_q_eb": 0.7537906472374559,
+        "ap_fbl_scaled": 0.3986076144690416,
+        "ap_fbl_abs_ungated": 0.35389220752642925,
+        "ap_fbl_abs_epsilon_zero": 0.35389220752642925,
+        "ap_fbl_paper_signed": 0.4965032006526479,
+        "paper_valid_n": 85,
+        "ap_zscore": 0.7391190681088976
+      },
+      {
+        "seed": 19,
+        "ap_q_eb": 0.7431852650977504,
+        "ap_fbl_scaled": 0.39617083492924504,
+        "ap_fbl_abs_ungated": 0.38765321950774034,
+        "ap_fbl_abs_epsilon_zero": 0.38765321950774034,
+        "ap_fbl_paper_signed": 0.5432052947606412,
+        "paper_valid_n": 101,
+        "ap_zscore": 0.7395602873415628
+      }
+    ],
+    "paired_seed_ap_difference_q_minus_fbl": {
+      "mean": 0.3845006478613532,
+      "wins_ties_losses": [
+        10,
+        0,
+        0
+      ],
+      "exact_sign_test_one_sided_p": 0.0009765625,
+      "bootstrap_95pct_ci": [
+        0.3703628861928378,
+        0.3989664925257294
+      ]
+    }
+  },
+  "limitations": [
+    "This is a binary task-block adaptation of scaled FBL, not an original-paper reproduction.",
+    "The EB q/w model is a Normal-normal paired-contrast proxy, not the TCAIL M2/M3 GLMM.",
+    "The shared block effect is an additive probability perturbation, not a logistic GLMM.",
+    "The synthetic task distribution is deliberately narrow; more landscapes and independent reruns are required.",
+    "Low-support edge recovery remains poor; unresolved pairs must abstain.",
+    "The pre-existing fbl_scaled score is an absolute-ratio adaptation, not Eq.(7)'s signed ratio.",
+    "Paper-signed Eq.(7) is audited separately; undefined/out-of-range outputs are flagged and excluded only from its explicitly valid-only diagnostic.",
+    "The calibrated epsilon and zero-epsilon/no-gate diagnostics are distinct; no original-paper threshold equivalence is claimed."
+  ]
+}

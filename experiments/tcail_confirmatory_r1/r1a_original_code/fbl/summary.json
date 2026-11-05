@@ -1,0 +1,156 @@
+{
+  "design": {
+    "train_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "test_seeds": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "pairs_per_seed": 200,
+    "contexts": 2,
+    "delta_local": 0.08,
+    "strong_delta": 0.2,
+    "weak_delta": 0.04,
+    "full_task_blocks": 128,
+    "low_support_blocks": 8,
+    "unsupported_pairs_per_seed": 10,
+    "shared_probability_shift_sd": 0.04,
+    "eb_prior": "Normal(0,tau^2); method-of-moments tau fitted on train seeds only",
+    "tau": 0.11131319939716265,
+    "q_threshold_from_train_null_95pct": 0.6505319243015749,
+    "fbl_epsilon_from_train_null_95pct": 0.25
+  },
+  "heldout": {
+    "n_supported_pair_contexts": 3800,
+    "positive_labels": 1130,
+    "auprc": {
+      "eb_q": 0.8015013530322979,
+      "eb_w": 0.797403416694798,
+      "scaled_fbl_adaptation": 0.4137607399897001,
+      "student_t_q": 0.7665278657577131,
+      "local_zscore": 0.7841372551312504,
+      "local_raw_contrast": 0.6192286880950574,
+      "context_pooled": 0.5978360502182086
+    },
+    "brier_q": {
+      "eb_q": 0.15329601288907355,
+      "student_t_q": 0.2551438846783575
+    },
+    "matched_null_calibration_operating_points": {
+      "eb_q": {
+        "precision": 0.8154981549815498,
+        "recall": 0.5867256637168141,
+        "fpr": 0.056179775280898875,
+        "selected": 813
+      },
+      "scaled_fbl_adaptation": {
+        "precision": 0.6966731898238747,
+        "recall": 0.31504424778761064,
+        "fpr": 0.05805243445692884,
+        "selected": 511
+      }
+    },
+    "low_support_eb_q_auprc": 0.3527751860344952,
+    "full_support_eb_q_auprc": 0.8295180173509906,
+    "per_seed": [
+      {
+        "seed": 10,
+        "ap_q_eb": 0.8361342166596831,
+        "ap_fbl_scaled": 0.42844097504951806,
+        "ap_zscore": 0.8242724273780327
+      },
+      {
+        "seed": 11,
+        "ap_q_eb": 0.81316596737813,
+        "ap_fbl_scaled": 0.38382787705174704,
+        "ap_zscore": 0.7945964348703489
+      },
+      {
+        "seed": 12,
+        "ap_q_eb": 0.7980074341847212,
+        "ap_fbl_scaled": 0.4044885035566706,
+        "ap_zscore": 0.7911836349061786
+      },
+      {
+        "seed": 13,
+        "ap_q_eb": 0.8261013509408557,
+        "ap_fbl_scaled": 0.43630971966239945,
+        "ap_zscore": 0.8085178422994538
+      },
+      {
+        "seed": 14,
+        "ap_q_eb": 0.8058445497320189,
+        "ap_fbl_scaled": 0.4205855034871164,
+        "ap_zscore": 0.7745879296567959
+      },
+      {
+        "seed": 15,
+        "ap_q_eb": 0.784931061662435,
+        "ap_fbl_scaled": 0.4193977170105888,
+        "ap_zscore": 0.7672546311156877
+      },
+      {
+        "seed": 16,
+        "ap_q_eb": 0.8128913801059096,
+        "ap_fbl_scaled": 0.42755917764034795,
+        "ap_zscore": 0.7844992592720457
+      },
+      {
+        "seed": 17,
+        "ap_q_eb": 0.8494510568844555,
+        "ap_fbl_scaled": 0.463108528413209,
+        "ap_zscore": 0.8306259118866142
+      },
+      {
+        "seed": 18,
+        "ap_q_eb": 0.7537906472374559,
+        "ap_fbl_scaled": 0.3986076144690416,
+        "ap_zscore": 0.7391190681088976
+      },
+      {
+        "seed": 19,
+        "ap_q_eb": 0.7431852650977504,
+        "ap_fbl_scaled": 0.39617083492924504,
+        "ap_zscore": 0.7395602873415628
+      }
+    ],
+    "paired_seed_ap_difference_q_minus_fbl": {
+      "mean": 0.3845006478613532,
+      "wins_ties_losses": [
+        10,
+        0,
+        0
+      ],
+      "exact_sign_test_one_sided_p": 0.0009765625,
+      "bootstrap_95pct_ci": [
+        0.3703628861928378,
+        0.3989664925257294
+      ]
+    }
+  },
+  "limitations": [
+    "This is a binary task-block adaptation of scaled FBL, not an original-paper reproduction.",
+    "The EB q/w model is a Normal-normal paired-contrast proxy, not the TCAIL M2/M3 GLMM.",
+    "The shared block effect is an additive probability perturbation, not a logistic GLMM.",
+    "The synthetic task distribution is deliberately narrow; more landscapes and independent reruns are required.",
+    "Low-support edge recovery remains poor; unresolved pairs must abstain."
+  ]
+}

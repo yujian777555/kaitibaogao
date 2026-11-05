@@ -1,0 +1,28 @@
+{
+  "estimator": {
+    "summary_metrics_match": true,
+    "bootstrap_ci_match": true,
+    "raw_sha256": "2428d1751dbea13018355b2629c41309f4323b7de3f18b8d436dc0660c187c5d"
+  },
+  "fbl": {
+    "summary_metrics_match": true,
+    "bootstrap_ci_match": true,
+    "raw_four_cell_audit": {
+      "n_blocks_recomputed": 438400,
+      "cell_contrast_max_abs_error": 0.0,
+      "mean_contrast_max_abs_error": 0.0,
+      "gate_identity_max_abs_error": 0.0
+    },
+    "raw_sha256": "4b576217c304185c9950fd689a6620dc8ae531b5761ff6ce2fd790545d059de7"
+  },
+  "oracle": {
+    "summary_and_paired_statistics_match": true,
+    "budget_audit": {
+      "minimum_evaluations": 1464,
+      "maximum_evaluations": 5000,
+      "all_include_at_least_initial_population": true,
+      "same_initial_population_within_seed_and_landscape": true
+    },
+    "raw_sha256": "7ff2027cdc889a3f13f745a12bc985003303e0dc761431a26f1afee65ca09239"
+  }
+}

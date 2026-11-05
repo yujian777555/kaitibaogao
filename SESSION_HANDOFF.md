@@ -1409,3 +1409,22 @@ E. Estimator Gate 通过后才做独立 discovery/evaluation blocks 的 FOS→GO
 F. 按 42 号 GO/NO-GO 规则作结论。失败也要如实报告，不得调阈值直到通过，不得查看 held-out 后再改方法。
 
 维护要求：全部 raw data、per-seed results、配置、依赖、Git SHA、命令和日志入仓库；更新 README、05_DECISION_LOG、SESSION_HANDOFF，提交推送并复核远端。未完成事项明确标记 NOT RUN。严禁真实 LLM API、A800 训练、CI-GOM、IMCE-RSI 和完整 active acquisition。
+
+
+## 42. R1-A 实际运行与修正版审计已完成（2026-11-05）
+
+当前实验目录：`experiments/tcail_confirmatory_r1/`。必须先读 `R1A_AUDIT_RESULTS.md`、原始/修正版 reconciliation JSON 和环境锁，不得只引用旧报告。
+
+### 实际运行和数据
+
+- 原始 Oracle、Estimator-only、Scaled-FBL 三个脚本均已在隔离 Python 3.10.1 环境实际运行；原始与修正版输出分别位于 `r1a_original_code/` 和 `r1a_corrected/`。
+- 所有原报告核心指标均可从原始 CSV 独立重算；FBL 四格顺序、contrast 和 gate 在 438,400 个 block 上误差为 0。
+- 修正版 Oracle 使用相同跨方法 mixing seed，初始种群哈希一致；Oracle−Learned LT 配对均值 +1.30，bootstrap 95% CI [0.60,2.00]。这只证明该原型的 Oracle 上界价值。
+- FBL 绝对值适配无 gate/零 epsilon AUPRC=0.379；signed Eq.(7) 有 2,811/3,800 个领域违规，valid-only 结果不是完整公平基线。
+- EB q/w 仍是 Normal–Normal proxy，不是 TCAIL Bernoulli M2/M3。
+
+### 当前结论和下一步
+
+R1-A 不是 GO。Estimator Gate、真正 TCAIL 和 TCAIL-FOS GOM Gate 均未完成。下一阶段必须实际实现并校准 Bernoulli task/block 层级 M2/M3，按 42 号运行 train/validation/test 和强基线比较；只有 Estimator Gate 通过才可进入 TCAIL-FOS GOM Gate。失败和低支持结果必须保留。
+
+严格边界不变：禁止真实 LLM API、A800 训练、CI-GOM、IMCE-RSI、完整 active acquisition 和生产 retry。每阶段保存原始数据、日志、配置、环境、每 seed 结果和统计输出，更新 README、05_DECISION_LOG、SESSION_HANDOFF，提交并核验远端 main。

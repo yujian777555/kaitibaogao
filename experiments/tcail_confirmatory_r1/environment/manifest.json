@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-11-05T12:50:44+08:00",
+  "baseline_head": "a3cec9844332bbce04061af3041061fa94e88143",
+  "python": "3.10.1",
+  "environment": ".venv (local, untracked)",
+  "code_git_blob_hashes": {
+    "original_oracle": "ac78bbea6f996d24bbd7d6964bd126e46c960d71",
+    "original_estimator": "3585ff3bf941adbcdcb373193c3f57ab161bae0a",
+    "original_fbl": "25428a4975852279d613ccc3273345f87fac5de4",
+    "corrected_oracle": "6f8e43de0e3679ffb2a983244e4cef41ce0d6fb2",
+    "corrected_estimator": "3585ff3bf941adbcdcb373193c3f57ab161bae0a",
+    "corrected_fbl": "6db7dab4b8c676b5f444b5e6aa1f5048f9c6e4dc",
+    "recompute_pilot_metrics": "1f5a973810e9218ca76843723fccbb460f6cb7ee",
+    "reconcile_pilot_outputs": "f16d91a080eb001717c043ed0a3f0dc99486aaaf"
+  },
+  "raw_data_hashes": {
+    "original_oracle_csv": "e27371ca894ed72f1900dca3513997c1bcbe4d0f454630c34e7d928df6aba7cc",
+    "original_estimator_csv": "2428d1751dbea13018355b2629c41309f4323b7de3f18b8d436dc0660c187c5d",
+    "original_fbl_csv": "2271e206e91e7245e32de410e196d102dc5ebf1f2ecfdceac1615471bc96db1f",
+    "corrected_oracle_csv": "7ff2027cdc889a3f13f745a12bc985003303e0dc761431a26f1afee65ca09239",
+    "corrected_estimator_csv": "2428d1751dbea13018355b2629c41309f4323b7de3f18b8d436dc0660c187c5d",
+    "corrected_fbl_csv": "4b576217c304185c9950fd689a6620dc8ae531b5761ff6ce2fd790545d059de7"
+  },
+  "notes": [
+    "Original and corrected outputs are stored separately.",
+    "The virtual environment itself is not committed; exact package versions are in requirements-lock.txt.",
+    "All results remain exploratory and do not establish TCAIL or EC improvement."
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "design": {
+    "train_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "test_seeds": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "pairs_per_seed": 200,
+    "contexts": 2,
+    "delta_local": 0.08,
+    "strong_delta": 0.2,
+    "weak_delta": 0.04,
+    "full_task_blocks": 128,
+    "low_support_blocks": 8,
+    "unsupported_pairs_per_seed": 10,
+    "shared_block_shift_sd": 0.04,
+    "eb_prior": "Normal(0,tau^2), tau estimated by method of moments on train seeds only",
+    "tau": 0.11131319939716265
+  },
+  "test": {
+    "n_supported_pair_contexts": 3800,
+    "positive_labels": 1130,
+    "ap": {
+      "eb_q": 0.8015013530322979,
+      "eb_w": 0.797403416694798,
+      "student_t_q": 0.7665278657577131,
+      "student_t_w": 0.5451175642244576,
+      "local_zscore": 0.7841372551312504,
+      "local_raw_abs_contrast": 0.6192286880950574,
+      "context_pooled_abs_contrast": 0.5978360502182086
+    },
+    "brier": {
+      "eb_q": 0.15329601288907355,
+      "student_t_q": 0.2551438846783575
+    },
+    "q_eb_threshold_0_8": {
+      "precision": 0.9110169491525424,
+      "recall": 0.3805309734513274,
+      "false_positive_rate": 0.015730337078651686,
+      "selected": 472
+    },
+    "low_support_ap_eb_q": 0.3527751860344952,
+    "full_support_ap_eb_q": 0.8295180173509906,
+    "per_seed_ap": [
+      {
+        "seed": 10,
+        "ap_q_eb": 0.8361342166596831,
+        "ap_w_eb": 0.8320192027306643,
+        "ap_zscore": 0.8242724273780327,
+        "ap_raw": 0.6229880840019575,
+        "ap_pooled": 0.6237589210826676
+      },
+      {
+        "seed": 11,
+        "ap_q_eb": 0.81316596737813,
+        "ap_w_eb": 0.8085182207354803,
+        "ap_zscore": 0.7945964348703489,
+        "ap_raw": 0.620204649664535,
+        "ap_pooled": 0.5642602240349095
+      },
+      {
+        "seed": 12,
+        "ap_q_eb": 0.7980074341847212,
+        "ap_w_eb": 0.7906147008504028,
+        "ap_zscore": 0.7911836349061786,
+        "ap_raw": 0.5959630544056833,
+        "ap_pooled": 0.6488432099119565
+      },
+      {
+        "seed": 13,
+        "ap_q_eb": 0.8261013509408557,
+        "ap_w_eb": 0.8218710565948553,
+        "ap_zscore": 0.8085178422994538,
+        "ap_raw": 0.642028467260059,
+        "ap_pooled": 0.5753603879207456
+      },
+      {
+        "seed": 14,
+        "ap_q_eb": 0.8058445497320189,
+        "ap_w_eb": 0.8067528570571537,
+        "ap_zscore": 0.7745879296567959,
+        "ap_raw": 0.6618852737553709,
+        "ap_pooled": 0.6053188622913458
+      },
+      {
+        "seed": 15,
+        "ap_q_eb": 0.784931061662435,
+        "ap_w_eb": 0.7803957369175568,
+        "ap_zscore": 0.7672546311156877,
+        "ap_raw": 0.6341007716747823,
+        "ap_pooled": 0.6191659875826869
+      },
+      {
+        "seed": 16,
+        "ap_q_eb": 0.8128913801059096,
+        "ap_w_eb": 0.8032335205163925,
+        "ap_zscore": 0.7844992592720457,
+        "ap_raw": 0.6132968489091069,
+        "ap_pooled": 0.5348562184475413
+      },
+      {
+        "seed": 17,
+        "ap_q_eb": 0.8494510568844555,
+        "ap_w_eb": 0.8477841280842014,
+        "ap_zscore": 0.8306259118866142,
+        "ap_raw": 0.6284741259593413,
+        "ap_pooled": 0.6121645754584787
+      },
+      {
+        "seed": 18,
+        "ap_q_eb": 0.7537906472374559,
+        "ap_w_eb": 0.7540323807343154,
+        "ap_zscore": 0.7391190681088976,
+        "ap_raw": 0.6248148937126354,
+        "ap_pooled": 0.6182464563076084
+      },
+      {
+        "seed": 19,
+        "ap_q_eb": 0.7431852650977504,
+        "ap_w_eb": 0.7390059287625573,
+        "ap_zscore": 0.7395602873415628,
+        "ap_raw": 0.6232408330031378,
+        "ap_pooled": 0.7067553094013733
+      }
+    ],
+    "paired_ap_q_eb_minus_zscore": {
+      "mean": 0.016928550304779744,
+      "wins_ties_losses": [
+        10,
+        0,
+        0
+      ],
+      "exact_sign_test_one_sided_p": 0.0009765625,
+      "bootstrap_95pct_ci": [
+        0.012048414355799298,
+        0.022106133867903482
+      ]
+    }
+  },
+  "limitations": [
+    "This is a paired task-block normal-normal empirical-Bayes proxy, not the full TCAIL M2/M3 GLMM.",
+    "The shared block effect is an additive probability-scale perturbation, not a fitted logistic random-intercept GLMM.",
+    "The raw/z-score baselines are simple four-cell contrasts, not exact FBL or scaled-FBLT reproductions.",
+    "Synthetic pilot only; no active acquisition, retry ledger, FOS-to-GOM evaluation or real Agent rollout.",
+    "Low-support performance remains poor and requires explicit abstention/support gates."
+  ]
+}

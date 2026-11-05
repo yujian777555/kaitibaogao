@@ -557,3 +557,12 @@ TCAIL 的核心命题不是“统计模型更复杂”，而是：在同样 task
 
 ### 边界
 这只授权固定 full-factorial 的合成研究原型与隔离 GOM research prototype；不授权完整 active acquisition、生产 retry、真实 Agent API、A800 训练、CI-GOM 或 IMCE-RSI。所有实验结果必须如实标为 NOT RUN / PILOT / CONFIRMATORY。
+
+
+## 决策 D-045：R1-A 审计完成，现有结果仍为 exploratory（2026-11-05）
+
+实际重跑 Oracle、Estimator-only 和 Scaled-FBL pilot，并保存原始及修正版代码、CSV/JSON、日志、环境和独立重算。所有原报告核心数值均可从原始 CSV 重算。
+
+修复并记录：Oracle 方法专属 mixing seed 改为跨方法配对 seed，导出初始种群哈希并验证一致；FBL 区分绝对值比率适配与论文 signed Eq.(7)，增加无 gate/零 epsilon 敏感性。修正版 Oracle−Learned LT 配对均值 +1.30，95% CI [0.60,2.00]；该变化与原结果分开保留。FBL signed Eq.(7) 领域违规 2,811/3,800，valid-only 结果不得作完整公平比较。
+
+**决定：R1-A 只确认可重算性和适配边界，不构成 TCAIL 或 EC 收益证明。** EB q/w 仍是 Normal–Normal proxy；真正 Bernoulli task/block M2/M3、Estimator Gate 和 TCAIL-FOS GOM Gate 尚未完成。继续禁止真实 LLM API、A800 训练、CI-GOM、IMCE-RSI、完整 active acquisition 和生产 retry。
