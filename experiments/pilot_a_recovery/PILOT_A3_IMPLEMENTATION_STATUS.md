@@ -30,6 +30,6 @@ All policies share scenario IDs, seeds and fault realizations.
 
 ## Tests
 
-Thirteen regression tests are authored for split disjointness, frozen budget, per-tool independent faults, timeout-observation collapse, policy information boundary, idempotent/non-idempotent retry, visibility SLA, reverse-order rollback, dependency stopping, compensation failure, paired scenario identity and reproducibility.
+Fifteen regression tests are authored for split disjointness, frozen budget, per-tool independent faults, timeout-observation collapse, policy information boundary, idempotent/non-idempotent retry, visibility SLA, reverse-order rollback, dependency stopping, compensation failure, paired scenario identity and reproducibility and slice-wise safety-gate enforcement.
 
 **Important:** The existence of tests and workflow configuration is not a test pass. Do not report A-3 results until the GitHub Actions run and uploaded artifacts have been inspected. Do not start Pilot B, A800 training, ARWM or real LLM API evaluation before the A-3 gate is evaluated.
