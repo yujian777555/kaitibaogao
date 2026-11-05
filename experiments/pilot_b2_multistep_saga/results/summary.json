@@ -1,0 +1,138 @@
+{
+  "status": "EXPLORATORY_PILOT_B2",
+  "design": {
+    "tasks": [
+      "order_fulfillment",
+      "appointment_confirmation",
+      "return_refund"
+    ],
+    "profiles": [
+      "timeout_before",
+      "timeout_after",
+      "partial_commit",
+      "delayed_timeout_after",
+      "timeout_rate_before",
+      "timeout_rate_after",
+      "schema_before",
+      "permission_before",
+      "partial_compensation_unavailable",
+      "partial_previous_comp_failure",
+      "partial_timeout_delayed"
+    ],
+    "policies": [
+      "blind_retry",
+      "verify_then_retry",
+      "contract_resume",
+      "rollback_on_ambiguous",
+      "oracle_upper_bound"
+    ],
+    "steps_per_workflow": 3,
+    "evaluation_seeds": [
+      3120,
+      3159
+    ],
+    "no_training_or_validation_split": "fixed-policy feasibility pilot; no model fitting or search",
+    "episodes_per_policy": 3960,
+    "total_policy_episodes": 19800,
+    "oracle_reads_hidden_state": true,
+    "no_llm_api": true,
+    "no_a800_training": true,
+    "no_ec_search": true
+  },
+  "heldout_test": {
+    "blind_retry": {
+      "task_success": 0.191919,
+      "safe_resolution": 0.757576,
+      "invariant_violation": 0.242424,
+      "unresolved": 0.242424,
+      "escalated": 0.69697,
+      "rollback_complete": 0.474747,
+      "tool_actions": 4.323232,
+      "wait_units": 0.0
+    },
+    "verify_then_retry": {
+      "task_success": 0.282828,
+      "safe_resolution": 0.919192,
+      "invariant_violation": 0.080808,
+      "unresolved": 0.080808,
+      "escalated": 0.545455,
+      "rollback_complete": 0.484848,
+      "tool_actions": 4.989899,
+      "wait_units": 0.0
+    },
+    "contract_resume": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.0,
+      "escalated": 0.242424,
+      "rollback_complete": 0.30303,
+      "tool_actions": 4.10101,
+      "wait_units": 0.966667
+    },
+    "rollback_on_ambiguous": {
+      "task_success": 0.0,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.0,
+      "escalated": 0.151515,
+      "rollback_complete": 0.848485,
+      "tool_actions": 4.969697,
+      "wait_units": 1.777778
+    },
+    "oracle_upper_bound": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.0,
+      "escalated": 0.242424,
+      "rollback_complete": 0.30303,
+      "tool_actions": 3.606061,
+      "wait_units": 0.360606
+    }
+  },
+  "paired_bootstrap": {
+    "contract_resume_vs_oracle_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_resume_vs_oracle_actions": {
+      "mean_difference_A_minus_B": 0.494949,
+      "ci95": [
+        0.494949,
+        0.494949
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_resume_vs_verify_then_retry_success": {
+      "mean_difference_A_minus_B": 0.262626,
+      "ci95": [
+        0.262626,
+        0.262626
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_resume_vs_verify_then_retry_violations": {
+      "mean_difference_A_minus_B": -0.080808,
+      "ci95": [
+        -0.080808,
+        -0.080808
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    }
+  },
+  "limitations": [
+    "synthetic Saga simulator, not a production tool API",
+    "one injected fault per workflow plus compensation-failure variants",
+    "oracle sees hidden state and is diagnostic only",
+    "no EC algorithm or trained model in this pilot"
+  ]
+}
