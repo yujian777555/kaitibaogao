@@ -119,15 +119,16 @@ class Env:
         if action=="ESCALATE":
             self.escalated=True;return "ESCALATED"
         if action=="VERIFY_CURRENT":
+            self.actions+=1
             if self.tick<s["visibility_delay"]:return "NOT_FOUND"
             return "NOT_FOUND" if self.current_outcome=="NONE" else self.current_outcome
         if action in ("RETRY_CURRENT","RETRY_CURRENT_WITH_KEY"):
+            self.actions+=1
             if not s["permission"]:return "PERMISSION_DENIED"
             if not s["schema_valid"]:return "SCHEMA_REJECTED"
             if self.tick<s["retry_after"]:return "RATE_LIMITED"
             c=s["steps"][s["step_index"]]
             dedup=(c["idempotency"]=="native" and action=="RETRY_CURRENT") or (c["idempotency"]=="keyed" and action=="RETRY_CURRENT_WITH_KEY")
-            self.actions+=1
             if self.current_effects>0:
                 if dedup:
                     return "ALREADY_COMMITTED" if self.current_outcome=="COMMITTED" else "ALREADY_PARTIAL"
@@ -153,6 +154,11 @@ class Env:
                 return "COMPENSATION_FAILED"
             self.previous_stack.pop();self.compensated_previous.append(index)
             return "COMPENSATED"
+        if action=="FINALIZE_ROLLBACK":
+            if self.current_outcome=="NONE" and not self.previous_stack and not self.violation:
+                self.rollback_complete=True
+                return "ROLLBACK_COMPLETE"
+            return "ROLLBACK_INCOMPLETE"
         if action=="RESUME":
             if self.current_outcome!="COMMITTED" or self.violation:
                 return "CANNOT_RESUME"
@@ -176,7 +182,7 @@ class Env:
 
     def result(self):
         success=self.current_outcome=="WORKFLOW_COMPLETE" and not self.violation
-        rollback_complete=(self.current_outcome=="NONE" and not self.previous_stack and not self.violation)
+        rollback_complete=self.rollback_complete
         safe=success or rollback_complete or self.escalated
         return {
             "task_success":int(success),"safe_resolution":int(safe),
@@ -194,15 +200,14 @@ def rollback_from_observations(env, obs):
             break
     if failed:
         env.act("ESCALATE")
+    else:
+        env.act("FINALIZE_ROLLBACK")
 
 def run_policy(spec,policy):
     env=Env(spec);obs=env.observe();c=obs["current_operation"];signals=set(obs["signals"])
     def retry():
         action="RETRY_CURRENT_WITH_KEY" if c["idempotency"]=="keyed" else "RETRY_CURRENT"
-        result=env.act(action)
-        if result in ("RATE_LIMITED","PERMISSION_DENIED","SCHEMA_REJECTED"):
-            env.act("ESCALATE")
-        return result
+        return env.act(action)
     def handle_partial():
         rollback_from_observations(env, obs)
     def resume():
@@ -221,13 +226,13 @@ def run_policy(spec,policy):
         elif status=="PARTIAL":handle_partial()
         elif status=="NOT_FOUND":
             result=env.act("RETRY_CURRENT")
-            if result in ("COMMITTED","ALREADY_COMMITTED"):resume_if_committed()
+            if result in ("COMMITTED","ALREADY_COMMITTED"):resume()
             elif result=="DUPLICATE":env.act("ESCALATE")
             else:
                 rollback_from_observations(env,obs);env.act("ESCALATE")
     elif policy=="contract_resume":
         if not obs["permission"]:
-            env.rollback();env.act("ESCALATE")
+            rollback_from_observations(env,obs);env.act("ESCALATE")
         else:
             if not obs["schema_valid"]:env.act("REPAIR_SCHEMA")
             if "RATE_LIMIT" in signals:env.act("WAIT",obs["retry_after"])
