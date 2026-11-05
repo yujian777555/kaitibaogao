@@ -494,3 +494,16 @@ TCAIL R1 的确认性 Estimator Gate 已失败（TCAIL q macro-AUPRC 0.6736 vs s
 该方向目前仅为 HOLD，不代表已通过新颖性审查。下一步先做相关工作机制级差异矩阵和 Pilot A（oracle/手工恢复策略上界）；只有确认恢复策略存在可进化空间后，才进入标准 GA/GP 与约束演化方法比较。不要立即扩建完整系统或开跑大规模实验。
 
 2026 年相关工作已覆盖通用 prompt/workflow 演化、blame-aware tool-policy mutation、延迟奖励 self-evolution、failure retrieval/recovery、tool transaction runtime 和 fault benchmarks。新贡献必须落在状态化副作用工具环境中可执行恢复控制器的约束演化，以及有验证的故障场景—策略协同演化，不能声称普通进化 prompt、模块定向变异、Pareto 选择或事务保护本身是新颖点。
+
+
+## 2026-11-05：A800 训练候选与 Pilot A 首轮
+
+新增：
+- 46_RELATED_WORK_MECHANISM_AUDIT_ARWM.md：TRACE、SENTINEL、HarnessMDP、CoMAP、EvoTool 的机制级初审。
+- experiments/pilot_a_recovery/：确定性模拟器、回归测试、探索性结果和 JSON 汇总。
+
+首轮 Pilot A：7 类故障 × 10 个参数种子，6 种策略，每策略 70 episodes。三个 timeout 子类型向策略暴露同一 TIMEOUT 观测，隐藏子类型仅 oracle 可见。state-aware 手工策略 task success 0.8571、safe resolution 1.0、invariant violation 0；与 oracle 的成功/安全指标持平，但平均动作数 3.0714 vs oracle 1.5。盲目重试 success 0.1429、invariant violation 0.4286。
+
+**Gate：CONDITIONAL HOLD。** 该小型确定性场景中，手工状态规则已达到 oracle 的成功/安全表现，尚未证明足够的成功率优化空间；仅剩动作效率差距，且 oracle 使用隐藏信息。因此暂不启动 A800 训练、ARWM 或正式 EC 搜索。下一步只允许 bounded Pilot A-2：多工具幂等契约、同观测下复合/潜在故障、变化的读延迟与补偿可用性、按 task/fault family 隔离的测试。若简单规则仍匹配 oracle，则停止该方向。
+
+CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作后的文本状态，并与 Agent 策略闭环自蒸馏共演化；HarnessMDP 学习冻结 LLM 的外部 harness controller；TRACE/SENTINEL 已覆盖失败驱动的 Agent 训练；EvoTool 已覆盖 blame-aware tool policy evolution。新贡献不能是泛化的“world model + EA”或“失败轨迹训练”。A800 训练候选必须证明配对反事实动作后果数据、多任务副作用风险校准与不确定性门控确实改善固定真实 rollout 预算下的约束演化搜索。
