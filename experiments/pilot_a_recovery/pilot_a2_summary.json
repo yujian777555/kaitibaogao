@@ -1,0 +1,82 @@
+{
+  "status": "EXPLORATORY_SIGNAL_FOUND_NOT_CONFIRMATORY",
+  "design": {
+    "tasks": 4,
+    "fault_families": 9,
+    "seeds_per_task_fault_cell": 30,
+    "episodes_per_policy": 1080,
+    "total_policy_episodes": 6480,
+    "policies": 6,
+    "timeout_subtypes_share_public_signature": true,
+    "oracle_reads_latent_fault": true
+  },
+  "summary": {
+    "blind_retry": {
+      "task_success": 0.1111,
+      "safe": 0.5556,
+      "duplicate": 0.4444,
+      "invariant_violation": 0.4444,
+      "unresolved": 0.8889,
+      "escalated": 0,
+      "mean_actions": 2
+    },
+    "verify_retry": {
+      "task_success": 0.2778,
+      "safe": 0.7778,
+      "duplicate": 0.2222,
+      "invariant_violation": 0.2222,
+      "unresolved": 0.6111,
+      "escalated": 0.1111,
+      "mean_actions": 4.1111
+    },
+    "fixed_wait_verify": {
+      "task_success": 0.5815,
+      "safe": 0.9148,
+      "duplicate": 0.0852,
+      "invariant_violation": 0.0852,
+      "unresolved": 0.3074,
+      "escalated": 0.1111,
+      "mean_actions": 9.7778
+    },
+    "escalate_on_unknown": {
+      "task_success": 0.5556,
+      "safe": 1,
+      "duplicate": 0,
+      "invariant_violation": 0,
+      "unresolved": 0,
+      "escalated": 0.7778,
+      "mean_actions": 2.6667
+    },
+    "contract_aware": {
+      "task_success": 0.7222,
+      "safe": 1,
+      "duplicate": 0,
+      "invariant_violation": 0,
+      "unresolved": 0.0556,
+      "escalated": 0.2222,
+      "mean_actions": 5.5167
+    },
+    "oracle_diagnostic": {
+      "task_success": 0.7778,
+      "safe": 1,
+      "duplicate": 0,
+      "invariant_violation": 0,
+      "unresolved": 0,
+      "escalated": 0.2222,
+      "mean_actions": 3.7778
+    }
+  },
+  "gate": {
+    "decision": "CONDITIONAL_GO_PILOT_A3_NO_A800",
+    "reason": "5.56pp gap to diagnostic oracle; no EC or ARWM comparison yet; simulator has same fault applied to both tools and no held-out task/fault families"
+  },
+  "ci": {
+    "run_id": 42030194929,
+    "conclusion": "success",
+    "tests": "12/12",
+    "steps": [
+      "Pilot A baseline",
+      "Pilot A-2 simulator"
+    ]
+  }
+}
