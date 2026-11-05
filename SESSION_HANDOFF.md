@@ -1539,3 +1539,5 @@ ARWM（Agent Recovery World Model）：主 LLM 继续走 DeepSeek API；A800 训
 Pilot A 首轮已显示：state-aware 手工策略 success 0.8571、safe resolution 1.0、violation 0，与 oracle 的成功安全表现持平；oracle 只在动作成本上更低。因此当前是 CONDITIONAL HOLD，禁止直接开始 A800 训练或完整 EC。
 
 本轮只执行 bounded Pilot A-2：增加多工具幂等契约、潜在/复合故障、读可见延迟和补偿差异，冻结可观察接口与 held-out 划分；先比较手工策略与 oracle。若强手工策略仍匹配 oracle，则停止该方向。只有证明剩余策略空间后才比较 GA/GP 与 contract-aware EA；只有模型超越 LightGBM/MLP 且改善固定真实 rollout 预算下的 EA，才训练 ARWM。维护原始数据、每 seed 结果、配置、README、决策日志和 handoff。不要训练基模，不要调用真实 API，不要把研究计划当作实验成果。
+
+ARWM 候选规格另见 `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`。不要将其当作训练授权；当前 A800 训练仍 HOLD，须先完成 bounded Pilot A-2 并通过 M1/M2 前置证据。
