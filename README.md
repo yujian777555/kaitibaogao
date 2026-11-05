@@ -513,3 +513,19 @@ CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作�
 
 ### Pilot A 审计修正（2026-11-05）
 独立复算发现首轮报告的 `unresolved` 列存在转录错误，已更正 `PILOT_A_EXPLORATORY_RESULTS.md` 与 `summary.json`：verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。task success、safe resolution、duplicate side effect、invariant violation 和动作数不变。7 项状态转移/覆盖断言在独立复现中通过；GitHub Actions 尚无运行记录，CI 未验证。Pilot A 仍是探索性模拟器结果。
+
+
+## 2026-11-05：Pilot A-2 多工具恢复实验结果
+
+新增目录：experiments/pilot_a2_multitool/
+
+- 4 类工具/任务族（inventory/order/calendar/ledger），13 类故障与复合故障，100 个确定性参数种子，8 种策略，共 41,600 policy-episodes。
+- 每策略 5,200 episodes。政策只接收公开工具契约、失败信号、权限/Schema 结果和 retry-after；隐藏执行结果只供诊断 Oracle 使用。
+- GitHub Actions：运行回归测试和完整矩阵成功；workflow run 42022440268，后续 AST 防泄漏测试更新运行 42022613261。
+- 留出种子 60–99：contract-optimized task success 0.7000、safe resolution 1.0000、invariant violation 0、mean tool actions 2.3462；oracle 分别为 0.7000、1.0000、0、1.3923。
+- contract-optimized 与 contract-bounded 成功率/安全性相同，但平均动作数少 0.1538；与 Oracle 成功/安全相同，但动作数多 0.9538。Oracle 使用隐藏状态，只是诊断下界。
+- 结论：没有发现成功率/安全性层面的剩余空间；发现了安全约束下的动作成本优化空间，但尚未证明 EC 能找到比强手工 contract-optimized 策略更低成本的策略。
+
+**D-050：CONDITIONAL GO for Pilot B（cost-aware policy search）；A800/ARWM 仍 HOLD。** Pilot B 必须使用全新独立 seeds（例如 train 1000–1099、validation 1100–1119、test 1120–1159），不得把 Pilot A/A-2 的 seeds 作为确认性测试。优化目标：critical invariant violation = 0 硬约束、task success 不低于预注册阈值（至少达到 A-2 held-out 的 0.70），在此条件下最小化工具调用和等待成本。对比强手工策略、随机合法 FSM、标准 GA/GP、契约保持 GA/GP、NSGA-II/III；所有方法使用相同 fitness calls 和 held-out test。只有 EC 稳定超过强手工策略，才进入 ARWM 训练。
+
+报告：experiments/pilot_a2_multitool/PILOT_A2_EXPLORATORY_RESULTS.md；原始 episode CSV 与 summary JSON 已保存。局限：合成环境、单操作恢复 episode、参数种子而非学习模型切分；尚无 LLM API、A800、ARWM、EC 或 RSI 结果。
