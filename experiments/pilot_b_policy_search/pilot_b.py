@@ -9,8 +9,13 @@ import argparse
 import json
 import math
 import random
+import sys
 from collections import defaultdict
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from experiments.pilot_a2_multitool.pilot_a2 import (
     Env, TOOLS, PROFILES, make_episode, METRICS
@@ -238,7 +243,7 @@ def nsga_select(pop, scores, size):
             cd = crowding(front, scores)
             chosen.extend(sorted(front, key=lambda i: cd[i], reverse=True)[:size-len(chosen)])
             break
-    return [pop[i] for i in chosen]
+    return [pop[i] for i in chosen], [scores[i] for i in chosen]
 
 def search(algorithm: str, seed: int) -> dict:
     rng = random.Random(seed)
@@ -265,12 +270,7 @@ def search(algorithm: str, seed: int) -> dict:
             child_scores = [evaluate(g, TRAIN_SEEDS) for g in children]
             evals += len(children)
             pop, scores = pop + children, scores + child_scores
-            pop = nsga_select(pop, scores, POPULATION)
-            scores = [evaluate(g, TRAIN_SEEDS) for g in pop]
-            evals += len(pop)
-            # Keep total search calls within the declared budget.
-            if evals > EVAL_BUDGET:
-                evals = EVAL_BUDGET
+            pop, scores = nsga_select(pop, scores, POPULATION)
         else:
             children = []
             while len(children) < min(POPULATION, EVAL_BUDGET-evals):
