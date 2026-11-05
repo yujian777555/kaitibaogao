@@ -246,10 +246,10 @@ def run_policy(spec: dict, policy: str) -> dict:
 
             if policy == "contract_optimized" and "TIMEOUT" in signals:
                 if contract["idempotency"] in ("native", "keyed"):
-                    retry()
-                    # Idempotency response distinguishes committed from partial.
-                    # If partial, verify after the declared visibility bound.
-                    if env.hidden_outcome == "PARTIAL":
+                    retry_result = retry()
+                    # The idempotency service returns the prior operation outcome;
+                    # this is a public action response, not a hidden simulator read.
+                    if retry_result == "ALREADY_PARTIAL":
                         if contract["consistency"] == "eventual":
                             env.act("WAIT", contract["max_visibility_delay"])
                         resolve_partial()
