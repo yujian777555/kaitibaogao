@@ -157,3 +157,12 @@
 - 建立本文件为唯一 canonical handoff prompt。
 - 当前状态：Pilot A-3 已实现；CI/原始 artifacts 尚待核验；Pilot B 未获授权；A800/ARWM HOLD。
 - 下一会话唯一任务：完成 A-3 最新 Actions run 核验及 JSON/CSV 独立复算。
+
+
+### 2026-11-05 — D-052：强制维护制度正式生效
+- 用户明确要求接管提示词必须一直维护。
+- 本文件被指定为唯一 canonical handoff prompt。
+- 同步规则已写入 `SESSION_HANDOFF.md` 第 47 节、`05_DECISION_LOG.md` D-052 和 README。
+- 每次实质性进展后必须同一轮同步更新四份文件；会话结束前重新读取核对；每次对用户汇报附本文件链接。
+- 本文件中的历史 SHA 只作接管前基线；新会话必须动态查询远端 HEAD，不能将历史 SHA 当作当前 HEAD。
+- 当前唯一下一任务仍是 A-3 Actions 核验和 JSON/CSV 独立复算。
