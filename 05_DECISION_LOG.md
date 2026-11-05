@@ -685,3 +685,32 @@ Pilot B 必须：
 6. 若无稳定成本收益或违反硬约束，则停止该 EC 机制，不启动 ARWM。
 
 A800/ARWM 只有在 Pilot B 证明 EC 存在真实搜索收益后才重新考虑。
+
+
+## 决策 D-051：Pilot B 固定预算演化搜索未证明 EC 增益（2026-11-05）
+
+### 实验设计
+- 新 seeds：train 1000–1039、validation 1100–1119、test 1120–1159，未复用 Pilot A/A-2 的 seeds；
+- 每次搜索 160 次 fitness evaluation（population 16 × 10 generations）；
+- 4 种方法 × 3 optimizer seeds：random valid FSM、standard GA、contract-preserving GA、NSGA-II-style hybrid；
+- 强手工基线：contract v1 与 contract v2；
+- 目标：critical invariant violation=0 硬约束，task success≥0.70，在可行域内最小化 actions + 0.1×wait units。
+
+### Held-out test 结果
+random valid FSM、standard GA、contract-preserving GA、NSGA-II-style hybrid 均为：
+- task success 0.701923；
+- safe resolution 1.0；
+- invariant violation 0；
+- tool actions 1.923077；
+- wait units 1.196154；
+- cost 2.042692。
+
+Manual contract v2 完全相同；配对差为 0。Manual v1 actions 2.384615、cost 2.565769；v2 通过显式 partial response 后直接尝试契约允许的补偿，减少 0.461538 mean tool actions，且保持 success/safety。该改进来自手工规则，不是 EC 搜索增益。
+
+### 审计限制
+当前 NSGA-II 实现使用 nondominated sorting/crowding 做环境选择，但 mating tournament 仍用 scalar feasibility-first fitness；应称 NSGA-II-style hybrid，不得称 canonical NSGA-II。小型单操作 genome 有大量等效/中性基因，随机搜索 160 次已找到同一有效策略。该问题表示不足以证明 GA/EC 优于随机搜索。
+
+### 决策
+**NO-GO：当前单操作有限状态策略表示不能作为已成立的 EC 算法创新。** 不投入 A800/ARWM，不调用真实 LLM API。
+
+**CONDITIONAL GO：只批准多步骤跨工具事务 Pilot B2。** 建立订单履约、预约确认、退货退款等多步骤流程，显式建模跨工具依赖、部分提交、逆序补偿、幂等键、延迟读与补偿失败。先比较强 Saga/规则策略与 Oracle，确认存在剩余策略空间；之后才做 random FSM、canonical GA/GP、契约保持 GA/GP 和 canonical NSGA-II/III 等预算匹配对照。若随机搜索仍达到强手工策略，或 EC 无法稳定改善成本且不牺牲安全/成功，则停止该方向。
