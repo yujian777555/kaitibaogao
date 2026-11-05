@@ -10,6 +10,7 @@ from pilot_a3 import (
     VALIDATION_COMPOSITIONS,
     HELDOUT_COMPOSITIONS,
     ToolRuntime,
+    PublicToolView,
     build_scenarios,
     make_fault_vector,
     run_episode,
@@ -65,6 +66,14 @@ class PilotA3Tests(unittest.TestCase):
         after = ToolRuntime("inventory", fault("timeout_after", delay=3)).execute()
         delayed = ToolRuntime("inventory", fault("delayed_visibility", delay=2)).execute()
         self.assertEqual({before, after, delayed}, {"TIMEOUT"})
+
+    def test_policy_view_hides_latent_simulator_labels(self):
+        runtime = ToolRuntime("inventory", fault("timeout_after", delay=3, comp=False))
+        view = PublicToolView(runtime)
+        self.assertFalse(hasattr(view, "fault"))
+        self.assertFalse(hasattr(view, "compensation_available"))
+        self.assertFalse(hasattr(view, "visible_at"))
+        self.assertEqual(view.contract["idempotent"], False)
 
     def test_non_idempotent_retry_after_commit_is_duplicate(self):
         tool = ToolRuntime("inventory", fault("timeout_after", delay=4))
