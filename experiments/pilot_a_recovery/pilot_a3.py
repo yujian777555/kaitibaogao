@@ -267,6 +267,31 @@ class ToolRuntime:
         return self.last_compensation_result
 
 
+class PublicToolView:
+    """Restricted policy interface; latent simulator fields stay in ToolRuntime."""
+    __slots__ = ("__runtime", "contract", "retry_after")
+
+    def __init__(self, runtime):
+        self.__runtime = runtime
+        self.contract = dict(runtime.contract)
+        self.retry_after = runtime.retry_after
+
+    def retry(self):
+        return self.__runtime.retry()
+
+    def verify(self):
+        return self.__runtime.verify()
+
+    def wait(self):
+        return self.__runtime.wait()
+
+    def repair_schema(self):
+        return self.__runtime.repair_schema()
+
+    def compensate(self):
+        return self.__runtime.compensate()
+
+
 def accepted(result):
     return result in ("COMMITTED", "IDEMPOTENT_REPLAY")
 
@@ -395,7 +420,7 @@ def run_episode(policy, scenario):
         if policy == "oracle_diagnostic":
             recovered = oracle_recover(tool, first_result)
         else:
-            recovered = recover_tool(policy, tool, first_result)
+            recovered = recover_tool(policy, PublicToolView(tool), first_result)
 
         if recovered and tool.state == "COMMITTED":
             continue
