@@ -218,7 +218,7 @@ def run_policy(spec,policy):
         elif result=="ALREADY_PARTIAL":handle_partial()
         elif result=="DUPLICATE":env.act("ESCALATE")
         else:
-            env.rollback()
+            rollback_from_observations(env,obs)
             env.act("ESCALATE")
     elif policy=="verify_then_retry":
         status=env.act("VERIFY_CURRENT")
@@ -241,10 +241,10 @@ def run_policy(spec,policy):
             elif "TIMEOUT" in signals:
                 if c["idempotency"] in ("native","keyed"):
                     result=retry()
-                    if result in ("COMMITTED","ALREADY_COMMITTED"):resume_if_committed()
+                    if result in ("COMMITTED","ALREADY_COMMITTED"):resume()
                     elif result=="ALREADY_PARTIAL":handle_partial()
                     elif not env.escalated:
-                        env.rollback();env.act("ESCALATE")
+                        rollback_from_observations(env,obs);env.act("ESCALATE")
                 else:
                     if c["consistency"]=="eventual":env.act("WAIT",c["max_visibility_delay"])
                     status=env.act("VERIFY_CURRENT")
@@ -254,13 +254,13 @@ def run_policy(spec,policy):
                         result=retry()
                         if result=="COMMITTED":env.act("RESUME")
                         elif not env.escalated:
-                            env.rollback();env.act("ESCALATE")
+                            rollback_from_observations(env,obs);env.act("ESCALATE")
             else:
                 result=retry()
-                if result in ("COMMITTED","ALREADY_COMMITTED"):resume_if_committed()
+                if result in ("COMMITTED","ALREADY_COMMITTED"):resume()
                 elif result=="ALREADY_PARTIAL":handle_partial()
                 elif not env.escalated:
-                    env.rollback();env.act("ESCALATE")
+                    rollback_from_observations(env,obs);env.act("ESCALATE")
     elif policy=="rollback_on_ambiguous":
         if c["consistency"]=="eventual":env.act("WAIT",c["max_visibility_delay"])
         env.act("VERIFY_CURRENT")
@@ -275,7 +275,7 @@ def run_policy(spec,policy):
             elif env.current_outcome=="PARTIAL":env.rollback()
             else:
                 result=retry()
-                if result in ("COMMITTED","ALREADY_COMMITTED"):resume_if_committed()
+                if result in ("COMMITTED","ALREADY_COMMITTED"):resume()
                 elif result=="ALREADY_PARTIAL":env.rollback()
                 elif not env.escalated:
                     env.rollback();env.act("ESCALATE")
