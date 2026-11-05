@@ -1,0 +1,40 @@
+name: Pilot A-2 multi-tool recovery benchmark
+on:
+  push:
+    branches: [pilot-a2-multitool]
+    paths:
+      - "experiments/pilot_a2_multitool/pilot_a2.py"
+      - "experiments/pilot_a2_multitool/test_pilot_a2.py"
+      - ".github/workflows/pilot-a2-multitool.yml"
+  pull_request:
+    paths:
+      - "experiments/pilot_a2_multitool/pilot_a2.py"
+      - "experiments/pilot_a2_multitool/test_pilot_a2.py"
+      - ".github/workflows/pilot-a2-multitool.yml"
+permissions:
+  contents: write
+jobs:
+  pilot-a2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pilot-a2-multitool
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run regression tests
+        run: python -m unittest discover -s experiments/pilot_a2_multitool -p "test_*.py" -v
+      - name: Run complete exploratory matrix
+        run: python experiments/pilot_a2_multitool/pilot_a2.py
+      - name: Commit reproducible results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/pilot_a2_multitool/results/summary.json experiments/pilot_a2_multitool/results/episodes.csv
+          if git diff --cached --quiet; then
+            echo "No result changes."
+          else
+            git commit -m "Record Pilot A-2 exploratory results"
+            git push origin pilot-a2-multitool
+          fi
