@@ -1545,3 +1545,51 @@ ARWM 候选规格另见 `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`。不要�
 
 ### Pilot A 数据审计补充（2026-11-05）
 注意：首轮报告的 unresolved 列已在 D-049 中更正。正确值依次为 blind retry 0.8571、verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。原因是 state-aware/oracle 对权限失败执行 ESCALATE。其他指标不变。独立复现的 7 项状态转移/覆盖断言通过，但 GitHub Actions 没有运行记录，CI 尚未验证。不要引用旧 unresolved 数值。
+
+
+## 46. Pilot A-2 结果与下一步 Pilot B 接管（2026-11-05）
+
+### 仓库和分支
+- 唯一毕业论文仓库：yujian777555/kaitibaogao
+- 当前实验分支：pilot-a2-multitool
+- Pilot A-2 workflow run：42022440268（回归测试与完整矩阵成功）；加入 AST 防隐藏状态读取测试后 run 42022613261（成功）
+- A-2 原始结果提交：fc4de5bf8117e852e88d3a3319b813428055a587
+- A-2 报告：experiments/pilot_a2_multitool/PILOT_A2_EXPLORATORY_RESULTS.md
+- 原始数据：experiments/pilot_a2_multitool/results/episodes.csv
+- 汇总：experiments/pilot_a2_multitool/results/summary.json
+
+### Pilot A-2 结果
+4 工具/任务族 × 13 fault profiles × 100 seeds × 8 policies = 41,600 policy-episodes；每策略 5,200。策略可见工具合同、公开故障信号、Schema/permission 结果和 retry-after，不可见隐藏 outcome、visibility delay、compensation availability；仅 Oracle 读隐藏状态。AST 防泄漏测试加入后 GitHub Actions 成功。
+
+Held-out seeds 60–99、四工具：
+- contract-optimized：success 0.7000、safe resolution 1.0000、critical violation 0、actions 2.3462；
+- contract-bounded：success 0.7000、safe resolution 1.0000、violation 0、actions 2.5000；
+- Oracle：success 0.7000、safe resolution 1.0000、violation 0、actions 1.3923。
+
+Held-out ledger：
+- contract-optimized success 0.5385、safe 1、violation 0、actions 1.8462；
+- Oracle success 0.5385、safe 1、violation 0、actions 1.2308。
+
+### 研究结论边界
+A-2 说明契约感知策略在合成模拟器中可达到 Oracle 的成功/安全表现；因此没有成功率/安全性方面的明显策略缺口。仍有动作成本差距，但 Oracle 使用隐藏状态，不能当作可实现基线。手工 contract-optimized 比 contract-bounded 少 0.1538 actions；不能宣称 EC 已带来提升。
+
+当前 D-050：CONDITIONAL GO for Pilot B cost-aware policy search；A800/ARWM 仍 HOLD。模拟器是单操作恢复，不是跨工具多步骤事务；seed split 是参数区间而非学习模型切分；结果为探索性合成实验。
+
+### 下一步唯一任务：Pilot B（成本约束策略搜索）
+使用新 seeds，禁止复用 A/A-2 test：
+- train 1000–1099
+- validation 1100–1119
+- test 1120–1159
+
+在相同有限状态机 grammar 下比较：
+1. 强手工 contract-optimized；
+2. random valid FSM；
+3. standard GA/GP；
+4. contract-preserving GA/GP；
+5. NSGA-II/III feasibility-first。
+
+目标采用 lexicographic / feasibility-first：critical invariant violations 必须为 0；task success 不低于预注册 0.70；在可行域内最小化 tool actions + wait cost。fitness-call budget、episodes、种群规模和随机种子必须匹配。test 只在策略冻结后运行。报告每 seed、paired bootstrap、worst tool/fault group 和错误分析。
+
+如果 EC 无法稳定优于强手工策略，不保留该算法创新。若有可重复增益，才进一步考虑 A800 ARWM；ARWM 必须证明超越 LightGBM/MLP，并改善固定真实 rollout 预算下的 EA。
+
+禁止当前启动 A800 训练、DeepSeek API 或 RSI 多轮闭环；先完成 Pilot B。
