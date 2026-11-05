@@ -1626,3 +1626,29 @@ A-2 说明契约感知策略在合成模拟器中可达到 Oracle 的成功/安�
 
 ### 接班原则
 继续只维护 kaitibaogao 主仓库，所有实验分支独立；每轮同步 README、05_DECISION_LOG、SESSION_HANDOFF、原始数据、汇总结果与 CI。不得把模拟器结果写成真实 Agent/LLM 结果。
+
+
+## 48. Pilot B2 多步骤 Saga 结果与 Pilot B3 接管（2026-11-05）
+
+### 当前状态
+- 分支：pilot-b2-multistep-saga
+- GitHub Actions run 42024900989：13 项测试和完整 held-out matrix 成功
+- 结果提交：8c93d436d29e3e9d61ad917b93931c42d27e3d97
+- 报告：experiments/pilot_b2_multistep_saga/PILOT_B2_EXPLORATORY_RESULTS.md
+- 原始 CSV / summary：experiments/pilot_b2_multistep_saga/results/
+
+### 结果
+三种三步跨工具工作流，11 fault profiles，故障位置覆盖三个步骤，5 policies；3,960 episodes/policy、19,800 总评估。contract-resume Saga success 0.545455、safe1、violation0、actions4.101010、wait0.966667；Oracle success0.545455、safe1、violation0、actions3.606061。Blind retry violation0.242424；verify-then-retry violation0.080808；rollback-on-ambiguous success0、safe1、violation0。
+
+结论：多步骤 Saga 环境有实质恢复问题；契约感知恢复策略在模拟器中匹配 Oracle 成功/安全表现，但仍有调用成本差距。尚无 EC 增益证据。A800/ARWM 不启动。
+
+### 下一步唯一任务：Pilot B3 workflow-level evolutionary search
+- 新 seeds：train 4000–4039、validation 4100–4119、test 4120–4159；不得复用 A/B/B2 的 test seeds。
+- 搜索对象：跨工具 workflow Saga recovery controller / finite-state policy，不再使用单操作九基因小策略。
+- Baselines：contract-resume Saga 强手工策略、random valid workflow FSM、standard GA/GP、contract-preserving GA/GP、canonical NSGA-II/III。
+- 策略基因应覆盖：当前步骤未知结果的处理、是否使用幂等键、可见性等待、部分提交处理、逆序补偿、补偿失败升级、resume vs abort。
+- Hard gate：invariant violation=0；task success 不低于 Saga baseline；可行域内最小化真实 tool calls + wait cost。
+- Equal fitness-call budget、相同 workflow/fault panels、配对 seeds；validation 选策略，test 冻结后只跑一次。
+- 若随机搜索达到手工 Saga 策略，或 EC 无稳定成本增益，停止 EC 创新主张；不训练 ARWM。
+
+当前研究边界：所有结果都是合成 simulator，不是真实 LLM Agent/API。尚未运行 GA/GP、NSGA-II/III、A800、ARWM 或 RSI 闭环。必须维护 README、D-Log、SESSION_HANDOFF、源代码、原始数据、summary 与 CI。
