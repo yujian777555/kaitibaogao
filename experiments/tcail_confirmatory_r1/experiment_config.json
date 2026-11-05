@@ -1,0 +1,49 @@
+{
+  "protocol": "42_TCAIL_ESTIMATOR_TO_GOM_CONFIRMATORY_GATE_R1.md",
+  "date_frozen_before_test": "2026-11-05",
+  "scenario_order": [
+    "additive_null",
+    "sparse_pairwise",
+    "parent_sign_flip",
+    "overlapping_higher_order",
+    "low_support_drift"
+  ],
+  "seed_splits": {
+    "train": [0, 39],
+    "validation": [40, 59],
+    "heldout_test": [3000, 3039]
+  },
+  "minimum_seed_counts": {"train": 40, "validation": 20, "heldout_test": 40},
+  "n_variables": 40,
+  "n_local_modules": 10,
+  "n_variables_per_module": 4,
+  "delta_local": 0.08,
+  "support_blocks": [8, 16, 32, 128],
+  "support_block_assignment": "non-drift scenarios rotate 8/16/32/128 by seed modulo four; low_support_drift uses 8",
+  "cell_order": ["00", "10", "01", "11"],
+  "estimator": {
+    "posterior_approximation": "joint Laplace Bernoulli task/block GLMM",
+    "models": ["M2", "M3"],
+    "fixed_effect_sd_by_order": {"intercept": 2.0, "main": 1.0, "pairwise": 0.5, "three_way": 0.25},
+    "log_random_effect_sd_prior": {"mean": -0.6931471805599453, "sd": 0.5},
+    "posterior_draws": 512,
+    "anchor_tasks": 32,
+    "random_effect_quadrature_points": 8,
+    "optimizer_max_iterations": 500,
+    "minimum_support_candidates": [8, 16, 32],
+    "q_threshold_grid": [0.5, 0.6, 0.7, 0.8, 0.9, 0.95],
+    "null_false_link_target": 0.05,
+    "conservative_merge": "q=min(M2,M3), w=min(M2,M3); any failed/unsupported model abstains"
+  },
+  "statistics": {
+    "paired_bootstrap_draws": 50000,
+    "paired_bootstrap_seed": 20261105,
+    "confidence_level": 0.95,
+    "independent_unit": "generator seed",
+    "all_null_auprc_convention": 0.0,
+    "baseline_selection": "largest validation mean of per-seed five-scenario macro-AUPRC; non-oracle and complete-coverage methods only; alphabetical tie-break",
+    "selection_rule": "selected iff eligible and score > frozen threshold (strict inequality)"
+  },
+  "gom_gate": "NOT RUN unless estimator gate passes; discovery and search share one total episode budget",
+  "forbidden": ["real LLM API", "A800 training", "active acquisition", "production retry", "CI-GOM", "IMCE-RSI"]
+}

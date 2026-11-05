@@ -466,4 +466,15 @@ TCAIL 仍未证明；这是一项有限的合成研究原型证据任务，不�
 
 Oracle 修正版统一跨方法 mixing seed，并验证初始种群哈希一致。Oracle−Learned LT 的配对均值从原代码 +1.00 变为修正版 +1.30，95% bootstrap CI [0.60,2.00]；这只保留 Oracle 上界信号，不证明 TCAIL。
 
-**当前状态：** 真正 Bernoulli task/block M2/M3、Estimator Gate 和 TCAIL-FOS GOM Gate 尚未完成；不得将 R1-A 写成 GO。下一步直接实现并校准核心估计器。
+**当时状态（已被下文取代）：** 真正 Bernoulli task/block M2/M3、Estimator Gate 和 TCAIL-FOS GOM Gate 尚未完成；不得将 R1-A 写成 GO。
+
+
+## 2026-11-05：R1 Estimator Gate 完成并失败；GOM Gate NOT RUN
+
+新增真正的 Bernoulli task/block 层级 M2/M3 估计器、五情景合成生成器、9 类 linkage 基线、train/validation/held-out 隔离流程和完整原始数据，结果见 `experiments/tcail_confirmatory_r1/R1_ESTIMATOR_GATE_RESULTS.md`。
+
+Held-out seeds 3000–3039（40 个，运行前未使用）。验证集选出的最强非 Oracle 基线为 standardized contrast（validation macro-AUPRC 0.7713）。TCAIL q 的 held-out macro-AUPRC 为 0.6736，配对差 **−0.0996**，95% CI **[−0.1139, −0.0858]**；关键情景 sparse pairwise（−0.0393）与 parent sign-flip（−0.3541）均显著更差，只有 low-support/drift 显著更好（+0.0462）。
+
+**决定：ESTIMATOR_GATE_FAIL。** 按 42 号协议停止 TCAIL estimator 优越性主张，Downstream GOM Gate 未运行；本轮没有产生任何“TCAIL 改善演化搜索”的证据。TCAIL null false-link 为 0.0375（合格），但 calibration slope=0.130、FOS F1=0.373（standardized 0.729），且 128-block 条件弃权率高达 52.9%。解盲后的 q_M3-only 仍显著低于 standardized（−0.0322，CI [−0.0496,−0.0168]），说明失败不只是 conservative min 规则。
+
+严格边界不变：未调用真实 LLM API，未训练 A800，未启动 CI-GOM、IMCE-RSI 或完整 active acquisition。cDLED-P3M 与 CGOMEA 仍是 static adaptation；SLL-MI、FBL incremental、DLED、LMM、ALI/AIM、GAwLL2 未运行。

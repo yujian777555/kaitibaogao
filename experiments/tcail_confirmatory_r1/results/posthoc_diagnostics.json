@@ -1,0 +1,98 @@
+{
+  "status": "EXPLORATORY_POST_HOC",
+  "warning": "Not a confirmatory result; must not be used to claim gate pass.",
+  "q_variant_comparisons": {
+    "q_min": {
+      "mean_difference_vs_standardized": -0.09964691093188117,
+      "ci": [
+        -0.11391689390116508,
+        -0.08575152855732131
+      ]
+    },
+    "q_m2": {
+      "mean_difference_vs_standardized": -0.1011176450588653,
+      "ci": [
+        -0.11536010204862475,
+        -0.08709423125783448
+      ]
+    },
+    "q_m3": {
+      "mean_difference_vs_standardized": -0.0321893011815225,
+      "ci": [
+        -0.04935859458420268,
+        -0.01703813028534416
+      ]
+    },
+    "q_max": {
+      "mean_difference_vs_standardized": -0.03050150950340344,
+      "ci": [
+        -0.04798654519907901,
+        -0.01481722046353167
+      ]
+    }
+  },
+  "variant_scenario_means": {
+    "additive_null": {
+      "q_m2": 0.0,
+      "q_m3": 0.0,
+      "q_max": 0.0,
+      "q_min": 0.0,
+      "standardized": 0.0
+    },
+    "low_support_drift": {
+      "q_m2": 0.9479,
+      "q_m3": 0.9366,
+      "q_max": 0.9416,
+      "q_min": 0.9486,
+      "standardized": 0.9024
+    },
+    "overlapping_higher_order": {
+      "q_m2": 0.8405,
+      "q_m3": 0.9564,
+      "q_max": 0.956,
+      "q_min": 0.8438,
+      "standardized": 0.9949
+    },
+    "parent_sign_flip": {
+      "q_m2": 0.6318,
+      "q_m3": 0.8732,
+      "q_max": 0.8752,
+      "q_min": 0.6348,
+      "standardized": 0.9889
+    },
+    "sparse_pairwise": {
+      "q_m2": 0.9402,
+      "q_m3": 0.939,
+      "q_max": 0.9407,
+      "q_min": 0.9406,
+      "standardized": 0.9798
+    }
+  },
+  "support_strata_auprc": {
+    "tcail": {
+      "33-128": 0.8348,
+      "<=32": 0.8832,
+      ">128": 0.6959
+    },
+    "standardized": {
+      "33-128": 0.9892,
+      "<=32": 0.9295,
+      ">128": 0.9986
+    }
+  },
+  "abstention": {
+    "by_scenario": {
+      "additive_null": 0.1271,
+      "low_support_drift": 0.0,
+      "overlapping_higher_order": 0.2042,
+      "parent_sign_flip": 0.2083,
+      "sparse_pairwise": 0.15
+    },
+    "by_support_stratum": {
+      "33-128": 0.0688,
+      "<=32": 0.0115,
+      ">128": 0.5292
+    },
+    "q_m2_m3_conflict_rate": 0.032916666666666664
+  }
+}

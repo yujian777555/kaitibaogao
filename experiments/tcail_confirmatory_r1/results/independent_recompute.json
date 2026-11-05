@@ -1,0 +1,102 @@
+{
+  "strongest_baseline": "standardized",
+  "n_held_out_seeds": 40,
+  "recomputed_overall": {
+    "mean_difference": -0.09964691093188117,
+    "ci": [
+      -0.11391689390116508,
+      -0.08575152855732131
+    ]
+  },
+  "summary_overall": [
+    -0.11391689390116508,
+    -0.08575152855732128
+  ],
+  "recomputed_scenarios": {
+    "additive_null": {
+      "mean_difference": 0.0,
+      "ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "low_support_drift": {
+      "mean_difference": 0.04622581755766284,
+      "ci": [
+        0.02614405212842719,
+        0.06735682120596558
+      ]
+    },
+    "overlapping_higher_order": {
+      "mean_difference": -0.15108660195023838,
+      "ci": [
+        -0.19380184276476897,
+        -0.1100629798048122
+      ]
+    },
+    "parent_sign_flip": {
+      "mean_difference": -0.35411095543015186,
+      "ci": [
+        -0.4080967283199054,
+        -0.2982533472658844
+      ]
+    },
+    "sparse_pairwise": {
+      "mean_difference": -0.039262814836678483,
+      "ci": [
+        -0.07408187239685823,
+        -0.0102043465351112
+      ]
+    }
+  },
+  "summary_scenarios": {
+    "additive_null": [
+      0.0,
+      0.0
+    ],
+    "sparse_pairwise": [
+      -0.07408187239685822,
+      -0.010204346535111212
+    ],
+    "parent_sign_flip": [
+      -0.4080967283199054,
+      -0.2982533472658845
+    ],
+    "overlapping_higher_order": [
+      -0.19380184276476892,
+      -0.11006297980481218
+    ],
+    "low_support_drift": [
+      0.026144052128427155,
+      0.06735682120596556
+    ]
+  },
+  "recomputed_null_false_link": {
+    "cdled": 0.075,
+    "cgomea": 0.075,
+    "context_pooled": 0.09583333333333334,
+    "fbl_abs": 0.0,
+    "fbl_signed": 0.00625,
+    "local_raw": 0.075,
+    "oracle": 0.0,
+    "random": 0.058333333333333334,
+    "standardized": 0.058333333333333334,
+    "tcail_q": 0.0375,
+    "tcail_w": 0.03958333333333333
+  },
+  "summary_null_false_link": {
+    "tcail_q": 0.0375,
+    "tcail_w": 0.03958333333333333,
+    "local_raw": 0.075,
+    "standardized": 0.058333333333333334,
+    "context_pooled": 0.09583333333333334,
+    "fbl_abs": 0.0,
+    "fbl_signed": 0.00625,
+    "cdled": 0.075,
+    "cgomea": 0.075,
+    "random": 0.058333333333333334,
+    "oracle": 0.0
+  },
+  "gate_pass": false,
+  "status": "ESTIMATOR_GATE_FAIL"
+}

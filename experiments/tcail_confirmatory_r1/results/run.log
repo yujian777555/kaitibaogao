@@ -1,0 +1,711 @@
+train additive_null 0 12
+train additive_null 1 12
+train additive_null 2 12
+train additive_null 3 12
+train additive_null 4 12
+train additive_null 5 12
+train additive_null 6 12
+train additive_null 7 12
+train additive_null 8 12
+train additive_null 9 12
+train additive_null 10 12
+train additive_null 11 12
+train additive_null 12 12
+train additive_null 13 12
+train additive_null 14 12
+train additive_null 15 12
+train additive_null 16 12
+train additive_null 17 12
+train additive_null 18 12
+train additive_null 19 12
+train additive_null 20 12
+train additive_null 21 12
+train additive_null 22 12
+train additive_null 23 12
+train additive_null 24 12
+train additive_null 25 12
+train additive_null 26 12
+train additive_null 27 12
+train additive_null 28 12
+train additive_null 29 12
+train additive_null 30 12
+train additive_null 31 12
+train additive_null 32 12
+train additive_null 33 12
+train additive_null 34 12
+train additive_null 35 12
+train additive_null 36 12
+train additive_null 37 12
+train additive_null 38 12
+train additive_null 39 12
+train sparse_pairwise 0 12
+train sparse_pairwise 1 12
+train sparse_pairwise 2 12
+train sparse_pairwise 3 12
+train sparse_pairwise 4 12
+train sparse_pairwise 5 12
+train sparse_pairwise 6 12
+train sparse_pairwise 7 12
+train sparse_pairwise 8 12
+train sparse_pairwise 9 12
+train sparse_pairwise 10 12
+train sparse_pairwise 11 12
+train sparse_pairwise 12 12
+train sparse_pairwise 13 12
+train sparse_pairwise 14 12
+train sparse_pairwise 15 12
+train sparse_pairwise 16 12
+train sparse_pairwise 17 12
+train sparse_pairwise 18 12
+train sparse_pairwise 19 12
+train sparse_pairwise 20 12
+train sparse_pairwise 21 12
+train sparse_pairwise 22 12
+train sparse_pairwise 23 12
+train sparse_pairwise 24 12
+train sparse_pairwise 25 12
+train sparse_pairwise 26 12
+train sparse_pairwise 27 12
+train sparse_pairwise 28 12
+train sparse_pairwise 29 12
+train sparse_pairwise 30 12
+train sparse_pairwise 31 12
+train sparse_pairwise 32 12
+train sparse_pairwise 33 12
+train sparse_pairwise 34 12
+train sparse_pairwise 35 12
+train sparse_pairwise 36 12
+train sparse_pairwise 37 12
+train sparse_pairwise 38 12
+train sparse_pairwise 39 12
+train parent_sign_flip 0 12
+train parent_sign_flip 1 12
+train parent_sign_flip 2 12
+train parent_sign_flip 3 12
+train parent_sign_flip 4 12
+train parent_sign_flip 5 12
+train parent_sign_flip 6 12
+train parent_sign_flip 7 12
+train parent_sign_flip 8 12
+train parent_sign_flip 9 12
+train parent_sign_flip 10 12
+train parent_sign_flip 11 12
+train parent_sign_flip 12 12
+train parent_sign_flip 13 12
+train parent_sign_flip 14 12
+train parent_sign_flip 15 12
+train parent_sign_flip 16 12
+train parent_sign_flip 17 12
+train parent_sign_flip 18 12
+train parent_sign_flip 19 12
+train parent_sign_flip 20 12
+train parent_sign_flip 21 12
+train parent_sign_flip 22 12
+train parent_sign_flip 23 12
+train parent_sign_flip 24 12
+train parent_sign_flip 25 12
+train parent_sign_flip 26 12
+train parent_sign_flip 27 12
+train parent_sign_flip 28 12
+train parent_sign_flip 29 12
+train parent_sign_flip 30 12
+train parent_sign_flip 31 12
+train parent_sign_flip 32 12
+train parent_sign_flip 33 12
+train parent_sign_flip 34 12
+train parent_sign_flip 35 12
+train parent_sign_flip 36 12
+train parent_sign_flip 37 12
+train parent_sign_flip 38 12
+train parent_sign_flip 39 12
+train overlapping_higher_order 0 12
+train overlapping_higher_order 1 12
+train overlapping_higher_order 2 12
+train overlapping_higher_order 3 12
+train overlapping_higher_order 4 12
+train overlapping_higher_order 5 12
+train overlapping_higher_order 6 12
+train overlapping_higher_order 7 12
+train overlapping_higher_order 8 12
+train overlapping_higher_order 9 12
+train overlapping_higher_order 10 12
+train overlapping_higher_order 11 12
+train overlapping_higher_order 12 12
+train overlapping_higher_order 13 12
+train overlapping_higher_order 14 12
+train overlapping_higher_order 15 12
+train overlapping_higher_order 16 12
+train overlapping_higher_order 17 12
+train overlapping_higher_order 18 12
+train overlapping_higher_order 19 12
+train overlapping_higher_order 20 12
+train overlapping_higher_order 21 12
+train overlapping_higher_order 22 12
+train overlapping_higher_order 23 12
+train overlapping_higher_order 24 12
+train overlapping_higher_order 25 12
+train overlapping_higher_order 26 12
+train overlapping_higher_order 27 12
+train overlapping_higher_order 28 12
+train overlapping_higher_order 29 12
+train overlapping_higher_order 30 12
+train overlapping_higher_order 31 12
+train overlapping_higher_order 32 12
+train overlapping_higher_order 33 12
+train overlapping_higher_order 34 12
+train overlapping_higher_order 35 12
+train overlapping_higher_order 36 12
+train overlapping_higher_order 37 12
+train overlapping_higher_order 38 12
+train overlapping_higher_order 39 12
+train low_support_drift 0 12
+train low_support_drift 1 12
+train low_support_drift 2 12
+train low_support_drift 3 12
+train low_support_drift 4 12
+train low_support_drift 5 12
+train low_support_drift 6 12
+train low_support_drift 7 12
+train low_support_drift 8 12
+train low_support_drift 9 12
+train low_support_drift 10 12
+train low_support_drift 11 12
+train low_support_drift 12 12
+train low_support_drift 13 12
+train low_support_drift 14 12
+train low_support_drift 15 12
+train low_support_drift 16 12
+train low_support_drift 17 12
+train low_support_drift 18 12
+train low_support_drift 19 12
+train low_support_drift 20 12
+train low_support_drift 21 12
+train low_support_drift 22 12
+train low_support_drift 23 12
+train low_support_drift 24 12
+train low_support_drift 25 12
+train low_support_drift 26 12
+train low_support_drift 27 12
+train low_support_drift 28 12
+train low_support_drift 29 12
+train low_support_drift 30 12
+train low_support_drift 31 12
+train low_support_drift 32 12
+train low_support_drift 33 12
+train low_support_drift 34 12
+train low_support_drift 35 12
+train low_support_drift 36 12
+train low_support_drift 37 12
+train low_support_drift 38 12
+train low_support_drift 39 12
+validation additive_null 40 12
+validation additive_null 41 12
+validation additive_null 42 12
+validation additive_null 43 12
+validation additive_null 44 12
+validation additive_null 45 12
+validation additive_null 46 12
+validation additive_null 47 12
+validation additive_null 48 12
+validation additive_null 49 12
+validation additive_null 50 12
+validation additive_null 51 12
+validation additive_null 52 12
+validation additive_null 53 12
+validation additive_null 54 12
+validation additive_null 55 12
+validation additive_null 56 12
+validation additive_null 57 12
+validation additive_null 58 12
+validation additive_null 59 12
+validation sparse_pairwise 40 12
+validation sparse_pairwise 41 12
+validation sparse_pairwise 42 12
+validation sparse_pairwise 43 12
+validation sparse_pairwise 44 12
+validation sparse_pairwise 45 12
+validation sparse_pairwise 46 12
+validation sparse_pairwise 47 12
+validation sparse_pairwise 48 12
+validation sparse_pairwise 49 12
+validation sparse_pairwise 50 12
+validation sparse_pairwise 51 12
+validation sparse_pairwise 52 12
+validation sparse_pairwise 53 12
+validation sparse_pairwise 54 12
+validation sparse_pairwise 55 12
+validation sparse_pairwise 56 12
+validation sparse_pairwise 57 12
+validation sparse_pairwise 58 12
+validation sparse_pairwise 59 12
+validation parent_sign_flip 40 12
+validation parent_sign_flip 41 12
+validation parent_sign_flip 42 12
+validation parent_sign_flip 43 12
+validation parent_sign_flip 44 12
+validation parent_sign_flip 45 12
+validation parent_sign_flip 46 12
+validation parent_sign_flip 47 12
+validation parent_sign_flip 48 12
+validation parent_sign_flip 49 12
+validation parent_sign_flip 50 12
+validation parent_sign_flip 51 12
+validation parent_sign_flip 52 12
+validation parent_sign_flip 53 12
+validation parent_sign_flip 54 12
+validation parent_sign_flip 55 12
+validation parent_sign_flip 56 12
+validation parent_sign_flip 57 12
+validation parent_sign_flip 58 12
+validation parent_sign_flip 59 12
+validation overlapping_higher_order 40 12
+validation overlapping_higher_order 41 12
+validation overlapping_higher_order 42 12
+validation overlapping_higher_order 43 12
+validation overlapping_higher_order 44 12
+validation overlapping_higher_order 45 12
+validation overlapping_higher_order 46 12
+validation overlapping_higher_order 47 12
+validation overlapping_higher_order 48 12
+validation overlapping_higher_order 49 12
+validation overlapping_higher_order 50 12
+validation overlapping_higher_order 51 12
+validation overlapping_higher_order 52 12
+validation overlapping_higher_order 53 12
+validation overlapping_higher_order 54 12
+validation overlapping_higher_order 55 12
+validation overlapping_higher_order 56 12
+validation overlapping_higher_order 57 12
+validation overlapping_higher_order 58 12
+validation overlapping_higher_order 59 12
+validation low_support_drift 40 12
+validation low_support_drift 41 12
+validation low_support_drift 42 12
+validation low_support_drift 43 12
+validation low_support_drift 44 12
+validation low_support_drift 45 12
+validation low_support_drift 46 12
+validation low_support_drift 47 12
+validation low_support_drift 48 12
+validation low_support_drift 49 12
+validation low_support_drift 50 12
+validation low_support_drift 51 12
+validation low_support_drift 52 12
+validation low_support_drift 53 12
+validation low_support_drift 54 12
+validation low_support_drift 55 12
+validation low_support_drift 56 12
+validation low_support_drift 57 12
+validation low_support_drift 58 12
+validation low_support_drift 59 12
+held_out additive_null 3000 12
+held_out additive_null 3001 12
+held_out additive_null 3002 12
+held_out additive_null 3003 12
+held_out additive_null 3004 12
+held_out additive_null 3005 12
+held_out additive_null 3006 12
+held_out additive_null 3007 12
+held_out additive_null 3008 12
+held_out additive_null 3009 12
+held_out additive_null 3010 12
+held_out additive_null 3011 12
+held_out additive_null 3012 12
+held_out additive_null 3013 12
+held_out additive_null 3014 12
+held_out additive_null 3015 12
+held_out additive_null 3016 12
+held_out additive_null 3017 12
+held_out additive_null 3018 12
+held_out additive_null 3019 12
+held_out additive_null 3020 12
+held_out additive_null 3021 12
+held_out additive_null 3022 12
+held_out additive_null 3023 12
+held_out additive_null 3024 12
+held_out additive_null 3025 12
+held_out additive_null 3026 12
+held_out additive_null 3027 12
+held_out additive_null 3028 12
+held_out additive_null 3029 12
+held_out additive_null 3030 12
+held_out additive_null 3031 12
+held_out additive_null 3032 12
+held_out additive_null 3033 12
+held_out additive_null 3034 12
+held_out additive_null 3035 12
+held_out additive_null 3036 12
+held_out additive_null 3037 12
+held_out additive_null 3038 12
+held_out additive_null 3039 12
+held_out sparse_pairwise 3000 12
+held_out sparse_pairwise 3001 12
+held_out sparse_pairwise 3002 12
+held_out sparse_pairwise 3003 12
+held_out sparse_pairwise 3004 12
+held_out sparse_pairwise 3005 12
+held_out sparse_pairwise 3006 12
+held_out sparse_pairwise 3007 12
+held_out sparse_pairwise 3008 12
+held_out sparse_pairwise 3009 12
+held_out sparse_pairwise 3010 12
+held_out sparse_pairwise 3011 12
+held_out sparse_pairwise 3012 12
+held_out sparse_pairwise 3013 12
+held_out sparse_pairwise 3014 12
+held_out sparse_pairwise 3015 12
+held_out sparse_pairwise 3016 12
+held_out sparse_pairwise 3017 12
+held_out sparse_pairwise 3018 12
+held_out sparse_pairwise 3019 12
+held_out sparse_pairwise 3020 12
+held_out sparse_pairwise 3021 12
+held_out sparse_pairwise 3022 12
+held_out sparse_pairwise 3023 12
+held_out sparse_pairwise 3024 12
+held_out sparse_pairwise 3025 12
+held_out sparse_pairwise 3026 12
+held_out sparse_pairwise 3027 12
+held_out sparse_pairwise 3028 12
+held_out sparse_pairwise 3029 12
+held_out sparse_pairwise 3030 12
+held_out sparse_pairwise 3031 12
+held_out sparse_pairwise 3032 12
+held_out sparse_pairwise 3033 12
+held_out sparse_pairwise 3034 12
+held_out sparse_pairwise 3035 12
+held_out sparse_pairwise 3036 12
+held_out sparse_pairwise 3037 12
+held_out sparse_pairwise 3038 12
+held_out sparse_pairwise 3039 12
+held_out parent_sign_flip 3000 12
+held_out parent_sign_flip 3001 12
+held_out parent_sign_flip 3002 12
+held_out parent_sign_flip 3003 12
+held_out parent_sign_flip 3004 12
+held_out parent_sign_flip 3005 12
+held_out parent_sign_flip 3006 12
+held_out parent_sign_flip 3007 12
+held_out parent_sign_flip 3008 12
+held_out parent_sign_flip 3009 12
+held_out parent_sign_flip 3010 12
+held_out parent_sign_flip 3011 12
+held_out parent_sign_flip 3012 12
+held_out parent_sign_flip 3013 12
+held_out parent_sign_flip 3014 12
+held_out parent_sign_flip 3015 12
+held_out parent_sign_flip 3016 12
+held_out parent_sign_flip 3017 12
+held_out parent_sign_flip 3018 12
+held_out parent_sign_flip 3019 12
+held_out parent_sign_flip 3020 12
+held_out parent_sign_flip 3021 12
+held_out parent_sign_flip 3022 12
+held_out parent_sign_flip 3023 12
+held_out parent_sign_flip 3024 12
+held_out parent_sign_flip 3025 12
+held_out parent_sign_flip 3026 12
+held_out parent_sign_flip 3027 12
+held_out parent_sign_flip 3028 12
+held_out parent_sign_flip 3029 12
+held_out parent_sign_flip 3030 12
+held_out parent_sign_flip 3031 12
+held_out parent_sign_flip 3032 12
+held_out parent_sign_flip 3033 12
+held_out parent_sign_flip 3034 12
+held_out parent_sign_flip 3035 12
+held_out parent_sign_flip 3036 12
+held_out parent_sign_flip 3037 12
+held_out parent_sign_flip 3038 12
+held_out parent_sign_flip 3039 12
+held_out overlapping_higher_order 3000 12
+held_out overlapping_higher_order 3001 12
+held_out overlapping_higher_order 3002 12
+held_out overlapping_higher_order 3003 12
+held_out overlapping_higher_order 3004 12
+held_out overlapping_higher_order 3005 12
+held_out overlapping_higher_order 3006 12
+held_out overlapping_higher_order 3007 12
+held_out overlapping_higher_order 3008 12
+held_out overlapping_higher_order 3009 12
+held_out overlapping_higher_order 3010 12
+held_out overlapping_higher_order 3011 12
+held_out overlapping_higher_order 3012 12
+held_out overlapping_higher_order 3013 12
+held_out overlapping_higher_order 3014 12
+held_out overlapping_higher_order 3015 12
+held_out overlapping_higher_order 3016 12
+held_out overlapping_higher_order 3017 12
+held_out overlapping_higher_order 3018 12
+held_out overlapping_higher_order 3019 12
+held_out overlapping_higher_order 3020 12
+held_out overlapping_higher_order 3021 12
+held_out overlapping_higher_order 3022 12
+held_out overlapping_higher_order 3023 12
+held_out overlapping_higher_order 3024 12
+held_out overlapping_higher_order 3025 12
+held_out overlapping_higher_order 3026 12
+held_out overlapping_higher_order 3027 12
+held_out overlapping_higher_order 3028 12
+held_out overlapping_higher_order 3029 12
+held_out overlapping_higher_order 3030 12
+held_out overlapping_higher_order 3031 12
+held_out overlapping_higher_order 3032 12
+held_out overlapping_higher_order 3033 12
+held_out overlapping_higher_order 3034 12
+held_out overlapping_higher_order 3035 12
+held_out overlapping_higher_order 3036 12
+held_out overlapping_higher_order 3037 12
+held_out overlapping_higher_order 3038 12
+held_out overlapping_higher_order 3039 12
+held_out low_support_drift 3000 12
+held_out low_support_drift 3001 12
+held_out low_support_drift 3002 12
+held_out low_support_drift 3003 12
+held_out low_support_drift 3004 12
+held_out low_support_drift 3005 12
+held_out low_support_drift 3006 12
+held_out low_support_drift 3007 12
+held_out low_support_drift 3008 12
+held_out low_support_drift 3009 12
+held_out low_support_drift 3010 12
+held_out low_support_drift 3011 12
+held_out low_support_drift 3012 12
+held_out low_support_drift 3013 12
+held_out low_support_drift 3014 12
+held_out low_support_drift 3015 12
+held_out low_support_drift 3016 12
+held_out low_support_drift 3017 12
+held_out low_support_drift 3018 12
+held_out low_support_drift 3019 12
+held_out low_support_drift 3020 12
+held_out low_support_drift 3021 12
+held_out low_support_drift 3022 12
+held_out low_support_drift 3023 12
+held_out low_support_drift 3024 12
+held_out low_support_drift 3025 12
+held_out low_support_drift 3026 12
+held_out low_support_drift 3027 12
+held_out low_support_drift 3028 12
+held_out low_support_drift 3029 12
+held_out low_support_drift 3030 12
+held_out low_support_drift 3031 12
+held_out low_support_drift 3032 12
+held_out low_support_drift 3033 12
+held_out low_support_drift 3034 12
+held_out low_support_drift 3035 12
+held_out low_support_drift 3036 12
+held_out low_support_drift 3037 12
+held_out low_support_drift 3038 12
+held_out low_support_drift 3039 12
+{
+  "baseline_selection": {
+    "method": "standardized",
+    "validation_mean_macro_auprc": 0.7712717374997137,
+    "all_validation_means": {
+      "cdled": 0.7700278692537621,
+      "cgomea": 0.7700278692537621,
+      "context_pooled": 0.6953803841991342,
+      "fbl_abs": 0.672692745469017,
+      "local_raw": 0.7700278692537621,
+      "standardized": 0.7712717374997137
+    }
+  },
+  "strongest_baseline": "standardized",
+  "thresholds": {
+    "tcail_q": 0.498046875,
+    "tcail_w": 0.03089333629971451,
+    "local_raw": 0.21875,
+    "standardized": 1.6325363765205998,
+    "context_pooled": 0.15625,
+    "fbl_abs": 1.0,
+    "fbl_signed": 0.9230769230769231,
+    "cdled": 0.21875,
+    "cgomea": 0.21875,
+    "random": 0.9456154310484879,
+    "oracle": 0.0
+  },
+  "seed_counts": {
+    "train": 40,
+    "validation": 20,
+    "held_out": 40
+  },
+  "estimator_gate": {
+    "overall_mean_difference": -0.09964691093188116,
+    "overall_paired_bootstrap_95pct_ci": [
+      -0.11391689390116508,
+      -0.08575152855732128
+    ],
+    "scenario_results": {
+      "additive_null": {
+        "mean_difference": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "sparse_pairwise": {
+        "mean_difference": -0.039262814836678483,
+        "ci": [
+          -0.07408187239685822,
+          -0.010204346535111212
+        ]
+      },
+      "parent_sign_flip": {
+        "mean_difference": -0.35411095543015186,
+        "ci": [
+          -0.4080967283199054,
+          -0.2982533472658845
+        ]
+      },
+      "overlapping_higher_order": {
+        "mean_difference": -0.15108660195023832,
+        "ci": [
+          -0.19380184276476892,
+          -0.11006297980481218
+        ]
+      },
+      "low_support_drift": {
+        "mean_difference": 0.04622581755766282,
+        "ci": [
+          0.026144052128427155,
+          0.06735682120596556
+        ]
+      }
+    },
+    "key_scenarios_not_significantly_worse": false,
+    "PASS": false
+  },
+  "calibration": {
+    "brier": 0.25369060990198505,
+    "ece": 0.17887755256162394,
+    "calibration_intercept": 0.13650493615838027,
+    "calibration_slope": 0.13002825339583293
+  },
+  "null_false_link": {
+    "tcail_q": 0.0375,
+    "tcail_w": 0.03958333333333333,
+    "local_raw": 0.075,
+    "standardized": 0.058333333333333334,
+    "context_pooled": 0.09583333333333334,
+    "fbl_abs": 0.0,
+    "fbl_signed": 0.00625,
+    "cdled": 0.075,
+    "cgomea": 0.075,
+    "random": 0.058333333333333334,
+    "oracle": 0.0
+  },
+  "sign_flip_accuracy": 0.6470588235294118,
+  "FOS_recovery": [
+    {
+      "method": "cdled",
+      "precision": 0.7570833333333333,
+      "recall": 0.7516666666666667,
+      "f1": 0.7379166666666667,
+      "false_merge_rate": 0.10291666666666666,
+      "variation_of_information": 0.1323650480296162
+    },
+    {
+      "method": "cgomea",
+      "precision": 0.7570833333333333,
+      "recall": 0.7516666666666667,
+      "f1": 0.7379166666666667,
+      "false_merge_rate": 0.10291666666666666,
+      "variation_of_information": 0.1323650480296162
+    },
+    {
+      "method": "context_pooled",
+      "precision": 0.44708333333333333,
+      "recall": 0.4354166666666666,
+      "f1": 0.42214285714285715,
+      "false_merge_rate": 0.09916666666666667,
+      "variation_of_information": 0.502043118395282
+    },
+    {
+      "method": "fbl_abs",
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "false_merge_rate": 0.0,
+      "variation_of_information": 0.9492924377736762
+    },
+    {
+      "method": "fbl_signed",
+      "precision": 0.06,
+      "recall": 0.01375,
+      "f1": 0.021726190476190475,
+      "false_merge_rate": 0.00125,
+      "variation_of_information": 0.9278439621771721
+    },
+    {
+      "method": "local_raw",
+      "precision": 0.7570833333333333,
+      "recall": 0.7516666666666667,
+      "f1": 0.7379166666666667,
+      "false_merge_rate": 0.10291666666666666,
+      "variation_of_information": 0.1323650480296162
+    },
+    {
+      "method": "oracle",
+      "precision": 0.6570833333333332,
+      "recall": 0.8,
+      "f1": 0.70375,
+      "false_merge_rate": 0.28,
+      "variation_of_information": 0.15974305112223622
+    },
+    {
+      "method": "random",
+      "precision": 0.18916666666666668,
+      "recall": 0.05541666666666666,
+      "f1": 0.07972619047619048,
+      "false_merge_rate": 0.032916666666666664,
+      "variation_of_information": 0.9087824147117738
+    },
+    {
+      "method": "standardized",
+      "precision": 0.7725,
+      "recall": 0.7266666666666667,
+      "f1": 0.7289880952380952,
+      "false_merge_rate": 0.06583333333333333,
+      "variation_of_information": 0.12873775470599108
+    },
+    {
+      "method": "tcail_q",
+      "precision": 0.42833333333333334,
+      "recall": 0.3745833333333334,
+      "f1": 0.3729166666666666,
+      "false_merge_rate": 0.06791666666666667,
+      "variation_of_information": 0.5429778890491731
+    },
+    {
+      "method": "tcail_w",
+      "precision": 0.39208333333333334,
+      "recall": 0.35791666666666666,
+      "f1": 0.3514285714285715,
+      "false_merge_rate": 0.06958333333333333,
+      "variation_of_information": 0.5666009189807885
+    }
+  ],
+  "fit_quality": [
+    {
+      "model_order": 2,
+      "fit_ok": 0.935,
+      "ppc_extreme_rate": 0.005,
+      "mean_seconds": 17.05303538739681
+    },
+    {
+      "model_order": 3,
+      "fit_ok": 0.925,
+      "ppc_extreme_rate": 0.0,
+      "mean_seconds": 16.60202534735203
+    }
+  ],
+  "status": "ESTIMATOR_GATE_FAIL",
+  "gom_gate": "NOT_RUN",
+  "limitations": [
+    "Laplace posterior approximation, not exact MCMC.",
+    "cDLED-P3M and CGOMEA are explicit static-data adaptations, not full original reproductions.",
+    "FBL signed Eq.(7) domain violations are reported separately and excluded from valid-only metrics.",
+    "Test metrics were computed only after thresholds and strongest baseline were frozen."
+  ]
+}

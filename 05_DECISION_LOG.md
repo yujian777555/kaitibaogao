@@ -566,3 +566,26 @@ TCAIL 的核心命题不是“统计模型更复杂”，而是：在同样 task
 修复并记录：Oracle 方法专属 mixing seed 改为跨方法配对 seed，导出初始种群哈希并验证一致；FBL 区分绝对值比率适配与论文 signed Eq.(7)，增加无 gate/零 epsilon 敏感性。修正版 Oracle−Learned LT 配对均值 +1.30，95% CI [0.60,2.00]；该变化与原结果分开保留。FBL signed Eq.(7) 领域违规 2,811/3,800，valid-only 结果不得作完整公平比较。
 
 **决定：R1-A 只确认可重算性和适配边界，不构成 TCAIL 或 EC 收益证明。** EB q/w 仍是 Normal–Normal proxy；真正 Bernoulli task/block M2/M3、Estimator Gate 和 TCAIL-FOS GOM Gate 尚未完成。继续禁止真实 LLM API、A800 训练、CI-GOM、IMCE-RSI、完整 active acquisition 和生产 retry。
+
+
+## 决策 D-046：Estimator Gate 确认性运行失败，Downstream GOM Gate NOT RUN（2026-11-05）
+
+在 `experiments/tcail_confirmatory_r1/` 完成真正的 Bernoulli task/block 层级 M2/M3 Laplace 估计器、五情景 logistic random-effects 生成器、9 类共享四格数据的 linkage 基线，以及 train 0–39 / validation 40–59 / held-out 3000–3039 的隔离流程。全部原始观测、per-pair 评分、per-seed 指标、配置、日志、环境锁和独立重算已保存。
+
+### 结果
+- 验证集最强非 Oracle 基线：standardized contrast（0.7713）。
+- Held-out：TCAIL q macro-AUPRC 0.6736；配对差 **−0.0996**，95% CI **[−0.1139, −0.0858]**。
+- 分情景：sparse −0.0393 [−0.0741,−0.0102]；parent sign-flip −0.3541 [−0.4081,−0.2983]；higher-order −0.1511 [−0.1938,−0.1101]；low-support/drift **+0.0462** [0.0261,0.0674]；additive_null 无正例，AUPRC 约定 0。
+- TCAIL null false-link 0.0375（≤0.05，合格）；calibration slope 0.130、ECE 0.179；FOS F1 0.373（standardized 0.729）；sign accuracy 0.647。
+- M2/M3 fit_ok 0.935/0.925；56/800 次 `GRADIENT_TOLERANCE` 失败；512-row 支持条件弃权率 52.9%。
+- 解盲后 q_M3-only 仍显著低于 standardized：−0.0322 [−0.0496,−0.0168]；因此失败不只是 conservative min。
+- 先验敏感性（validation 40–42）：q Spearman 0.983/0.986，selection agreement 1.000/0.983。
+
+### 决定
+**ESTIMATOR_GATE_FAIL。** 按 42 号协议停止 TCAIL estimator 优越性主张；不进入 Downstream GOM Gate，GOM 标记 **NOT RUN**。不得用 AUPRC、FOS recovery、拟合成功或工程运行代替 EC 收益证据。
+
+### 边界
+cDLED-P3M 与 CGOMEA 是 static-data adaptation，不是原论文完整复现；SLL-MI、FBL incremental、DLED、LMM、ALI/AIM、GAwLL2 未运行。未调用真实 LLM API，未训练 A800，未启动 CI-GOM/IMCE-RSI 或完整 active acquisition。
+
+### OPEN
+128-block 拟合失败、additive_null 的 AUPRC 约定、random slopes/overdispersion、多档效应强度、联合 40 变量全图、缺失强基线、conservative min vs M3-only 的预注册取舍，均未解决。若重试，必须使用新的独立 held-out seeds，不得复用 3000–3039 作确认性 test。

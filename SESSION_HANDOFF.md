@@ -1428,3 +1428,49 @@ F. 按 42 号 GO/NO-GO 规则作结论。失败也要如实报告，不得调阈
 R1-A 不是 GO。Estimator Gate、真正 TCAIL 和 TCAIL-FOS GOM Gate 均未完成。下一阶段必须实际实现并校准 Bernoulli task/block 层级 M2/M3，按 42 号运行 train/validation/test 和强基线比较；只有 Estimator Gate 通过才可进入 TCAIL-FOS GOM Gate。失败和低支持结果必须保留。
 
 严格边界不变：禁止真实 LLM API、A800 训练、CI-GOM、IMCE-RSI、完整 active acquisition 和生产 retry。每阶段保存原始数据、日志、配置、环境、每 seed 结果和统计输出，更新 README、05_DECISION_LOG、SESSION_HANDOFF，提交并核验远端 main。
+
+
+## 43. R1 Estimator Gate 确认性运行完成：FAIL，GOM NOT RUN（2026-11-05）
+
+### 当前状态
+- 真正的 Bernoulli task/block M2/M3 Laplace 估计器、五情景生成器和 9 类基线已实现并实际运行。
+- Held-out 3000–3039（40 seeds）未参与开发。结果：TCAIL q macro-AUPRC 0.6736 vs standardized 0.7732；配对差 −0.0996，95% CI [−0.1139,−0.0858]。
+- 关键情景 sparse（−0.0393）与 parent sign-flip（−0.3541）显著更差；只有 low-support/drift 显著更好（+0.0462）。
+- **ESTIMATOR_GATE_FAIL。** Downstream GOM Gate **NOT RUN**；没有 EC 收益证据。
+
+### 必读文件
+1. `experiments/tcail_confirmatory_r1/R1_ESTIMATOR_GATE_RESULTS.md`（完整结果、失败机制、边界、OPEN）。
+2. `experiments/tcail_confirmatory_r1/results/summary.json`、`stage_summary.json`、`independent_recompute.json`、`posthoc_diagnostics.json`。
+3. `experiments/tcail_confirmatory_r1/experiment_config.json`（冻结配置与 held-out 范围）。
+4. `experiments/tcail_confirmatory_r1/R1A_AUDIT_RESULTS.md`（pilot 审计与基线边界）。
+5. `42_TCAIL_ESTIMATOR_TO_GOM_CONFIRMATORY_GATE_R1.md`（协议与停止规则）。
+
+### 已确认的事实
+- TCAIL null false-link 0.0375（合格）；calibration slope 0.130、ECE 0.179，概率不可直接使用。
+- FOS F1 0.373，显著低于 standardized 0.729。
+- 56/800 次拟合 `GRADIENT_TOLERANCE` 失败；512-row 支持弃权率 52.9%。
+- 解盲后 q_M3-only 仍显著低于 standardized（−0.0322），失败不只是 conservative min。
+- 先验敏感性稳定（Spearman 0.983–0.986）。
+- cDLED/CGOMEA 是 static adaptation；SLL-MI、FBL incremental、DLED、LMM、ALI/AIM、GAwLL2 未运行。
+
+### 不允许的下一步
+- 不得复用 held-out 3000–3039 调参或重新宣称通过。
+- 不得在 Estimator Gate 失败后运行 GOM 并声称 TCAIL 改善 EC。
+- 不得把 q_M3-only 或 q_max 的事后结果写成预注册 Gate 通过。
+- 不得调用真实 LLM API、训练 A800、启动 CI-GOM/IMCE-RSI 或完整 active acquisition。
+
+### 下一会话可选方向（需用户决策）
+1. **修复实现后重新预注册：** 相对梯度准则/更强优化器、random slopes/overdispersion、新的独立 held-out seeds（如 4000–4039），并预先声明 merge 规则。
+2. **收窄主张：** 仅把 TCAIL 作为低支持/漂移下的 abstention 组件研究，不再声称普遍优于 direct contrast。
+3. **转向 EC 价值：** 若 Oracle FOS 在该任务族仍显示上界价值，可单独研究“何时 linkage 值得学”，但必须先通过 Estimator Gate。
+4. **补强基线：** SLL-MI、FBL incremental、DLED、LMM、ALI/AIM、GAwLL2。
+
+### 可直接复制的接班提示词
+
+你是 yujian777555/kaitibaogao 的实验 Executor。先核验远端 main HEAD，读取 README、05_DECISION_LOG、SESSION_HANDOFF（第 43 节）、`experiments/tcail_confirmatory_r1/R1_ESTIMATOR_GATE_RESULTS.md`、`results/summary.json`、`results/posthoc_diagnostics.json`、`experiment_config.json` 和 42 号协议。
+
+当前结论是 ESTIMATOR_GATE_FAIL，GOM NOT RUN。不要重跑已解盲的 held-out 3000–3039 来调参。若用户要求继续，只允许以下之一：
+A. 以新的独立 held-out seeds 预注册并复测修复后的估计器（相对梯度准则、random slopes/overdispersion、merge 规则先冻结）；
+B. 收窄为低支持/漂移 abstention 研究；
+C. 补强缺失基线。
+任何新轮次必须保存原始数据、每 seed 结果、配置、环境、日志和独立重算；不得调用真实 LLM API、训练 A800、启动 CI-GOM/IMCE-RSI 或完整 active acquisition。失败结果不得删除。
