@@ -19,5 +19,7 @@ jobs:
           python-version: "3.11"
       - name: Run regression tests
         run: python -m unittest discover -s experiments/pilot_a_recovery -p "test_*.py" -v
-      - name: Run exploratory simulator
+      - name: Run Pilot A baseline
         run: python experiments/pilot_a_recovery/pilot_a.py
+      - name: Run Pilot A-2 simulator
+        run: python experiments/pilot_a_recovery/pilot_a2.py
