@@ -1545,3 +1545,21 @@ ARWM 候选规格另见 `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`。不要�
 
 ### Pilot A 数据审计补充（2026-11-05）
 注意：首轮报告的 unresolved 列已在 D-049 中更正。正确值依次为 blind retry 0.8571、verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。原因是 state-aware/oracle 对权限失败执行 ESCALATE。其他指标不变。独立复现的 7 项状态转移/覆盖断言通过，但 GitHub Actions 没有运行记录，CI 尚未验证。不要引用旧 unresolved 数值。
+
+
+## Pilot A-2 最新状态（2026-11-05）
+
+- 分支：pilot-a-stateful-recovery
+- Pilot A-2 代码：experiments/pilot_a_recovery/pilot_a2.py
+- 测试：experiments/pilot_a_recovery/test_pilot_a2.py
+- 结果：experiments/pilot_a_recovery/PILOT_A2_EXPLORATORY_RESULTS.md
+- 机器可读摘要：experiments/pilot_a_recovery/pilot_a2_summary.json
+- CI：run 42030194929，12/12 tests passed，Pilot A 和 A-2 simulator 成功。
+- 结果：contract-aware success 0.7222 / safe 1.0 / violation 0；oracle diagnostic success 0.7778 / safe 1.0；差距 5.56pp。该差距只是模拟器探索信号，不是显著性或演化算法提升证据。
+- 限制：双工具共享同一故障族；seed 只变延迟/限流；无 held-out task/fault composition。
+- 当前门禁：CONDITIONAL GO to Pilot A-3；A800/ARWM 仍 HOLD。
+
+### 下一步唯一任务：Pilot A-3
+将每个工具的故障独立分配，构造真正跨步骤的 saga 部分提交、延迟可见、补偿失败、不同工具重试/幂等契约交互；冻结 train/validation/held-out task-family 与 fault-composition split。先跑强手工策略和 oracle，再引入 random search、GA/GP、contract-aware EA，全部固定真实 simulator rollout 预算。只有 EC 在 held-out 上超过强手工策略，才启动 ARWM 数据采集和 A800 训练。
+
+不要把 A-2 的 5.56pp oracle gap 宣称为已证明的创新；不要直接开始大模型训练。
