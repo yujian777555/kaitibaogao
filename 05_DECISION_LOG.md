@@ -643,3 +643,45 @@ CONDITIONAL HOLD。当前场景中手工策略已达到 oracle 的成功/安全�
 复算提交模拟器逻辑后，发现原报告的 unresolved 指标转录错误。正确值：blind retry 0.8571、verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。原因是 state-aware/oracle 对 permission-denied 失败显式执行 ESCALATE，因此 `unresolved = not success and not resolved` 为 0。其余指标保持不变：state-aware 与 oracle 的 task success 均 0.8571、safe resolution 均 1.0、invariant violation 均 0。
 
 独立复现中 7 项转移/覆盖断言通过，但这不是 GitHub Actions 运行结果；CI 仍未验证。修正不改变 Pilot A 的 CONDITIONAL HOLD：手工策略在本小型场景匹配 oracle 成功/安全表现，动作数差异不能单独证明算法收益。A800、ARWM、正式 EC 搜索仍未授权。
+
+
+## 决策 D-050：Pilot A-2 多工具恢复结果与 Pilot B Gate（2026-11-05）
+
+### 实验交付
+- 4 个工具/任务族，13 个故障/复合故障 profile，100 个参数 seeds，8 种策略；
+- 5,200 episodes/策略，共 41,600 policy-episodes；
+- 保存代码、11 项回归测试（包括 AST 检查：非 Oracle 策略不得读取隐藏模拟器状态）、完整 CSV 和 JSON 汇总；
+- GitHub Actions 的回归测试和完整矩阵运行成功（run 42022440268；加入 AST 防泄漏测试后 run 42022613261）。
+
+### 主要结果
+held-out seeds 60–99、四工具：
+- contract-optimized：task success 0.7000，safe resolution 1.0000，invariant violation 0，平均 tool actions 2.3462；
+- contract-bounded：task success 0.7000，safe resolution 1.0000，invariant violation 0，平均 tool actions 2.5000；
+- oracle upper bound：task success 0.7000，safe resolution 1.0000，invariant violation 0，平均 tool actions 1.3923。
+
+held-out ledger 工具族：
+- contract-optimized success 0.5385、safe resolution 1、violation 0、actions 1.8462；
+- oracle success 0.5385、safe resolution 1、violation 0、actions 1.2308。
+
+paired bootstrap（seed 为单位，10,000 draws）：
+- optimized - bounded success = 0，95% CI [0,0]；
+- optimized - bounded actions = -0.1538，95% CI [-0.1538,-0.1538]；
+- optimized - oracle success = 0，95% CI [0,0]；
+- optimized - oracle actions = +0.9538，95% CI [+0.9505,+0.9577]。
+动作差区间退化是因为此确定性设计中每 seed 的差值恒定，不可解释为普遍统计确定性。
+
+### 解释
+契约感知规则在此模拟器中已匹配 Oracle 的成功/安全表现，故没有证据支持“EC 还可提高恢复成功率/安全性”。但在保持成功/安全的同时仍有工具调用成本差距。Oracle 读取隐藏状态，不是可部署策略，其成本仅作诊断下界。手工优化策略比 contract-bounded 少 0.1538 次动作，但这不是 EC 增益。
+
+### 决策
+**CONDITIONAL GO：仅批准 Pilot B（成本约束策略搜索）设计/实现；NO-GO：立即训练 A800/ARWM。**
+
+Pilot B 必须：
+1. 采用全新独立 seeds：建议 train 1000–1099、validation 1100–1119、test 1120–1159；A/A-2 seeds 不得复用作确认性 test；
+2. 固定相同 policy grammar、fitness-call budget 和评价 episodes；
+3. 比较强手工 contract-optimized、random valid FSM、standard GA/GP、contract-preserving GA/GP、NSGA-II/III；
+4. 将 critical invariant violation = 0 作为硬可行性约束，task success 至少达到预注册 0.70 门槛，在可行域内最小化工具调用与等待成本；
+5. 用独立 test 验证 EC 是否优于强手工策略，报告每 seed、配对差、置信区间和失败案例；
+6. 若无稳定成本收益或违反硬约束，则停止该 EC 机制，不启动 ARWM。
+
+A800/ARWM 只有在 Pilot B 证明 EC 存在真实搜索收益后才重新考虑。
