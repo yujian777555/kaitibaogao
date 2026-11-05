@@ -1609,6 +1609,8 @@ Pilot A-2：
 
 策略：blind_retry、verify_then_retry、fixed_wait_verify、conservative_escalation、contract_aware、saga_aware、oracle_diagnostic。Oracle 只看当前步骤的潜在执行状态，是诊断参考，不是可部署策略，也不保证全局最优。
 
+A-3 Pilot B gate：saga_aware 必须在 task-only、fault-only、joint-shift 三个 held-out slice **各自**达到零 invariant violation；随后还需 oracle-success gap ≥ 0.05 且按 task-family × fault-composition 的 paired cluster bootstrap 95% CI 下界 > 0。任一 slice 有安全违规即 HOLD；只有动作成本差异不能触发 GO。若全部 slice 零违规、success gap ≤ 0.02 且动作成本差 ≤ 10%，则该模拟器任务族 NO-GO。
+
 ### 当前真实状态（务必准确）
 **SPECIFIED：** A-3 协议已冻结。  
 **IMPLEMENTED：** A-3 simulator、15 tests、CI workflow step 和 artifact upload 已写入分支。  
