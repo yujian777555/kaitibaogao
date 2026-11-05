@@ -677,8 +677,8 @@ Pilot A-2 的 contract-aware success 为 0.7222，oracle diagnostic 为 0.7778�
 本轮只确认协议和首版代码已写入分支。**CI 运行结果尚未核验，A-3 尚无实验结果，不能标记 IMPLEMENTED_AND_TESTED 或 GATE_PASS。** 不得把脚本存在、测试用例存在或 workflow 配置存在写成测试通过。
 
 ### 下一步
-1. 核验分支最新 Actions run，确认 13 项新增测试、A1/A2 回归、A3 运行和 artifact 上传；
+1. 核验分支最新 Actions run，确认 15 项新增测试、A1/A2 回归、A3 运行和 artifact 上传；
 2. 下载 A3 JSON/CSV，独立检查 episode 数、split、scenario pairing、fault vector 和 summary；
-3. 检查 held-out 三个 slice、worst-group、invariant violation、safe resolution、unresolved 和 cluster bootstrap；
+3. 检查 held-out 三个 slice（每个 slice 的 saga_aware invariant violation 必须为 0）、worst-group、invariant violation、safe resolution、unresolved 和 cluster bootstrap；
 4. 只有 47 号预注册门禁满足时才进入 Pilot B；否则 HOLD/NO-GO 并保留失败数据；
 5. 不调用真实 LLM API、不训练 A800、不实现 ARWM、不启动双种群协同演化。
