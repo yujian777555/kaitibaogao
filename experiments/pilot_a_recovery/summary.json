@@ -1,0 +1,94 @@
+{
+  "status": "CONDITIONAL_HOLD",
+  "experiment_type": "exploratory_deterministic_simulator",
+  "design": {
+    "fault_families": [
+      "timeout_before_dispatch",
+      "timeout_after_commit",
+      "partial_commit",
+      "delayed_visibility",
+      "rate_limit",
+      "schema_drift",
+      "permission_denied"
+    ],
+    "seeds_per_fault": 10,
+    "episodes_per_policy": 70,
+    "policies": [
+      "blind_retry",
+      "verify_then_retry",
+      "wait_verify_retry",
+      "conservative_escalate",
+      "state_aware",
+      "oracle_upper_bound"
+    ],
+    "total_policy_episodes": 420,
+    "timeout_subtypes_share_public_signature": true,
+    "oracle_can_read_hidden_fault_subtype": true
+  },
+  "summary": {
+    "blind_retry": {
+      "task_success": 0.1429,
+      "safe_resolution": 0.1429,
+      "duplicate_side_effect": 0.4286,
+      "invariant_violation": 0.4286,
+      "unresolved": 0.8571,
+      "mean_tool_actions": 1.0
+    },
+    "verify_then_retry": {
+      "task_success": 0.4286,
+      "safe_resolution": 0.4286,
+      "duplicate_side_effect": 0.1429,
+      "invariant_violation": 0.1429,
+      "unresolved": 0.7143,
+      "mean_tool_actions": 2.0
+    },
+    "wait_verify_retry": {
+      "task_success": 0.5571,
+      "safe_resolution": 0.5571,
+      "duplicate_side_effect": 0.0857,
+      "invariant_violation": 0.0857,
+      "unresolved": 0.6429,
+      "mean_tool_actions": 2.9429
+    },
+    "conservative_escalate": {
+      "task_success": 0.7714,
+      "safe_resolution": 0.9143,
+      "duplicate_side_effect": 0.0857,
+      "invariant_violation": 0.0857,
+      "unresolved": 0.2857,
+      "mean_tool_actions": 2.3
+    },
+    "state_aware": {
+      "task_success": 0.8571,
+      "safe_resolution": 1.0,
+      "duplicate_side_effect": 0.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.2857,
+      "mean_tool_actions": 3.0714
+    },
+    "oracle_upper_bound": {
+      "task_success": 0.8571,
+      "safe_resolution": 1.0,
+      "duplicate_side_effect": 0.0,
+      "invariant_violation": 0.0,
+      "unresolved": 0.2857,
+      "mean_tool_actions": 1.5
+    }
+  },
+  "gate": {
+    "decision": "CONDITIONAL_HOLD",
+    "reason": "The best handcrafted observable-state rule matches the oracle on success and safety; only an action-efficiency gap remains.",
+    "next": "Bounded Pilot A-2 with compositional failures, multiple tool contracts, stronger partial observability and held-out task/fault families.",
+    "a800_training_authorized": false,
+    "evolutionary_search_authorized": false
+  },
+  "limitations": [
+    "exploratory deterministic simulator only",
+    "10 seeds vary delay parameters; fault families remain fixed",
+    "no LLM API calls",
+    "no A800 training",
+    "no ARWM",
+    "no evolutionary search",
+    "no confirmatory held-out evaluation"
+  ]
+}
