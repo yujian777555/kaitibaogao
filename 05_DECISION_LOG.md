@@ -643,3 +643,14 @@ CONDITIONAL HOLD。当前场景中手工策略已达到 oracle 的成功/安全�
 复算提交模拟器逻辑后，发现原报告的 unresolved 指标转录错误。正确值：blind retry 0.8571、verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。原因是 state-aware/oracle 对 permission-denied 失败显式执行 ESCALATE，因此 `unresolved = not success and not resolved` 为 0。其余指标保持不变：state-aware 与 oracle 的 task success 均 0.8571、safe resolution 均 1.0、invariant violation 均 0。
 
 独立复现中 7 项转移/覆盖断言通过，但这不是 GitHub Actions 运行结果；CI 仍未验证。修正不改变 Pilot A 的 CONDITIONAL HOLD：手工策略在本小型场景匹配 oracle 成功/安全表现，动作数差异不能单独证明算法收益。A800、ARWM、正式 EC 搜索仍未授权。
+
+
+## 决策 D-050：Pilot A-2 首轮结果（2026-11-05）
+
+实现四类双工具任务（inventory→order、calendar→charge、inventory→ledger、calendar→order），九类故障（含 timeout+stale-read、partial-commit+rate-limit），六种策略，每策略 1,080 episodes，总计 6,480 policy episodes。策略仅接收公开观测，timeout 潜在子类型共用 TIMEOUT；oracle diagnostic 可见潜在故障，只作诊断上界。工具具有不同幂等/补偿契约（calendar 幂等，ledger 不可补偿）。
+
+结果：contract-aware success 0.7222、safe 1.0、invariant violation 0、unresolved 0.0556、平均动作 5.5167；oracle diagnostic success 0.7778、safe 1.0、violation 0、平均动作 3.7778。固定等待策略 success 0.5815、安全 0.9148、violation 0.0852；blind retry success 0.1111、violation 0.4444。contract-aware 与 oracle 的 success 差距 5.56pp，提示存在剩余空间，但尚未进行统计检验，也没有任何 EC 对照。
+
+GitHub Actions run 42030194929：12/12 tests passed，Pilot A baseline 和 Pilot A-2 simulator 均成功。早先首次 A-2 CI 曾因分层汇总函数对单组数据误调用全策略汇总导致 ZeroDivisionError；已修复并重新运行成功。
+
+**决定：CONDITIONAL GO 到 Pilot A-3 simulator refinement；NO-GO for A800 training now。** 当前 A-2 的主要缺陷：每个任务中的两个工具共享同一故障族；参数种子只变化延迟/限流；没有真正 held-out task/fault composition。下一步实现每工具独立故障分配、跨步骤依赖和 held-out task/fault composition，再用强手工策略、随机策略搜索、GA/GP、contract-aware EA 做相同预算比较。只有 EC 在 held-out 上优于强手工策略，才考虑 A800/ARWM。
