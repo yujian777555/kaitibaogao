@@ -1,0 +1,813 @@
+{
+  "status": "EXPLORATORY_PILOT_B",
+  "design": {
+    "train_seeds": [
+      1000,
+      1039
+    ],
+    "validation_seeds": [
+      1100,
+      1119
+    ],
+    "heldout_test_seeds": [
+      1120,
+      1159
+    ],
+    "tools": [
+      "inventory",
+      "order",
+      "calendar",
+      "ledger"
+    ],
+    "fault_profiles": [
+      "timeout_before",
+      "timeout_after",
+      "partial_commit",
+      "delayed_commit_timeout",
+      "timeout_rate_before",
+      "timeout_rate_after",
+      "partial_delayed_rate",
+      "schema_before",
+      "schema_rate_before",
+      "permission_before",
+      "permission_timeout_before",
+      "partial_timeout_delayed",
+      "partial_compensation_unavailable"
+    ],
+    "algorithms": [
+      "random_valid_fsm",
+      "standard_ga",
+      "contract_preserving_ga",
+      "nsga2"
+    ],
+    "algorithm_seeds": [
+      13,
+      29,
+      47
+    ],
+    "population": 16,
+    "generations": 10,
+    "fitness_evaluation_budget_per_run": 160,
+    "task_success_floor": 0.7,
+    "hard_constraint": "invariant_violation == 0",
+    "cost": "mean tool_actions + 0.1 * mean wait_units",
+    "genome_length": 9,
+    "oracle_not_used_for_search": true,
+    "test_used_once_after_validation_selection": true,
+    "no_llm_api": true,
+    "no_a800_training": true
+  },
+  "search_runs": [
+    {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 29,
+      "genome": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 29,
+      "genome": [
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 29,
+      "genome": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "nsga2",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    {
+      "algorithm": "nsga2",
+      "algorithm_seed": 29,
+      "genome": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        3,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.4927884615384615,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0723557692307693
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.4836538461538462,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.071442307692308
+      }
+    },
+    {
+      "algorithm": "nsga2",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    }
+  ],
+  "selected_by_validation": {
+    "random_valid_fsm": {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    "standard_ga": {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    "contract_preserving_ga": {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    },
+    "nsga2": {
+      "algorithm": "nsga2",
+      "algorithm_seed": 13,
+      "genome": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        2
+      ],
+      "train_metrics": {
+        "task_success": 0.7009615384615384,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1850961538461537,
+        "safe_resolution": 1.0,
+        "escalated": 0.29903846153846153,
+        "feasible": 1,
+        "cost": 2.0415865384615386
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.7028846153846153,
+        "invariant_violation": 0.0,
+        "tool_actions": 1.9230769230769231,
+        "wait_units": 1.1759615384615385,
+        "safe_resolution": 1.0,
+        "escalated": 0.2971153846153846,
+        "feasible": 1,
+        "cost": 2.0406730769230768
+      }
+    }
+  },
+  "heldout_test": {
+    "random_valid_fsm": {
+      "episodes": 2080,
+      "task_success": 0.701923,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 1.923077,
+      "wait_units": 1.196154,
+      "cost": 2.042692
+    },
+    "standard_ga": {
+      "episodes": 2080,
+      "task_success": 0.701923,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 1.923077,
+      "wait_units": 1.196154,
+      "cost": 2.042692
+    },
+    "contract_preserving_ga": {
+      "episodes": 2080,
+      "task_success": 0.701923,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 1.923077,
+      "wait_units": 1.196154,
+      "cost": 2.042692
+    },
+    "nsga2": {
+      "episodes": 2080,
+      "task_success": 0.701923,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 1.923077,
+      "wait_units": 1.196154,
+      "cost": 2.042692
+    },
+    "manual_contract_v1": {
+      "episodes": 2080,
+      "task_success": 0.701923,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 2.384615,
+      "wait_units": 1.811538,
+      "cost": 2.565769
+    },
+    "manual_contract_v2": {
+      "episodes": 2080,
+      "task_success": 0.701923,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 1.923077,
+      "wait_units": 1.196154,
+      "cost": 2.042692
+    }
+  },
+  "paired_bootstrap_vs_manual_v2": {
+    "random_valid_fsm_vs_manual_v2_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "random_valid_fsm_vs_manual_v2_actions": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "standard_ga_vs_manual_v2_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "standard_ga_vs_manual_v2_actions": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_preserving_ga_vs_manual_v2_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_preserving_ga_vs_manual_v2_actions": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "nsga2_vs_manual_v2_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "nsga2_vs_manual_v2_actions": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_contract_v1_vs_manual_v2_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_contract_v1_vs_manual_v2_actions": {
+      "mean_difference_A_minus_B": 0.461538,
+      "ci95": [
+        0.461538,
+        0.461538
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_contract_v2_vs_manual_v2_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_contract_v2_vs_manual_v2_actions": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    }
+  },
+  "interpretation_limits": [
+    "synthetic single-operation recovery simulator",
+    "finite structured controller genome, not general program synthesis",
+    "GA/NSGA-II are exploratory baselines; no claim of general EC superiority",
+    "manual v2 is a strong hand-designed baseline",
+    "test seeds are new and disjoint from Pilot A/A-2"
+  ]
+}
