@@ -10,6 +10,10 @@
       4119
     ],
     "test_seeds": [
+      4320,
+      4359
+    ],
+    "previous_b3_test_seeds_not_reused": [
       4120,
       4159
     ],
@@ -47,8 +51,15 @@
     "fitness_evaluation_budget_per_run": 160,
     "task_success_floor": 0.5404545454545454,
     "floor_definition": "manual Saga train success minus 0.005",
-    "hard_constraint": "invariant_violation == 0",
-    "cost": "mean tool_actions + 0.1 * mean wait_units",
+    "escalation_rate_ceiling": 0.24742424242424244,
+    "escalation_ceiling_definition": "manual Saga train escalation rate plus 0.005",
+    "hard_constraints": [
+      "invariant_violation == 0",
+      "unresolved_rate == 0",
+      "escalated_rate <= manual_train_escalated_rate + 0.005",
+      "task_success >= manual_train_success - 0.005"
+    ],
+    "cost": "mean tool_actions + 0.1 * mean wait_units + 2.0 * escalation_rate",
     "test_evaluated_once_after_validation_selection": true,
     "no_oracle_in_search": true,
     "no_llm_api": true,
@@ -60,8 +71,11 @@
     "tool_actions": 4.101010101010101,
     "wait_units": 0.972979797979798,
     "safe_resolution": 1.0,
+    "escalated_rate": 0.24242424242424243,
+    "rollback_complete_rate": 0.30303030303030304,
+    "unresolved_rate": 0.0,
     "feasible": 1,
-    "cost": 4.198308080808081
+    "cost": 4.6831565656565655
   },
   "search_runs": [
     {
@@ -70,7 +84,7 @@
       "genome": [
         0,
         0,
-        2,
+        0,
         3,
         0,
         0,
@@ -82,21 +96,27 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     {
@@ -105,7 +125,7 @@
       "genome": [
         0,
         0,
-        2,
+        0,
         2,
         0,
         0,
@@ -117,21 +137,27 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     {
@@ -140,8 +166,8 @@
       "genome": [
         0,
         0,
-        2,
-        3,
+        0,
+        0,
         0,
         0,
         2,
@@ -152,21 +178,27 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     {
@@ -174,34 +206,40 @@
       "algorithm_seed": 31,
       "genome": [
         0,
+        2,
+        0,
+        1,
+        0,
         0,
         2,
-        3,
-        0,
-        0,
         2,
-        3,
         0,
-        0
+        1
       ],
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
-        "wait_units": 1.2154040404040405,
+        "tool_actions": 4.101010101010101,
+        "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.4346717171717174
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
-        "wait_units": 1.2141414141414142,
+        "tool_actions": 4.101010101010101,
+        "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.4345454545454546
+        "cost": 4.6830303030303035
       }
     },
     {
@@ -210,33 +248,39 @@
       "genome": [
         0,
         0,
-        2,
+        0,
         2,
         0,
         0,
         2,
         2,
         0,
-        0
+        1
       ],
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.410429292929293
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.41030303030303
+        "cost": 4.6830303030303035
       }
     },
     {
@@ -245,33 +289,39 @@
       "genome": [
         0,
         2,
-        2,
-        2,
+        0,
+        3,
         0,
         0,
         3,
         2,
         0,
-        0
+        1
       ],
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 1.1547979797979797,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.428611111111111
+        "cost": 4.701338383838385
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 1.1535353535353536,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.4284848484848487
+        "cost": 4.701212121212121
       }
     },
     {
@@ -280,7 +330,7 @@
       "genome": [
         0,
         0,
-        2,
+        0,
         3,
         0,
         0,
@@ -292,21 +342,27 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     {
@@ -315,8 +371,8 @@
       "genome": [
         0,
         0,
-        2,
         0,
+        2,
         0,
         0,
         2,
@@ -327,21 +383,27 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     {
@@ -350,8 +412,8 @@
       "genome": [
         0,
         0,
-        2,
-        3,
+        0,
+        0,
         0,
         0,
         2,
@@ -362,101 +424,37 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     {
       "algorithm": "canonical_nsga2",
       "algorithm_seed": 31,
       "genome": [
-        1,
-        2,
-        2,
+        0,
         2,
         0,
         0,
-        2,
-        3,
-        1,
-        0
-      ],
-      "train_metrics": {
-        "task_success": 0.5454545454545454,
-        "invariant_violation": 0.0,
-        "tool_actions": 3.4545454545454546,
-        "wait_units": 1.7002525252525253,
-        "safe_resolution": 1.0,
-        "feasible": 1,
-        "cost": 3.624570707070707
-      },
-      "fitness_evaluations": 160,
-      "validation_metrics": {
-        "task_success": 0.5454545454545454,
-        "invariant_violation": 0.0,
-        "tool_actions": 3.4545454545454546,
-        "wait_units": 1.698989898989899,
-        "safe_resolution": 1.0,
-        "feasible": 1,
-        "cost": 3.6244444444444444
-      }
-    },
-    {
-      "algorithm": "canonical_nsga2",
-      "algorithm_seed": 47,
-      "genome": [
-        0,
-        2,
-        2,
-        0,
-        0,
-        0,
-        2,
-        2,
-        0,
-        0
-      ],
-      "train_metrics": {
-        "task_success": 0.5454545454545454,
-        "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
-        "wait_units": 0.972979797979798,
-        "safe_resolution": 1.0,
-        "feasible": 1,
-        "cost": 3.410429292929293
-      },
-      "fitness_evaluations": 160,
-      "validation_metrics": {
-        "task_success": 0.5454545454545454,
-        "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
-        "wait_units": 0.9717171717171718,
-        "safe_resolution": 1.0,
-        "feasible": 1,
-        "cost": 3.41030303030303
-      }
-    },
-    {
-      "algorithm": "canonical_nsga2",
-      "algorithm_seed": 59,
-      "genome": [
-        0,
-        0,
-        2,
-        3,
         0,
         0,
         3,
@@ -467,21 +465,109 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 1.3972222222222221,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.5437626262626263
+        "cost": 4.725580808080808
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 1.395959595959596,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.5436363636363635
+        "cost": 4.7254545454545465
+      }
+    },
+    {
+      "algorithm": "canonical_nsga2",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 4.101010101010101,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
+        "feasible": 1,
+        "cost": 4.6831565656565655
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 4.101010101010101,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
+        "feasible": 1,
+        "cost": 4.6830303030303035
+      }
+    },
+    {
+      "algorithm": "canonical_nsga2",
+      "algorithm_seed": 59,
+      "genome": [
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        3,
+        3,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 4.606060606060606,
+        "wait_units": 1.882070707070707,
+        "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
+        "feasible": 1,
+        "cost": 5.279116161616162
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 4.606060606060606,
+        "wait_units": 1.8808080808080807,
+        "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
+        "feasible": 1,
+        "cost": 5.278989898989899
       }
     }
   ],
@@ -492,7 +578,7 @@
       "genome": [
         0,
         0,
-        2,
+        0,
         3,
         0,
         0,
@@ -504,56 +590,68 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     "standard_ga": {
       "algorithm": "standard_ga",
-      "algorithm_seed": 47,
+      "algorithm_seed": 31,
       "genome": [
         0,
+        2,
+        0,
+        1,
+        0,
         0,
         2,
         2,
         0,
-        0,
-        2,
-        2,
-        0,
-        0
+        1
       ],
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.410429292929293
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.41030303030303
+        "cost": 4.6830303030303035
       }
     },
     "contract_preserving_ga": {
@@ -562,7 +660,7 @@
       "genome": [
         0,
         0,
-        2,
+        0,
         3,
         0,
         0,
@@ -574,21 +672,27 @@
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501338383838384
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.404040404040404,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.501212121212121
+        "cost": 4.6830303030303035
       }
     },
     "canonical_nsga2": {
@@ -596,34 +700,40 @@
       "algorithm_seed": 47,
       "genome": [
         0,
-        2,
-        2,
         0,
         0,
         0,
+        0,
+        0,
         2,
         2,
         0,
-        0
+        1
       ],
       "train_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.972979797979798,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.410429292929293
+        "cost": 4.6831565656565655
       },
       "fitness_evaluations": 160,
       "validation_metrics": {
         "task_success": 0.5454545454545454,
         "invariant_violation": 0.0,
-        "tool_actions": 3.313131313131313,
+        "tool_actions": 4.101010101010101,
         "wait_units": 0.9717171717171718,
         "safe_resolution": 1.0,
+        "escalated_rate": 0.24242424242424243,
+        "rollback_complete_rate": 0.30303030303030304,
+        "unresolved_rate": 0.0,
         "feasible": 1,
-        "cost": 3.41030303030303
+        "cost": 4.6830303030303035
       }
     }
   },
@@ -632,36 +742,48 @@
       "task_success": 0.545455,
       "safe_resolution": 1.0,
       "invariant_violation": 0.0,
-      "tool_actions": 3.40404,
-      "wait_units": 0.973232,
-      "cost": 3.501363,
+      "tool_actions": 4.10101,
+      "wait_units": 0.964646,
+      "escalated_rate": 0.242424,
+      "rollback_complete_rate": 0.30303,
+      "unresolved_rate": 0.0,
+      "cost": 4.682323,
       "episodes": 3960
     },
     "standard_ga": {
       "task_success": 0.545455,
       "safe_resolution": 1.0,
       "invariant_violation": 0.0,
-      "tool_actions": 3.313131,
-      "wait_units": 0.973232,
-      "cost": 3.410454,
+      "tool_actions": 4.10101,
+      "wait_units": 0.964646,
+      "escalated_rate": 0.242424,
+      "rollback_complete_rate": 0.30303,
+      "unresolved_rate": 0.0,
+      "cost": 4.682323,
       "episodes": 3960
     },
     "contract_preserving_ga": {
       "task_success": 0.545455,
       "safe_resolution": 1.0,
       "invariant_violation": 0.0,
-      "tool_actions": 3.40404,
-      "wait_units": 0.973232,
-      "cost": 3.501363,
+      "tool_actions": 4.10101,
+      "wait_units": 0.964646,
+      "escalated_rate": 0.242424,
+      "rollback_complete_rate": 0.30303,
+      "unresolved_rate": 0.0,
+      "cost": 4.682323,
       "episodes": 3960
     },
     "canonical_nsga2": {
       "task_success": 0.545455,
       "safe_resolution": 1.0,
       "invariant_violation": 0.0,
-      "tool_actions": 3.313131,
-      "wait_units": 0.973232,
-      "cost": 3.410454,
+      "tool_actions": 4.10101,
+      "wait_units": 0.964646,
+      "escalated_rate": 0.242424,
+      "rollback_complete_rate": 0.30303,
+      "unresolved_rate": 0.0,
+      "cost": 4.682323,
       "episodes": 3960
     },
     "manual_saga": {
@@ -669,8 +791,11 @@
       "safe_resolution": 1.0,
       "invariant_violation": 0.0,
       "tool_actions": 4.10101,
-      "wait_units": 0.973232,
-      "cost": 4.198333,
+      "wait_units": 0.964646,
+      "escalated_rate": 0.242424,
+      "rollback_complete_rate": 0.30303,
+      "unresolved_rate": 0.0,
+      "cost": 4.682323,
       "episodes": 3960
     },
     "manual_saga_verify": {
@@ -678,8 +803,11 @@
       "safe_resolution": 1.0,
       "invariant_violation": 0.0,
       "tool_actions": 4.606061,
-      "wait_units": 1.983333,
-      "cost": 4.804394,
+      "wait_units": 1.974747,
+      "escalated_rate": 0.242424,
+      "rollback_complete_rate": 0.30303,
+      "unresolved_rate": 0.0,
+      "cost": 5.288384,
       "episodes": 3960
     }
   },
@@ -694,10 +822,19 @@
       "bootstrap_draws": 10000
     },
     "random_valid_fsm_vs_manual_saga_actions": {
-      "mean_difference_A_minus_B": -0.69697,
+      "mean_difference_A_minus_B": 0.0,
       "ci95": [
-        -0.69697,
-        -0.69697
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "random_valid_fsm_vs_manual_saga_escalation": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
       ],
       "n_seeds": 40,
       "bootstrap_draws": 10000
@@ -712,10 +849,19 @@
       "bootstrap_draws": 10000
     },
     "standard_ga_vs_manual_saga_actions": {
-      "mean_difference_A_minus_B": -0.787879,
+      "mean_difference_A_minus_B": 0.0,
       "ci95": [
-        -0.787879,
-        -0.787879
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "standard_ga_vs_manual_saga_escalation": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
       ],
       "n_seeds": 40,
       "bootstrap_draws": 10000
@@ -730,10 +876,19 @@
       "bootstrap_draws": 10000
     },
     "contract_preserving_ga_vs_manual_saga_actions": {
-      "mean_difference_A_minus_B": -0.69697,
+      "mean_difference_A_minus_B": 0.0,
       "ci95": [
-        -0.69697,
-        -0.69697
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_preserving_ga_vs_manual_saga_escalation": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
       ],
       "n_seeds": 40,
       "bootstrap_draws": 10000
@@ -748,10 +903,19 @@
       "bootstrap_draws": 10000
     },
     "canonical_nsga2_vs_manual_saga_actions": {
-      "mean_difference_A_minus_B": -0.787879,
+      "mean_difference_A_minus_B": 0.0,
       "ci95": [
-        -0.787879,
-        -0.787879
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "canonical_nsga2_vs_manual_saga_escalation": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
       ],
       "n_seeds": 40,
       "bootstrap_draws": 10000
@@ -774,6 +938,15 @@
       "n_seeds": 40,
       "bootstrap_draws": 10000
     },
+    "manual_saga_vs_manual_saga_escalation": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
     "manual_saga_verify_vs_manual_saga_success": {
       "mean_difference_A_minus_B": 0.0,
       "ci95": [
@@ -788,6 +961,15 @@
       "ci95": [
         0.505051,
         0.505051
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_saga_verify_vs_manual_saga_escalation": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
       ],
       "n_seeds": 40,
       "bootstrap_draws": 10000
