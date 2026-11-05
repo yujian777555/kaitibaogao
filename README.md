@@ -478,3 +478,19 @@ Held-out seeds 3000–3039（40 个，运行前未使用）。验证集选出的
 **决定：ESTIMATOR_GATE_FAIL。** 按 42 号协议停止 TCAIL estimator 优越性主张，Downstream GOM Gate 未运行；本轮没有产生任何“TCAIL 改善演化搜索”的证据。TCAIL null false-link 为 0.0375（合格），但 calibration slope=0.130、FOS F1=0.373（standardized 0.729），且 128-block 条件弃权率高达 52.9%。解盲后的 q_M3-only 仍显著低于 standardized（−0.0322，CI [−0.0496,−0.0168]），说明失败不只是 conservative min 规则。
 
 严格边界不变：未调用真实 LLM API，未训练 A800，未启动 CI-GOM、IMCE-RSI 或完整 active acquisition。cDLED-P3M 与 CGOMEA 仍是 static adaptation；SLL-MI、FBL incremental、DLED、LMM、ALI/AIM、GAwLL2 未运行。
+
+
+## 2026-11-05：TCAIL NO-GO 后重新评估硕士论文创新点
+
+新增 [44_THESIS_INNOVATION_REASSESSMENT_POST_TCAIL_NO_GO.md](44_THESIS_INNOVATION_REASSESSMENT_POST_TCAIL_NO_GO.md)。
+
+TCAIL R1 的确认性 Estimator Gate 已失败（TCAIL q macro-AUPRC 0.6736 vs standardized 0.7732，配对差 -0.0996，95% CI [-0.1139,-0.0858]；FOS F1 0.373 vs 0.729），Downstream GOM 未运行。TCAIL 不再作为核心创新点，旧版依赖 TCAIL linkage 的 CI-GOM 继续冻结。
+
+新主线候选：**面向状态化工具型 LLM Agent 的故障恢复策略演化与递归自我改进**。两个核心候选为：
+1. 状态感知、契约约束的恢复策略演化；
+2. 故障场景—恢复策略双种群协同演化。
+第三项跨任务恢复策略迁移暂作储备。
+
+该方向目前仅为 HOLD，不代表已通过新颖性审查。下一步先做相关工作机制级差异矩阵和 Pilot A（oracle/手工恢复策略上界）；只有确认恢复策略存在可进化空间后，才进入标准 GA/GP 与约束演化方法比较。不要立即扩建完整系统或开跑大规模实验。
+
+2026 年相关工作已覆盖通用 prompt/workflow 演化、blame-aware tool-policy mutation、延迟奖励 self-evolution、failure retrieval/recovery、tool transaction runtime 和 fault benchmarks。新贡献必须落在状态化副作用工具环境中可执行恢复控制器的约束演化，以及有验证的故障场景—策略协同演化，不能声称普通进化 prompt、模块定向变异、Pareto 选择或事务保护本身是新颖点。
