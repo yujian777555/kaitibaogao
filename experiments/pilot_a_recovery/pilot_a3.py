@@ -528,6 +528,36 @@ def paired_cluster_bootstrap(rows, policy_a, policy_b, metric="task_success", re
     }
 
 
+
+def decide_gate(summaries, oracle_gap):
+    saga_metrics = summaries["saga_aware"]["heldout_all"]
+    oracle_metrics = summaries["oracle_diagnostic"]["heldout_all"]
+    heldout_slices = [
+        value for key, value in summaries["saga_aware"].items()
+        if key.startswith("heldout_") and key != "heldout_all"
+    ]
+    zero_violation_all_slices = bool(heldout_slices) and all(
+        value["invariant_violation"] == 0 for value in heldout_slices
+    )
+    success_gap = oracle_metrics["task_success"] - saga_metrics["task_success"]
+    action_gap = (
+        (saga_metrics["mean_action_count"] - oracle_metrics["mean_action_count"])
+        / max(oracle_metrics["mean_action_count"], 1e-9)
+    )
+    ci_low = oracle_gap["ci95"][0] if oracle_gap.get("ci95") else None
+
+    if not zero_violation_all_slices:
+        gate = "HOLD_SAFETY_FAILURE"
+    elif success_gap >= 0.05 and ci_low is not None and ci_low > 0:
+        gate = "CONDITIONAL_GO_PILOT_B"
+    elif success_gap <= 0.02 and action_gap <= 0.10:
+        gate = "NO_GO_INSUFFICIENT_OPTIMIZATION_HEADROOM"
+    else:
+        gate = "HOLD_REVIEW_FAILURE_BOUNDARIES"
+
+    return gate, success_gap, action_gap, zero_violation_all_slices
+
+
 def run_experiment():
     scenarios = build_scenarios()
     rows = [run_episode(policy, scenario) for scenario in scenarios for policy in POLICIES]
@@ -551,24 +581,9 @@ def run_experiment():
     oracle_gap = paired_cluster_bootstrap(
         heldout_rows, "oracle_diagnostic", "saga_aware", "task_success"
     )
-    saga_metrics = summaries["saga_aware"]["heldout_all"]
-    oracle_metrics = summaries["oracle_diagnostic"]["heldout_all"]
-    success_gap = oracle_metrics["task_success"] - saga_metrics["task_success"]
-    action_gap = (
-        (saga_metrics["mean_action_count"] - oracle_metrics["mean_action_count"])
-        / max(oracle_metrics["mean_action_count"], 1e-9)
+    gate, success_gap, action_gap, zero_violation_all_slices = decide_gate(
+        summaries, oracle_gap
     )
-    if (
-        saga_metrics["invariant_violation"] == 0
-        and success_gap >= 0.05
-        and oracle_gap["ci95"][0] is not None
-        and oracle_gap["ci95"][0] > 0
-    ):
-        gate = "CONDITIONAL_GO_PILOT_B"
-    elif success_gap <= 0.02 and action_gap <= 0.10:
-        gate = "NO_GO_INSUFFICIENT_OPTIMIZATION_HEADROOM"
-    else:
-        gate = "HOLD_REVIEW_FAILURE_BOUNDARIES"
 
     worst_groups = {}
     group_rows = defaultdict(list)
@@ -611,6 +626,7 @@ def run_experiment():
             "decision": gate,
             "oracle_minus_saga_success": round(success_gap, 6),
             "saga_minus_oracle_action_cost_relative": round(action_gap, 6),
+            "saga_zero_violation_all_heldout_slices": zero_violation_all_slices,
             "rule": (
                 "Pilot B GO requires zero saga_aware held-out invariant violations, "
                 "oracle-success gap >= 0.05, and cluster-bootstrap CI lower bound > 0. "
