@@ -513,3 +513,7 @@ CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作�
 
 ### Pilot A 审计修正（2026-11-05）
 独立复算发现首轮报告的 `unresolved` 列存在转录错误，已更正 `PILOT_A_EXPLORATORY_RESULTS.md` 与 `summary.json`：verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。task success、safe resolution、duplicate side effect、invariant violation 和动作数不变。7 项状态转移/覆盖断言在独立复现中通过；GitHub Actions 尚无运行记录，CI 未验证。Pilot A 仍是探索性模拟器结果。
+
+
+## Pilot A-2 首轮（2026-11-05）
+已实现四类双工具任务、九类故障（含 timeout+stale-read、partial-commit+rate-limit）、六种策略和 30 个参数种子，共 1,080 episodes/策略、6,480 policy episodes。12/12 回归测试通过，GitHub Actions run 42030194929 成功。contract-aware 策略 success 0.7222、safe 1.0、invariant violation 0；oracle diagnostic success 0.7778、safe 1.0。与 oracle 有 5.56pp 差距，初步显示仍有优化空间，但不是统计显著性或 EC 收益证据。限制：每个任务两工具目前共享同一故障族，seed 只改变延迟/限流参数，无真正 held-out task/fault families。结论：CONDITIONAL GO 到 Pilot A-3；暂不训练 ARWM/A800。
