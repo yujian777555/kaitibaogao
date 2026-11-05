@@ -509,3 +509,7 @@ TCAIL R1 的确认性 Estimator Gate 已失败（TCAIL q macro-AUPRC 0.6736 vs s
 CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作后的文本状态，并与 Agent 策略闭环自蒸馏共演化；HarnessMDP 学习冻结 LLM 的外部 harness controller；TRACE/SENTINEL 已覆盖失败驱动的 Agent 训练；EvoTool 已覆盖 blame-aware tool policy evolution。新贡献不能是泛化的“world model + EA”或“失败轨迹训练”。A800 训练候选必须证明配对反事实动作后果数据、多任务副作用风险校准与不确定性门控确实改善固定真实 rollout 预算下的约束演化搜索。
 
 - `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`：ARWM 训练目标、与 EC 的接口、强基线和 M1–M3 停止门。
+
+
+### Pilot A 审计修正（2026-11-05）
+独立复算发现首轮报告的 `unresolved` 列存在转录错误，已更正 `PILOT_A_EXPLORATORY_RESULTS.md` 与 `summary.json`：verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。task success、safe resolution、duplicate side effect、invariant violation 和动作数不变。7 项状态转移/覆盖断言在独立复现中通过；GitHub Actions 尚无运行记录，CI 未验证。Pilot A 仍是探索性模拟器结果。
