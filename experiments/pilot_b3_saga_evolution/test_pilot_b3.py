@@ -59,9 +59,9 @@ class PilotB3Tests(unittest.TestCase):
 
     def test_nsga2_fronts_and_rank_are_well_formed(self):
         scores=[
-            {"invariant_violation":0.0,"task_success":0.70,"tool_actions":4.0,"wait_units":1.0},
-            {"invariant_violation":0.0,"task_success":0.70,"tool_actions":3.0,"wait_units":1.0},
-            {"invariant_violation":0.1,"task_success":0.80,"tool_actions":2.0,"wait_units":0.0},
+            {"invariant_violation":0.0,"task_success":0.70,"escalated_rate":0.0,"tool_actions":4.0,"wait_units":1.0},
+            {"invariant_violation":0.0,"task_success":0.70,"escalated_rate":0.0,"tool_actions":3.0,"wait_units":1.0},
+            {"invariant_violation":0.1,"task_success":0.80,"escalated_rate":0.0,"tool_actions":2.0,"wait_units":0.0},
         ]
         fs=fronts(scores)
         rank,distance=rank_crowding(scores)
