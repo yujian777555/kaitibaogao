@@ -23,6 +23,16 @@ jobs:
         run: python experiments/pilot_a_recovery/pilot_a.py
       - name: Run Pilot A-2 simulator
         run: python experiments/pilot_a_recovery/pilot_a2.py
+      - name: Run Pilot A-3 simulator
+        run: python experiments/pilot_a_recovery/pilot_a3.py
+      - name: Upload Pilot A-3 episode-level results
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilot-a3-results
+          path: |
+            experiments/pilot_a_recovery/pilot_a3_results.json
+            experiments/pilot_a_recovery/pilot_a3_episodes.csv
+          if-no-files-found: error
       - name: Upload Pilot A-2 summary
         uses: actions/upload-artifact@v4
         with:
