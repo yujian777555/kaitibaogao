@@ -1541,3 +1541,7 @@ Pilot A 首轮已显示：state-aware 手工策略 success 0.8571、safe resolut
 本轮只执行 bounded Pilot A-2：增加多工具幂等契约、潜在/复合故障、读可见延迟和补偿差异，冻结可观察接口与 held-out 划分；先比较手工策略与 oracle。若强手工策略仍匹配 oracle，则停止该方向。只有证明剩余策略空间后才比较 GA/GP 与 contract-aware EA；只有模型超越 LightGBM/MLP 且改善固定真实 rollout 预算下的 EA，才训练 ARWM。维护原始数据、每 seed 结果、配置、README、决策日志和 handoff。不要训练基模，不要调用真实 API，不要把研究计划当作实验成果。
 
 ARWM 候选规格另见 `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`。不要将其当作训练授权；当前 A800 训练仍 HOLD，须先完成 bounded Pilot A-2 并通过 M1/M2 前置证据。
+
+
+### Pilot A 数据审计补充（2026-11-05）
+注意：首轮报告的 unresolved 列已在 D-049 中更正。正确值依次为 blind retry 0.8571、verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。原因是 state-aware/oracle 对权限失败执行 ESCALATE。其他指标不变。独立复现的 7 项状态转移/覆盖断言通过，但 GitHub Actions 没有运行记录，CI 尚未验证。不要引用旧 unresolved 数值。
