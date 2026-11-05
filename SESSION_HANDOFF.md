@@ -1474,3 +1474,18 @@ A. 以新的独立 held-out seeds 预注册并复测修复后的估计器（相�
 B. 收窄为低支持/漂移 abstention 研究；
 C. 补强缺失基线。
 任何新轮次必须保存原始数据、每 seed 结果、配置、环境、日志和独立重算；不得调用真实 LLM API、训练 A800、启动 CI-GOM/IMCE-RSI 或完整 active acquisition。失败结果不得删除。
+
+
+## 44. 2026-11-05：TCAIL NO-GO 后的论文方向调整
+
+完整重评见 44_THESIS_INNOVATION_REASSESSMENT_POST_TCAIL_NO_GO.md；决策见 D-047。TCAIL Estimator Gate 已失败，旧 CI-GOM 冻结，不得复用 held-out 3000–3039 调参。
+
+新工作题目候选：《面向状态化工具型大语言模型智能体的故障恢复策略演化与递归自我改进方法研究》。两个核心候选：
+1. 状态感知、契约约束的 Agent 恢复策略演化：将恢复控制器编码为 guarded finite-state policy，演化 verify/reconcile/retry/replan/compensate/rollback/escalate/abstain 决策；安全不变量为硬约束。
+2. 故障场景—恢复策略双种群协同演化：在有效故障语法、挑战档案和 held-out fault families 下验证鲁棒泛化。
+
+第三项跨任务恢复策略迁移暂作储备。通用 prompt evolution、blame-aware mutation、Pareto selection、failure-memory retrieval、transaction runtime 均已有直接工作，不能单独包装成创新。
+
+下一步唯一任务：机制级文献差异矩阵 + Pilot A。先定义最小 stateful tool simulator、effect states、failure signatures、合法动作和硬不变量；实现 5–8 个手工恢复策略及 oracle 上界；配对运行并判断是否存在足够策略改进空间。若 oracle 不优于简单 retry/verify，停止。Pilot A 通过后才比较 random search、standard GA/GP、NSGA-II/III 和 contract-aware variation；再通过后才考虑双种群协同演化。
+
+相关工作必须比较 GEPA、EvoTool、Q-Evolve、AgentEvo、GRSE、Sentry、AgentDebug/PROBE、ToolMaze、ReliabilityBench、Cordon、DelAct。LLM backbone 可固定并通过 API 使用；演化对象是结构化恢复策略。不得训练基模或启动无关模块。保存原始轨迹、配置、种子和 per-seed 结果，并维护 README、决策日志与 handoff。
