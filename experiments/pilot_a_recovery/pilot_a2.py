@@ -169,8 +169,20 @@ if __name__=="__main__":
     # Per-task and per-fault results retained for audit.
     groups=defaultdict(list)
     for r in rows: groups[(r["policy"],r["task"],r["fault"])].append(r)
-    stratified={ "|".join(k):summarize(v)[k[0]] for k,v in groups.items()}
-    print(json.dumps({"design":{"tasks":TASKS,"faults":FAULTS,"seeds":30,
+    stratified={}
+    for group_key, group_rows in groups.items():
+        policy = group_key[0]
+        metrics = ("task_success","safe","duplicate","invariant_violation","unresolved","escalated","actions")
+        record = {"episodes": len(group_rows)}
+        for metric in metrics:
+            record[metric] = round(sum(row[metric] for row in group_rows)/len(group_rows),4)
+        stratified["|".join(group_key)] = record
+    payload = {"design":{"tasks":TASKS,"faults":FAULTS,"seeds":30,
         "episodes_per_policy":len(TASKS)*len(FAULTS)*30,
         "note":"exploratory deterministic simulator; policies see public observations only; oracle diagnostic sees latent fault"},
-        "summary":summarize(rows),"stratified":stratified},indent=2))
+        "summary":summarize(rows),"stratified":stratified}
+    rendered = json.dumps(payload, indent=2)
+    print(rendered)
+    from pathlib import Path
+    output = Path(__file__).parent / "pilot_a2_summary.json"
+    output.write_text(rendered + "\\n", encoding="utf-8")
