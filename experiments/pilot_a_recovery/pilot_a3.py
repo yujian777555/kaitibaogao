@@ -247,15 +247,16 @@ class ToolRuntime:
         return "REPAIRED"
 
     def compensate(self):
-        self.action_count += 1
         if self.active_effects == 0:
             self.last_compensation_result = "NO_EFFECT"
             return self.last_compensation_result
         if not self.contract["compensatable"]:
+            self.action_count += 1
             self.last_compensation_result = "CONTRACT_BLOCKED"
             return self.last_compensation_result
         if self.compensation_attempted:
             return self.last_compensation_result
+        self.action_count += 1
         self.compensation_attempted = True
         if not self.compensation_available:
             self.compensation_failures += 1
