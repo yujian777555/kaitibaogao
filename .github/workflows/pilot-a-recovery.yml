@@ -1,0 +1,23 @@
+name: Pilot A recovery simulator
+on:
+  push:
+    branches: [pilot-a-stateful-recovery]
+    paths:
+      - "experiments/pilot_a_recovery/**"
+      - ".github/workflows/pilot-a-recovery.yml"
+  pull_request:
+    paths:
+      - "experiments/pilot_a_recovery/**"
+      - ".github/workflows/pilot-a-recovery.yml"
+jobs:
+  pilot-a:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run regression tests
+        run: python -m unittest discover -s experiments/pilot_a_recovery -p "test_*.py" -v
+      - name: Run exploratory simulator
+        run: python experiments/pilot_a_recovery/pilot_a.py
