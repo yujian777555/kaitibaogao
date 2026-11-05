@@ -85,7 +85,7 @@ Held-out 组合族不参与手工规则调整、阈值选择或参数调节。
 4. conservative_escalation
 5. contract_aware（单工具契约感知恢复，不执行跨步骤补偿）
 6. saga_aware（契约感知恢复 + 逆序补偿）
-7. oracle_diagnostic（可见当前步骤潜在执行状态，仅作诊断上界，不是可部署基线）
+7. oracle_diagnostic（可见当前步骤潜在执行状态，仅作诊断参考，不是可部署基线，也不保证全局最优）
 
 A-3 只比较预先定义的手工策略与 oracle；不在 held-out 上选择策略，也不把 oracle 作为可实现算法。
 
