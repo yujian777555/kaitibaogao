@@ -1641,3 +1641,18 @@ TCAIL Estimator Gate 已 FAIL / NO-GO，旧 CI-GOM 冻结。新主线是状态�
 当前 A-3 已实现，但**CI 和实验结果尚未核验**。你的唯一任务是检查 push-triggered Actions run；确认 15 项测试、A1/A2/A3 执行和 artifacts 上传。成功后下载 JSON/CSV 并独立重算，验证 6,678 行、每策略 954 episodes、split、配对和 fault-vector 语义；失败则修复并重跑。最后严格按 47 号预注册 gate 判断是否进入 Pilot B。
 
 不得将实现写成测试通过，不得将 A-3 模拟器结果写成真实 Agent 证据，不得提前启动 Pilot B、A800/ARWM、真实 LLM API 或双种群协同演化。每轮继续更新 README、05_DECISION_LOG、SESSION_HANDOFF 并核验远端。
+
+
+## 47. 强制接管提示词维护制度（2026-11-05）
+
+**唯一权威接管提示词：`NEXT_SESSION_PROMPT.md`**
+
+今后每次实质性研究、实验、代码、协议、审计、分支或决策变化后，必须在同一轮更新：
+1. `NEXT_SESSION_PROMPT.md`（自包含、可直接复制、唯一下一任务）；
+2. `SESSION_HANDOFF.md`（详细历史与上下文）；
+3. `05_DECISION_LOG.md`（证据、决策、限制、下一步）；
+4. `README.md`（当前阶段和状态）。
+
+会话结束前必须重新读取四份文件，检查内容一致，并核验接管提示词对应的最新远端 HEAD。若 CI/实验未运行或未核验，必须明确写未运行/未核验；不得推断成功。每次向用户汇报时必须说明接管提示词是否已更新，并附仓库链接。不得只在聊天中维护提示词。
+
+当前 canonical prompt 已建立：`NEXT_SESSION_PROMPT.md`。当前唯一下一任务仍为：核验加入 A3 步骤后最新 GitHub Actions run，下载并独立复算 A3 JSON/CSV，再按 47 号协议决定 Pilot B。A3 CI 和结果尚未核验；Pilot B、A800/ARWM、真实 LLM API、双种群协同演化继续 HOLD。
