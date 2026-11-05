@@ -16,11 +16,11 @@
 | Policy | Task success | Safe resolution | Duplicate side effect | Invariant violation | Unresolved | Mean actions |
 |---|---:|---:|---:|---:|---:|---:|
 | Blind retry | 0.1429 | 0.1429 | 0.4286 | 0.4286 | 0.8571 | 1.000 |
-| Verify then retry | 0.4286 | 0.4286 | 0.1429 | 0.1429 | 0.7143 | 2.000 |
-| Wait-verify-retry | 0.5571 | 0.5571 | 0.0857 | 0.0857 | 0.6429 | 2.943 |
-| Conservative escalation | 0.7714 | 0.9143 | 0.0857 | 0.0857 | 0.2857 | 2.300 |
+| Verify then retry | 0.4286 | 0.4286 | 0.1429 | 0.1429 | 0.5714 | 2.000 |
+| Wait-verify-retry | 0.5571 | 0.5571 | 0.0857 | 0.0857 | 0.4429 | 2.943 |
+| Conservative escalation | 0.7714 | 0.9143 | 0.0857 | 0.0857 | 0.0857 | 2.300 |
 | State-aware rules | **0.8571** | **1.0000** | **0.0000** | **0.0000** | 0.2857 | 3.071 |
-| Oracle upper bound | **0.8571** | **1.0000** | **0.0000** | **0.0000** | 0.2857 | **1.500** |
+| Oracle upper bound | **0.8571** | **1.0000** | **0.0000** | **0.0000** | 0.0000 | **1.500** |
 
 ## Interpretation
 
@@ -48,3 +48,14 @@ Pre-register these additions before generating the next evaluation set. If a sim
 - Run: `python experiments/pilot_a_recovery/pilot_a.py`
 - The reported numbers are exploratory deterministic simulator results, not independent-seed statistical evidence. Seeds vary delay parameters; fault families are fixed.
 - A separate critical-transition regression check passed for collapsed timeout observations, duplicate prevention, partial compensation, delayed visibility and permission denial. The committed pytest file has not been run in GitHub Actions; only equivalent local transition assertions were executed.
+
+
+## Audit correction (2026-11-05)
+
+An independent re-execution of the committed simulator logic found that the original `unresolved` column had been transcribed incorrectly. The corrected values are shown in the table above and in `summary.json`: verify-then-retry 0.5714; wait-verify-retry 0.4429; conservative escalation 0.0857; state-aware 0; oracle 0. Blind retry remains 0.8571.
+
+The correction follows the code definition `unresolved = int(not success and not resolved)`. In the state-aware and oracle policies, all non-success permission-denied cases are explicitly escalated, so unresolved is zero. Safe resolution remains 1.0 and task success remains 0.8571.
+
+Seven transition/coverage assertions passed in an independent reproduction of the simulator logic. This is not a GitHub Actions result; no workflow run was available at the time of the audit. The report's previous wording implying an already completed local test run should not be treated as evidence of CI completion.
+
+**Decision impact:** the primary success/safety comparison is unchanged: state-aware equals oracle on task success, safe resolution and invariant violations. The action-count gap remains diagnostic only because the oracle uses hidden subtype information. Pilot A remains exploratory and does not authorize A800 training or EC search.
