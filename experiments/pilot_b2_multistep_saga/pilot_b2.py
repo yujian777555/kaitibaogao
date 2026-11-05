@@ -34,8 +34,6 @@ PROFILES = (
     "partial_previous_comp_failure", "partial_timeout_delayed",
 )
 POLICIES = ("blind_retry","verify_then_retry","contract_resume","rollback_on_ambiguous","oracle_upper_bound")
-TRAIN_SEEDS=tuple(range(3000,3040))
-VALIDATION_SEEDS=tuple(range(3100,3120))
 TEST_SEEDS=tuple(range(3120,3160))
 
 def make_episode(task, step_index, profile, seed):
@@ -183,7 +181,7 @@ class Env:
     def result(self):
         success=self.current_outcome=="WORKFLOW_COMPLETE" and not self.violation
         rollback_complete=self.rollback_complete
-        safe=success or rollback_complete or self.escalated
+        safe=(success or rollback_complete or self.escalated) and not self.violation
         return {
             "task_success":int(success),"safe_resolution":int(safe),
             "invariant_violation":int(self.violation),"unresolved":int(not safe),
@@ -309,8 +307,8 @@ def main():
     summary={
         "status":"EXPLORATORY_PILOT_B2",
         "design":{"tasks":list(TASKS),"profiles":list(PROFILES),"policies":list(POLICIES),
-                  "steps_per_workflow":3,"train_seeds":[3000,3039],
-                  "validation_seeds":[3100,3119],"heldout_test_seeds":[3120,3159],
+                  "steps_per_workflow":3,"evaluation_seeds":[3120,3159],
+                  "no_training_or_validation_split":"fixed-policy feasibility pilot; no model fitting or search",
                   "episodes_per_policy":len(TASKS)*3*len(PROFILES)*len(TEST_SEEDS),
                   "total_policy_episodes":len(rows),
                   "oracle_reads_hidden_state":True,
