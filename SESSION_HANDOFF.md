@@ -1554,7 +1554,7 @@ ARWM 候选规格另见 `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`。不要�
 - 测试：experiments/pilot_a_recovery/test_pilot_a2.py
 - 结果：experiments/pilot_a_recovery/PILOT_A2_EXPLORATORY_RESULTS.md
 - 机器可读摘要：experiments/pilot_a_recovery/pilot_a2_summary.json
-- CI：run 42030194929，12/12 tests passed，Pilot A 和 A-2 simulator 成功。
+- CI：run 42030194929 与后续 run 42030392313 均成功；最新 run 42030392313 的 job logs 显示 regression tests、Pilot A、A-2 和 pilot-a2-summary artifact upload 均完成（artifact ID 13415632289）。
 - 结果：contract-aware success 0.7222 / safe 1.0 / violation 0；oracle diagnostic success 0.7778 / safe 1.0；差距 5.56pp。该差距只是模拟器探索信号，不是显著性或演化算法提升证据。
 - 限制：双工具共享同一故障族；seed 只变延迟/限流；无 held-out task/fault composition。
 - 当前门禁：CONDITIONAL GO to Pilot A-3；A800/ARWM 仍 HOLD。
@@ -1612,7 +1612,7 @@ Pilot A-2：
 ### 当前真实状态（务必准确）
 **SPECIFIED：** A-3 协议已冻结。  
 **IMPLEMENTED：** A-3 simulator、15 tests、CI workflow step 和 artifact upload 已写入分支。  
-**TESTED：** 尚未核验本轮 Actions run；不得声称 13 项测试已通过。  
+**TESTED：** 尚未核验本轮 Actions run；不得声称 15 项测试已通过。  
 **EXPERIMENTAL RESULTS：** 尚未检查 A-3 JSON/CSV；无 A-3 结果。  
 **GATE：** A-3 gate 尚未评估；Pilot B 未获准；A800/ARWM 继续 HOLD。
 
