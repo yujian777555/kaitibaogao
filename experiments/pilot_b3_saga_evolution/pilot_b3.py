@@ -24,8 +24,10 @@ ALGORITHM_SEEDS=(31,47,59)
 ALGORITHMS=("random_valid_fsm","standard_ga","contract_preserving_ga","canonical_nsga2")
 TRAIN_SEEDS=tuple(range(4000,4040))
 VALIDATION_SEEDS=tuple(range(4100,4120))
-TEST_SEEDS=tuple(range(4120,4160))
+TEST_SEEDS=tuple(range(4320,4360))
 TASK_SUCCESS_FLOOR=0.0
+ESCALATION_CEILING=1.0
+COST_ESCALATION_WEIGHT=2.0
 
 # Genome:
 # 0 idempotent timeout: 0=same-key retry, 1=verify first
@@ -168,14 +170,24 @@ def evaluate(genome,seeds):
         "tool_actions":sum(r["tool_actions"] for r in rows)/n,
         "wait_units":sum(r["wait_units"] for r in rows)/n,
         "safe_resolution":sum(r["safe_resolution"] for r in rows)/n,
+        "escalated_rate":sum(r["escalated"] for r in rows)/n,
+        "rollback_complete_rate":sum(r["rollback_complete"] for r in rows)/n,
+        "unresolved_rate":sum(r["unresolved"] for r in rows)/n,
     }
-    m["feasible"]=int(m["invariant_violation"]==0 and m["task_success"]>=TASK_SUCCESS_FLOOR)
-    m["cost"]=m["tool_actions"]+0.1*m["wait_units"]
+    m["feasible"]=int(
+        m["invariant_violation"]==0
+        and m["task_success"]>=TASK_SUCCESS_FLOOR
+        and m["escalated_rate"]<=ESCALATION_CEILING
+        and m["unresolved_rate"]==0
+    )
+    m["cost"]=m["tool_actions"]+0.1*m["wait_units"]+COST_ESCALATION_WEIGHT*m["escalated_rate"]
     return m
 
 def fitness_key(m):
     return (0 if m["feasible"] else 1,m["invariant_violation"],
-            max(0.0,TASK_SUCCESS_FLOOR-m["task_success"]),m["cost"],-m["task_success"])
+            max(0.0,TASK_SUCCESS_FLOOR-m["task_success"]),
+            max(0.0,m["escalated_rate"]-ESCALATION_CEILING),
+            m["cost"],-m["task_success"])
 
 def mutate(g,rng):
     x=list(g)
@@ -192,8 +204,10 @@ def tournament(pop,scores,rng,k=3):
     return min(ids,key=lambda i:fitness_key(scores[i]))
 
 def dominates(a,b):
-    av=(a["invariant_violation"],max(0,TASK_SUCCESS_FLOOR-a["task_success"]),a["tool_actions"],a["wait_units"])
-    bv=(b["invariant_violation"],max(0,TASK_SUCCESS_FLOOR-b["task_success"]),b["tool_actions"],b["wait_units"])
+    av=(a["invariant_violation"],max(0,TASK_SUCCESS_FLOOR-a["task_success"]),
+        max(0,a["escalated_rate"]-ESCALATION_CEILING),a["tool_actions"],a["wait_units"])
+    bv=(b["invariant_violation"],max(0,TASK_SUCCESS_FLOOR-b["task_success"]),
+        max(0,b["escalated_rate"]-ESCALATION_CEILING),b["tool_actions"],b["wait_units"])
     return all(x<=y for x,y in zip(av,bv)) and any(x<y for x,y in zip(av,bv))
 
 def fronts(scores):
@@ -222,7 +236,7 @@ def rank_crowding(scores):
         if len(front)<=2:
             for i in front:distance[i]=float("inf")
             continue
-        for key in ("invariant_violation","task_success","tool_actions","wait_units"):
+        for key in ("invariant_violation","task_success","escalated_rate","tool_actions","wait_units"):
             ordered=sorted(front,key=lambda i:scores[i][key])
             distance[ordered[0]]=distance[ordered[-1]]=float("inf")
             lo,hi=scores[ordered[0]][key],scores[ordered[-1]][key]
@@ -309,7 +323,10 @@ def summarize(rows):
     n=len(rows)
     keys=("task_success","safe_resolution","invariant_violation","tool_actions","wait_units")
     m={k:round(sum(r[k] for r in rows)/n,6) for k in keys}
-    m["cost"]=round(m["tool_actions"]+0.1*m["wait_units"],6)
+    m["escalated_rate"]=round(sum(r["escalated"] for r in rows)/n,6)
+    m["rollback_complete_rate"]=round(sum(r["rollback_complete"] for r in rows)/n,6)
+    m["unresolved_rate"]=round(sum(r["unresolved"] for r in rows)/n,6)
+    m["cost"]=round(m["tool_actions"]+0.1*m["wait_units"]+COST_ESCALATION_WEIGHT*m["escalated_rate"],6)
     m["episodes"]=n
     return m
 
@@ -322,6 +339,8 @@ def main():
 
     manual_train=evaluate(MANUAL_SAGA,TRAIN_SEEDS)
     TASK_SUCCESS_FLOOR=max(0.0,manual_train["task_success"]-0.005)
+    ESCALATION_CEILING=min(1.0,manual_train["escalated_rate"]+0.005)
+    manual_train=evaluate(MANUAL_SAGA,TRAIN_SEEDS)
 
     runs=[]
     for algorithm in ALGORITHMS:
@@ -351,6 +370,7 @@ def main():
     for name,rows in test_rows.items():
         comparisons[name+"_vs_manual_saga_success"]=paired_bootstrap(rows,reference,"task_success",TEST_SEEDS)
         comparisons[name+"_vs_manual_saga_actions"]=paired_bootstrap(rows,reference,"tool_actions",TEST_SEEDS)
+        comparisons[name+"_vs_manual_saga_escalation"]=paired_bootstrap(rows,reference,"escalated",TEST_SEEDS)
 
     all_rows=[r for rs in test_rows.values() for r in rs]
     with (out/"test_policy_episodes.csv").open("w",encoding="utf-8",newline="") as f:
@@ -359,13 +379,18 @@ def main():
     summary={
         "status":"EXPLORATORY_PILOT_B3",
         "design":{
-            "train_seeds":[4000,4039],"validation_seeds":[4100,4119],"test_seeds":[4120,4159],
+            "train_seeds":[4000,4039],"validation_seeds":[4100,4119],"test_seeds":[4320,4359],
+            "previous_b3_test_seeds_not_reused":[4120,4159],
             "tasks":list(TASKS),"fault_profiles":list(PROFILES),
             "algorithms":list(ALGORITHMS),"algorithm_seeds":list(ALGORITHM_SEEDS),
             "population":POPULATION,"generations":GENERATIONS,"fitness_evaluation_budget_per_run":EVAL_BUDGET,
             "task_success_floor":TASK_SUCCESS_FLOOR,"floor_definition":"manual Saga train success minus 0.005",
-            "hard_constraint":"invariant_violation == 0",
-            "cost":"mean tool_actions + 0.1 * mean wait_units",
+            "escalation_rate_ceiling":ESCALATION_CEILING,
+            "escalation_ceiling_definition":"manual Saga train escalation rate plus 0.005",
+            "hard_constraints":["invariant_violation == 0","unresolved_rate == 0",
+                                "escalated_rate <= manual_train_escalated_rate + 0.005",
+                                "task_success >= manual_train_success - 0.005"],
+            "cost":"mean tool_actions + 0.1 * mean wait_units + 2.0 * escalation_rate",
             "test_evaluated_once_after_validation_selection":True,
             "no_oracle_in_search":True,"no_llm_api":True,"no_a800_training":True,
         },
