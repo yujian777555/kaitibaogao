@@ -714,3 +714,32 @@ Manual contract v2 完全相同；配对差为 0。Manual v1 actions 2.384615、
 **NO-GO：当前单操作有限状态策略表示不能作为已成立的 EC 算法创新。** 不投入 A800/ARWM，不调用真实 LLM API。
 
 **CONDITIONAL GO：只批准多步骤跨工具事务 Pilot B2。** 建立订单履约、预约确认、退货退款等多步骤流程，显式建模跨工具依赖、部分提交、逆序补偿、幂等键、延迟读与补偿失败。先比较强 Saga/规则策略与 Oracle，确认存在剩余策略空间；之后才做 random FSM、canonical GA/GP、契约保持 GA/GP 和 canonical NSGA-II/III 等预算匹配对照。若随机搜索仍达到强手工策略，或 EC 无法稳定改善成本且不牺牲安全/成功，则停止该方向。
+
+
+## 决策 D-052：Pilot B2 多步骤跨工具 Saga 可行性结果（2026-11-05）
+
+### 实验交付
+- 三个三步工作流：订单履约（库存预留→订单创建→账务记账）、预约确认（日历预留→押金→预约确认）、退货退款（订单取消→库存释放→账务退款）；
+- 11 类故障/复合故障及补偿失败，故障注入覆盖三个步骤；
+- 5 种策略，3 workflows × 3 fault positions × 11 profiles × 40 seeds = 3,960 episodes/policy；总计 19,800 policy-episodes；
+- 13 项回归与防隐藏状态读取测试通过；GitHub Actions run 42024900989 成功；
+- 原始 CSV、summary JSON 和报告已保存。
+
+### Held-out exploratory results
+- contract-resume Saga：task success 0.545455，safe resolution 1.0，invariant violation 0，tool actions 4.101010，wait units 0.966667；
+- Oracle：task success 0.545455，safe resolution 1.0，invariant violation 0，tool actions 3.606061，wait units 0.360606；
+- verify-then-retry：task success 0.282828，invariant violation 0.080808；
+- blind retry：task success 0.191919，invariant violation 0.242424；
+- rollback-on-ambiguous：success 0，safe resolution 1.0，violation 0。
+
+paired bootstrap（seed 单位，10,000 draws）显示 contract-resume 与 Oracle success 差为 0；actions 比 Oracle 多 0.494949。该 CI 退化是确定性设计的结果，只是描述性诊断，不代表总体统计确定性。
+
+### 解释
+多步骤事务环境确实比单操作恢复更有意义：跨工具已完成前缀、当前操作未知状态和逆序补偿依赖共同影响恢复决策。契约感知 Saga 策略显著优于盲目重试/立即验证，并在模拟器中匹配 Oracle 的成功/安全表现。仍未证明演化计算能超过强 Saga 手工策略。
+
+### 决策
+**CONDITIONAL GO：Pilot B3 workflow-level evolutionary search。NO-GO：立即训练 A800/ARWM。**
+
+B3 使用新独立 seeds（建议 train 4000–4039、validation 4100–4119、test 4120–4159），不得复用 Pilot B2 test 3120–3159。比较强 contract-resume Saga、random valid workflow FSM、standard GA/GP、contract-preserving GA/GP、canonical NSGA-II/III。硬安全约束 invariant violation=0；task success 不得低于 contract-resume baseline；在可行域内优化 tool calls 与 wait cost。所有方法固定相同 fitness calls、workflow/fault panels 和统计种子；test 在策略冻结后仅评估一次。
+
+如果随机搜索匹配 Saga 手工策略，或 EC 无法稳定改善成本且不损失安全/成功，则停止 EC 创新主张。只有 B3 证明 EC 增益后，才重新考虑 A800 ARWM。
