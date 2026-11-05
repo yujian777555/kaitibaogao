@@ -32,22 +32,22 @@
       "duplicate_side_effect": 0.4286,
       "invariant_violation": 0.4286,
       "unresolved": 0.8571,
-      "mean_tool_actions": 1.0
+      "mean_tool_actions": 1
     },
     "verify_then_retry": {
       "task_success": 0.4286,
       "safe_resolution": 0.4286,
       "duplicate_side_effect": 0.1429,
       "invariant_violation": 0.1429,
-      "unresolved": 0.7143,
-      "mean_tool_actions": 2.0
+      "unresolved": 0.5714,
+      "mean_tool_actions": 2
     },
     "wait_verify_retry": {
       "task_success": 0.5571,
       "safe_resolution": 0.5571,
       "duplicate_side_effect": 0.0857,
       "invariant_violation": 0.0857,
-      "unresolved": 0.6429,
+      "unresolved": 0.4429,
       "mean_tool_actions": 2.9429
     },
     "conservative_escalate": {
@@ -55,23 +55,23 @@
       "safe_resolution": 0.9143,
       "duplicate_side_effect": 0.0857,
       "invariant_violation": 0.0857,
-      "unresolved": 0.2857,
+      "unresolved": 0.0857,
       "mean_tool_actions": 2.3
     },
     "state_aware": {
       "task_success": 0.8571,
-      "safe_resolution": 1.0,
-      "duplicate_side_effect": 0.0,
-      "invariant_violation": 0.0,
-      "unresolved": 0.2857,
+      "safe_resolution": 1,
+      "duplicate_side_effect": 0,
+      "invariant_violation": 0,
+      "unresolved": 0,
       "mean_tool_actions": 3.0714
     },
     "oracle_upper_bound": {
       "task_success": 0.8571,
-      "safe_resolution": 1.0,
-      "duplicate_side_effect": 0.0,
-      "invariant_violation": 0.0,
-      "unresolved": 0.2857,
+      "safe_resolution": 1,
+      "duplicate_side_effect": 0,
+      "invariant_violation": 0,
+      "unresolved": 0,
       "mean_tool_actions": 1.5
     }
   },
@@ -90,5 +90,11 @@
     "no ARWM",
     "no evolutionary search",
     "no confirmatory held-out evaluation"
-  ]
+  ],
+  "audit": {
+    "correction": "unresolved was recomputed from the committed simulator logic; prior report values were incorrect",
+    "reproduced_metrics": "all aggregate metrics recalculated from 420 policy-episodes",
+    "regression_assertions": "7 transition/coverage assertions passed in an independent reproduction",
+    "github_actions": "no workflow run was returned at the time of audit; CI status remains unverified"
+  }
 }
