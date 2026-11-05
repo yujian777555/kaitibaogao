@@ -1563,3 +1563,79 @@ ARWM 候选规格另见 `45_A800_TRAINED_RECOVERY_MODEL_CANDIDATE.md`。不要�
 将每个工具的故障独立分配，构造真正跨步骤的 saga 部分提交、延迟可见、补偿失败、不同工具重试/幂等契约交互；冻结 train/validation/held-out task-family 与 fault-composition split。先跑强手工策略和 oracle，再引入 random search、GA/GP、contract-aware EA，全部固定真实 simulator rollout 预算。只有 EC 在 held-out 上超过强手工策略，才启动 ARWM 数据采集和 A800 训练。
 
 不要把 A-2 的 5.56pp oracle gap 宣称为已证明的创新；不要直接开始大模型训练。
+
+
+## 46. Pilot A-3 首版实现与待验证状态（2026-11-05）
+
+### 项目边界与当前方向
+- 唯一仓库：`yujian777555/kaitibaogao`。不得读取或混入其他 GitHub 仓库。
+- 工作分支：`pilot-a-stateful-recovery`；main 保持独立，不要将实验分支直接合并。
+- 最新已核验 main HEAD：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
+- TCAIL Estimator Gate 已 FAIL / NO-GO；旧 CI-GOM linkage 路线冻结，保留负结果。
+- 当前主线候选：状态感知、契约约束的 Agent 恢复策略演化；第二项故障场景—恢复策略双种群协同演化暂候选；跨任务迁移储备。
+- A800/ARWM 仍 HOLD；真实 LLM API、模型训练和双种群协同演化均未获授权。
+
+### Pilot A 与 A-2 的证据边界
+Pilot A 的 unresolved 指标已在 D-049 修正，不能引用旧数值。Pilot A 的手工 state-aware policy 与 oracle 在 success/safety 上持平，仅有动作数差异，不足以启动 EA。
+
+Pilot A-2：
+- 4 个双工具任务 × 9 个故障族 × 30 seeds；6 种策略，每种 1,080 episodes；
+- contract-aware success 0.7222、safe 1.0、invariant violation 0；oracle diagnostic success 0.7778、safe 1.0；
+- 5.56pp gap 是探索性模拟器信号，不是显著性或 EC 增益；
+- CI run 42030194929：12/12 tests passed；
+- 主要缺陷：任务内工具共享故障族，且没有 held-out task/fault composition。
+因此只 CONDITIONAL GO 到 Pilot A-3，不启动 A800。
+
+### Pilot A-3 本轮交付
+- `47_PILOT_A3_PROTOCOL.md`：冻结协议与 Pilot B 门禁；
+- `experiments/pilot_a_recovery/pilot_a3.py`：三步 saga、每工具独立 fault vector、不同工具幂等/补偿契约、partial commit、delayed visibility、compensation failure、逆序补偿、七种策略、held-out cluster bootstrap；
+- `experiments/pilot_a_recovery/test_pilot_a3.py`：13 项回归测试；
+- `experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md`：实现范围和未验证边界；
+- `.github/workflows/pilot-a-recovery.yml`：增加 A-3 simulator step，并上传 JSON 与 episode-level CSV artifact；
+- README、D-051 和本 handoff 已更新。
+
+### 冻结实验设计
+六个三步 task families：
+- Train：inventory_order_payment、calendar_order_ledger、customer_order_shipment；
+- Validation：inventory_calendar_order；
+- Held-out：return_refund_restock、subscription_ledger_notification。
+
+故障组合：
+- Train：single_timeout、timeout_then_rate_limit、partial_then_delay、schema_then_timeout；
+- Validation：independent_mixed_val、partial_then_timeout_val；
+- Held-out：partial_comp_failure、delay_rate_permission、triple_mixed。
+
+预算：每策略 954 episodes（144 train、120 validation、690 held-out），七种策略共 6,678 policy episodes。Held-out 分为 task-only、fault-only、joint shift。所有策略共享 scenario IDs、seeds 和 fault realizations。策略只访问公开错误、工具契约与 VERIFY/WAIT 结果；隐藏 fault、真实 visibility time 和 compensation availability 只供诊断 oracle/离线审计。
+
+策略：blind_retry、verify_then_retry、fixed_wait_verify、conservative_escalation、contract_aware、saga_aware、oracle_diagnostic。Oracle 只看当前步骤的潜在执行状态，是诊断参考，不是可部署策略，也不保证全局最优。
+
+### 当前真实状态（务必准确）
+**SPECIFIED：** A-3 协议已冻结。  
+**IMPLEMENTED：** A-3 simulator、13 tests、CI workflow step 和 artifact upload 已写入分支。  
+**TESTED：** 尚未核验本轮 Actions run；不得声称 13 项测试已通过。  
+**EXPERIMENTAL RESULTS：** 尚未检查 A-3 JSON/CSV；无 A-3 结果。  
+**GATE：** A-3 gate 尚未评估；Pilot B 未获准；A800/ARWM 继续 HOLD。
+
+### 下一会话唯一任务
+1. 核验 `pilot-a-stateful-recovery` 最新 HEAD 与 main HEAD；确认 main 未被修改。
+2. 检查本轮 push-triggered GitHub Actions run（工作流 `.github/workflows/pilot-a-recovery.yml`）。必须确认 regression tests、Pilot A、Pilot A-2、Pilot A-3 和 artifact upload 均成功。
+3. 如果 CI 失败，先定位并修复，不得绕过测试；修复后重新运行。
+4. 如果 CI 成功，下载 `pilot-a3-results` artifact，独立复算 JSON 与 CSV：
+   - 6,678 policy rows；每策略 954；
+   - train 144、validation 120、held-out 690；
+   - scenario IDs 与 seeds 跨策略完全配对；
+   - per-tool fault vectors 独立，held-out task/composition 无训练泄漏；
+   - summary、worst-group、paired cluster bootstrap 与原始 CSV 一致。
+5. 按 47 号预注册门禁判断是否 CONDITIONAL GO to Pilot B。Pilot B 才比较 random search、standard GA/GP、contract-aware EA，必须同真实 simulator rollout budget；held-out 只能最终评价。
+6. 不要在 A-3 gate 前启动 Pilot B、A800/ARWM、真实 LLM API 或双种群 co-evolution。失败数据必须保留。
+
+### 可直接复制的接班提示词
+你是我的河北工业大学计算机技术硕士开题研究 Executor。唯一允许读取和维护的仓库是 `yujian777555/kaitibaogao`，严禁读取其他 GitHub 仓库或混用其他项目。工作分支是 `pilot-a-stateful-recovery`，main 必须保持独立。
+
+先核验远端 main 与工作分支 HEAD，读取 README、05_DECISION_LOG 的 D-047–D-051、SESSION_HANDOFF 第 44–46 节、44_THESIS_INNOVATION_REASSESSMENT_POST_TCAIL_NO_GO.md、46_RELATED_WORK_MECHANISM_AUDIT_ARWM.md、47_PILOT_A3_PROTOCOL.md、experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md、pilot_a3.py、test_pilot_a3.py 和 workflow。
+
+TCAIL Estimator Gate 已 FAIL / NO-GO，旧 CI-GOM 冻结。新主线是状态化工具型 LLM Agent 的故障恢复策略演化与 RSI。Pilot A-2 只 CONDITIONAL GO to Pilot A-3；A-2 的 5.56pp oracle gap 不是算法证据。A800/ARWM 仍 HOLD。
+
+当前 A-3 已实现，但**CI 和实验结果尚未核验**。你的唯一任务是检查 push-triggered Actions run；确认 13 项测试、A1/A2/A3 执行和 artifacts 上传。成功后下载 JSON/CSV 并独立重算，验证 6,678 行、每策略 954 episodes、split、配对和 fault-vector 语义；失败则修复并重跑。最后严格按 47 号预注册 gate 判断是否进入 Pilot B。
+
+不得将实现写成测试通过，不得将 A-3 模拟器结果写成真实 Agent 证据，不得提前启动 Pilot B、A800/ARWM、真实 LLM API 或双种群协同演化。每轮继续更新 README、05_DECISION_LOG、SESSION_HANDOFF 并核验远端。
