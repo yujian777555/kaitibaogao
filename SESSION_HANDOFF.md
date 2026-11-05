@@ -1593,3 +1593,36 @@ A-2 说明契约感知策略在合成模拟器中可达到 Oracle 的成功/安�
 如果 EC 无法稳定优于强手工策略，不保留该算法创新。若有可重复增益，才进一步考虑 A800 ARWM；ARWM 必须证明超越 LightGBM/MLP，并改善固定真实 rollout 预算下的 EA。
 
 禁止当前启动 A800 训练、DeepSeek API 或 RSI 多轮闭环；先完成 Pilot B。
+
+
+## 47. Pilot B 结果与 Pilot B2 多步骤事务接管（2026-11-05）
+
+### Pilot B 当前状态
+- 分支：pilot-b-policy-search
+- workflow run 42023597413：测试与固定预算搜索均成功
+- 结果提交：4f254ab41001c98b32c9d1eb61a3373744c3b397
+- 报告：experiments/pilot_b_policy_search/PILOT_B_EXPLORATORY_RESULTS.md
+- 代码/测试/原始测试 episode/summary 位于 experiments/pilot_b_policy_search/
+
+### Pilot B 结论
+使用新 seeds：train 1000–1039、validation 1100–1119、test 1120–1159。160 evals/run，population16×10 generations，4 方法×3 optimizer seeds。Random valid FSM、standard GA、contract-preserving GA、NSGA-II-style hybrid 均选出与 manual contract v2 等效的策略；test success 0.701923、safe1、violation0、actions1.923077、wait1.196154、cost2.042692。配对差对 manual v2 为 0。Manual v2 相比 v1 减少 0.461538 actions，但属于人工规则优化，不是 EC 算法增益。
+
+当前 NSGA-II 实现是 hybrid：nondominated environmental selection + scalar mating tournament，不是 canonical NSGA-II。单操作 genome 太简单，随机搜索已足以找到同等策略。
+
+### D-051
+当前单操作 FSM grammar 的 EC 创新 NO-GO。A800/ARWM 仍 HOLD。
+
+### 下一步：Pilot B2 多步骤跨工具事务
+先建三个真实结构的模拟任务：
+1. 订单履约：inventory reserve → order create → ledger post；
+2. 预约：calendar reserve → deposit ledger → confirm appointment；
+3. 退货：cancel order → inventory release → ledger refund。
+
+模拟状态需包含 workflow step、各工具 effect-state、operation/idempotency key、compensation stack、依赖图、read visibility 和 fault events。故障注入覆盖任意步骤前/后超时、部分提交、延迟可见、限流、Schema drift、补偿失败、跨工具复合故障。策略只能使用公开工具观察与事务契约，不能读取隐藏执行结果。
+
+第一 Gate：强手工 Saga/规则控制器与 Oracle 之间必须存在可观测性能/成本差距。第二 Gate：相同预算比较 random valid FSM、canonical GA/GP、contract-preserving GA/GP、canonical NSGA-II/III。硬安全约束不允许以成功率或成本抵消。测试使用新的独立 seeds（建议 train 2000–2099、validation 2100–2119、test 2120–2159），不可复用 Pilot A/B test seeds。
+
+若手工 Saga 已达到 Oracle 或随机搜索已匹配强手工策略，则停止，不训练 ARWM。只有 EC 有可重复优势后才考虑 A800 训练。
+
+### 接班原则
+继续只维护 kaitibaogao 主仓库，所有实验分支独立；每轮同步 README、05_DECISION_LOG、SESSION_HANDOFF、原始数据、汇总结果与 CI。不得把模拟器结果写成真实 Agent/LLM 结果。
