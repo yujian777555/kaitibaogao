@@ -533,3 +533,10 @@ TCAIL Estimator Gate 已失败，旧 TCAIL/CI-GOM 主张冻结；当前研究主
 冻结预算：每种策略 954 episodes（144 train、120 validation、690 held-out），7 种策略共 6,678 policy episodes；所有策略共享 scenario IDs、seeds 和 fault realizations。Held-out 拆成 task-only、fault-only、joint shift 三类。
 
 **当前真实状态：** A-3 协议、模拟器和测试已写入分支；尚未核验本轮 GitHub Actions 运行结果，尚无 A-3 实验结果，不能声称测试通过或策略有效。下一步先检查 CI 与 artifacts，独立重算每个 episode 和分层指标，再按 47 号协议决定是否进入 Pilot B。A800/ARWM、真实 LLM API 和双种群协同演化继续 HOLD。
+
+
+## 长期会话接管（强制维护）
+
+唯一权威接管提示词：[NEXT_SESSION_PROMPT.md](NEXT_SESSION_PROMPT.md)。每次实质性研究、代码、实验、审计或决策变化后，必须同一轮同步更新该文件、`SESSION_HANDOFF.md`、`05_DECISION_LOG.md` 和 README；会话结束前重新读取核对，并在每次用户汇报中附接管提示词链接。不得只在聊天中维护接班信息。
+
+当前唯一下一任务：核验 A-3 最新 GitHub Actions run，下载并独立复算 JSON/CSV，再按 47 号协议决定是否进入 Pilot B。A-3 CI/结果尚未核验；Pilot B 和 A800/ARWM 继续 HOLD。
