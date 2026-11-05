@@ -113,11 +113,11 @@ A-3 只比较预先定义的手工策略与 oracle；不在 held-out 上选择�
 A-3 只决定是否进入 Pilot B，不证明演化算法有效。
 
 **CONDITIONAL GO to Pilot B** 必须同时满足：
-1. saga_aware 在全部 held-out slices 上 invariant violation rate = 0；
+1. saga_aware 在每一个 held-out slice（task-only、fault-only、joint-shift）上的 invariant violation rate 均为 0；
 2. held-out 合并集上 oracle_diagnostic − saga_aware 的 task-success 差至少 0.05；
 3. 以 task-family × fault-composition 为 cluster 的 paired bootstrap 95% CI 下界大于 0。
 
-若 saga_aware 与 oracle 的 success gap ≤ 0.02，且动作成本差不超过 10%，则对该模拟器任务族 NO-GO（没有足够优化空间）。其他情况为 HOLD，先定位失败边界，不得通过查看 held-out 后调参再宣称通过。
+若任一 held-out slice 出现 saga_aware invariant violation，则 HOLD，先修复安全问题，不得进入 Pilot B。若全部 slice 零违规，但 saga_aware 与 oracle 的 success gap ≤ 0.02 且动作成本差不超过 10%，则对该模拟器任务族 NO-GO（没有足够优化空间）。其他情况为 HOLD，先定位失败边界，不得通过查看 held-out 后调参再宣称通过。
 
 即使 Pilot A-3 通过，也只允许进入 Pilot B 的算法比较：random search、standard GA/GP、contract-aware EA；必须在相同真实 simulator rollout budget 下比较，held-out 只作最终一次评价。
 
