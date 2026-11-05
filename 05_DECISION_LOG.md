@@ -636,3 +636,10 @@ CONDITIONAL HOLD。当前场景中手工策略已达到 oracle 的成功/安全�
 - experiments/pilot_a_recovery/summary.json
 
 结果为探索性确定性模拟器结果，不是确认性统计证据；未调用 LLM API，未训练 A800，未实现 ARWM，未运行 EA。
+
+
+## 决策 D-049：Pilot A unresolved 指标独立复算修正（2026-11-05）
+
+复算提交模拟器逻辑后，发现原报告的 unresolved 指标转录错误。正确值：blind retry 0.8571、verify-then-retry 0.5714、wait-verify-retry 0.4429、conservative escalation 0.0857、state-aware 0、oracle 0。原因是 state-aware/oracle 对 permission-denied 失败显式执行 ESCALATE，因此 `unresolved = not success and not resolved` 为 0。其余指标保持不变：state-aware 与 oracle 的 task success 均 0.8571、safe resolution 均 1.0、invariant violation 均 0。
+
+独立复现中 7 项转移/覆盖断言通过，但这不是 GitHub Actions 运行结果；CI 仍未验证。修正不改变 Pilot A 的 CONDITIONAL HOLD：手工策略在本小型场景匹配 oracle 成功/安全表现，动作数差异不能单独证明算法收益。A800、ARWM、正式 EC 搜索仍未授权。
