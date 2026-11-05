@@ -612,3 +612,27 @@ GEPA (ICLR 2026)、EvoTool (ACL 2026)、Q-Evolve (ICML 2026)、AgentEvo (2026)�
 只做相关工作机制差异矩阵、状态/动作/硬不变量形式化和 Pilot A：手工策略与 oracle policy 上界测试。若 oracle 不优于简单 retry/verify，停止方向；若普通策略已达到 oracle，也停止。Pilot A 通过后再比较 random search、standard GA/GP、NSGA-II/III 和 proposed contract-aware variation。Pilot B 有证据后才做双种群协同演化。
 
 完整评估见 44_THESIS_INNOVATION_REASSESSMENT_POST_TCAIL_NO_GO.md。当前新方向状态为 HOLD / NOT IMPLEMENTED / NOT VALIDATED；不启动大规模实验，不训练基模，不把研究计划当成创新成果。
+
+
+## 决策 D-048：A800 训练候选与 Pilot A 首轮结果（2026-11-05）
+
+### 文献审计结论
+CoMAP (EMNLP 2026) 已研究文本世界模型与 Agent policy 闭环共演化，模型预测动作后的文本状态并以 on-policy 轨迹自蒸馏更新；HarnessMDP 已研究冻结 LLM 的外部 harness controller 离线学习；TRACE/SENTINEL 已覆盖失败轨迹驱动的能力训练/任务生成；EvoTool 已覆盖 blame-aware 工具策略演化。不能把“训练世界模型”“从失败训练 Agent”“演化工具策略”单独视为创新。
+
+### A800 训练候选
+保留 ARWM（Agent Recovery World Model）为条件性候选：从 simulator-grounded 同状态多动作反事实干预数据训练 effect-state transition、side-effect/invariant risk、postcondition 与 recovery outcome 预测器；用于模型辅助约束演化策略搜索。真实 simulator rollout 仍是最终评价，模型不替代安全门禁。模型必须优于 MLP/LightGBM 等结构化基线，并在相同真实 rollout 预算下改善 EC 搜索，否则删除训练模型。
+
+### Pilot A 首轮
+7 fault families × 10 deterministic parameter seeds；6 policies，每策略 70 episodes。timeout-before-dispatch、timeout-after-commit、delayed-visibility 向策略暴露同一 TIMEOUT 签名，隐藏子类型仅 oracle 可见。state-aware handcrafted policy：task success 0.8571、safe resolution 1.0、invariant violation 0；oracle 相同成功/安全表现，但 mean actions 1.5 vs 3.0714。blind retry success 0.1429、violation 0.4286。
+
+### 决定
+CONDITIONAL HOLD。当前场景中手工策略已达到 oracle 的成功/安全上界，尚未证明足够的成功率进化空间；动作效率差距不是独立算法收益证据。暂不启动 A800 训练、ARWM 或正式 EC 搜索。仅允许 bounded Pilot A-2：多工具不同幂等契约、同公开观测下复合/潜在故障、变化的读延迟与补偿可用性、按 task/fault family 隔离测试。若强手工策略仍匹配 oracle 且成本接近，停止恢复策略方向。若 A-2 证明有剩余空间，再比较 GA/GP、NSGA-II/III 和 contract-aware EA；只有 action-effect 预测本身超越结构化基线且改善固定真实 rollout 预算下的 EC 搜索，才训练 ARWM。
+
+### 交付
+- 46_RELATED_WORK_MECHANISM_AUDIT_ARWM.md
+- experiments/pilot_a_recovery/pilot_a.py
+- experiments/pilot_a_recovery/test_pilot_a.py
+- experiments/pilot_a_recovery/PILOT_A_EXPLORATORY_RESULTS.md
+- experiments/pilot_a_recovery/summary.json
+
+结果为探索性确定性模拟器结果，不是确认性统计证据；未调用 LLM API，未训练 A800，未实现 ARWM，未运行 EA。
