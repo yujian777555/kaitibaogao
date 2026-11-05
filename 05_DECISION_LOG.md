@@ -682,3 +682,27 @@ Pilot A-2 的 contract-aware success 为 0.7222，oracle diagnostic 为 0.7778�
 3. 检查 held-out 三个 slice（每个 slice 的 saga_aware invariant violation 必须为 0）、worst-group、invariant violation、safe resolution、unresolved 和 cluster bootstrap；
 4. 只有 47 号预注册门禁满足时才进入 Pilot B；否则 HOLD/NO-GO 并保留失败数据；
 5. 不调用真实 LLM API、不训练 A800、不实现 ARWM、不启动双种群协同演化。
+
+
+## 决策 D-052：将接管提示词设为强制、持续维护的 canonical 仓库文件（2026-11-05）
+
+### 用户要求
+用户明确要求“接管提示词必须一直维护”。
+
+### 决定
+新增 `NEXT_SESSION_PROMPT.md`，作为唯一权威、可直接复制、自包含的下一会话接管提示词。每次实质性研究、实验、代码、协议、审计、分支或决策变化后，同一轮必须同步维护：
+- `NEXT_SESSION_PROMPT.md`
+- `SESSION_HANDOFF.md`
+- `05_DECISION_LOG.md`
+- `README.md`
+
+会话结束前重新读取并核对四份文件一致性、最新远端 HEAD 和唯一下一任务。每次用户汇报必须给出接管提示词链接。不得将聊天中的临时提示词替代仓库 canonical file。
+
+### 当前状态
+- Canonical prompt 已创建：`NEXT_SESSION_PROMPT.md`。
+- A-3 当前仍是 IMPLEMENTED / CI NOT YET VERIFIED / RESULTS NOT YET AUDITED。
+- 下一任务唯一为核验最新 A3 Actions、下载并独立复算 JSON/CSV，再按 47 号协议作 Pilot B gate 判断。
+- Pilot B、A800/ARWM、真实 LLM API 和双种群协同演化仍 HOLD。
+
+### 验收
+本次将同步更新 SESSION_HANDOFF 与 README；后续每次实质性进展均必须继续更新 canonical prompt，不得遗漏。
