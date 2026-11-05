@@ -3,7 +3,8 @@ on:
   push:
     branches: [pilot-b-policy-search]
     paths:
-      - "experiments/pilot_b_policy_search/**"
+      - "experiments/pilot_b_policy_search/pilot_b.py"
+      - "experiments/pilot_b_policy_search/test_pilot_b.py"
       - ".github/workflows/pilot-b-policy-search.yml"
       - "experiments/pilot_a2_multitool/pilot_a2.py"
   pull_request:
