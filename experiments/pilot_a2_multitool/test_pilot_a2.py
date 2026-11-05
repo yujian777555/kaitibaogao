@@ -1,4 +1,6 @@
 import unittest
+import ast
+from pathlib import Path
 
 from pilot_a2 import (
     Env, TOOLS, PROFILES, POLICIES, make_episode, run_policy
@@ -73,6 +75,23 @@ class PilotA2Tests(unittest.TestCase):
         self.assertEqual(len(rows), len(TOOLS) * len(PROFILES) * 100)
         self.assertEqual(sum(r["invariant_violation"] for r in rows), 0)
         self.assertEqual(sum(r["duplicate_side_effect"] for r in rows), 0)
+
+
+    def test_only_oracle_branch_can_read_hidden_state(self):
+        source_path = Path(__file__).with_name("pilot_a2.py")
+        source = source_path.read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        run_fn = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "run_policy")
+        oracle_marker = 'elif policy == "oracle_upper_bound":'
+        oracle_line = source[:source.index(oracle_marker)].count("\\n") + 1
+        hidden_keys = {"hidden_outcome", "effects", "visibility_delay", "compensation_available"}
+        for node in ast.walk(run_fn):
+            if isinstance(node, ast.Attribute) and node.attr in hidden_keys:
+                self.assertGreaterEqual(node.lineno, oracle_line)
+            if isinstance(node, ast.Subscript):
+                sl = node.slice
+                if isinstance(sl, ast.Constant) and sl.value in hidden_keys:
+                    self.assertGreaterEqual(node.lineno, oracle_line)
 
     def test_all_policies_cover_complete_matrix(self):
         rows = [
