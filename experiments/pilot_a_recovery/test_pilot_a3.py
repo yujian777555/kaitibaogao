@@ -14,6 +14,7 @@ from pilot_a3 import (
     build_scenarios,
     make_fault_vector,
     run_episode,
+    decide_gate,
 )
 
 
@@ -129,6 +130,8 @@ class PilotA3Tests(unittest.TestCase):
         row = run_episode("saga_aware", scenario)
         self.assertEqual(row["compensation_failure"], 1)
         self.assertEqual(row["unresolved"], 1)
+        self.assertEqual(row["task_success"], 0)
+        self.assertEqual(row["safe_resolution"], 0)
         self.assertEqual(row["steps_attempted"], 1)
         self.assertEqual(row["invariant_violation"], 0)
 
@@ -137,6 +140,48 @@ class PilotA3Tests(unittest.TestCase):
         rows = [run_episode(policy, scenario) for policy in POLICIES]
         self.assertEqual({row["scenario_id"] for row in rows}, {scenario["scenario_id"]})
         self.assertEqual({row["seed"] for row in rows}, {scenario["seed"]})
+
+    def test_gate_requires_zero_violations_in_every_heldout_slice(self):
+        summaries = {
+            "saga_aware": {
+                "heldout_all": {
+                    "invariant_violation": 0,
+                    "task_success": 0.60,
+                    "mean_action_count": 10.0,
+                },
+                "heldout_task_shift": {"invariant_violation": 0.0},
+                "heldout_fault_shift": {"invariant_violation": 0.01},
+                "heldout_joint_shift": {"invariant_violation": 0.0},
+            },
+            "oracle_diagnostic": {
+                "heldout_all": {"task_success": 0.70, "mean_action_count": 5.0}
+            },
+        }
+        bootstrap = {"ci95": [0.02, 0.18]}
+        gate, _, _, all_safe = decide_gate(summaries, bootstrap)
+        self.assertFalse(all_safe)
+        self.assertEqual(gate, "HOLD_SAFETY_FAILURE")
+
+    def test_gate_go_requires_safety_success_gap_and_positive_ci(self):
+        summaries = {
+            "saga_aware": {
+                "heldout_all": {
+                    "invariant_violation": 0.0,
+                    "task_success": 0.60,
+                    "mean_action_count": 10.0,
+                },
+                "heldout_task_shift": {"invariant_violation": 0.0},
+                "heldout_fault_shift": {"invariant_violation": 0.0},
+                "heldout_joint_shift": {"invariant_violation": 0.0},
+            },
+            "oracle_diagnostic": {
+                "heldout_all": {"task_success": 0.70, "mean_action_count": 5.0}
+            },
+        }
+        bootstrap = {"ci95": [0.02, 0.18]}
+        gate, _, _, all_safe = decide_gate(summaries, bootstrap)
+        self.assertTrue(all_safe)
+        self.assertEqual(gate, "CONDITIONAL_GO_PILOT_B")
 
     def test_fault_generation_is_reproducible(self):
         first = make_fault_vector("subscription_ledger_notification", "triple_mixed", 99)
