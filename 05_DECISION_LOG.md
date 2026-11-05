@@ -654,3 +654,31 @@ CONDITIONAL HOLD。当前场景中手工策略已达到 oracle 的成功/安全�
 GitHub Actions run 42030194929：12/12 tests passed，Pilot A baseline 和 Pilot A-2 simulator 均成功。早先首次 A-2 CI 曾因分层汇总函数对单组数据误调用全策略汇总导致 ZeroDivisionError；已修复并重新运行成功。
 
 **决定：CONDITIONAL GO 到 Pilot A-3 simulator refinement；NO-GO for A800 training now。** 当前 A-2 的主要缺陷：每个任务中的两个工具共享同一故障族；参数种子只变化延迟/限流；没有真正 held-out task/fault composition。下一步实现每工具独立故障分配、跨步骤依赖和 held-out task/fault composition，再用强手工策略、随机策略搜索、GA/GP、contract-aware EA 做相同预算比较。只有 EC 在 held-out 上优于强手工策略，才考虑 A800/ARWM。
+
+
+## 决策 D-051：Pilot A-3 协议冻结并完成首版实现（2026-11-05）
+
+### 依据
+Pilot A-2 的 contract-aware success 为 0.7222，oracle diagnostic 为 0.7778，差距 5.56pp；但 A-2 对同一任务内的多个工具广播同一故障族，且没有 held-out task/fault composition。该结果只能支持有条件地细化模拟器，不能证明演化算法增益。
+
+### 本轮交付
+- `47_PILOT_A3_PROTOCOL.md`：冻结任务族 × 故障组合族的因子化 train/validation/held-out split、同场景配对预算、指标和 Pilot B 门禁。
+- `experiments/pilot_a_recovery/pilot_a3.py`：六个三步任务族、每工具独立故障向量、十种工具契约、部分提交、延迟可见、补偿失败、saga 逆序补偿、七种手工/诊断策略、episode CSV/JSON 与 held-out cluster bootstrap。
+- `experiments/pilot_a_recovery/test_pilot_a3.py`：13 项回归测试。
+- `experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md`：实现与验证边界。
+- GitHub Actions 已增加 A-3 运行和 episode-level artifact 上传步骤。
+
+### 冻结预算
+每种策略 954 episodes：144 train、120 validation、690 held-out；七种策略共 6,678 policy episodes。Held-out 分为 task-only、fault-only 和 joint shift。所有策略使用相同 scenario IDs、seeds 和 fault realizations。
+
+### 当前决定
+**CONDITIONAL GO to run/inspect Pilot A-3; NO-GO for Pilot B until A-3 gate is evaluated; NO-GO for A800/ARWM now。**
+
+本轮只确认协议和首版代码已写入分支。**CI 运行结果尚未核验，A-3 尚无实验结果，不能标记 IMPLEMENTED_AND_TESTED 或 GATE_PASS。** 不得把脚本存在、测试用例存在或 workflow 配置存在写成测试通过。
+
+### 下一步
+1. 核验分支最新 Actions run，确认 13 项新增测试、A1/A2 回归、A3 运行和 artifact 上传；
+2. 下载 A3 JSON/CSV，独立检查 episode 数、split、scenario pairing、fault vector 和 summary；
+3. 检查 held-out 三个 slice、worst-group、invariant violation、safe resolution、unresolved 和 cluster bootstrap；
+4. 只有 47 号预注册门禁满足时才进入 Pilot B；否则 HOLD/NO-GO 并保留失败数据；
+5. 不调用真实 LLM API、不训练 A800、不实现 ARWM、不启动双种群协同演化。
