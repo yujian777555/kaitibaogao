@@ -1,0 +1,41 @@
+name: Pilot B2 multi-step Saga recovery
+on:
+  push:
+    branches: [pilot-b2-multistep-saga]
+    paths:
+      - "experiments/pilot_b2_multistep_saga/pilot_b2.py"
+      - "experiments/pilot_b2_multistep_saga/test_pilot_b2.py"
+      - ".github/workflows/pilot-b2-multistep-saga.yml"
+  pull_request:
+    paths:
+      - "experiments/pilot_b2_multistep_saga/pilot_b2.py"
+      - "experiments/pilot_b2_multistep_saga/test_pilot_b2.py"
+      - ".github/workflows/pilot-b2-multistep-saga.yml"
+permissions:
+  contents: write
+jobs:
+  pilot-b2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pilot-b2-multistep-saga
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run Saga transition and leakage tests
+        run: python -m unittest discover -s experiments/pilot_b2_multistep_saga -p "test_*.py" -v
+      - name: Run held-out multi-step workflow matrix
+        run: python experiments/pilot_b2_multistep_saga/pilot_b2.py
+      - name: Commit reproducible results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/pilot_b2_multistep_saga/results/summary.json experiments/pilot_b2_multistep_saga/results/episodes.csv
+          if git diff --cached --quiet; then
+            echo "No result changes."
+          else
+            git commit -m "Record Pilot B2 multi-step Saga results"
+            git push origin pilot-b2-multistep-saga
+          fi
