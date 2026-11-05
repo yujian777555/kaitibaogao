@@ -529,3 +529,14 @@ CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作�
 **D-050：CONDITIONAL GO for Pilot B（cost-aware policy search）；A800/ARWM 仍 HOLD。** Pilot B 必须使用全新独立 seeds（例如 train 1000–1099、validation 1100–1119、test 1120–1159），不得把 Pilot A/A-2 的 seeds 作为确认性测试。优化目标：critical invariant violation = 0 硬约束、task success 不低于预注册阈值（至少达到 A-2 held-out 的 0.70），在此条件下最小化工具调用和等待成本。对比强手工策略、随机合法 FSM、标准 GA/GP、契约保持 GA/GP、NSGA-II/III；所有方法使用相同 fitness calls 和 held-out test。只有 EC 稳定超过强手工策略，才进入 ARWM 训练。
 
 报告：experiments/pilot_a2_multitool/PILOT_A2_EXPLORATORY_RESULTS.md；原始 episode CSV 与 summary JSON 已保存。局限：合成环境、单操作恢复 episode、参数种子而非学习模型切分；尚无 LLM API、A800、ARWM、EC 或 RSI 结果。
+
+
+## 2026-11-05：Pilot B 固定预算演化搜索结果
+
+新增 experiments/pilot_b_policy_search/，使用全新 seeds（train 1000–1039、validation 1100–1119、test 1120–1159）。每次搜索 160 fitness evaluations，population 16 × 10 generations；4 种搜索方法 × 3 optimizer seeds；held-out test 每种方法 2,080 episodes。
+
+测试结果：random valid FSM、standard GA、contract-preserving GA、NSGA-II-style hybrid 全部选出与 manual contract v2 等效的策略，held-out success 0.701923、safe resolution 1.0、invariant violation 0、tool actions 1.923077、cost 2.042692。与 manual v2 的配对差为 0。Manual v2 相比 manual v1 减少 0.461538 平均工具动作，但这是人工规则改进，不是 EC 增益。
+
+**D-051：当前单操作策略 grammar 的 EC 创新 NO-GO。** 搜索空间过于简单，随机搜索已能达到与 GA/契约保持 GA/NSGA-II-style hybrid 相同的结果。当前 NSGA-II 是 hybrid（nondominated survival + scalar mating tournament），不是 canonical reproduction。
+
+下一步只考虑多步骤跨工具事务 Pilot B2：订单履约（库存预留→订单创建→账务记账）、预约（时段预留→押金→确认）、退货（取消订单→释放库存→退款）。研究跨步骤部分提交、依赖关系、逆序补偿、幂等键、延迟读和补偿失败。先检查强 Saga/规则控制器与 Oracle 的差距；有剩余优化空间后再验证 EC。A800/ARWM 仍 HOLD。
