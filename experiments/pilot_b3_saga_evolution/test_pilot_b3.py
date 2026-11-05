@@ -12,7 +12,7 @@ from experiments.pilot_b3_saga_evolution.pilot_b3 import (
 
 class PilotB3Tests(unittest.TestCase):
     def test_new_seed_panels_are_disjoint_from_prior_pilots(self):
-        prior=set(range(100))|set(range(1000,1160))|set(range(3120,3160))
+        prior=set(range(100))|set(range(1000,1160))|set(range(3120,3160))|set(range(4120,4160))
         self.assertTrue(set(TRAIN_SEEDS).isdisjoint(prior))
         self.assertTrue(set(VALIDATION_SEEDS).isdisjoint(prior))
         self.assertTrue(set(TEST_SEEDS).isdisjoint(prior))
@@ -44,6 +44,7 @@ class PilotB3Tests(unittest.TestCase):
             for seed in range(4000,4005)
         ]
         self.assertEqual(sum(r["invariant_violation"] for r in rows),0)
+        self.assertTrue(all("escalated" in r and "rollback_complete" in r for r in rows))
 
     def test_genome_executor_does_not_read_hidden_state(self):
         path=Path(__file__).with_name("pilot_b3.py")
@@ -72,7 +73,7 @@ class PilotB3Tests(unittest.TestCase):
         self.assertEqual(EVAL_BUDGET,160)
         self.assertEqual(TRAIN_SEEDS,tuple(range(4000,4040)))
         self.assertEqual(VALIDATION_SEEDS,tuple(range(4100,4120)))
-        self.assertEqual(TEST_SEEDS,tuple(range(4120,4160)))
+        self.assertEqual(TEST_SEEDS,tuple(range(4320,4360)))
 
 if __name__=="__main__":
     unittest.main()
