@@ -1,0 +1,803 @@
+{
+  "status": "EXPLORATORY_PILOT_B3",
+  "design": {
+    "train_seeds": [
+      4000,
+      4039
+    ],
+    "validation_seeds": [
+      4100,
+      4119
+    ],
+    "test_seeds": [
+      4120,
+      4159
+    ],
+    "tasks": [
+      "order_fulfillment",
+      "appointment_confirmation",
+      "return_refund"
+    ],
+    "fault_profiles": [
+      "timeout_before",
+      "timeout_after",
+      "partial_commit",
+      "delayed_timeout_after",
+      "timeout_rate_before",
+      "timeout_rate_after",
+      "schema_before",
+      "permission_before",
+      "partial_compensation_unavailable",
+      "partial_previous_comp_failure",
+      "partial_timeout_delayed"
+    ],
+    "algorithms": [
+      "random_valid_fsm",
+      "standard_ga",
+      "contract_preserving_ga",
+      "canonical_nsga2"
+    ],
+    "algorithm_seeds": [
+      31,
+      47,
+      59
+    ],
+    "population": 16,
+    "generations": 10,
+    "fitness_evaluation_budget_per_run": 160,
+    "task_success_floor": 0.5404545454545454,
+    "floor_definition": "manual Saga train success minus 0.005",
+    "hard_constraint": "invariant_violation == 0",
+    "cost": "mean tool_actions + 0.1 * mean wait_units",
+    "test_evaluated_once_after_validation_selection": true,
+    "no_oracle_in_search": true,
+    "no_llm_api": true,
+    "no_a800_training": true
+  },
+  "manual_train_metrics": {
+    "task_success": 0.5454545454545454,
+    "invariant_violation": 0.0,
+    "tool_actions": 4.101010101010101,
+    "wait_units": 0.972979797979798,
+    "safe_resolution": 1.0,
+    "feasible": 1,
+    "cost": 4.198308080808081
+  },
+  "search_runs": [
+    {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 31,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        2,
+        2,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 59,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 31,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        2,
+        3,
+        0,
+        0
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 1.2154040404040405,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.4346717171717174
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 1.2141414141414142,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.4345454545454546
+      }
+    },
+    {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        2,
+        2,
+        0,
+        0,
+        2,
+        2,
+        0,
+        0
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.410429292929293
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.41030303030303
+      }
+    },
+    {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 59,
+      "genome": [
+        0,
+        2,
+        2,
+        2,
+        0,
+        0,
+        3,
+        2,
+        0,
+        0
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 1.1547979797979797,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.428611111111111
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 1.1535353535353536,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.4284848484848487
+      }
+    },
+    {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 31,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 59,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    {
+      "algorithm": "canonical_nsga2",
+      "algorithm_seed": 31,
+      "genome": [
+        1,
+        2,
+        2,
+        2,
+        0,
+        0,
+        2,
+        3,
+        1,
+        0
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.4545454545454546,
+        "wait_units": 1.7002525252525253,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.624570707070707
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.4545454545454546,
+        "wait_units": 1.698989898989899,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.6244444444444444
+      }
+    },
+    {
+      "algorithm": "canonical_nsga2",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        2,
+        2,
+        0,
+        0
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.410429292929293
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.41030303030303
+      }
+    },
+    {
+      "algorithm": "canonical_nsga2",
+      "algorithm_seed": 59,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        3,
+        3,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 1.3972222222222221,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.5437626262626263
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 1.395959595959596,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.5436363636363635
+      }
+    }
+  ],
+  "selected_by_validation": {
+    "random_valid_fsm": {
+      "algorithm": "random_valid_fsm",
+      "algorithm_seed": 31,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    "standard_ga": {
+      "algorithm": "standard_ga",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        0,
+        2,
+        2,
+        0,
+        0,
+        2,
+        2,
+        0,
+        0
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.410429292929293
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.41030303030303
+      }
+    },
+    "contract_preserving_ga": {
+      "algorithm": "contract_preserving_ga",
+      "algorithm_seed": 31,
+      "genome": [
+        0,
+        0,
+        2,
+        3,
+        0,
+        0,
+        2,
+        2,
+        0,
+        1
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501338383838384
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.404040404040404,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.501212121212121
+      }
+    },
+    "canonical_nsga2": {
+      "algorithm": "canonical_nsga2",
+      "algorithm_seed": 47,
+      "genome": [
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        2,
+        2,
+        0,
+        0
+      ],
+      "train_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.972979797979798,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.410429292929293
+      },
+      "fitness_evaluations": 160,
+      "validation_metrics": {
+        "task_success": 0.5454545454545454,
+        "invariant_violation": 0.0,
+        "tool_actions": 3.313131313131313,
+        "wait_units": 0.9717171717171718,
+        "safe_resolution": 1.0,
+        "feasible": 1,
+        "cost": 3.41030303030303
+      }
+    }
+  },
+  "heldout_test": {
+    "random_valid_fsm": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 3.40404,
+      "wait_units": 0.973232,
+      "cost": 3.501363,
+      "episodes": 3960
+    },
+    "standard_ga": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 3.313131,
+      "wait_units": 0.973232,
+      "cost": 3.410454,
+      "episodes": 3960
+    },
+    "contract_preserving_ga": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 3.40404,
+      "wait_units": 0.973232,
+      "cost": 3.501363,
+      "episodes": 3960
+    },
+    "canonical_nsga2": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 3.313131,
+      "wait_units": 0.973232,
+      "cost": 3.410454,
+      "episodes": 3960
+    },
+    "manual_saga": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 4.10101,
+      "wait_units": 0.973232,
+      "cost": 4.198333,
+      "episodes": 3960
+    },
+    "manual_saga_verify": {
+      "task_success": 0.545455,
+      "safe_resolution": 1.0,
+      "invariant_violation": 0.0,
+      "tool_actions": 4.606061,
+      "wait_units": 1.983333,
+      "cost": 4.804394,
+      "episodes": 3960
+    }
+  },
+  "paired_bootstrap_vs_manual_saga": {
+    "random_valid_fsm_vs_manual_saga_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "random_valid_fsm_vs_manual_saga_actions": {
+      "mean_difference_A_minus_B": -0.69697,
+      "ci95": [
+        -0.69697,
+        -0.69697
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "standard_ga_vs_manual_saga_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "standard_ga_vs_manual_saga_actions": {
+      "mean_difference_A_minus_B": -0.787879,
+      "ci95": [
+        -0.787879,
+        -0.787879
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_preserving_ga_vs_manual_saga_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "contract_preserving_ga_vs_manual_saga_actions": {
+      "mean_difference_A_minus_B": -0.69697,
+      "ci95": [
+        -0.69697,
+        -0.69697
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "canonical_nsga2_vs_manual_saga_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "canonical_nsga2_vs_manual_saga_actions": {
+      "mean_difference_A_minus_B": -0.787879,
+      "ci95": [
+        -0.787879,
+        -0.787879
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_saga_vs_manual_saga_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_saga_vs_manual_saga_actions": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_saga_verify_vs_manual_saga_success": {
+      "mean_difference_A_minus_B": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    },
+    "manual_saga_verify_vs_manual_saga_actions": {
+      "mean_difference_A_minus_B": 0.505051,
+      "ci95": [
+        0.505051,
+        0.505051
+      ],
+      "n_seeds": 40,
+      "bootstrap_draws": 10000
+    }
+  },
+  "limitations": [
+    "synthetic Saga simulator; not production tools or real Agent traces",
+    "finite structured controller genome; not general program synthesis",
+    "three workflow templates only",
+    "test seeds disjoint from prior pilots",
+    "no ARWM or RSI closed-loop experiment"
+  ]
+}
