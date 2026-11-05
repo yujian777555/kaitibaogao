@@ -589,3 +589,26 @@ cDLED-P3M 与 CGOMEA 是 static-data adaptation，不是原论文完整复现；
 
 ### OPEN
 128-block 拟合失败、additive_null 的 AUPRC 约定、random slopes/overdispersion、多档效应强度、联合 40 变量全图、缺失强基线、conservative min vs M3-only 的预注册取舍，均未解决。若重试，必须使用新的独立 held-out seeds，不得复用 3000–3039 作确认性 test。
+
+
+## 决策 D-047：TCAIL NO-GO 后重新评估毕业论文主线（2026-11-05）
+
+### 事实依据
+TCAIL R1 Estimator Gate 已失败：TCAIL q macro-AUPRC 0.6736 vs standardized 0.7732，配对差 -0.0996，95% CI [-0.1139,-0.0858]；FOS F1 0.373 vs standardized 0.729；calibration slope 0.130。Downstream GOM 未运行。不能声称 TCAIL 改善演化搜索。
+
+### 决定
+1. TCAIL 不再作为毕业论文核心创新点；保留其完整负结果和代码/数据。
+2. 旧 CI-GOM linkage 接口依赖 TCAIL，继续 FROZEN，不按旧规格实施。
+3. 新主线候选调整为“面向状态化工具型 LLM Agent 的故障恢复策略演化与递归自我改进”。
+4. 两个核心候选：(a) 状态感知、契约约束的恢复策略演化；(b) 故障场景—恢复策略双种群协同演化。
+5. 第三个候选跨任务恢复策略迁移仅作储备，前两项通过独立 Gate 后再审查。
+6. RSI 体现为 Agent 从自身执行失败与恢复轨迹更新后续策略版本，并在未来任务上验证递归改进；LLM backbone 可固定通过 API 使用，EC 搜索结构化策略基因型。
+7. 不把 NSGA-III、Pareto、通用 prompt evolution、blame-aware mutation、失败记忆检索、事务 runtime 单独称为创新。
+
+### 相关工作约束
+GEPA (ICLR 2026)、EvoTool (ACL 2026)、Q-Evolve (ICML 2026)、AgentEvo (2026)、GRSE (preprint)、Sentry (preprint)、AgentDebug/PROBE、ToolMaze、ReliabilityBench、Cordon、DelAct 已覆盖通用 agent evolution、credit assignment、failure recovery、fault evaluation 或 transactional runtime 的多个方面。候选方法必须以状态化副作用工具环境中的可执行恢复控制器约束演化及故障场景—策略协同演化为具体切入点；新颖性仍需机制级审查，不能宣称空白已证实。
+
+### 下一步
+只做相关工作机制差异矩阵、状态/动作/硬不变量形式化和 Pilot A：手工策略与 oracle policy 上界测试。若 oracle 不优于简单 retry/verify，停止方向；若普通策略已达到 oracle，也停止。Pilot A 通过后再比较 random search、standard GA/GP、NSGA-II/III 和 proposed contract-aware variation。Pilot B 有证据后才做双种群协同演化。
+
+完整评估见 44_THESIS_INNOVATION_REASSESSMENT_POST_TCAIL_NO_GO.md。当前新方向状态为 HOLD / NOT IMPLEMENTED / NOT VALIDATED；不启动大规模实验，不训练基模，不把研究计划当成创新成果。
