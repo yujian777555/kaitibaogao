@@ -1,0 +1,43 @@
+name: Pilot B3 workflow-level evolutionary search
+on:
+  push:
+    branches: [pilot-b3-saga-evolution]
+    paths:
+      - "experiments/pilot_b3_saga_evolution/pilot_b3.py"
+      - "experiments/pilot_b3_saga_evolution/test_pilot_b3.py"
+      - ".github/workflows/pilot-b3-saga-evolution.yml"
+      - "experiments/pilot_b2_multistep_saga/pilot_b2.py"
+  pull_request:
+    paths:
+      - "experiments/pilot_b3_saga_evolution/pilot_b3.py"
+      - "experiments/pilot_b3_saga_evolution/test_pilot_b3.py"
+      - ".github/workflows/pilot-b3-saga-evolution.yml"
+      - "experiments/pilot_b2_multistep_saga/pilot_b2.py"
+permissions:
+  contents: write
+jobs:
+  pilot-b3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pilot-b3-saga-evolution
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run B3 regression and leakage tests
+        run: python -m unittest discover -s experiments/pilot_b3_saga_evolution -p "test_*.py" -v
+      - name: Run fixed-budget evolutionary search
+        run: python experiments/pilot_b3_saga_evolution/pilot_b3.py
+      - name: Commit reproducible B3 results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/pilot_b3_saga_evolution/results/summary.json experiments/pilot_b3_saga_evolution/results/test_policy_episodes.csv
+          if git diff --cached --quiet; then
+            echo "No result changes."
+          else
+            git commit -m "Record Pilot B3 Saga evolutionary search results"
+            git push origin pilot-b3-saga-evolution
+          fi
