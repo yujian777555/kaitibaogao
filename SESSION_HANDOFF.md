@@ -1582,14 +1582,14 @@ Pilot A-2：
 - 4 个双工具任务 × 9 个故障族 × 30 seeds；6 种策略，每种 1,080 episodes；
 - contract-aware success 0.7222、safe 1.0、invariant violation 0；oracle diagnostic success 0.7778、safe 1.0；
 - 5.56pp gap 是探索性模拟器信号，不是显著性或 EC 增益；
-- CI run 42030194929：12/12 tests passed；
+- CI run 42030194929 与后续 run 42030392313 均成功；最新 run 42030392313 完成 regression tests、Pilot A/A-2 和 artifact upload（pilot-a2-summary，ID 13415632289）；
 - 主要缺陷：任务内工具共享故障族，且没有 held-out task/fault composition。
 因此只 CONDITIONAL GO 到 Pilot A-3，不启动 A800。
 
 ### Pilot A-3 本轮交付
 - `47_PILOT_A3_PROTOCOL.md`：冻结协议与 Pilot B 门禁；
 - `experiments/pilot_a_recovery/pilot_a3.py`：三步 saga、每工具独立 fault vector、不同工具幂等/补偿契约、partial commit、delayed visibility、compensation failure、逆序补偿、七种策略、held-out cluster bootstrap；
-- `experiments/pilot_a_recovery/test_pilot_a3.py`：13 项回归测试；
+- `experiments/pilot_a_recovery/test_pilot_a3.py`：15 项回归测试；
 - `experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md`：实现范围和未验证边界；
 - `.github/workflows/pilot-a-recovery.yml`：增加 A-3 simulator step，并上传 JSON 与 episode-level CSV artifact；
 - README、D-051 和本 handoff 已更新。
@@ -1611,7 +1611,7 @@ Pilot A-2：
 
 ### 当前真实状态（务必准确）
 **SPECIFIED：** A-3 协议已冻结。  
-**IMPLEMENTED：** A-3 simulator、13 tests、CI workflow step 和 artifact upload 已写入分支。  
+**IMPLEMENTED：** A-3 simulator、15 tests、CI workflow step 和 artifact upload 已写入分支。  
 **TESTED：** 尚未核验本轮 Actions run；不得声称 13 项测试已通过。  
 **EXPERIMENTAL RESULTS：** 尚未检查 A-3 JSON/CSV；无 A-3 结果。  
 **GATE：** A-3 gate 尚未评估；Pilot B 未获准；A800/ARWM 继续 HOLD。
@@ -1636,6 +1636,6 @@ Pilot A-2：
 
 TCAIL Estimator Gate 已 FAIL / NO-GO，旧 CI-GOM 冻结。新主线是状态化工具型 LLM Agent 的故障恢复策略演化与 RSI。Pilot A-2 只 CONDITIONAL GO to Pilot A-3；A-2 的 5.56pp oracle gap 不是算法证据。A800/ARWM 仍 HOLD。
 
-当前 A-3 已实现，但**CI 和实验结果尚未核验**。你的唯一任务是检查 push-triggered Actions run；确认 13 项测试、A1/A2/A3 执行和 artifacts 上传。成功后下载 JSON/CSV 并独立重算，验证 6,678 行、每策略 954 episodes、split、配对和 fault-vector 语义；失败则修复并重跑。最后严格按 47 号预注册 gate 判断是否进入 Pilot B。
+当前 A-3 已实现，但**CI 和实验结果尚未核验**。你的唯一任务是检查 push-triggered Actions run；确认 15 项测试、A1/A2/A3 执行和 artifacts 上传。成功后下载 JSON/CSV 并独立重算，验证 6,678 行、每策略 954 episodes、split、配对和 fault-vector 语义；失败则修复并重跑。最后严格按 47 号预注册 gate 判断是否进入 Pilot B。
 
 不得将实现写成测试通过，不得将 A-3 模拟器结果写成真实 Agent 证据，不得提前启动 Pilot B、A800/ARWM、真实 LLM API 或双种群协同演化。每轮继续更新 README、05_DECISION_LOG、SESSION_HANDOFF 并核验远端。
