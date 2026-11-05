@@ -540,3 +540,12 @@ CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作�
 **D-051：当前单操作策略 grammar 的 EC 创新 NO-GO。** 搜索空间过于简单，随机搜索已能达到与 GA/契约保持 GA/NSGA-II-style hybrid 相同的结果。当前 NSGA-II 是 hybrid（nondominated survival + scalar mating tournament），不是 canonical reproduction。
 
 下一步只考虑多步骤跨工具事务 Pilot B2：订单履约（库存预留→订单创建→账务记账）、预约（时段预留→押金→确认）、退货（取消订单→释放库存→退款）。研究跨步骤部分提交、依赖关系、逆序补偿、幂等键、延迟读和补偿失败。先检查强 Saga/规则控制器与 Oracle 的差距；有剩余优化空间后再验证 EC。A800/ARWM 仍 HOLD。
+
+
+## 2026-11-05：Pilot B2 多步骤跨工具 Saga 恢复实验
+
+新增 experiments/pilot_b2_multistep_saga/：订单履约、预约确认、退货退款三个三步工作流；11 类故障/补偿故障；故障注入覆盖三个工作流步骤；5 种策略，共 19,800 policy-episodes。GitHub Actions run 42024900989：13 项回归/防泄漏测试及完整矩阵均成功。
+
+主要结果：contract-resume Saga task success 0.545455、safe resolution 1.0、invariant violation 0；与诊断 Oracle 成功/安全指标持平，平均 tool actions 4.1010 vs Oracle 3.6061。blind retry violation 0.242424；verify-then-retry violation 0.080808；rollback-on-ambiguous 安全但 task success 0。
+
+**D-052：多步骤 Saga 环境有实质恢复问题，但尚无 EC 增益证据。** CONDITIONAL GO for Pilot B3 workflow-level evolutionary search；A800/ARWM 仍 HOLD。B3 必须使用新 seeds，比较强 contract-resume Saga、random valid FSM、standard GA/GP、contract-preserving GA/GP、canonical NSGA-II/III；安全违规为硬约束，task success 不低于 Saga baseline，再优化调用/等待成本。若随机搜索达到强手工策略或 EC 无稳定增益，停止 EC 创新主张。
