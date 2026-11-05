@@ -526,7 +526,7 @@ TCAIL Estimator Gate 已失败，旧 TCAIL/CI-GOM 主张冻结；当前研究主
 新增：
 - `47_PILOT_A3_PROTOCOL.md`：冻结的 A-3 任务/故障分层、预算、对照策略和 Pilot B 门禁；
 - `experiments/pilot_a_recovery/pilot_a3.py`：独立 per-tool fault vector、三步 saga、partial commit、delayed visibility、compensation failure、public policy facade、held-out slices 和 cluster bootstrap；
-- `experiments/pilot_a_recovery/test_pilot_a3.py`：13 项回归测试；
+- `experiments/pilot_a_recovery/test_pilot_a3.py`：15 项回归测试；
 - `experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md`：实现范围和验证边界；
 - `.github/workflows/pilot-a-recovery.yml`：CI 增加 A-3 运行和 episode-level JSON/CSV artifact。
 
