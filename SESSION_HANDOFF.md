@@ -1489,3 +1489,53 @@ C. 补强缺失基线。
 下一步唯一任务：机制级文献差异矩阵 + Pilot A。先定义最小 stateful tool simulator、effect states、failure signatures、合法动作和硬不变量；实现 5–8 个手工恢复策略及 oracle 上界；配对运行并判断是否存在足够策略改进空间。若 oracle 不优于简单 retry/verify，停止。Pilot A 通过后才比较 random search、standard GA/GP、NSGA-II/III 和 contract-aware variation；再通过后才考虑双种群协同演化。
 
 相关工作必须比较 GEPA、EvoTool、Q-Evolve、AgentEvo、GRSE、Sentry、AgentDebug/PROBE、ToolMaze、ReliabilityBench、Cordon、DelAct。LLM backbone 可固定并通过 API 使用；演化对象是结构化恢复策略。不得训练基模或启动无关模块。保存原始轨迹、配置、种子和 per-seed 结果，并维护 README、决策日志与 handoff。
+
+
+## 45. A800 训练候选与 Pilot A 首轮接管（2026-11-05）
+
+### 当前基线
+- 工作分支：pilot-a-stateful-recovery（从 683b3fe7fc52c86e917d523fdc6bbb13abbfd653 建立）
+- 最新主线：TCAIL NO-GO；新方向见 44_THESIS_INNOVATION_REASSESSMENT_POST_TCAIL_NO_GO.md
+- 本轮决策：D-048
+- 文献机制审计：46_RELATED_WORK_MECHANISM_AUDIT_ARWM.md
+- Pilot A 代码与结果：experiments/pilot_a_recovery/
+
+### A800 训练候选
+ARWM（Agent Recovery World Model）：主 LLM 继续走 DeepSeek API；A800 训练辅助模型预测工具动作后的 effect-state、side-effect/invariant risk、postcondition 和 recovery outcome。训练数据应来自 simulator-grounded 同状态多动作反事实执行。ARWM 仅辅助候选策略筛选；真实 simulator rollout 才是最终 fitness 与安全门禁。该候选尚未实现/验证。
+
+### 相关工作关键限制
+- CoMAP (EMNLP 2026) 已闭环共演化 textual world model 与 Agent policy；其公开代码的 world model 以当前文本状态、目标、历史和动作预测下一文本状态，并用真实 next-state CE + teacher-logit distillation 训练。
+- HarnessMDP 已从离线 rollout 学习冻结 LLM 的外部结构化控制器。
+- TRACE/SENTINEL 已覆盖失败轨迹驱动的能力训练/目标任务生成。
+- EvoTool 已覆盖 blame-aware tool policy mutation 与 diversity selection。
+因此不得声称通用 world model、失败驱动训练、冻结 LLM controller 或工具策略进化本身新颖。ARWM 差异只能是配对反事实动作效果数据 + 结构化副作用风险/后置条件联合预测 + 校准不确定性门控 + 对约束 EA 固定真实 rollout 预算收益；须通过直接强基线验证。
+
+### Pilot A 首轮结论
+7 fault families × 10 deterministic parameter seeds；6 policies × 70 episodes。timeout-before-dispatch、timeout-after-commit、delayed-visibility 对策略暴露同一 TIMEOUT 观测，隐藏子类型仅 oracle 可见。
+- state-aware handcrafted：success 0.8571、safe resolution 1.0、invariant violation 0、mean actions 3.0714；
+- oracle upper bound：success 0.8571、safe resolution 1.0、violation 0、mean actions 1.5；
+- blind retry：success 0.1429、violation 0.4286。
+
+判断：CONDITIONAL HOLD。当前简单场景中手工规则已达到 oracle 成功/安全表现，只有动作效率差距；这不是足以启动大规模 EA 或训练 ARWM 的证据。已完成五项关键状态转移独立回归断言；仓库 pytest 文件尚未通过 GitHub Actions 实际运行。实验是探索性确定性模拟器，不是确认性统计证据。
+
+### 下一步唯一任务：bounded Pilot A-2
+增强任务复杂性，不得泄漏隐藏状态：
+1. 多工具不同幂等性/补偿契约；
+2. 同公开 TIMEOUT 下多个潜在执行结果与复合故障；
+3. 随机化读可见延迟、部分提交范围和补偿可用性；
+4. 任务族与故障组合族分离的 train/validation/held-out；
+5. 对比 5–8 个可执行手工策略和 oracle，报告成功、安全、重复副作用、成本和 worst-group。
+
+若强手工策略仍达到 oracle 成功/安全并接近成本，停止恢复策略路线。若仍有清晰可行策略空间，先做标准 GA/GP 与 contract-aware EA 对照。只有 ARWM 在 action-effect/risk 预测上超越 LightGBM/MLP，并且在固定真实 rollout 预算下提升 EA，才使用 A800 训练 ARWM。
+
+不得启动 A800 训练、真实 LLM API、完整 EC 或 Co-evolution，直到 Pilot A-2 通过预注册 Gate。保留 kaitibaogao 为唯一毕业论文仓库。
+
+### 可复制接班提示词
+
+你是 yujian777555/kaitibaogao 的研究 Executor。先核验分支 pilot-a-stateful-recovery 和 main 的 HEAD；读取 README、D-047/D-048、SESSION_HANDOFF 第 44/45 节、44 号重评报告、46 号文献机制审计、Pilot A 代码/测试/结果。
+
+当前 TCAIL = NO-GO。新方向是 stateful tool Agent recovery policy evolution + RSI；A800 ARWM 是条件候选。CoMAP、HarnessMDP、TRACE、SENTINEL、EvoTool 已覆盖相邻关键机制，不能声称泛化世界模型/失败训练/策略进化新颖。
+
+Pilot A 首轮已显示：state-aware 手工策略 success 0.8571、safe resolution 1.0、violation 0，与 oracle 的成功安全表现持平；oracle 只在动作成本上更低。因此当前是 CONDITIONAL HOLD，禁止直接开始 A800 训练或完整 EC。
+
+本轮只执行 bounded Pilot A-2：增加多工具幂等契约、潜在/复合故障、读可见延迟和补偿差异，冻结可观察接口与 held-out 划分；先比较手工策略与 oracle。若强手工策略仍匹配 oracle，则停止该方向。只有证明剩余策略空间后才比较 GA/GP 与 contract-aware EA；只有模型超越 LightGBM/MLP 且改善固定真实 rollout 预算下的 EA，才训练 ARWM。维护原始数据、每 seed 结果、配置、README、决策日志和 handoff。不要训练基模，不要调用真实 API，不要把研究计划当作实验成果。
