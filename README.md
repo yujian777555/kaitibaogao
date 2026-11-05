@@ -2,8 +2,8 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** 开题研究 / 文献系统检索与机制审查  
-**状态日期：** 2026-11-04
+**当前阶段：** Pilot A-3 simulator implementation / CI validation pending  
+**状态日期：** 2026-11-05
 
 ## 1. 项目边界（必须遵守）
 
@@ -517,3 +517,19 @@ CoMAP (EMNLP 2026) 已是直接相关强工作：文本世界模型预测动作�
 
 ## Pilot A-2 首轮（2026-11-05）
 已实现四类双工具任务、九类故障（含 timeout+stale-read、partial-commit+rate-limit）、六种策略和 30 个参数种子，共 1,080 episodes/策略、6,480 policy episodes。12/12 回归测试通过，GitHub Actions run 42030194929 成功。contract-aware 策略 success 0.7222、safe 1.0、invariant violation 0；oracle diagnostic success 0.7778、safe 1.0。与 oracle 有 5.56pp 差距，初步显示仍有优化空间，但不是统计显著性或 EC 收益证据。限制：每个任务两工具目前共享同一故障族，seed 只改变延迟/限流参数，无真正 held-out task/fault families。结论：CONDITIONAL GO 到 Pilot A-3；暂不训练 ARWM/A800。
+
+
+## 2026-11-05：Pilot A-3 已实现，等待 CI 与结果审计
+
+TCAIL Estimator Gate 已失败，旧 TCAIL/CI-GOM 主张冻结；当前研究主线为状态化工具型 Agent 的故障恢复策略演化与 RSI。Pilot A-2 的 CONDITIONAL GO 只授权进入 A-3 simulator refinement，不授权 A800 训练或算法创新结论。
+
+新增：
+- `47_PILOT_A3_PROTOCOL.md`：冻结的 A-3 任务/故障分层、预算、对照策略和 Pilot B 门禁；
+- `experiments/pilot_a_recovery/pilot_a3.py`：独立 per-tool fault vector、三步 saga、partial commit、delayed visibility、compensation failure、public policy facade、held-out slices 和 cluster bootstrap；
+- `experiments/pilot_a_recovery/test_pilot_a3.py`：13 项回归测试；
+- `experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md`：实现范围和验证边界；
+- `.github/workflows/pilot-a-recovery.yml`：CI 增加 A-3 运行和 episode-level JSON/CSV artifact。
+
+冻结预算：每种策略 954 episodes（144 train、120 validation、690 held-out），7 种策略共 6,678 policy episodes；所有策略共享 scenario IDs、seeds 和 fault realizations。Held-out 拆成 task-only、fault-only、joint shift 三类。
+
+**当前真实状态：** A-3 协议、模拟器和测试已写入分支；尚未核验本轮 GitHub Actions 运行结果，尚无 A-3 实验结果，不能声称测试通过或策略有效。下一步先检查 CI 与 artifacts，独立重算每个 episode 和分层指标，再按 47 号协议决定是否进入 Pilot B。A800/ARWM、真实 LLM API 和双种群协同演化继续 HOLD。
