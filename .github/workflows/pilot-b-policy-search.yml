@@ -1,0 +1,41 @@
+name: Pilot B contract-constrained evolutionary search
+on:
+  push:
+    branches: [pilot-b-policy-search]
+    paths:
+      - "experiments/pilot_b_policy_search/**"
+      - ".github/workflows/pilot-b-policy-search.yml"
+      - "experiments/pilot_a2_multitool/pilot_a2.py"
+  pull_request:
+    paths:
+      - "experiments/pilot_b_policy_search/**"
+      - ".github/workflows/pilot-b-policy-search.yml"
+      - "experiments/pilot_a2_multitool/pilot_a2.py"
+permissions:
+  contents: write
+jobs:
+  pilot-b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pilot-b-policy-search
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run Pilot B regression tests
+        run: python -m unittest discover -s experiments/pilot_b_policy_search -p "test_*.py" -v
+      - name: Run fixed-budget search and held-out evaluation
+        run: python experiments/pilot_b_policy_search/pilot_b.py
+      - name: Commit reproducible Pilot B results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/pilot_b_policy_search/results/summary.json experiments/pilot_b_policy_search/results/test_policy_episodes.csv
+          if git diff --cached --quiet; then
+            echo "No result changes."
+          else
+            git commit -m "Record Pilot B evolutionary search results"
+            git push origin pilot-b-policy-search
+          fi
