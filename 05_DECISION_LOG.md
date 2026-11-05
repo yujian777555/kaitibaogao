@@ -651,7 +651,7 @@ CONDITIONAL HOLD。当前场景中手工策略已达到 oracle 的成功/安全�
 
 结果：contract-aware success 0.7222、safe 1.0、invariant violation 0、unresolved 0.0556、平均动作 5.5167；oracle diagnostic success 0.7778、safe 1.0、violation 0、平均动作 3.7778。固定等待策略 success 0.5815、安全 0.9148、violation 0.0852；blind retry success 0.1111、violation 0.4444。contract-aware 与 oracle 的 success 差距 5.56pp，提示存在剩余空间，但尚未进行统计检验，也没有任何 EC 对照。
 
-GitHub Actions run 42030194929：12/12 tests passed，Pilot A baseline 和 Pilot A-2 simulator 均成功。早先首次 A-2 CI 曾因分层汇总函数对单组数据误调用全策略汇总导致 ZeroDivisionError；已修复并重新运行成功。
+GitHub Actions run 42030194929 与后续 run 42030392313 均成功；最新 run 42030392313 的 job logs 显示 regression tests、Pilot A baseline、Pilot A-2 simulator 和 artifact upload 全部完成，上传 artifact `pilot-a2-summary`（ID 13415632289）。早先首次 A-2 CI 曾因分层汇总函数对单组数据误调用全策略汇总导致 ZeroDivisionError；已修复并重新运行成功。
 
 **决定：CONDITIONAL GO 到 Pilot A-3 simulator refinement；NO-GO for A800 training now。** 当前 A-2 的主要缺陷：每个任务中的两个工具共享同一故障族；参数种子只变化延迟/限流；没有真正 held-out task/fault composition。下一步实现每工具独立故障分配、跨步骤依赖和 held-out task/fault composition，再用强手工策略、随机策略搜索、GA/GP、contract-aware EA 做相同预算比较。只有 EC 在 held-out 上优于强手工策略，才考虑 A800/ARWM。
 
@@ -664,7 +664,7 @@ Pilot A-2 的 contract-aware success 为 0.7222，oracle diagnostic 为 0.7778�
 ### 本轮交付
 - `47_PILOT_A3_PROTOCOL.md`：冻结任务族 × 故障组合族的因子化 train/validation/held-out split、同场景配对预算、指标和 Pilot B 门禁。
 - `experiments/pilot_a_recovery/pilot_a3.py`：六个三步任务族、每工具独立故障向量、十种工具契约、部分提交、延迟可见、补偿失败、saga 逆序补偿、七种手工/诊断策略、episode CSV/JSON 与 held-out cluster bootstrap。
-- `experiments/pilot_a_recovery/test_pilot_a3.py`：13 项回归测试。
+- `experiments/pilot_a_recovery/test_pilot_a3.py`：15 项回归测试。
 - `experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md`：实现与验证边界。
 - GitHub Actions 已增加 A-3 运行和 episode-level artifact 上传步骤。
 
