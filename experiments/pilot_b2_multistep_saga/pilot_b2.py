@@ -137,6 +137,8 @@ class Env:
         if action=="COMPENSATE_CURRENT":
             c=s["steps"][s["step_index"]]
             self.actions+=1
+            if self.current_outcome == "NONE":
+                return "NO_CURRENT_EFFECT"
             if (self.current_outcome in ("COMMITTED","PARTIAL") and c["compensable"]
                     and s["current_comp_available"]):
                 self.current_outcome,self.current_effects="NONE",0
@@ -174,13 +176,24 @@ class Env:
 
     def result(self):
         success=self.current_outcome=="WORKFLOW_COMPLETE" and not self.violation
-        safe=success or self.rollback_complete or self.escalated
+        rollback_complete=(self.current_outcome=="NONE" and not self.previous_stack and not self.violation)
+        safe=success or rollback_complete or self.escalated
         return {
             "task_success":int(success),"safe_resolution":int(safe),
             "invariant_violation":int(self.violation),"unresolved":int(not safe),
-            "escalated":int(self.escalated),"rollback_complete":int(self.rollback_complete),
+            "escalated":int(self.escalated),"rollback_complete":int(rollback_complete),
             "tool_actions":self.actions,"wait_units":self.wait_units,
         }
+
+def rollback_from_observations(env, obs):
+    failed = env.act("COMPENSATE_CURRENT") == "COMPENSATION_FAILED"
+    for idx in range(obs["step_index"] - 1, -1, -1):
+        result = env.act("COMPENSATE_PREVIOUS", index=idx)
+        if result != "COMPENSATED":
+            failed = True
+            break
+    if failed:
+        env.act("ESCALATE")
 
 def run_policy(spec,policy):
     env=Env(spec);obs=env.observe();c=obs["current_operation"];signals=set(obs["signals"])
@@ -191,13 +204,12 @@ def run_policy(spec,policy):
             env.act("ESCALATE")
         return result
     def handle_partial():
-        env.rollback()
-    def resume_if_committed():
-        if env.current_outcome=="COMMITTED":
-            env.act("RESUME")
+        rollback_from_observations(env, obs)
+    def resume():
+        env.act("RESUME")
     if policy=="blind_retry":
         result=env.act("RETRY_CURRENT")
-        if result in ("COMMITTED","ALREADY_COMMITTED"):resume_if_committed()
+        if result in ("COMMITTED","ALREADY_COMMITTED"):resume()
         elif result=="ALREADY_PARTIAL":handle_partial()
         elif result=="DUPLICATE":env.act("ESCALATE")
         else:
@@ -212,7 +224,7 @@ def run_policy(spec,policy):
             if result in ("COMMITTED","ALREADY_COMMITTED"):resume_if_committed()
             elif result=="DUPLICATE":env.act("ESCALATE")
             else:
-                env.rollback();env.act("ESCALATE")
+                rollback_from_observations(env,obs);env.act("ESCALATE")
     elif policy=="contract_resume":
         if not obs["permission"]:
             env.rollback();env.act("ESCALATE")
@@ -246,10 +258,8 @@ def run_policy(spec,policy):
                     env.rollback();env.act("ESCALATE")
     elif policy=="rollback_on_ambiguous":
         if c["consistency"]=="eventual":env.act("WAIT",c["max_visibility_delay"])
-        status=env.act("VERIFY_CURRENT")
-        if status=="NOT_FOUND":
-            env.current_outcome="NONE"
-        env.rollback()
+        env.act("VERIFY_CURRENT")
+        rollback_from_observations(env,obs)
     elif policy=="oracle_upper_bound":
         if not obs["permission"]:
             env.rollback();env.act("ESCALATE")
@@ -257,11 +267,11 @@ def run_policy(spec,policy):
             if not obs["schema_valid"]:env.act("REPAIR_SCHEMA")
             if env.tick<obs["retry_after"]:env.act("WAIT",obs["retry_after"]-env.tick)
             if env.current_outcome=="COMMITTED":env.act("RESUME")
-            elif env.current_outcome=="PARTIAL":handle_partial()
+            elif env.current_outcome=="PARTIAL":env.rollback()
             else:
                 result=retry()
                 if result in ("COMMITTED","ALREADY_COMMITTED"):resume_if_committed()
-                elif result=="ALREADY_PARTIAL":handle_partial()
+                elif result=="ALREADY_PARTIAL":env.rollback()
                 elif not env.escalated:
                     env.rollback();env.act("ESCALATE")
     else:raise ValueError(policy)
