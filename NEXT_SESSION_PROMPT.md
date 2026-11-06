@@ -240,3 +240,39 @@ Pilot A-2's deterministic fault-injection testbed/policy comparison is not itsel
 - Before Pilot B, finish the mechanism-level full-paper review of UndoBench, EvoUndo, EvoTool, LIMBO and the transaction/runtime papers, and compare their policy object, state/effect semantics, search loop, safety verifier, data split and budget.
 - Continue to verify A3 CI/artifacts and independently recompute its results. Pilot B is authorized only if both the A3 pre-registered gate and novelty/baseline review are satisfactory.
 - No A800/ARWM or real LLM API until separately authorized.
+
+
+## 2026-11-06 — D-055: dataset selection and validation design
+
+New plan: 50_DATASET_SELECTION_AND_VALIDATION_PLAN.md.
+
+### Recommended benchmark stack (PROPOSED, NOT FROZEN)
+1. Development/search: current Pilot A-3 deterministic simulator + ToolMisuseBench v0.2 large train split.
+2. Development/tuning: A-3 validation + ToolMisuseBench dev.
+3. Locked external recovery evaluation: ToolMisuseBench public test + UndoBench TEST.
+4. Clean workflow regression only: ThinkingBox-Bench v1.0 or ToolSandbox. ThinkingBox is explicitly evaluation-only and must NOT be used for evolutionary search, tuning, prompt optimization or training.
+
+### ToolMisuseBench details
+- REALM 2026 ACL Anthology: https://aclanthology.org/2026.realm-1.28/
+- Dataset: https://huggingface.co/datasets/sigdelakshey/ToolMisuseBench
+- Code: https://github.com/akgitrepos/toolmisusebench
+- v0.2 large: 6,000 train / 900 dev / 1,200 public-test records; CRUD, retrieval, files, scheduling; clean, timeout, rate-limit, schema-drift, authorization, adversarial faults; task rows include initial_state, tool_schemas, fault_plan, success_criteria, budgets and seed.
+- HF card marks MIT. It says public test has 1,200 records but only 600 output-grounded tasks; audit manifest/evaluator denominator before use.
+- This is a close recovery benchmark, not our novelty. Audit split leakage, task/fault families, semantics, official runner and reproducibility before any Pilot B.
+
+### UndoBench
+- arXiv:2610.05622; 36 workflows / 36 faults / 8 domains; DEV 14 / VALIDATION 10 / TEST 12; paired CONTROL/FAULT with same seeds and effect-history/state oracle.
+- Use TEST only after algorithm freeze; small test workflow count requires cluster-aware statistics.
+
+### ThinkingBox / ToolSandbox
+- ThinkingBox-Bench v1.0: 507 stateful business tasks across five domains, executable final-state/side-effect checks; official card says evaluation-only, so clean regression only, never search/tune.
+- ToolSandbox: stateful tools, implicit dependencies, simulated user, dynamic trajectory evaluation; not a dedicated fault-recovery benchmark, so clean state-dependency regression or explicitly labeled modified fault-injection variant only.
+
+### Critical principle
+This is not ordinary supervised learning from text. Evolutionary controllers must be evaluated by executing rollouts in a deterministic stateful environment. The dataset supplies task definitions, initial states, tool schemas, fault plans and graders; fitness comes from actual environment outcomes.
+
+### Immediate work / gates
+- Do NOT launch Pilot B yet. First verify A-3 Actions and independently recompute JSON/CSV per protocol 47.
+- In parallel, download/pin ToolMisuseBench v0.2 and UndoBench; audit license, manifest/checksums, schema, task/fault leakage, fault semantics and runner.
+- Build a feature coverage matrix: timeout-before/after, late commit, partial mutation, delayed visibility, schema drift, authorization, cross-tool saga, compensation failure, no-readback, idempotency.
+- Only after A-3 pre-registered gate AND benchmark compatibility/novelty gate pass may Pilot B begin. No A800/ARWM or real LLM API until separately authorized.
