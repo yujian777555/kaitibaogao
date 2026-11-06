@@ -13,6 +13,7 @@ from pilot_a3 import (
     PublicToolView,
     build_scenarios,
     make_fault_vector,
+    recover_tool,
     run_episode,
     decide_gate,
 )
@@ -187,6 +188,33 @@ class PilotA3Tests(unittest.TestCase):
         first = make_fault_vector("subscription_ledger_notification", "triple_mixed", 99)
         second = make_fault_vector("subscription_ledger_notification", "triple_mixed", 99)
         self.assertEqual(first, second)
+
+    def test_recover_tool_never_touches_hidden_runtime_fields(self):
+        implementable = (
+            "blind_retry",
+            "verify_then_retry",
+            "fixed_wait_verify",
+            "conservative_escalation",
+            "contract_aware",
+            "saga_aware",
+        )
+        signatures = (
+            ("timeout_before", "TIMEOUT"),
+            ("timeout_after", "TIMEOUT"),
+            ("delayed_visibility", "TIMEOUT"),
+            ("partial_commit", "PARTIAL"),
+            ("rate_limit", "RATE_LIMIT"),
+            ("schema_drift", "SCHEMA"),
+            ("permission_denied", "PERMISSION"),
+        )
+        for policy in implementable:
+            for fault_name, public_error in signatures:
+                runtime = ToolRuntime(
+                    "inventory", fault(fault_name, delay=2, retry_after=2)
+                )
+                first = runtime.execute()
+                self.assertEqual(first, public_error)
+                recover_tool(policy, PublicToolView(runtime), first)
 
 
 if __name__ == "__main__":

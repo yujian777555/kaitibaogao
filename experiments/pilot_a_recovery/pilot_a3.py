@@ -332,7 +332,8 @@ def recover_tool(policy, tool, initial_error):
         if initial_error in ("TIMEOUT", "PARTIAL", "PERMISSION"):
             return False
         if initial_error == "RATE_LIMIT":
-            for _ in range(max(0, tool.retry_after - tool.tick)):
+            # The public view has no runtime clock; the policy counts its own waits.
+            for _ in range(tool.retry_after):
                 tool.wait()
             return accepted(tool.retry())
         if initial_error == "SCHEMA":
@@ -347,7 +348,8 @@ def recover_tool(policy, tool, initial_error):
             tool.repair_schema()
             return accepted(tool.retry())
         if initial_error == "RATE_LIMIT":
-            for _ in range(max(0, tool.retry_after - tool.tick)):
+            # The public view has no runtime clock; the policy counts its own waits.
+            for _ in range(tool.retry_after):
                 tool.wait()
             return accepted(tool.retry())
         if initial_error == "PARTIAL":
