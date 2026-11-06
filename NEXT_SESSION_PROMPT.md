@@ -196,3 +196,17 @@ Can evolutionary computation search executable, contract-constrained recovery co
 
 ### Next action remains unchanged
 The only immediate task is to verify the latest A3 GitHub Actions run, independently recompute its JSON/CSV, and apply the pre-registered A3 gate. Do not start Pilot B or A800/ARWM before that gate.
+
+
+### 2026-11-06 — D-053: thesis-level status clarification
+- Current working title (not frozen): `《面向状态化工具型大语言模型智能体的故障恢复策略演化与递归自我改进方法研究》`.
+- The older interaction-aware title belongs to the failed TCAIL/CI-GOM route and is no longer the current thesis title.
+- Core candidate 1: contract-constrained recovery-policy evolution; EC benefit not yet validated.
+- Core candidate 2: fault-scenario / recovery-policy co-evolution; deferred until candidate 1 passes.
+- Reserve candidate 3: cross-task recovery-policy transfer with capability preservation; frozen.
+- ARWM/A800 is a conditional supporting-model route, not a confirmed independent innovation; HOLD.
+- TCAIL FAIL; Pilot A/A-2 exploratory only; A-2 contract-aware 72.22% vs oracle diagnostic 77.78%, both safe 100%; no EC gain established.
+- Pilot A-3 implemented but CI and raw JSON/CSV not yet audited; Pilot B not started; no multi-round RSI benefit established.
+- Existing opening drafts V0.1–V0.3 are based on TCAIL/CI-GOM and are not valid current proposal drafts as-is. `04_OPENING_REPORT_PLAN.md` now carries a warning and current direction update.
+- Latest branch content before this prompt sync: `9f453fbd9afe78cc410ecc86293b8d1eac0af54f`. This is a historical baseline only; next session must query branch HEAD dynamically.
+- Current stage: pre-proposal research validation, not final thesis writing. The immediate next task remains A-3 Actions verification and independent raw-data audit.
