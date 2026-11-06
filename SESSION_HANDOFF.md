@@ -1703,3 +1703,21 @@ Pilot A-2 的 fault-injection testbed 本身不具新颖性；A-3 作为内部�
 
 ### 下一任务（Pilot B 前置门）
 完成 UndoBench、EvoUndo、EvoTool、LIMBO 和 Cordon/Atomix/SagaLLM 的全文机制级对照，并核验 A3 CI/原始数据；只有 A3 预注册 Gate 与 novelty/baseline review 均通过，才授权 Pilot B。
+
+
+## 51. 数据集官方信息复核与下一步执行计划（2026-11-06）
+
+执行计划见 51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md；数据选择见 50_DATASET_SELECTION_AND_VALIDATION_PLAN.md。
+
+### 官方信息已核验
+- ToolMisuseBench REALM 2026：seed-42 v0.2 large 为 6,000 train / 900 dev / 1,200 public-test records；HF 数据卡明确其中 600 条为 output-grounded tasks，最终评分分母需审计官方 evaluator。论文报告 Parser+Repair task success 0.767、conditional recovery success 0.736、recovery-disabled task success 0.158；这些是论文数值，不是本项目复现结果。
+- UndoBench 当前数据卡版本 v1.0.1：36 workflows，DEV 14 / validation 10 / TEST 12；数据/spec CC BY 4.0，软件 Apache 2.0；frozen TEST 需要显式 opt-in。
+- ThinkingBox-Bench v1.0：507 tasks / 5 domains；evaluation-only，不得用于演化搜索或调参，只能方法冻结后做 clean regression。
+
+### A-3 当前状态（严格按仓库证据）
+47 号协议为 PRE-REGISTERED / NOT RUN；A3 implementation status 为 IMPLEMENTED / NOT YET VALIDATED BY CI / RESULTS NOT YET RUN OR ACCEPTED。15 项测试和 artifact upload workflow 已编写，但未核验实际 Actions run、日志和 artifact。因此 A-3 未通过，Pilot B 不得启动。
+
+### 下一步唯一执行优先级
+Phase A：找出 A-3 对应 Actions run，核验 head SHA、job/step、15 项测试和 simulator run；下载 JSON/CSV artifact，计算 hashes，独立重算全部指标并应用 47 号 Gate。并行开展 ToolMisuseBench / UndoBench revision、manifest、license、split leakage、evaluator denominator 与故障覆盖审计。A-3 Gate、数据兼容 Gate、adapter smoke 均通过后，才起草 Pilot B 预注册协议。
+
+HOLD：Pilot B、UndoBench TEST、ThinkingBox 优化、A800/ARWM、真实 LLM API。每次接管会话继续维护 NEXT_SESSION_PROMPT.md。
