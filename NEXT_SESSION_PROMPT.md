@@ -2,7 +2,7 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-06（Phase A 独立复核完成轮）**  
+**最后维护日期：2026-11-06（Phase B 完成 + A-3b 设计完成轮）**  
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
@@ -92,19 +92,17 @@
 - RESULTS：A-3 已运行并经独立复核（`PILOT_A3_INDEPENDENT_REAUDIT.md`）：6,678 episodes、结构/配对/split/语义全部通过审计、JSON 与 CSV 零偏差、artifact 哈希齐全、本地重跑确定性一致。
 - GATE：**A-3 预注册 Gate = HOLD（HOLD_REVIEW_FAILURE_BOUNDARIES）**。三条件中安全条件满足（各 slice 零违规），但 oracle−saga 成功率差 0.0（要求 ≥0.05）、bootstrap CI [0.0,0.0]（要求下界 >0）；gap≤0.02 但动作成本差 +34.6%>10%，按 47 号原文为 HOLD。**Pilot B 未获准**；A800/ARWM、真实 LLM API、双种群协同演化继续 HOLD。
 
-### 4. 当前唯一下一任务：Phase B 数据集审计 + A-3b 新预注册设计
+### 4. 当前唯一下一任务：A-3b 独立审查 → 预注册冻结 → 实现（分类器/场景生成器/adapter）
 
-Phase A（A-3 独立复核）已完成，结论 HOLD，详见 `PILOT_A3_INDEPENDENT_REAUDIT.md` 与 D-057。不要重跑 A-3，不要启动 Pilot B。按顺序执行：
+Phase A（A-3 复核，Gate=HOLD）与 Phase B（数据集审计）均已完成，A-3b 设计草案见 `55_PILOT_A3B_RESEARCH_DESIGN.md`。不要重跑 A-3，不要启动 Pilot B，不要运行 A-3b（未预注册）。按顺序执行：
 
-1. 重新核验远端 `pilot-a-stateful-recovery` 和 `main` HEAD、ahead/behind、工作树状态。
-2. **Phase B（51 号计划 §3）：公开数据集只读审计**——
-   - ToolMisuseBench v0.2 large：固定 HF dataset commit/revision，下载 train/dev/test_public 与 manifest/freeze/quality 文件，全部算 SHA-256；核验 6,000/900/1,200 行数、task_id 唯一性、600 output-grounded 子集、domain×fault_family 分布、官方 evaluator 分母语义（0.767/0.736/0.158 是论文报告值，不是我们的复现值）；做 train/dev/test 的 task/fault family 泄漏审计。
-   - UndoBench v1.0.1：固定数据与官方代码 commit；核验 14/10/12 split、CC BY 4.0 / Apache 2.0、paired CONTROL/FAULT 语义、指标实现；TEST 锁箱，只用 DEV/validation 做接口 smoke。
-   - ThinkingBox-Bench v1.0：仅记录 507 tasks/5 domains 与 evaluation-only 约束。
-3. **A-3b 新预注册协议设计（先设计、后批准，不得直接开跑）**——针对 A-3 定位的失败边界：(a) 可行性分层的评价定义（区分结构性不可行场景）；(b) 补充可行的 held-out 故障组合族或明确可行/不可行标注；(c) 动作成本作为独立优化维度的评价方案。新协议必须保留 A-3 结果不动、held-out 继续锁箱，预注册后才允许运行。
-4. 产出 Phase B 交付：DATASET_LOCK_MANIFEST.json、BENCHMARK_COMPATIBILITY_MATRIX.md、SPLIT_LEAKAGE_AUDIT.md、LICENSE_AND_PROVENANCE.md（51 号计划 §3 规定）。
-5. 只有 A-3b Gate 通过 + 数据兼容 Gate + adapter smoke 通过，才可起草 Pilot B 预注册。Pilot B 必须证明 EC 超越强手工恢复策略与 Parser+Repair 等强基线，而不是只超过 blind retry。
-6. A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 优化、双种群协同演化均需独立前置证据和明确授权，不得自动启动。
+1. 重新核验远端 `pilot-a-stateful-recovery` 与 `main` HEAD、ahead/behind、工作树、CI 状态。
+2. **对 55 号设计做独立审查**：可恢复性四分类的可判定性、指标分母纪律、统计方案（cluster bootstrap+置换+Holm）、预算公平性、与 49 号新颖性边界的一致性、消融能否分离 A/B 机制。发现问题先改设计文档，不带病冻结。
+3. **预注册冻结**：场景生成器规格（含 R3/R4 分层比例 3:1 主设定与 1:1、5:1 敏感性）、τ_min=saga_aware 基线、成本计价表、seed 清单、rollout 预算、场景清单哈希。冻结后经用户批准才允许运行。
+4. **实现**（批准后）：可恢复性分类器（评估器侧，含一致性回归测试与 10% 人工抽检）、场景生成器扩展（新组合族含可区分恢复决策点）、FSM 基因组+语义修复算子、反例池。全部沿用 PublicToolView 观察边界（隐藏标签隔离测试保留）。
+5. **Phase C adapter（可与 3 并行）**：ToolMisuseBench `reset()/act()` 与 UndoBench `UndoBenchAgent.run()` 到统一 episode contract 的封装；只用 train/dev/validation smoke（ToolMisuseBench DEV 复现报告已在 `experiments/dataset_audit/`）；UndoBench TEST 与 ToolMisuseBench test_public 继续锁箱。
+6. 运行 A-3b 前置门禁：分类器一致性、泄漏检查脚本、预算表齐备、55 号审查通过。缺一项不得开跑。
+7. Pilot B 预注册草案仅在 A-3b Gate + 数据兼容 Gate + adapter smoke 全过后起草。A800/ARWM、真实 LLM API、UndoBench TEST 执行、ThinkingBox 任何用途、双种群协同演化继续 HOLD，均需独立授权。
 
 ### 5. 强制接管提示词维护制度（不可违反）
 
@@ -338,3 +336,38 @@ New report: `PILOT_A3_INDEPENDENT_REAUDIT.md`. Decision log: D-057.
 
 ### Next session's only task
 Phase B dataset audit (ToolMisuseBench / UndoBench version pinning, manifest/license/split-leakage/evaluator-denominator audit per 51 plan section 3) **plus** drafting a NEW preregistration A-3b addressing the failure boundaries (feasibility-stratified metrics / feasible held-out compositions / action cost as objective). A-3b must be approved before any new run. Pilot B remains blocked until A-3b Gate + dataset compatibility Gate + adapter smoke all pass.
+
+
+## 2026-11-06 — D-058: Phase B dataset audits COMPLETE; A-3b research design drafted
+
+New documents: `52_TOOLMISUSEBENCH_AUDIT.md`, `53_UNDOBENCH_AUDIT.md`, `54_BENCHMARK_COMPATIBILITY_MATRIX.md`, `SPLIT_LEAKAGE_AUDIT.md`, `LICENSE_AND_PROVENANCE.md`, `DATASET_LOCK_MANIFEST.json`, `55_PILOT_A3B_RESEARCH_DESIGN.md`; evidence in `experiments/dataset_audit/`.
+
+### ToolMisuseBench v0.2 large (audited, MIT, HF rev 98eb2871)
+- 6,000/900/1,200 rows verified; file SHA-256 match official manifest exactly. task_id clean across splits.
+- **Scoring denominators decoded from released per-task episodes**: paper 0.767 = TaskSuccess over ALL 1,200 (recomputed 0.7667); 0.736 = conditional recovery over the 993 FAULTED tasks (731/993=0.7362); 0.158 = no-recovery full-split (0.1575). "600 output-grounded" = subset with tool_output_path_equals criteria (scores 0.8783 there vs 0.655 state-grounded) — NOT a headline denominator.
+- **Semantics (official env/fault code)**: all faults fire BEFORE execution (no lost-ACK); envs idempotent/guarded (duplicates impossible); every fault triggers once (on_nth_call=1) so one retry always recovers; NO compensation/idempotency contracts/partial commit/late commit/saga (0 occurrences); two-fault plans never span tools. No structurally unrecoverable scenarios exist.
+- **Parser+Repair = regex instruction parsing + error-code arg repair** (schema alias id↔doc_id↔account_id). Reproduced on DEV (900): TaskSuccess 0.7622, conditional recovery 0.7363; no-recovery 0.1511. MUST be a Pilot B baseline. It is a parser/repair baseline, not a recovery-policy upper bound.
+
+### UndoBench v1.0.1 (audited, CC-BY-4.0 data / Apache-2.0 software, HF rev 4be11518)
+- 36 workflows (14/10/12) fully characterized: 33/36 SCN-LOST-ACK with observability=UNKNOWN_OUTCOME on ALL rows; idempotency_support=false everywhere (duplicates real); IRREVERSIBLE 8, COMPENSATABLE 24; forbidden_effects 22; 19/36 multi-tool. Metrics CRSR/DER/MER/URR/EOR align with our safety-recovery semantics (CRSR conditions on Control success).
+- Harness verified: doctor PASS, smoke PASS (control/fault/oracle/effect-log pipeline), DEV paired run with example agent (14 pairs) computes CRSR/DER/MER correctly. Built-in TEST lock `allow_frozen_test_execution: false`. TEST never executed.
+
+### ThinkingBox-Bench: UNREACHABLE (HF 401 gated/removed; github.com/microsoft/thinkingbox-data 404). Claims (507 tasks, evaluation-only) NOT re-verifiable this round; keep evaluation-only policy; no experiments depending on it.
+
+### Split leakage (SPLIT_LEAKAGE_AUDIT.md)
+- ToolMisuseBench: 72–73 normalized instruction templates shared across splits; toolsets 100% shared → instance-level generalization ONLY.
+- UndoBench: all 8 domains in all splits; test 12/12 homogeneous lost-ACK; tool overlap low (3/20) → workflow-level generalization only.
+- Pilot A-3 remains the only task-family x fault-composition factorized OOD (keep it).
+
+### A-3 gap=0 root cause (55 §0, evidence-based)
+(a) on feasible cells saga_aware already matches oracle; (b) 52.2% of held-out is structurally infeasible (0% for everyone incl. oracle) and dilutes the aggregate; (c) the pre-registered gate values only success, not the real difference (action cost +34.6%); oracle sees only current-step state (not an upper bound). Fix = recoverability stratification + cost objective + re-graduated held-out — NOT deleting hard scenarios.
+
+### A-3b design (55, DRAFT — not approved, not run)
+Recoverability classes R1/R2/R3/R4 defined evaluator-side (never by "did a policy succeed"); stratified metrics (CondRecSucc on R1+R2 only; CorrectEscalation on R3+R4; hard P(violation)=0); two ablatable mechanisms (A contract-preserving operators, B counterexample-guided search); baselines Random Search/GA/GP/NSGA-II/NSGA-III/hand rules/oracle-diagnostic; paired cluster bootstrap + permutation + Holm; explicit stopping rules and pre-registered failure reasons. A-3 held-out retired as confirmation data.
+
+### Status
+- GO: A-3b design review + preregistration freeze (needs user approval before any run); Phase C adapters (train/dev/validation smoke only).
+- HOLD: A-3b execution; Pilot B; A800/ARWM; real LLM API; UndoBench TEST execution; ThinkingBox anything; tuning on any locked split.
+
+### Next session's only task
+Independent review of 55_PILOT_A3B_RESEARCH_DESIGN.md, then preregistration freeze (scenario generator spec, R3/R4 stratification ratio, tau_min, cost table, seeds, budget), then implementation of the recoverability classifier + scenario generator + adapters. No A-3b run before the freeze is approved.

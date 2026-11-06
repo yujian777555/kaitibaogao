@@ -1768,3 +1768,36 @@ gap ≤ 0.02 但动作成本差 +34.63% > 10% → 不构成 NO-GO；按协议"�
 - GO：文档维护；ToolMisuseBench / UndoBench 只读数据集审计（Phase B）；A-3b 协议设计（先批准后运行）。
 - HOLD：Pilot B 演化搜索；用 A-3 held-out 调参；A800/ARWM；真实 LLM API；UndoBench frozen TEST；ThinkingBox 优化。
 - 下一会话唯一任务：Phase B 数据集审计 + A-3b 新预注册设计。维护要求不变：每轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、README.md、05_DECISION_LOG.md 与 51 号计划状态。
+
+
+## 53. Phase B 执行轮：数据集审计完成 + A-3b 设计（2026-11-06）
+
+覆盖 §52.7 的"下一会话任务"。完整证据见 52/53/54 号审计、SPLIT_LEAKAGE_AUDIT.md、LICENSE_AND_PROVENANCE.md、DATASET_LOCK_MANIFEST.json、55_PILOT_A3B_RESEARCH_DESIGN.md；复现与 smoke 证据在 `experiments/dataset_audit/`。
+
+### 53.1 ToolMisuseBench（rev 98eb2871，MIT）
+- 规模实测 6,000/900/1,200；三文件 SHA-256 与官方 manifest 吻合；task_id 跨 split 零重叠。
+- **评分口径解密**（用官方发布的 per-task episodes 独立复算）：0.767=全 1,200 TaskSuccess（复算 0.7667）；0.736=993 条故障任务的条件恢复（731/993=0.7362）；0.158=no-recovery 全量（0.1575）；600 output-grounded 是 `tool_output_path_equals` 子集（0.8783），非头号分母。
+- **语义缺口（env/fault 代码取证）**：故障全在 before_call 拦截（无 lost-ACK）；环境幂等（重复副作用不可能）；故障单次触发（重试必恢复）；无补偿/幂等合同/部分提交/late commit/saga；双故障同工具。无结构性不可恢复场景。
+- **Parser+Repair 逆向**：指令正则解析+错误码修参（别名映射 id↔doc_id↔account_id），无验证/补偿/等待/升级。**DEV 复现**：900 条 TaskSuccess 0.7622、条件恢复 0.7363；no-recovery 0.1511。必须列为 Pilot B 基线（解析强≠恢复强）。
+
+### 53.2 UndoBench（rev 4be11518，CC-BY-4.0 / Apache-2.0）
+- 36 行全量画像：33/36 SCN-LOST-ACK、全部 UNKNOWN_OUTCOME、idempotency_support 全 false、IRREVERSIBLE 8、forbidden_effects 22、19/36 多工具；指标 CRSR/DER/MER/URR/EOR 与我们语义同构（CRSR 条件在 CONTROL 成功）。
+- **harness 实测**：doctor PASS（36 任务/47 工具/沙箱）、smoke PASS（CONTROL/FAULT/oracle/effect-log 全链路）、DEV 14 对示例 agent 跑通指标计算；内置 TEST 锁 `allow_frozen_test_execution: false`；TEST 未执行。
+- 定位：外部泛化验证（TEST 锁箱一次性）+ DEV 24 条接口适配；不做主搜索（样本小且 test 同质 lost-ACK）。
+
+### 53.3 ThinkingBox — 不可达
+HF 401（gated/移除）+ GitHub 404。507 任务/evaluation-only 声称无法复核；继续按 evaluation-only 保守处理，不规划依赖实验。
+
+### 53.4 泄漏审计摘要
+ToolMisuseBench 模板级泄漏（72–73 模板跨 split、工具全重叠）→ 只能主张实例泛化；UndoBench 领域全重叠、test 同质 → 只能主张工作流泛化；A-3 因子化 OOD 保持唯一双因子干净来源。
+
+### 53.5 A-3 gap=0 根因（写入 55 号 §0）
+(a) 可行单元 saga 已达 oracle 水平；(b) held-out 52.2% 结构性死区稀释差异；(c) Gate 只认成功率、效率差异 +34.6% 无预注册地位；oracle 仅当前步、非上界（次因）。修正=可恢复性分层+效率目标+重划 held-out；**不删困难场景**。
+
+### 53.6 A-3b 设计草案（55 号，未批准未运行）
+R1/R2/R3/R4 可恢复性分类（评估器侧判定，与策略/oracle 隔离）；分母纪律（CondRecSucc 只算 R1+R2，R3+R4 计 CorrectEscalation）；硬约束 P(violation)=0；目标 min(C_recovery, C_side-effect, C_intervention)；两个可消融机制（A 契约语义保持算子、B 反例驱动）；基线 Random Search/GA/GP/NSGA-II/NSGA-III/手工规则/oracle 诊断；cluster bootstrap+置换+Holm；停止条件与失败预案预登记；A-3 旧 held-out 退役为历史诊断。
+
+### 53.7 授权状态与下一步
+- GO：55 号独立审查→预注册冻结（需用户批准）→ 实现分类器/场景生成器/adapter（Phase C 仅 train/dev/validation smoke）。
+- HOLD：A-3b 运行、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 执行、ThinkingBox 任何用途、锁箱调参。
+- 下一会话唯一任务：55 号独立审查并冻结预注册；未冻结批准前不得运行任何 A-3b 实验。

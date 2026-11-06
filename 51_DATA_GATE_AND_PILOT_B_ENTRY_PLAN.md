@@ -2,7 +2,7 @@
 
 日期：2026-11-06
 所属项目：kaitibaogao / 第一项创新候选
-状态：PHASE A COMPLETE (GATE = HOLD) / PHASE B NEXT
+状态：PHASE A COMPLETE (GATE=HOLD) / PHASE B COMPLETE / A-3B DESIGN DRAFT — NEXT: REVIEW + PREREG FREEZE
 工作分支：pilot-a-stateful-recovery
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
@@ -91,7 +91,7 @@ Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_re
 
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、重算脚本、原始 artifact manifest、独立重算表和明确的 GO / HOLD / NO-GO。
 
-## 3. Phase B — 公开数据集版本与语义审计
+## 3. Phase B — 公开数据集版本与语义审计 — 已完成（2026-11-06，见 52/53/54 号审计、SPLIT_LEAKAGE_AUDIT、LICENSE_AND_PROVENANCE、DATASET_LOCK_MANIFEST.json）
 
 ### B1. ToolMisuseBench v0.2 large
 - 固定 Hugging Face dataset commit/revision，不跟随 main 浮动。
@@ -201,8 +201,9 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 
 - **Phase A 结论：A-3 预注册 Gate = HOLD（HOLD_REVIEW_FAILURE_BOUNDARIES）。** 完整证据见 PILOT_A3_INDEPENDENT_REAUDIT.md。要点：run 42241224898（head `f5e6b46`）真实运行并成功上传 artifact（此前全部 run 因 `PublicToolView.tick` 崩溃）；28 项测试通过；6,678 episodes 结构/配对/语义审计全部通过；oracle−saga 成功率差 0.0、bootstrap CI [0.0,0.0]、动作成本差 +34.6% → 按 47 号原文 HOLD。
 - Phase A artifact 哈希（SHA-256）：ZIP `1119d14b70eedef221fe6e63439e2a04bd58c0354d5a723344d2c80c459ab727`；JSON `3a60ae8385c723c57d54ff47608fe428690d94519f6762ec78bbc15c1d15fe14`；CSV `2c7d7dad5faaae58f182f27d77b90dfa237f4c1627e15b0bc029d34582f3c369`（6,678 数据行）。原始文件：`experiments/pilot_a_recovery/ci_artifact/`；清单：`a3_artifact_manifest.json`。
-- GO：文档维护、公开数据集只读审计（Phase B）、adapter smoke 的准备、A-3b 新预注册协议设计（先批准后运行）。
-- HOLD：Pilot B 演化搜索；用 A-3 held-out 调参；A800 / ARWM；真实 LLM API；UndoBench frozen TEST。
-- ThinkingBox：仅冻结后 clean regression。
-- 下一项实际执行任务：Phase B（§3）数据集版本固定与语义/泄漏/分母审计 + A-3b 预注册设计（可行性分层指标、可行 held-out 组合族、动作成本目标）。
+- GO：文档维护、公开数据集只读审计（Phase B，已完成）、adapter smoke 的准备（Phase C，仅 train/dev/validation）、A-3b 新预注册协议设计（已完成草案，待独立审查与批准）。
+- HOLD：A-3b 正式运行（预注册冻结+批准前禁止）；Pilot B 演化搜索；用 A-3 held-out 或任何锁箱调参；A800 / ARWM；真实 LLM API；UndoBench frozen TEST 执行。
+- ThinkingBox：UNREACHABLE（HF 401 / GitHub 404，53 号记录）；恢复访问前不规划任何依赖实验；即便恢复也仅冻结后 clean regression。
+- Phase B 结论（2026-11-06）：ToolMisuseBench 评分口径已解密（0.767/1200、0.736/993、600 OG 为子集）；语义缺口确认（无 lost-ACK/补偿/saga/重复副作用）；Parser+Repair DEV 复现 0.7622/0.7363，列为 Pilot B 必选基线。UndoBench 语义与指标同构、harness 验证、TEST 锁内置；定位外部泛化验证。融合判断见 54 号：主搜索=A-3b 自有模拟器+ToolMisuseBench train 第二域，外部=UndoBench TEST；公开基准不能单独支撑第一项创新。数据 revision：ToolMisuseBench `98eb28718b0393e029088ce80604c48807216de4`、UndoBench `4be1151851a109e7c9cfc1ba5d6e6c64461f6f93`（哈希明细在 DATASET_LOCK_MANIFEST.json）。
+- 下一项实际执行任务：55_PILOT_A3B_RESEARCH_DESIGN.md 独立审查 → 预注册冻结（R3/R4 分层比例、τ_min、成本计价、seed、预算、场景哈希）→ 用户批准 → 实现可恢复性分类器/场景生成器扩展/统一 adapter。任何 A-3b 运行在冻结批准前一律禁止。
 - 接管要求：每次会话结束前更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、README.md、05_DECISION_LOG.md 和本计划的状态；必须记录实际 HEAD、CI run、artifact hashes、工作区/分支状态。不得把文档提交或 CI 配置写成实验已通过。

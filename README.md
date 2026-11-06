@@ -618,3 +618,15 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - **预注册 Gate（47 号 §6 原文）：HOLD。** 安全条件满足（held-out 三 slice 零违规），但 oracle−saga 成功率差 0.0（要求 ≥0.05）、cluster bootstrap CI [0.0, 0.0]（要求下界 >0）；gap≤0.02 但动作成本差 +34.6%>10%，不构成 NO-GO。
 - **失败边界：** `partial_comp_failure` 与 `delay_rate_permission` 组合族对全部策略（含特权 oracle）结构性不可行（0% 成功，占 held-out 52.2%）；任务族漂移 slice 97.5% 成功、零违规；可优化维度只剩动作成本。
 - **边界：** 不得用本批 held-out 调参再宣称通过。GO：ToolMisuseBench/UndoBench 只读审计（Phase B）+ A-3b 新预注册设计。HOLD：Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 优化。
+
+
+## 2026-11-06：Phase B 数据集审计完成 + A-3b 设计草案（D-058）
+
+审计与设计文档：[52_TOOLMISUSEBENCH_AUDIT.md](52_TOOLMISUSEBENCH_AUDIT.md)、[53_UNDOBENCH_AUDIT.md](53_UNDOBENCH_AUDIT.md)、[54_BENCHMARK_COMPATIBILITY_MATRIX.md](54_BENCHMARK_COMPATIBILITY_MATRIX.md)、[SPLIT_LEAKAGE_AUDIT.md](SPLIT_LEAKAGE_AUDIT.md)、[LICENSE_AND_PROVENANCE.md](LICENSE_AND_PROVENANCE.md)、[DATASET_LOCK_MANIFEST.json](DATASET_LOCK_MANIFEST.json)、[55_PILOT_A3B_RESEARCH_DESIGN.md](55_PILOT_A3B_RESEARCH_DESIGN.md)。
+
+- **ToolMisuseBench v0.2**（rev `98eb2871`，MIT）：哈希与官方 manifest 吻合；评分口径解密——0.767=全 1,200 分母、0.736=993 故障任务分母、600 output-grounded 是子集非分母；语义缺口确认（无 lost-ACK/重复副作用/补偿/saga，故障单次触发）；Parser+Repair 逆向+DEV 复现（0.7622/0.7363），必须列为 Pilot B 基线。
+- **UndoBench v1.0.1**（rev `4be11518`，CC-BY-4.0/Apache-2.0）：36 条全画像（33/36 lost-ACK、幂等全 false、IRREVERSIBLE 8）；doctor/smoke/DEV 配对跑通；内置 TEST 锁；定位为外部泛化验证。
+- **ThinkingBox 不可达**（HF 401、GitHub 404），继续按 evaluation-only 保守处理。
+- **泄漏审计**：ToolMisuseBench 模板层泄漏、UndoBench 领域层重叠——泛化主张须限定；A-3 因子化 OOD 保持唯一干净来源。
+- **A-3 gap=0 根因**：可行单元 saga 已达 oracle 水平 + 52.2% 死区稀释 + Gate 无视效率差异；修正=可恢复性分层（R1–R4）+ 成本目标 + 重划 held-out，不删困难场景。
+- **A-3b 设计草案（55 号）已产出，未批准、未运行。** 下一步：独立审查 → 预注册冻结 → 实现分类器/场景生成器/adapter。HOLD 不变：A-3b 运行、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 执行、锁箱调参。

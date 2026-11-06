@@ -811,3 +811,31 @@ HOLD：Pilot B 演化搜索、ToolMisuseBench public test 调参、UndoBench fro
 
 ### 下一步
 按 51 号计划执行 Phase B（数据集版本固定、manifest/license/split 泄漏/evaluator 分母审计），同时设计 A-3b 新预注册协议供批准。A-3 Gate = HOLD，任何演化搜索继续等待授权。
+
+
+## 决策 D-058：Phase B 数据集审计完成与 A-3b 研究设计（2026-11-06）
+
+### 事实（已核验）
+1. **ToolMisuseBench v0.2 large 审计完成。** HF revision `98eb28718b0393e029088ce80604c48807216de4`，MIT；三 split（6000/900/1200）SHA-256 与官方 manifest 逐一吻合。评分口径解密：论文 0.767=全部 1200 条 TaskSuccess（独立复算 0.7667）；0.736=仅 993 条故障任务的条件恢复率（731/993=0.7362）；0.158=no-recovery 全量（0.1575）；"600 output-grounded"是 tool_output_path_equals 子集（其上 0.8783），不是头号指标分母。
+2. **覆盖缺口（官方 env/fault 代码取证）：** timeout/rate_limit/authz 全部在 before_call 拦截（工具从未执行，无 lost-ACK）；环境幂等/already_exists 守卫使重复副作用结构上不可能；全部故障 on_nth_call=1 单次触发（重试一次必恢复）；无补偿/幂等合同/部分提交/late commit/saga（全量关键词 0 次）；双故障计划 100% 同工具。结论：该基准无结构性不可恢复场景。
+3. **Parser+Repair 机制已逆向并在 DEV 复现。** 机制=指令正则解析+错误码修参重试（schema 别名映射），无验证/补偿/等待/升级。DEV 900 条实测：TaskSuccess 0.7622、条件恢复 0.7363（550/747）；no-recovery 0.1511。与 test 发布值一致，执行器忠实可复现。必须纳入 Pilot B 基线。
+4. **UndoBench v1.0.1 审计完成。** HF revision `4be1151851a109e7c9cfc1ba5d6e6c64461f6f93`，数据 CC-BY-4.0/软件 Apache-2.0。36 行全量：33/36 SCN-LOST-ACK（全部 UNKNOWN_OUTCOME）、idempotency_support 全 false、IRREVERSIBLE 8、COMPENSATABLE 24、forbidden_effects 22、19/36 多工具。指标族 CRSR/DER/MER/URR/EOR 与我们的安全-恢复语义同构。doctor+smoke+DEV 配对跑通（14 对），harness 内置 TEST 锁（allow_frozen_test_execution=false）。
+5. **ThinkingBox-Bench 不可达：** HF 401（gated/移除）、GitHub microsoft/thinkingbox-data 404。许可与 507 任务声称本轮无法复核；继续按 evaluation-only 保守处理，不规划依赖实验。
+6. **泄漏审计：** ToolMisuseBench 指令模板跨 split 重叠 72–73 个、工具集全重叠→只能主张实例层泛化；UndoBench 8 领域三分割全覆盖、test 12 条全同质 lost-ACK→主张限于新工作流层；A-3 因子化 OOD 是三者中唯一双因子干净的。
+
+### A-3 gap=0 根因（A3b-4）
+主因三合一：(a) 可行单元上 saga 已达 oracle 水平；(b) held-out 52.2% 为结构性死区（全员 0%）稀释差异；(c) Gate 只认成功率不认效率（唯一差异 +34.6% 动作成本无预注册地位）。oracle 只看当前步、非全局上界为次因。**修正方向=可恢复性分层+效率目标+重划 held-out，不是删困难场景。**
+
+### 交付物
+52_TOOLMISUSEBENCH_AUDIT.md、53_UNDOBENCH_AUDIT.md、54_BENCHMARK_COMPATIBILITY_MATRIX.md、SPLIT_LEAKAGE_AUDIT.md、LICENSE_AND_PROVENANCE.md、DATASET_LOCK_MANIFEST.json、55_PILOT_A3B_RESEARCH_DESIGN.md（研究设计草案）、experiments/dataset_audit/（复现与 smoke 证据）。
+
+### 决定
+- **GO：** 数据集只读审计（已完成）；A-3b 设计（已完成草案）→ 送独立审查与批准；Phase C adapter 准备。
+- **HOLD：** A-3b 正式运行（待预注册冻结+批准）；Pilot B；A800/ARWM；真实 LLM API；UndoBench TEST 执行；ThinkingBox 任何用途；用 A-3 旧 held-out 调参。
+- 融合判断（54 号）：主搜索=A-3b 自有模拟器（核心语义唯一完整）+ ToolMisuseBench train 第二域；外部验证=UndoBench TEST（锁箱一次性）；公开基准均不能单独支撑第一项创新。
+
+### 下一步
+1. 对 55 号设计做独立审查（数学/统计/可识别性/与 49 号边界一致性）→ 批准后冻结预注册；
+2. 实现可恢复性分类器 + 场景生成器扩展（含回归测试）；
+3. Phase C：ToolMisuseBench/UndoBench 统一 adapter（只用 train/dev/validation smoke）；
+4. Pilot B 预注册草案仅在 A-3b Gate + 数据兼容 Gate + adapter smoke 全过后起草。
