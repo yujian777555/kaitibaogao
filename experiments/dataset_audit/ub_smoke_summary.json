@@ -1,0 +1,30 @@
+{
+  "total_pairs": 2,
+  "control_passed": 1,
+  "fault_passed": 0,
+  "crsr_passed": 0,
+  "eor_passed": 0,
+  "duplicate_effects_count": 1,
+  "missing_effects_count": 0,
+  "control_rate": 0.5,
+  "rsr": 0.0,
+  "crsr": 0.0,
+  "eor": 0.0,
+  "der": 0.5,
+  "mer": 0.0,
+  "task_breakdown": {
+    "RB-PAY-003": {
+      "domain": "payments",
+      "total_pairs": 2,
+      "control_passed": 1,
+      "fault_passed": 0,
+      "crsr_passed": 0,
+      "eor_passed": 0,
+      "duplicate_count": 1,
+      "control_rate": 0.5,
+      "fault_rate": 0.0,
+      "crsr": 0.0,
+      "der": 0.5
+    }
+  }
+}

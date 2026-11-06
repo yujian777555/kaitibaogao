@@ -1,0 +1,113 @@
+{
+  "lock_record_version": 1,
+  "recorded_at": "2026-11-06T18:20:00Z",
+  "recorded_by": "Phase B dataset audit (session D-058)",
+  "policy": "Datasets below are pinned to exact revisions and hashed. Public-test / TEST splits are locked for tuning; evaluation uses them only under a final, preregistered, one-shot protocol. Hashes are SHA-256 of the exact bytes downloaded from the pinned revision.",
+  "datasets": {
+    "ToolMisuseBench": {
+      "source": "https://huggingface.co/datasets/sigdelakshey/ToolMisuseBench",
+      "hf_revision": "98eb28718b0393e029088ce80604c48807216de4",
+      "hf_last_modified": "2026-07-11T23:48:51Z",
+      "license": "MIT",
+      "paper": "Baral & Sigdel, REALM 2026, ACL Anthology 2026.realm-1.28",
+      "versions_present": {
+        "v0.1": {
+          "note": "root-level train/dev/test_public/tasks.jsonl (5000/800/1000, seed 42); superseded, kept for provenance only",
+          "splits": {"train": 5000, "dev": 800, "test_public": 1000}
+        },
+        "v0.2_large": {
+          "note": "ACTIVE version used for this project",
+          "splits": {"train": 6000, "dev": 900, "test_public": 1200},
+          "seed": 42,
+          "design": "crossed_domain_fault_difficulty_budget",
+          "files": {
+            "data/v0_2_large/train.jsonl": {"bytes": 8353767, "sha256": "70c1f33b4fa215d71a72fa2b6b2f7be2575088197fc49283cf4799e80b798eed", "matches_official_manifest": true},
+            "data/v0_2_large/dev.jsonl": {"bytes": 1249342, "sha256": "a5a2b49b28c66f01bdbac37966c00cca9c6a1027a6d4b5b3a8c1d1d359db27e3", "matches_official_manifest": true},
+            "data/v0_2_large/test_public.jsonl": {"bytes": 1695141, "sha256": "12c5e1e93926f4089dfc8d0c60cea53b556057360562375510744858fc6f1161", "matches_official_manifest": true},
+            "artifacts/v0_2_large/v0_2_freeze.json": {"bytes": 870, "sha256": "d965ee8eae4f37c9eefb9a8626be787c782a5b419d70e7fabdb789c8221111f7"},
+            "artifacts/v0_2_large/manifest.json": {"bytes": 601, "sha256": "dbc940b8ead00071b8287d301384091077158f4296fd330c36ba022b6fa93c0d"},
+            "artifacts/v0_2_large/dataset_quality_report.json": {"bytes": 5946, "sha256": "6be445c1efe5a56212b189903a72653efce1c2542dd92982b5d0889ea0489e48"},
+            "artifacts/v0_2_large/release_summary.json": {"bytes": 34879, "sha256": "1e72ede920963ce5545726b36bcc3d4835136dfea344cf3d34bd3933ab752e57"},
+            "artifacts/v0_2_large/fault_ablation_summary.json": {"bytes": 5857, "sha256": "4a13b50ee9af0fe399926144628d9a041a6b4342f0cecc2eba6decb67a3fa0e2"},
+            "artifacts/v0_2_large/stages/deterministic_instruction_parser/episodes.jsonl": {"bytes": 1418516, "sha256": "8b9a20b25afe5ce3b31703c8ac7f5a5a13d47a79de062d193aa020e20120ec7f"},
+            "artifacts/v0_2_large/stages/deterministic_instruction_parser/score.json": {"bytes": 507412, "sha256": "5cf224875bc235199118086c14f91887cd89091932c7e5939178ab0d3fe51b16"}
+          }
+        }
+      },
+      "official_code": {
+        "repo": "https://github.com/akgitrepos/toolmisusebench",
+        "commit_audited": "b6ee3412f98d2058ee487e182a72b26c58046d51",
+        "cli": "toolmisusebench eval --dataset <dir> --split <split> --agent-module <module:Class> --report <out.json>",
+        "agent_interface": "reset() / act(observation) -> Action | None"
+      },
+      "scoring_denominators_verified": {
+        "TaskSuccess_0.767": "mean over ALL 1200 public-test tasks (recomputed 0.7667 from released episodes)",
+        "conditional_recovery_0.736": "RecoverySuccess over the 993 FAULTED public-test tasks only (731/993 = 0.7362; the 1200-row aggregate is 0.6092)",
+        "recovery_disabled_0.158": "TaskSuccess of instruction_parser_no_recovery over all 1200 (recomputed 0.1575)",
+        "output_grounded_600": "test tasks carrying at least one tool_output_path_equals criterion; it is a SUBSET (TaskSuccess 0.8783 on it), NOT the headline denominator; state-grounded other 600 score 0.655"
+      },
+      "local_reproduction_dev": {
+        "date": "2026-11-06",
+        "agent": "toolmisusebench.version2.baselines:InstructionParserAgent (Parser+Repair)",
+        "split": "dev (900 tasks, allowed)",
+        "TaskSuccess": 0.7622,
+        "RecoverySuccess_all900": 0.6111,
+        "RecoverySuccess_faulted747": 0.7363,
+        "report_sha256": "d2306a12fc0eb769073918089a1e60661c0edfa6ac19c3274cfb2e8180c10360",
+        "no_recovery_dev_TaskSuccess": 0.1511,
+        "no_recovery_report_sha256": "33abcb83caee78440e4ae5652ac741660a7f1e1ecdef129743b0fe180b3535a5",
+        "conclusion": "deterministic executor and baselines reproduce faithfully; dev and test performance consistent"
+      }
+    },
+    "UndoBench": {
+      "source": "https://huggingface.co/datasets/TanmaySah/undobench",
+      "hf_revision": "4be1151851a109e7c9cfc1ba5d6e6c64461f6f93",
+      "hf_last_modified": "2026-10-07T12:26:20Z",
+      "license_data": "CC-BY-4.0",
+      "license_software": "Apache-2.0",
+      "paper": "arXiv:2610.05622",
+      "benchmark_version": "v1.0.1",
+      "splits": {"dev": 14, "validation": 10, "test": 12},
+      "files": {
+        "data/dev.parquet": {"bytes": 23065, "sha256": "cca4b6bf61ab0f46bbabde5721190b5e3555d0d004b0b78278e83e2d1f783720"},
+        "data/validation.parquet": {"bytes": 21481, "sha256": "afb8b2ab7349f4cb3a15ed9004c5f6bc889c5de8b1ce96d9ff38bd04d5197ac7"},
+        "data/test.parquet": {"bytes": 20950, "sha256": "9678c584bfc9abcc590228d500ab165d65accc3ae6513f8c148065c23cb74920"},
+        "README.md": {"bytes": 4701, "sha256": "db088634a7280ad62eaf229d56d7f4892eab9e3b49361c6cf64bae06a87c1cc9"}
+      },
+      "official_code": {
+        "repo": "https://github.com/tradertanmay/undobench",
+        "commit_audited": "4a25c4fa0f12bb6c79dc6e0e3a8f31deeb6af21e",
+        "cli": "recoverbench.cli doctor | smoke | run --agent <file:Class> --split <dev|validation> --recovery none --seeds 42",
+        "frozen_test_guard": "config flag allow_frozen_test_execution defaults to false; harness records it per run"
+      },
+      "local_smoke_dev": {
+        "date": "2026-11-06",
+        "doctor": "PASS (36 tasks 14/10/12, 47 tools, sandbox operational)",
+        "smoke": "PASS (control SUCCESS, fault injected, oracle + effect log verified, 0.14s)",
+        "example_agent_dev_run": {
+          "pairs": 14,
+          "control_rate": 0.0,
+          "rsr": 0.0,
+          "crsr": null,
+          "der": 0.0,
+          "mer": 1.0,
+          "note": "SimpleDeterministicAgent is a naive interface example (fails all controls); run only proves paired CONTROL/FAULT pipeline and CRSR/DER/MER computation work end-to-end",
+          "summary_sha256_record": "experiments/dataset_audit/ub_dev_smoke_summary.json"
+        }
+      },
+      "test_lock": "TEST split (12 workflows) is locked; no execution, no tuning, no policy design reads of test outcomes. Metadata read for the split-leakage audit only, per SPLIT_LEAKAGE_AUDIT.md."
+    },
+    "ThinkingBox-Bench": {
+      "source_claimed": "https://huggingface.co/datasets/microsoft/ThinkingBox-Bench",
+      "status": "UNREACHABLE_AT_AUDIT_TIME",
+      "evidence": [
+        "HF dataset API returns HTTP 401 (gated or removed)",
+        "HF public search finds no 'microsoft/ThinkingBox-Bench'",
+        "GitHub repo microsoft/thinkingbox-data (tag thinkingbox-bench-v1.0) returns HTTP 404"
+      ],
+      "consequence": "License, task count (claimed 507) and evaluation-only restriction could NOT be re-verified in this round. Do not plan experiments that depend on this benchmark until access is restored. The evaluation-only restriction recorded in 50_DATASET_SELECTION_AND_VALIDATION_PLAN.md remains in force as a conservative default."
+    }
+  },
+  "downloaded_at": "2026-11-06",
+  "local_cache": "datasets/ (gitignored; re-downloadable from the pinned revisions above)"
+}

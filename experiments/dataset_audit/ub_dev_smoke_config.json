@@ -1,0 +1,21 @@
+{
+  "run_id": "run_20261107_015732_d4eb",
+  "benchmark_version": "1.0.1",
+  "protocol_version": "V4",
+  "sdk_version": "1.0.0",
+  "model": null,
+  "agent_spec": "simple_agent.py:SimpleDeterministicAgent",
+  "agent_url": null,
+  "split": "dev",
+  "suite": null,
+  "task_id": null,
+  "recovery": "none",
+  "workers": 1,
+  "resume": false,
+  "dry_run": false,
+  "output_dir": "D:\\temp\\ub_dev_runs",
+  "seeds": [
+    42
+  ],
+  "allow_frozen_test_execution": false
+}
