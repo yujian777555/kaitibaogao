@@ -585,3 +585,14 @@ A-3 仍待 CI 和 JSON/CSV 独立审计；Pilot B 未授权。必须先完成近
 ToolMisuseBench v0.2 large 标注 6,000 train / 900 dev / 1,200 public-test records，覆盖 CRUD、retrieval、files、scheduling 和多种故障；数据卡包含 initial_state、tool_schemas、fault_plan、success_criteria 等字段，MIT license。但其 public test 统计口径（1,200 records，其中 600 output-grounded tasks）需要通过冻结 manifest 和 evaluator 核实。
 
 **重要：** 这是可执行环境中的策略演化，不是把 JSONL 当监督训练集。fitness 必须来自实际 rollout。数据方案仍未冻结，Pilot B 仍 HOLD；先完成 A-3 CI/原始数据复算和 benchmark compatibility/leakage audit。
+
+
+## 2026-11-06：第一项创新的数据集方案（建议，尚未冻结）
+
+新增 [50_DATASET_SELECTION_AND_VALIDATION_PLAN.md](50_DATASET_SELECTION_AND_VALIDATION_PLAN.md)。
+
+建议组合：Pilot A-3 + ToolMisuseBench train（搜索开发）；A-3 validation + ToolMisuseBench dev（调参）；ToolMisuseBench public test + UndoBench TEST（冻结后外部恢复验证）；ThinkingBox-Bench 或 ToolSandbox（正常任务回归）。ThinkingBox 官方规定 evaluation-only，不能用于演化搜索或调参。
+
+ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records，覆盖 CRUD/retrieval/files/scheduling 和多类工具故障。数据卡写明 test 中 600 条 output-grounded tasks，最终统计分母须按 manifest/evaluator 审计。
+
+演化 fitness 必须来自可执行环境 rollout，而非对静态 JSONL 做监督学习。A-3 CI/数据复算未完成前，Pilot B 仍 HOLD。
