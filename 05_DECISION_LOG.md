@@ -734,3 +734,30 @@ Pilot A-2 的 contract-aware success 为 0.7222，oracle diagnostic 为 0.7778�
 
 ### 下一步
 唯一下一任务为完成 Pilot A-3 CI 核验、原始数据独立复算及预注册 Gate 判断。只有 A-3 通过才进入 Pilot B。当前仍处于开题前研究验证阶段，不写最终大论文正文，不宣称创新已成立。
+
+
+## 决策 D-054：第一项创新相关工作与新颖性边界审计（2026-11-06）
+
+### 检索发现
+新增 `49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md`。初步检索发现：
+- UndoBench：工具型 Agent 故障恢复 benchmark，含 lost-ACK paired trials 和受限 EvoUndo-RB1；
+- EvoUndo：Agent harness 自修改的 recoverability-constrained self-evolution，虽不等同于 EC，但与 effect contracts、counterfactual recovery 和 recovery synthesis 近邻；
+- EvoTool：ACL 2026，已通过 gradient-free evolutionary paradigm 优化模块化 tool-use prompt policy；
+- LIMBO：late commit、idempotency、eventual consistency 和 duplicate side effects；
+- Cordon、Atomix、SagaLLM：transaction、commit/rollback、Saga compensation；
+- Verified Tool Calls、Repair Economics：verify-before-retry、idempotency 和 fault-injection 评估；
+- CDGP、GP controller synthesis、FSM-MOEA、SMC-ES：安全程序/控制器合成基础。
+
+### 新颖性边界
+不能把 generic recovery、verify-before-retry、idempotency、Saga、transaction wrapper、generic prompt evolution、FSM synthesis、counterexample-guided GP 或 safe EA 单独称为创新。
+
+保留的研究假设（未批准）：**契约语义保持、反例驱动的可执行恢复 FSM 演化**，重点验证 typed effect-state genome、semantic variation/repair、feasibility-first safety 和跨任务/故障族泛化是否带来标准 GP/EA 无法替代的收益。
+
+### 对实验的影响
+Pilot A-2 的 fault-injection testbed/policy matrix 不是新颖性贡献。A-3 可作为内部算法测试环境，但必须与 UndoBench、LIMBO、Repair Economics、FAILING TOOLS 做 feature-level comparison。Pilot B 必须加入 EvoTool 适配基线、强手工恢复/transactional policy、标准 GA/GP/NSGA 和安全控制器合成相关对照。
+
+### 决定
+**GO：继续第一项候选的机制级审查。HOLD：Pilot B、A800/ARWM、真实 LLM API。** A-3 CI 和 JSON/CSV 仍待核验。只有 A-3 预注册 gate 与新颖性/强基线审查都通过，才进入 Pilot B。
+
+### 下一步
+精读 UndoBench、EvoUndo、EvoTool、LIMBO、Cordon、Atomix、SagaLLM，完成统一矩阵：研究对象、状态/效应语义、策略表示、搜索/优化机制、验证方式、基线、数据划分、预算、未解决问题。并核验 A-3 Actions/artifacts。
