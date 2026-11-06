@@ -596,3 +596,13 @@ ToolMisuseBench v0.2 large 标注 6,000 train / 900 dev / 1,200 public-test reco
 ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records，覆盖 CRUD/retrieval/files/scheduling 和多类工具故障。数据卡写明 test 中 600 条 output-grounded tasks，最终统计分母须按 manifest/evaluator 审计。
 
 演化 fitness 必须来自可执行环境 rollout，而非对静态 JSONL 做监督学习。A-3 CI/数据复算未完成前，Pilot B 仍 HOLD。
+
+
+## 当前下一阶段：数据门禁与 Pilot A-3 独立复核
+
+- 数据选择与官方信息复核：见 [50_DATASET_SELECTION_AND_VALIDATION_PLAN.md](50_DATASET_SELECTION_AND_VALIDATION_PLAN.md)。
+- 可执行任务计划：见 [51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md](51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md)。
+- ToolMisuseBench：6,000 train / 900 dev / 1,200 public-test records；其中 HF 数据卡注明 600 条 output-grounded tasks，评分分母待官方 evaluator 审计；Parser+Repair 是必须复现/适配的参考基线。
+- UndoBench：v1.0.1，36 workflows，14/10/12 split；TEST 锁箱。
+- ThinkingBox-Bench：507 tasks，evaluation-only，只能最终 clean regression。
+- Pilot A-3 当前仍是 IMPLEMENTED / NOT YET VALIDATED BY CI / RESULTS NOT YET RUN OR ACCEPTED；不能宣称通过。下一步先核验 Actions 与 JSON/CSV artifact 并独立重算。Pilot B、A800/ARWM、真实 LLM API 继续 HOLD。
