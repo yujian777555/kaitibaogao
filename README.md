@@ -559,3 +559,14 @@ ARWM/A800 是条件性辅助模型路线，不是已确认的独立创新点，�
 **论文成熟度：** 研究方向已收敛，但最终题目和 2–3 个创新点未冻结；尚处于开题前研究验证阶段。TCAIL 已失败；Pilot A/A-2 仅为探索性模拟器证据；Pilot A-3 已实现但 CI 和原始数据尚未核验；Pilot B 未启动；RSI 多轮收益未验证。旧 V0.1–V0.3 开题稿按 TCAIL/CI-GOM 路线撰写，不能直接作为当前方向的正式开题稿，需基于新证据重构。
 
 下一步唯一任务：核验 Pilot A-3 最新 Actions，独立复算 JSON/CSV，并按 47 号协议判断是否进入 Pilot B。
+
+
+## 2026-11-06：第一项创新相关工作审计
+
+新增 [49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md](49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md)。
+
+初步检索发现 UndoBench、EvoUndo、EvoTool、LIMBO、Cordon、Atomix、SagaLLM、Verified Tool Calls、Repair Economics 等近邻工作；安全控制器合成方面还有 CDGP、GP controller synthesis、FSM-MOEA、SMC-ES。
+
+**结论：** 第一项候选仍可继续研究，但“契约约束恢复策略演化”尚未通过新颖性审查。通用工具恢复、verify-before-retry、Saga、通用 prompt evolution、FSM + EA 均不能单独作为创新。待验证的差异假设是契约语义保持、反例驱动的可执行恢复 FSM 演化及跨任务/故障泛化。
+
+A-3 仍待 CI 和 JSON/CSV 独立审计；Pilot B 未授权。必须先完成近邻论文全文机制比较，再结合 A-3 结果决定是否进入 Pilot B。
