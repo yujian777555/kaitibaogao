@@ -1,0 +1,72 @@
+{
+  "artifact_source": {
+    "repository": "yujian777555/kaitibaogao",
+    "branch": "pilot-a-stateful-recovery",
+    "workflow_name": "Pilot A recovery simulator",
+    "workflow_run_id": 42241224898,
+    "workflow_job_id": 127971717249,
+    "trigger_event": "push",
+    "head_sha": "f5e6b4608440b7ac60d3b57ceb0a758f819678c1",
+    "run_created_at": "2026-11-06T15:14:44Z",
+    "run_conclusion": "success",
+    "artifact_name": "pilot-a3-results",
+    "artifact_id": 13517080091,
+    "artifact_created_at": "2026-11-06T15:14:54Z",
+    "artifact_expires_at": "2027-02-04T15:14:45Z",
+    "artifact_size_in_bytes": 54341,
+    "artifact_zip_sha256": "1119d14b70eedef221fe6e63439e2a04bd58c0354d5a723344d2c80c459ab727",
+    "artifact_zip_sha256_matches_github_digest": true
+  },
+  "files": {
+    "pilot_a3_results.json": {
+      "raw_sha256": "3a60ae8385c723c57d54ff47608fe428690d94519f6762ec78bbc15c1d15fe14",
+      "lf_normalized_sha256": "3a60ae8385c723c57d54ff47608fe428690d94519f6762ec78bbc15c1d15fe14",
+      "size_in_bytes": 94400
+    },
+    "pilot_a3_episodes.csv": {
+      "raw_sha256": "2c7d7dad5faaae58f182f27d77b90dfa237f4c1627e15b0bc029d34582f3c369",
+      "lf_normalized_sha256": "ba0655987bd2153891a4929e89b81296b6b6f146751c8750c4952bad0f2b18cb",
+      "size_in_bytes": 1701434,
+      "rows_including_header": 6679,
+      "data_rows": 6678,
+      "columns": [
+        "scenario_id",
+        "split",
+        "task_family",
+        "fault_composition",
+        "seed",
+        "policy",
+        "task_success",
+        "safe_resolution",
+        "safe",
+        "invariant_violation",
+        "duplicate_side_effect",
+        "unresolved",
+        "escalated",
+        "compensation_failure",
+        "compensation_failures",
+        "active_effects",
+        "steps_committed",
+        "steps_attempted",
+        "action_count",
+        "rollback_order",
+        "tool_action_counts",
+        "tool_vector",
+        "fault_vector"
+      ]
+    }
+  },
+  "determinism_check": {
+    "local_rerun_command": "python experiments/pilot_a_recovery/pilot_a3.py",
+    "csv_byte_identical_to_ci_artifact": true,
+    "json_identical_to_ci_artifact_modulo_line_endings": true,
+    "note": "Local Windows run writes CRLF JSON; CI Linux run writes LF. CSV is byte-identical because the csv module always emits CRLF. Content is fully deterministic across platforms."
+  },
+  "verification_steps": [
+    "Workflow run located by head SHA of the remediation commit f5e6b46, event push, branch pilot-a-stateful-recovery.",
+    "Job 127971717249 logs confirm 28 regression tests executed and OK (16 Pilot A-3 tests including the new crash-regression test).",
+    "Job logs confirm Pilot A, Pilot A-2 and Pilot A-3 simulator steps all succeeded and both artifact upload steps succeeded.",
+    "Artifact ZIP downloaded via gh run download and via the raw API archive URL; ZIP SHA-256 recomputed locally and matches the GitHub digest field.",
+    "JSON and CSV hashes computed on the extracted files as preserved under experiments/pilot_a_recovery/ci_artifact/."
+  ]
+}
