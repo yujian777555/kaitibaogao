@@ -1684,3 +1684,22 @@ TCAIL Estimator Gate 已 FAIL / NO-GO，旧 CI-GOM 冻结。新主线是状态�
 - 旧开题稿 V0.1–V0.3 基于 TCAIL/CI-GOM，不能直接作为当前方向正式开题稿；可审计复用其背景和参考文献，但研究内容、创新点、技术路线和可行性须重写。
 
 **结论：** 大论文方向已比原来聚焦，但尚未进入最终开题定稿或大论文正文阶段；当前是新方向的预实验和算法可行性验证阶段。当前唯一下一任务仍为 A-3 CI 核验及原始结果独立复算。
+
+
+## 49. 第一项创新相关工作审计（2026-11-06）
+
+详见 `49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md`。初步检索确认近邻工作较多，尤其：
+- UndoBench arXiv:2610.05622：恢复 benchmark、lost-ACK paired trials，并纳入受零权限限制的 EvoUndo-RB1；
+- EvoUndo arXiv:2608.28363：recoverability-constrained harness self-modification；self-evolution 不等于 EC，但与 effect contract / counterfactual recovery 高度相关；
+- EvoTool ACL 2026：已做模块化 tool-use policy 的 gradient-free evolutionary optimization，blame-aware targeted mutation 和 diversity selection；
+- LIMBO / Where Does Exactly-Once Live? arXiv:2609.29095：late commit、idempotency、missing read path、duplicate side effects；
+- Cordon、Atomix、SagaLLM：transaction/commit/rollback/compensation；
+- Verified Tool Calls、Repair Economics：verify-before-retry、idempotency 和 fault-injection policy benchmark；
+- CDGP、GP controller synthesis、FSM-MOEA、SMC-ES：安全程序/控制器的进化合成和反例验证基础。
+
+因此第一项创新不能只叫“用 GA/NSGA-III 优化 Agent 恢复策略”。目前仅保留待验证假设：**契约语义保持、反例驱动的可执行恢复 FSM 演化**，并在硬安全约束下验证跨任务/故障组合泛化。所有组件都需消融，且必须与 EvoTool、EvoUndo、标准 GP/EA、事务型 runtime 和安全控制器合成基线比较。
+
+Pilot A-2 的 fault-injection testbed 本身不具新颖性；A-3 作为内部实验环境可继续，但需与 UndoBench、LIMBO、Repair Economics、FAILING TOOLS 做 feature-level comparison。当前 A3 CI/JSON/CSV 未核验，Pilot B 未授权。
+
+### 下一任务（Pilot B 前置门）
+完成 UndoBench、EvoUndo、EvoTool、LIMBO 和 Cordon/Atomix/SagaLLM 的全文机制级对照，并核验 A3 CI/原始数据；只有 A3 预注册 Gate 与 novelty/baseline review 均通过，才授权 Pilot B。
