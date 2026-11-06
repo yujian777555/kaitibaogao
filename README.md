@@ -570,3 +570,18 @@ ARWM/A800 是条件性辅助模型路线，不是已确认的独立创新点，�
 **结论：** 第一项候选仍可继续研究，但“契约约束恢复策略演化”尚未通过新颖性审查。通用工具恢复、verify-before-retry、Saga、通用 prompt evolution、FSM + EA 均不能单独作为创新。待验证的差异假设是契约语义保持、反例驱动的可执行恢复 FSM 演化及跨任务/故障泛化。
 
 A-3 仍待 CI 和 JSON/CSV 独立审计；Pilot B 未授权。必须先完成近邻论文全文机制比较，再结合 A-3 结果决定是否进入 Pilot B。
+
+
+## 2026-11-06：第一项创新的数据集选择方案（尚未冻结）
+
+新增 [50_DATASET_SELECTION_AND_VALIDATION_PLAN.md](50_DATASET_SELECTION_AND_VALIDATION_PLAN.md)。
+
+推荐实验组合：
+- Pilot A-3 自有确定性模拟器 + ToolMisuseBench v0.2 train：演化策略搜索和开发；
+- A-3 validation + ToolMisuseBench dev：调参与候选选择；
+- ToolMisuseBench public test + UndoBench TEST：算法锁定后的外部恢复验证；
+- ThinkingBox-Bench v1.0 或 ToolSandbox：正常状态化任务回归；ThinkingBox 明确 evaluation-only，不得用于演化搜索或调参。
+
+ToolMisuseBench v0.2 large 标注 6,000 train / 900 dev / 1,200 public-test records，覆盖 CRUD、retrieval、files、scheduling 和多种故障；数据卡包含 initial_state、tool_schemas、fault_plan、success_criteria 等字段，MIT license。但其 public test 统计口径（1,200 records，其中 600 output-grounded tasks）需要通过冻结 manifest 和 evaluator 核实。
+
+**重要：** 这是可执行环境中的策略演化，不是把 JSONL 当监督训练集。fitness 必须来自实际 rollout。数据方案仍未冻结，Pilot B 仍 HOLD；先完成 A-3 CI/原始数据复算和 benchmark compatibility/leakage audit。
