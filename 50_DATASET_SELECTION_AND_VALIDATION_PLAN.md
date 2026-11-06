@@ -155,3 +155,27 @@ GA/GP/NSGA 的 fitness 必须来自策略在环境中的 rollout。数据集任�
 - 不把 ThinkingBox 作为必需项。
 
 这套方案比只在自建模拟器上跑 GA/NSGA 更有说服力，也能避免把已有 benchmark 的任务内容当成自己的创新。
+
+
+## 10. 2026-11-06 官方页面复核补充
+
+本节是对官方论文/数据卡的二次核验，仍不代表数据已经下载或执行。
+
+### ToolMisuseBench 核验
+- ACL Anthology 确认该文发表于 REALM 2026，论文报告 seed-42 release 为 6,000 train / 900 dev / 1,200 public-test tasks。
+- Hugging Face 数据卡明确 public test 为 1,200 条记录，其中 600 条为 output-grounded tasks；最终 recovery score 的统计分母必须以官方 evaluator 对 output-grounded criteria 的实际处理为准。
+- 数据卡列出 MIT license、manifest、freeze metadata、quality report、deterministic reference agents 和 scoring artifacts。
+- 论文报告 Parser+Repair：public-test task success 0.767、conditional recovery success 0.736；recovery-disabled task success 0.158。必须将 Parser+Repair 作为重点复现/适配基线，且上述为论文报告值，不是本项目复现实测值。
+- 官方来源：ACL https://aclanthology.org/2026.realm-1.28/ ；HF https://huggingface.co/datasets/sigdelakshey/ToolMisuseBench 。
+
+### UndoBench 核验
+- 当前 HF 数据卡标注 benchmark_version v1.0.1，36 workflows，DEV 14 / validation 10 / TEST 12。
+- Dataset/spec license 为 CC BY 4.0；software/execution framework 为 Apache 2.0。
+- TEST split 要显式 opt-in；当前只允许 DEV/validation 做 smoke 和适配，TEST 锁箱。
+- 官方来源：https://huggingface.co/datasets/TanmaySah/undobench 。
+
+### ThinkingBox 核验
+- v1.0 为 507 个任务，5 个业务领域；官方指定 release tag 为 thinkingbox-bench-v1.0。
+- Intended use 明确为 exclusively evaluation；不得用任务内容、gold state、expected outcomes 或 trajectories 做任何策略优化/训练。
+- 因此仅在最终方法冻结后做 clean-workflow regression。
+- 官方来源：https://huggingface.co/datasets/microsoft/ThinkingBox-Bench ；release：https://github.com/microsoft/thinkingbox-data/releases/tag/thinkingbox-bench-v1.0 。
