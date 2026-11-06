@@ -285,3 +285,36 @@ See 50_DATASET_SELECTION_AND_VALIDATION_PLAN.md. Proposed, not frozen:
 - Locked recovery evaluation: ToolMisuseBench public test (1,200 records; HF card says 600 are output-grounded, so audit actual denominator) + UndoBench TEST (12 workflows).
 - Clean regression only: ThinkingBox-Bench v1.0 (507 tasks; evaluation-only, never use for search/tuning) or ToolSandbox (stateful dependencies, not a dedicated recovery benchmark).
 Evolution fitness comes from executing controller rollouts, not supervised learning over JSONL. Audit versions, license, runner, manifests, leakage, and fault coverage first. A-3 CI/JSON/CSV still require independent audit; Pilot B remains HOLD. No A800/ARWM or real LLM API.
+
+
+## 2026-11-06 — D-056: dataset plan official-source verification and next execution plan
+
+New execution plan: 51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md.
+Dataset strategy and official metadata are maintained in 50_DATASET_SELECTION_AND_VALIDATION_PLAN.md.
+
+### Official-source corrections / confirmations
+- ToolMisuseBench REALM 2026: seed-42 v0.2 large = 6,000 train / 900 dev / 1,200 public-test records; HF card explicitly says only 600 public-test tasks are output-grounded. Do not conflate record count and score denominator.
+- ToolMisuseBench paper reports Parser+Repair task success 0.767 and conditional recovery success 0.736 on public test; recovery-disabled task success 0.158. These are paper-reported values, NOT our reproduction. Parser+Repair is a required reference baseline.
+- UndoBench current dataset card version is v1.0.1, 36 workflows, DEV 14 / validation 10 / TEST 12; data/spec CC BY 4.0, software Apache 2.0. Frozen TEST requires explicit opt-in.
+- ThinkingBox-Bench v1.0 has 507 tasks / 5 domains and is evaluation-only. It must not be used for search, tuning, prompt optimization or training; final clean regression only.
+
+### Current A-3 status
+- 47_PILOT_A3_PROTOCOL.md says PRE-REGISTERED / NOT RUN.
+- experiments/pilot_a_recovery/PILOT_A3_IMPLEMENTATION_STATUS.md says IMPLEMENTED / NOT YET VALIDATED BY CI / RESULTS NOT YET RUN OR ACCEPTED.
+- The 15 tests and artifact-upload workflow are authored, not evidence of a passing run.
+- Per-policy budget 954 (144 train / 120 validation / 690 held-out); seven policies = 6,678 policy episodes.
+- Do NOT claim A-3 passed. Do NOT start Pilot B.
+
+### Immediate next task: Phase A in 51 plan
+1. Identify the exact Actions run for the current implementation SHA.
+2. Inspect jobs/steps/logs and verify the 15 A-3 tests actually ran.
+3. Download the A-3 artifact and hash ZIP/JSON/CSV.
+4. Independently recompute CSV metrics and JSON parity, verify scenario/seed/fault pairing and hidden-oracle isolation.
+5. Apply the exact pre-registered Gate in file 47; publish GO / HOLD / NO-GO with evidence.
+6. In parallel, pin ToolMisuseBench and UndoBench revisions, audit manifest/checksums, splits, licenses, evaluator denominator and feature coverage.
+7. Only after A-3 Gate + dataset compatibility Gate + adapter smoke pass may Pilot B preregistration be drafted.
+
+### Authorization boundary
+GO: read-only dataset audit, A-3 CI/artifact audit, deterministic adapter smoke on train/dev.
+HOLD: evolutionary Pilot B, public-test tuning, UndoBench TEST, ThinkingBox optimization, A800/ARWM, real LLM API.
+At each session end update this file, SESSION_HANDOFF.md, README.md, 05_DECISION_LOG.md and 51 plan status. Record real commit SHA, run ID, artifact hashes and test outcomes. Never infer experiment success from documentation or workflow configuration.
