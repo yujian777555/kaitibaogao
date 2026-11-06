@@ -1721,3 +1721,50 @@ Pilot A-2 的 fault-injection testbed 本身不具新颖性；A-3 作为内部�
 Phase A：找出 A-3 对应 Actions run，核验 head SHA、job/step、15 项测试和 simulator run；下载 JSON/CSV artifact，计算 hashes，独立重算全部指标并应用 47 号 Gate。并行开展 ToolMisuseBench / UndoBench revision、manifest、license、split leakage、evaluator denominator 与故障覆盖审计。A-3 Gate、数据兼容 Gate、adapter smoke 均通过后，才起草 Pilot B 预注册协议。
 
 HOLD：Pilot B、UndoBench TEST、ThinkingBox 优化、A800/ARWM、真实 LLM API。每次接管会话继续维护 NEXT_SESSION_PROMPT.md。
+
+
+## 52. Phase A 执行轮：A-3 CI 修复、独立复核完成、Gate = HOLD（2026-11-06）
+
+本节为 Phase A 的实际执行记录，覆盖此前"A-3 待核验"状态。完整证据见 `PILOT_A3_INDEPENDENT_REAUDIT.md`（独立复核报告）、`experiments/pilot_a_recovery/a3_artifact_manifest.json`（哈希清单）、`experiments/pilot_a_recovery/a3_recompute_report.json`（独立重算表）。
+
+### 52.1 CI 核验发现：A-3 结果此前根本不存在
+- workflow `Pilot A recovery simulator` 在 `76f62c09`（"Run Pilot A-3 and archive episode-level results in CI"）之后的全部 7 个 run 均失败于 "Run Pilot A-3 simulator" 步骤，artifact 上传全部 skipped。
+- 根因：`recover_tool` 中 `tool.retry_after - tool.tick` 经 `PublicToolView` 读取运行时时钟 `tick`，而该门面按设计只暴露 `contract`/`retry_after`/动作方法 → `AttributeError: 'PublicToolView' object has no attribute 'tick'`。rate-limit 恢复分支必崩；15 项测试未覆盖该路径，所以测试全绿而模拟器必败。
+- 因此：旧文档中"A-3 已实现"一直成立，但"实验已运行"从未成立；旧 run 42030194929/42030392313 只覆盖 A1/A2。
+
+### 52.2 修复（commit `f5e6b46`）
+- 可部署策略改为按公开 `retry_after` 自行计数等待；`PublicToolView` 可见边界保持不变（与 `test_policy_view_hides_latent_simulator_labels` 一致）。
+- `oracle_recover` 保留特权 `tick`/`visible_at`（直接持有 `ToolRuntime`，属协议允许的诊断参考）。
+- 新增第 16 项测试 `test_recover_tool_never_touches_hidden_runtime_fields`：6 种可部署策略 × 7 种公开错误签名逐一驱动公开门面。测试总数 28（A-3 部分 16 = 15 预注册 + 1 崩溃回归）。
+
+### 52.3 被审计运行与 artifact
+- run **42241224898**，head SHA `f5e6b4608440b7ac60d3b57ceb0a758f819678c1`，push 触发，结论 success。
+- 步骤核验：28 项测试逐条在日志中出现并 OK；A1/A2/A3 模拟器步骤全部成功；`pilot-a3-results` 上传成功。
+- 哈希：ZIP `1119d14b70eedef221fe6e63439e2a04bd58c0354d5a723344d2c80c459ab727`（= GitHub digest）；JSON `3a60ae8385c723c57d54ff47608fe428690d94519f6762ec78bbc15c1d15fe14`；CSV `2c7d7dad5faaae58f182f27d77b90dfa237f4c1627e15b0bc029d34582f3c369`。
+- 原始文件保存在 `experiments/pilot_a_recovery/ci_artifact/`（`.gitattributes` 设 `-text` 保字节）；本地重跑 CSV 逐字节一致，模拟器确定性成立。
+
+### 52.4 独立重算与审计结论
+- 结构：6,678 行；每策略 954（144 train / 120 validation / 690 held-out）；954 scenario 七策略完全配对（同 seed、同 fault vector）；split 因子化与 47 号 §3 零偏差（45 个 task×composition 组合）。
+- 语义：逆序补偿（rollback 仅 saga/oracle、顺序为逆前缀）、补偿失败不冒充成功、unresolved/safe/violation 逐行一致。
+- JSON 汇总 vs CSV 独立聚合：0 处偏差。
+- Bootstrap：23 个 task×composition cluster，oracle−saga 配对差全为 0，CI [0.0, 0.0]（seed 42 敏感性相同）。
+
+### 52.5 预注册 Gate 判定（47 号 §6 原文）
+| 条件 | 实测 | 判定 |
+|---|---|---|
+| 每个 held-out slice saga_aware 零违规 | 三 slice 均 0.0 | 满足 |
+| oracle − saga 成功率差 ≥ 0.05 | **0.0** | 不满足 |
+| bootstrap CI 下界 > 0 | **0.0** | 不满足 |
+
+gap ≤ 0.02 但动作成本差 +34.63% > 10% → 不构成 NO-GO；按协议"其他情况"分支 **判定 HOLD（HOLD_REVIEW_FAILURE_BOUNDARIES）**。Pilot B 不启动。
+
+### 52.6 失败边界定位
+- `partial_comp_failure`、`delay_rate_permission` 两个 held-out 组合族对全部 7 策略（含 oracle）0% 成功（占 held-out 52.2%）——结构性不可行死区，特权信息只能省动作。
+- 任务族漂移 slice：saga_aware 97.5% 成功、零违规——策略跨任务族泛化良好。
+- 唯一可优化维度是动作成本（saga 10.17 vs oracle 7.56，+34.6%）。
+- 不得在查看该批 held-out 后调参再宣称通过；若继续需新预注册 A-3b（可行性分层指标/补充可行组合族/动作成本目标），保留 A-3 结果不动。
+
+### 52.7 授权状态与下一步
+- GO：文档维护；ToolMisuseBench / UndoBench 只读数据集审计（Phase B）；A-3b 协议设计（先批准后运行）。
+- HOLD：Pilot B 演化搜索；用 A-3 held-out 调参；A800/ARWM；真实 LLM API；UndoBench frozen TEST；ThinkingBox 优化。
+- 下一会话唯一任务：Phase B 数据集审计 + A-3b 新预注册设计。维护要求不变：每轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、README.md、05_DECISION_LOG.md 与 51 号计划状态。

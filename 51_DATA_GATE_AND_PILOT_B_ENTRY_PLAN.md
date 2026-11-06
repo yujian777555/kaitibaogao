@@ -2,9 +2,10 @@
 
 日期：2026-11-06
 所属项目：kaitibaogao / 第一项创新候选
-状态：EXECUTION PLAN / NOT STARTED
+状态：PHASE A COMPLETE (GATE = HOLD) / PHASE B NEXT
 工作分支：pilot-a-stateful-recovery
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
+Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
 
 ## 0. 本阶段唯一目标
 
@@ -51,7 +52,7 @@
 - 官方用途明确为 evaluation-only；不得用于演化搜索、参数调节、prompt optimization、训练或其他模型优化。
 - 只能在恢复策略冻结后做 clean-workflow regression。不是故障恢复主数据集。
 
-## 2. Phase A — Pilot A-3 独立验收（最高优先级）
+## 2. Phase A — Pilot A-3 独立验收（最高优先级）— 已完成（2026-11-06，Gate = HOLD，见 PILOT_A3_INDEPENDENT_REAUDIT.md）
 
 ### A1. 固定运行身份
 - 找到 pilot-a-stateful-recovery 当前 HEAD。
@@ -196,10 +197,12 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 | 5 | Pilot B | 同预算强基线实验 | 执行授权实验 | 访问锁箱 test 调参 |
 | 6 | 外部最终评估 | ToolMisuseBench public test / UndoBench TEST / clean regression | 冻结后确认 | 再根据 test 改方法并继续报同一 test |
 
-## 7. 当前明确决定
+## 7. 当前明确决定（2026-11-06 Phase A 完成后更新）
 
-- GO：文档维护、A-3 独立复核、公开数据集只读审计和 adapter smoke 的准备。
-- HOLD：Pilot B 演化搜索；A800 / ARWM；真实 LLM API；UndoBench frozen TEST。
+- **Phase A 结论：A-3 预注册 Gate = HOLD（HOLD_REVIEW_FAILURE_BOUNDARIES）。** 完整证据见 PILOT_A3_INDEPENDENT_REAUDIT.md。要点：run 42241224898（head `f5e6b46`）真实运行并成功上传 artifact（此前全部 run 因 `PublicToolView.tick` 崩溃）；28 项测试通过；6,678 episodes 结构/配对/语义审计全部通过；oracle−saga 成功率差 0.0、bootstrap CI [0.0,0.0]、动作成本差 +34.6% → 按 47 号原文 HOLD。
+- Phase A artifact 哈希（SHA-256）：ZIP `1119d14b70eedef221fe6e63439e2a04bd58c0354d5a723344d2c80c459ab727`；JSON `3a60ae8385c723c57d54ff47608fe428690d94519f6762ec78bbc15c1d15fe14`；CSV `2c7d7dad5faaae58f182f27d77b90dfa237f4c1627e15b0bc029d34582f3c369`（6,678 数据行）。原始文件：`experiments/pilot_a_recovery/ci_artifact/`；清单：`a3_artifact_manifest.json`。
+- GO：文档维护、公开数据集只读审计（Phase B）、adapter smoke 的准备、A-3b 新预注册协议设计（先批准后运行）。
+- HOLD：Pilot B 演化搜索；用 A-3 held-out 调参；A800 / ARWM；真实 LLM API；UndoBench frozen TEST。
 - ThinkingBox：仅冻结后 clean regression。
-- 下一项实际执行任务：Phase A — 找到 A-3 对应 Actions run 和 artifact，完成独立重算。
+- 下一项实际执行任务：Phase B（§3）数据集版本固定与语义/泄漏/分母审计 + A-3b 预注册设计（可行性分层指标、可行 held-out 组合族、动作成本目标）。
 - 接管要求：每次会话结束前更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、README.md、05_DECISION_LOG.md 和本计划的状态；必须记录实际 HEAD、CI run、artifact hashes、工作区/分支状态。不得把文档提交或 CI 配置写成实验已通过。

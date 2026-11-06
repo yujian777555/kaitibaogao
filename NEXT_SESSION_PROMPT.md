@@ -2,7 +2,7 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-05**  
+**最后维护日期：2026-11-06（Phase A 独立复核完成轮）**  
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
@@ -26,10 +26,11 @@
 - 所有修改在工作分支进行；每次提交后核验远端 commit、文件内容和分支差异。
 - 不得将“文件已写入”“测试用例已编写”“CI workflow 已配置”表述为测试通过或实验完成。
 
-记录基线（创建本文件前最后一次核验）：
-- 工作分支 HEAD：`ad9d942a9cccf3627f5af8805156e754af4c4ff7`
+记录基线（2026-11-06 Phase A 完成时最后一次核验）：
+- 工作分支 HEAD（Phase A 提交后）：以 `f5e6b4608440b7ac60d3b57ceb0a758f819678c1`（A-3 崩溃修复）之后的审计/文档提交为准，见维护记录
 - main HEAD：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`
-- 工作分支相对 main：ahead 54 / behind 0
+- 工作分支相对 main：ahead 82+ / behind 0
+- A-3 被审计 CI run：42241224898，head SHA `f5e6b4608440b7ac60d3b57ceb0a758f819678c1`，结论 success
 以上只是历史基线；接手后必须重新查询。
 
 ### 2. 研究背景与方向边界
@@ -84,39 +85,26 @@
 6. saga_aware
 7. oracle_diagnostic
 
-**真实状态必须如实表述：**
-- SPECIFIED：A3 协议已冻结。
-- IMPLEMENTED：首版模拟器、15 项测试用例、CI workflow step 和 artifact 上传步骤已写入分支。
-- TESTED：截至本提示词维护时，尚未核验加入 A3 后的 GitHub Actions run；不得声称 A3 测试通过。
-- RESULTS：尚未独立审计 A3 JSON/CSV；没有 A3 实验结论。
-- GATE：A3 gate 未评估；Pilot B 未获准；A800/ARWM、真实 LLM API、双种群协同演化继续 HOLD。
+**真实状态必须如实表述（2026-11-06 更新）：**
+- SPECIFIED：A3 协议已冻结（47 号，未修改）。
+- IMPLEMENTED：模拟器、16 项测试（15 预注册 + 1 崩溃回归）、CI workflow step 和 artifact 上传步骤在分支上。
+- TESTED：run 42241224898（head `f5e6b46`）28 项测试全部通过，A1/A2/A3 模拟器全部真实运行；此前 7 个 run 因 `PublicToolView` 误读 `tick` 崩溃（已修复）。
+- RESULTS：A-3 已运行并经独立复核（`PILOT_A3_INDEPENDENT_REAUDIT.md`）：6,678 episodes、结构/配对/split/语义全部通过审计、JSON 与 CSV 零偏差、artifact 哈希齐全、本地重跑确定性一致。
+- GATE：**A-3 预注册 Gate = HOLD（HOLD_REVIEW_FAILURE_BOUNDARIES）**。三条件中安全条件满足（各 slice 零违规），但 oracle−saga 成功率差 0.0（要求 ≥0.05）、bootstrap CI [0.0,0.0]（要求下界 >0）；gap≤0.02 但动作成本差 +34.6%>10%，按 47 号原文为 HOLD。**Pilot B 未获准**；A800/ARWM、真实 LLM API、双种群协同演化继续 HOLD。
 
-### 4. 当前唯一下一任务：核验并审计 Pilot A-3
+### 4. 当前唯一下一任务：Phase B 数据集审计 + A-3b 新预注册设计
 
-不要另起新研究方向，不要先做 Pilot B。按顺序执行：
+Phase A（A-3 独立复核）已完成，结论 HOLD，详见 `PILOT_A3_INDEPENDENT_REAUDIT.md` 与 D-057。不要重跑 A-3，不要启动 Pilot B。按顺序执行：
 
-1. 重新核验远端 `pilot-a-stateful-recovery` 和 `main` HEAD、ahead/behind、工作树/分支状态。
-2. 找到**加入 A3 workflow step 之后**由最新分支 commit 触发的 GitHub Actions run。确认 workflow 实际运行了 regression tests、Pilot A、Pilot A-2、Pilot A-3，并完成 artifact upload。
-3. 若 CI 失败，定位真实根因、修复代码/测试/协议，提交后重跑。不得删测试、跳过测试、伪造成功或把旧 A1/A2 run 当作 A3 证据。
-4. 若 CI 成功，下载 `pilot-a3-results` artifact，独立复算 JSON 和 CSV：
-   - 总行数 6,678；每策略 954；
-   - 每策略 train 144、validation 120、held-out 690；
-   - 每个 scenario ID 对应七种策略，seed 和 fault realization 完全配对；
-   - split 与任务族/故障组合族符合 47 号协议，无 held-out 泄漏；
-   - 检查 per-tool fault vector、策略公开观测边界、隐藏状态访问；
-   - 从 episode CSV 独立重算 success、safe resolution、invariant violation、duplicate side effect、unresolved、escalation、compensation failure、动作成本；
-   - 复算 task-only、fault-only、joint-shift 各 slice 和 worst-group；
-   - 独立复算 task-family × fault-composition cluster paired bootstrap；
-   - 检查 saga 逆序补偿、补偿失败与 residual side effects 语义是否正确。
-5. 严格按 `47_PILOT_A3_PROTOCOL.md` 的预注册门禁判断：
-   - saga_aware 在 task-only、fault-only、joint-shift 三个 held-out slice **每个 slice 都必须零 invariant violation**；
-   - oracle_diagnostic − saga_aware held-out task-success gap 至少 0.05；
-   - task-family × fault-composition paired cluster bootstrap 95% CI 下界必须大于 0；
-   - 任一 slice 有安全违规即 HOLD；
-   - 若全部 slice 零违规、success gap ≤ 0.02 且动作成本差 ≤ 10%，则该模拟器任务族 NO-GO；
-   - 其他情况 HOLD，先定位失败边界。
-6. 只有门禁满足，才可进入 Pilot B 的同预算算法对照：Random Search、标准 GA/GP、契约约束 EA；held-out 只作最终评价。Pilot B 必须证明 EC 超越强手工策略，而不是只超过 blind retry 或弱基线。
-7. A800/ARWM、真实 LLM API、双种群协同演化均需独立前置证据和明确授权，不得因 A3 通过而自动启动。
+1. 重新核验远端 `pilot-a-stateful-recovery` 和 `main` HEAD、ahead/behind、工作树状态。
+2. **Phase B（51 号计划 §3）：公开数据集只读审计**——
+   - ToolMisuseBench v0.2 large：固定 HF dataset commit/revision，下载 train/dev/test_public 与 manifest/freeze/quality 文件，全部算 SHA-256；核验 6,000/900/1,200 行数、task_id 唯一性、600 output-grounded 子集、domain×fault_family 分布、官方 evaluator 分母语义（0.767/0.736/0.158 是论文报告值，不是我们的复现值）；做 train/dev/test 的 task/fault family 泄漏审计。
+   - UndoBench v1.0.1：固定数据与官方代码 commit；核验 14/10/12 split、CC BY 4.0 / Apache 2.0、paired CONTROL/FAULT 语义、指标实现；TEST 锁箱，只用 DEV/validation 做接口 smoke。
+   - ThinkingBox-Bench v1.0：仅记录 507 tasks/5 domains 与 evaluation-only 约束。
+3. **A-3b 新预注册协议设计（先设计、后批准，不得直接开跑）**——针对 A-3 定位的失败边界：(a) 可行性分层的评价定义（区分结构性不可行场景）；(b) 补充可行的 held-out 故障组合族或明确可行/不可行标注；(c) 动作成本作为独立优化维度的评价方案。新协议必须保留 A-3 结果不动、held-out 继续锁箱，预注册后才允许运行。
+4. 产出 Phase B 交付：DATASET_LOCK_MANIFEST.json、BENCHMARK_COMPATIBILITY_MATRIX.md、SPLIT_LEAKAGE_AUDIT.md、LICENSE_AND_PROVENANCE.md（51 号计划 §3 规定）。
+5. 只有 A-3b Gate 通过 + 数据兼容 Gate + adapter smoke 通过，才可起草 Pilot B 预注册。Pilot B 必须证明 EC 超越强手工恢复策略与 Parser+Repair 等强基线，而不是只超过 blind retry。
+6. A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 优化、双种群协同演化均需独立前置证据和明确授权，不得自动启动。
 
 ### 5. 强制接管提示词维护制度（不可违反）
 
@@ -318,3 +306,35 @@ Dataset strategy and official metadata are maintained in 50_DATASET_SELECTION_AN
 GO: read-only dataset audit, A-3 CI/artifact audit, deterministic adapter smoke on train/dev.
 HOLD: evolutionary Pilot B, public-test tuning, UndoBench TEST, ThinkingBox optimization, A800/ARWM, real LLM API.
 At each session end update this file, SESSION_HANDOFF.md, README.md, 05_DECISION_LOG.md and 51 plan status. Record real commit SHA, run ID, artifact hashes and test outcomes. Never infer experiment success from documentation or workflow configuration.
+
+
+## 2026-11-06 — D-057: Phase A complete — A-3 CI remediation, independent reaudit, Gate = HOLD
+
+New report: `PILOT_A3_INDEPENDENT_REAUDIT.md`. Decision log: D-057.
+
+### What actually happened (facts, verified)
+1. **A-3 CI had never produced results.** All workflow runs from `76f62c09` onward crashed in "Run Pilot A-3 simulator": `recover_tool` dereferenced `tool.tick` through `PublicToolView` (which intentionally hides runtime fields) → `AttributeError`. Artifact upload was skipped every time; no A-3 JSON/CSV existed before today.
+2. **Remediation (commit `f5e6b46`):** policies count their own waits against the public `retry_after` hint; `PublicToolView` unchanged (observation boundary preserved); added regression test #16 (`test_recover_tool_never_touches_hidden_runtime_fields`, 6 policies x 7 public errors). Test count is now **16** A-3 tests (15 pre-registered + 1 crash-regression), 28 total in the suite.
+3. **Validated run:** 42241224898, head SHA `f5e6b4608440b7ac60d3b57ceb0a758f819678c1`, conclusion success. 28 tests OK (verified in logs), A1/A2/A3 simulators all ran, `pilot-a3-results` uploaded.
+4. **Artifacts (sha256):** ZIP `1119d14b70eedef221fe6e63439e2a04bd58c0354d5a723344d2c80c459ab727` (matches GitHub digest); `pilot_a3_results.json` `3a60ae8385c723c57d54ff47608fe428690d94519f6762ec78bbc15c1d15fe14`; `pilot_a3_episodes.csv` `2c7d7dad5faaae58f182f27d77b90dfa237f4c1627e15b0bc029d34582f3c369` (6,678 data rows). Preserved raw under `experiments/pilot_a_recovery/ci_artifact/` with `-text` gitattributes; manifest `a3_artifact_manifest.json`. Local rerun is byte-identical (deterministic simulator).
+5. **Independent recompute** (`recompute_a3_audit.py`, does not import simulator code): 6,678 rows; 954/policy (144/120/690); 954 scenario IDs perfectly paired across 7 policies (same seeds + fault realizations); protocol-47 factorized splits exact (45 task x composition cells, 0 deviations); JSON vs CSV parity 0 mismatches; rollback/compensation/unresolved semantics consistent row-by-row.
+
+### Pre-registered Gate (47 section 6, applied verbatim): **HOLD**
+- Condition 1 (zero saga_aware invariant violations per held-out slice): **PASS** (task-shift 0.0, fault-shift 0.0, joint-shift 0.0).
+- Condition 2 (oracle − saga held-out task-success gap >= 0.05): **FAIL — gap = 0.0**.
+- Condition 3 (cluster paired bootstrap 95% CI lower > 0): **FAIL — CI = [0.0, 0.0]** (23 task-family x fault-composition clusters, every paired diff = 0; seed-42 sensitivity identical).
+- gap <= 0.02 holds but action-cost difference +34.63% > 10%, so the NO-GO branch does not apply either → protocol's "otherwise HOLD" branch.
+- Decision: **HOLD_REVIEW_FAILURE_BOUNDARIES**. Pilot B NOT authorized.
+
+### Failure boundaries (why the gap is zero)
+- Compositions `partial_comp_failure` and `delay_rate_permission` are structurally infeasible: 0% success for **all 7 policies including the privileged oracle** (360/690 = 52.2% of held-out). Compensation-failure residue and permission denials make completion impossible; latent oracle knowledge only saves actions.
+- Task-family shift is near ceiling (saga_aware 97.5% success, zero violations) — policy rules generalize; collapse comes only from unseen fault compositions.
+- The only real optimization headroom is action cost (saga 10.17 vs oracle 7.56 mean actions, +34.6%).
+- Full worst-group table in the reaudit report.
+
+### Status after this round
+- Pilot A-3: **RUN / INDEPENDENTLY AUDITED / GATE = HOLD**. Do not re-run A-3 and do not tune on its held-out.
+- Pilot B: NOT started / NOT authorized. A800/ARWM, real LLM API, dual-population co-evolution, UndoBench TEST, ThinkingBox optimization: all HOLD.
+
+### Next session's only task
+Phase B dataset audit (ToolMisuseBench / UndoBench version pinning, manifest/license/split-leakage/evaluator-denominator audit per 51 plan section 3) **plus** drafting a NEW preregistration A-3b addressing the failure boundaries (feasibility-stratified metrics / feasible held-out compositions / action cost as objective). A-3b must be approved before any new run. Pilot B remains blocked until A-3b Gate + dataset compatibility Gate + adapter smoke all pass.

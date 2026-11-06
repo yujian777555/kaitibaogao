@@ -783,3 +783,31 @@ HOLD：Pilot B 演化搜索、ToolMisuseBench public test 调参、UndoBench fro
 
 ### 下一步
 按 51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md 执行 Phase A：确定准确 Actions run 与 head SHA，检查 15 项测试，下载 A-3 JSON/CSV artifact，hash 并独立重算，严格应用 47 号预注册 Gate。并行完成 ToolMisuseBench / UndoBench 数据审计。只有 A-3 Gate、数据兼容 Gate 和 adapter smoke 均通过，才起草 Pilot B preregistration。
+
+
+## 决策 D-057：Pilot A-3 CI 修复、独立复核与预注册 Gate 判定 HOLD（2026-11-06）
+
+### 事实（已核验）
+1. **CI 失败根因已定位并修复。** 加入 A-3 simulator 步骤后的全部 run（42037561884 起 7 个）在 `recover_tool` 崩溃：`AttributeError: 'PublicToolView' object has no attribute 'tick'`。策略代码经公开门面误读运行时时钟；因此 artifact 从未上传，A-3 结果文件此前根本不存在。修复（commit `f5e6b46`）：策略按公开 `retry_after` 自行计数等待，`PublicToolView` 可见边界不变；新增第 16 项崩溃回归测试（6 策略 × 7 公开错误全覆盖）。测试数由 15 变为 16（15 项预注册测试全部保留）。
+2. **修复后的 CI 真实通过。** run 42241224898（head SHA `f5e6b4608440b7ac60d3b57ceb0a758f819678c1`）：28 项测试 OK、A1/A2/A3 模拟器全部运行成功、artifact 上传成功。
+3. **artifact 已核验。** ZIP SHA-256 `1119d14b70eedef221fe6e63439e2a04bd58c0354d5a723344d2c80c459ab727`（与 GitHub digest 一致）；JSON `3a60ae83…`；CSV `2c7d7dad…`（6,678 数据行）。原始文件存于 `experiments/pilot_a_recovery/ci_artifact/`（-text 属性保真），清单在 `a3_artifact_manifest.json`。本地重跑 CSV 逐字节一致，模拟器完全确定。
+4. **独立重算全部通过结构/语义审计。** 6,678 行、每策略 954（144/120/690）、954 个 scenario 七策略完全配对（同 seed、同 fault vector）、split 因子化与 47 号协议零偏差、JSON 汇总与 CSV 重算 0 处偏差、逆序补偿/补偿失败/unresolved 语义逐行一致。
+5. **预注册 Gate 结果：HOLD（HOLD_REVIEW_FAILURE_BOUNDARIES）。**
+   - 条件 1（每个 held-out slice saga_aware 零违规）：满足（三 slice 均 0.0）；
+   - 条件 2（oracle − saga 成功率差 ≥ 0.05）：**0.0，不满足**；
+   - 条件 3（cluster paired bootstrap 95% CI 下界 > 0）：**[0.0, 0.0]，不满足**（23 个 task×composition cluster 配对差全为 0，seed 42 敏感性相同）；
+   - gap ≤ 0.02 成立但动作成本差 +34.63% > 10%，不满足 NO-GO 分支；按 47 号原文落入"其他情况为 HOLD"。
+
+### 失败边界（HOLD 要求的定位）
+- **可行性死区**：held-out 组合族 `partial_comp_failure` 与 `delay_rate_permission` 对全部 7 种策略（含特权 oracle）均为 0% 成功，占 held-out 52.2%（360/690）——补偿失败残留与权限拒绝使任务结构性不可行，特权信息只能省动作不能改结局，这是 gap=0 的直接原因。
+- **泛化边界**：任务族漂移 slice 上 saga_aware 达 97.5% 成功且零违规，策略规则跨任务族泛化良好；塌陷全部来自未见故障组合。
+- **效率边界**：saga_aware 相对 oracle 动作成本 +34.6%（盲目等待/重复 verify），是本任务族唯一明确可优化维度。
+
+### 判定含义与限制
+- **Pilot B 不启动**；不得查看本批 held-out 后调参再宣称通过。
+- 结果是探索性确定性模拟器证据，不是真实 LLM Agent 结论，不是 EC 增益证据。
+- 若继续本方向，需**新预注册**（如 A-3b：可行性分层指标或补充可行组合族）；本报告（`PILOT_A3_INDEPENDENT_REAUDIT.md`）作为 A-3 完整结果永久保留。
+- GO：ToolMisuseBench / UndoBench 只读数据集审计、A-3b 协议设计。HOLD：Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 优化。
+
+### 下一步
+按 51 号计划执行 Phase B（数据集版本固定、manifest/license/split 泄漏/evaluator 分母审计），同时设计 A-3b 新预注册协议供批准。A-3 Gate = HOLD，任何演化搜索继续等待授权。

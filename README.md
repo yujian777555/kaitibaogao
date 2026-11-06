@@ -605,4 +605,16 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - ToolMisuseBench：6,000 train / 900 dev / 1,200 public-test records；其中 HF 数据卡注明 600 条 output-grounded tasks，评分分母待官方 evaluator 审计；Parser+Repair 是必须复现/适配的参考基线。
 - UndoBench：v1.0.1，36 workflows，14/10/12 split；TEST 锁箱。
 - ThinkingBox-Bench：507 tasks，evaluation-only，只能最终 clean regression。
-- Pilot A-3 当前仍是 IMPLEMENTED / NOT YET VALIDATED BY CI / RESULTS NOT YET RUN OR ACCEPTED；不能宣称通过。下一步先核验 Actions 与 JSON/CSV artifact 并独立重算。Pilot B、A800/ARWM、真实 LLM API 继续 HOLD。
+- Pilot A-3 独立复核已于 2026-11-06 完成（见下节）；Gate = HOLD。Pilot B、A800/ARWM、真实 LLM API 继续 HOLD。
+
+
+## 2026-11-06：Phase A 完成 — Pilot A-3 独立复核与预注册 Gate 判定 HOLD
+
+完整报告：[PILOT_A3_INDEPENDENT_REAUDIT.md](PILOT_A3_INDEPENDENT_REAUDIT.md)；决策记录：05_DECISION_LOG.md D-057。
+
+- **CI 修复：** 加入 A-3 步骤后的全部 run 曾在 `recover_tool` 崩溃（策略经 `PublicToolView` 误读运行时 `tick`），artifact 从未产生。修复 commit `f5e6b46`，新增第 16 项崩溃回归测试（A-3 测试 15→16，套件共 28 项）。
+- **真实运行：** run 42241224898（head `f5e6b46`）28 项测试全部通过，A1/A2/A3 模拟器全部成功，artifact 上传成功。哈希：ZIP `1119d14b…`、JSON `3a60ae83…`、CSV `2c7d7dad…`（6,678 行）；原始文件存 `experiments/pilot_a_recovery/ci_artifact/`。
+- **独立重算：** 结构/配对/split 因子化/语义全部通过；JSON 与 CSV 零偏差；本地重跑逐字节一致。
+- **预注册 Gate（47 号 §6 原文）：HOLD。** 安全条件满足（held-out 三 slice 零违规），但 oracle−saga 成功率差 0.0（要求 ≥0.05）、cluster bootstrap CI [0.0, 0.0]（要求下界 >0）；gap≤0.02 但动作成本差 +34.6%>10%，不构成 NO-GO。
+- **失败边界：** `partial_comp_failure` 与 `delay_rate_permission` 组合族对全部策略（含特权 oracle）结构性不可行（0% 成功，占 held-out 52.2%）；任务族漂移 slice 97.5% 成功、零违规；可优化维度只剩动作成本。
+- **边界：** 不得用本批 held-out 调参再宣称通过。GO：ToolMisuseBench/UndoBench 只读审计（Phase B）+ A-3b 新预注册设计。HOLD：Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 优化。
