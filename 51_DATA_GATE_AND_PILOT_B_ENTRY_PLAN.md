@@ -207,3 +207,12 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 - Phase B 结论（2026-11-06）：ToolMisuseBench 评分口径已解密（0.767/1200、0.736/993、600 OG 为子集）；语义缺口确认（无 lost-ACK/补偿/saga/重复副作用）；Parser+Repair DEV 复现 0.7622/0.7363，列为 Pilot B 必选基线。UndoBench 语义与指标同构、harness 验证、TEST 锁内置；定位外部泛化验证。融合判断见 54 号：主搜索=A-3b 自有模拟器+ToolMisuseBench train 第二域，外部=UndoBench TEST；公开基准不能单独支撑第一项创新。数据 revision：ToolMisuseBench `98eb28718b0393e029088ce80604c48807216de4`、UndoBench `4be1151851a109e7c9cfc1ba5d6e6c64461f6f93`（哈希明细在 DATASET_LOCK_MANIFEST.json）。
 - 下一项实际执行任务：55_PILOT_A3B_RESEARCH_DESIGN.md 独立审查 → 预注册冻结（R3/R4 分层比例、τ_min、成本计价、seed、预算、场景哈希）→ 用户批准 → 实现可恢复性分类器/场景生成器扩展/统一 adapter。任何 A-3b 运行在冻结批准前一律禁止。
 - 接管要求：每次会话结束前更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、README.md、05_DECISION_LOG.md 和本计划的状态；必须记录实际 HEAD、CI run、artifact hashes、工作区/分支状态。不得把文档提交或 CI 配置写成实验已通过。
+
+
+## 8. 2026-11-07 状态更新：Phase B 完成，55 号独立审查 REQUEST CHANGES
+
+- Phase B 数据审计交付物见 52–54、DATASET_LOCK_MANIFEST.json、SPLIT_LEAKAGE_AUDIT.md、LICENSE_AND_PROVENANCE.md 与 experiments/dataset_audit/。
+- A-3b 设计草案见 55 号；独立审查见 56 号。
+- Phase B = GO / complete；55 = REQUEST CHANGES；A-3b execution = HOLD。
+- 55 号不能直接冻结：必须修复 R4 零残留矛盾、R2 完成/安全放弃混淆、observation-based recoverability 定义、有限样本 P(violation)=0 表述、R4 成本与必要升级惩罚、类别比例/精确配额/cluster-level power、算法初始化与共同骨干、rollout 预算边界和新颖性审计。
+- 下一阶段：55-R1 修订 + reachability checker 规格/单测 + 场景配额与功效分析 + 算法公平性设计。只允许单元测试和 train/dev/validation smoke；正式 A-3b、Pilot B、A800、真实 API、UndoBench TEST 均 HOLD。
