@@ -1964,7 +1964,7 @@ Q1 WAIT-SLA 是否降低重复副作用；Q2 是否优于固定 WAIT；Q3 VERIFY
 **AB vs A +0.119 p=0.0002（B-new 成立，逆转 D-061）**；**AwaitSLA vs A +0.089 p=0.005、vs Fixed +0.054 p=0.003（WAIT-SLA 成立）**；AB vs AwaitSLA all +0.031 p=0.0072；但 validation +0.031, p=0.244（n.s.），Q10 搜索增量尚未证明泛化；validation AB vs A +0.142 p=0.008。负结果：Gate 有害、B 单独劣于 NSGA-II、未超 hand（−0.282）。
 
 ### 56.4 判定与下一步
-A + WAIT-SLA + B-new 三机制各有独立消融证据；主张限定"优于标准 EA 且行为安全"。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。
+A + WAIT-SLA + B-new 三机制有诊断性消融证据；但 AB vs NSGA-II all p=0.062、validation p=0.2277，尚未证明优于标准 EA；Q10 validation p=0.244，搜索增量尚未证明泛化。安全保证限于明确工具合同假设。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。
 
 
 ## 57. D-063：正式 A-3b 功效核算与预注册（2026-11-08）
@@ -1972,7 +1972,7 @@ A + WAIT-SLA + B-new 三机制各有独立消融证据；主张限定"优于标�
 执行计划：`62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md`；下一会话入口：`NEXT_SESSION_PROMPT.md` D-063 节。
 
 ### D-062 完成结论
-- 59/60/61 已提交；D-062 Stage 0–4 完成。79/79 为执行报告中的本地测试结果，CI 需通过新 workflow 真实确认。
+- 59/60/61 已提交；D-062 Stage 0–4 完成。执行报告称 79/79；新 workflow Actions run `42398278551` 已 success，`pilot_a_recovery` 与 `pilot_a3b` 两个测试步骤均通过。
 - D-061 0.36 vs 0.006 叙事被推翻：99.4% 为 evaluator artifact；真实重复 7 例，根因是 SLA 内 VERIFY 的 NOT_COMMITTED 谎言解锁非幂等 RETRY。
 - WAIT-SLA、B-new 有诊断级机制证据；AB vs A +0.119、AwaitSLA vs A +0.089、AwaitSLA vs Fixed +0.054、AB vs AwaitSLA all +0.031。
 - 负结果：B 单独劣于 NSGA-II；Safety Gate 有害；AB 未超过 Hand。
