@@ -1892,3 +1892,22 @@ D-060 只可作为诊断线索；不能声称 A 已证明安全提升、B 已验
 
 ### 下一会话优先级
 先修 controller/evaluator/labels/B/statistics/baselines 和配额矛盾，再用新诊断场景重跑。**暂不做功效分析，不扩大 rollout**，因为当前效应指标尚不可信。保留 D-060 原始 artifact，不覆盖。正式 A-3b 需独立复审和用户批准。
+
+
+## 55. D-061 执行轮：57 号修复落地 + 第二轮诊断（2026-11-07）
+
+完整记录：`58_PILOT_A3B_ROUND2_FIX_AND_DIAGNOSTIC_REPORT.md`。数据：`diagnostic2_results.json`（manifest d4fb2be680e74f2e…）+ `diagnostic2_stats.json`；D-060 `diagnostic_results.json` 保留。
+
+### 55.1 修复（F1–F8/S1–S3 全部处置，47/47 测试绿）
+真状态化 FSM + 显式补偿日志（隐式回滚已删）；升级事件三分（显式/强制/原因）；R4 四量损害记账；R1/R2-only 成本目标；A-3 标签解析证明器+检查器 309 模式穷举交叉（0 硬矛盾）；B 全种群聚合+涉事基因定位+权重进评价+预算对齐；独立 contract_validator；三值可达性+环检测；pooled hierarchical 统计；标准 NSGA-II/III/GA/Random（GP 排除）；train/val 分离。
+
+### 55.2 第二轮诊断结果（8 方法×3 seeds，316,224 eps/method/seed）
+- **A vs NSGA-II Δ=+0.239 [0.193,0.284] Holm p=0.0014（d=1.56）**；独立 validator 非法率 A/AB=0 vs 其余=1.0。
+- primary AB vs NSGA-II +0.126（p=0.0002, d=0.82）显著。
+- **AB vs A −0.113（p=0.0014）：B 叠加有害**；B 单独 +0.082（弱）。
+- AB vs hand −0.514：**未超强手工**（hand 0.827）。
+- Q6 验证集 AB vs NSGA-II +0.148（p=0.002, d=0.97）——泛化成立。
+- 开放：环境违规率 A 0.36 vs hand 0.006（观测歧义 WAIT-SLA 时序属行为层）。
+
+### 55.3 判定与下一步
+机制 A 有真实显著证据；B 组合主张不成立；第一项创新**部分成立**。下一步：重设计 B 反例→基因映射 + 状态化 WAIT-SLA 契约修复，复测违规率后 A+新B 同配置重跑。正式 A-3b/功效分析继续 HOLD。

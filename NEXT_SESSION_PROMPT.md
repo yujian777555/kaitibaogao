@@ -463,3 +463,37 @@ G. 纠正 3:1/3:2 配额定义和 D-060 记录；再做功效分析。
 ## 授权
 GO：以上实现修复、单元测试、独立 validator、非锁箱新诊断集和统计复算。
 HOLD：正式 A-3b 确认性实验、A-3 原 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM、真实 LLM API、ThinkingBox 优化。用户批准 preregistration 后才可运行正式 A-3b。
+
+
+## 2026-11-07 — D-061: 57-review fixes implemented; round-2 diagnostic run
+
+Report: `58_PILOT_A3B_ROUND2_FIX_AND_DIAGNOSTIC_REPORT.md`. Artifacts: `experiments/pilot_a3b/diagnostic2_results.json` (manifest d4fb2be680e74f2e...) + `diagnostic2_stats.json`. D-060 `diagnostic_results.json` preserved untouched.
+
+### All F1-F8/S1-S3 blockers fixed (47/47 tests green)
+- F1 real stateful FSM (step/attempts/confirmed/comp-stack/decision-budget); explicit COMPENSATE/ROLLBACK with comp_log; implicit saga rollback REMOVED.
+- F2 policy_selected_escalation vs runtime_forced_abort separated; R3 counts explicit escalation only.
+- F3 R4 harm accounting: min_reachable_harm / actual_harm / avoidable_harm / unavoidable_residual; containment = explicit escalation AND zero duplicates AND avoidable_harm==0.
+- F4 cost objective counts only R1/R2 unnecessary actions; necessary R3/R4 escalation unpunished.
+- F5 A-3 verdicts: analytic prover + AND-OR checker exhaustive cross-check over 309 fault patterns: 0 hard contradictions, 120 exact, 18 R1->R2 refinements, 171 checker-UNKNOWN (bounded search, not counter-evidence).
+- F6 B redesigned: per-generation population-wide aggregation, action-sequence implicated genes, weights actually reach the evaluator (<=2x), targeted mutation REPLACES standard mutation (budget-matched).
+- F7 independent contract_validator.py (separate code path from repair table; exhaustive error x action matrix).
+- F8 three-valued WIN/PROVEN_LOSE/UNKNOWN + cycle detection; no downgrade when higher goal UNKNOWN.
+- S1 pooled hierarchical stats (cluster = task x composition, seeds nested; bootstrap + sign-flip + Holm + effect sizes + seed stability).
+- S2 standard NSGA-II / NSGA-III (labelled reimplementation) / GA / Random; GP excluded with reason.
+- S3 train 108 search / validation 54 (2 unseen task families, fresh seeds) reporting-only.
+
+### Round-2 results (DIAGNOSTIC, not confirmatory)
+8 methods x 3 seeds; pop 48 x 60 gens; 316,224 real episodes per method per seed; shared init pool.
+- **A vs NSGA-II: +0.239 [0.193, 0.284], Holm p=0.0014 (d=1.56) -- significant.**
+- **Independent-validator illegal ratio: A/AB = 0.00 vs everyone else = 1.00 -- decisive.**
+- primary AB vs NSGA-II: +0.126 [0.086, 0.167], p=0.0002 (d=0.82) -- significant.
+- **AB vs A: -0.113, p=0.0014 -- adding B HURTS A**; B alone +0.082 (Holm p=0.034, weak).
+- AB vs hand: -0.514 -- strong hand baseline (0.827) NOT beaten.
+- Q6 validation: AB vs NSGA-II +0.148, p=0.002 (d=0.97); A val 0.488 vs nsga2 0.222 -- generalisation holds.
+- Open issue: environment violation rate A 0.36 vs hand 0.006 (observation-ambiguity WAIT-SLA timing is behavioural, not rule-level).
+
+### Judgement
+Mechanism A: real significant evidence (legality + success, attributable). Mechanism B in combination: NOT established (significantly harmful). First innovation PARTIALLY established (A yes, B needs redesign). Not yet paper-complete.
+
+### Next task (single)
+Redesign B's counterexample->gene mapping (action-sequence pattern signatures + semantic-repair-style targeted mutation) and add stateful contract repair for the ambiguous-observation WAIT-SLA discipline; re-measure environment violation rate; rerun A+newB with the same configuration. Formal power analysis and preregistration remain HOLD until then.

@@ -659,3 +659,14 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 原始 JSON 实际类别为 R1=96/R2=50/R3=35/R4=35（D-060 文档中的 36/34 更正）；实际 A/seed23=108,648 episodes，hand 每 seed 216，其他搜索 runs 多数 108,864。不能声称所有方法/seed 实际 rollout 完全相同。
 
 结论：D-060 只能作为诊断线索，A 的内部规则修复有效性尚不等于独立语义安全提升；B 未按设计实现；A+B 未建立对标准 EA 的提升证据。下一阶段先修 controller/evaluator/labels/B/statistics/baselines 和配额，再用新诊断集重跑；暂不做功效分析或扩大 rollout。正式 A-3b 继续 HOLD。
+
+
+## 2026-11-07：D-061 — 57 号修复落地 + 第二轮诊断实验
+
+报告：[58_PILOT_A3B_ROUND2_FIX_AND_DIAGNOSTIC_REPORT.md](58_PILOT_A3B_ROUND2_FIX_AND_DIAGNOSTIC_REPORT.md)。
+
+- **F1–F8/S1–S3 全部修复**（真状态化 FSM、显式补偿、升级事件分离、R4 损害记账、独立 contract validator、B 重设计、三值可达性、pooled 统计、标准基线、train/val 分离）；47/47 测试绿。
+- **机制 A 显著成立**：A vs NSGA-II Δ=+0.239（Holm p=0.0014, d=1.56）；独立 validator 非法率 1.00→0.00。
+- **B 叠加显著有害**（AB vs A −0.113, p=0.0014）；AB vs NSGA-II primary +0.126（p=0.0002）显著但低于 A 单独；**未超过强手工基线**（−0.514）。
+- **Q6 泛化成立**：验证集 AB vs NSGA-II +0.148（p=0.002, d=0.97）。
+- 判定：第一项创新**部分成立**（A 成立、B 需重设计）。下一步：B 反例映射重设计 + WAIT-SLA 行为层契约修复。正式 A-3b 继续 HOLD。

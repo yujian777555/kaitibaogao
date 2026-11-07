@@ -931,3 +931,38 @@ HOLD：Pilot B 演化搜索、ToolMisuseBench public test 调参、UndoBench fro
 - 第一项创新继续验证，但当前不能声称 A 已证明安全提升、B 已验证或 A+B 优于标准 EA。
 - **先修 controller/evaluator/labels/B/statistics/baselines 和配额，再重跑新诊断。暂不做功效分析，不扩大 rollout。**
 - 正式 A-3b、Pilot B、A800/ARWM、真实 API、UndoBench TEST、ThinkingBox 继续 HOLD。
+
+
+## 决策 D-061：57 号阻断项修复落地 + 第二轮诊断实验（2026-11-07）
+
+### 实现修复（全部有代码与测试，47/47 绿）
+- F1：真状态化 StatefulFSM（步索引/尝试数/确认栈/补偿栈/决策预算）；显式 COMPENSATE/ROLLBACK 动作+comp_log；**删除隐式 Saga 回滚**（回归测试证明未用基因不改变执行）。
+- F2：policy_selected_escalation / runtime_forced_abort / escalation_reason 分列；R3 只认显式升级。
+- F3：R4 引入 min_reachable_harm/actual_harm/avoidable_harm/unavoidable_residual；遏制判定=显式升级∧零重复∧可避免损害=0。
+- F4：动作成本目标只计 R1/R2；R3/R4 必要升级仅描述统计。
+- F5：解析证明器（逐故障模式）+ AND-OR 检查器穷举交叉验证 309 模式：**0 硬矛盾**、120 精确一致、18 R1→R2 细化、171 检查器资源内未决。
+- F6：B 重设计——每代聚合全种群反例、动作序列定位涉事基因、权重实际进评价（≤2×）、定向变异替换普通变异（预算对齐）。
+- F7：独立 contract_validator（不依赖 repair 表、穷举 error×action 矩阵）；三指标分列。
+- F8：三值 WIN/PROVEN_LOSE/UNKNOWN+环检测；高层目标 UNKNOWN 禁止降级（回归测试）。
+- S1：pooled hierarchical 统计（cluster=task×composition，seed 为嵌套重复；bootstrap+符号翻转+Holm+效应量+seed 稳定性）；禁止 CI/p 平均。
+- S2：标准 NSGA-II/NSGA-III（注明重实现）/GA/Random；GP 排除（决策表 FSM 不适配树 GP 表示）。
+- S3：train 108 搜索 / validation 54（2 未见任务族、新种子）仅报告。
+
+### 第二轮诊断结果（diagnostic2，manifest d4fb2be680e74f2e…；D-060 旧数据保留）
+- 8 方法×3 seeds；pop 48×60 代；每方法每 seed 316,224 真实 episodes；同初始池/同评价器。
+- **A vs NSGA-II：Δ=+0.239，CI [0.193,0.284]，Holm p=0.0014（d=1.56）——显著。**
+- **独立 validator 非法率：A/AB=0.00 vs 其余全部=1.00——A 的契约保持效应决定性。**
+- primary AB vs NSGA-II：Δ=+0.126，CI [0.086,0.167]，p=0.0002（d=0.82）——显著。
+- **AB vs A：Δ=−0.113，p=0.0014——B 叠加显著有害**；B 单独 +0.082（Holm p=0.034，弱）。
+- AB vs hand：Δ=−0.514——未超过强手工基线（hand 0.827）。
+- Q6 验证集：AB vs NSGA-II Δ=+0.148，p=0.002（d=0.97）；A 验证集 0.488 vs nsga2 0.222——**泛化成立**。
+- 开放问题：环境违规率 A 0.36 vs hand 0.006（观测歧义下 WAIT-SLA 时序是行为层问题，规则修复无法静态消除）。
+
+### 判定
+- **机制 A 有真实显著证据**（合法性+成功率双维度、同表示同预算可归因）。
+- **机制 B 组合主张不成立**（显著劣于 A 单独）；B 单独弱有效。
+- 第一项创新**部分成立**：A 成立；B 需重设计；尚未达小论文完整主张。
+- 正式 A-3b 继续 HOLD；功效分析继续暂缓（先修 B 与行为层安全）。
+
+### 下一步
+重设计 B 的反例→基因映射（动作序列模式级签名+语义修复型定向变异）+ 状态化契约修复（歧义观测后等满 SLA 再 VERIFY/RETRY），复测环境违规率，A+新B 同配置重跑。见 58 号报告 §7。
