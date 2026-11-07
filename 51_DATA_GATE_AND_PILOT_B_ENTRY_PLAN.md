@@ -216,3 +216,13 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 - Phase B = GO / complete；55 = REQUEST CHANGES；A-3b execution = HOLD。
 - 55 号不能直接冻结：必须修复 R4 零残留矛盾、R2 完成/安全放弃混淆、observation-based recoverability 定义、有限样本 P(violation)=0 表述、R4 成本与必要升级惩罚、类别比例/精确配额/cluster-level power、算法初始化与共同骨干、rollout 预算边界和新颖性审计。
 - 下一阶段：55-R1 修订 + reachability checker 规格/单测 + 场景配额与功效分析 + 算法公平性设计。只允许单元测试和 train/dev/validation smoke；正式 A-3b、Pilot B、A800、真实 API、UndoBench TEST 均 HOLD。
+
+
+## 9. D-061 更新：D-060 诊断复核 REQUEST CHANGES（2026-11-07）
+
+- 独立复核报告：`57_PILOT_A3B_DIAGNOSTIC_INDEPENDENT_REAUDIT.md`。
+- D-060 原始 JSON 保留，216 scenarios / 24 runs / 每 run 216 rows；正确类别数 R1=96/R2=50/R3=35/R4=35。
+- 当前算法结论不得升级为确认性证据：静态 rule table 冒充 stateful FSM、运行器隐式 Saga rollback/auto-escalation、R4 scorer 忽略可避免残留、必要升级仍计入 action cost、A-3 labels 非 checker 全量验证、B pool 清空/权重未使用、per-seed CI/p 平均、基线非 canonical。
+- 55-R1 的 3:1 文字与表中 3:2/58:38 冲突；冻结前必须重算。
+- 下一阶段先修控制器执行语义、R3/R4 evaluator、标签器、B、独立合同验证器、标准 EA 和 pooled/hierarchical 统计，再以新诊断集重跑。
+- **暂停功效分析和扩大 rollout**，避免用有缺陷的指标估算正式样本量。正式 A-3b 继续 HOLD，直到独立复核和用户批准。
