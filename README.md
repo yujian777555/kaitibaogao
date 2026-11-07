@@ -672,20 +672,27 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - 判定：第一项创新**部分成立**（A 成立、B 需重设计）。下一步：B 反例映射重设计 + WAIT-SLA 行为层契约修复。正式 A-3b 继续 HOLD。
 
 
-## 2026-11-08：D-062 — WAIT-SLA 行为安全与反例驱动演化
+## 2026-11-08：D-062 — WAIT-SLA 行为安全与反例驱动演化（已完成）
 
-新增 [59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md](59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md)，并更新 [NEXT_SESSION_PROMPT.md](NEXT_SESSION_PROMPT.md) 与 [SESSION_HANDOFF.md](SESSION_HANDOFF.md)。
+原始计划 [59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md](59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md) 已执行，交付见 [59 号独立复核](59_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md)、[60 号机制设计](60_WAIT_SLA_CONTRACT_BNEW_AND_SAFETY_GATE_DESIGN.md)、[61 号第三轮诊断结果](61_D062_DIAGNOSTIC_RESULTS.md)。下方的 READY_FOR_EXECUTION 内容属于当时的历史计划状态，现已由执行结果取代。
 
-D-061 报告显示机制 A 相对 NSGA-II 有正向诊断证据，但 B 叠加到 A 后显著有害，且 A+B 未超过强手工策略。报告的行为违规率 A=0.36、Hand=0.006 需要从原始 episode 数据独立复核，不能直接当作已核验事实。
-
-D-062 首要任务是复核该违规率的分母/口径并定位完整失败轨迹，然后设计状态化 WAIT-SLA 合同、重构反例到基因的局部语义修复型变异，并评估 Safety Gate。没有可证明的 visibility guarantee 时，不得把固定等待解释为确认未提交。D-062 当前是 **READY_FOR_EXECUTION / PLANNED**，尚未实施；正式 A-3b、锁箱测试、Pilot B、A800/ARWM 和大规模真实 API 继续 HOLD。
-
-## 2026-11-07：D-062 — 失败轨迹复核、WAIT-SLA、B-new、第三轮诊断
+## 2026-11-07：D-062 — 失败轨迹复核、WAIT-SLA、B-new、第三轮诊断（已完成）
 
 报告：[59_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md](59_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md)、[60_WAIT_SLA_CONTRACT_BNEW_AND_SAFETY_GATE_DESIGN.md](60_WAIT_SLA_CONTRACT_BNEW_AND_SAFETY_GATE_DESIGN.md)、[61_D062_DIAGNOSTIC_RESULTS.md](61_D062_DIAGNOSTIC_RESULTS.md)。
 
-- **复核推翻 D-061 叙事**：0.36 违规率 99.4% 是评价器 artifact（正确 ROLLBACK 被误伤），非重复副作用；真实失败轨迹为 `TIMEOUT→VERIFY(SLA 内谎言)→RETRY→DUPLICATE`。
-- **WAIT-SLA 契约成立**：行为违规归零；SLA 感知显著优于固定等待（+0.054, p=0.003）；相对 A +0.089（p=0.005）。
-- **B-new 成立**：AB vs A +0.119（p=0.0002），逆转 D-061 的组合有害；验证集泛化 +0.142（p=0.008）。
-- **Q10 可分**：提升 = 合同语义（+0.089）+ 演化搜索（+0.031, p=0.007），非纯手工规则。
-- 负结果：Safety Gate 有害、B 单独无效、未超强手工（−0.282）。三机制各有独立消融证据；主张限定"优于标准 EA 且行为安全"。下一步：功效核算 → 预注册 → 正式 A-3b（待批准）。
+- **Stage 0 更正**：D-061 的 0.36 vs 0.006 并非真实重复副作用差距；99.4% 为 evaluator artifact（正确 ROLLBACK 被 saga gate 误伤），真实重复仅 7 例。
+- **WAIT-SLA**：相对 A +0.089（p=0.0047），优于 Fixed-WAIT +0.054（p=0.0032）；行为 SLA 违规在 AwaitSLA/AB 诊断臂为 0。
+- **B-new**：AB vs A +0.119（p=0.0002），验证集 AB vs A +0.142（p=0.0082）。
+- **必须保留的限制**：AB vs NSGA-II all +0.1049（54 clusters，p=0.062）未显著；validation +0.1173（18 clusters，p=0.2277）也未显著。AB vs AwaitSLA 的 Q10 搜索增量 validation p=0.244，尚未证明独立泛化。
+- **负结果**：B 单独劣于 NSGA-II（−0.074）；Safety Gate 有害（AB−ABG +0.193）；AB 仍显著落后 Hand（−0.282）。不得声称超越专家，也不得提前声称正式优于 NSGA-II。
+- D-062 代码、测试和 diagnostic3 完成；正式 A-3b 仍 HOLD。下一步转入 D-063：统计分析可复现性、held-out cluster 功效仿真、预注册草案。
+
+## 2026-11-08：D-063 — 正式 A-3b 功效与预注册准备
+
+计划：[62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md](62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md)。
+
+- 首先修复 `stats.py` 仍硬编码 diagnostic2、缺少 diagnostic3 完整对比复算入口的问题。
+- 初步 paired-cluster t 近似：validation-only SD=0.3914，MDE=0.10 时 80%/90% power 约需 123/163 个可分析 clusters；加 15% 预留约 145/192。
+- 当前 validation 只有 18 个 task×fault-composition clusters；不能用更多 seeds/episodes 代替独立 cluster。
+- 主要确认性比较拟定 AB vs NSGA-II；Q10 的 AB vs AwaitSLA 必须在新 held-out test 验证；Hand 只作参考。
+- 正式 A-3b、held-out 调参、Pilot B、A800/ARWM 和真实 LLM API 继续 HOLD，等待用户批准预注册。
