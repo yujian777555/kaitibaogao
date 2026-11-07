@@ -679,3 +679,13 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 D-061 报告显示机制 A 相对 NSGA-II 有正向诊断证据，但 B 叠加到 A 后显著有害，且 A+B 未超过强手工策略。报告的行为违规率 A=0.36、Hand=0.006 需要从原始 episode 数据独立复核，不能直接当作已核验事实。
 
 D-062 首要任务是复核该违规率的分母/口径并定位完整失败轨迹，然后设计状态化 WAIT-SLA 合同、重构反例到基因的局部语义修复型变异，并评估 Safety Gate。没有可证明的 visibility guarantee 时，不得把固定等待解释为确认未提交。D-062 当前是 **READY_FOR_EXECUTION / PLANNED**，尚未实施；正式 A-3b、锁箱测试、Pilot B、A800/ARWM 和大规模真实 API 继续 HOLD。
+
+## 2026-11-07：D-062 — 失败轨迹复核、WAIT-SLA、B-new、第三轮诊断
+
+报告：[59_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md](59_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md)、[60_WAIT_SLA_CONTRACT_BNEW_AND_SAFETY_GATE_DESIGN.md](60_WAIT_SLA_CONTRACT_BNEW_AND_SAFETY_GATE_DESIGN.md)、[61_D062_DIAGNOSTIC_RESULTS.md](61_D062_DIAGNOSTIC_RESULTS.md)。
+
+- **复核推翻 D-061 叙事**：0.36 违规率 99.4% 是评价器 artifact（正确 ROLLBACK 被误伤），非重复副作用；真实失败轨迹为 `TIMEOUT→VERIFY(SLA 内谎言)→RETRY→DUPLICATE`。
+- **WAIT-SLA 契约成立**：行为违规归零；SLA 感知显著优于固定等待（+0.054, p=0.003）；相对 A +0.089（p=0.005）。
+- **B-new 成立**：AB vs A +0.119（p=0.0002），逆转 D-061 的组合有害；验证集泛化 +0.142（p=0.008）。
+- **Q10 可分**：提升 = 合同语义（+0.089）+ 演化搜索（+0.031, p=0.007），非纯手工规则。
+- 负结果：Safety Gate 有害、B 单独无效、未超强手工（−0.282）。三机制各有独立消融证据；主张限定"优于标准 EA 且行为安全"。下一步：功效核算 → 预注册 → 正式 A-3b（待批准）。

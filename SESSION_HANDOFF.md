@@ -1949,3 +1949,19 @@ HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM�
 Q1 WAIT-SLA 是否降低重复副作用；Q2 是否优于固定 WAIT；Q3 VERIFY 是否有独立贡献；Q4 B-new 是否正确定位基因；Q5 B-new 是否优于 NSGA-II；Q6 A+B-new 是否优于 A；Q7 Safety Gate 是否保护 A；Q8 是否接近/超过 Hand；Q9 未见任务泛化；Q10 增益来自演化搜索还是手工规则。
 
 本节记录的是 D-062 计划，**不是已实现或已验证的实验结果**。
+
+## 56. D-062 执行轮：失败轨迹复核 + WAIT-SLA + B-new + 第三轮诊断（2026-11-07）
+
+报告：59（复核）/60（设计）/61（结果）。数据：diagnostic3_results.json（manifest 017b3454…）。
+
+### 56.1 Stage 0 复核推翻 D-061 叙事
+0.36 违规率非重复副作用（A dup=0）：99.4% 是评价器 artifact（正确 ROLLBACK 被 saga 门禁误伤，hand 0.006 同源）；真实重复仅 7 例，轨迹确证 `TIMEOUT→VERIFY(SLA 内谎言)→RETRY→DUPLICATE`。
+
+### 56.2 实现（51/51 测试绿）
+评价器门禁只对执行类动作计罚；WAIT-SLA 契约（补偿清除 或 SLA 后查询确认才解锁重试，动作掩码）；B-new（动作序列签名+涉事基因+死因修复映射+validator）；Safety Gate（ABG 臂）。
+
+### 56.3 第三轮结果
+**AB vs A +0.119 p=0.0002（B-new 成立，逆转 D-061）**；**AwaitSLA vs A +0.089 p=0.005、vs Fixed +0.054 p=0.003（WAIT-SLA 成立）**；AB vs AwaitSLA +0.031 p=0.007（搜索独立增益，Q10 可分）；validation AB vs A +0.142 p=0.008。负结果：Gate 有害、B 单独劣于 NSGA-II、未超 hand（−0.282）。
+
+### 56.4 判定与下一步
+A + WAIT-SLA + B-new 三机制各有独立消融证据；主张限定"优于标准 EA 且行为安全"。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。

@@ -558,3 +558,31 @@ HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM�
 
 ## 仓库接班纪律
 每个阶段及时更新本文件、`SESSION_HANDOFF.md`、`README.md`、`05_DECISION_LOG.md`、`51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md`。每轮区分 PLANNED / IMPLEMENTED / TESTED / EXPERIMENTALLY VERIFIED。不得把计划写成完成。每次阶段提交后核验远端 HEAD、main、CI 和工作树。
+
+## 2026-11-07 — D-062: D-061 failure-trace audit, WAIT-SLA contract, B-new, round-3 diagnostics
+
+Reports: `59_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md`, `60_WAIT_SLA_CONTRACT_BNEW_AND_SAFETY_GATE_DESIGN.md`, `61_D062_DIAGNOSTIC_RESULTS.md`. Data: `experiments/pilot_a3b/diagnostic3_results.json` (manifest 017b3454c0b9cf90...) + `diagnostic3_stats.json`. D-060/D-061 artifacts preserved untouched.
+
+### Stage 0 audit (OVERTURNS the D-061 narrative)
+- diagnostic2_results.json SHA-256 dc455355... ; independent aggregation + genome replay.
+- The 0.36 violation rate is NOT duplicates (A dup_rate = 0.0000): 1,132/1,139 (99.4%) violations are an EVALUATOR ARTIFACT -- correct ROLLBACK safe-aborts were charged by the saga gate; hand's 0.006 is the same artifact.
+- Only 7 genuine duplicate episodes; their traces confirm `TIMEOUT -> VERIFY (SLA-internal NOT_COMMITTED lie) -> RETRY -> DUPLICATE` on non-idempotent tools. timeout_before is retry-safe; timeout_after/delayed_visibility are not.
+
+### Fixes and new mechanisms (51/51 tests green)
+- Evaluator: saga gate applies to EXECUTE-type actions only; safe rollback is free. Metrics separated: sla_violation / duplicate / downstream_violation.
+- WAIT-SLA contract (implemented): under UNKNOWN_OUTCOME on non-idempotent tools, RETRY unlocks only after compensation clears the ambiguity OR (visibility SLA elapsed AND a post-SLA query confirms non-commitment); SLA-internal queries never unlock retry. Action masking; genome unchanged (Q10 isolation).
+- B-new: action-sequence failure signatures, population-wide per-generation aggregation, implicated-gene targeting, cause->repair-action map, contract repair + independent validator, budget-matched.
+- Safety Gate: 6-scenario behavioural battery + layered survivor (ABG arm).
+
+### Round-3 results (DIAGNOSTIC; fresh seeds 2026110900)
+- **AB vs A: +0.119 [0.066, 0.183] p=0.0002 -- B-new combination gain ESTABLISHED (D-061 negative reversed).**
+- **AwaitSLA vs A: +0.089 p=0.005; AwaitSLA vs AwaitFixed: +0.054 p=0.003 -- WAIT-SLA works and beats fixed waiting.**
+- AB vs AwaitSLA +0.031 p=0.007 -- search adds independent gain on top of WAIT-SLA (Q10: gain = contract semantics + evolution, NOT hand rules alone).
+- AB behavioural violations 0 (A 0.060); AB stability [0.543, 0.531, 0.543]; validation AB vs A +0.142 p=0.008.
+- Negative results kept: Safety Gate harmful (ABG < AB, -0.193); B alone worse than NSGA-II (-0.074); hand still ahead (AB -0.282).
+
+### Judgement
+Three mechanisms now have independent ablation evidence (contract-preserving A, WAIT-SLA, B-new). Paper claim must be "significantly better than standard EA under equal budget with behavioural safety guarantees" -- NOT "beats experts". First innovation NEARLY established.
+
+### Next task (single)
+Power analysis from the round-3 cluster variance (cluster_sd ~ 0.40) -> freeze preregistration (with the Q10-scoped claim) -> submit for user approval -> formal A-3b. Everything else stays HOLD.

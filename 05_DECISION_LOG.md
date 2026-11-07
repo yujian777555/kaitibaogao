@@ -989,3 +989,33 @@ HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM�
 
 ### 接受标准
 必须证明 WAIT-SLA 对歧义观测重复副作用的影响，比较固定 WAIT 与 SLA-aware WAIT，检验 B-new 是否真正增加搜索收益且不破坏 A 的安全性质，并报告与 NSGA-II 和 Hand 的公平对照。必须回答增益来自演化搜索还是人工编码的 WAIT-SLA 规则。当前 D-062 仅为任务计划，尚未执行。
+
+## 决策 D-062：D-061 独立复核、WAIT-SLA 契约、B-new 与第三轮诊断（2026-11-07）
+
+### Stage 0 独立复核（59 号报告）——颠覆 D-061 叙事
+- 原始数据 `diagnostic2_results.json` SHA-256 `dc455355…`（manifest d4fb2be6…）；从 rows 独立聚合 + 基因组重放轨迹。
+- **0.36 违规率不是重复副作用**：A 的 dup_rate=0.0000；1,139 违规 episode 中 1,132（99.4%）为评价器 artifact——**正确的 ROLLBACK 安全放弃被 saga 门禁误伤**；hand 的 0.006 同为该 artifact。
+- 真实重复仅 7 例，轨迹确证：`TIMEOUT → VERIFY(SLA 内谎言 NOT_COMMITTED) → RETRY → DUPLICATE`；区分了 timeout_before（重试安全）与 timeout_after/delayed_visibility（已提交不可重试）。
+- D-061"行为安全差距 0.36 vs 0.006"结论**作废**。
+
+### 实现（60 号设计；51/51 测试绿）
+- 评价器修复：saga 门禁只对执行类动作生效，安全回滚不计罚；度量三分（sla_violation / duplicate / downstream_violation）。
+- **WAIT-SLA 契约**：非幂等工具 UNKNOWN_OUTCOME 下 RETRY 仅在补偿清除或"等满可见性 SLA + SLA 后查询确认未提交"时解锁（cleared_to_retry）；SLA 内查询不解锁；动作掩码实现。
+- **B-new（反例变异 R2）**：动作序列签名、全种群聚合、只打涉事基因、死因→修复动作映射、过契约修复+独立 validator、预算对齐。
+- **Safety Gate**：6 场景行为电池硬过滤 + 分层生存者（ABG 臂）。
+
+### 第三轮诊断（61 号；diagnostic3 manifest 017b3454…；新种子 2026110900）
+- **AB vs A：+0.119 [0.066,0.183] p=0.0002——B-new 组合增益成立，D-061 负结果逆转**。
+- **AwaitSLA vs A：+0.089 p=0.005；AwaitSLA vs AwaitFixed：+0.054 p=0.003——WAIT-SLA 有效且优于固定等待**。
+- AB vs AwaitSLA +0.031 p=0.007——搜索在 WAIT-SLA 之上仍有独立增益（Q10：提升=合同语义(+0.089)+演化搜索(+0.031)，非纯手工规则）。
+- AB 行为违规 0（A 0.060）；AB seed 稳定 [0.543,0.531,0.543]。
+- AB vs hand −0.282（收窄但未超越）；ABG 门禁有害（−0.193，负结果）；B 单独劣于 NSGA-II（−0.074，负结果）。
+- Q9：validation AB vs A +0.142 p=0.008（泛化显著）。
+
+### 判定
+- 契约保持（A）、WAIT-SLA、B-new 三机制**各有独立消融证据**；Safety Gate 与 B 单独为负结果（如实保留）。
+- 小论文主张限定：显著优于标准 EA 且行为安全可保证；**不得**声称超越专家。
+- 第一项创新**接近成立**；待功效核算+预注册+正式 A-3b。正式实验、Pilot B、A800 等继续 HOLD。
+
+### 下一步
+功效核算（54-cluster 方差 cluster_sd≈0.40）→ preregistration 冻结交用户批准 → 正式 A-3b。

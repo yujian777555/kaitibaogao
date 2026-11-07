@@ -243,3 +243,6 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 - 新诊断至少比较 Hand、NSGA-II、A、Fixed-WAIT、WAIT-SLA、WAIT-SLA+VERIFY、安全重试、B-new、A+B-new、A+B-new+Gate；指标覆盖恢复成功、episode/action 行为违规、重复副作用、SLA 违规、正确升级、损害、不必要成本和未见任务泛化。
 - 旧 D-061 validation 若用于调参不得继续作为独立验证；正式 held-out 继续锁定。
 - **当前状态 READY_FOR_EXECUTION，不代表代码或实验已完成。** GO：复核、实现、测试、新非锁箱诊断；HOLD：正式 A-3b、锁箱调参、UndoBench TEST、Pilot B、A800/ARWM、大规模真实 API。
+
+### D-062 执行更新（2026-11-07）
+59/60/61 号报告落地。复核确认 D-061 的 0.36 违规率系评价器 artifact（正确 ROLLBACK 被误伤），真实损害仅 7 例重复（`TIMEOUT→VERIFY 谎言→RETRY→DUPLICATE`）。修复评价器并实现 WAIT-SLA 契约 + B-new。第三轮（diagnostic3，manifest 017b3454…）：**AB vs A +0.119 p=0.0002（B-new 成立）**；**WAIT-SLA vs A +0.089 p=0.005、vs 固定等待 +0.054 p=0.003**；AB vs AwaitSLA +0.031 p=0.007（搜索独立增益）；validation AB vs A +0.142 p=0.008。负结果：Safety Gate 有害、B 单独无效、未超 hand（−0.282）。判定：三机制独立证据齐备，第一项创新接近成立。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。
