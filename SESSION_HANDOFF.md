@@ -1860,3 +1860,35 @@ R1–R4 互斥重定义 + UNKNOWN：R2 成功=最终任务完成（安全放弃�
 - GO：诊断级实验/代码、功效核算、49 系统检索、预注册材料准备。
 - HOLD：正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、锁箱调参。
 - 下一会话唯一任务：用本轮 54-cluster 方差做功效核算定正式实验规模 → B/A 机制迭代 → 49 系统检索 → preregistration candidate 交用户批准。未批准前禁止正式 A-3b。
+
+
+## 55. D-060 首轮诊断的独立复核（D-061，2026-11-07）
+
+完整报告：`57_PILOT_A3B_DIAGNOSTIC_INDEPENDENT_REAUDIT.md`。
+
+### 仓库与 artifact 复核
+- 远端 HEAD `edfc7ad0156617dccc4e4bf998df33f991ae921f`；main `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead 94 / behind 0。
+- 原始 diagnostic JSON 可解析：216 scenarios、24 method-seed runs、每 run 216 rows、scenario ID 完全配对。
+- 正确类别计数 R1=96/R2=50/R3=35/R4=35；旧文档 36/34 为记录错误。
+- 实际 episodes：hand 每 seed 216；搜索方法大多 108,864；A seed23=108,648（cache hit）。不能写所有方法/seed 实际执行数完全相同。
+- 当前 commit 无 GitHub status checks；55/55 为本地测试报告。
+
+### 核心阻断问题
+1. 当前所谓 FSM 实为静态三元组查表，不具备状态记忆；任意未使用规则含 COMP 会触发全局 Saga rollback。
+2. 任何恢复失败都会自动设置 escalated=True，R3 CorrectEscalation 不能证明策略明确升级。
+3. R4 scorer 只看 escalation 和 duplicate，不检查可避免残留/最小可达损害；R4 residual 被整体排除。
+4. action cost 在全体 rows 上平均，仍惩罚 R3/R4 必要升级。
+5. A-3 216 场景由启发式 label_scenario 标记，未逐场景经过 AND-OR checker；6 组 sanity test 不足以证明全场景标签。
+6. B pool 每次 update 清空；scenario_weights 从未使用；定向变异未定位错误签名；B/AB targeted branch 额外 mutation。
+7. A 的 legality metric 与 repair 共用 ILLEGAL 表，validator 不完整；这不是独立安全证明，且 NSGA-II/GA 也零观察违规。
+8. Reachability horizon cutoff 返回 False/ proved=True，可能错误降级为 R3/R4；必须 tri-state。
+9. stats.py 平均 per-seed CI/p 不构成有效 pooled inference。独立 pooled cluster 探索重算 AB−NSGA-II Δ≈+0.0494、CI≈[-0.0031,+0.1034]、p≈0.0874，仍未显著，须实现正式 hierarchical/pooled 统计脚本。
+10. NSGA-II/III/GA 当前实现并非完全 canonical；无 GP，Random 使用 Pareto survivor selection，须修正或准确命名。
+11. 55-R1 的 3:1 文字与表中 3:2/58:38 配额冲突，必须冻结前修正。
+12. 原始 artifact 的 R3/R4=35/35；D-060 旧记录 36/34 必须以 D-061 更正。
+
+### 研究结论
+D-060 只可作为诊断线索；不能声称 A 已证明安全提升、B 已验证、A+B 已超过标准 EA。A 的内部规则修复行为可保留，但不是独立语义安全证据。第一项创新继续验证，不放弃；正式 A-3b 仍 HOLD。
+
+### 下一会话优先级
+先修 controller/evaluator/labels/B/statistics/baselines 和配额矛盾，再用新诊断场景重跑。**暂不做功效分析，不扩大 rollout**，因为当前效应指标尚不可信。保留 D-060 原始 artifact，不覆盖。正式 A-3b 需独立复审和用户批准。
