@@ -1801,3 +1801,29 @@ R1/R2/R3/R4 可恢复性分类（评估器侧判定，与策略/oracle 隔离）
 - GO：55 号独立审查→预注册冻结（需用户批准）→ 实现分类器/场景生成器/adapter（Phase C 仅 train/dev/validation smoke）。
 - HOLD：A-3b 运行、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 执行、ThinkingBox 任何用途、锁箱调参。
 - 下一会话唯一任务：55 号独立审查并冻结预注册；未冻结批准前不得运行任何 A-3b 实验。
+
+
+## 54. Pilot A-3b 独立审查结果（D-059，2026-11-07）
+
+审查报告：`56_PILOT_A3B_INDEPENDENT_REVIEW.md`。当前分支新增 56 号审查文件；55 号原草案保留不覆盖。
+
+### Gate
+- Phase B：GO / 完成（ToolMisuseBench 与 UndoBench 真实下载、版本/hash、DEV 复现/Smoke、覆盖语义与泄漏审计；ThinkingBox 不可达）。
+- 55 号：REQUEST CHANGES，不可直接预注册。
+- A-3b：HOLD，未运行。
+- Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox：HOLD。
+
+### 必须修复的核心问题
+1. R4 不可达零残留安全终态，却被要求 CorrectEscalation(R3+R4) 零残留；R4 应独立评价 DamageContainment。
+2. R2 包含优雅失败/安全放弃，却进入 CondRecSucc；应把“补偿后完成”与“安全回滚/放弃”分开。
+3. Recoverability 必须按仅依赖公开观测历史的 contingent policy 可达性判定；隐藏状态只供 evaluator，未知类不得强行分类。
+4. 有限测试集只能报告 zero observed violations + 置信上界，不能声称经验上证明总体 P=0。
+5. R4 unavoidable residual 与可避免损害分开；R3/R4 正确升级不能被统一成本惩罚。
+6. 明确 3:1 是 (R1+R2):(R3+R4) 还是 R3:R4，给出每 split 每 slice 四类计数；按独立 task-family×fault-composition clusters 做功效分析。
+7. A/B/A+B 消融固定同一 NSGA-II 骨干；所有 EA 共享初始化分布；NSGA-III 单独作强基线。
+8. 明确 50k rollout 是每方法总预算还是每 seed 预算，所有实际 rollout 计费。
+9. 主检验必须对最强标准 EA，而不仅是手工策略/随机搜索。
+10. 49 号是初步文献扫描，novelty 未批准，需补系统性机制级审计。
+
+### 下一会话任务
+创建 `55_PILOT_A3B_RESEARCH_DESIGN_R1.md`，逐条回应 56 号 B1–B6/M1–M5；完善 R1–R4 互斥定义、reachability checker 规格、指标和成本、分层配额、cluster-level power、rollout budget、公平算法骨干和新颖性审计。可进行定义/分类器单元测试和 train/dev smoke；不得运行正式 A-3b，直到 R1 独立审查并获用户批准。
