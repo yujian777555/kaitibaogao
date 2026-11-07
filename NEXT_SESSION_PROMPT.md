@@ -420,3 +420,46 @@ Same random-only initial pool for all search methods (hand policy is a separate 
 
 ### Next task
 Power sizing from the 54-cluster variance; mechanism iteration (B granularity/weighting, A repair completeness); 49 systematic review; preregistration candidate for user approval. Formal A-3b remains HOLD.
+
+
+# 2026-11-07 — D-061: D-060 独立复核（本节覆盖此前“下一步先做功效分析”的指令）
+
+**独立报告：** `57_PILOT_A3B_DIAGNOSTIC_INDEPENDENT_REAUDIT.md`  
+**当前状态：** D-060 原始诊断数据保留；Stage-2 指标/控制器/B/统计存在阻断问题；正式 A-3b 继续 HOLD。
+
+## 复核事实
+- 远端 branch HEAD：`edfc7ad0156617dccc4e4bf998df33f991ae921f`；main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead 94 / behind 0。
+- 原始 `diagnostic_results.json` 已从 GitHub blob 读取并解析：216 scenarios、24 runs、每 run 216 rows；全部 scenario ID 配对一致。
+- 实际 label counts = R1 96 / R2 50 / R3 35 / R4 35。旧 D-060 文档中的 36/34 是记录错误，后续统一为 35/35。
+- 固定 hand 每 seed 216 episodes；搜索方法大多 108,864；A/seed23=108,648（cache hit）。不能再声称所有方法/seed 都执行完全相同的真实 episode 数。
+- 无 GitHub status checks；55/55 是本地测试报告，不是本轮 CI 记录。
+
+## 阻断问题（先修代码，不要先做功效分析）
+1. **控制器不是 stateful FSM**：实际是静态 `(error, idempotent, compensatable)->macro-action` 查表；Saga rollback 由“基因组任一规则含 COMP”触发，而非策略明确动作。必须实现真实状态/观察历史/事务进度/补偿栈，或收窄论文主张。
+2. **自动升级污染指标**：任何宏动作失败都会把 `escalated=True`，不能区分策略明确升级和运行器自动失败终止。
+3. **R4 评分错误**：`score_class(R4)` 只看 escalated 和 duplicate，不检查可避免残留/最小可达损害；R4 残留整体被排除在 avoid_resid 外。
+4. **必要升级仍被成本惩罚**：`norm_actions` 对所有类别求平均，包含 R3/R4 的必要升级动作。
+5. **A-3 labels 非 checker 输出**：216 个场景由启发式 `label_scenario` 分类；6 组 sanity tests 不等于 216 场景逐项可达性验证。
+6. **B 实现与设计不符**：`CounterexamplePool.update` 每次清空池；`scenario_weights()` 未调用；只按 class label 粗略调 mutation，未按公开错误签名定位规则；B/AB targeted 分支有额外 mutation。
+7. **A legality 指标同源**：`repair_genome` 与 `is_legal` 共用 ILLEGAL 表；validator 还漏检非 SCHEMA 的 REPAIR/default action。该指标只能叫内部规则合法性，不能当独立安全证明；NSGA-II/GA 本轮也零观察违规。
+8. **Reachability horizon bug**：到达 horizon 时返回 False 但未标记 unproved，可能把“任务可达性未知”错误降级为 R3/R4。改成 WIN/PROVEN_LOSE/UNKNOWN 三值传播。
+9. **统计汇总不正确**：stats.py 平均 per-seed CI 端点和 p 值。禁止这样合并。独立探索性 pooled cluster 重算 AB−NSGA-II Δ≈+0.0494、CI≈[-0.0031,+0.1034]、sign-flip p≈0.0874，仍不显著；需实现预先定义的 pooled/hierarchical cluster bootstrap。
+10. **基线非 canonical**：当前 NSGA-II tournament 未完整使用 rank+crowding；NSGA-III 为 simplified niching；GA 与设计描述不一致；无 GP；Random 也使用 Pareto survivor selection。正式比较前换标准实现或准确改名。
+11. **55-R1 配额冲突**：文字 3:1，但 Train/Validation 表 3:2，held-out 58:38 也不是 3:1。必须统一比例。
+12. D-060 原始统计 label count 35/35，旧 handoff/decision log 36/34，按原始 artifact 更正。
+
+## 下一会话唯一优先任务
+创建并执行 D-061 修复分支任务，按顺序：
+A. 修复控制器执行语义（显式升级、显式补偿、移除基因组全局 rollback flag）；决定并实现真正有状态 FSM。
+B. 修复 R3/R4 scorer、最小可达损害、可避免/不可避免残留、类别条件化 action cost。
+C. 把 A-3 全部场景标签接入 checker/可审计穷举证明；修复 horizon 三值传播。
+D. 修复 B 反例池聚合、错误签名、实际权重采样和变异预算公平性。
+E. 建立独立 contract validator；补 canonical NSGA-II/NSGA-III/GA（或准确命名），决定 GP 是否纳入。
+F. 修复 pooled/hierarchical cluster statistics；重跑新诊断集（仍非 held-out）。
+G. 纠正 3:1/3:2 配额定义和 D-060 记录；再做功效分析。
+
+**不要先做功效分析，也不要先扩大 rollout**：当前执行和评分语义有缺陷，基于错误指标算样本量会固化错误。D-060 artifact 永久保留，任何修复后重跑必须使用新 run ID、新输出文件和新 manifest。
+
+## 授权
+GO：以上实现修复、单元测试、独立 validator、非锁箱新诊断集和统计复算。
+HOLD：正式 A-3b 确认性实验、A-3 原 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM、真实 LLM API、ThinkingBox 优化。用户批准 preregistration 后才可运行正式 A-3b。
