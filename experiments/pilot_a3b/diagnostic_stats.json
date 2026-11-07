@@ -1,0 +1,1104 @@
+{
+  "kind": "DIAGNOSTIC_NOT_CONFIRMATORY",
+  "label_counts": {
+    "R1": 96,
+    "R2": 50,
+    "R3": 35,
+    "R4": 35
+  },
+  "throughput_eps_per_s": 100804.7,
+  "budget_episodes_per_method_seed": 108864,
+  "aggregate": {
+    "hand": {
+      "cond_rec_mean": 1.0,
+      "cond_rec_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "corr_esc_mean": 0.6571,
+      "corr_esc_per_seed": [
+        0.6571,
+        0.6571,
+        0.6571
+      ],
+      "containment_mean": 1.0,
+      "containment_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dup_mean": 0.0,
+      "dup_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "violations_mean": 0.0,
+      "violations_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unnec_esc_mean": 0.0,
+      "unnec_esc_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "avoid_resid_mean": 0.0602,
+      "avoid_resid_per_seed": [
+        0.0602,
+        0.0602,
+        0.0602
+      ],
+      "illegal_ratio_final_mean": 0.0,
+      "illegal_ratio_final_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "random": {
+      "cond_rec_mean": 0.5753,
+      "cond_rec_per_seed": [
+        0.5959,
+        0.5068,
+        0.6233
+      ],
+      "corr_esc_mean": 0.781,
+      "corr_esc_per_seed": [
+        0.9429,
+        0.5714,
+        0.8286
+      ],
+      "containment_mean": 0.9238,
+      "containment_per_seed": [
+        0.8857,
+        1.0,
+        0.8857
+      ],
+      "dup_mean": 0.0432,
+      "dup_per_seed": [
+        0.0833,
+        0.0139,
+        0.0324
+      ],
+      "violations_mean": 0.0432,
+      "violations_per_seed": [
+        0.0833,
+        0.0139,
+        0.0324
+      ],
+      "unnec_esc_mean": 0.4247,
+      "unnec_esc_per_seed": [
+        0.4041,
+        0.4932,
+        0.3767
+      ],
+      "avoid_resid_mean": 0.1451,
+      "avoid_resid_per_seed": [
+        0.0741,
+        0.2546,
+        0.1065
+      ],
+      "illegal_ratio_final_mean": 1.0,
+      "illegal_ratio_final_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "ga": {
+      "cond_rec_mean": 0.911,
+      "cond_rec_per_seed": [
+        1.0,
+        0.7945,
+        0.9384
+      ],
+      "corr_esc_mean": 0.7524,
+      "corr_esc_per_seed": [
+        0.6571,
+        0.7143,
+        0.8857
+      ],
+      "containment_mean": 1.0,
+      "containment_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dup_mean": 0.0,
+      "dup_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "violations_mean": 0.0,
+      "violations_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unnec_esc_mean": 0.089,
+      "unnec_esc_per_seed": [
+        0.0,
+        0.2055,
+        0.0616
+      ],
+      "avoid_resid_mean": 0.054,
+      "avoid_resid_per_seed": [
+        0.0602,
+        0.0741,
+        0.0278
+      ],
+      "illegal_ratio_final_mean": 1.0,
+      "illegal_ratio_final_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "nsga2": {
+      "cond_rec_mean": 0.8379,
+      "cond_rec_per_seed": [
+        0.8973,
+        0.7534,
+        0.863
+      ],
+      "corr_esc_mean": 0.8667,
+      "corr_esc_per_seed": [
+        0.7714,
+        0.9143,
+        0.9143
+      ],
+      "containment_mean": 1.0,
+      "containment_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dup_mean": 0.0,
+      "dup_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "violations_mean": 0.0,
+      "violations_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unnec_esc_mean": 0.1621,
+      "unnec_esc_per_seed": [
+        0.1027,
+        0.2466,
+        0.137
+      ],
+      "avoid_resid_mean": 0.037,
+      "avoid_resid_per_seed": [
+        0.0556,
+        0.0324,
+        0.0231
+      ],
+      "illegal_ratio_final_mean": 1.0,
+      "illegal_ratio_final_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "nsga3": {
+      "cond_rec_mean": 0.9018,
+      "cond_rec_per_seed": [
+        0.8836,
+        0.9247,
+        0.8973
+      ],
+      "corr_esc_mean": 0.7429,
+      "corr_esc_per_seed": [
+        0.6571,
+        0.6857,
+        0.8857
+      ],
+      "containment_mean": 0.9619,
+      "containment_per_seed": [
+        1.0,
+        0.8857,
+        1.0
+      ],
+      "dup_mean": 0.0062,
+      "dup_per_seed": [
+        0.0,
+        0.0185,
+        0.0
+      ],
+      "violations_mean": 0.0062,
+      "violations_per_seed": [
+        0.0,
+        0.0185,
+        0.0
+      ],
+      "unnec_esc_mean": 0.0982,
+      "unnec_esc_per_seed": [
+        0.1164,
+        0.0753,
+        0.1027
+      ],
+      "avoid_resid_mean": 0.0556,
+      "avoid_resid_per_seed": [
+        0.0694,
+        0.0556,
+        0.0417
+      ],
+      "illegal_ratio_final_mean": 1.0,
+      "illegal_ratio_final_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "A": {
+      "cond_rec_mean": 0.968,
+      "cond_rec_per_seed": [
+        0.9247,
+        0.9795,
+        1.0
+      ],
+      "corr_esc_mean": 0.6667,
+      "corr_esc_per_seed": [
+        0.6857,
+        0.6571,
+        0.6571
+      ],
+      "containment_mean": 1.0,
+      "containment_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dup_mean": 0.0,
+      "dup_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "violations_mean": 0.0,
+      "violations_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unnec_esc_mean": 0.032,
+      "unnec_esc_per_seed": [
+        0.0753,
+        0.0205,
+        0.0
+      ],
+      "avoid_resid_mean": 0.0586,
+      "avoid_resid_per_seed": [
+        0.0556,
+        0.0602,
+        0.0602
+      ],
+      "illegal_ratio_final_mean": 0.0,
+      "illegal_ratio_final_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "B": {
+      "cond_rec_mean": 0.8721,
+      "cond_rec_per_seed": [
+        0.9178,
+        0.8356,
+        0.863
+      ],
+      "corr_esc_mean": 0.8667,
+      "corr_esc_per_seed": [
+        0.8857,
+        0.8,
+        0.9143
+      ],
+      "containment_mean": 0.9619,
+      "containment_per_seed": [
+        1.0,
+        1.0,
+        0.8857
+      ],
+      "dup_mean": 0.0108,
+      "dup_per_seed": [
+        0.0,
+        0.0139,
+        0.0185
+      ],
+      "violations_mean": 0.0108,
+      "violations_per_seed": [
+        0.0,
+        0.0139,
+        0.0185
+      ],
+      "unnec_esc_mean": 0.1279,
+      "unnec_esc_per_seed": [
+        0.0822,
+        0.1644,
+        0.137
+      ],
+      "avoid_resid_mean": 0.0463,
+      "avoid_resid_per_seed": [
+        0.0278,
+        0.088,
+        0.0231
+      ],
+      "illegal_ratio_final_mean": 1.0,
+      "illegal_ratio_final_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "AB": {
+      "cond_rec_mean": 0.9384,
+      "cond_rec_per_seed": [
+        0.9521,
+        0.9247,
+        0.9384
+      ],
+      "corr_esc_mean": 0.7524,
+      "corr_esc_per_seed": [
+        0.6857,
+        0.6857,
+        0.8857
+      ],
+      "containment_mean": 1.0,
+      "containment_per_seed": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dup_mean": 0.0,
+      "dup_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "violations_mean": 0.0,
+      "violations_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unnec_esc_mean": 0.0616,
+      "unnec_esc_per_seed": [
+        0.0479,
+        0.0753,
+        0.0616
+      ],
+      "avoid_resid_mean": 0.0509,
+      "avoid_resid_per_seed": [
+        0.0694,
+        0.0556,
+        0.0278
+      ],
+      "illegal_ratio_final_mean": 0.0,
+      "illegal_ratio_final_per_seed": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "primary_contrast_AB_vs_nsga2": {
+    "mean_diff_avg": 0.0494,
+    "ci95_avg": [
+      -0.017,
+      0.1219
+    ],
+    "permutation_p_avg": 0.2692,
+    "clusters": 54,
+    "per_seed": [
+      {
+        "mean_diff": 0.0231,
+        "ci95": [
+          -0.0417,
+          0.0926
+        ],
+        "clusters": 54,
+        "permutation_p": 0.5991
+      },
+      {
+        "mean_diff": 0.0787,
+        "ci95": [
+          -0.0139,
+          0.1759
+        ],
+        "clusters": 54,
+        "permutation_p": 0.129
+      },
+      {
+        "mean_diff": 0.0463,
+        "ci95": [
+          0.0046,
+          0.0972
+        ],
+        "clusters": 54,
+        "permutation_p": 0.0795
+      }
+    ]
+  },
+  "secondary_contrasts": {
+    "A vs nsga2": {
+      "mean_diff_avg": 0.0555,
+      "ci95_avg": [
+        -0.0262,
+        0.1404
+      ],
+      "permutation_p_avg": 0.4575,
+      "clusters": 54,
+      "per_seed": [
+        {
+          "mean_diff": 0.0046,
+          "ci95": [
+            -0.0556,
+            0.0694
+          ],
+          "clusters": 54,
+          "permutation_p": 1.0
+        },
+        {
+          "mean_diff": 0.1111,
+          "ci95": [
+            0.0093,
+            0.213
+          ],
+          "clusters": 54,
+          "permutation_p": 0.0482
+        },
+        {
+          "mean_diff": 0.0509,
+          "ci95": [
+            -0.0324,
+            0.1389
+          ],
+          "clusters": 54,
+          "permutation_p": 0.3242
+        }
+      ],
+      "holm_p": 1.0
+    },
+    "B vs nsga2": {
+      "mean_diff_avg": 0.017,
+      "ci95_avg": [
+        -0.0262,
+        0.0633
+      ],
+      "permutation_p_avg": 0.2839,
+      "clusters": 54,
+      "per_seed": [
+        {
+          "mean_diff": 0.0324,
+          "ci95": [
+            -0.0046,
+            0.0741
+          ],
+          "clusters": 54,
+          "permutation_p": 0.2049
+        },
+        {
+          "mean_diff": 0.037,
+          "ci95": [
+            -0.0324,
+            0.1157
+          ],
+          "clusters": 54,
+          "permutation_p": 0.4059
+        },
+        {
+          "mean_diff": -0.0185,
+          "ci95": [
+            -0.0417,
+            0.0
+          ],
+          "clusters": 54,
+          "permutation_p": 0.2409
+        }
+      ],
+      "holm_p": 1.0
+    },
+    "AB vs A": {
+      "mean_diff_avg": -0.0062,
+      "ci95_avg": [
+        -0.0617,
+        0.0494
+      ],
+      "permutation_p_avg": 0.6062,
+      "clusters": 54,
+      "per_seed": [
+        {
+          "mean_diff": 0.0185,
+          "ci95": [
+            -0.0324,
+            0.0787
+          ],
+          "clusters": 54,
+          "permutation_p": 0.6668
+        },
+        {
+          "mean_diff": -0.0324,
+          "ci95": [
+            -0.0741,
+            0.0
+          ],
+          "clusters": 54,
+          "permutation_p": 0.1517
+        },
+        {
+          "mean_diff": -0.0046,
+          "ci95": [
+            -0.0787,
+            0.0694
+          ],
+          "clusters": 54,
+          "permutation_p": 1.0
+        }
+      ],
+      "holm_p": 1.0
+    },
+    "AB vs B": {
+      "mean_diff_avg": 0.0324,
+      "ci95_avg": [
+        -0.0278,
+        0.0988
+      ],
+      "permutation_p_avg": 0.3859,
+      "clusters": 54,
+      "per_seed": [
+        {
+          "mean_diff": -0.0093,
+          "ci95": [
+            -0.088,
+            0.0741
+          ],
+          "clusters": 54,
+          "permutation_p": 0.9183
+        },
+        {
+          "mean_diff": 0.0417,
+          "ci95": [
+            -0.0139,
+            0.1019
+          ],
+          "clusters": 54,
+          "permutation_p": 0.2204
+        },
+        {
+          "mean_diff": 0.0648,
+          "ci95": [
+            0.0185,
+            0.1204
+          ],
+          "clusters": 54,
+          "permutation_p": 0.019
+        }
+      ],
+      "holm_p": 1.0
+    },
+    "AB vs ga": {
+      "mean_diff_avg": 0.0185,
+      "ci95_avg": [
+        -0.0108,
+        0.0525
+      ],
+      "permutation_p_avg": 0.3912,
+      "clusters": 54,
+      "per_seed": [
+        {
+          "mean_diff": -0.0278,
+          "ci95": [
+            -0.0602,
+            0.0
+          ],
+          "clusters": 54,
+          "permutation_p": 0.1582
+        },
+        {
+          "mean_diff": 0.0833,
+          "ci95": [
+            0.0278,
+            0.1574
+          ],
+          "clusters": 54,
+          "permutation_p": 0.0155
+        },
+        {
+          "mean_diff": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "clusters": 54,
+          "permutation_p": 1.0
+        }
+      ],
+      "holm_p": 1.0
+    },
+    "AB vs nsga3": {
+      "mean_diff_avg": 0.0324,
+      "ci95_avg": [
+        -0.0046,
+        0.0756
+      ],
+      "permutation_p_avg": 0.1985,
+      "clusters": 54,
+      "per_seed": [
+        {
+          "mean_diff": 0.0509,
+          "ci95": [
+            -0.0185,
+            0.125
+          ],
+          "clusters": 54,
+          "permutation_p": 0.2239
+        },
+        {
+          "mean_diff": 0.0185,
+          "ci95": [
+            0.0,
+            0.0417
+          ],
+          "clusters": 54,
+          "permutation_p": 0.2409
+        },
+        {
+          "mean_diff": 0.0278,
+          "ci95": [
+            0.0046,
+            0.0602
+          ],
+          "clusters": 54,
+          "permutation_p": 0.1307
+        }
+      ],
+      "holm_p": 1.0
+    },
+    "AB vs hand": {
+      "mean_diff_avg": -0.0262,
+      "ci95_avg": [
+        -0.0787,
+        0.0216
+      ],
+      "permutation_p_avg": 0.4126,
+      "clusters": 54,
+      "per_seed": [
+        {
+          "mean_diff": -0.0278,
+          "ci95": [
+            -0.0602,
+            0.0
+          ],
+          "clusters": 54,
+          "permutation_p": 0.1582
+        },
+        {
+          "mean_diff": -0.0463,
+          "ci95": [
+            -0.0972,
+            -0.0046
+          ],
+          "clusters": 54,
+          "permutation_p": 0.0795
+        },
+        {
+          "mean_diff": -0.0046,
+          "ci95": [
+            -0.0787,
+            0.0694
+          ],
+          "clusters": 54,
+          "permutation_p": 1.0
+        }
+      ],
+      "holm_p": 1.0
+    }
+  },
+  "per_composition": {
+    "hand": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.5833,
+        "viol": 0.0
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.9583,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.9583,
+        "viol": 0.0
+      }
+    },
+    "random": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.7778,
+        "viol": 0.0139
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.5694,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 0.9028,
+        "viol": 0.0556
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 0.9306,
+        "viol": 0.0417
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 0.4444,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 0.8472,
+        "viol": 0.0833
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 0.0417,
+        "viol": 0.0556
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.4722,
+        "viol": 0.1389
+      }
+    },
+    "ga": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.7222,
+        "viol": 0.0
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.8333,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 0.6667,
+        "viol": 0.0
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.875,
+        "viol": 0.0
+      }
+    },
+    "nsga2": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.8889,
+        "viol": 0.0
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.7222,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 0.8333,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 0.5694,
+        "viol": 0.0
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.8056,
+        "viol": 0.0
+      }
+    },
+    "nsga3": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.7083,
+        "viol": 0.0
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.8056,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 0.8333,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 0.8333,
+        "viol": 0.0
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.7917,
+        "viol": 0.0556
+      }
+    },
+    "A": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.5972,
+        "viol": 0.0
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.875,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 0.9306,
+        "viol": 0.0
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.9167,
+        "viol": 0.0
+      }
+    },
+    "B": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.8889,
+        "viol": 0.0
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.75,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 0.9861,
+        "viol": 0.0139
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 0.9722,
+        "viol": 0.0278
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 0.5694,
+        "viol": 0.0
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.8056,
+        "viol": 0.0556
+      }
+    },
+    "AB": {
+      "delay_rate_permission": {
+        "n": 72,
+        "class_success": 0.7222,
+        "viol": 0.0
+      },
+      "independent_mixed_val": {
+        "n": 72,
+        "class_success": 0.8889,
+        "viol": 0.0
+      },
+      "partial_comp_failure": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_delay": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "partial_then_timeout_val": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "schema_then_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "single_timeout": {
+        "n": 72,
+        "class_success": 1.0,
+        "viol": 0.0
+      },
+      "timeout_then_rate_limit": {
+        "n": 72,
+        "class_success": 0.7639,
+        "viol": 0.0
+      },
+      "triple_mixed": {
+        "n": 72,
+        "class_success": 0.8889,
+        "viol": 0.0
+      }
+    }
+  }
+}

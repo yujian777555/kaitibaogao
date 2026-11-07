@@ -1,0 +1,213 @@
+{
+  "total": 12,
+  "correct": 12,
+  "mismatch_count": 0,
+  "unknown_count": 2,
+  "unknown_ratio": 0.1667,
+  "matrix": {
+    "R1": {
+      "R1": 5
+    },
+    "R2": {
+      "R2": 2
+    },
+    "R3": {
+      "R3": 1
+    },
+    "R4": {
+      "R4": 2
+    },
+    "UNKNOWN": {
+      "UNKNOWN": 2
+    }
+  },
+  "mismatches": [],
+  "rows": [
+    {
+      "case": "c1_direct_complete",
+      "expected": "R1",
+      "predicted": "R1",
+      "match": true,
+      "horizon": 12,
+      "notes": "one CALL completes the task",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c2_verify_disambiguation",
+      "expected": "R1",
+      "predicted": "R1",
+      "match": true,
+      "horizon": 12,
+      "notes": "same public TIMEOUT, hidden committed/not; VERIFY splits; no comp needed",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c3_lost_ack_comp_recover",
+      "expected": "R2",
+      "predicted": "R2",
+      "match": true,
+      "horizon": 12,
+      "notes": "wrong commit must be compensated before redo; no-comp cannot finish",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "r2_task_with_comp",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c4_partial_commit_comp_redo",
+      "expected": "R2",
+      "predicted": "R2",
+      "match": true,
+      "horizon": 12,
+      "notes": "partial commit visible as PARTIAL; compensation then redo",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "r2_task_with_comp",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c5_permission_denied_safe_escalate",
+      "expected": "R3",
+      "predicted": "R3",
+      "match": true,
+      "horizon": 12,
+      "notes": "task impossible; escalation reaches zero-residual terminal",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "r2_task_with_comp",
+        "r3_zero_residual",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c6_comp_failure_unavoidable_residue",
+      "expected": "R4",
+      "predicted": "R4",
+      "match": true,
+      "horizon": 12,
+      "notes": "unavoidable residue (excluded from harm); containment via escalate",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "r2_task_with_comp",
+        "r3_zero_residual",
+        "r4_containment",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c7_hidden_delay_variants",
+      "expected": "R1",
+      "predicted": "R1",
+      "match": true,
+      "horizon": 12,
+      "notes": "hidden delay 1..3 share obs; one robust WAIT-then-VERIFY policy works",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c8_partial_theta_unknown",
+      "expected": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "match": true,
+      "horizon": 12,
+      "notes": "completion only for GOOD theta; BAD theta cannot reach any robust class",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "r2_task_with_comp",
+        "r3_zero_residual",
+        "r4_containment",
+        "reason",
+        "spec"
+      ],
+      "reason": "all goals proved robustly unreachable"
+    },
+    {
+      "case": "c9_delayed_commit",
+      "expected": "R1",
+      "predicted": "R1",
+      "match": true,
+      "horizon": 12,
+      "notes": "commit invisible until WAIT; wait then complete",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c10_depth_exceeded",
+      "expected": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "match": true,
+      "horizon": 4,
+      "notes": "needs 7 steps; classified with horizon=4 -> UNKNOWN; horizon=20 -> R1",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "r2_task_with_comp",
+        "r3_zero_residual",
+        "r4_containment",
+        "reason",
+        "spec"
+      ],
+      "reason": "all goals proved robustly unreachable"
+    },
+    {
+      "case": "c11_duplicate_avoidable",
+      "expected": "R1",
+      "predicted": "R1",
+      "match": true,
+      "horizon": 12,
+      "notes": "blind RETRY duplicates on committed theta; VERIFY policy avoids harm",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "spec"
+      ],
+      "reason": ""
+    },
+    {
+      "case": "c12_saga_comp_failure_residue",
+      "expected": "R4",
+      "predicted": "R4",
+      "match": true,
+      "horizon": 12,
+      "notes": "step2 residue unavoidable; step1 residue avoidable via COMPENSATE",
+      "evidence_keys": [
+        "horizon",
+        "r1_no_comp_task",
+        "r2_task_with_comp",
+        "r3_zero_residual",
+        "r4_containment",
+        "spec"
+      ],
+      "reason": ""
+    }
+  ]
+}
