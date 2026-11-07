@@ -648,3 +648,14 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - **机制诊断实验（非确认性）**：216 个新生成场景、8 方法 × 3 seeds、每方法每 seed 108,864 真实 episodes、吞吐 ~97k eps/s。**A（契约语义保持算子）把非法候选率从 100% 降到 0%、全 seed 零违规**；CondRec：hand 1.000 > A 0.968 > AB 0.938 > ga 0.911 > nsga3 0.902 > B 0.872 > nsga2 0.838 > random 0.575。
 - **统计诚实结论**：primary AB vs NSGA-II Δ=+0.049 但 CI95 [−0.017,+0.122]、p=0.27（功效不足，不显著）；AB 未超过强手工基线；A+B 未超过 A 单独。第一项创新**方向可行、尚未证实**。
 - 下一步：功效核算定正式实验规模、B/A 机制迭代、49 系统检索、预注册交用户批准。正式 A-3b 继续 HOLD。
+
+
+## 2026-11-07：D-060 首轮机制诊断独立复核（D-061）
+
+新增 [57_PILOT_A3B_DIAGNOSTIC_INDEPENDENT_REAUDIT.md](57_PILOT_A3B_DIAGNOSTIC_INDEPENDENT_REAUDIT.md)。
+
+独立复核发现 D-060 的诊断数据可解析、216 场景配对完整，但算法评价存在阻断问题：当前控制器并非真正有状态 FSM；任意基因组 COMP 规则会触发运行器全局 Saga rollback；所有失败自动标记 escalated；R4 scorer 忽略可避免残留；必要升级仍计入 action cost；A-3 标签来自启发式而非逐场景 reachability checker；B 反例池被每次 update 清空且权重函数未调用；统计脚本平均 per-seed CI/p；NSGA-II/III/GA 不是完整 canonical baseline；55-R1 的 3:1/3:2 配额冲突。
+
+原始 JSON 实际类别为 R1=96/R2=50/R3=35/R4=35（D-060 文档中的 36/34 更正）；实际 A/seed23=108,648 episodes，hand 每 seed 216，其他搜索 runs 多数 108,864。不能声称所有方法/seed 实际 rollout 完全相同。
+
+结论：D-060 只能作为诊断线索，A 的内部规则修复有效性尚不等于独立语义安全提升；B 未按设计实现；A+B 未建立对标准 EA 的提升证据。下一阶段先修 controller/evaluator/labels/B/statistics/baselines 和配额，再用新诊断集重跑；暂不做功效分析或扩大 rollout。正式 A-3b 继续 HOLD。
