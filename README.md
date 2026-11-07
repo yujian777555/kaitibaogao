@@ -630,3 +630,12 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - **泄漏审计**：ToolMisuseBench 模板层泄漏、UndoBench 领域层重叠——泛化主张须限定；A-3 因子化 OOD 保持唯一干净来源。
 - **A-3 gap=0 根因**：可行单元 saga 已达 oracle 水平 + 52.2% 死区稀释 + Gate 无视效率差异；修正=可恢复性分层（R1–R4）+ 成本目标 + 重划 held-out，不删困难场景。
 - **A-3b 设计草案（55 号）已产出，未批准、未运行。** 下一步：独立审查 → 预注册冻结 → 实现分类器/场景生成器/adapter。HOLD 不变：A-3b 运行、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 执行、锁箱调参。
+
+
+## 2026-11-07：Pilot A-3b 设计独立审查
+
+新增 [56_PILOT_A3B_INDEPENDENT_REVIEW.md](56_PILOT_A3B_INDEPENDENT_REVIEW.md)。
+
+结论：Phase B 数据集审计 GO / 完成；55 号 A-3b 研究设计草案 **REQUEST CHANGES**，尚不能冻结预注册。主要阻断点包括 R4 零残留逻辑矛盾、R2 安全放弃与任务完成混淆、公开观测可达性未形式化、有限样本不能证明 P(violation)=0、R4 不可避免残留/必要升级被成本惩罚、类别配额与 cluster-level power 未冻结，以及算法初始化/骨干混杂风险。
+
+下一步：建立 55-R1 逐条修订，完成分类器可达性定义、分层指标、样本功效和公平预算审计。A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 继续 HOLD。
