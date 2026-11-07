@@ -577,12 +577,12 @@ Reports: `59_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md`, `60_WAIT_SLA_CONTRACT_BNE
 ### Round-3 results (DIAGNOSTIC; fresh seeds 2026110900)
 - **AB vs A: +0.119 [0.066, 0.183] p=0.0002 -- B-new combination gain ESTABLISHED (D-061 negative reversed).**
 - **AwaitSLA vs A: +0.089 p=0.005; AwaitSLA vs AwaitFixed: +0.054 p=0.003 -- WAIT-SLA works and beats fixed waiting.**
-- AB vs AwaitSLA +0.031 p=0.007 -- search adds independent gain on top of WAIT-SLA (Q10: gain = contract semantics + evolution, NOT hand rules alone).
+- AB vs AwaitSLA +0.031 p=0.0072 on all data, but validation +0.031, p=0.244 (n.s.); Q10 search increment is suggestive in-sample but not yet shown to generalize.
 - AB behavioural violations 0 (A 0.060); AB stability [0.543, 0.531, 0.543]; validation AB vs A +0.142 p=0.008.
 - Negative results kept: Safety Gate harmful (ABG < AB, -0.193); B alone worse than NSGA-II (-0.074); hand still ahead (AB -0.282).
 
 ### Judgement
-Three mechanisms now have independent ablation evidence (contract-preserving A, WAIT-SLA, B-new). Paper claim must be "significantly better than standard EA under equal budget with behavioural safety guarantees" -- NOT "beats experts". First innovation NEARLY established.
+Three mechanisms now have independent ablation evidence (contract-preserving A, WAIT-SLA, B-new). Mechanism-level ablations are promising, but AB vs NSGA-II is not significant (all p=0.062; validation p=0.2277), and Q10 is not significant on validation (p=0.244). Do NOT yet claim superiority to standard EA or generalized search gain. Hand remains ahead.
 
 ### Next task (single)
 Power analysis from the round-3 cluster variance (cluster_sd ~ 0.40) -> freeze preregistration (with the Q10-scoped claim) -> submit for user approval -> formal A-3b. Everything else stays HOLD.
@@ -597,7 +597,7 @@ Power analysis from the round-3 cluster variance (cluster_sd ~ 0.40) -> freeze p
 ## 接管时先核验
 - 远端分支 `pilot-a-stateful-recovery`、main、HEAD、CI。
 - D-062 基线 HEAD 曾为 `730431e1c52e97adf550a54f77cb53256e302525`；后续 D-063 文档/CI 更新会产生新 HEAD。
-- 79/79 是执行报告中的本地测试结果。旧 workflow 只触发 `pilot_a_recovery/**`；新 workflow `.github/workflows/research-simulator-regression.yml` 应覆盖 `pilot_a_recovery/**` 和 `pilot_a3b/**`。必须查看真实 Actions run，不能把本地结果写成 CI 通过。
+- 执行报告称 79/79 测试通过。新 workflow `.github/workflows/research-simulator-regression.yml` 已覆盖 `pilot_a_recovery/**` 和 `pilot_a3b/**`；Actions run `42398278551` 在 D-062 代码提交 `c0078d5` 上成功，两个测试步骤均 success。后续提交只改文档，未改实验代码。
 
 ## D-062 关键结果和限制
 - 59 号独立审计推翻 D-061 的 0.36 vs 0.006 行为违规叙事：99.4% 为 evaluator artifact（正确 rollback 被 saga gate 误伤）；真实重复副作用 7 例，错误链为 `UNKNOWN_OUTCOME -> SLA 内 VERIFY 谎言 -> 非幂等 RETRY -> DUPLICATE`。
