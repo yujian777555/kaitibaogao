@@ -246,3 +246,16 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 
 ### D-062 执行更新（2026-11-07）
 59/60/61 号报告落地。复核确认 D-061 的 0.36 违规率系评价器 artifact（正确 ROLLBACK 被误伤），真实损害仅 7 例重复（`TIMEOUT→VERIFY 谎言→RETRY→DUPLICATE`）。修复评价器并实现 WAIT-SLA 契约 + B-new。第三轮（diagnostic3，manifest 017b3454…）：**AB vs A +0.119 p=0.0002（B-new 成立）**；**WAIT-SLA vs A +0.089 p=0.005、vs 固定等待 +0.054 p=0.003**；AB vs AwaitSLA +0.031 p=0.007（搜索独立增益）；validation AB vs A +0.142 p=0.008。负结果：Safety Gate 有害、B 单独无效、未超 hand（−0.282）。判定：三机制独立证据齐备，第一项创新接近成立。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。
+
+
+## 11. D-063：正式 A-3b 功效与预注册 Gate（2026-11-08）
+
+D-062 diagnostic3 已完成，但正式确认性实验仍 HOLD。完整计划见 `62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md`。
+
+- **主要证据限制：** AB vs NSGA-II all +0.1049 / p=.062（54 clusters）；validation +0.1173 / p=.2277（18 clusters），均未显著。AB vs A validation +.142 / p=.0082 支持 B-new 增量，但不能替代标准 EA 主比较。AB vs AwaitSLA validation +.031 / p=.244，Q10 独立搜索增益尚未泛化。AB vs Hand −.282，仍落后强手工。
+- **统计阻断：** `stats.py` 仍硬编码读取 diagnostic2；`run_diagnostic3.py` 不生成统计摘要；AwaitSLA 相关比较缺少完整可执行复算入口。先实现并测试 diagnostic3 专用分析器。
+- **初步样本量：** validation-only SD=.3914，双侧 alpha=.05，MDE=.10，80%/90% power 约需 123/163 个可分析 task×fault-composition clusters；加 15% 失效预留约 145/192。MDE=.08 则约需 190/254。最终数字须以 empirical cluster simulation 冻结。
+- **数据扩展：** 当前 validation 只有 18 clusters（2 个 task families ×9 compositions）。新增独立任务族/故障组合，不得仅增加 seeds 或重复 episodes 凑数。
+- **预注册：** AB vs NSGA-II 为唯一主要对比；次要对比 Holm；Hand 为参考；安全为硬门，合同假设必须写明；Q10 必须在新 held-out test 验证。
+- **GO：** 统计复现、功效仿真、任务族扩展审计、预注册草案、CI。
+- **HOLD：** 正式 A-3b、held-out 调参/查看、Pilot B、A800/ARWM、真实 API、UndoBench TEST、ThinkingBox。用户明确批准预注册后再冻结并另行授权正式实验。
