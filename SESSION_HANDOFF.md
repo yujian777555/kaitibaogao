@@ -1961,7 +1961,7 @@ Q1 WAIT-SLA 是否降低重复副作用；Q2 是否优于固定 WAIT；Q3 VERIFY
 评价器门禁只对执行类动作计罚；WAIT-SLA 契约（补偿清除 或 SLA 后查询确认才解锁重试，动作掩码）；B-new（动作序列签名+涉事基因+死因修复映射+validator）；Safety Gate（ABG 臂）。
 
 ### 56.3 第三轮结果
-**AB vs A +0.119 p=0.0002（B-new 成立，逆转 D-061）**；**AwaitSLA vs A +0.089 p=0.005、vs Fixed +0.054 p=0.003（WAIT-SLA 成立）**；AB vs AwaitSLA +0.031 p=0.007（搜索独立增益，Q10 可分）；validation AB vs A +0.142 p=0.008。负结果：Gate 有害、B 单独劣于 NSGA-II、未超 hand（−0.282）。
+**AB vs A +0.119 p=0.0002（B-new 成立，逆转 D-061）**；**AwaitSLA vs A +0.089 p=0.005、vs Fixed +0.054 p=0.003（WAIT-SLA 成立）**；AB vs AwaitSLA all +0.031 p=0.0072；但 validation +0.031, p=0.244（n.s.），Q10 搜索增量尚未证明泛化；validation AB vs A +0.142 p=0.008。负结果：Gate 有害、B 单独劣于 NSGA-II、未超 hand（−0.282）。
 
 ### 56.4 判定与下一步
 A + WAIT-SLA + B-new 三机制各有独立消融证据；主张限定"优于标准 EA 且行为安全"。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。
