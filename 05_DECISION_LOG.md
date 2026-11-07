@@ -966,3 +966,26 @@ HOLD：Pilot B 演化搜索、ToolMisuseBench public test 调参、UndoBench fro
 
 ### 下一步
 重设计 B 的反例→基因映射（动作序列模式级签名+语义修复型定向变异）+ 状态化契约修复（歧义观测后等满 SLA 再 VERIFY/RETRY），复测环境违规率，A+新B 同配置重跑。见 58 号报告 §7。
+
+
+## 决策 D-062：启动 WAIT-SLA 行为安全与反例驱动演化改进（2026-11-08）
+
+完整任务计划：`59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md`。
+
+### 背景
+D-061（58 号报告）给出 A vs NSGA-II Δ=+0.239（Holm p=0.0014），AB vs A Δ=-0.113（p=0.0014），AB vs Hand Δ=-0.514。报告的环境行为违规率 A=0.36、Hand=0.006。第一项创新暂定为部分成立：A 有正向诊断证据，B 的组合增益不成立，未超过强手工策略。
+
+### 决策
+- 不推翻机制 A，不再强行保留旧 B。
+- D-062 第一任务是独立复核 0.36/0.006 的分子、分母、episode/action 口径和完整失败轨迹；在此之前不扩大 rollout。
+- 研究 WAIT-SLA 状态化契约：区分 visibility SLA 与 retry SLA，显式建模提交语义、查询一致性、幂等性、可见性保证、等待预算、补偿和升级条件。策略只能访问公开观测。
+- 重新设计 B-new：完整动作序列反例签名、涉事基因邻域定位、语义修复型局部变异；定向变异替换普通变异，严格预算公平。
+- 评估独立 Contract Validator、行为层 Safety Gate 和硬安全优先的分层生存者选择。
+- 只有 Stage 0–3 通过后，才运行新的非锁箱诊断集；旧 D-061 validation 若参与调参，不得继续声称独立验证。
+
+### 授权
+GO：原始数据复核、WAIT-SLA/FSM/B-new/Safety Gate 实现、测试、新非锁箱诊断和统计复算。
+HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM、大规模真实 LLM API、ThinkingBox、未经批准的锁箱测试。
+
+### 接受标准
+必须证明 WAIT-SLA 对歧义观测重复副作用的影响，比较固定 WAIT 与 SLA-aware WAIT，检验 B-new 是否真正增加搜索收益且不破坏 A 的安全性质，并报告与 NSGA-II 和 Hand 的公平对照。必须回答增益来自演化搜索还是人工编码的 WAIT-SLA 规则。当前 D-062 仅为任务计划，尚未执行。
