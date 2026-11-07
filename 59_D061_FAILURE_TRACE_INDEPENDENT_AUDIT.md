@@ -1,5 +1,7 @@
 # 59 — D-061 失败轨迹独立复核
 
+> 注：编号 59 并存两份文档——本文件（D-061 复核，D-062 Stage 0 交付）与 `59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md`（D-062 执行计划）。两者内容互补：本文件为计划的证据输入。
+
 **日期：** 2026-11-07（D-062 Stage 0）  
 **对象：** `experiments/pilot_a3b/diagnostic2_results.json`（D-061 原始数据，只读）  
 **原始数据哈希：** SHA-256 `dc45535532dd91c3ef573145f007e5114bf7872b5e4d438e2189d2b4d28884c7`（2,735,653 字节；payload manifest `d4fb2be680e74f2e8351ae2648b00a20c1a3fe2d8d4579dac68f180f321ba25d`）  
