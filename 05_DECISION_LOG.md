@@ -901,3 +901,33 @@ HOLD：Pilot B 演化搜索、ToolMisuseBench public test 调参、UndoBench fro
 2. A/B 机制迭代（B 的反例粒度与加权；A 的修复规则完备性）；
 3. 49 号系统性机制检索补齐；
 4. 形成 preregistration candidate 交用户批准后才运行正式实验。
+
+
+## 决策 D-061：D-060 首轮机制诊断独立复核 — REQUEST CHANGES（2026-11-07）
+
+独立报告：`57_PILOT_A3B_DIAGNOSTIC_INDEPENDENT_REAUDIT.md`。
+
+### 仓库/原始数据核验
+- branch `pilot-a-stateful-recovery` 远端 HEAD `edfc7ad0156617dccc4e4bf998df33f991ae921f`；main `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead 94 / behind 0。
+- `diagnostic_results.json` 可解析：216 场景、24 run、每 run 216 rows，scenario ID 跨方法/seed 一致。
+- 实际标签 R1=96/R2=50/R3=35/R4=35；D-060 旧维护文档的 R3=36/R4=34 更正为 35/35。
+- hand 每 seed 216 episodes；搜索 runs 多数 108,864，A seed23=108,648；缓存命中导致实际数并非完全一致。当前 commit 无 GitHub status checks。
+
+### 关键实现/统计阻断
+1. FSMGenome 是静态 `(error, idem, comp)->macro_action` 表，不是真正有状态 FSM；任一规则含 COMP 会触发全局 Saga rollback。
+2. 所有失败都会自动置 `escalated=True`，污染 R3 CorrectEscalation。
+3. R4 只检查 escalation+no duplicate，不检查可避免残留/最小可达损害；R4 residual 被排除。
+4. action cost 对全体 rows 平均，仍惩罚 R3/R4 必要升级。
+5. A-3 labels 使用 heuristic `label_scenario`，没有 216 场景逐项 AND-OR checker 证明。
+6. B 反例池 update 每次 clear；scenario_weights 未调用；没有按公开错误签名定向；B/AB targeted mutation 强度不匹配。
+7. A 的 legality 指标与 repair 共用 ILLEGAL 表，且 validator 不完整；不能视为独立安全证明。
+8. reachability horizon cutoff 未作为 UNKNOWN 传播，可能错误降级 R3/R4。
+9. stats.py 平均 per-seed CI/p 无效。探索性 pooled cluster 重算 AB−NSGA-II Δ≈+0.0494、CI≈[-0.0031,+0.1034]、p≈0.0874，仍不显著。
+10. NSGA-II/III/GA 并非完整 canonical baseline；无 GP；Random 使用 Pareto survivor selection。
+11. 55-R1 配额文字 3:1 与表格 3:2/58:38 冲突。
+
+### 决定
+- D-060 artifact 保留为诊断数据，不覆盖。
+- 第一项创新继续验证，但当前不能声称 A 已证明安全提升、B 已验证或 A+B 优于标准 EA。
+- **先修 controller/evaluator/labels/B/statistics/baselines 和配额，再重跑新诊断。暂不做功效分析，不扩大 rollout。**
+- 正式 A-3b、Pilot B、A800/ARWM、真实 API、UndoBench TEST、ThinkingBox 继续 HOLD。
