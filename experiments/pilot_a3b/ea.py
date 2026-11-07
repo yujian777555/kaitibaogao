@@ -29,6 +29,7 @@ from a3_bridge import (
     make_gene_rule_table,
     random_fsm,
     repair_fsm,
+    run_episode_fsm,
 )
 
 # ---------------------------------------------------------------------------
@@ -54,58 +55,78 @@ def crossover(a: StatefulFSM, b: StatefulFSM, rng: random.Random) -> StatefulFSM
             src = a.genes.get(key) or b.genes[key]
         genes.append(src.clone())
     default = (a.default_action, a.default_wait) if rng.random() < 0.5 else (b.default_action, b.default_wait)
-    return StatefulFSM(genes, default)
+    return StatefulFSM(genes, default, a.sla_aware or b.sla_aware, a.fixed_wait or b.fixed_wait)
 
 
 # ---------------------------------------------------------------------------
-# Mechanism B: counterexample-guided search (57 F6 redesign)
+# Mechanism B-new: counterexample-guided CONTRACT-PRESERVING mutation (D-062)
 # ---------------------------------------------------------------------------
+# failure signature -> preferred repair action for implicated genes
+_SIG_REPAIR = {
+    "dup_retry": ("WAIT", "VERIFY", "COMPENSATE"),      # duplicate from blind retry
+    "sla_retry": ("WAIT", "VERIFY"),                     # retry before SLA clearance
+    "residual": ("COMPENSATE", "ROLLBACK"),              # avoidable residue
+    "comp_fail_loop": ("ESCALATE", "ROLLBACK"),          # compensation failing repeatedly
+    "unnecessary_escalation": ("VERIFY", "WAIT", "RETRY"),
+    "incomplete": ("RETRY", "VERIFY", "WAIT"),
+}
+
+
 class CounterexamplePool:
-    """Aggregates failures across the ENTIRE population; cleared once per
-    generation by the driver (not per evaluation)."""
+    """Aggregates failures across the whole population once per generation.
+
+    Signatures are ACTION-SEQUENCE patterns (not coarse labels): each failing
+    episode yields the (obs, action) decision sequence and a failure cause.
+    Targeted mutation touches ONLY genes consulted in failing traces and
+    proposes a cause-specific repair action, then the genome passes through
+    the standard contract repair (so B cannot reintroduce illegal rules).
+    """
 
     def __init__(self):
         self.cluster_counts = Counter()
-        self.cluster_genes = defaultdict(Counter)
-        self.scenario_fail = Counter()
+        self.cluster_genes = defaultdict(Counter)  # sig -> gene key -> count
+        self.cluster_cause = Counter()
         self.n_examples = 0
 
     def clear(self):
         self.cluster_counts.clear()
         self.cluster_genes.clear()
-        self.scenario_fail.clear()
+        self.cluster_cause.clear()
         self.n_examples = 0
 
+    @staticmethod
+    def _cause(row):
+        if row["duplicate"]:
+            return "dup_retry"
+        if row.get("sla_violation"):
+            return "sla_retry"
+        if row.get("avoidable_harm", 0) > 0:
+            return "residual"
+        if row.get("compensation_failure"):
+            return "comp_fail_loop"
+        if row.get("policy_selected_escalation") and row.get("class_success") in (0, None):
+            return "unnecessary_escalation"
+        return "incomplete"
+
+    @staticmethod
+    def _signature(row):
+        trace = row.get("decision_trace") or []
+        window = tuple((o, a) for o, _at, _st, a in trace[-4:])
+        return (CounterexamplePool._cause(row), window)
+
     def aggregate(self, results):
-        """results: list of evaluate_controller outputs (one per genome)."""
         for res in results:
             for r in res["rows"]:
                 if r["class_success"] in (1, None):
                     continue
-                if not r["decision_trace"]:
+                if not r.get("decision_trace"):
                     continue
                 self.n_examples += 1
                 sig = self._signature(r)
                 self.cluster_counts[sig] += 1
-                self.scenario_fail[r["scenario_id"]] += 1
+                self.cluster_cause[self._cause(r)] += 1
                 for (obs, att, stack, _act) in r["decision_trace"]:
                     self.cluster_genes[sig][(obs, att, stack)] += 1
-
-    @staticmethod
-    def _signature(row):
-        trace = row["decision_trace"]
-        last_obs = trace[-1][0] if trace else "NONE"
-        cause = ("violation" if row["invariant_violation"] else
-                 "residual" if row["avoidable_harm"] else
-                 "comp_fail" if row["compensation_failure"] else "incomplete")
-        return (row["label"], last_obs, cause)
-
-    def scenario_weights(self, scenarios, cap=2.0):
-        if not self.scenario_fail:
-            return [1.0] * len(scenarios)
-        worst = self.scenario_fail.most_common(3)
-        worst_ids = {sid for sid, _ in worst}
-        return [cap if sc["scenario_id"] in worst_ids else 1.0 for sc in scenarios]
 
     def implicated_genes(self, top_clusters=3):
         keys = Counter()
@@ -114,20 +135,42 @@ class CounterexamplePool:
         return list(keys)
 
     def targeted_mutate(self, fsm: StatefulFSM, rng: random.Random) -> StatefulFSM:
-        """Mutate genes implicated by counterexamples; falls back to uniform
-        mutation. EXACTLY one mutation event (same budget as mutate())."""
+        """Counterexample-guided CONTRACT-PRESERVING mutation: modify one
+        implicated gene toward a cause-specific repair action. Exactly one
+        mutation event (budget-matched with standard mutate)."""
         g = fsm.clone()
-        implicated = self.implicated_genes()
+        if not self.cluster_counts:
+            return mutate(g, rng)
+        sig, _count = self.cluster_counts.most_common(1)[0]
+        cause = sig[0]
         candidates = []
-        for (obs, att, stack) in implicated:
+        for (obs, att, stack) in self.implicated_genes():
             gene = g.genes.get((obs, att, stack))
             if gene is not None:
                 candidates.append(gene)
         gene = rng.choice(candidates) if candidates else rng.choice(g.genes_list())
-        gene.action = rng.choice(ACTIONS)
+        repairs = _SIG_REPAIR.get(cause, ACTIONS)
+        gene.action = rng.choice(repairs)
         if rng.random() < 0.3:
             gene.wait_n = rng.randint(1, 4)
         return g
+
+
+# ---------------------------------------------------------------------------
+# Safety Gate (D-062 Stage 3): behavioural hard filter before survivor use
+# ---------------------------------------------------------------------------
+SAFETY_BATTERY = None  # populated by driver with fixed critical scenarios
+
+
+def safety_battery_pass(fsm, battery, verdicts):
+    """Hard behavioural screen: candidates producing duplicates or SLA
+    violations on the fixed safety battery are REJECTED (cannot be traded off
+    against success)."""
+    for sc in battery:
+        row = run_episode_fsm(fsm, sc)
+        if row["duplicate"] or row.get("sla_violation"):
+            return False
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -244,34 +287,44 @@ def niching_select(objs, front, dirs):
 # Driver
 # ---------------------------------------------------------------------------
 def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
-                  eval_budget, seed, counterexample_cap=2.0):
-    """method: random | ga | nsga2 | nsga3 | A | B | AB"""
+                  eval_budget, seed, safety_battery=None, battery_verdicts=None,
+                  counterexample_cap=None):
+    """method: random | ga | nsga2 | nsga3 | A | B | AB | ABG
+    (A = contract repair; B = counterexample-guided mutation;
+     G suffix = behavioural safety gate)."""
     rng = random.Random(seed)
     population = [g.clone() for g in init_pool[:pop_size]]
     episodes_used = 0
+    battery = safety_battery if (safety_battery and method.endswith("G")) else None
     cache = {}
 
     def fingerprint(g):
         return tuple(sorted((k, gene.action, gene.wait_n) for k, gene in g.genes.items())) + (
-            g.default_action, g.default_wait)
+            g.default_action, g.default_wait, g.sla_aware, g.fixed_wait)
 
-    def evaluate(g, weights=None):
+    def evaluate(g):
         nonlocal episodes_used
         fp = fingerprint(g)
         if fp in cache:
             return cache[fp]
         if episodes_used + len(scenarios) > eval_budget:
             return None
-        res = evaluate_controller(g, scenarios, verdicts, weights)
+        res = evaluate_controller(g, scenarios, verdicts, None)
         episodes_used += len(scenarios)
         cache[fp] = res
         return res
 
-    use_repair = method in ("A", "AB")
-    use_cex = method in ("B", "AB")
+    def gate_ok(g):
+        nonlocal episodes_used
+        if battery is None:
+            return True
+        episodes_used += len(battery)
+        return safety_battery_pass(g, battery, battery_verdicts or verdicts)
+
+    use_repair = method.startswith("A") or method.startswith("AB")
+    use_cex = "B" in method
     cex = CounterexamplePool()
 
-    weights = None
     results = []
     for g in population:
         res = evaluate(g)
@@ -283,7 +336,6 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
     history = []
 
     for gen in range(generations):
-        # ranks/crowd for tournament BEFORE variation
         fronts0 = fast_non_dominated_sort(objs)
         ranks = {}
         for fi, f in enumerate(fronts0):
@@ -295,17 +347,22 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
 
         if use_cex:
             cex.clear()
-            cex.aggregate(results)  # aggregate whole population once per gen
-            weights = cex.scenario_weights(scenarios, counterexample_cap)
+            cex.aggregate(results)
 
         # --- variation: exactly one mutate per child ---------------------
         offspring = []
+        attempts = 0
         if method == "random":
-            for _ in range(pop_size):
+            while len(offspring) < pop_size and attempts < pop_size * 6:
+                attempts += 1
+                cand = random_fsm(rng)
+                if gate_ok(cand):
+                    offspring.append(cand)
+            while len(offspring) < pop_size:
                 offspring.append(random_fsm(rng))
         else:
-            while len(offspring) < pop_size:
-                # parents
+            while len(offspring) < pop_size and attempts < pop_size * 6:
+                attempts += 1
                 if method == "ga":
                     def fit(i):
                         return sum(objs[i])
@@ -320,19 +377,26 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
                         return i if crowd.get(i, 0) >= crowd.get(j, 0) else j
                     a, b = pick(), pick()
                 child = crossover(population[a], population[b], rng)
-                if use_cex and rng.random() < 0.5:
+                if use_cex:
                     child = cex.targeted_mutate(child, rng)      # ONE mutation event
                 else:
                     child = mutate(child, rng)                    # ONE mutation event
                 if use_repair:
                     child = repair_fsm(child)
+                if not gate_ok(child):
+                    continue
                 offspring.append(child)
+            while len(offspring) < pop_size:
+                g2 = mutate(population[rng.randrange(len(population))], rng)
+                if use_repair:
+                    g2 = repair_fsm(g2)
+                offspring.append(g2)
 
         off_results = []
         for g in offspring:
-            res = evaluate(g, weights if use_cex else None)
+            res = evaluate(g)
             if res is None:
-                res = evaluate_controller(g, scenarios, verdicts, weights if use_cex else None)
+                res = evaluate_controller(g, scenarios, verdicts, None)
                 episodes_used += len(scenarios)
             off_results.append(res)
 

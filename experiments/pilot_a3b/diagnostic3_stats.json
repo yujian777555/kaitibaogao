@@ -1,0 +1,246 @@
+{
+  "aggregate": {
+    "hand": {
+      "class_success_mean": 0.821,
+      "invariant_violation_mean": 0.0123,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 2.2037,
+      "policy_selected_escalation_mean": 0.3457,
+      "class_success_stability": {
+        "per_seed": [
+          0.821,
+          0.821,
+          0.821
+        ],
+        "mean": 0.821,
+        "sd": 0.0
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 486
+    },
+    "nsga2": {
+      "class_success_mean": 0.4342,
+      "invariant_violation_mean": 0.1399,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 0.4979,
+      "policy_selected_escalation_mean": 0.6955,
+      "class_success_stability": {
+        "per_seed": [
+          0.3457,
+          0.4568,
+          0.5
+        ],
+        "mean": 0.4342,
+        "sd": 0.0796
+      },
+      "validator_illegal_ratio": 1.0,
+      "episodes_total": 948834
+    },
+    "A": {
+      "class_success_mean": 0.4198,
+      "invariant_violation_mean": 0.3909,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 1.0864,
+      "policy_selected_escalation_mean": 0.179,
+      "class_success_stability": {
+        "per_seed": [
+          0.3395,
+          0.5309,
+          0.3889
+        ],
+        "mean": 0.4198,
+        "sd": 0.0994
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 948834
+    },
+    "AwaitFixed": {
+      "class_success_mean": 0.4547,
+      "invariant_violation_mean": 0.3848,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 1.0432,
+      "policy_selected_escalation_mean": 0.2366,
+      "class_success_stability": {
+        "per_seed": [
+          0.5,
+          0.3889,
+          0.4753
+        ],
+        "mean": 0.4547,
+        "sd": 0.0583
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 948834
+    },
+    "AwaitSLA": {
+      "class_success_mean": 0.5082,
+      "invariant_violation_mean": 0.4033,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 1.0823,
+      "policy_selected_escalation_mean": 0.2593,
+      "class_success_stability": {
+        "per_seed": [
+          0.4506,
+          0.5432,
+          0.5309
+        ],
+        "mean": 0.5082,
+        "sd": 0.0503
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 948834
+    },
+    "B": {
+      "class_success_mean": 0.3601,
+      "invariant_violation_mean": 0.3086,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 0.5864,
+      "policy_selected_escalation_mean": 0.4794,
+      "class_success_stability": {
+        "per_seed": [
+          0.2284,
+          0.4383,
+          0.4136
+        ],
+        "mean": 0.3601,
+        "sd": 0.1147
+      },
+      "validator_illegal_ratio": 1.0,
+      "episodes_total": 945054
+    },
+    "AB": {
+      "class_success_mean": 0.5391,
+      "invariant_violation_mean": 0.3992,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 1.1523,
+      "policy_selected_escalation_mean": 0.2387,
+      "class_success_stability": {
+        "per_seed": [
+          0.5432,
+          0.5309,
+          0.5432
+        ],
+        "mean": 0.5391,
+        "sd": 0.0071
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 941922
+    },
+    "ABG": {
+      "class_success_mean": 0.3457,
+      "invariant_violation_mean": 0.4177,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 1.0638,
+      "policy_selected_escalation_mean": 0.0988,
+      "class_success_stability": {
+        "per_seed": [
+          0.3827,
+          0.3272,
+          0.3272
+        ],
+        "mean": 0.3457,
+        "sd": 0.032
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 1004022
+    }
+  },
+  "primary_contrast": {
+    "name": "AB vs nsga2 (all)",
+    "stats": {
+      "mean_diff": 0.1049,
+      "ci95": [
+        0.0,
+        0.2058
+      ],
+      "clusters": 54,
+      "permutation_p": 0.062,
+      "cluster_sd": 0.404,
+      "effect_size_d": 0.2597
+    }
+  },
+  "secondary_contrasts": {
+    "A vs nsga2": {
+      "mean_diff": -0.0144,
+      "ci95": [
+        -0.1255,
+        0.0947
+      ],
+      "clusters": 54,
+      "permutation_p": 0.8315,
+      "cluster_sd": 0.4317,
+      "effect_size_d": -0.0334,
+      "holm_p": 0.8315
+    },
+    "B vs nsga2": {
+      "mean_diff": -0.0741,
+      "ci95": [
+        -0.1152,
+        -0.035
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0007,
+      "cluster_sd": 0.1526,
+      "effect_size_d": -0.4853,
+      "holm_p": 0.0015
+    },
+    "AB vs A": {
+      "mean_diff": 0.1193,
+      "ci95": [
+        0.0658,
+        0.1831
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0002,
+      "cluster_sd": 0.2178,
+      "effect_size_d": 0.5479,
+      "holm_p": 0.001
+    },
+    "AB vs B": {
+      "mean_diff": 0.179,
+      "ci95": [
+        0.0947,
+        0.2634
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0005,
+      "cluster_sd": 0.3381,
+      "effect_size_d": 0.5294,
+      "holm_p": 0.0015
+    },
+    "AB vs ga": null,
+    "AB vs nsga3": null,
+    "AB vs hand": {
+      "mean_diff": -0.2819,
+      "ci95": [
+        -0.3868,
+        -0.1811
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0002,
+      "cluster_sd": 0.3925,
+      "effect_size_d": -0.7182
+    }
+  },
+  "validation_class_success": {
+    "hand": 0.8704,
+    "nsga2": 0.4136,
+    "A": 0.3889,
+    "AwaitFixed": 0.4321,
+    "AwaitSLA": 0.5,
+    "B": 0.3519,
+    "AB": 0.5309,
+    "ABG": 0.3272
+  },
+  "q6_AB_vs_nsga2_validation": {
+    "mean_diff": 0.1173,
+    "ci95": [
+      -0.0679,
+      0.2778
+    ],
+    "clusters": 18,
+    "permutation_p": 0.2277,
+    "cluster_sd": 0.3914,
+    "effect_size_d": 0.2997
+  }
+}

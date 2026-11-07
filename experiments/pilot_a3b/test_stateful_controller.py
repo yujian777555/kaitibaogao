@@ -66,6 +66,55 @@ class StatefulControllerTests(unittest.TestCase):
         self.assertIn(att, (0, 1, 2))
         self.assertIsInstance(stack, bool)
 
+    def test_safe_rollback_escalate_is_not_a_violation(self):
+        """D-062 audit finding: rolling back prior steps during a safe abort
+        must NOT be charged as a saga violation (the D-061 artifact)."""
+        from a3_bridge import ACT_ROLLBACK, ACT_COMPENSATE, ACT_WAIT
+        fsm = hand_fsm()
+        # force a safe-abort behaviour: compensate/rollback then escalate
+        for g in fsm.genes_list():
+            if g.error in ("TIMEOUT", "PARTIAL", "NOT_COMMITTED", "WAITED"):
+                g.action = ACT_COMPENSATE if g.error == "PARTIAL" else ACT_ROLLBACK
+        # any multi-step scenario where step 2 faults after step 1 committed
+        s = sc("inventory_order_payment", "timeout_then_rate_limit", 5)
+        row = run_episode_fsm(fsm, s)
+        self.assertEqual(row["downstream_violation"], 0,
+                         "rollback-based safe abort must not be a violation")
+        self.assertEqual(row["invariant_violation"], row["duplicate"])
+
+    def test_downstream_execute_attempt_without_commit_is_violation(self):
+        from a3_bridge import ACT_RETRY
+        fsm = hand_fsm()
+        for g in fsm.genes_list():
+            g.action = ACT_RETRY  # always try to execute
+        s = sc("inventory_order_payment", "partial_comp_failure", 5)
+        row = run_episode_fsm(fsm, s)
+        self.assertEqual(row["invariant_violation"], 1)
+
+    def test_unsafe_retry_counts_sla_violation(self):
+        """TIMEOUT -> VERIFY (lies NOT_COMMITTED within SLA) -> RETRY on a
+        non-idempotent tool must be measured as an SLA violation."""
+        from a3_bridge import ACT_RETRY, ACT_VERIFY
+        fsm = hand_fsm()
+        for g in fsm.genes_list():
+            g.action = ACT_RETRY if g.error in ("NOT_COMMITTED", "WAITED") else (
+                ACT_VERIFY if g.error == "TIMEOUT" else g.action)
+        s = sc("inventory_order_payment", "single_timeout", 5)
+        row = run_episode_fsm(fsm, s)
+        self.assertEqual(row["sla_violation"], 1, "verify-then-retry within SLA is unsafe")
+
+    def test_sla_aware_masking_blocks_unsafe_retry(self):
+        from a3_bridge import ACT_RETRY, ACT_VERIFY
+        genes_fsm = hand_fsm()
+        for g in genes_fsm.genes_list():
+            g.action = ACT_RETRY if g.error in ("NOT_COMMITTED", "WAITED") else (
+                ACT_VERIFY if g.error == "TIMEOUT" else g.action)
+        genes_fsm.sla_aware = True
+        s = sc("inventory_order_payment", "single_timeout", 5)
+        row = run_episode_fsm(genes_fsm, s)
+        self.assertEqual(row["sla_violation"], 0, "WAIT-SLA masking must block unsafe retry")
+        self.assertEqual(row["duplicate"], 0)
+
 
 class EvaluatorTests(unittest.TestCase):
     def test_r4_requires_containment_not_mere_escalation(self):

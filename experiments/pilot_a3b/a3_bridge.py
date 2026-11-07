@@ -82,7 +82,8 @@ class ControllerState:
     """Policy-maintained state. NO hidden environment data lives here."""
 
     __slots__ = ("step_idx", "attempts", "last_obs", "confirmed", "comp_stack",
-                 "decisions", "phase")
+                 "decisions", "phase", "ambiguous", "sla_waits", "visibility_bound",
+                 "compensated_since_ambiguity", "cleared_to_retry")
 
     def __init__(self, n_steps):
         self.step_idx = 0
@@ -92,9 +93,19 @@ class ControllerState:
         self.comp_stack = []  # step indices with committed effects, oldest first
         self.decisions = 0
         self.phase = "RECOVER"  # RECOVER | DONE | ABORTED
+        self.ambiguous = False          # public: last outcome was TIMEOUT (unknown)
+        self.sla_waits = 0              # public: own WAIT count since ambiguity
+        self.visibility_bound = 4       # public: from tool contract
+        self.compensated_since_ambiguity = False
+        self.cleared_to_retry = False   # post-SLA VERIFY confirmed NOT_COMMITTED
 
     def att_bucket(self):
         return 0 if self.attempts == 0 else (1 if self.attempts == 1 else 2)
+
+    def sla_bucket(self):
+        if not self.ambiguous:
+            return 0
+        return 1 if self.sla_waits < self.visibility_bound else 2
 
     def snapshot(self):
         return (self.step_idx, self.attempts, self.last_obs,
@@ -108,15 +119,23 @@ class StatefulFSM:
     plus a default action. The controller STATE (step index, attempts,
     confirmed steps, compensation stack) is maintained from PUBLIC information
     only (its own actions and public observations).
+
+    sla_aware=True enables the WAIT-SLA contract semantics (D-062): under an
+    ambiguous TIMEOUT on a non-idempotent tool, a bare RETRY is MASKED until
+    the public visibility SLA has elapsed or compensation cleared the
+    ambiguity. Evolution still chooses among the remaining legal actions.
     """
 
-    def __init__(self, genes, default=(ACT_ESCALATE, 2)):
+    def __init__(self, genes, default=(ACT_ESCALATE, 2), sla_aware=False, fixed_wait=False):
         self.genes = {g.key(): g for g in genes}
         self.default_action, self.default_wait = default
+        self.sla_aware = bool(sla_aware)
+        self.fixed_wait = bool(fixed_wait)
 
     def clone(self):
         return StatefulFSM([g.clone() for g in self.genes.values()],
-                           (self.default_action, self.default_wait))
+                           (self.default_action, self.default_wait),
+                           self.sla_aware, self.fixed_wait)
 
     def decide(self, state: ControllerState):
         key = (state.last_obs, state.att_bucket(), bool(state.comp_stack))
@@ -124,8 +143,28 @@ class StatefulFSM:
         if g is None:
             g = self.genes.get((state.last_obs, state.att_bucket(), False))
         if g is None:
-            return self.default_action, self.default_wait
-        return g.action, g.wait_n
+            action, wait_n = self.default_action, self.default_wait
+        else:
+            action, wait_n = g.action, g.wait_n
+        if self.fixed_wait and state.last_obs == OBS_TIMEOUT:
+            # D-062 ablation: fixed-delay WAIT after every TIMEOUT (no contract
+            # reasoning) -- tests whether SLA awareness beats a fixed delay
+            return ACT_WAIT, 4
+        if self.sla_aware and action in (ACT_RETRY,) and self._retry_unsafe(state):
+            # WAIT-SLA contract (D-062): an unknown outcome on a non-idempotent
+            # tool may be retried only after (a) compensation cleared it, or
+            # (b) the visibility SLA elapsed AND a post-SLA query confirms
+            # non-commitment. Otherwise wait (below SLA) or re-verify (at SLA).
+            if state.sla_waits < state.visibility_bound:
+                return ACT_WAIT, max(1, state.visibility_bound - state.sla_waits)
+            return ACT_VERIFY, 1
+        return action, wait_n
+
+    @staticmethod
+    def _retry_unsafe(state: ControllerState) -> bool:
+        return (state.ambiguous
+                and not state.compensated_since_ambiguity
+                and not state.cleared_to_retry)
 
     def genes_list(self):
         return [self.genes[k] for k in sorted(self.genes)]
@@ -267,27 +306,33 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
     runtime_forced_abort = False
     escalation_reason = ""
     downstream_violation = 0
+    sla_violation = 0
 
     def step_done(idx):
         return tools[idx].state == "COMMITTED"
+
+    def execute_allowed(idx):
+        """Saga gate (D-062 fix): a downstream EXECUTE attempt without prior
+        commits is a real violation. Recovery actions (VERIFY/WAIT/COMPENSATE/
+        ROLLBACK/ESCALATE/STOP) are always legal -- rolling back prior steps
+        during a safe-abort sequence must NOT be charged as a violation."""
+        return idx == 0 or all(step_done(j) for j in range(idx))
 
     while state.phase == "RECOVER":
         idx = state.step_idx
         if idx >= n:
             state.phase = "DONE"
             break
-        # saga gate: no downstream step before prior commits
-        if idx > 0 and not all(step_done(j) for j in range(idx)):
-            downstream_violation += 1
-            runtime_forced_abort = True
-            escalation_reason = "downstream_before_commit"
-            state.phase = "ABORTED"
-            break
 
         tool = PublicToolView(tools[idx])
-
-        # first call of this step
         if state.attempts == 0 and state.last_obs == OBS_START:
+            state.visibility_bound = tool.contract["visibility_bound"]
+            if not execute_allowed(idx):
+                downstream_violation += 1
+                runtime_forced_abort = True
+                escalation_reason = "downstream_before_commit"
+                state.phase = "ABORTED"
+                break
             result = tools[idx].execute()
             state.attempts += 1
             state.last_obs = _obs_of_result(result)
@@ -297,7 +342,13 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
                 state.step_idx += 1
                 state.attempts = 0
                 state.last_obs = OBS_START
-                continue
+            else:
+                if state.last_obs == OBS_TIMEOUT:
+                    state.ambiguous = True
+                    state.sla_waits = 0
+                    state.compensated_since_ambiguity = False
+                    state.cleared_to_retry = False
+            continue
 
         # recovery decision loop
         if state.decisions >= MAX_DECISIONS:
@@ -322,43 +373,52 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
             state.attempts += 1
             state.last_obs = _obs_of_result(result)
             if result == "COMMITTED":
+                state.ambiguous = False
                 state.confirmed[idx] = True
                 state.comp_stack.append(idx)
                 state.step_idx += 1
                 state.attempts = 0
                 state.last_obs = OBS_START
+            elif result == "NOT_COMMITTED" and state.sla_waits >= state.visibility_bound:
+                # post-SLA query confirms non-commitment: retry is now safe
+                state.cleared_to_retry = True
             continue
 
         if action == ACT_WAIT:
             for _ in range(wait_n):
                 tool.wait()
+            state.sla_waits += wait_n
             state.attempts += 1
             state.last_obs = OBS_WAITED
             continue
 
-        if action == ACT_RETRY:
+        if action in (ACT_RETRY, ACT_REPAIR):
+            # behavioural safety measurement (59/60): blind retry under an
+            # ambiguous outcome on a non-idempotent tool before SLA elapsed
+            if (state.ambiguous and not state.compensated_since_ambiguity
+                    and not state.cleared_to_retry
+                    and not tool.contract["idempotent"]):
+                sla_violation = 1
+            if not execute_allowed(idx):
+                downstream_violation += 1
+                runtime_forced_abort = True
+                escalation_reason = "downstream_before_commit"
+                state.phase = "ABORTED"
+                break
+            if action == ACT_REPAIR:
+                tool.repair_schema()
             result = tool.retry()
             state.attempts += 1
             state.last_obs = _obs_of_result(result)
             if accepted(result):
+                state.ambiguous = False
                 state.confirmed[idx] = True
                 state.comp_stack.append(idx)
                 state.step_idx += 1
                 state.attempts = 0
                 state.last_obs = OBS_START
-            continue
-
-        if action == ACT_REPAIR:
-            tool.repair_schema()
-            result = tool.retry()
-            state.attempts += 1
-            state.last_obs = _obs_of_result(result)
-            if accepted(result):
-                state.confirmed[idx] = True
-                state.comp_stack.append(idx)
-                state.step_idx += 1
-                state.attempts = 0
-                state.last_obs = OBS_START
+            elif state.last_obs == OBS_DUPLICATE:
+                state.ambiguous = False  # outcome is now known (badly)
             continue
 
         if action == ACT_COMPENSATE:
@@ -366,6 +426,9 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
             comp_log.append((idx, "current", res))
             state.attempts += 1
             state.last_obs = _obs_of_result(res)
+            if res == "COMPENSATED":
+                state.ambiguous = False
+                state.compensated_since_ambiguity = True
             continue
 
         if action == ACT_ROLLBACK:
@@ -400,6 +463,8 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
         "task_success": task_success,
         "safe": int(violation == 0),
         "invariant_violation": int(violation > 0),
+        "downstream_violation": int(downstream_violation > 0),
+        "sla_violation": int(sla_violation > 0),
         "duplicate_count": duplicates,
         "duplicate": int(duplicates > 0),
         "active_effects": active,
@@ -537,6 +602,8 @@ def evaluate_controller(fsm, scenarios, verdicts, scenario_weights=None):
     else:
         unnec_actions = 0.0
     violations = wrate(rows, "invariant_violation")
+    sla_viol = wrate(rows, "sla_violation")
+    dup_viol = wrate(rows, "duplicate")
     r34_actions = (sum(r["decision_count"] for r in r3 + r4) / len(r3 + r4)) if (r3 or r4) else 0.0
 
     obj1 = 1.0 - cond_rec
@@ -548,6 +615,8 @@ def evaluate_controller(fsm, scenarios, verdicts, scenario_weights=None):
         "corr_esc": corr_esc,
         "containment": containment,
         "dup": dup,
+        "sla_viol": sla_viol,
+        "behavioral_violation": dup_viol + sla_viol,
         "avoid_resid": avoid_resid,
         "unnec_esc": unnec_esc,
         "unnec_actions_r12": unnec_actions,
