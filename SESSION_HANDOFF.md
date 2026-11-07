@@ -1965,3 +1965,45 @@ Q1 WAIT-SLA 是否降低重复副作用；Q2 是否优于固定 WAIT；Q3 VERIFY
 
 ### 56.4 判定与下一步
 A + WAIT-SLA + B-new 三机制各有独立消融证据；主张限定"优于标准 EA 且行为安全"。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。
+
+
+## 57. D-063：正式 A-3b 功效核算与预注册（2026-11-08）
+
+执行计划：`62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md`；下一会话入口：`NEXT_SESSION_PROMPT.md` D-063 节。
+
+### D-062 完成结论
+- 59/60/61 已提交；D-062 Stage 0–4 完成。79/79 为执行报告中的本地测试结果，CI 需通过新 workflow 真实确认。
+- D-061 0.36 vs 0.006 叙事被推翻：99.4% 为 evaluator artifact；真实重复 7 例，根因是 SLA 内 VERIFY 的 NOT_COMMITTED 谎言解锁非幂等 RETRY。
+- WAIT-SLA、B-new 有诊断级机制证据；AB vs A +0.119、AwaitSLA vs A +0.089、AwaitSLA vs Fixed +0.054、AB vs AwaitSLA all +0.031。
+- 负结果：B 单独劣于 NSGA-II；Safety Gate 有害；AB 未超过 Hand。
+
+### 不能夸大的统计结论
+- AB vs NSGA-II all：+0.1049，CI [0.000,0.2058]，p=0.062（54 clusters），未显著。
+- AB vs NSGA-II validation：+0.1173，CI [-0.0679,0.2778]，p=0.2277（18 clusters），未显著。
+- AB vs AwaitSLA validation：+0.031，CI [0.000,0.068]，p=0.244；Q10 搜索增益尚未建立独立泛化。
+- AB vs A validation +0.142，p=0.0082 支持 B-new 增量，但不能替代 AB vs NSGA-II 主比较。
+- AB vs Hand −0.282，显著落后；论文不得声称超越专家。
+
+### 统计可复现性阻断
+当前 `experiments/pilot_a3b/stats.py` 的 main 仍硬编码 `diagnostic2_results.json`，`run_diagnostic3.py` 只写原始结果，61 报告中的 AwaitSLA 三组比较没有在已提交统计入口中完整再生。先做 `analyse_diagnostic3.py`，对 raw diagnostic3 重新计算所有对比和 train/validation split；校正报告中任何差异。不能直接以现有 summary 数字冻结样本量。
+
+### 初步功效数值
+paired cluster t 近似，双侧 alpha=.05，基于 validation-only SD=.3914：
+- 当前 validation：18 clusters；点估计 Δ=.1173。
+- MDE=.1173：80%/90% power 约需 90/119 可分析 clusters。
+- MDE=.10：约需 123/163 clusters；加 15% 失效预留约 145/192。
+- MDE=.08：约需 190/254 clusters。
+- 当前估计只有 18 个 cluster，SD 不稳定；最终要基于 empirical cluster differences 做 Monte Carlo sign-flip/bootstrap power simulation。
+cluster 定义是 task×fault composition；增加 seeds 或 episode 数不能代替独立 cluster。若 9 compositions，145 clusters 约需 17 个 task families ×9。
+
+### D-063 执行顺序
+1. 统计流水线可复现性和 synthetic tests；
+2. 从 validation-only paired cluster data 做 empirical power simulation；
+3. 冻结 MDE、alpha、power、held-out cluster 数和任务族扩展方案；
+4. 起草预注册（主比较 AB vs NSGA-II；次要比较 Holm；Hand 仅参考；安全硬门）；
+5. 用户审阅批准后才冻结；
+6. 正式 A-3b 另行授权，未批准前 HOLD。
+
+### Gate
+GO：统计复现、功效仿真、任务族可行性、预注册草案、CI。
+HOLD：正式 A-3b、held-out 调参/查看、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
