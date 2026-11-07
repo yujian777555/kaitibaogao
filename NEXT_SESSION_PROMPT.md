@@ -586,3 +586,47 @@ Three mechanisms now have independent ablation evidence (contract-preserving A, 
 
 ### Next task (single)
 Power analysis from the round-3 cluster variance (cluster_sd ~ 0.40) -> freeze preregistration (with the Q10-scoped claim) -> submit for user approval -> formal A-3b. Everything else stays HOLD.
+
+
+# 2026-11-08 — D-063：正式 A-3b 功效核算与预注册（下一会话接管）
+
+**执行计划：** `62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md`  
+**D-062 交付：** 59（失败轨迹独立复核）/ 60（WAIT-SLA、B-new、Safety Gate 设计）/ 61（diagnostic3 结果）。  
+**当前阶段：** D-062 已完成；D-063 为 PLANNED；正式 A-3b 仍 HOLD。
+
+## 接管时先核验
+- 远端分支 `pilot-a-stateful-recovery`、main、HEAD、CI。
+- D-062 基线 HEAD 曾为 `730431e1c52e97adf550a54f77cb53256e302525`；后续 D-063 文档/CI 更新会产生新 HEAD。
+- 79/79 是执行报告中的本地测试结果。旧 workflow 只触发 `pilot_a_recovery/**`；新 workflow `.github/workflows/research-simulator-regression.yml` 应覆盖 `pilot_a_recovery/**` 和 `pilot_a3b/**`。必须查看真实 Actions run，不能把本地结果写成 CI 通过。
+
+## D-062 关键结果和限制
+- 59 号独立审计推翻 D-061 的 0.36 vs 0.006 行为违规叙事：99.4% 为 evaluator artifact（正确 rollback 被 saga gate 误伤）；真实重复副作用 7 例，错误链为 `UNKNOWN_OUTCOME -> SLA 内 VERIFY 谎言 -> 非幂等 RETRY -> DUPLICATE`。
+- WAIT-SLA 契约实现：非幂等工具 UNKNOWN_OUTCOME 下，只有补偿清除歧义，或等满 visibility SLA 且 SLA 后查询确认未提交，才解锁 RETRY；SLA 内查询不能解锁。无可靠合同保证时应升级/安全停止。
+- B-new：动作序列签名、全种群聚合、涉事基因定位、死因到修复动作映射、替换式预算对齐变异。
+- diagnostic3 报告：AB vs A +0.119 p=.0002；AwaitSLA vs A +.089 p=.0047；AwaitSLA vs Fixed +.054 p=.0032；AB vs AwaitSLA +.031 p=.0072（all）；AB vs A validation +.142 p=.0082。
+- 负结果：B 单独劣于 NSGA-II（−.074）；ABG gate 有害（AB−ABG +.193）；AB 未超 Hand（−.282）。
+- **关键限制：AB vs NSGA-II all +.1049, p=.062；validation +.1173, p=.2277。两者均未显著。Q10 的 AB vs AwaitSLA validation +.031, p=.244，也未显著。** 当前不能宣称 AB 已在独立测试集显著优于 NSGA-II，也不能说搜索增益已泛化。
+
+## D-063 第一阻断项：重现 diagnostic3 统计
+当前 `experiments/pilot_a3b/stats.py` 仍硬编码读取 `diagnostic2_results.json`，而 `run_diagnostic3.py` 只写原始数据；已提交 `diagnostic3_stats.json` 没有完整包含 AwaitSLA 相关对比的 cluster SD / 推断结果。先新增可执行 `analyse_diagnostic3.py` 或通用 CLI 分析器，完整再生 61 号统计并校对，不得硬编码结果。
+
+必须输出 all/train/validation 三种 split；AB vs NSGA-II、AB vs A、AwaitSLA vs A、AwaitSLA vs AwaitFixed、AB vs AwaitSLA、AB vs Hand、B vs NSGA-II；cluster SD、CI、paired sign-flip p、Holm（次要家族）、效应量、seed nesting、输入 hash 和分析命令。新增 synthetic tests。
+
+## 功效规划初值（paired cluster t 近似，最终需 empirical simulation）
+- 正确主要依据是 validation-only AB vs NSGA-II：Δ=.1173、cluster SD=.3914、18 clusters、p=.2277。
+- 当前 all-split AB vs NSGA-II：Δ=.1049、SD=.404、54 clusters、p=.062；不得把 train+validation 混合作正式确认性证据。
+- 双侧 α=.05，80%/90% power：
+  - MDE=.1173，SD=.3914：90/119 可分析 clusters；
+  - **MDE=.10：123/163 clusters**；
+  - MDE=.08：190/254 clusters。
+- MDE=.10、80% power 加 15% 失效预留约 145 clusters。cluster=task×fault composition；不能靠增加 seeds/episodes 伪造独立样本。若 9 个 fault compositions，145 clusters 约需 17 个 task families ×9（153）。
+- 以上是近似规划值；18 个 validation clusters 对 SD 的估计不稳定，先用完整 paired cluster 数据做 Monte Carlo sign-flip/bootstrap power simulation，再冻结。
+
+## D-063 预注册要求
+主要假设：AB 在全新 held-out test clusters 的 balanced class-success 上优于 NSGA-II；双侧 α=.05；唯一主要对比。次要对比 Holm：AB vs A、AwaitSLA vs A、AwaitSLA vs Fixed、AB vs AwaitSLA。Hand 作为参考，不声称超越专家。安全为硬接受条件；保证仅在工具合同假设成立的范围内，不将零观察违规夸大为对所有工具的绝对证明。
+锁定新任务族、新故障组合、算法版本、预算、种子、类别权重、排除规则、统计脚本和 manifest。当前 diagnostic3 validation 不得再作为正式 test。
+
+## GO / HOLD
+GO：统计脚本修复与独立复算、empirical power simulation、任务族扩展可行性审计、预注册草案、CI 测试。
+HOLD：正式 A-3b、查看/调参 held-out test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
+**完成 D-063 草案后交用户审阅批准；未经明确批准，不启动正式 A-3b。**
