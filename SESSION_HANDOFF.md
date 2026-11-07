@@ -1911,3 +1911,41 @@ D-060 只可作为诊断线索；不能声称 A 已证明安全提升、B 已验
 
 ### 55.3 判定与下一步
 机制 A 有真实显著证据；B 组合主张不成立；第一项创新**部分成立**。下一步：重设计 B 反例→基因映射 + 状态化 WAIT-SLA 契约修复，复测违规率后 A+新B 同配置重跑。正式 A-3b/功效分析继续 HOLD。
+
+
+## 56. D-062：WAIT-SLA 行为安全与反例驱动演化（2026-11-08）
+
+完整任务计划：`59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md`；完整接管提示：`NEXT_SESSION_PROMPT.md` 的 D-062 节。
+
+### 当前基线
+- 建立计划时 branch HEAD：`ac042b4e96b80edb8ca727009f0e34ef32179a1f`；main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead 102 / behind 0。
+- 58 号报告记录 D-061：A vs NSGA-II Δ=+0.239（Holm p=0.0014）；AB vs A Δ=-0.113（p=0.0014）；AB vs Hand Δ=-0.514；报告的环境行为违规率 A=0.36、Hand=0.006。
+- 这些是报告结果，D-062 必须从 `diagnostic2_results.json` 和 episode 轨迹独立复算，特别核对 0.36/0.006 的分子、分母和口径。
+- D-060/D-061 原始 artifact 均保留，禁止覆盖。
+- 建立计划时当前 commit 无可读取的 status checks；workflow 仅触发 `experiments/pilot_a_recovery/**`，不会自动覆盖 `pilot_a3b/**`。
+
+### 研究判断
+A 有正向诊断证据；B 叠加到 A 后显著有害；A+B 未超过强手工策略；第一项创新部分成立，尚未达到投稿标准。不能把 D-061 汇总值直接升级为已独立验证事实。
+
+### D-062 唯一首要任务
+**先独立复核 D-061 环境行为违规率 A=0.36 vs Hand=0.006，并定位每条重复副作用的完整轨迹。** 复核必须区分 episode/action 分母、同 episode 重复事件、task/fault/seed/genome 分布，并还原公开观测与策略动作。判断提交未发生、lost ACK、已提交但未可见、仍处理中、结果未知和无可见性保证等不同情形。先完成独立脚本和审计报告，未通过前不扩大 rollout。
+
+### 后续实现路线
+1. 定义 WAIT-SLA 工具合同：visibility SLA/保证类型、query consistency、idempotency/key、safe retry、compensation、retry window、max wait/decision budget、escalation；区分 visibility SLA 与 retry SLA。
+2. 实现状态化 WAIT-SLA，策略只能使用公开观测和自身状态。没有可证明 visibility guarantee 时，固定等待不能把 UNKNOWN 推断为 NOT_COMMITTED。
+3. B-new 使用完整失败轨迹定位涉事 FSM 基因邻域；语义修复型变异替换普通变异，不能增加 mutation/rollout 预算，记录变异前后差异。
+4. 比较独立 Contract Validator、关键行为 Safety Gate 和硬安全优先的分层生存者选择，防止 B 破坏 A。
+5. 新非锁箱诊断场景做消融：Hand、NSGA-II、A、A+Fixed-WAIT、A+WAIT-SLA、A+WAIT-SLA+VERIFY、安全重试、B-new、A+B-new、A+B-new+Gate。
+6. 指标包括 CondRecSucc、episode/action 行为违规、重复副作用、SLA 违规、CorrectEscalation、AvoidableHarm、不必要成本、worst-group、搜索效率和未见任务族泛化。
+7. 旧 D-061 validation 若用于调参，不再称独立验证；正式 held-out 仍锁定。
+8. 统计沿用 pooled hierarchical，但要审计 cluster=task×fault composition、seed 嵌套、paired bootstrap/permutation、Holm、效应量和 CI。
+
+### Gate
+GO：失败轨迹复核、WAIT-SLA/FSM/B-new/Safety Gate 实现、单测、独立 validator、新非锁箱诊断和统计复算。
+HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM、大规模真实 API、ThinkingBox 和未经批准的锁箱测试。
+指标稳定之前不做正式功效分析，不启动 A800。
+
+### 研究问题
+Q1 WAIT-SLA 是否降低重复副作用；Q2 是否优于固定 WAIT；Q3 VERIFY 是否有独立贡献；Q4 B-new 是否正确定位基因；Q5 B-new 是否优于 NSGA-II；Q6 A+B-new 是否优于 A；Q7 Safety Gate 是否保护 A；Q8 是否接近/超过 Hand；Q9 未见任务泛化；Q10 增益来自演化搜索还是手工规则。
+
+本节记录的是 D-062 计划，**不是已实现或已验证的实验结果**。
