@@ -867,3 +867,37 @@ HOLD：Pilot B 演化搜索、ToolMisuseBench public test 调参、UndoBench fro
 
 ### 下一步
 创建 55-R1 逐条回应 56 号 B1–B6/M1–M5；形式化 R1–R4 和 observation-based reachability；修复指标/成本；完成分层配额、cluster-level power 和预算核算；统一算法骨干与初始化；补系统性相关工作审计。仅允许单元测试和 train/dev smoke。用户批准冻结预注册前，禁止 A-3b 正式运行。
+
+
+## 决策 D-060：55-R1 修订、可恢复性判定器落地、机制诊断实验首轮结果（2026-11-07）
+
+### 交付（全部真实代码与实验，非计划书）
+1. **`55_PILOT_A3B_RESEARCH_DESIGN_R1.md`**：逐条回应 56 号 B1–B6/M1–M5。R1–R4 互斥重定义（R2 成功=最终任务完成、安全放弃归 R3；R3 正确升级计成功；R4 不要求零残留、区分不可避免残留与可避免损害）+ UNKNOWN 兜底；可达性=信念态 AND-OR 观测策略鲁棒可达（horizon/动作集/截断→UNKNOWN）；安全主张分层（设计层静态保证 + 实验层 zero observed violations+置信上界，禁止 P=0）；成本三分（必要升级不惩罚）；配额 3:1≡(R1+R2):(R3+R4) 逐 split 计数；同初始池/同骨干/同预算归因设计；primary contrast=A+B vs NSGA-II。
+2. **可恢复性判定器** `experiments/pilot_a3b/reachability.py`：AND-OR 信念态搜索，策略只能以观测历史为输入，同一观测等价类要求鲁棒；R1→R2→R3→R4→UNKNOWN 有序判定 + 证书输出。
+3. **Stage 1 验证（已通过）**：`mini_env.py` 12 类 ground-truth 环境（直接恢复/补偿后恢复/仅可升级/结构性不可恢复/同观测异隐藏/延迟提交/lost-ACK/补偿失败/重复副作用/超深度/部分 θ 可达/saga 残留）；`test_recoverability.py` 21 项 + `test_a3_labels.py` 6 项全部通过；混淆矩阵纯对角 12/12，UNKNOWN 2/12（设计内），资源截断正确返回 UNKNOWN。
+4. **Stage 2 机制实现**：FSM 基因组（守卫×宏动作）；A=契约语义保持修复算子（非幂等×歧义结果禁裸重试、partial 强制补偿/升级、权限/漂移单解）；B=反例池聚类+定向变异+≤2× 加权；NSGA-II 骨干、NSGA-III、GA、Random Search、强手工基线（对齐 saga_aware 语义）；桥接复用 A-3 `ToolRuntime/PublicToolView`（未重建模拟器）。
+5. **Stage 2 诊断实验（已运行）**：216 个新生成场景（新 seed，非 A-3 旧 held-out 数据），标签分布 R1 96/R2 50/R3 36/R4 34；吞吐 ~97k episodes/s；每方法每 seed 108,864 episodes 真实计数；3 seeds；结果 `diagnostic_results.json`（含逐场景行、基因组规则、manifest SHA-256）。
+
+### 首轮诊断结果（DIAGNOSTIC，非确认性）
+- **机制 A 决定性效应：非法候选率 1.000 → 0.000**（A/AB 最终种群 100% 合法；其余全部方法含 NSGA-II/GA 均为 1.000 非法率）；A/AB 全 seed 零不变量违规，对照组违规率可达 8%。回答 Stage3-Q1：**是**。
+- CondRec（3 seeds 均值）：hand 1.000 > A 0.968 > AB 0.938 > ga 0.911 > nsga3 0.902 > B 0.872 > nsga2 0.838 > random 0.575。
+- Primary（AB vs NSGA-II，54 cluster 配对 bootstrap）：Δ=+0.049，CI95 [−0.017, +0.122]，置换 p=0.27 —— **方向为正但未达显著**（功效不足）。
+- A vs NSGA-II Δ=+0.056（CI 含 0）；B vs NSGA-II +0.017（弱）；AB vs A **−0.006**（本预算下 B 稀释 A）；AB vs hand −0.026（**未超过强手工基线**）。
+- 3 seeds 均不显著（Holm 校正后全部 p=1.0）；**如实报告功效不足，不宣称显著**。
+- 归因控制：同初始池（纯随机）、同预算、同评价器；发现并排除了手工种子污染初始池的混杂（M1）。
+
+### 判断
+- **有真实证据支持"契约语义保持算子"是有效机制**（非法率消除 + 成功率方向性提升 + 零违规）；
+- **尚无统计证据**支持 A+B 超过标准 EA 或强手工规则的假设；A+B 未超过 A 单独；
+- 第一项创新**方向可行但未成立**：需要更大功效的预注册实验（正式 A-3b）才能回答 H1；
+- B 机制首轮信号弱，可能需要反例粒度/权重再设计。
+
+### 决定
+- GO：继续诊断级工作；55-R1 审查与预注册材料准备；功效核算（下一轮）。
+- HOLD（不变）：正式 A-3b 确认性实验、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、锁箱调参。
+
+### 下一步
+1. cluster 级功效核算（用本轮 54 cluster 方差估计所需 cluster/seed 数）；
+2. A/B 机制迭代（B 的反例粒度与加权；A 的修复规则完备性）；
+3. 49 号系统性机制检索补齐；
+4. 形成 preregistration candidate 交用户批准后才运行正式实验。

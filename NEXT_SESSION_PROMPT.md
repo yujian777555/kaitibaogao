@@ -392,9 +392,31 @@ Current status: Phase B = GO / complete; design 55 = REQUEST CHANGES; A-3b forma
 11. 49 related-work file remains INITIAL LITERATURE SCAN / NOT SYSTEMATIC / NOVELTY NOT APPROVED. Complete mechanism-level systematic review before novelty claims.
 
 ### Immediate task
-Create `55_PILOT_A3B_RESEARCH_DESIGN_R1.md` responding to all B1–B6 and M1–M5 items in 56. Preserve original 55 unchanged. Then specify and unit-test the observation-based reachability classifier, finalize class-specific metrics/costs, exact split quotas, cluster-level power simulation, budget and fair algorithm ablations. Continue only train/dev/validation smoke tests.
+DONE (2026-11-07, D-060): `55_PILOT_A3B_RESEARCH_DESIGN_R1.md` created (all B1–B6/M1–M5 addressed); observation-based AND-OR belief reachability classifier implemented (`experiments/pilot_a3b/reachability.py`) and Stage-1 verified (12 ground-truth cases, confusion matrix diagonal, 27 tests green); A/B operators + 8-method diagnostic run executed on 216 new-seed scenarios.
+
+NEXT (single task): (1) cluster-level power simulation using this round's 54-cluster variance to size the formal A-3b experiment; (2) iterate mechanism B (counterexample granularity/weighting) and A (repair completeness) as diagnostic work; (3) complete the 49 mechanism-level systematic review; (4) assemble the preregistration candidate and submit for user approval. No formal A-3b run before approval.
 
 ### Authorization
-GO: revise design, audit related work, develop reachability checker specifications/unit tests, deterministic train/dev/validation smoke.
-HOLD: formal A-3b runs, Pilot B, public test/UndoBench TEST, A800/ARWM, real LLM API, ThinkingBox optimization.
-User approval is required after independent review of 55-R1 and before any formal A-3b run. Continue maintaining this prompt, SESSION_HANDOFF.md, README.md, 05_DECISION_LOG.md and 51 plan every session.
+GO: diagnostic-level code/experiments on new-seed own scenarios, design revision, related-work audit, power analysis, preregistration preparation.
+HOLD: formal A-3b confirmatory runs, Pilot B, public test/UndoBench TEST, A800/ARWM, real LLM API, ThinkingBox optimization, tuning on any locked split.
+User approval is required after independent review of the preregistration candidate and before any formal A-3b run. Continue maintaining this prompt, SESSION_HANDOFF.md, README.md, 05_DECISION_LOG.md and 51 plan every session.
+
+## 2026-11-07 — D-060: 55-R1 + recoverability classifier + first mechanism diagnostics
+
+### Delivered (real code and experiments)
+- `55_PILOT_A3B_RESEARCH_DESIGN_R1.md`: B1–B6/M1–M5 all addressed; mutually exclusive R1–R4 + UNKNOWN; observation-history contingent robust reachability; layered safety claims (no P=0 claims); cost three-way split (necessary escalation unpunished); quotas 3:1=(R1+R2):(R3+R4) per split; same-init-pool/same-backbone/same-budget attribution; primary contrast A+B vs NSGA-II.
+- `experiments/pilot_a3b/`: reachability.py (AND-OR belief-state checker + ladder classifier with certificates), mini_env.py (12 ground-truth environments), test_recoverability.py + test_a3_labels.py (27 tests, all green), a3_bridge.py (A-3 ToolRuntime reuse, FSM genome, contract-preserving repair = mechanism A, analytic labels), ea.py (NSGA-II backbone, NSGA-III, GA, Random, B = counterexample pool + targeted mutation + <=2x weighting), run_diagnostic.py, stats.py (cluster paired bootstrap + sign-flip permutation + Holm).
+- Stage-1 gate PASSED: confusion matrix 12/12 diagonal (R1 5, R2 2, R3 1, R4 2, UNKNOWN 2 by design); horizon-cutoff and resource-cutoff cases correctly return UNKNOWN; labels generated independently of tested algorithms.
+
+### Stage-2 diagnostic (DIAGNOSTIC, NOT confirmatory)
+- 216 fresh scenarios (new seeds, NOT the frozen A-3 held-out dataset); labels R1 96 / R2 50 / R3 36 / R4 34; throughput ~97k episodes/s; budget 108,864 real episodes per method per seed; 3 seeds; methods: hand, random, ga, nsga2, nsga3, A, B, AB.
+- **Mechanism A decisive effect: illegal-candidate ratio 1.000 -> 0.000** (A and AB final populations fully legal; every other method including NSGA-II/GA stayed at 1.000). A/AB zero observed invariant violations on all seeds; comparators up to 8%. Answers Q1 affirmatively.
+- CondRec means: hand 1.000 > A 0.968 > AB 0.938 > ga 0.911 > nsga3 0.902 > B 0.872 > nsga2 0.838 > random 0.575.
+- Primary AB vs NSGA-II (54 clusters, paired bootstrap): delta +0.049, CI95 [-0.017, +0.122], permutation p=0.27 — positive direction, NOT significant (underpowered). A vs nsga2 +0.056 (CI contains 0). AB vs A -0.006 (B dilutes A at this budget). AB vs hand -0.026 (hand baseline NOT beaten).
+- All Holm-adjusted secondary tests ns. Honest conclusion: mechanism A demonstrably works (illegal-candidate elimination + zero violations + directional success gain); H1 (A+B beats standard EA and hand rules) NOT YET established; first innovation is feasible but unproven.
+
+### Confound controls
+Same random-only initial pool for all search methods (hand policy is a separate baseline); identical budget and evaluator; the earlier hand-seed-in-pool contamination was detected and removed (56 M1). Episode counts are real simulator rollouts.
+
+### Next task
+Power sizing from the 54-cluster variance; mechanism iteration (B granularity/weighting, A repair completeness); 49 systematic review; preregistration candidate for user approval. Formal A-3b remains HOLD.

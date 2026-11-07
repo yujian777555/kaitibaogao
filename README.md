@@ -639,3 +639,12 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 结论：Phase B 数据集审计 GO / 完成；55 号 A-3b 研究设计草案 **REQUEST CHANGES**，尚不能冻结预注册。主要阻断点包括 R4 零残留逻辑矛盾、R2 安全放弃与任务完成混淆、公开观测可达性未形式化、有限样本不能证明 P(violation)=0、R4 不可避免残留/必要升级被成本惩罚、类别配额与 cluster-level power 未冻结，以及算法初始化/骨干混杂风险。
 
 下一步：建立 55-R1 逐条修订，完成分类器可达性定义、分层指标、样本功效和公平预算审计。A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 继续 HOLD。
+
+
+## 2026-11-07：55-R1 修订 + 可恢复性判定器 + 机制诊断首轮（D-060）
+
+- **[55_PILOT_A3B_RESEARCH_DESIGN_R1.md](55_PILOT_A3B_RESEARCH_DESIGN_R1.md)**：56 号 B1–B6/M1–M5 全部处置（R1–R4 互斥+UNKNOWN、观测策略鲁棒可达性、分层安全主张、成本三分、配额与功效方案、公平归因设计、primary contrast）。
+- **判定器落地并验证**：`experiments/pilot_a3b/reachability.py`（AND-OR 信念态观测策略可达性）；12 类 ground-truth 环境 27 项测试全绿；混淆矩阵 12/12 纯对角，UNKNOWN 2/12 设计内，资源截断正确兜底。
+- **机制诊断实验（非确认性）**：216 个新生成场景、8 方法 × 3 seeds、每方法每 seed 108,864 真实 episodes、吞吐 ~97k eps/s。**A（契约语义保持算子）把非法候选率从 100% 降到 0%、全 seed 零违规**；CondRec：hand 1.000 > A 0.968 > AB 0.938 > ga 0.911 > nsga3 0.902 > B 0.872 > nsga2 0.838 > random 0.575。
+- **统计诚实结论**：primary AB vs NSGA-II Δ=+0.049 但 CI95 [−0.017,+0.122]、p=0.27（功效不足，不显著）；AB 未超过强手工基线；A+B 未超过 A 单独。第一项创新**方向可行、尚未证实**。
+- 下一步：功效核算定正式实验规模、B/A 机制迭代、49 系统检索、预注册交用户批准。正式 A-3b 继续 HOLD。

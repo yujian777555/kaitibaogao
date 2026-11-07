@@ -1827,3 +1827,36 @@ R1/R2/R3/R4 可恢复性分类（评估器侧判定，与策略/oracle 隔离）
 
 ### 下一会话任务
 创建 `55_PILOT_A3B_RESEARCH_DESIGN_R1.md`，逐条回应 56 号 B1–B6/M1–M5；完善 R1–R4 互斥定义、reachability checker 规格、指标和成本、分层配额、cluster-level power、rollout budget、公平算法骨干和新颖性审计。可进行定义/分类器单元测试和 train/dev smoke；不得运行正式 A-3b，直到 R1 独立审查并获用户批准。
+
+
+## 54. 55-R1 落地 + 判定器验证 + 机制诊断首轮（2026-11-07，D-060）
+
+覆盖 §53 之后、D-059 所列任务。证据：`55_PILOT_A3B_RESEARCH_DESIGN_R1.md`、`experiments/pilot_a3b/`（代码+测试+结果 JSON）。
+
+### 54.1 55-R1 修订（B1–B6/M1–M5 全部处置）
+R1–R4 互斥重定义 + UNKNOWN：R2 成功=最终任务完成（安全放弃→R3 SAFE_ABORT）；R3 正确升级计成功；R4 不要求零残留、区分 UnavoidableResidualBurden 与可避免损害；可达性=信念态 AND-OR 观测策略鲁棒可达（horizon 12、动作类型化、截断→UNKNOWN、标签独立于被测算法）；安全主张分层（禁 P=0）；必要升级不入成本目标；配额 3:1≡(R1+R2):(R3+R4) 逐 split 计数；同初始池/同 NSGA-II 骨干/同预算归因；primary contrast=A+B vs NSGA-II。
+
+### 54.2 可恢复性判定器（Stage 1 已过）
+`reachability.py`：belief-state AND-OR 求解器 + 五级分类器 + 策略证书。`mini_env.py` 12 类 ground-truth 环境覆盖用户要求的全部情形（直接/补偿后/仅升级/不可恢复/同观测异隐藏/延迟提交/lost-ACK/补偿失败/重复副作用/超深度/部分 θ/saga 残留）。**27 项测试全绿；混淆矩阵 12/12 纯对角（R1×5、R2×2、R3×1、R4×2、UNKNOWN×2 设计内）**；资源截断正确返回 UNKNOWN；R2 无补偿不可达、R4 零残留不可达等语义护栏测试通过。
+
+### 54.3 机制实现（Stage 2）
+`a3_bridge.py` 复用 A-3 `ToolRuntime/PublicToolView`（未重建模拟器）+ FSM 基因组（守卫×宏动作）+ **A=契约语义保持修复算子**（非幂等×歧义禁裸重试等）+ 解析标签器（发现并修复 timeout_after 不可补偿残留漏判 R4 的 bug，含回归测试）。`ea.py`：NSGA-II 骨干、NSGA-III、GA、Random、**B=反例聚类+定向变异+≤2× 加权**。强手工基线对齐 saga_aware（初版过弱已修正）。
+
+### 54.4 诊断实验（DIAGNOSTIC，非确认性）
+216 个新生成场景（新 seed，非 A-3 旧 held-out）；标签 R1 96/R2 50/R3 36/R4 34；吞吐 ~97k eps/s；每方法每 seed 108,864 真实 episodes；3 seeds；同纯随机初始池（M1：手工种子混杂已发现并排除）。
+
+**结果（cond_rec 三种子均值）**：hand 1.000 > A 0.968 > AB 0.938 > ga 0.911 > nsga3 0.902 > B 0.872 > nsga2 0.838 > random 0.575。
+
+**机制 A 决定性效应：非法候选率 1.000→0.000**（A/AB 全合法；其余全部方法含 NSGA-II/GA 为 1.000）；A/AB 全 seed 零违规 vs 对照最高 8%。
+
+**统计（54 cluster 配对 bootstrap + 置换 + Holm）**：primary AB vs NSGA-II Δ=+0.049、CI95 [−0.017,+0.122]、p=0.27——**方向正、不显著（功效不足，如实报告）**；AB vs A −0.006（B 本预算下稀释 A）；AB vs hand −0.026（未超过强手工）。
+
+### 54.5 判定
+- 契约语义保持算子（A）**有真实机制证据**（非法率消除+零违规+成功率方向性提升）；
+- H1（A+B 超标准 EA 与手工规则）**未成立**，需功效足够的正式 A-3b；
+- 第一项创新：**方向可行、未证实**；B 机制首轮信号弱待迭代。
+
+### 54.6 授权与下一步
+- GO：诊断级实验/代码、功效核算、49 系统检索、预注册材料准备。
+- HOLD：正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、锁箱调参。
+- 下一会话唯一任务：用本轮 54-cluster 方差做功效核算定正式实验规模 → B/A 机制迭代 → 49 系统检索 → preregistration candidate 交用户批准。未批准前禁止正式 A-3b。
