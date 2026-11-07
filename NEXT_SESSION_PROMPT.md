@@ -371,3 +371,30 @@ Recoverability classes R1/R2/R3/R4 defined evaluator-side (never by "did a polic
 
 ### Next session's only task
 Independent review of 55_PILOT_A3B_RESEARCH_DESIGN.md, then preregistration freeze (scenario generator spec, R3/R4 stratification ratio, tau_min, cost table, seeds, budget), then implementation of the recoverability classifier + scenario generator + adapters. No A-3b run before the freeze is approved.
+
+
+## 2026-11-07 — D-059: Independent review of Pilot A-3b design
+
+Review: `56_PILOT_A3B_INDEPENDENT_REVIEW.md`.
+Current status: Phase B = GO / complete; design 55 = REQUEST CHANGES; A-3b formal run = HOLD.
+
+### Critical corrections required before preregistration
+1. R4 is defined as having no reachable zero-residual safe terminal, so CorrectEscalation(R3+R4) requiring zero residual is contradictory. Define R4 DamageContainment; report unavoidable residual separately.
+2. R2 currently includes graceful failure/safe abandonment but is counted in CondRecSucc. Restrict R2 to compensation-assisted task completion; classify safe abort as R3 or a separately defined outcome.
+3. Define recoverability as existence of an observation-based contingent policy over public observation histories, robust across hidden states in the same observation-equivalence class. Specify finite horizon, action set, nondeterminism and UNKNOWN labels.
+4. Finite rollouts cannot prove population P(violation)=0. Separate by-construction/static invariant checks from zero observed violations and a finite-sample confidence upper bound.
+5. Separate avoidable from unavoidable residual effects; do not penalize necessary R3/R4 escalation as if it were unnecessary intervention.
+6. Clarify whether 3:1 means (R1+R2):(R3+R4) or R3:R4. Freeze exact R1/R2/R3/R4 counts for every split and held-out slice.
+7. Compute power at independent task-family × fault-composition cluster level. Do not treat repeated episodes/seeds as independent clusters.
+8. Ensure all EA methods share initialization distribution and candidate pool; fix one common NSGA-II backbone for A/B/A+B mechanism ablations, with NSGA-III as a separate baseline.
+9. Clarify 50k rollout budget (per method total or per seed), count all real simulator episodes, and separate search/validation/final evaluation budgets.
+10. Make strongest standard EA comparison a primary test. Beating only hand rules or Random Search does not establish improved EA.
+11. 49 related-work file remains INITIAL LITERATURE SCAN / NOT SYSTEMATIC / NOVELTY NOT APPROVED. Complete mechanism-level systematic review before novelty claims.
+
+### Immediate task
+Create `55_PILOT_A3B_RESEARCH_DESIGN_R1.md` responding to all B1–B6 and M1–M5 items in 56. Preserve original 55 unchanged. Then specify and unit-test the observation-based reachability classifier, finalize class-specific metrics/costs, exact split quotas, cluster-level power simulation, budget and fair algorithm ablations. Continue only train/dev/validation smoke tests.
+
+### Authorization
+GO: revise design, audit related work, develop reachability checker specifications/unit tests, deterministic train/dev/validation smoke.
+HOLD: formal A-3b runs, Pilot B, public test/UndoBench TEST, A800/ARWM, real LLM API, ThinkingBox optimization.
+User approval is required after independent review of 55-R1 and before any formal A-3b run. Continue maintaining this prompt, SESSION_HANDOFF.md, README.md, 05_DECISION_LOG.md and 51 plan every session.
