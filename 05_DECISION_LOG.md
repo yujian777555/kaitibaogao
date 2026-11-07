@@ -839,3 +839,31 @@ HOLD：Pilot B 演化搜索、ToolMisuseBench public test 调参、UndoBench fro
 2. 实现可恢复性分类器 + 场景生成器扩展（含回归测试）；
 3. Phase C：ToolMisuseBench/UndoBench 统一 adapter（只用 train/dev/validation smoke）；
 4. Pilot B 预注册草案仅在 A-3b Gate + 数据兼容 Gate + adapter smoke 全过后起草。
+
+
+## 决策 D-059：Pilot A-3b 设计独立审查 — REQUEST CHANGES（2026-11-07）
+
+独立审查报告：`56_PILOT_A3B_INDEPENDENT_REVIEW.md`。
+
+### 结论
+- Phase B 数据集审计：GO / 完成。
+- 55 号 A-3b 草案：REQUEST CHANGES，不能直接冻结为预注册。
+- A-3b 正式运行：HOLD。
+- Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox：继续 HOLD。
+
+### 阻断问题
+1. R4 定义为零残留安全终态不可达，但 CorrectEscalation 又要求 R3+R4 零残留，逻辑矛盾。
+2. R2 允许“优雅失败/安全放弃”，却进入 CondRecSucc 分母，任务完成与安全回滚混淆。
+3. 可恢复性判定没有形式化为基于公开观测历史的策略可达性；动作序列可能依赖 hidden state。
+4. 有限 rollout 不能证明总体概率 P(violation)=0；须区分静态/形式约束与有限样本 zero-observed-violation。
+5. C_side_effect 惩罚 R4 不可避免残留，C_intervention 可能惩罚 R3/R4 必要升级。
+6. 3:1 比例含义、R1–R4 精确配额、独立 cluster 数和 cluster-level power 尚未冻结。
+
+### 方法学修订
+- 所有算法须共享初始候选池/初始化分布；A/B/A+B 消融固定同一演化骨干（建议 NSGA-II），NSGA-III 作为独立强基线。
+- 50k rollout × 5 seeds 的计费边界、搜索/验证/最终评估预算须明确。
+- 改进 EA 的主检验必须比较最强标准 EA（GA/GP/NSGA-II/III），不能只超过手工策略或随机搜索。
+- 49 号仍为 initial literature scan，novelty not approved；须补系统性机制级检索。
+
+### 下一步
+创建 55-R1 逐条回应 56 号 B1–B6/M1–M5；形式化 R1–R4 和 observation-based reachability；修复指标/成本；完成分层配额、cluster-level power 和预算核算；统一算法骨干与初始化；补系统性相关工作审计。仅允许单元测试和 train/dev smoke。用户批准冻结预注册前，禁止 A-3b 正式运行。
