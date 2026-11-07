@@ -497,3 +497,64 @@ Mechanism A: real significant evidence (legality + success, attributable). Mecha
 
 ### Next task (single)
 Redesign B's counterexample->gene mapping (action-sequence pattern signatures + semantic-repair-style targeted mutation) and add stateful contract repair for the ambiguous-observation WAIT-SLA discipline; re-measure environment violation rate; rerun A+newB with the same configuration. Formal power analysis and preregistration remain HOLD until then.
+
+
+# 2026-11-08 — D-062：WAIT-SLA 行为安全与反例驱动演化（下一会话直接执行）
+
+**完整执行计划：** `59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md`  
+**D-061 结果报告：** `58_PILOT_A3B_ROUND2_FIX_AND_DIAGNOSTIC_REPORT.md`  
+**当前任务状态：** READY_FOR_EXECUTION；本节是任务授权与接管指令，不代表 D-062 已经执行。
+
+## 项目接管时先做
+1. 重新检查 `pilot-a-stateful-recovery` 远端 HEAD、main、compare、工作树（若可访问）和 CI；建立计划时 HEAD 为 `ac042b4e96b80edb8ca727009f0e34ef32179a1f`，main 为 `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead 102 / behind 0。
+2. 阅读 58 号报告、59 号计划、D-061 原始 JSON/统计、`a3_bridge.py`、`ea.py`、`contract_validator.py`、`run_diagnostic2.py`、`stats.py`。
+3. 不覆盖 D-060/D-061 原始 artifact。先复核数据哈希、manifest 和运行记录。
+4. 当前 HEAD 没有可读取的 status checks；现有 `.github/workflows/pilot-a-recovery.yml` 只监控 `experiments/pilot_a_recovery/**` 和 workflow 自身，不会因 `pilot_a3b/**` 修改自动触发。若要让 D-062 自动测试，需单独评估 workflow path filter 和安全性，不可假称 CI 已运行。
+
+## D-061 结果的证据边界
+58 号报告给出的结果（必须从原始 artifact 独立复算）：
+- A vs NSGA-II：Δ=+0.239，95% CI [0.193,0.284]，Holm p=0.0014；
+- AB vs NSGA-II：Δ=+0.126，CI [0.086,0.167]，p=0.0002；
+- AB vs A：Δ=-0.113，CI [-0.152,-0.078]，p=0.0014；
+- B vs NSGA-II：Δ=+0.082，CI [0.025,0.144]，p=0.034；
+- AB vs Hand：Δ=-0.514，CI [-0.613,-0.416]，p=0.0014；
+- 报告的环境行为违规率 A=0.36、Hand=0.006。
+这些是报告值，不得跳过独立复算。当前研究结论：A 有正向诊断证据；B 叠加有害；未超过 Hand；第一项创新部分成立。
+
+## 唯一首要任务：先查清 0.36 vs 0.006
+从 `experiments/pilot_a3b/diagnostic2_results.json` 和原始 episode 轨迹复算：
+- 分子、分母、episode-level/action-level 口径；
+- 同一 episode 多次违规是否重复计数；
+- task/fault/seed/genome 分层；
+- Hand 与 A 是否同口径；
+- 每条 duplicate side effect 的完整公开观测和动作轨迹；
+- 区分提交未发生、lost ACK、已提交但不可见、处理中、未知结果、合同无 visibility guarantee。
+新增独立复核报告（建议 58_D061_FAILURE_TRACE_INDEPENDENT_AUDIT.md；先查重，若占用则递增），脚本必须独立于原 scorer。Stage 0 未通过，不扩大 rollout。
+
+## WAIT-SLA 状态化合同设计
+为工具定义 submit semantics、visibility SLA/保证类型、query consistency、idempotency/idempotency-key、safe retry preconditions、compensation capability、retry window、max wait/decision budget、escalation conditions。区分 visibility SLA 和 retry SLA；没有可证明的可见性上界时，固定等待不得把 UNKNOWN 推断成 NOT_COMMITTED。
+状态/观测测试至少覆盖：SLA 边界前后可见、超过 SLA 仍未知、无 visibility guarantee、强一致/最终一致/无保证查询、幂等/非幂等、幂等键有无、处理中、lost ACK、WAIT 失败/限流、多工具部分提交。
+策略只能读取公开观察与自身状态，不能读 hidden state。
+
+## B-new 和安全门
+- 反例签名细化为公开观测序列 + 合同 + FSM 状态/事务阶段 + 动作序列 + 失败后果 + 涉事基因。
+- 建立 `failure trace -> violated transition/contract -> implicated gene neighborhood -> semantic repair mutation` 映射。
+- 定向变异替换普通变异，不增加 mutation 或 rollout 预算；每代聚合全种群反例；记录变异前后基因和独立 validator 结果。
+- 变异后独立 Contract Validator；关键行为场景 Safety Gate；生存者选择先满足硬安全，再优化性能。
+- B 不能硬编码 TIMEOUT->WAIT；必须在不同工具合同和故障模式上搜索。
+
+## 新诊断对照和指标
+对照至少 Hand、NSGA-II、A、A+Fixed-WAIT、A+WAIT-SLA、A+WAIT-SLA+VERIFY、安全重试、B-new、A+B-new、A+B-new+Safety Gate。可分机制消融和完整对照两轮，但预算公平。
+指标：CondRecSucc、episode/action behavior violation、duplicate side-effect、SLA violation、CorrectEscalation、AvoidableHarm、不必要成本、worst-group、搜索效率、未见任务族泛化。
+旧 D-061 validation 若用于调参，不得继续称独立验证；生成新的非锁箱诊断数据。正式 held-out/确认性实验仍 HOLD。
+
+## 必须回答
+Q1 WAIT-SLA 是否减少重复副作用？Q2 是否优于固定 WAIT？Q3 VERIFY 独立贡献？Q4 B-new 是否定位正确基因？Q5 B-new 是否优于 NSGA-II？Q6 A+B-new 是否优于 A？Q7 Safety Gate 能否保护 A？Q8 能否接近/超过 Hand？Q9 未见任务泛化？Q10 增益来自演化搜索还是手工编码 WAIT-SLA？
+
+## Gate
+GO：原始数据复核、WAIT-SLA、FSM/B-new/Safety Gate 代码、单测、独立 validator、新非锁箱诊断和统计复算。
+HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM、大规模真实 API、ThinkingBox、未经批准的锁箱测试。
+当前不启动 A800。指标和执行语义稳定后再做正式功效分析。
+
+## 仓库接班纪律
+每个阶段及时更新本文件、`SESSION_HANDOFF.md`、`README.md`、`05_DECISION_LOG.md`、`51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md`。每轮区分 PLANNED / IMPLEMENTED / TESTED / EXPERIMENTALLY VERIFIED。不得把计划写成完成。每次阶段提交后核验远端 HEAD、main、CI 和工作树。
