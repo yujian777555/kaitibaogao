@@ -670,3 +670,12 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - **B 叠加显著有害**（AB vs A −0.113, p=0.0014）；AB vs NSGA-II primary +0.126（p=0.0002）显著但低于 A 单独；**未超过强手工基线**（−0.514）。
 - **Q6 泛化成立**：验证集 AB vs NSGA-II +0.148（p=0.002, d=0.97）。
 - 判定：第一项创新**部分成立**（A 成立、B 需重设计）。下一步：B 反例映射重设计 + WAIT-SLA 行为层契约修复。正式 A-3b 继续 HOLD。
+
+
+## 2026-11-08：D-062 — WAIT-SLA 行为安全与反例驱动演化
+
+新增 [59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md](59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md)，并更新 [NEXT_SESSION_PROMPT.md](NEXT_SESSION_PROMPT.md) 与 [SESSION_HANDOFF.md](SESSION_HANDOFF.md)。
+
+D-061 报告显示机制 A 相对 NSGA-II 有正向诊断证据，但 B 叠加到 A 后显著有害，且 A+B 未超过强手工策略。报告的行为违规率 A=0.36、Hand=0.006 需要从原始 episode 数据独立复核，不能直接当作已核验事实。
+
+D-062 首要任务是复核该违规率的分母/口径并定位完整失败轨迹，然后设计状态化 WAIT-SLA 合同、重构反例到基因的局部语义修复型变异，并评估 Safety Gate。没有可证明的 visibility guarantee 时，不得把固定等待解释为确认未提交。D-062 当前是 **READY_FOR_EXECUTION / PLANNED**，尚未实施；正式 A-3b、锁箱测试、Pilot B、A800/ARWM 和大规模真实 API 继续 HOLD。
