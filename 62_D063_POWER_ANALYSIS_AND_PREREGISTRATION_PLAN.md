@@ -201,7 +201,12 @@ ABG 可作为已知负结果，不必占用主要确认性预算；如保留，�
 
 D-062 执行报告称 79/79 测试通过，但当前已有 `.github/workflows/pilot-a-recovery.yml` 的 path filter 只覆盖 `experiments/pilot_a_recovery/**`，不会因 `experiments/pilot_a3b/**` 变化而触发。
 
-新增独立 workflow：
+独立 workflow 已新增并通过：
+- Workflow：`.github/workflows/research-simulator-regression.yml`；
+- Actions run：`42398278551`（commit `c0078d5c3db17380e81faca5752ac6a64f555a6d`），结论 `success`；两个测试步骤 `pilot_a_recovery` 和 `pilot_a3b` 均 success；
+- 执行报告称两套测试合计 79/79。当前 HEAD 后续提交仅修改文档，没有修改实验代码。
+
+新增 workflow 的设计为：
 - 触发分支 `pilot-a-stateful-recovery`；
 - path filter 覆盖 `experiments/pilot_a_recovery/**`、`experiments/pilot_a3b/**` 和 workflow 本身；
 - Python 3.11；
