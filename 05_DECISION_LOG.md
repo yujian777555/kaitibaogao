@@ -1007,14 +1007,14 @@ HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM�
 ### 第三轮诊断（61 号；diagnostic3 manifest 017b3454…；新种子 2026110900）
 - **AB vs A：+0.119 [0.066,0.183] p=0.0002——B-new 组合增益成立，D-061 负结果逆转**。
 - **AwaitSLA vs A：+0.089 p=0.005；AwaitSLA vs AwaitFixed：+0.054 p=0.003——WAIT-SLA 有效且优于固定等待**。
-- AB vs AwaitSLA +0.031 p=0.007——搜索在 WAIT-SLA 之上仍有独立增益（Q10：提升=合同语义(+0.089)+演化搜索(+0.031)，非纯手工规则）。
+- AB vs AwaitSLA all +0.031 p=0.0072；但 validation +0.031, p=0.244（n.s.），因此 Q10 搜索增量尚未证明独立泛化。
 - AB 行为违规 0（A 0.060）；AB seed 稳定 [0.543,0.531,0.543]。
 - AB vs hand −0.282（收窄但未超越）；ABG 门禁有害（−0.193，负结果）；B 单独劣于 NSGA-II（−0.074，负结果）。
 - Q9：validation AB vs A +0.142 p=0.008（泛化显著）。
 
 ### 判定
 - 契约保持（A）、WAIT-SLA、B-new 三机制**各有独立消融证据**；Safety Gate 与 B 单独为负结果（如实保留）。
-- 小论文主张限定：显著优于标准 EA 且行为安全可保证；**不得**声称超越专家。
+- 机制消融有诊断性正向证据；但 AB vs NSGA-II all p=0.062、validation p=0.2277，尚未证实优于标准 EA；行为安全保证仅限明确工具合同假设。**不得**声称超越专家。
 - 第一项创新**接近成立**；待功效核算+预注册+正式 A-3b。正式实验、Pilot B、A800 等继续 HOLD。
 
 ### 下一步
