@@ -1019,3 +1019,28 @@ HOLD：正式 A-3b、旧 held-out 调参、UndoBench TEST、Pilot B、A800/ARWM�
 
 ### 下一步
 功效核算（54-cluster 方差 cluster_sd≈0.40）→ preregistration 冻结交用户批准 → 正式 A-3b。
+
+
+## 决策 D-063：功效核算与正式 A-3b 预注册准备（2026-11-08）
+
+D-062 已完成诊断性阶段，但正式确认性实验仍未获授权。完整计划见 `62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md`。
+
+### 证据边界
+- AB vs NSGA-II all +0.1049、p=0.062（54 clusters）；validation +0.1173、p=0.2277（18 clusters）：均未显著。
+- AB vs A validation +0.142、p=0.0082：支持 B-new 在 A 上的增量，但不能替代主比较。
+- AB vs AwaitSLA validation +0.031、p=0.244：Q10 的搜索增量尚未证明泛化。
+- AB vs Hand −0.282：仍显著落后专家手工策略。
+- WAIT-SLA 与 B-new 的机制级诊断结果保留；Safety Gate 和 B 单独的负结果必须保留。
+
+### 必须先修复
+当前 `stats.py` 仍读取 diagnostic2，`run_diagnostic3.py` 不产出统计，部分 61 号报告对比不能从已提交分析入口直接再生。必须新增 diagnostic3 专用可执行分析器并从原始数据复算，随后才做功效冻结。
+
+### 初步设计
+以 held-out test 上 AB vs NSGA-II 为唯一主要比较；balanced class-success 为候选主要终点；双侧 alpha=.05。次要对比 AB vs A、AwaitSLA vs A、AwaitSLA vs Fixed、AB vs AwaitSLA 使用 Holm。Hand 只作参考，不预设非劣效或超越专家。安全指标作为硬接受条件，安全保证只限于明确合同假设和测试模型。
+
+### 初步功效
+以 validation-only cluster SD=.3914 做 paired t 近似：MDE=.10 时 80%/90% 约需 123/163 个可分析 clusters；15% 失效预留后约 145/192。MDE=.08 时约 190/254。当前只有 18 validation clusters，最终样本量须用经验 paired-cluster 分布做 Monte Carlo sign-flip/bootstrap power simulation。cluster 是 task×fault composition，不能用 seed/episode 替代。
+
+### 授权
+GO：统计流水线修复、empirical power simulation、任务族扩展可行性、预注册草案和 CI。
+HOLD：正式 A-3b、任何 held-out test 调参/查看、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。预注册须交用户审阅批准后才冻结。
