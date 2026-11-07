@@ -21,6 +21,9 @@ from reachability import (
     GOAL_CONTAINMENT,
     GOAL_TASK,
     GOAL_ZERO_RESIDUAL,
+    PROVEN_LOSE,
+    UNKNOWN,
+    WIN,
     ReachabilityChecker,
     classify,
 )
@@ -135,6 +138,37 @@ class RecoverabilityClassifierTests(unittest.TestCase):
         spec = by_name()["c7_hidden_delay_variants"]
         got = classify(spec, horizon=1, max_nodes=3)
         self.assertEqual(got.label, CLS_UNKNOWN)
+
+    def test_horizon_cutoff_blocks_downgrade_to_r3(self):
+        """57 F8: if TASK completion needs more than H steps but R3 escalation
+        is reachable within H, the classifier must return UNKNOWN (task
+        reachability not proved), NOT R3."""
+        from reachability import ReachabilityChecker, GOAL_TASK, GOAL_ZERO_RESIDUAL, UNKNOWN, PROVEN_LOSE, WIN
+
+        spec = by_name()["c10_depth_exceeded"]  # task needs 7 steps; stop is reachable
+        c_task = ReachabilityChecker(spec, horizon=4).solve(GOAL_TASK)
+        self.assertEqual(c_task.status, UNKNOWN, "task search must be UNKNOWN at horizon 4")
+        c_zr = ReachabilityChecker(spec, horizon=4).solve(GOAL_ZERO_RESIDUAL)
+        self.assertEqual(c_zr.status, WIN, "zero-residual (escalate) is reachable within horizon")
+        got = classify(spec, horizon=4)
+        self.assertEqual(got.label, CLS_UNKNOWN, "must NOT downgrade to R3 when task search is UNKNOWN")
+
+    def test_proven_lose_allows_downgrade(self):
+        """When TASK is PROVEN_LOSE and zero-residual is WIN, R3 is correct."""
+        spec = by_name()["c5_permission_denied_safe_escalate"]
+        c_task = ReachabilityChecker(spec, horizon=12).solve(GOAL_TASK)
+        self.assertEqual(c_task.status, PROVEN_LOSE)
+        got = classify(spec, horizon=12)
+        self.assertEqual(got.label, CLS_R3)
+
+    def test_three_valued_status_terminology(self):
+        from reachability import WIN, PROVEN_LOSE, UNKNOWN
+
+        spec = by_name()["c6_comp_failure_unavoidable_residue"]
+        r_zr = ReachabilityChecker(spec, horizon=12).solve(GOAL_ZERO_RESIDUAL)
+        self.assertEqual(r_zr.status, PROVEN_LOSE)
+        r_c = ReachabilityChecker(spec, horizon=12).solve(GOAL_CONTAINMENT)
+        self.assertEqual(r_c.status, WIN)
 
 
 class ConfusionMatrixTest(unittest.TestCase):

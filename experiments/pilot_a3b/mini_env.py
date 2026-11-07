@@ -401,42 +401,44 @@ def _c9():
 
 # ---------------------------------------------------------------------------
 # C10: completion needs more steps than the horizon -> UNKNOWN
+# escalation is a zero-residual safe terminal reachable within the horizon,
+# so the classifier must NOT downgrade to R3 (57 F8 regression case).
+# h = (ticks_done, stopped) ; need 6 WAITs then CALL; horizon test uses 4.
 # ---------------------------------------------------------------------------
 def _c10():
-    # h = (ticks_done,) ; need 6 WAITs then CALL; horizon test uses 4.
     def trans(h, a):
-        t = h[0]
-        if t >= 7:
+        t, stopped = h
+        if stopped or t >= 7:
             return h, "ALREADY", 0
         if a == "WAIT":
-            return (t + 1,), "WAITED", 0
+            return (t + 1, 0), "WAITED", 0
         if a in ("CALL", "RETRY"):
             if t >= 6:
-                return (7,), "OK", 0
-            return (t,), "TOO_EARLY", 0
+                return (7, 0), "OK", 0
+            return (t, 0), "TOO_EARLY", 0
         if a == "VERIFY":
-            return h, "NOT_COMMITTED", 0
+            return (t, 0), "NOT_COMMITTED", 0
         if a == "COMPENSATE":
-            return (0,), "COMPENSATED", 0
+            return (0, 0), "COMPENSATED", 0
         if a in ("ESCALATE", "STOP_SAFE"):
-            return (t,), "ESCALATED", 0
+            return (t, 1), "ESCALATED", 0
         return h, "NOOP", 0
 
     def obs_of(aug):
-        return ("pub", aug.hidden[0] >= 7)
+        return ("pub", aug.hidden[0] >= 7, aug.hidden[1], aug.used_escalate)
 
     return EpisodeSpec(
         name="c10_depth_exceeded",
-        initial_hidden=[(0,)],
+        initial_hidden=[(0, 0)],
         actions=ACTIONS,
         transition=trans,
         obs_key=obs_of,
-        terminal=lambda a: a.hidden[0] >= 7,
+        terminal=lambda a: a.hidden[0] >= 7 or a.hidden[1] == 1,
         goal_task=lambda a: a.hidden[0] >= 7,
-        goal_zero_residual=lambda a: False,
+        goal_zero_residual=lambda a: a.hidden[1] == 1 and a.harm == 0,
         min_reachable_harm=0,
         expected_class="UNKNOWN",
-        notes="needs 7 steps; classified with horizon=4 -> UNKNOWN; horizon=20 -> R1",
+        notes="needs 7 steps; horizon=4 -> task UNKNOWN but safe-stop WIN -> must stay UNKNOWN; horizon=20 -> R1",
     )
 
 

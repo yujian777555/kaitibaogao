@@ -1,7 +1,7 @@
-"""Sanity tests: analytic A-3 labels follow the 55-R1 ladder."""
+"""Sanity tests: analytic A-3 verdicts follow the 55-R1 ladder."""
 import unittest
 
-from a3_bridge import label_scenario
+from a3_bridge import scenario_verdict
 from pilot_a3 import TASKS, make_fault_vector
 
 
@@ -16,28 +16,30 @@ def sc(task, comp, seed=7):
     }
 
 
-class A3LabelTests(unittest.TestCase):
-    def test_single_timeout_is_r1(self):
+class A3VerdictTests(unittest.TestCase):
+    def test_single_timeout_is_r1_or_r2(self):
         for seed in range(20):
             s = sc("inventory_order_payment", "single_timeout", seed)
-            # single timeout/delayed: verify/wait completes
-            self.assertIn(label_scenario(s), ("R1", "R2"))
+            self.assertIn(scenario_verdict(s)["class"], ("R1", "R2"))
 
     def test_partial_comp_failure_is_r4(self):
         for seed in range(20):
             s = sc("inventory_order_payment", "partial_comp_failure", seed)
-            self.assertEqual(label_scenario(s), "R4", msg=str(s["faults"]))
+            self.assertEqual(scenario_verdict(s)["class"], "R4", msg=str(s["faults"]))
 
     def test_permission_family_is_r3_or_r4(self):
         for seed in range(20):
             s = sc("calendar_order_ledger", "delay_rate_permission", seed)
-            self.assertIn(label_scenario(s), ("R3", "R4"), msg=str(s["faults"]))
+            self.assertIn(scenario_verdict(s)["class"], ("R3", "R4"), msg=str(s["faults"]))
+
+    def test_partial_then_delay_with_comp_is_r2(self):
+        seen = set()
+        for seed in range(30):
+            s = sc("customer_order_shipment", "partial_then_delay", seed)
+            seen.add(scenario_verdict(s)["class"])
+        self.assertIn("R2", seen)
 
     def test_permission_with_uncompensated_prefix_commit_is_r4(self):
-        """timeout_after on a non-compensatable prefix tool then permission:
-        committed residue cannot be cleared -> R4, not R3."""
-        from pilot_a3 import TASKS
-
         s = {
             "scenario_id": "manual",
             "task": "subscription_ledger_notification",
@@ -50,22 +52,15 @@ class A3LabelTests(unittest.TestCase):
                 {"fault": "none", "delay": 0, "retry_after": 0, "compensation_available": True},
             ],
         }
-        # subscription is compensatable but compensation_available=False;
-        # committed effect cannot be removed -> unavoidable residue -> R4
-        self.assertEqual(label_scenario(s), "R4")
+        self.assertEqual(scenario_verdict(s)["class"], "R4")
 
-    def test_partial_then_delay_with_comp_is_r2(self):
-        seen = set()
-        for seed in range(30):
-            s = sc("customer_order_shipment", "partial_then_delay", seed)
-            seen.add(label_scenario(s))
-        self.assertIn("R2", seen)
-
-    def test_labels_deterministic(self):
+    def test_verdicts_deterministic_and_have_harm_fields(self):
         for comp in ("single_timeout", "partial_comp_failure", "triple_mixed"):
-            s1 = sc("inventory_order_payment", comp, 11)
-            s2 = sc("inventory_order_payment", comp, 11)
-            self.assertEqual(label_scenario(s1), label_scenario(s2))
+            v1 = scenario_verdict(sc("inventory_order_payment", comp, 11))
+            v2 = scenario_verdict(sc("inventory_order_payment", comp, 11))
+            self.assertEqual(v1, v2)
+            self.assertIn("unavoidable_residual", v1)
+            self.assertIn("min_reachable_harm", v1)
 
 
 if __name__ == "__main__":

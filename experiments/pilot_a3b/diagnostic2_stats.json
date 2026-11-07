@@ -1,0 +1,269 @@
+{
+  "aggregate": {
+    "hand": {
+      "class_success_mean": 0.8272,
+      "invariant_violation_mean": 0.0062,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 2.2531,
+      "policy_selected_escalation_mean": 0.3395,
+      "class_success_stability": {
+        "per_seed": [
+          0.8272,
+          0.8272,
+          0.8272
+        ],
+        "mean": 0.8272,
+        "sd": 0.0
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 486
+    },
+    "random": {
+      "class_success_mean": 0.3333,
+      "invariant_violation_mean": 0.1193,
+      "duplicate_mean": 0.0041,
+      "avoidable_harm_mean": 0.2325,
+      "policy_selected_escalation_mean": 0.8683,
+      "class_success_stability": {
+        "per_seed": [
+          0.3333,
+          0.3333,
+          0.3333
+        ],
+        "mean": 0.3333,
+        "sd": 0.0
+      },
+      "validator_illegal_ratio": 1.0,
+      "episodes_total": 948834
+    },
+    "ga": {
+      "class_success_mean": 0.2737,
+      "invariant_violation_mean": 0.3971,
+      "duplicate_mean": 0.0041,
+      "avoidable_harm_mean": 0.251,
+      "policy_selected_escalation_mean": 0.5658,
+      "class_success_stability": {
+        "per_seed": [
+          0.3395,
+          0.2531,
+          0.2284
+        ],
+        "mean": 0.2737,
+        "sd": 0.0583
+      },
+      "validator_illegal_ratio": 1.0,
+      "episodes_total": 948834
+    },
+    "nsga2": {
+      "class_success_mean": 0.1872,
+      "invariant_violation_mean": 0.4383,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 0.2428,
+      "policy_selected_escalation_mean": 0.4671,
+      "class_success_stability": {
+        "per_seed": [
+          0.2037,
+          0.2407,
+          0.1173
+        ],
+        "mean": 0.1872,
+        "sd": 0.0633
+      },
+      "validator_illegal_ratio": 1.0,
+      "episodes_total": 948834
+    },
+    "nsga3": {
+      "class_success_mean": 0.1996,
+      "invariant_violation_mean": 0.3272,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 0.2243,
+      "policy_selected_escalation_mean": 0.5391,
+      "class_success_stability": {
+        "per_seed": [
+          0.3333,
+          0.1111,
+          0.1543
+        ],
+        "mean": 0.1996,
+        "sd": 0.1178
+      },
+      "validator_illegal_ratio": 1.0,
+      "episodes_total": 948834
+    },
+    "A": {
+      "class_success_mean": 0.4259,
+      "invariant_violation_mean": 0.3601,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 0.7058,
+      "policy_selected_escalation_mean": 0.43,
+      "class_success_stability": {
+        "per_seed": [
+          0.3951,
+          0.5556,
+          0.3272
+        ],
+        "mean": 0.426,
+        "sd": 0.1173
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 948834
+    },
+    "B": {
+      "class_success_mean": 0.2695,
+      "invariant_violation_mean": 0.2819,
+      "duplicate_mean": 0.0062,
+      "avoidable_harm_mean": 0.2942,
+      "policy_selected_escalation_mean": 0.679,
+      "class_success_stability": {
+        "per_seed": [
+          0.321,
+          0.2037,
+          0.284
+        ],
+        "mean": 0.2696,
+        "sd": 0.06
+      },
+      "validator_illegal_ratio": 1.0,
+      "episodes_total": 947322
+    },
+    "AB": {
+      "class_success_mean": 0.3128,
+      "invariant_violation_mean": 0.4136,
+      "duplicate_mean": 0.0,
+      "avoidable_harm_mean": 0.537,
+      "policy_selected_escalation_mean": 0.3848,
+      "class_success_stability": {
+        "per_seed": [
+          0.5432,
+          0.2778,
+          0.1173
+        ],
+        "mean": 0.3128,
+        "sd": 0.2151
+      },
+      "validator_illegal_ratio": 0.0,
+      "episodes_total": 944838
+    }
+  },
+  "primary_contrast": {
+    "name": "AB vs nsga2 (all)",
+    "stats": {
+      "mean_diff": 0.1255,
+      "ci95": [
+        0.0864,
+        0.1667
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0002,
+      "cluster_sd": 0.1527,
+      "effect_size_d": 0.822
+    }
+  },
+  "secondary_contrasts": {
+    "A vs nsga2": {
+      "mean_diff": 0.2387,
+      "ci95": [
+        0.1934,
+        0.284
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0002,
+      "cluster_sd": 0.1705,
+      "effect_size_d": 1.3998,
+      "holm_p": 0.0014
+    },
+    "B vs nsga2": {
+      "mean_diff": 0.0823,
+      "ci95": [
+        0.0247,
+        0.144
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0112,
+      "cluster_sd": 0.2296,
+      "effect_size_d": 0.3584,
+      "holm_p": 0.0336
+    },
+    "AB vs A": {
+      "mean_diff": -0.1132,
+      "ci95": [
+        -0.1523,
+        -0.0782
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0002,
+      "cluster_sd": 0.1407,
+      "effect_size_d": -0.8043,
+      "holm_p": 0.0014
+    },
+    "AB vs B": {
+      "mean_diff": 0.0432,
+      "ci95": [
+        -0.0453,
+        0.1276
+      ],
+      "clusters": 54,
+      "permutation_p": 0.3469,
+      "cluster_sd": 0.3298,
+      "effect_size_d": 0.131,
+      "holm_p": 0.4784
+    },
+    "AB vs ga": {
+      "mean_diff": 0.0391,
+      "ci95": [
+        -0.0247,
+        0.1029
+      ],
+      "clusters": 54,
+      "permutation_p": 0.2392,
+      "cluster_sd": 0.2405,
+      "effect_size_d": 0.1626,
+      "holm_p": 0.4784
+    },
+    "AB vs nsga3": {
+      "mean_diff": 0.1132,
+      "ci95": [
+        0.0514,
+        0.1728
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0017,
+      "cluster_sd": 0.2299,
+      "effect_size_d": 0.4922,
+      "holm_p": 0.0068
+    },
+    "AB vs hand": {
+      "mean_diff": -0.5144,
+      "ci95": [
+        -0.6132,
+        -0.4156
+      ],
+      "clusters": 54,
+      "permutation_p": 0.0002,
+      "cluster_sd": 0.3784,
+      "effect_size_d": -1.3595,
+      "holm_p": 0.0014
+    }
+  },
+  "validation_class_success": {
+    "hand": 0.8333,
+    "random": 0.3889,
+    "ga": 0.3086,
+    "nsga2": 0.2222,
+    "nsga3": 0.2284,
+    "A": 0.4877,
+    "B": 0.321,
+    "AB": 0.3704
+  },
+  "q6_AB_vs_nsga2_validation": {
+    "mean_diff": 0.1481,
+    "ci95": [
+      0.0802,
+      0.216
+    ],
+    "clusters": 18,
+    "permutation_p": 0.0017,
+    "cluster_sd": 0.1524,
+    "effect_size_d": 0.9718
+  }
+}
