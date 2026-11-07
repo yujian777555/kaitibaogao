@@ -229,3 +229,17 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 
 ### D-061 执行更新（2026-11-07）
 上述修复**已全部落地**（58 号报告；47/47 测试绿）。第二轮诊断（diagnostic2，manifest d4fb2be6…）：A vs NSGA-II Δ=+0.239（Holm p=0.0014）显著、独立 validator 非法率 1.00→0.00；primary AB vs NSGA-II +0.126（p=0.0002）显著；**AB vs A −0.113（B 叠加有害）**；未超过强手工（−0.514）；验证集泛化显著（+0.148, p=0.002）。判定：机制 A 成立、B 需重设计、创新部分成立。下一步：B 反例→基因映射重设计 + WAIT-SLA 行为层契约修复后重跑。正式 A-3b/功效分析继续 HOLD。
+
+
+## 10. D-062 更新：WAIT-SLA 行为安全与反例驱动演化（2026-11-08）
+
+任务计划：`59_D062_WAIT_SLA_AND_COUNTEREXAMPLE_REDESIGN_PLAN.md`；接管入口：`NEXT_SESSION_PROMPT.md` D-062 节。
+
+- D-061 结果报告给出 A vs NSGA-II Δ=+0.239、AB vs A Δ=-0.113、AB vs Hand Δ=-0.514；报告行为违规率 A=0.36、Hand=0.006。以上必须先从原始 episode 数据独立复算，尤其核对分子、分母、episode/action 口径和重复事件。
+- 第一阶段：独立复核失败轨迹，区分未提交、lost ACK、已提交但不可见、处理中、未知结果及缺少 visibility guarantee。
+- 第二阶段：定义工具级 WAIT-SLA 合同，明确 visibility SLA 与 retry SLA，保证策略只读取公开观测；无可证明 visibility guarantee 时不得通过固定等待推断 NOT_COMMITTED。
+- 第三阶段：B-new 依据完整失败动作序列定位涉事 FSM 基因邻域，语义修复型变异替换普通变异，保持变异/rollout 预算公平。
+- 第四阶段：评估独立 Contract Validator、行为层 Safety Gate 和硬安全优先的生存者选择。
+- 新诊断至少比较 Hand、NSGA-II、A、Fixed-WAIT、WAIT-SLA、WAIT-SLA+VERIFY、安全重试、B-new、A+B-new、A+B-new+Gate；指标覆盖恢复成功、episode/action 行为违规、重复副作用、SLA 违规、正确升级、损害、不必要成本和未见任务泛化。
+- 旧 D-061 validation 若用于调参不得继续作为独立验证；正式 held-out 继续锁定。
+- **当前状态 READY_FOR_EXECUTION，不代表代码或实验已完成。** GO：复核、实现、测试、新非锁箱诊断；HOLD：正式 A-3b、锁箱调参、UndoBench TEST、Pilot B、A800/ARWM、大规模真实 API。
