@@ -2,7 +2,7 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** D-063 — diagnostic3 统计复现、经验功效仿真、任务族扩展审计与预注册草案；正式 A-3b HOLD  
+**当前阶段：** D-063 工程交付完成；D-064 独立审查 64 号预注册草案（REQUEST CHANGES）；正式 A-3b HOLD  
 **状态日期：** 2026-11-09
 
 ## 1. 项目边界（必须遵守）
@@ -742,3 +742,26 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - **Stage 2**（[63_D063_TASK_FAMILY_EXPANSION_AUDIT.md](63_D063_TASK_FAMILY_EXPANSION_AUDIT.md)）：576 候选、多样性面板重叠 0.83/3；train/val/test=8/4/17 族=72/36/**153 clusters**，泄漏受控。
 - **Stage 3**（[64_A3B_PREREGISTRATION_CANDIDATE.md](64_A3B_PREREGISTRATION_CANDIDATE.md)）：正式预注册草案（主要对比 AB vs NSGA-II、Holm、硬安全门、协议冻结）——**待用户批准**。
 - GO：审阅 64。HOLD：正式 A-3b（批准+预检后解锁）及全部既有 HOLD 项。
+
+
+## 2026-11-09：D-064 — 64 号预注册草案独立审查（REQUEST CHANGES）
+
+D-063 的工程交付已远端核验：最终基线 `4f23abed3150e09703839b980ad3afc9bb14dfb3`，CI run [42615985837](https://github.com/yujian777555/kaitibaogao/actions/runs/42615985837) 真实成功，pilot_a_recovery 28/28、pilot_a3b 68/68，合计 96/96。
+
+但 64 号草案**暂不批准**。独立审查报告：[65_D064_PREREGISTRATION_INDEPENDENT_AUDIT.md](65_D064_PREREGISTRATION_INDEPENDENT_AUDIT.md)。
+
+### 阻断项
+
+1. **主要 estimand 不一致：** 64 §3 的 CondRecSucc 只算 R1+R2；D-063 功效分析却把 R1–R4 全部 class_success 混合，145 clusters 不能直接作为该主要终点的样本量。
+2. **功效模拟方法不符：** 当前实际为正态参数化 Monte Carlo + 正态近似检验，不是经验 cluster resampling/sign-flip；缺 MCSE，且小样本 null FPR 有偏高值。
+3. **ICC 证据不足：** 仅 6 个 task families（validation 只有 2 个），ICC 负点估计不能证明未来 task×composition clusters 独立。
+4. **任务族语义与接入：** 576 候选只经合同属性过滤，未验证任务前置/后置条件；profile 多样性没有进入贪心目标；正式 8/4/17 生成器尚未接入当前固定 6 任务族运行路径。
+5. **样本量未唯一冻结：** 153 test clusters 在 15% 失效后约 130；MDE=.10 的 80% power 方案需要约 171 招募 clusters。MDE=.1173 来自历史观察效应，不能未经论证直接作为 MDE。
+6. **标签与安全门：** UNKNOWN 上限、R1/R2 主终点有效 cluster 数、硬安全门对两臂的判定语义需要冻结。
+
+### 下一步唯一任务
+
+先完成 **D-064-A：CondRecSucc（R1+R2 only）配对 cluster 分析**，从 diagnostic3 原始数据重算主效应、cluster SD 和 primary-eligible cluster 数；随后用正确 estimand 重做功效分析。未完成前，不批准 64、不生成/查看正式 test、不启动正式 A-3b。
+
+**GO：** D-064 统计、数据生成、标签验证和预注册修订。  
+**HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
