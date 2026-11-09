@@ -2,7 +2,7 @@
 
 日期：2026-11-06
 所属项目：kaitibaogao / 第一项创新候选
-状态：PHASE A COMPLETE (GATE=HOLD) / PHASE B COMPLETE / A-3B DESIGN DRAFT — NEXT: REVIEW + PREREG FREEZE
+状态：D-063 ENGINEERING COMPLETE / D-064 PREREG REVIEW=REQUEST CHANGES / FORMAL A-3B=HOLD
 工作分支：pilot-a-stateful-recovery
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
@@ -310,3 +310,24 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 **HOLD：** 正式 A-3b、查看/调参新 held-out test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。用户批准预注册后，正式 A-3b 仍需单独授权。
 
 **下一会话唯一首要任务：** Stage 0 — 从 diagnostic3 原始数据建立独立、可复现的分析入口。
+
+
+---
+
+## 12. D-064 预注册独立审查更新（2026-11-09）
+
+64 号预注册草案暂不批准。完整阻断项见 `65_D064_PREREGISTRATION_INDEPENDENT_AUDIT.md`。
+
+核心问题：
+- 64 §3 主要终点 CondRecSucc 只含 R1+R2；D-063 功效模拟使用全 R1–R4 的 class_success，estimand 不一致；
+- 当前功效脚本是参数化正态 Monte Carlo，不是实际经验重采样/sign-flip；
+- ICC 仅由 6 个 task families（validation 2 个）估计，负点估计不能证明 cluster 独立；
+- 任务族候选只经过合同属性筛选，没有任务语义验证；正式 8/4/17 场景生成器尚未接入当前运行代码；
+- MDE=.10、失效预留和 MDE=.1173 备选未形成唯一冻结决定；
+- UNKNOWN 上限、primary eligible clusters、硬安全门规则需要补齐。
+
+**当前 GO：** D-064-A/B/C/D 修复、CondRecSucc 分析、功效重算、任务语义 validator、正式场景生成器、标签和 manifest 测试、预注册修订。
+
+**当前 HOLD：** 正式 A-3b、任何 held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
+
+**下一步唯一首要任务：** D-064-A — 对 diagnostic3 原始 rows 建立 R1/R2-only CondRecSucc 配对 cluster 分析；在 primary estimand 和功效方案修正前，不批准 64 号草案。
