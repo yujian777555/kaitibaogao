@@ -2,7 +2,7 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** D-063 工程交付完成；D-064 独立审查 64 号预注册草案（REQUEST CHANGES）；正式 A-3b HOLD  
+**当前阶段：** D-064-A 完成（CondRecSucc 独立复算）；D-064-B READY_TO_EXECUTE（层级功效与 ICC 敏感性）；64 号预注册仍 REQUEST CHANGES；正式 A-3b HOLD  
 **状态日期：** 2026-11-09
 
 ## 1. 项目边界（必须遵守）
@@ -775,3 +775,32 @@ D-063 的工程交付已远端核验：最终基线 `4f23abed3150e09703839b980ad
 - 原全类别 +0.1049（p=0.065）系 12 个 R3/R4-only 稀释；scenario 加权一致（0.3145）；配对 1.000。
 - R3/R4 权衡如实：AB 0.226/0.80 vs NSGA-II 0.679/0.933。
 - GO：D-064-B（功效+ICC 敏感性）。HOLD 不变。
+
+
+## 2026-11-09：D-064-A 完成，D-064-B 接管任务已冻结
+
+D-064-A 正式报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md)。
+
+- CondRecSucc 严格使用 R1+R2；R3 CorrectEscalation、R4 DamageContainment 独立报告。
+- 42 个 primary-eligible task×composition clusters，嵌套在 **6 个 task families** 中；每个 family 当前有 7 个 eligible compositions；12 个 R3/R4-only clusters 预规定排除并登记。
+- AB=0.5582，NSGA-II=0.2407，cluster-equal Δ=+0.3175，cluster SD=0.318856；D-064-A cluster bootstrap CI [0.218254, 0.411376]，cluster-level sign-flip MC p=0.000125（8000 次）。
+- scenario-weighted Δ=0.314465，配对完整率 1.000。
+- R3：AB 0.226 vs NSGA-II 0.679；R4：AB 0.800 vs NSGA-II 0.933。AB 的主要终点优势不能掩盖其安全行为率落后。
+- 原始 diagnostic3 SHA-256：`b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c`。
+- D-064-A CI：run [42631223393](https://github.com/yujian777555/kaitibaogao/actions/runs/42631223393)，head `16e255de627b37713f0ea936df0ddb0dd03ac084`，success；109/109 tests。
+
+**统计限制：** 42 个 composition clusters 并非已证明相互独立；它们嵌套于仅 6 个 task families。D-064-A 的 cluster-level CI/sign-flip 需要 D-064-B 做 family-level / hierarchical sensitivity，不能直接当作最终确认性推断。
+
+### 下一步：D-064-B
+
+完整执行接管提示词：[67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md](67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md)。
+
+重点：
+1. 以 family 为高层抽样单位，重建 42 clusters / 6 families 的嵌套结构；
+2. 估计 ICC 及其不确定性，并对 ICC=0/.05/.10/.20 做敏感性；
+3. 比较 family-block empirical resampling 与 ICC-controlled hierarchical simulation；
+4. 对 MDE=.05/.08/.10/.1173/.15、80%/90% power、family/cluster attrition 生成样本量曲线；
+5. 区分 design clusters 与 primary-eligible clusters：若仍为 7/9 eligible，17×9=153 design clusters 对应约 119 primary-eligible clusters（条件性投影，待 D-064-C 生成器验证）。
+
+**GO：** D-064-B。  
+**HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍未批准；D-064-C 的任务语义验证完成前不最终冻结 test family 数和 MDE。
