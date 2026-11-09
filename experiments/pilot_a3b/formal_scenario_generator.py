@@ -38,6 +38,8 @@ from task_semantics import (  # noqa: E402
 GENERATOR_VERSION = "d064c-formal-generator-v1"
 SEED_BASE = 2026111100
 REPEATS_PER_CLUSTER = 3
+LABELER_HORIZON = 24
+LABELER_MAX_NODES = 500000
 FORMAL_COMPOSITIONS = (
     tuple(TRAIN_COMPOSITIONS)
     + tuple(VALIDATION_COMPOSITIONS)
@@ -77,6 +79,9 @@ POWER_DESIGN = {
     "effective_primary_clusters_after_attrition": 170,
     "expected_power_from_D064B_MC": 0.85,
     "power_source": "68_D064B_HIERARCHICAL_POWER_REPORT.md; ICC=0.20, MDE=0.10, m=7, 40 design families, dual 15% family/cluster attrition",
+    "reachability_horizon": LABELER_HORIZON,
+    "reachability_max_nodes": LABELER_MAX_NODES,
+    "reachability_horizon_rationale": "At most 3 steps x (CALL + 4 WAIT + VERIFY) = 18 actions are required for three maximally delayed commits; horizon 24 provides a fixed buffer.",
     "primary_test": "two-sided family-level Student-t test on task-family means; df=39 before attrition",
     "sign_flip": "secondary sensitivity only",
     "family_block_bootstrap": "descriptive interval only; not an alpha test (D-064-B Type-I calibration was anti-conservative)",
@@ -223,7 +228,7 @@ def _build_cluster(family, split, composition, seed_base=SEED_BASE):
             "faults": faults,
         })
 
-    label_info = classify_scenario(scenarios[0])
+    label_info = classify_scenario(scenarios[0], horizon=LABELER_HORIZON, max_nodes=LABELER_MAX_NODES)
     analytic_labels = [scenario_verdict(s)["class"] for s in scenarios]
     analytic_label = analytic_labels[0]
     disagreement_reason = _explain_analytic_disagreement(

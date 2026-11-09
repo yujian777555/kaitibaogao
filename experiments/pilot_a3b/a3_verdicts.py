@@ -278,7 +278,7 @@ def _classify_pattern_cached(faults, idempotent, compensatable,
     return result.label, result.evidence
 
 
-def classify_scenario(scenario, horizon=12, max_nodes=200000):
+def classify_scenario(scenario, horizon=24, max_nodes=500000):
     """Return robust R1-R4/UNKNOWN label plus an analytic cross-check.
 
     Compensation availability is fixed to the declared scenario contract for

@@ -49,6 +49,11 @@ class FormalScenarioGeneratorTests(unittest.TestCase):
             [[f["fault"] for f in row] for row in rows[:1]] * 3,
         )
 
+    def test_formal_labeler_uses_three_step_safe_horizon(self):
+        from formal_scenario_generator import LABELER_HORIZON, LABELER_MAX_NODES
+        self.assertEqual(LABELER_HORIZON, 24)
+        self.assertEqual(LABELER_MAX_NODES, 500000)
+
     def test_seed_derivation_is_stable_and_split_specific(self):
         a = stable_seed(SEED_BASE, "train", "family", "comp", 0)
         b = stable_seed(SEED_BASE, "train", "family", "comp", 0)
