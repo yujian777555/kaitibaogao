@@ -185,3 +185,19 @@ D-063 的独立复算程序、任务族候选枚举脚本、统计测试和 CI �
 - ThinkingBox。
 
 **唯一下一步：** 先完成 D-064-A——将正式主要终点 CondRecSucc（R1+R2 only）加入配对 cluster 分析器，复算诊断数据的 primary effect/SD/有效 cluster 数；在这一步完成前，不批准 64 号草案，也不启动正式 A-3b。
+
+
+---
+
+## 10. p 值差异幅度更正
+
+D-063 执行汇报将复算 p 值差异描述为“仅第 3 位微差”。逐项对照 `diagnostic3_recomputed_report.md` 后，这一描述不够准确：
+
+- primary AB vs NSGA-II：0.064734 vs 0.062，差 0.002734；
+- validation AB vs NSGA-II：0.238190 vs 0.2277，差 0.010490；
+- validation AB vs A：0.009998 vs 0.0082，差 0.001798；
+- all AwaitSLA vs A：0.006748 vs 0.0047，差 0.002048；
+- all AwaitSLA vs AwaitFixed：0.004749 vs 0.0032，差 0.001549；
+- all AB vs AwaitSLA：0.009498 vs 0.0072，差 0.002298。
+
+这些差异可能来自置换 Monte Carlo 随机种子不同（复算 20261110、旧报告 20261108），且当前显著性分类未改变；但不能一概表述为“仅第三位微差”。正式报告应给出绝对差值、置换次数和 Monte Carlo 不确定性，并将复算结果作为唯一可执行复现值。效应量 Δ 对齐不意味着 p 值逐项一致。
