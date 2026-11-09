@@ -216,3 +216,31 @@ D-063 执行汇报将复算 p 值差异描述为“仅第 3 位微差”。逐�
 6. R3/R4 权衡如实记录：AB R3 0.226 vs NSGA-II 0.679、R4 0.80 vs 0.933——主要终点领先不掩盖安全行为率落后。
 
 **P0-2/3/4、P1-5/6/7 未处理**（属 D-064-B 及后续：功效/ICC 敏感性重做、任务族语义 validator 与正式生成器、MDE/样本量唯一冻结、安全门细则）。
+
+
+---
+
+## D-064-A 关闭 P0-1 后的状态更新（2026-11-09）
+
+D-064-A 已正式完成；P0-1（主要 estimand 与功效分析输入不一致）在诊断分析层面关闭。证据见 `66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md`。
+
+- CondRecSucc 仅 R1+R2：42 eligible clusters / 54 design clusters；
+- 42 个 cluster 嵌套在 6 个 task families，每 family 7 个 eligible compositions；
+- AB=.5582，NSGA-II=.2407，Δ=+.3175，cluster SD=.318856；
+- cluster bootstrap CI [.218254,.411376]；cluster-level sign-flip p=.000125（8000 次）；
+- scenario-weighted Δ=.314465；
+- R3/R4 仍显示 AB 的正确升级/遏制行为率落后，需独立报告。
+
+**重要限定：** D-064-A 的 42-cluster bootstrap/sign-flip 尚未处理 task-family 内相关性。点估计已独立复算，但 CI/p 的有效性需要 D-064-B 重新评估。不能把 D-064-A cluster-level 显著性当作已解决 family dependence 的确认性证据。
+
+### D-064-B 当前授权
+
+GO：以 D-064-A CondRecSucc cluster differences 为基础，执行 task-family 层级方差、ICC 不确定性、family-block resampling、ICC-controlled power simulation、Type-I error 校准和条件性样本量分析。完整执行提示词：`67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md`。
+
+**D-064-B 仍须解决：**
+- P0-2：正确 estimand 下的经验/层级功效分析与 null calibration；
+- P0-3：task-family 内相关性和 ICC 不确定性。
+
+P0-4（任务语义 validator/正式生成器）及 P1-5/6/7（MDE/样本量最终冻结、UNKNOWN/安全门细则、实现与预检冻结）仍未关闭。
+
+64 号预注册仍为 REQUEST CHANGES；正式 A-3b 继续 HOLD。
