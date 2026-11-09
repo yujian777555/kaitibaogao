@@ -2,7 +2,7 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-06（Phase B 完成 + A-3b 设计完成轮）**  
+**最后维护日期：2026-11-09（D-063 执行接管要求更新；Stage 0 尚未完成）**  
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
@@ -630,3 +630,202 @@ Power analysis from the round-3 cluster variance (cluster_sd ~ 0.40) -> freeze p
 GO：统计脚本修复与独立复算、empirical power simulation、任务族扩展可行性审计、预注册草案、CI 测试。
 HOLD：正式 A-3b、查看/调参 held-out test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
 **完成 D-063 草案后交用户审阅批准；未经明确批准，不启动正式 A-3b。**
+
+
+---
+
+# D-063 执行接管指令（2026-11-09；本节优先于所有较早历史段落）
+
+你现在继续接管唯一研究仓库 yujian777555/kaitibaogao。当前任务不是重新选题，也不是重复写研究计划，而是把 D-062 diagnostic3 的统计证据独立复算正确，并据此完成正式 A-3b 的功效设计和预注册草案。
+
+**本节是当前最高优先级指令。若本文较早的历史段落与本节冲突，以本节为准。**
+
+## A. 接管时先做真实仓库核验
+
+- 仓库：yujian777555/kaitibaogao。
+- 分支：pilot-a-stateful-recovery。
+- 本轮维护开始前 HEAD：e6fee3bde05e8dea3fcc54f2ea1d97bc54837867（仅为历史核验基线）。
+- main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653（历史核验值）。
+- 本轮维护开始前工作分支 ahead 123 / behind 0。
+- 接管时重新读取远端 branch HEAD、main HEAD、ahead/behind、工作区状态和最新 Actions；不得照抄历史 SHA。
+- main 不得修改或合并；所有写入仅发生在 pilot-a-stateful-recovery。
+
+## B. 研究目标与当前证据边界
+
+第一项创新候选：
+
+**契约约束与反例引导的 Agent 事务安全恢复策略演化。**
+
+已实现机制：
+- A：契约语义保持算子；
+- WAIT-SLA：未知工具执行结果下的状态化等待/验证/重试解锁合同；
+- B-new：基于动作序列失败签名、涉事基因定位和语义修复的反例引导演化。
+
+D-062 diagnostic3 结果必须如实继承：
+
+| 对比 | 报告结果 | 证据边界 |
+|---|---:|---|
+| AB vs A | +0.119，p=.0002 | 诊断性正向证据 |
+| AB vs A（validation） | +0.142，p=.0082 | B-new 增量的 validation 证据 |
+| AwaitSLA vs A | +0.089，p=.0047 | WAIT-SLA 诊断性正向证据 |
+| AwaitSLA vs AwaitFixed | +0.054，p=.0032 | SLA-aware 优于固定等待 |
+| AB vs AwaitSLA（all） | +0.031，p=.0072 | 全数据正向；不能替代 validation |
+| AB vs AwaitSLA（validation） | +0.031，p=.244 | 不显著，Q10 搜索增量尚未证明泛化 |
+| AB vs NSGA-II（all） | +0.1049，p=.062 | 不显著 |
+| AB vs NSGA-II（validation） | +0.1173，p=.2277 | 不显著 |
+| AB vs Hand | −0.282，p=.0002 | 仍落后强手工策略 |
+
+其他限制：
+- B 单独劣于 NSGA-II；Safety Gate 在当前设定下有害，必须保留负结果。
+- A 的非法候选率下降、WAIT-SLA 行为违规为零是诊断实验结果，不应夸大为对所有外部工具的绝对安全保证。
+- 安全保证只能限定于明确的工具合同、可见性 SLA、查询一致性、幂等和补偿假设。
+- 59 号独立审计已推翻 D-061 的 0.36 vs 0.006 叙事：99.4% 是 evaluator artifact；真实重复副作用 7 例。必须保留更正。
+- D-062 是 diagnostic，不是 confirmatory。不得声称 AB 已显著优于 NSGA-II，也不得声称超过专家。
+
+## C. 本轮唯一主线：D-063
+
+### Stage 0 — diagnostic3 统计分析独立复现（唯一首要任务）
+
+先审查：
+- experiments/pilot_a3b/diagnostic3_results.json
+- experiments/pilot_a3b/diagnostic3_stats.json
+- experiments/pilot_a3b/stats.py
+- experiments/pilot_a3b/run_diagnostic3.py
+- 相关 manifest、报告和测试。
+
+当前已知问题：
+- stats.py 的 main() 仍硬编码读取 diagnostic2_results.json；
+- run_diagnostic3.py 负责产生原始结果，但没有完整的 diagnostic3 独立统计复算入口；
+- 已提交 diagnostic3_stats.json 未完整包含 61 号报告中的所有 AwaitSLA 相关对比。
+- 因此 61 号报告的关键结果必须从原始 diagnostic3 数据重新生成、逐项对账。
+
+新增 experiments/pilot_a3b/analyse_diagnostic3.py，或将 stats.py 改为显式输入输出参数的通用 CLI。必须满足：
+
+1. 输入显式指定 diagnostic3_results.json，不能静默回退 diagnostic2。
+2. 输出 all/train/validation 三种 split。
+3. 复算七组比较：AB vs NSGA-II、AB vs A、AwaitSLA vs A、AwaitSLA vs AwaitFixed、AB vs AwaitSLA、AB vs Hand、B vs NSGA-II。
+4. 推断单位为 task × fault-composition cluster；seed 是嵌套重复，不是独立 cluster。
+5. 每个比较输出样本数、cluster SD、效应量、95% cluster bootstrap CI、paired cluster sign-flip p、适用的 Holm-adjusted p、seed 稳定性。
+6. 校验 episode ID 唯一性；重复 episode 必须 fail-closed。
+7. 校验配对完整性、cluster 成员一致性、seed 完整性、split 隔离。
+8. 校验评价分母和 R1/R2 条件恢复、R3/R4 正确升级、UNKNOWN 标签语义。
+9. 明确缺失 episode、异常退出、预算截断和无效样本的处理规则。
+10. 对输入 JSON、manifest、分析配置和代码版本计算/记录哈希。
+11. 固定随机种子、bootstrap/permutation 次数、CI 算法、缺失配对处理和多重比较 family。
+12. 同一输入与配置重复运行必须得到可复现统计结果。
+13. 新增 synthetic tests，覆盖正常配对、缺失臂、重复 episode、cluster mismatch、seed 缺失、split 泄漏、分母错误、Holm 正确性和确定性。
+14. 独立再生 diagnostic3_recomputed.json、diagnostic3_recomputed.csv、diagnostic3_recomputed_report.md。
+15. 与 61 号报告逐项比较；任何差异必须解释和记录，不能为了匹配历史结果而硬编码统计值。
+
+**Stage 0 未通过，不进入正式功效冻结。**
+
+### Stage 1 — empirical Monte Carlo power simulation
+
+必须使用 Stage 0 独立复算后的 cluster-level paired differences。
+
+- 主要比较：未来新 held-out test 上 AB vs canonical NSGA-II。
+- 当前 diagnostic3 validation 只能作为历史开发/功效规划数据，不能重新命名为正式 test。
+- 报告 MDE=.08、.10、.1173。
+- 双侧 alpha=.05，分别报告 80% 和 90% power。
+- 采用与配对 cluster 设计匹配的 empirical resampling / sign-flip Monte Carlo。
+- 记录模拟重复数、Monte Carlo 标准误、随机种子和稳定性检查。
+- 评估 15% cluster 失效预留。
+- 做 cluster SD 敏感性分析，明确 18 个 validation clusters 导致方差估计不稳定。
+- 不能通过增加同一 cluster 的 episode 或 seed 凑独立样本。
+
+初步 t 近似（不是最终冻结值）：
+- MDE=.1173：80%/90% 约 90/119 个可分析 clusters；
+- MDE=.10：约 123/163 个可分析 clusters；加 15% 失效预留约 145/192；
+- MDE=.08：约 190/254 个可分析 clusters。
+
+这些只是初步规划，最终样本量以 empirical simulation 为准。
+
+### Stage 2 — task-family / fault-composition 扩展审计
+
+仓库中存在两种计数表述：
+- 某些历史设计记录提到总计 6 个任务族；
+- validation 当前描述为 2 个任务族 ×9 compositions =18 clusters。
+
+两者可能分别代表全量任务族与 validation 子集。必须从真实 task manifest、split manifest、scenario IDs 对账，不得猜测。
+
+审计至少包含：
+- task family ID、生成规则、语义目标、工具依赖；
+- fault composition 定义及其适用性；
+- cluster ID 的确定性生成规则；
+- 同模板、状态图、工具序列和故障轨迹的近重复检查；
+- train/validation/test 泄漏矩阵；
+- 真实可用独立 cluster 数；
+- 新任务族生成成本和人工审核要求。
+
+目标 cluster 数必须以 Stage 1 经验功效结果为准。145 只是 MDE=.10、80% power、15% 预留下的初步近似值。不能拆分相似任务伪造独立 cluster。
+
+输出 63_D063_TASK_FAMILY_EXPANSION_AUDIT.md。
+
+### Stage 3 — preregistration candidate
+
+输出 64_A3B_PREREGISTRATION_CANDIDATE.md。
+
+必须明确：
+- 唯一主要比较：AB vs canonical NSGA-II；
+- 主要 estimand、主要终点、逐类公式、分母、类别权重和 cluster 聚合顺序；
+- R1/R2 条件恢复与 R3/R4 正确升级是不同语义，不能混成含糊的“成功率”；
+- UNKNOWN 必须有预先定义的处理方式，不得事后重分类；
+- 双侧 alpha=.05、目标 power、MDE 和最终 cluster 数；
+- 次要比较及 Holm family；
+- Hand 仅作强手工参考，不声称超越专家；
+- 安全硬门和明确工具合同假设；
+- 算法/代码/依赖版本、初始化、演化参数、相同预算；
+- 随机化、配对、seed、cluster、排除和缺失值规则；
+- 锁箱 manifest、哈希、执行命令和偏离预注册的披露方式。
+
+预注册必须标记 DRAFT — NOT FROZEN，交用户审阅。用户批准预注册不自动授权正式 A-3b；正式实验另需明确授权。
+
+## D. 当前 GO / HOLD
+
+**GO：**
+- 统计分析器与 synthetic tests；
+- 历史 diagnostic3 原始数据独立复算；
+- empirical power simulation；
+- task-family / leakage audit；
+- preregistration draft；
+- CI、仓库文档和接管提示词维护。
+
+**HOLD：**
+- 正式 A-3b 确认性实验；
+- 新 held-out test 查看或调参；
+- Pilot B；
+- A800/ARWM；
+- 真实 LLM API；
+- UndoBench TEST；
+- ThinkingBox。
+
+本轮不需要 GPU，不需要真实 LLM API。
+
+## E. 仓库维护和 CI 纪律
+
+每轮实质性研究后，同轮更新：
+- NEXT_SESSION_PROMPT.md（本文件，唯一权威接管提示）；
+- SESSION_HANDOFF.md；
+- README.md；
+- 05_DECISION_LOG.md；
+- 62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md；
+- 新增的 63/64 号交付文件（若已实际完成）。
+
+记录起始 SHA、最终 SHA、修改文件、数据哈希、测试结果、真实 CI run URL、科学结论和下一步唯一任务。GitHub Actions 未触发或失败必须如实记录，不得写成通过。main 不得修改。
+
+## F. 本轮最终汇报格式
+
+1. 仓库分支、HEAD、main、ahead/behind、工作区；
+2. 统计分析器实现和运行命令；
+3. diagnostic3 独立复算及与 61 号报告的差异；
+4. synthetic tests 与仓库回归测试；
+5. Monte Carlo 功效结果及不确定性；
+6. task-family 扩展和泄漏审计；
+7. 预注册草案与终点定义；
+8. CI 实际运行记录；
+9. 科学结论和负结果；
+10. GO/HOLD；
+11. 仓库链接与更新后的接管提示；
+12. 下一阶段唯一任务。
+
+**接管后立即开始 Stage 0，不要再询问用户是否开始。不得把计划写成已完成，不得擅自启动正式 A-3b。**
