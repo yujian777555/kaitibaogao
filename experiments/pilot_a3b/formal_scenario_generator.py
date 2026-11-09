@@ -45,6 +45,10 @@ FORMAL_COMPOSITIONS = (
     + tuple(VALIDATION_COMPOSITIONS)
     + tuple(HELDOUT_COMPOSITIONS)
 )
+FORMAL_COMPOSITIONS = tuple(
+    "permission_after_compensatable_prefix" if c == "permission_after_compensatable_prefix" else c
+    for c in FORMAL_COMPOSITIONS
+)
 ALLOWED_CLASSES_BY_COMPOSITION = {
     "single_timeout": {"R1", "R2"},
     "timeout_then_rate_limit": {"R1", "R2"},
@@ -53,7 +57,7 @@ ALLOWED_CLASSES_BY_COMPOSITION = {
     "independent_mixed_val": {"R1", "R2"},
     "partial_then_timeout_val": {"R2"},
     "partial_comp_failure": {"R4"},
-    "delay_rate_permission": {"R3"},
+    "permission_after_compensatable_prefix": {"R3"},
     "triple_mixed": {"R1", "R2"},
 }
 PRIMARY_CLASSES = {"R1", "R2"}
@@ -95,7 +99,7 @@ FAULT_COMPOSITION_NOTES = {
     "independent_mixed_val": "independent per-step recoverable faults only; excludes permission_denied and partial_commit",
     "partial_then_timeout_val": "partial commit at the first contract-compensatable step with guaranteed compensation, plus timeout_after at another step",
     "partial_comp_failure": "partial commit at the first contract-compensatable step with compensation outcome hidden/uncertain, plus timeout_after",
-    "delay_rate_permission": "delayed visibility, rate limit, then permission denial; prior committed prefix is compensatable by the task-family design",
+    "permission_after_compensatable_prefix": "delayed visibility, rate limit, then permission denial; prior committed prefix is compensatable by the task-family design",
     "triple_mixed": "timeout_after, rate_limit, and schema_drift across the three steps",
 }
 
@@ -184,10 +188,8 @@ def make_fault_vector(tools, composition, pattern_seed, parameter_seed):
     elif composition == "partial_comp_failure":
         assign(first_comp, "partial_commit", False)
         assign(_other_step(first_comp), "timeout_after")
-    elif composition == "delay_rate_permission":
-        assign(0, "delayed_visibility")
-        assign(1, "rate_limit")
-        assign(2, "permission_denied")
+    elif composition == "permission_after_compensatable_prefix":
+        assign(1, "permission_denied")
     elif composition == "triple_mixed":
         assign(0, "timeout_after")
         assign(1, "rate_limit")

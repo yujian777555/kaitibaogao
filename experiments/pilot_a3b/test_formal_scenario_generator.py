@@ -80,7 +80,7 @@ class FormalScenarioGeneratorTests(unittest.TestCase):
         from a3_verdicts import classify_scenario
         scenario = {
             "tools": ["inventory", "order", "ledger"],
-            "composition": "delay_rate_permission",
+            "composition": "permission_after_compensatable_prefix",
             "faults": [
                 {"fault": "none", "compensation_available": True},
                 {"fault": "permission_denied", "compensation_available": True},
