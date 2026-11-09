@@ -1091,3 +1091,27 @@ Current verified state: work branch HEAD fa3bc2c5699c0fad8df384bebd44e5510d1d892
 Blocking findings: §2 cluster-level bootstrap/sign-flip conflicts with §4 family-level Student-t; df=39 must be dynamic F_observed−1 (expected df=33 at 34 families after attrition); stale manifest hash; secondary test specification incomplete; deterministic floor attrition requires explicit conservative wording; MDE=0.10 still needs advisor approval. See report 70.
 
 Only next task: correct 64-R2 and re-review. Formal A-3b remains HOLD until independent review passes, advisor accepts MDE, user explicitly approves, and §5 pre-flight passes.
+
+## 2026-11-10 — D-064-R2 COMPLETE: six R1 findings fixed; 64-R3 created for independent re-review
+
+Deliverables: `64_A3B_PREREGISTRATION_CANDIDATE_R3.md` (R2 original preserved in `64_A3B_PREREGISTRATION_CANDIDATE.md`), `71_64R2_CORRECTIVE_RESPONSE_AND_R3_VALIDATION.md`, `test_64r3_protocol.py` (15/15), code fixes in `power_hierarchical.py`.
+
+### R1 findings — independently verified, all CONFIRMED, all fixed
+- R2-001: primary test unified = two-sided family-level Student-t (alpha=0.05) on family-level paired CondRecSucc diffs; sign-flip = sensitivity; bootstrap CI = descriptive only; AB vs Hand descriptive.
+- R2-002: **df = F_observed - 1 dynamic** via `family_t_df()` (40->39, 34->33); documented + tested through the real code path.
+- R2-003: **manifest hash independently rebuilt = fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a** (matches CI run 42661732606); af83f065... marked SUPERSEDED (pre-POWER_DESIGN-edit); test-family 01b41df8... / test-scenario dded3bb7... unchanged.
+- R2-004: attrition = deterministic floor conservative retention (34 x 5; 5/7 != exact 15%); `missing_data_rules()` freezes technical-missing / behavioural-failure (score 0, keep denominator) / fail-closed integrity; family floor >=1; design_deviation flag if F<34; selective deletion forbidden.
+- R2-005: GO sequence now explicitly requires **advisor MDE acceptance**; MDE stays PROPOSED_MDE_PENDING_ADVISOR_APPROVAL.
+- R2-006: H2-H5 fully specified with Holm family {H2..H5}; H4/H5 marked exploratory (no dedicated Type-I calibration); safety endpoints reported separately.
+
+### Extra implementation fix (found during verification)
+`family_level_tests` ran exact 2^F sign-flip enumeration (hangs at F=40) -> now exact for F<=15, 10,000-rep MC sign-flip otherwise (method recorded).
+
+### Verification numbers
+df tests 39/33/dynamic; family-equal weighting verified; missing-data rules tested; Holm edges tested; power recheck ICC=0.20 t=0.840 [0.833, 0.847] consistent with history 0.8391; real-data df=5 with 6 families. Full suite 28 + 161 = 189 green. CI: see maintenance docs for the run at the pushed HEAD.
+
+### Status
+GO: **64-R3 independent re-review** (71 is executor validation, NOT an audit). HOLD unchanged: formal A-3b (blocked until review ACCEPTED + advisor MDE + user approval + pre-flight), test access/tuning, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox, main merges.
+
+### Next task (single)
+Submit 64-R3 + 71 for independent R2 re-review; upon ACCEPTED obtain advisor MDE acceptance, then user approval, then run the 64-R3 §6 pre-flight and execute the formal A-3b.

@@ -832,3 +832,13 @@ D-064-A 正式报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_
 ## 2026-11-10：64-R2 独立审计 R1 — REQUEST CHANGES
 
 本轮独立审查发现 64-R2 仍有预注册内部矛盾：§2 仍写 cluster-level bootstrap/sign-flip，§4 才写 family-level Student-t；df=39 未随 34 个有效 families 的损耗设计动态化；candidate manifest 仍引用旧 SHA；secondary tests 的检验定义不够明确；MDE 导师审批门未进入 GO 顺序。D-064-C 维护文档也已发现最终 CI hash、测试计数和 handoff 顶部状态需要勘误。见 70_64R2_INDEPENDENT_REVIEW_R1.md。正式 A-3b 继续 HOLD。
+
+
+## 2026-11-10：D-064-R2 — 六项审计修正与 64-R3
+
+交付：[64_A3B_PREREGISTRATION_CANDIDATE_R3.md](64_A3B_PREREGISTRATION_CANDIDATE_R3.md)（R2 原文保留）、[71_64R2_CORRECTIVE_RESPONSE_AND_R3_VALIDATION.md](71_64R2_CORRECTIVE_RESPONSE_AND_R3_VALIDATION.md)、`test_64r3_protocol.py` 15/15。
+
+- **R2-001~006 全部修复**（主检验统一 family 级 t、动态 df、manifest **fb832bcc…** 独立重建确认、attrition/缺失规则冻结、导师 MDE 门、H2–H5 全定义）。
+- 附带修复：F>15 符号翻转 MC 化（原 2^F 枚举挂死）。
+- 功效复算一致（ICC=0.20 t=0.840 [0.833,0.847]）；全套件 189 绿。
+- GO：**64-R3 独立复审**（71 号非审计）。HOLD 不变。

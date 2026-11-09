@@ -1258,3 +1258,26 @@ GO：64-R2 独立审计 → 用户批准 → 正式 A-3b。HOLD 不变。
 
 ### 唯一下一任务
 修订 64-R2 并更新对应维护文件；独立复审通过后，再取得导师 MDE 认可和用户批准，最后才执行 §5 pre-flight。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和合并 main 继续 HOLD。
+
+
+## 决策 D-064-R2：六项审计发现修正与 R3 预注册（2026-11-10）
+
+### 独立核实（非照抄）
+R1 六项发现全部核实成立；附加发现实现问题：`family_level_tests` 对 F>15 做 2^F 精确符号翻转枚举（F=40 挂死）——已改小 F 精确、大 F 10,000 次 MC。
+
+### 修复（71 号报告；test_64r3_protocol.py 15/15）
+- R2-001：主检验统一为双侧 family 级 Student-t（α=0.05）；bootstrap/符号翻转定位降级。
+- R2-002：`family_t_df()` 动态 df（40→39、34→33）；文档禁止固定 39。
+- R2-003：**manifest 独立重建确认 fb832bcc…**（与 CI 42661732606 一致）；af83f065… 标注 superseded（POWER_DESIGN 修订前）；test-family/scenario 哈希不变。
+- R2-004：attrition 定性为向下取整保守保留（34×5，5/7≠15% 精确）；`missing_data_rules()` 冻结技术缺失/行为失败/完整性失败三分、family 门槛、design_deviation 门禁。
+- R2-005：GO 顺序显式含**导师 MDE 认可**；MDE 状态 PROPOSED_MDE_PENDING_ADVISOR_APPROVAL 不变。
+- R2-006：H2–H5 逐项定义 + Holm family {H2..H5}；H4/H5 探索性标注。
+
+### 交付
+`64_A3B_PREREGISTRATION_CANDIDATE_R3.md`（R2 原文保留）+ `71_64R2_CORRECTIVE_RESPONSE_AND_R3_VALIDATION.md` + 代码修复（power_hierarchical.py）+ 测试。
+
+### 决定
+GO：64-R3 **独立复审**（本报告非审计）。HOLD 不变：正式 A-3b（审计 ACCEPTED + 导师 MDE + 用户批准 + pre-flight 前禁止）、Test 接触、其余全项。
+
+### 下一步
+64-R3 独立 R2 复审 → 导师 MDE 认可 → 用户批准 → 正式 A-3b。
