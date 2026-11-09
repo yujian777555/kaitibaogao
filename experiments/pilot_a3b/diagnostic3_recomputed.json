@@ -1,0 +1,949 @@
+{
+  "kind": "DIAGNOSTIC3_INDEPENDENT_RECOMPUTATION",
+  "input_file": "diagnostic3_results.json",
+  "input_sha256": "b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c",
+  "input_manifest_field": "017b3454c0b9cf902e2c56d481c3e6ded54890ade4e219c13b7b05ac59d4d29d",
+  "input_manifest_recomputed": "017b3454c0b9cf902e2c56d481c3e6ded54890ade4e219c13b7b05ac59d4d29d",
+  "manifest_match": true,
+  "analysis_command": "python analyse_diagnostic3.py --input diagnostic3_results.json --outdir .",
+  "statistical_unit": "task x fault-composition cluster; seeds nested",
+  "structural_checks": {
+    "methods": [
+      "hand",
+      "nsga2",
+      "A",
+      "AwaitFixed",
+      "AwaitSLA",
+      "B",
+      "AB",
+      "ABG"
+    ],
+    "seeds": [
+      111,
+      222,
+      333
+    ],
+    "n_runs": 24,
+    "n_clusters": 54,
+    "cluster_size_min": 9,
+    "cluster_size_max": 9,
+    "train_tasks": [
+      "calendar_order_ledger",
+      "customer_order_shipment",
+      "inventory_calendar_order",
+      "inventory_order_payment"
+    ],
+    "val_tasks": [
+      "return_refund_restock",
+      "subscription_ledger_notification"
+    ],
+    "problems": []
+  },
+  "metrics": {
+    "all": {
+      "hand": {
+        "n_episodes": 486,
+        "class_success": 0.820988,
+        "cond_rec_r12": 0.981132,
+        "corr_esc_r3": 0.172414,
+        "containment_r4": 0.888889,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.012346,
+        "avoidable_harm_mean": 2.203704,
+        "unnec_escalation_r12": 0.0,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      },
+      "nsga2": {
+        "n_episodes": 486,
+        "class_success": 0.434156,
+        "cond_rec_r12": 0.232704,
+        "corr_esc_r3": 0.678161,
+        "containment_r4": 0.962963,
+        "sla_violation": 0.010288,
+        "duplicate": 0.0,
+        "invariant_violation": 0.139918,
+        "avoidable_harm_mean": 0.497942,
+        "unnec_escalation_r12": 0.625786,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      },
+      "A": {
+        "n_episodes": 486,
+        "class_success": 0.419753,
+        "cond_rec_r12": 0.506289,
+        "corr_esc_r3": 0.195402,
+        "containment_r4": 0.320988,
+        "sla_violation": 0.059671,
+        "duplicate": 0.0,
+        "invariant_violation": 0.390947,
+        "avoidable_harm_mean": 1.08642,
+        "unnec_escalation_r12": 0.062893,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      },
+      "AwaitFixed": {
+        "n_episodes": 486,
+        "class_success": 0.454733,
+        "cond_rec_r12": 0.484277,
+        "corr_esc_r3": 0.183908,
+        "containment_r4": 0.62963,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.384774,
+        "avoidable_harm_mean": 1.04321,
+        "unnec_escalation_r12": 0.078616,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      },
+      "AwaitSLA": {
+        "n_episodes": 486,
+        "class_success": 0.50823,
+        "cond_rec_r12": 0.493711,
+        "corr_esc_r3": 0.195402,
+        "containment_r4": 0.901235,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.403292,
+        "avoidable_harm_mean": 1.082305,
+        "unnec_escalation_r12": 0.04717,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      },
+      "B": {
+        "n_episodes": 486,
+        "class_success": 0.360082,
+        "cond_rec_r12": 0.220126,
+        "corr_esc_r3": 0.333333,
+        "containment_r4": 0.938272,
+        "sla_violation": 0.061728,
+        "duplicate": 0.0,
+        "invariant_violation": 0.308642,
+        "avoidable_harm_mean": 0.58642,
+        "unnec_escalation_r12": 0.399371,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      },
+      "AB": {
+        "n_episodes": 486,
+        "class_success": 0.539095,
+        "cond_rec_r12": 0.54717,
+        "corr_esc_r3": 0.183908,
+        "containment_r4": 0.888889,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.399177,
+        "avoidable_harm_mean": 1.152263,
+        "unnec_escalation_r12": 0.012579,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      },
+      "ABG": {
+        "n_episodes": 486,
+        "class_success": 0.345679,
+        "cond_rec_r12": 0.474843,
+        "corr_esc_r3": 0.195402,
+        "containment_r4": 0.0,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.417695,
+        "avoidable_harm_mean": 1.063786,
+        "unnec_escalation_r12": 0.025157,
+        "n_r1": 213,
+        "n_r2": 105,
+        "n_r3": 87,
+        "n_r4": 81
+      }
+    },
+    "train": {
+      "hand": {
+        "n_episodes": 324,
+        "class_success": 0.796296,
+        "cond_rec_r12": 0.971429,
+        "corr_esc_r3": 0.15,
+        "containment_r4": 0.833333,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.018519,
+        "avoidable_harm_mean": 2.185185,
+        "unnec_escalation_r12": 0.0,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      },
+      "nsga2": {
+        "n_episodes": 324,
+        "class_success": 0.444444,
+        "cond_rec_r12": 0.247619,
+        "corr_esc_r3": 0.683333,
+        "containment_r4": 0.944444,
+        "sla_violation": 0.009259,
+        "duplicate": 0.0,
+        "invariant_violation": 0.12963,
+        "avoidable_harm_mean": 0.521605,
+        "unnec_escalation_r12": 0.628571,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      },
+      "A": {
+        "n_episodes": 324,
+        "class_success": 0.435185,
+        "cond_rec_r12": 0.538095,
+        "corr_esc_r3": 0.183333,
+        "containment_r4": 0.314815,
+        "sla_violation": 0.052469,
+        "duplicate": 0.0,
+        "invariant_violation": 0.364198,
+        "avoidable_harm_mean": 1.138889,
+        "unnec_escalation_r12": 0.066667,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      },
+      "AwaitFixed": {
+        "n_episodes": 324,
+        "class_success": 0.466049,
+        "cond_rec_r12": 0.514286,
+        "corr_esc_r3": 0.166667,
+        "containment_r4": 0.611111,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.354938,
+        "avoidable_harm_mean": 1.092593,
+        "unnec_escalation_r12": 0.085714,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      },
+      "AwaitSLA": {
+        "n_episodes": 324,
+        "class_success": 0.512346,
+        "cond_rec_r12": 0.519048,
+        "corr_esc_r3": 0.183333,
+        "containment_r4": 0.851852,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.376543,
+        "avoidable_harm_mean": 1.126543,
+        "unnec_escalation_r12": 0.052381,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      },
+      "B": {
+        "n_episodes": 324,
+        "class_success": 0.364198,
+        "cond_rec_r12": 0.233333,
+        "corr_esc_r3": 0.333333,
+        "containment_r4": 0.907407,
+        "sla_violation": 0.046296,
+        "duplicate": 0.0,
+        "invariant_violation": 0.302469,
+        "avoidable_harm_mean": 0.601852,
+        "unnec_escalation_r12": 0.404762,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      },
+      "AB": {
+        "n_episodes": 324,
+        "class_success": 0.54321,
+        "cond_rec_r12": 0.57619,
+        "corr_esc_r3": 0.166667,
+        "containment_r4": 0.833333,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.376543,
+        "avoidable_harm_mean": 1.200617,
+        "unnec_escalation_r12": 0.014286,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      },
+      "ABG": {
+        "n_episodes": 324,
+        "class_success": 0.354938,
+        "cond_rec_r12": 0.495238,
+        "corr_esc_r3": 0.183333,
+        "containment_r4": 0.0,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.388889,
+        "avoidable_harm_mean": 1.108025,
+        "unnec_escalation_r12": 0.028571,
+        "n_r1": 138,
+        "n_r2": 72,
+        "n_r3": 60,
+        "n_r4": 54
+      }
+    },
+    "validation": {
+      "hand": {
+        "n_episodes": 162,
+        "class_success": 0.87037,
+        "cond_rec_r12": 1.0,
+        "corr_esc_r3": 0.222222,
+        "containment_r4": 1.0,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.0,
+        "avoidable_harm_mean": 2.240741,
+        "unnec_escalation_r12": 0.0,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      },
+      "nsga2": {
+        "n_episodes": 162,
+        "class_success": 0.41358,
+        "cond_rec_r12": 0.203704,
+        "corr_esc_r3": 0.666667,
+        "containment_r4": 1.0,
+        "sla_violation": 0.012346,
+        "duplicate": 0.0,
+        "invariant_violation": 0.160494,
+        "avoidable_harm_mean": 0.450617,
+        "unnec_escalation_r12": 0.62037,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      },
+      "A": {
+        "n_episodes": 162,
+        "class_success": 0.388889,
+        "cond_rec_r12": 0.444444,
+        "corr_esc_r3": 0.222222,
+        "containment_r4": 0.333333,
+        "sla_violation": 0.074074,
+        "duplicate": 0.0,
+        "invariant_violation": 0.444444,
+        "avoidable_harm_mean": 0.981481,
+        "unnec_escalation_r12": 0.055556,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      },
+      "AwaitFixed": {
+        "n_episodes": 162,
+        "class_success": 0.432099,
+        "cond_rec_r12": 0.425926,
+        "corr_esc_r3": 0.222222,
+        "containment_r4": 0.666667,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.444444,
+        "avoidable_harm_mean": 0.944444,
+        "unnec_escalation_r12": 0.064815,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      },
+      "AwaitSLA": {
+        "n_episodes": 162,
+        "class_success": 0.5,
+        "cond_rec_r12": 0.444444,
+        "corr_esc_r3": 0.222222,
+        "containment_r4": 1.0,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.45679,
+        "avoidable_harm_mean": 0.993827,
+        "unnec_escalation_r12": 0.037037,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      },
+      "B": {
+        "n_episodes": 162,
+        "class_success": 0.351852,
+        "cond_rec_r12": 0.194444,
+        "corr_esc_r3": 0.333333,
+        "containment_r4": 1.0,
+        "sla_violation": 0.092593,
+        "duplicate": 0.0,
+        "invariant_violation": 0.320988,
+        "avoidable_harm_mean": 0.555556,
+        "unnec_escalation_r12": 0.388889,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      },
+      "AB": {
+        "n_episodes": 162,
+        "class_success": 0.530864,
+        "cond_rec_r12": 0.490741,
+        "corr_esc_r3": 0.222222,
+        "containment_r4": 1.0,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.444444,
+        "avoidable_harm_mean": 1.055556,
+        "unnec_escalation_r12": 0.009259,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      },
+      "ABG": {
+        "n_episodes": 162,
+        "class_success": 0.32716,
+        "cond_rec_r12": 0.435185,
+        "corr_esc_r3": 0.222222,
+        "containment_r4": 0.0,
+        "sla_violation": 0.0,
+        "duplicate": 0.0,
+        "invariant_violation": 0.475309,
+        "avoidable_harm_mean": 0.975309,
+        "unnec_escalation_r12": 0.018519,
+        "n_r1": 75,
+        "n_r2": 33,
+        "n_r3": 27,
+        "n_r4": 27
+      }
+    }
+  },
+  "contrasts": [
+    {
+      "method_a": "AB",
+      "method_b": "nsga2",
+      "scope": "all",
+      "field": "class_success",
+      "n_scenarios": 162,
+      "n_clusters": 54,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.104938,
+      "cluster_sd": 0.404042,
+      "effect_size_d": 0.259721,
+      "ci95": [
+        -0.0,
+        0.205761
+      ],
+      "signflip_p": 0.064734,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000
+    },
+    {
+      "method_a": "AB",
+      "method_b": "A",
+      "scope": "all",
+      "field": "class_success",
+      "n_scenarios": 162,
+      "n_clusters": 54,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.119342,
+      "cluster_sd": 0.217831,
+      "effect_size_d": 0.547864,
+      "ci95": [
+        0.063786,
+        0.18107
+      ],
+      "signflip_p": 0.00025,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.0015
+    },
+    {
+      "method_a": "AwaitSLA",
+      "method_b": "A",
+      "scope": "all",
+      "field": "class_success",
+      "n_scenarios": 162,
+      "n_clusters": 54,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.088477,
+      "cluster_sd": 0.224703,
+      "effect_size_d": 0.393753,
+      "ci95": [
+        0.032922,
+        0.152263
+      ],
+      "signflip_p": 0.006748,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.014247
+    },
+    {
+      "method_a": "AwaitSLA",
+      "method_b": "AwaitFixed",
+      "scope": "all",
+      "field": "class_success",
+      "n_scenarios": 162,
+      "n_clusters": 54,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.053498,
+      "cluster_sd": 0.12722,
+      "effect_size_d": 0.420516,
+      "ci95": [
+        0.020576,
+        0.088477
+      ],
+      "signflip_p": 0.004749,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.014247
+    },
+    {
+      "method_a": "AB",
+      "method_b": "AwaitSLA",
+      "scope": "all",
+      "field": "class_success",
+      "n_scenarios": 162,
+      "n_clusters": 54,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.030864,
+      "cluster_sd": 0.07906,
+      "effect_size_d": 0.390389,
+      "ci95": [
+        0.012346,
+        0.053498
+      ],
+      "signflip_p": 0.009498,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.014247
+    },
+    {
+      "method_a": "AB",
+      "method_b": "hand",
+      "scope": "all",
+      "field": "class_success",
+      "n_scenarios": 162,
+      "n_clusters": 54,
+      "n_seeds_nested": 3,
+      "mean_diff": -0.281893,
+      "cluster_sd": 0.392519,
+      "effect_size_d": -0.718165,
+      "ci95": [
+        -0.386831,
+        -0.183128
+      ],
+      "signflip_p": 0.00025,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.0015
+    },
+    {
+      "method_a": "B",
+      "method_b": "nsga2",
+      "scope": "all",
+      "field": "class_success",
+      "n_scenarios": 162,
+      "n_clusters": 54,
+      "n_seeds_nested": 3,
+      "mean_diff": -0.074074,
+      "cluster_sd": 0.152623,
+      "effect_size_d": -0.485341,
+      "ci95": [
+        -0.113169,
+        -0.034979
+      ],
+      "signflip_p": 0.00125,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.005
+    },
+    {
+      "method_a": "AB",
+      "method_b": "nsga2",
+      "scope": "train",
+      "field": "class_success",
+      "n_scenarios": 108,
+      "n_clusters": 36,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.098765,
+      "cluster_sd": 0.415551,
+      "effect_size_d": 0.237673,
+      "ci95": [
+        -0.037037,
+        0.231481
+      ],
+      "signflip_p": 0.180705,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000
+    },
+    {
+      "method_a": "AB",
+      "method_b": "A",
+      "scope": "train",
+      "field": "class_success",
+      "n_scenarios": 108,
+      "n_clusters": 36,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.108025,
+      "cluster_sd": 0.221405,
+      "effect_size_d": 0.487905,
+      "ci95": [
+        0.04321,
+        0.182099
+      ],
+      "signflip_p": 0.002749,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.013745
+    },
+    {
+      "method_a": "AwaitSLA",
+      "method_b": "A",
+      "scope": "train",
+      "field": "class_success",
+      "n_scenarios": 108,
+      "n_clusters": 36,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.07716,
+      "cluster_sd": 0.229745,
+      "effect_size_d": 0.335853,
+      "ci95": [
+        0.009259,
+        0.157407
+      ],
+      "signflip_p": 0.061735,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.127467
+    },
+    {
+      "method_a": "AwaitSLA",
+      "method_b": "AwaitFixed",
+      "scope": "train",
+      "field": "class_success",
+      "n_scenarios": 108,
+      "n_clusters": 36,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.046296,
+      "cluster_sd": 0.136406,
+      "effect_size_d": 0.3394,
+      "ci95": [
+        0.003086,
+        0.092593
+      ],
+      "signflip_p": 0.065234,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.127467
+    },
+    {
+      "method_a": "AB",
+      "method_b": "AwaitSLA",
+      "scope": "train",
+      "field": "class_success",
+      "n_scenarios": 108,
+      "n_clusters": 36,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.030864,
+      "cluster_sd": 0.082343,
+      "effect_size_d": 0.374826,
+      "ci95": [
+        0.006173,
+        0.058642
+      ],
+      "signflip_p": 0.042489,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.127467
+    },
+    {
+      "method_a": "AB",
+      "method_b": "hand",
+      "scope": "train",
+      "field": "class_success",
+      "n_scenarios": 108,
+      "n_clusters": 36,
+      "n_seeds_nested": 3,
+      "mean_diff": -0.253086,
+      "cluster_sd": 0.370529,
+      "effect_size_d": -0.683041,
+      "ci95": [
+        -0.373457,
+        -0.138889
+      ],
+      "signflip_p": 0.0005,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.003
+    },
+    {
+      "method_a": "B",
+      "method_b": "nsga2",
+      "scope": "train",
+      "field": "class_success",
+      "n_scenarios": 108,
+      "n_clusters": 36,
+      "n_seeds_nested": 3,
+      "mean_diff": -0.080247,
+      "cluster_sd": 0.165042,
+      "effect_size_d": -0.486221,
+      "ci95": [
+        -0.135802,
+        -0.027778
+      ],
+      "signflip_p": 0.007998,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.031992
+    },
+    {
+      "method_a": "AB",
+      "method_b": "nsga2",
+      "scope": "validation",
+      "field": "class_success",
+      "n_scenarios": 54,
+      "n_clusters": 18,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.117284,
+      "cluster_sd": 0.391397,
+      "effect_size_d": 0.299655,
+      "ci95": [
+        -0.061728,
+        0.283951
+      ],
+      "signflip_p": 0.23819,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000
+    },
+    {
+      "method_a": "AB",
+      "method_b": "A",
+      "scope": "validation",
+      "field": "class_success",
+      "n_scenarios": 54,
+      "n_clusters": 18,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.141975,
+      "cluster_sd": 0.214931,
+      "effect_size_d": 0.660562,
+      "ci95": [
+        0.055556,
+        0.246914
+      ],
+      "signflip_p": 0.009998,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.04999
+    },
+    {
+      "method_a": "AwaitSLA",
+      "method_b": "A",
+      "scope": "validation",
+      "field": "class_success",
+      "n_scenarios": 54,
+      "n_clusters": 18,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.111111,
+      "cluster_sd": 0.21893,
+      "effect_size_d": 0.507519,
+      "ci95": [
+        0.024691,
+        0.222222
+      ],
+      "signflip_p": 0.063484,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.190452
+    },
+    {
+      "method_a": "AwaitSLA",
+      "method_b": "AwaitFixed",
+      "scope": "validation",
+      "field": "class_success",
+      "n_scenarios": 54,
+      "n_clusters": 18,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.067901,
+      "cluster_sd": 0.108725,
+      "effect_size_d": 0.624521,
+      "ci95": [
+        0.024691,
+        0.123457
+      ],
+      "signflip_p": 0.020495,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.08198
+    },
+    {
+      "method_a": "AB",
+      "method_b": "AwaitSLA",
+      "scope": "validation",
+      "field": "class_success",
+      "n_scenarios": 54,
+      "n_clusters": 18,
+      "n_seeds_nested": 3,
+      "mean_diff": 0.030864,
+      "cluster_sd": 0.074346,
+      "effect_size_d": 0.415143,
+      "ci95": [
+        0.0,
+        0.067901
+      ],
+      "signflip_p": 0.243439,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.272432
+    },
+    {
+      "method_a": "AB",
+      "method_b": "hand",
+      "scope": "validation",
+      "field": "class_success",
+      "n_scenarios": 54,
+      "n_clusters": 18,
+      "n_seeds_nested": 3,
+      "mean_diff": -0.339506,
+      "cluster_sd": 0.438642,
+      "effect_size_d": -0.773993,
+      "ci95": [
+        -0.537037,
+        -0.141975
+      ],
+      "signflip_p": 0.004499,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.026994
+    },
+    {
+      "method_a": "B",
+      "method_b": "nsga2",
+      "scope": "validation",
+      "field": "class_success",
+      "n_scenarios": 54,
+      "n_clusters": 18,
+      "n_seeds_nested": 3,
+      "mean_diff": -0.061728,
+      "cluster_sd": 0.12767,
+      "effect_size_d": -0.483501,
+      "ci95": [
+        -0.123457,
+        -0.006173
+      ],
+      "signflip_p": 0.136216,
+      "stat_method": "paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios",
+      "bootstrap_reps": 4000,
+      "signflip_reps": 4000,
+      "holm_p": 0.272432
+    }
+  ],
+  "seed_stability": {
+    "hand": {
+      "per_seed": {
+        "111": 0.820988,
+        "222": 0.820988,
+        "333": 0.820988
+      },
+      "mean": 0.820988,
+      "sd": 0.0
+    },
+    "nsga2": {
+      "per_seed": {
+        "111": 0.345679,
+        "222": 0.45679,
+        "333": 0.5
+      },
+      "mean": 0.434156,
+      "sd": 0.079611
+    },
+    "A": {
+      "per_seed": {
+        "111": 0.339506,
+        "222": 0.530864,
+        "333": 0.388889
+      },
+      "mean": 0.419753,
+      "sd": 0.099342
+    },
+    "AwaitFixed": {
+      "per_seed": {
+        "111": 0.5,
+        "222": 0.388889,
+        "333": 0.475309
+      },
+      "mean": 0.454733,
+      "sd": 0.058343
+    },
+    "AwaitSLA": {
+      "per_seed": {
+        "111": 0.450617,
+        "222": 0.54321,
+        "333": 0.530864
+      },
+      "mean": 0.50823,
+      "sd": 0.050275
+    },
+    "B": {
+      "per_seed": {
+        "111": 0.228395,
+        "222": 0.438272,
+        "333": 0.41358
+      },
+      "mean": 0.360082,
+      "sd": 0.114711
+    },
+    "AB": {
+      "per_seed": {
+        "111": 0.54321,
+        "222": 0.530864,
+        "333": 0.54321
+      },
+      "mean": 0.539095,
+      "sd": 0.007128
+    },
+    "ABG": {
+      "per_seed": {
+        "111": 0.382716,
+        "222": 0.32716,
+        "333": 0.32716
+      },
+      "mean": 0.345679,
+      "sd": 0.032075
+    }
+  },
+  "blocking_problems": []
+}

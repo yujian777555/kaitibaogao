@@ -1,0 +1,236 @@
+{
+  "kind": "TASK_FAMILY_EXPANSION_AUDIT_D063",
+  "n_tools": 10,
+  "tool_contracts": {
+    "inventory": {
+      "idempotent": false,
+      "compensatable": true,
+      "visibility_bound": 4
+    },
+    "calendar": {
+      "idempotent": true,
+      "compensatable": true,
+      "visibility_bound": 4
+    },
+    "order": {
+      "idempotent": false,
+      "compensatable": true,
+      "visibility_bound": 4
+    },
+    "payment": {
+      "idempotent": false,
+      "compensatable": true,
+      "visibility_bound": 4
+    },
+    "ledger": {
+      "idempotent": false,
+      "compensatable": false,
+      "visibility_bound": 4
+    },
+    "customer": {
+      "idempotent": true,
+      "compensatable": true,
+      "visibility_bound": 4
+    },
+    "shipment": {
+      "idempotent": false,
+      "compensatable": false,
+      "visibility_bound": 4
+    },
+    "refund": {
+      "idempotent": false,
+      "compensatable": false,
+      "visibility_bound": 4
+    },
+    "subscription": {
+      "idempotent": true,
+      "compensatable": true,
+      "visibility_bound": 4
+    },
+    "notification": {
+      "idempotent": false,
+      "compensatable": false,
+      "visibility_bound": 4
+    }
+  },
+  "current_families": {
+    "inventory_order_payment": [
+      "inventory",
+      "order",
+      "payment"
+    ],
+    "calendar_order_ledger": [
+      "calendar",
+      "order",
+      "ledger"
+    ],
+    "customer_order_shipment": [
+      "customer",
+      "order",
+      "shipment"
+    ],
+    "inventory_calendar_order": [
+      "inventory",
+      "calendar",
+      "order"
+    ],
+    "return_refund_restock": [
+      "order",
+      "refund",
+      "inventory"
+    ],
+    "subscription_ledger_notification": [
+      "subscription",
+      "ledger",
+      "notification"
+    ]
+  },
+  "fault_compositions": [
+    "single_timeout",
+    "timeout_then_rate_limit",
+    "partial_then_delay",
+    "schema_then_timeout",
+    "independent_mixed_val",
+    "partial_then_timeout_val",
+    "partial_comp_failure",
+    "delay_rate_permission",
+    "triple_mixed"
+  ],
+  "n_contract_meaningful_candidates": 576,
+  "n_distinct_contract_profiles": 18,
+  "overlap_current_6": {
+    "n_families": 6,
+    "pairwise_tool_overlap_mean": 1,
+    "pairwise_tool_overlap_max": 2,
+    "zero_overlap_pairs": 4,
+    "total_pairs": 15,
+    "tool_usage": {
+      "inventory": 3,
+      "order": 5,
+      "payment": 1,
+      "calendar": 2,
+      "ledger": 2,
+      "customer": 1,
+      "shipment": 1,
+      "refund": 1,
+      "subscription": 1,
+      "notification": 1
+    }
+  },
+  "overlap_new_panel": {
+    "n_families": 23,
+    "pairwise_tool_overlap_mean": 0.83,
+    "pairwise_tool_overlap_max": 3,
+    "zero_overlap_pairs": 100,
+    "total_pairs": 253,
+    "tool_usage": {
+      "customer": 8,
+      "notification": 8,
+      "payment": 7,
+      "refund": 8,
+      "shipment": 7,
+      "subscription": 7,
+      "calendar": 7,
+      "ledger": 7,
+      "inventory": 6,
+      "order": 4
+    }
+  },
+  "overlap_all_29": {
+    "n_families": 29,
+    "pairwise_tool_overlap_mean": 0.828,
+    "pairwise_tool_overlap_max": 3,
+    "zero_overlap_pairs": 144,
+    "total_pairs": 406,
+    "tool_usage": {
+      "inventory": 9,
+      "order": 9,
+      "payment": 8,
+      "calendar": 9,
+      "ledger": 9,
+      "customer": 9,
+      "shipment": 8,
+      "refund": 9,
+      "subscription": 8,
+      "notification": 9
+    }
+  },
+  "new_families_selected": [
+    "customer->notification->payment",
+    "refund->shipment->subscription",
+    "calendar->customer->ledger",
+    "notification->payment->refund",
+    "calendar->shipment->subscription",
+    "customer->inventory->ledger",
+    "notification->payment->shipment",
+    "calendar->refund->subscription",
+    "customer->inventory->notification",
+    "ledger->payment->refund",
+    "calendar->subscription->shipment",
+    "customer->inventory->refund",
+    "ledger->notification->order",
+    "payment->shipment->subscription",
+    "calendar->customer->notification",
+    "inventory->ledger->order",
+    "payment->refund->shipment",
+    "calendar->ledger->subscription",
+    "customer->inventory->shipment",
+    "notification->order->payment",
+    "calendar->subscription->refund",
+    "customer->ledger->inventory",
+    "notification->order->refund"
+  ],
+  "split_proposal": {
+    "train": [
+      "inventory->order->payment",
+      "calendar->order->ledger",
+      "customer->order->shipment",
+      "inventory->calendar->order",
+      "order->refund->inventory",
+      "subscription->ledger->notification",
+      "customer->notification->payment",
+      "refund->shipment->subscription"
+    ],
+    "validation": [
+      "calendar->customer->ledger",
+      "notification->payment->refund",
+      "calendar->shipment->subscription",
+      "customer->inventory->ledger"
+    ],
+    "test_locked": [
+      "notification->payment->shipment",
+      "calendar->refund->subscription",
+      "customer->inventory->notification",
+      "ledger->payment->refund",
+      "calendar->subscription->shipment",
+      "customer->inventory->refund",
+      "ledger->notification->order",
+      "payment->shipment->subscription",
+      "calendar->customer->notification",
+      "inventory->ledger->order",
+      "payment->refund->shipment",
+      "calendar->ledger->subscription",
+      "customer->inventory->shipment",
+      "notification->order->payment",
+      "calendar->subscription->refund",
+      "customer->ledger->inventory",
+      "notification->order->refund"
+    ]
+  },
+  "cluster_counts": {
+    "train": 72,
+    "validation": 36,
+    "test_locked": 153
+  },
+  "template_leakage_risks": [
+    "all families share the same 10-tool pool: generalisation claim is new ordered tool-sequences + contract combinations, NOT new tools",
+    "naive enumeration (one per contract profile) concentrates on ledger (mean overlap 2.0/3 steps) -- the greedy min-overlap panel reduces but cannot eliminate tool reuse",
+    "fault composition families (9) are shared across task families by factorial design: composition-level OOD is a separate axis and must stay factorized",
+    "same generator (make_fault_vector) semantics across splits: fault parameter draws differ by seed, fault TYPE vocabulary is shared"
+  ],
+  "independence_assessment": {
+    "task_family_axis": "ordered 3-step sequences; pairwise tool overlap is the main leakage proxy",
+    "composition_axis": "9 named compositions, factorized vs task axis (A-3 design preserved)",
+    "cluster_definition": "task_family x fault_composition; ICC from Stage 1 ~ -0.09 (no between-task-family correlation detected in development data)"
+  }
+}

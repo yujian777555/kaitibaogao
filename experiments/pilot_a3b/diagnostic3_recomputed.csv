@@ -1,0 +1,22 @@
+scope,method_a,method_b,n_clusters,n_scenarios,mean_diff,cluster_sd,effect_size_d,ci95_low,ci95_high,signflip_p,holm_p,stat_method
+all,AB,nsga2,54,162,0.104938,0.404042,0.259721,-0.0,0.205761,0.064734,,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+all,AB,A,54,162,0.119342,0.217831,0.547864,0.063786,0.18107,0.00025,0.0015,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+all,AwaitSLA,A,54,162,0.088477,0.224703,0.393753,0.032922,0.152263,0.006748,0.014247,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+all,AwaitSLA,AwaitFixed,54,162,0.053498,0.12722,0.420516,0.020576,0.088477,0.004749,0.014247,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+all,AB,AwaitSLA,54,162,0.030864,0.07906,0.390389,0.012346,0.053498,0.009498,0.014247,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+all,AB,hand,54,162,-0.281893,0.392519,-0.718165,-0.386831,-0.183128,0.00025,0.0015,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+all,B,nsga2,54,162,-0.074074,0.152623,-0.485341,-0.113169,-0.034979,0.00125,0.005,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+train,AB,nsga2,36,108,0.098765,0.415551,0.237673,-0.037037,0.231481,0.180705,,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+train,AB,A,36,108,0.108025,0.221405,0.487905,0.04321,0.182099,0.002749,0.013745,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+train,AwaitSLA,A,36,108,0.07716,0.229745,0.335853,0.009259,0.157407,0.061735,0.127467,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+train,AwaitSLA,AwaitFixed,36,108,0.046296,0.136406,0.3394,0.003086,0.092593,0.065234,0.127467,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+train,AB,AwaitSLA,36,108,0.030864,0.082343,0.374826,0.006173,0.058642,0.042489,0.127467,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+train,AB,hand,36,108,-0.253086,0.370529,-0.683041,-0.373457,-0.138889,0.0005,0.003,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+train,B,nsga2,36,108,-0.080247,0.165042,-0.486221,-0.135802,-0.027778,0.007998,0.031992,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+validation,AB,nsga2,18,54,0.117284,0.391397,0.299655,-0.061728,0.283951,0.23819,,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+validation,AB,A,18,54,0.141975,0.214931,0.660562,0.055556,0.246914,0.009998,0.04999,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+validation,AwaitSLA,A,18,54,0.111111,0.21893,0.507519,0.024691,0.222222,0.063484,0.190452,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+validation,AwaitSLA,AwaitFixed,18,54,0.067901,0.108725,0.624521,0.024691,0.123457,0.020495,0.08198,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+validation,AB,AwaitSLA,18,54,0.030864,0.074346,0.415143,0.0,0.067901,0.243439,0.272432,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+validation,AB,hand,18,54,-0.339506,0.438642,-0.773993,-0.537037,-0.141975,0.004499,0.026994,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
+validation,B,nsga2,18,54,-0.061728,0.12767,-0.483501,-0.123457,-0.006173,0.136216,0.272432,paired cluster bootstrap (percentile) + cluster-level sign-flip permutation; seeds nested within scenarios
