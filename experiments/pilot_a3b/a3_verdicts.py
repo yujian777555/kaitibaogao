@@ -124,7 +124,14 @@ def make_pattern_spec(name, faults, idempotent, compensatable, comp_available, h
             return pack(states, comps, delays, waitc, spent, "NOT_COMMITTED", 0, 0), "NOT_COMMITTED", 0
 
         if a == "WAIT":
-            waitc[cur] += 1
+            # Waiting advances only a live visibility delay or rate-limit window.
+            # Counters saturate at the corresponding bound; otherwise WAIT is a
+            # state-neutral self-loop so the finite-state solver can prove loss.
+            wait_limit = delays[cur]
+            if fault == "rate_limit":
+                wait_limit = max(wait_limit, 1)
+            if wait_limit > 0:
+                waitc[cur] = min(waitc[cur] + 1, wait_limit)
             if s == 1 and waitc[cur] >= delays[cur]:
                 states[cur] = 2
             return pack(states, comps, delays, waitc, spent, "WAITED", 0, 0), "WAITED", 0
