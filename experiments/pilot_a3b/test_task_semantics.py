@@ -58,7 +58,7 @@ class TaskSemanticValidatorTests(unittest.TestCase):
         audit = audit_split_catalog(catalog)
         self.assertTrue(audit["ok"], audit["problems"])
         self.assertEqual([len(catalog[k]) for k in ("train", "validation", "test")], [8, 4, 40])
-        ids = [f["family_id"] for k in catalog for f in catalog[k]]
+        ids = [f["family_id"] for split in ("train", "validation", "test") for f in catalog[split]]
         self.assertEqual(len(ids), len(set(ids)))
 
     def test_test_split_covers_all_ten_primary_compatible_profiles(self):

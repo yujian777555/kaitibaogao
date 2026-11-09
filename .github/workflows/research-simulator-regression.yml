@@ -37,7 +37,7 @@ jobs:
         with:
           name: d064c-formal-scenario-manifest-candidate
           path: |
-            \${{ runner.temp }}/d064c/formal_scenario_manifest_candidate.json
-            \${{ runner.temp }}/d064c/formal_scenario_manifest_report.md
+            ${{ runner.temp }}/d064c/formal_scenario_manifest_candidate.json
+            ${{ runner.temp }}/d064c/formal_scenario_manifest_report.md
           if-no-files-found: error
 
