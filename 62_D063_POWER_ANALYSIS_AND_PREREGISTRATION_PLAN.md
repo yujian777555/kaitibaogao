@@ -1,7 +1,7 @@
 # 62 — D-063：正式 A-3b 功效核算与预注册冻结计划
 
 **日期：** 2026-11-09  
-**状态：** D-063 ENGINEERING DELIVERABLES COMPLETE；64 号预注册经 D-064 独立审查 REQUEST CHANGES；正式 A-3b 仍 HOLD  
+**状态：** D-063 工程交付完成；D-064-A CondRecSucc 独立复算完成；D-064-B 层级功效/ICC 敏感性 READY_TO_EXECUTE；64 号预注册仍 REQUEST CHANGES；正式 A-3b HOLD  
 **本轮维护起始 HEAD：** `e6fee3bde05e8dea3fcc54f2ea1d97bc54837867`（历史基线；接管时必须实时查询）  
 **Main：** `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`（保持不动）  
 **前序：** D-062（59 复核、60 设计、61 diagnostic3）  
@@ -388,3 +388,38 @@ ICC 只基于 6 个 task families（validation 2 个），负估计不能证明 
 - 64 号预注册：REQUEST CHANGES。
 - 正式 A-3b：HOLD。
 - 唯一下一步：D-064-A，在 `analyse_diagnostic3.py` 新增 R1/R2-only CondRecSucc paired cluster contrast，输出有效 cluster 数、每 cluster 分母、Δ、cluster SD、95% CI 和 sign-flip p；R3/R4 独立统计。之后重做功效和 64 修订。
+
+
+---
+
+## 10. D-064-A 完成与 D-064-B 计划更新（2026-11-09）
+
+D-064-A 已修复主要 estimand 错位，详见 66 号报告。R1/R2-only CondRecSucc 为 42 eligible clusters，嵌套在 6 个 task families 中（每 family 7 个 eligible compositions）；AB−NSGA-II Δ=+.3175、cluster SD=.318856、D-064-A cluster bootstrap CI [.218254,.411376]、cluster-level sign-flip p=.000125。原始 diagnostic3 SHA-256 为 `b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c`。
+
+但 42 个 composition clusters 不等于 42 个独立 task families。D-064-A 的 cluster-level CI/p 尚未处理 family 内相关，必须在 D-064-B 中重做层级推断。
+
+### 10.1 D-064-B 授权内容
+
+执行提示词：`67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md`。
+
+- family-level descriptive statistics、within/between variance；
+- ANOVA method-of-moments 与 random-intercept REML ICC，报告不确定性；
+- family-block empirical resampling；
+- ICC-controlled hierarchical random-intercept simulation，ICC=0/.05/.10/.20；
+- MDE=.05/.08/.10/.1173/.15，双侧 alpha=.05，80%/90% power；
+- family-level t、exact/MC sign-flip、family-block bootstrap 对照；
+- null Type-I error、MCSE、功效区间；
+- family 数 6/8/10/12/15/17/19/22/25/30/40，eligible compositions/family 6/7/8/9；
+- cluster-level 与 family-level attrition 分开；
+- 分别输出 design clusters 和 primary-eligible clusters。
+
+### 10.2 关键样本量纪律
+
+64 候选 test=17 families×9 compositions=153 design clusters。但若当前 7/9 R1/R2 eligibility 持续，只有约 119 primary-eligible clusters（未计 attrition）。这是条件性 projection，需 D-064-C 正式生成器确认。
+
++0.3175 是观察效应，不是 MDE；.1173 是历史观察效应，仅作敏感性。D-064-B 不得为迁就现有 17 families 选择 MDE，也不得在 D-064-C 完成前冻结最终 test family 数。
+
+### 10.3 状态
+
+GO：D-064-B 层级功效与 ICC 敏感性分析。  
+HOLD：正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍 REQUEST CHANGES。
