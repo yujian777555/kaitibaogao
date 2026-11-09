@@ -76,6 +76,22 @@ class FormalScenarioGeneratorTests(unittest.TestCase):
             self.assertEqual(len(scenarios), 3)
             self.assertEqual({s["label"] for s in scenarios}, {cluster["label"]})
 
+    def test_recovery_labeler_starts_at_first_fault_after_committed_prefix(self):
+        from a3_verdicts import classify_scenario
+        scenario = {
+            "tools": ["inventory", "order", "ledger"],
+            "composition": "delay_rate_permission",
+            "faults": [
+                {"fault": "none", "compensation_available": True},
+                {"fault": "permission_denied", "compensation_available": True},
+                {"fault": "none", "compensation_available": False},
+            ],
+        }
+        result = classify_scenario(scenario, horizon=24, max_nodes=500000)
+        self.assertEqual(result["class"], "R3")
+        self.assertEqual(result["analytic_class"], "R3")
+        self.assertTrue(result["agreement"])
+
     def test_partial_compensation_failure_is_not_assumed_successful(self):
         faults = make_fault_vector(self.tools, "partial_comp_failure", 11, 29)
         partial_idx = next(i for i, f in enumerate(faults) if f["fault"] == "partial_commit")

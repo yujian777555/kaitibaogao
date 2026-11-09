@@ -30,7 +30,7 @@ VIS_BOUND = 4
 # spent: fault already fired (one-shot, matches on_nth_call=1)
 
 
-def make_pattern_spec(name, faults, idempotent, compensatable, comp_available, horizon=12):
+def make_pattern_spec(name, faults, idempotent, compensatable, comp_available, horizon=12, start_at_first_fault=False):
     n = len(faults)
     if isinstance(comp_available, (list, tuple)) and len(comp_available) != n:
         raise ValueError("comp_available sequence must match the fault vector length")
@@ -48,9 +48,41 @@ def make_pattern_spec(name, faults, idempotent, compensatable, comp_available, h
         else:
             delay_opts.append((0,))
     variants = []
+    first_fault = next((i for i, f in enumerate(faults) if f is not None), None)
     for comps in itertools.product(*comp_opts):
         for delays in itertools.product(*delay_opts):
-            variants.append(((0,) * n, comps, delays, (0,) * n, (0,) * n, "START", 0, 0))
+            states = [0] * n
+            waitc = [0] * n
+            spent = [0] * n
+            last_obs = "START"
+            if start_at_first_fault and first_fault is not None:
+                # The recovery controller is invoked after the first public fault
+                # observation; every earlier step is already committed.
+                for j in range(first_fault):
+                    states[j] = 2
+                fault = faults[first_fault]
+                if fault == "timeout_before":
+                    spent[first_fault] = 1
+                    last_obs = "TIMEOUT"
+                elif fault in ("timeout_after", "delayed_visibility"):
+                    states[first_fault] = 1
+                    spent[first_fault] = 1
+                    last_obs = "TIMEOUT"
+                elif fault == "partial_commit":
+                    states[first_fault] = 3
+                    spent[first_fault] = 1
+                    last_obs = "PARTIAL"
+                elif fault == "schema_drift":
+                    spent[first_fault] = 1
+                    last_obs = "SCHEMA"
+                elif fault == "rate_limit":
+                    last_obs = "RATE_LIMIT"
+                elif fault == "permission_denied":
+                    last_obs = "PERMISSION"
+            variants.append((
+                tuple(states), comps, delays, tuple(waitc), tuple(spent),
+                last_obs, 0, 0
+            ))
 
     def pack(states, comps, delays, waitc, spent, last_obs, stopped, done):
         return (tuple(states), tuple(comps), tuple(delays), tuple(waitc), tuple(spent), last_obs, stopped, done)
@@ -272,7 +304,7 @@ def _classify_pattern_cached(faults, idempotent, compensatable,
     )
     spec = make_pattern_spec(
         name, faults, idempotent, compensatable, comp_available,
-        horizon=horizon,
+        horizon=horizon, start_at_first_fault=True,
     )
     result = classify(spec, horizon=horizon, max_nodes=max_nodes)
     return result.label, result.evidence
@@ -281,11 +313,14 @@ def _classify_pattern_cached(faults, idempotent, compensatable,
 def classify_scenario(scenario, horizon=24, max_nodes=500000):
     """Return robust R1-R4/UNKNOWN label plus an analytic cross-check.
 
-    Compensation availability is fixed to the declared scenario contract for
-    ordinary compositions. For partial_comp_failure, the failing compensation
-    step is treated as hidden/uncertain (both success and failure are included
-    in the observation-equivalent initial belief). The labeler is independent
-    of any tested controller or its outcome.
+    The recovery decision begins immediately after the first fault has been
+    observed; all earlier workflow steps are initialized as committed. This
+    prevents trivial pre-execution escalation from turning every hard scenario
+    into R3. Compensation availability is fixed to the declared scenario
+    contract for ordinary compositions. For partial_comp_failure, the failing
+    compensation step is hidden/uncertain (both success and failure are included
+    in the observation-equivalent initial belief). No tested policy or outcome
+    is used to generate the label.
     """
     tools = tuple(scenario["tools"])
     fault_specs = scenario["faults"]
