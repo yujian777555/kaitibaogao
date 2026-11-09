@@ -3,7 +3,7 @@
 **最后更新：** 2026-11-09  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** D-063 — diagnostic3 统计复现、经验功效仿真、任务族扩展审计与预注册草案；正式 A-3b HOLD  
+**当前阶段：** D-063 工程交付完成；D-064 独立审查 64 号预注册草案（REQUEST CHANGES）；正式 A-3b HOLD  
 **最终题目：** 尚未确定  
 **最终创新点：** 尚未确定
 
@@ -2069,3 +2069,49 @@ HOLD：正式 A-3b、held-out 调参/查看、Pilot B、A800/ARWM、真实 LLM A
 
 ### 57.5 状态与下一步
 GO：用户审阅 64。HOLD：正式 A-3b（批准+清单后解锁）及其他全项。下一步：批准 → 预检 → 正式 A-3b。
+
+
+## 59. D-064：64 号预注册草案独立审查（2026-11-09）
+
+**结论：REQUEST CHANGES。** D-063 的工程交付和 CI 验收通过；64 号预注册尚不具备批准条件。完整审查见 `65_D064_PREREGISTRATION_INDEPENDENT_AUDIT.md`。当前最高优先级接管指令见 `NEXT_SESSION_PROMPT.md` 的 D-064 节。
+
+### 59.1 仓库与 CI 核验
+
+- D-063 final HEAD：`4f23abed3150e09703839b980ad3afc9bb14dfb3`。
+- main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。
+- Actions run `42615985837` 在 D-063 final SHA 上 success。
+- `pilot_a_recovery` 28/28；`pilot_a3b` 68/68；总计 **96/96**。
+- D-064 审计文档已新增；README 与接管文档随后更新。接管时重新查询当前 HEAD 和 CI。
+
+### 59.2 P0：主要 estimand / power mismatch
+
+64 §3 的主要终点 CondRecSucc 只算 R1+R2；但 D-063 `power_simulation.py` 未按标签过滤，使用全 R1–R4 的 `class_success`，得到 54 clusters、SD=.404、Δ=.1049。该数值不是 CondRecSucc 的功效输入。
+
+审查用快速配对重聚合（非正式统计产物）显示：原始 diagnostic3 的 54 clusters 中，只有 42 个含 R1/R2；R1/R2-only AB−NSGA-II Δ≈+.3175、SD≈.3189、42 个 eligible clusters。必须将该计算正式加入 `analyse_diagnostic3.py` 并独立复算，不能把快速审查值直接写入预注册。
+
+### 59.3 P0：功效模拟方法不符合“经验重采样”描述
+
+`power_simulation.py` 实际使用 `N(MDE, empirical SD)` 正态参数化生成；经验重采样分支未调用；signflip 选项也不是实际符号翻转检验，而是正态 z 近似。无 MCSE；小样本 null FPR 有偏高点。修复后需使用 CondRecSucc cluster 差值，做经验/层级模拟、检验校准、MCSE 和 ICC 敏感性。
+
+### 59.4 P0：ICC 与任务族独立性
+
+ICC 基于 6 个 task families，validation 仅 2 个；负点估计不能证明 task×composition clusters 独立。未来 17×9 结构需要层级相关敏感性或 family-level resampling。
+
+### 59.5 P0：任务族语义和正式场景生成器
+
+63 号只从 10 工具三步排列中按合同属性筛出 576 候选；未验证任务目标、前置/后置条件和工具顺序语义。贪心目标仅为工具重叠，不含 profile diversity；新 23 族实际覆盖 11/18 profiles，test 17 族覆盖 10/18。
+
+当前 `pilot_a3.py` 仍固定 6 个 TASKS，`make_fault_vector()` 依赖固定映射；`run_diagnostic3.py` 仍硬编码 4 train +2 val。63 的 8/4/17 还不是已集成的正式场景生成器。需实现任务语义 validator、通用生成器、标签和 manifest 测试。9 种 fault-composition 类别跨 split 共享，因此泛化主张不能写成未见故障类型 OOD。
+
+### 59.6 P1：样本量与协议尚未唯一冻结
+
+原参数化 power 表：MDE=.10 / 80% 需 145 个可分析 clusters，含 15% 失效需招募 171；当前 test 153 clusters 失效后约 130，低于目标。MDE=.1173 来自观察到的 validation effect，不能未经科学意义论证自动成为 MDE。修复 estimand 后必须重算并只冻结一个 MDE/power/attrition 方案。
+
+UNKNOWN 上限、类别分布、primary eligible clusters、硬安全门对 AB/NSGA-II 的规则、零事件置信上界、初始池 60 生成但只用前 48 个、精确 code SHA 也必须冻结。64 §5 的“27+ tests”需改为引用真实 CI 96/96 和具体 SHA。
+
+### 59.7 下一阶段唯一任务
+
+**D-064-A：** 在 `analyse_diagnostic3.py` 增加 R1/R2-only CondRecSucc 配对 cluster 对比，输出有效 cluster 数、每 cluster 分母、Δ、cluster SD、CI、sign-flip p；R3/R4 独立统计。之后才重做功效、ICC、任务族生成和 64 修订。
+
+**GO：** D-064-A/B/C/D 修复、统计与场景生成测试、预注册修订、CI。  
+**HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。即使 64 获用户批准，正式 A-3b 仍需另行明确授权。
