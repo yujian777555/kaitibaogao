@@ -853,3 +853,112 @@ GO: user review of 64. HOLD: formal A-3b (until approved AND checklist 64 §5 do
 
 ### Next task (single)
 User reviews 64_A3B_PREREGISTRATION_CANDIDATE.md -> upon approval run pre-flight checklist (freeze scenario hashes, record code SHA, tests green) -> execute formal A-3b.
+
+
+---
+
+# D-064 执行接管指令（2026-11-09；优先级高于上方 D-063 历史指令）
+
+**当前决策：D-063 工程交付已完成；64 号预注册草案经独立审查为 REQUEST CHANGES；正式 A-3b 继续 HOLD。**  
+独立审查：`65_D064_PREREGISTRATION_INDEPENDENT_AUDIT.md`。不得照抄上方 D-063 旧段落中“用户直接审阅 64 → 预检 → 正式实验”的路径；必须先完成本节修复。
+
+## 1. 接管基线
+
+- 仓库：`yujian777555/kaitibaogao`。
+- 分支：`pilot-a-stateful-recovery`。
+- D-063 最终审查基线：`4f23abed3150e09703839b980ad3afc9bb14dfb3`。
+- main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，不得修改或合并。
+- D-064 审计文档初始提交：`77c7118ce7631830bc79f7cb09553cced9cb5cc8`；之后 README/接管文档会继续产生提交。
+- 接管时必须重新查询真实 branch HEAD、main HEAD、ahead/behind、工作区和最新 CI；以上均为历史核验值。
+
+## 2. D-063 工程交付已核验
+
+- D-063 final HEAD：`4f23abe`。
+- GitHub Actions run `42615985837` 在该 SHA 上真实 success。
+- `pilot_a_recovery`: 28 tests；`pilot_a3b`: 68 tests；总计 96/96。
+- 新增 `analyse_diagnostic3.py`、复算报告、power simulation、task-family expansion audit、64 号候选草案均已提交。
+- 这代表工程交付和当前 CI 通过，不代表 64 号预注册科学设计已通过审查。
+
+## 3. 64 号草案独立审查结论
+
+`64_A3B_PREREGISTRATION_CANDIDATE.md` = **REQUEST CHANGES，不得批准，不得运行正式 A-3b**。
+
+### P0-A：主要终点与功效输入不一致（第一优先级）
+
+64 §3 的 primary endpoint 是 CondRecSucc，仅 R1+R2；但 `power_simulation.py` 的 `load_cluster_diffs()` 没有按 R1/R2 过滤，实际把 R1/R2/R3/R4 的 `class_success` 混在一起，使用 54 clusters、SD=.404、Δ=.1049 做样本量规划。
+
+原始 diagnostic3 共有 54 task×composition clusters；只有 42 个含 R1/R2 场景，另 12 个仅含 R3/R4。审查用快速配对聚合（非正式输出）得到 R1/R2-only AB−NSGA-II Δ≈+.3175、SD≈.3189、42 个有效 clusters。该值不能直接用于预注册，但证明当前 145-cluster 规划与 64 的 primary estimand 不一致。
+
+**立即执行：**
+1. 修改 `analyse_diagnostic3.py`，新增 R1/R2-only CondRecSucc paired contrast。
+2. 逐 scenario 配对、seed 嵌套；按 task×composition cluster 等权。
+3. 输出 primary eligible clusters、每 cluster R1/R2 分母、零分母 cluster 数、Δ、cluster SD、95% cluster bootstrap CI、cluster sign-flip p。
+4. R3 CorrectEscalation、R4 DamageContainment 单独统计，不混入 primary。
+5. 为零分母 cluster 预先制定规则，不得事后排除。
+6. 增加 synthetic tests 和真实原始数据复算测试。
+
+### P0-B：功效模拟并非经验重采样
+
+当前 `power_simulation.py` 实际使用 `N(MDE, empirical SD)` 正态生成；`assume_mean_shift=False` 经验重采样分支没有被调用；`test="signflip"` 分支仍是正态 z 近似；t 检验也使用正态 CDF 近似。没有 MCSE/功效区间，null FPR 在部分小样本点偏高。
+
+修复后必须：
+- 使用 CondRecSucc primary cluster differences；
+- 运行 empirical centered cluster resampling 或经论证的层级模型；
+- 使用与预注册一致的检验（Student-t / cluster sign-flip）；
+- 报告 MCSE/区间、null FPR 校准、seed、模拟次数和收敛检查；
+- 做 task-family 内相关性敏感性。
+
+### P0-C：ICC 不足以证明独立
+
+当前 ICC 仅 6 个 task families（validation 2 个），负点估计不是独立性证明。未来 17 families ×9 compositions 存在同 family 内相关可能。
+
+需明确独立推断单位，报告 ICC 不确定性，并至少做 ICC=0/.05/.10/.20 的设计效应/功效敏感性，或采用 family-level bootstrap / hierarchical simulation。删除“ICC≈−.09 证明独立”的表述。
+
+### P0-D：任务族有效性与正式生成器
+
+`task_family_expansion_audit.py` 仅枚举 10 工具的三步排列，并检查合同属性组合；没有验证业务/抽象 saga 的前置、后置条件和目标。贪心选择只最小化工具重叠，没有优化 profile diversity；实际新序列覆盖 11/18 profiles，test 覆盖 10/18。
+
+当前 `pilot_a3.py` 仍固定 6 个 TASKS，`make_fault_vector()` 依赖 `TASKS[task_name]`；`run_diagnostic3.py` 仍硬编码 4 train + 2 val tasks。63 的 8/4/17 只是候选划分，尚非可运行正式生成器。
+
+需实现：
+1. task semantic contract（目标、前置/后置条件、工具输入输出和合法顺序）；
+2. 独立任务序列 validator；
+3. 通用正式 scenario generator，支持 8/4/17 或经修订的 split；
+4. 标签生成、R1–R4/UNKNOWN 计数、primary-eligible cluster 检查；
+5. train/val/test manifest、seed、hash 和零 task-family overlap 测试；
+6. 重新核对 profile coverage；若只声称工具重叠贪心，修正文档措辞。
+7. 明确 9 种 fault-composition 类别在各 split 重复出现，因此不能声称 unseen fault-type OOD，只能声称新 task-family/sequence 上的泛化。
+
+### P1：样本量、UNKNOWN、安全门与冻结协议
+
+- 153 test clusters 在 15% 失效后约 130；原参数化方案 MDE=.10/80% 需要 145 个可分析、约 171 个招募 clusters。必须用修复后的 primary power simulation 重新决定。
+- MDE=.1173 来自观察到的 validation effect，不得未经实质意义论证就当作 MDE。
+- 64 当前同时保留 MDE=.10 和 .1173 方案，没有唯一冻结。
+- UNKNOWN 不进入 primary denominator，但必须冻结最大比例/超限处理；55-R1 的 ≤5% 规则不能无说明消失。
+- 冻结 R1/R2/R3/R4 分布、primary eligible clusters 和每 cluster 分母。
+- 精确定义硬安全门：AB 是否必须全部为 0；NSGA-II 安全失败如何报告；零观察事件报告分母和置信上界。
+- 初始池生成 60 个但 `run_evolution()` 只用前 48 个；预注册明确实际初始 population。
+- 64 §5 “27+ tests”更新为精确 CI 证据：当前 D-063 是 96/96；正式冻结时记录确切 commit 和 run。
+- 批准必须绑定具体代码 SHA 与场景 manifest hash；批准后代码变更须新版本/重新批准。
+
+## 4. D-064 执行顺序
+
+1. **D-064-A（唯一首要任务）：** CondRecSucc R1/R2-only paired cluster analysis。
+2. **D-064-B：** 以正确 primary estimand 重做 empirical/hierarchical power simulation、ICC 敏感性和样本量决策。
+3. **D-064-C：** 任务语义 validator + 正式 8/4/17 场景生成器 + label/manifest/hash 测试。
+4. **D-064-D：** 修订 64：MDE/power、UNKNOWN、类别分布、安全门、初始池、预算、代码 SHA、解释边界。
+5. 更新 65 审计状态；由独立复核确认 blockers 关闭后，才将 64 标记为 READY_FOR_USER_REVIEW。
+
+## 5. GO / HOLD
+
+**GO：** D-064-A/B/C/D 修复、synthetic tests、历史诊断数据重算、任务族生成器与标签审计、预注册修订、CI 和仓库维护。
+
+**HOLD：** 正式 A-3b；生成后查看/调参 held-out test；Pilot B；A800/ARWM；真实 LLM API；UndoBench TEST；ThinkingBox。
+
+用户批准预注册后，正式 A-3b 仍需另行明确授权。
+
+## 6. 下一会话汇报
+
+按以下格式报告：仓库 SHA/main/ahead-behind；primary CondRecSucc 正式复算；与旧全类别统计的差异；修正功效与 ICC 敏感性；任务序列语义 validator 与新生成器测试；64 修订点；CI 实际结果；剩余 HOLD；下一唯一任务。
+
+**接管后直接执行 D-064-A，不要再询问是否开始；不得擅自启动正式 A-3b。**
