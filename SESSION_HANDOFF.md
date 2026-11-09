@@ -1,9 +1,9 @@
 # SESSION HANDOFF — 开题研究项目
 
-**最后更新：** 2026-11-04  
+**最后更新：** 2026-11-09  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** 文献系统检索 + 核心机制精读 + 创新候选否证  
+**当前阶段：** D-063 — diagnostic3 统计复现、经验功效仿真、任务族扩展审计与预注册草案；正式 A-3b HOLD  
 **最终题目：** 尚未确定  
 **最终创新点：** 尚未确定
 
@@ -2007,3 +2007,47 @@ cluster 定义是 task×fault composition；增加 seeds 或 episode 数不能�
 ### Gate
 GO：统计复现、功效仿真、任务族可行性、预注册草案、CI。
 HOLD：正式 A-3b、held-out 调参/查看、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
+
+
+## 58. D-063 执行接管更新（2026-11-09）
+
+**唯一接管入口：** NEXT_SESSION_PROMPT.md（文件末尾“D-063 执行接管指令”覆盖本文件中较早的历史计划）。  
+**详细计划：** 62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md。  
+**数据门禁：** 51_DATA_GATE_AND_PILOT_B_ENTRY_PLAN.md。
+
+### 当前真实状态
+
+- 工作仓库：yujian777555/kaitibaogao。
+- 工作分支：pilot-a-stateful-recovery。
+- 本轮维护起始 HEAD：e6fee3bde05e8dea3fcc54f2ea1d97bc54837867；接管时必须重新查询远端 HEAD。
+- main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；不得修改或合并。
+- 本轮只做 D-063 计划、接管提示词与状态文档维护；没有运行 diagnostic3 分析器、没有执行功效仿真、没有生成任务族审计或预注册。
+- 最近一次实验代码 CI：run 42398278551，commit c0078d5c3db17380e81faca5752ac6a64f555a6d，结论 success；两个 job step（pilot_a_recovery、pilot_a3b）均成功。之后是文档提交，不能声称 CI 对当前文档 HEAD 重新运行。
+
+### D-062 结果边界
+
+- AB vs A +0.119 / p=.0002；validation +.142 / p=.0082。
+- AwaitSLA vs A +.089 / p=.0047；AwaitSLA vs AwaitFixed +.054 / p=.0032。
+- AB vs AwaitSLA all +.031 / p=.0072，但 validation +.031 / p=.244，Q10 搜索增量尚未证明泛化。
+- AB vs NSGA-II all +.1049 / p=.062；validation +.1173 / p=.2277，均未显著。
+- AB vs Hand −.282，仍落后强手工策略。
+- B 单独和 Safety Gate 的负结果必须保留。安全保证只限明确工具合同假设。
+- D-061 的 0.36 vs 0.006 行为违规叙事已被 59 号独立审计推翻：99.4% 为 evaluator artifact，真实重复副作用为 7 例。
+
+### D-063 唯一执行顺序
+
+1. **Stage 0 — diagnostic3 独立复算：** 新增 analyse_diagnostic3.py 或显式 CLI；从 diagnostic3_results.json 读取；输出 all/train/validation；复算七组比较；按 task × fault-composition cluster 推断，seed 嵌套；输出 cluster SD、CI、paired sign-flip p、效应量、seed 稳定性和适用 Holm；校验 episode 唯一、配对完整、cluster 一致、seed 完整、split 隔离、分母语义和哈希。
+2. **Stage 1 — empirical power：** 基于 Stage 0 复算的 cluster-level paired differences，仿真 MDE=.08/.10/.1173、双侧 alpha=.05、80%/90% power、15% 失效预留和 SD 敏感性；报告 Monte Carlo 误差。18 个 validation clusters 太少，SD 不稳定，必须披露。
+3. **Stage 2 — task-family audit：** 从 task/split/scenario manifests 对账总任务族数量与 validation 2 families ×9=18 clusters 的关系；检查近重复和泄漏；报告真实可用独立 cluster 数。不能用 seed/episode 凑独立样本。
+4. **Stage 3 — preregistration：** 唯一主要比较 AB vs canonical NSGA-II；澄清 R1/R2 恢复与 R3/R4 正确升级的主要终点公式、分母、权重及聚合顺序；次要比较 Holm；Hand 仅参考；安全为硬门。草案标记 DRAFT — NOT FROZEN。
+5. **用户批准：** 将预注册草案交用户审阅。批准预注册不自动授权正式 A-3b，正式实验必须另行获得明确批准。
+
+### 当前 GO / HOLD
+
+**GO：** 统计分析器、synthetic tests、历史 diagnostic3 复算、经验功效仿真、任务族/泄漏审计、预注册草案、CI 和文档维护。
+
+**HOLD：** 正式 A-3b；查看或调参新的 held-out test；Pilot B；A800/ARWM；真实 LLM API；UndoBench TEST；ThinkingBox。
+
+### 维护规则
+
+每次实质性研究、实验、代码、协议、审计或决策变化后，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、README.md、05_DECISION_LOG.md 和相关计划文件。所有 SHA、测试、CI 和科学结论必须来自真实仓库或运行结果；不得把计划写成完成。
