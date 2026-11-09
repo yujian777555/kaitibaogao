@@ -1,8 +1,8 @@
 # 62 — D-063：正式 A-3b 功效核算与预注册冻结计划
 
-**日期：** 2026-11-08  
-**状态：** PLANNED — 统计复现审计与功效设计；正式 A-3b 未获授权  
-**基线 HEAD：** `730431e1c52e97adf550a54f77cb53256e302525`  
+**日期：** 2026-11-09  
+**状态：** ACTIVE PLAN — D-063 文档/统计准备可执行；Stage 0 尚未完成；正式 A-3b 仍 HOLD  
+**本轮维护起始 HEAD：** `e6fee3bde05e8dea3fcc54f2ea1d97bc54837867`（历史基线；接管时必须实时查询）  
 **Main：** `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`（保持不动）  
 **前序：** D-062（59 复核、60 设计、61 diagnostic3）  
 **下一会话入口：** `NEXT_SESSION_PROMPT.md` 的 D-063 节
@@ -238,3 +238,111 @@ D-062 执行报告称 79/79 测试通过，但当前已有 `.github/workflows/pi
 - ThinkingBox。
 
 **唯一下一步：** 先修复 diagnostic3 统计分析可复现性，再做 empirical cluster power simulation 和预注册草案；将冻结版交用户批准。未批准前不得启动正式 A-3b。
+
+
+---
+
+## 8. D-063 执行级验收清单（2026-11-09 更新）
+
+本节细化执行要求，不表示任何 Stage 已经完成。当前仓库实际状态仍为：D-063 文档计划已存在；统计复现、经验功效仿真、任务族扩展审计和预注册草案均**尚未交付**。
+
+### 8.1 Stage 0 — diagnostic3 统计复现验收
+
+分析器建议采用显式 CLI 输入输出，不允许默认静默回退到 diagnostic2。至少支持：
+
+- --input experiments/pilot_a3b/diagnostic3_results.json
+- --output-dir <explicit path>
+- --seed <fixed integer>
+- --bootstrap-reps <N>
+- --permutation-reps <N>
+
+最终参数名可以调整，但必须在帮助信息、报告和运行命令中一致。
+
+必须输出 all/train/validation 三个 split，并完成以下数据完整性检查：
+
+1. episode ID 唯一性；重复行必须 fail-closed，不能自动去重掩盖问题；
+2. 每个主要对比的实验臂配对完整性；
+3. task × fault-composition cluster 成员一致性；
+4. seed 嵌套结构完整性，禁止把 seed 当作独立 cluster；
+5. train/validation/test split 隔离；
+6. 评价分母、R1/R2 条件恢复和 R3/R4 正确升级的标签语义；
+7. 缺失 episode、异常退出、预算截断和无效样本的明确处置；
+8. 输入 JSON、manifest、分析配置和代码版本哈希；
+9. 同一输入和配置重复执行得到确定性统计输出（允许文档时间戳字段除外）。
+
+至少覆盖以下对比：AB vs NSGA-II、AB vs A、AwaitSLA vs A、AwaitSLA vs AwaitFixed、AB vs AwaitSLA、AB vs Hand、B vs NSGA-II。对比需明确方向，避免报告中正负号歧义。
+
+统计方法应以独立 task × fault-composition cluster 为推断单位；seed 是 cluster 内嵌重复。bootstrap 和 sign-flip 的重采样/翻转单位均为 cluster。固定并记录随机种子、重复次数、CI 算法、缺失配对处理和多重比较 family。主要对比与次要对比不得混在一个 Holm family 中，具体 family 在预注册前固定。
+
+### 8.2 主要终点定义必须先澄清
+
+现有草案称主要终点为 balanced class-success，但 R1/R2 的“恢复成功”与 R3/R4 的“正确升级/安全遏制”不是同一语义。Stage 0/预注册草案必须给出逐类公式、分母、类别权重和 cluster 聚合顺序。
+
+不得把 R3/R4 结构性不可恢复样本简单计为恢复失败，也不得把所有升级一概计为成功。应区分：
+- R1/R2：条件恢复结果；
+- R3/R4：正确升级、无不允许副作用、无不必要升级；
+- UNKNOWN：信息不足，按预先定义的规则处理，不得事后重分类。
+
+如果无法构造一个语义上合理且可解释的单一主要终点，应在预注册前提出替代 estimand 并说明理由；不能看过正式 test 结果后改终点。
+
+### 8.3 Stage 1 — 经验功效仿真验收
+
+- 先用 Stage 0 独立复算出的 cluster-level paired differences。
+- 主要样本量只围绕未来 held-out test 的 AB vs NSGA-II 主要比较设计。
+- 当前 diagnostic3 validation 仅作历史开发/方差规划数据，不得重新命名为正式 test。
+- 至少报告 MDE=0.08/0.10/0.1173、双侧 alpha=.05、80%/90% power。
+- 用 cluster-level empirical resampling / sign-flip 或与设计相匹配的 Monte Carlo 方法，报告模拟次数、Monte Carlo 标准误和收敛/稳定性检查。
+- 做 15% cluster 失效预留的敏感性分析。
+- 说明当前 validation 仅 18 clusters 导致方差估计不稳定；给出不同 SD 假设下的样本量范围。
+- 不允许用增加同一 cluster 的 episode 或 seed 充当新增独立样本。
+
+### 8.4 Stage 2 — 任务族扩展审计与计数对账
+
+仓库不同历史段落出现“总任务族 6 个”和“validation 由 2 个任务族 × 9 种 composition = 18 clusters”两种描述。两者可能分别表示全体任务族与 validation 子集，但接管者必须从原始 task manifest、split manifest 和 scenario IDs 逐一核实，不得假定二者天然一致。
+
+任务族审计至少输出：
+- task family ID、来源/生成规则、语义目标、工具依赖；
+- 9 种 fault composition 的定义与每个 task family 的适用性；
+- cluster ID 的确定性生成规则；
+- 同模板、同状态图、同工具序列、同故障轨迹的近重复检查；
+- train/validation/test 泄漏矩阵；
+- 可用独立 cluster 数与不可用原因；
+- 任务族扩展的生成成本和人工审查要求。
+
+目标数量以经验功效仿真结果为准；145 仅是 MDE=.10、80% power、15% 预留下的初步 t 近似规划值，不是已批准的最终目标。若无法构造足量独立 cluster，应报告现实可达到的功效，不得伪造独立性。
+
+### 8.5 Stage 3 — 预注册草案与授权边界
+
+预注册草案至少明确：
+- 唯一主要对比：AB vs canonical NSGA-II；
+- 主要 estimand、主要终点及其逐类公式；
+- 双侧 alpha=.05、目标 power 和最终 cluster 数；
+- 次要比较及 Holm family；
+- Hand 作为参考，不声称超越专家；
+- 算法/代码/依赖版本、初始化、演化参数和相同预算口径；
+- 随机化、配对、种子、cluster、排除和缺失值规则；
+- 硬安全门、合同假设和事件级报告方式；
+- 锁箱 manifest、哈希、执行命令和偏离预注册的披露方式。
+
+文件状态必须保持 DRAFT — NOT FROZEN，直到用户明确批准。用户批准预注册也不自动等于批准正式 A-3b 执行；正式确认性实验需另行明确授权。
+
+### 8.6 本轮可执行与禁止事项
+
+**可执行：** 统计分析器、synthetic tests、历史 diagnostic3 复算、经验功效仿真、任务族/泄漏审计、预注册草案、CI 和文档维护。
+
+**禁止：** 正式 A-3b；查看或调参正式 held-out test；Pilot B；A800/ARWM；真实 LLM API；UndoBench TEST；ThinkingBox。
+
+### 8.7 完成 D-063 的最低交付标准
+
+只有同时满足以下条件，才可将 D-063 标记为“草案完成、待用户批准”：
+
+- Stage 0 分析器能从原始 diagnostic3 数据独立再生统计；
+- 与 61 号报告逐项对账，差异均已解释和记录；
+- synthetic tests 和仓库回归测试通过；
+- empirical power simulation 可重复，报告 Monte Carlo 不确定性；
+- 任务族扩展审计基于真实 manifest，独立 cluster 数有证据；
+- 预注册草案完整，主要终点定义无语义歧义；
+- 全部交付和 HOLD 边界已写入接管提示词；
+- GitHub Actions 真实运行成功，或如实标记未触发/失败。
+
+**当前唯一下一步仍是 Stage 0：审查原始 diagnostic3 数据与 stats.py，建立可复现的 diagnostic3 独立分析入口。**
