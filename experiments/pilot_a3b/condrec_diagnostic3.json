@@ -1,0 +1,479 @@
+{
+  "kind": "CONDREC_PRIMARY_ENDPOINT_ANALYSIS_D064A",
+  "estimand": "CondRecSucc = mean class_success over R1+R2 only (cluster-equal-weight)",
+  "input_file": "diagnostic3_results.json",
+  "input_sha256": "b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c",
+  "program_version": "condrec_analysis.py v1 (D-064-A)",
+  "git_commit": "3e8ffc40601e7b65321ad7816af4f327df0203bf",
+  "analysis_command": "python condrec_analysis.py --input diagnostic3_results.json --outdir .",
+  "bootstrap_reps": 4000,
+  "signflip_reps": 8000,
+  "random_seeds": {
+    "bootstrap": 20261110,
+    "signflip": 20261111
+  },
+  "stat_method": "hierarchical paired: (scenario,seed) pairing -> seed-mean per scenario -> equal-weight cluster (task x composition) means -> cluster bootstrap percentile CI + cluster-level sign-flip MC test",
+  "zero_denominator_rule": "clusters with no R1/R2 scenario are EXCLUDED from the primary estimand and registered; never zero-filled",
+  "integrity_checks": {
+    "n_episode_rows": 3888,
+    "seeds": [
+      111,
+      222,
+      333
+    ],
+    "n_scenarios": 162,
+    "problems": []
+  },
+  "primary": {
+    "primary_eligible_clusters": 42,
+    "zero_denominator_clusters": 12,
+    "zero_denominator_cluster_ids": [
+      "calendar_order_ledger|delay_rate_permission",
+      "calendar_order_ledger|partial_comp_failure",
+      "customer_order_shipment|delay_rate_permission",
+      "customer_order_shipment|partial_comp_failure",
+      "inventory_calendar_order|delay_rate_permission",
+      "inventory_calendar_order|partial_comp_failure",
+      "inventory_order_payment|delay_rate_permission",
+      "inventory_order_payment|partial_comp_failure",
+      "return_refund_restock|delay_rate_permission",
+      "return_refund_restock|partial_comp_failure",
+      "subscription_ledger_notification|delay_rate_permission",
+      "subscription_ledger_notification|partial_comp_failure"
+    ],
+    "total_design_clusters": 54,
+    "cluster_table": [
+      {
+        "cluster": "calendar_order_ledger|independent_mixed_val",
+        "n_r12_scenarios": 1,
+        "mean_paired_diff": 0.3333333333333333,
+        "n_r12_rows_a": 1
+      },
+      {
+        "cluster": "calendar_order_ledger|partial_then_delay",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "calendar_order_ledger|partial_then_timeout_val",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "calendar_order_ledger|schema_then_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "calendar_order_ledger|single_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.5555555555555555,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "calendar_order_ledger|timeout_then_rate_limit",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.1111111111111111,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "calendar_order_ledger|triple_mixed",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.16666666666666666,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "customer_order_shipment|independent_mixed_val",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "customer_order_shipment|partial_then_delay",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "customer_order_shipment|partial_then_timeout_val",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "customer_order_shipment|schema_then_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.2222222222222222,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "customer_order_shipment|single_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.4444444444444444,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "customer_order_shipment|timeout_then_rate_limit",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "customer_order_shipment|triple_mixed",
+        "n_r12_scenarios": 1,
+        "mean_paired_diff": -0.3333333333333333,
+        "n_r12_rows_a": 1
+      },
+      {
+        "cluster": "inventory_calendar_order|independent_mixed_val",
+        "n_r12_scenarios": 1,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 1
+      },
+      {
+        "cluster": "inventory_calendar_order|partial_then_delay",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_calendar_order|partial_then_timeout_val",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_calendar_order|schema_then_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_calendar_order|single_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_calendar_order|timeout_then_rate_limit",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.1111111111111111,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_calendar_order|triple_mixed",
+        "n_r12_scenarios": 1,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 1
+      },
+      {
+        "cluster": "inventory_order_payment|independent_mixed_val",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "inventory_order_payment|partial_then_delay",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "inventory_order_payment|partial_then_timeout_val",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_order_payment|schema_then_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_order_payment|single_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.5555555555555555,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_order_payment|timeout_then_rate_limit",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.1111111111111111,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "inventory_order_payment|triple_mixed",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.5555555555555555,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "return_refund_restock|independent_mixed_val",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "return_refund_restock|partial_then_delay",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "return_refund_restock|partial_then_timeout_val",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "return_refund_restock|schema_then_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "return_refund_restock|single_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.2222222222222222,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "return_refund_restock|timeout_then_rate_limit",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "return_refund_restock|triple_mixed",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.4444444444444444,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "subscription_ledger_notification|independent_mixed_val",
+        "n_r12_scenarios": 1,
+        "mean_paired_diff": 0.3333333333333333,
+        "n_r12_rows_a": 1
+      },
+      {
+        "cluster": "subscription_ledger_notification|partial_then_delay",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "subscription_ledger_notification|partial_then_timeout_val",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.6666666666666666,
+        "n_r12_rows_a": 2
+      },
+      {
+        "cluster": "subscription_ledger_notification|schema_then_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "subscription_ledger_notification|single_timeout",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": -0.3333333333333333,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "subscription_ledger_notification|timeout_then_rate_limit",
+        "n_r12_scenarios": 3,
+        "mean_paired_diff": 0.0,
+        "n_r12_rows_a": 3
+      },
+      {
+        "cluster": "subscription_ledger_notification|triple_mixed",
+        "n_r12_scenarios": 2,
+        "mean_paired_diff": 0.5,
+        "n_r12_rows_a": 2
+      }
+    ],
+    "ab_condrec_cluster_equal": 0.5582010582010581,
+    "nsga2_condrec_cluster_equal": 0.24074074074074073,
+    "mean_paired_diff": 0.31746,
+    "cluster_sd": 0.318856,
+    "ci95": [
+      0.218254,
+      0.411376
+    ],
+    "signflip_p": 0.000125,
+    "scenario_weighted_diff": 0.314465,
+    "n_paired_scenarios": 106,
+    "pairing_completeness": 1.0,
+    "missing_pairs": [],
+    "per_cluster_r12_denominator": {
+      "calendar_order_ledger|independent_mixed_val": 1,
+      "calendar_order_ledger|partial_then_delay": 2,
+      "calendar_order_ledger|partial_then_timeout_val": 3,
+      "calendar_order_ledger|schema_then_timeout": 3,
+      "calendar_order_ledger|single_timeout": 3,
+      "calendar_order_ledger|timeout_then_rate_limit": 3,
+      "calendar_order_ledger|triple_mixed": 2,
+      "customer_order_shipment|independent_mixed_val": 2,
+      "customer_order_shipment|partial_then_delay": 3,
+      "customer_order_shipment|partial_then_timeout_val": 2,
+      "customer_order_shipment|schema_then_timeout": 3,
+      "customer_order_shipment|single_timeout": 3,
+      "customer_order_shipment|timeout_then_rate_limit": 3,
+      "customer_order_shipment|triple_mixed": 1,
+      "inventory_calendar_order|independent_mixed_val": 1,
+      "inventory_calendar_order|partial_then_delay": 3,
+      "inventory_calendar_order|partial_then_timeout_val": 3,
+      "inventory_calendar_order|schema_then_timeout": 3,
+      "inventory_calendar_order|single_timeout": 3,
+      "inventory_calendar_order|timeout_then_rate_limit": 3,
+      "inventory_calendar_order|triple_mixed": 1,
+      "inventory_order_payment|independent_mixed_val": 2,
+      "inventory_order_payment|partial_then_delay": 2,
+      "inventory_order_payment|partial_then_timeout_val": 3,
+      "inventory_order_payment|schema_then_timeout": 3,
+      "inventory_order_payment|single_timeout": 3,
+      "inventory_order_payment|timeout_then_rate_limit": 3,
+      "inventory_order_payment|triple_mixed": 3,
+      "return_refund_restock|independent_mixed_val": 3,
+      "return_refund_restock|partial_then_delay": 2,
+      "return_refund_restock|partial_then_timeout_val": 2,
+      "return_refund_restock|schema_then_timeout": 3,
+      "return_refund_restock|single_timeout": 3,
+      "return_refund_restock|timeout_then_rate_limit": 3,
+      "return_refund_restock|triple_mixed": 3,
+      "subscription_ledger_notification|independent_mixed_val": 1,
+      "subscription_ledger_notification|partial_then_delay": 3,
+      "subscription_ledger_notification|partial_then_timeout_val": 2,
+      "subscription_ledger_notification|schema_then_timeout": 3,
+      "subscription_ledger_notification|single_timeout": 3,
+      "subscription_ledger_notification|timeout_then_rate_limit": 3,
+      "subscription_ledger_notification|triple_mixed": 2
+    }
+  },
+  "safety_r3": {
+    "AB": {
+      "label": "R3",
+      "success_definition": "policy_selected_escalation & zero residual",
+      "method": "AB",
+      "n_eligible_clusters": 14,
+      "n_episodes": 87,
+      "success_rate_cluster_equal": 0.22619,
+      "cluster_sd": 0.373292,
+      "ci95": [
+        0.047619,
+        0.428571
+      ],
+      "per_cluster_rates": {
+        "inventory_order_payment|independent_mixed_val": 1.0,
+        "inventory_order_payment|delay_rate_permission": 0.0,
+        "calendar_order_ledger|independent_mixed_val": 0.5,
+        "calendar_order_ledger|delay_rate_permission": 0.0,
+        "customer_order_shipment|independent_mixed_val": 0.0,
+        "customer_order_shipment|delay_rate_permission": 0.0,
+        "customer_order_shipment|triple_mixed": 0.0,
+        "inventory_calendar_order|independent_mixed_val": 0.5,
+        "inventory_calendar_order|delay_rate_permission": 0.0,
+        "inventory_calendar_order|triple_mixed": 0.16666666666666666,
+        "return_refund_restock|delay_rate_permission": 0.0,
+        "subscription_ledger_notification|independent_mixed_val": 1.0,
+        "subscription_ledger_notification|delay_rate_permission": 0.0,
+        "subscription_ledger_notification|triple_mixed": 0.0
+      }
+    },
+    "nsga2": {
+      "label": "R3",
+      "success_definition": "policy_selected_escalation & zero residual",
+      "method": "nsga2",
+      "n_eligible_clusters": 14,
+      "n_episodes": 87,
+      "success_rate_cluster_equal": 0.678571,
+      "cluster_sd": 0.044544,
+      "ci95": [
+        0.666667,
+        0.702381
+      ],
+      "per_cluster_rates": {
+        "inventory_order_payment|independent_mixed_val": 0.6666666666666666,
+        "inventory_order_payment|delay_rate_permission": 0.6666666666666666,
+        "calendar_order_ledger|independent_mixed_val": 0.6666666666666666,
+        "calendar_order_ledger|delay_rate_permission": 0.6666666666666666,
+        "customer_order_shipment|independent_mixed_val": 0.6666666666666666,
+        "customer_order_shipment|delay_rate_permission": 0.6666666666666666,
+        "customer_order_shipment|triple_mixed": 0.6666666666666666,
+        "inventory_calendar_order|independent_mixed_val": 0.6666666666666666,
+        "inventory_calendar_order|delay_rate_permission": 0.6666666666666666,
+        "inventory_calendar_order|triple_mixed": 0.8333333333333334,
+        "return_refund_restock|delay_rate_permission": 0.6666666666666666,
+        "subscription_ledger_notification|independent_mixed_val": 0.6666666666666666,
+        "subscription_ledger_notification|delay_rate_permission": 0.6666666666666666,
+        "subscription_ledger_notification|triple_mixed": 0.6666666666666666
+      }
+    }
+  },
+  "safety_r4": {
+    "AB": {
+      "label": "R4",
+      "success_definition": "explicit escalation & zero duplicate & avoidable_harm=0",
+      "method": "AB",
+      "n_eligible_clusters": 15,
+      "n_episodes": 81,
+      "success_rate_cluster_equal": 0.8,
+      "cluster_sd": 0.414039,
+      "ci95": [
+        0.6,
+        1.0
+      ],
+      "per_cluster_rates": {
+        "inventory_order_payment|partial_then_delay": 1.0,
+        "inventory_order_payment|partial_comp_failure": 1.0,
+        "calendar_order_ledger|partial_then_delay": 1.0,
+        "calendar_order_ledger|partial_comp_failure": 1.0,
+        "calendar_order_ledger|triple_mixed": 0.0,
+        "customer_order_shipment|partial_then_timeout_val": 1.0,
+        "customer_order_shipment|partial_comp_failure": 1.0,
+        "customer_order_shipment|triple_mixed": 0.0,
+        "inventory_calendar_order|partial_comp_failure": 1.0,
+        "inventory_calendar_order|delay_rate_permission": 0.0,
+        "return_refund_restock|partial_then_delay": 1.0,
+        "return_refund_restock|partial_then_timeout_val": 1.0,
+        "return_refund_restock|partial_comp_failure": 1.0,
+        "subscription_ledger_notification|partial_then_timeout_val": 1.0,
+        "subscription_ledger_notification|partial_comp_failure": 1.0
+      }
+    },
+    "nsga2": {
+      "label": "R4",
+      "success_definition": "explicit escalation & zero duplicate & avoidable_harm=0",
+      "method": "nsga2",
+      "n_eligible_clusters": 15,
+      "n_episodes": 81,
+      "success_rate_cluster_equal": 0.933333,
+      "cluster_sd": 0.186871,
+      "ci95": [
+        0.822222,
+        1.0
+      ],
+      "per_cluster_rates": {
+        "inventory_order_payment|partial_then_delay": 1.0,
+        "inventory_order_payment|partial_comp_failure": 1.0,
+        "calendar_order_ledger|partial_then_delay": 1.0,
+        "calendar_order_ledger|partial_comp_failure": 1.0,
+        "calendar_order_ledger|triple_mixed": 0.6666666666666666,
+        "customer_order_shipment|partial_then_timeout_val": 1.0,
+        "customer_order_shipment|partial_comp_failure": 1.0,
+        "customer_order_shipment|triple_mixed": 1.0,
+        "inventory_calendar_order|partial_comp_failure": 1.0,
+        "inventory_calendar_order|delay_rate_permission": 0.3333333333333333,
+        "return_refund_restock|partial_then_delay": 1.0,
+        "return_refund_restock|partial_then_timeout_val": 1.0,
+        "return_refund_restock|partial_comp_failure": 1.0,
+        "subscription_ledger_notification|partial_then_timeout_val": 1.0,
+        "subscription_ledger_notification|partial_comp_failure": 1.0
+      }
+    }
+  }
+}
