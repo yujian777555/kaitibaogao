@@ -68,6 +68,7 @@ UNKNOWN_LIMIT = 0.05
 POWER_DESIGN = {
     "primary_estimand": "family-equal-weight mean of task-family R1/R2 eligible composition-cluster CondRecSucc differences (AB minus canonical NSGA-II)",
     "mde_absolute": 0.10,
+    "mde_status": "PROPOSED_MDE_PENDING_ADVISOR_APPROVAL",
     "mde_rationale": "A 10-percentage-point absolute CondRecSucc gain is the minimum practically worthwhile improvement to justify the additional complexity and rollout cost of the evolutionary recovery controller; this threshold is not derived from the observed diagnostic effect and requires advisor/user acceptance.",
     "alpha_two_sided": 0.05,
     "target_power": 0.80,
@@ -81,7 +82,17 @@ POWER_DESIGN = {
     "effective_families_after_attrition": 34,
     "effective_eligible_compositions_per_family_after_attrition": 5,
     "effective_primary_clusters_after_attrition": 170,
-    "expected_power_from_D064B_MC": 0.85,
+    "expected_power_from_D064B_MC": 0.839,
+    "expected_power_ci95": [0.832, 0.846],
+    "expected_power_provenance": ("recomputed 2026-11-09 with power_hierarchical.mc_power_at "
+                                 "on the CondRecSucc cluster-diff distribution from "
+                                 "diagnostic3_results.json (SHA-256 b9498195...): "
+                                 "MDE=0.10, ICC=0.20 ceiling, n_families=34 effective "
+                                 "(40 design, 15% family attrition), m=5 effective "
+                                 "(7 eligible, 15% cluster attrition), 10,000 MC, "
+                                 "seed 20261113; see power_final_design_check.json. "
+                                 "Worst-case ICC power 0.839 >= 0.80 target; "
+                                 "the earlier unverified 0.85 figure is superseded."),
     "power_source": "68_D064B_HIERARCHICAL_POWER_REPORT.md; ICC=0.20, MDE=0.10, m=7, 40 design families, dual 15% family/cluster attrition",
     "reachability_horizon": LABELER_HORIZON,
     "reachability_max_nodes": LABELER_MAX_NODES,
@@ -99,7 +110,13 @@ FAULT_COMPOSITION_NOTES = {
     "independent_mixed_val": "independent per-step recoverable faults only; excludes permission_denied and partial_commit",
     "partial_then_timeout_val": "partial commit at the first contract-compensatable step with guaranteed compensation, plus timeout_after at another step",
     "partial_comp_failure": "partial commit at the first contract-compensatable step with compensation outcome hidden/uncertain, plus timeout_after",
-    "permission_after_compensatable_prefix": "delayed visibility, rate limit, then permission denial; prior committed prefix is compensatable by the task-family design",
+    "permission_after_compensatable_prefix": (
+        "permission_denied at step 1 after a clean step-0 commit; the committed "
+        "prefix is compensatable by task-family design (primary-compatible "
+        "requirement). Historical alias: legacy A-3 'delay_rate_permission' "
+        "triple-fault composition was renamed and simplified to isolate the "
+        "R3 (safe-escalation) mechanism."
+    ),
     "triple_mixed": "timeout_after, rate_limit, and schema_drift across the three steps",
 }
 

@@ -1,0 +1,83 @@
+{
+  "design": "40 families x 7 comps, dual 15% attrition -> 34 eff families x 5 eff comps = 170 eff clusters",
+  "mde": 0.1,
+  "mc": 10000,
+  "seed": 20261113,
+  "total_var": 0.10166903256334146,
+  "power_by_icc": {
+    "0.0": {
+      "power_student_t": 0.9787,
+      "mcse_student_t": 0.0014,
+      "ci95_student_t": [
+        0.9759,
+        0.9815
+      ],
+      "out_of_range_rate": 0.0,
+      "power_signflip": 0.9776,
+      "mcse_signflip": 0.0015,
+      "power_block_bootstrap": 0.9847,
+      "mcse_block_bootstrap": 0.0012
+    },
+    "0.05": {
+      "power_student_t": 0.9533,
+      "mcse_student_t": 0.0021,
+      "ci95_student_t": [
+        0.9492,
+        0.9574
+      ],
+      "out_of_range_rate": 0.0,
+      "power_signflip": 0.9519,
+      "mcse_signflip": 0.0021,
+      "power_block_bootstrap": 0.9638,
+      "mcse_block_bootstrap": 0.0019
+    },
+    "0.1": {
+      "power_student_t": 0.9223,
+      "mcse_student_t": 0.0027,
+      "ci95_student_t": [
+        0.9171,
+        0.9275
+      ],
+      "out_of_range_rate": 0.0,
+      "power_signflip": 0.9199,
+      "mcse_signflip": 0.0027,
+      "power_block_bootstrap": 0.9379,
+      "mcse_block_bootstrap": 0.0024
+    },
+    "0.2": {
+      "power_student_t": 0.8391,
+      "mcse_student_t": 0.0037,
+      "ci95_student_t": [
+        0.8319,
+        0.8463
+      ],
+      "out_of_range_rate": 1.1e-05,
+      "power_signflip": 0.8368,
+      "mcse_signflip": 0.0037,
+      "power_block_bootstrap": 0.8654,
+      "mcse_block_bootstrap": 0.0034
+    }
+  },
+  "unattrited_40x7_icc020": {
+    "power_student_t": 0.9345,
+    "mcse_student_t": 0.0025,
+    "ci95_student_t": [
+      0.9297,
+      0.9393
+    ],
+    "out_of_range_rate": 1.9e-05,
+    "power_signflip": 0.932,
+    "mcse_signflip": 0.0025,
+    "power_block_bootstrap": 0.9448,
+    "mcse_block_bootstrap": 0.0023
+  },
+  "null_calibration_34x5_icc020": {
+    "power_student_t": 0.0541,
+    "mcse_student_t": 0.0023,
+    "ci95_student_t": [
+      0.0497,
+      0.0585
+    ],
+    "out_of_range_rate": 1.9e-05
+  }
+}
