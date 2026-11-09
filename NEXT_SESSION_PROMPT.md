@@ -1054,3 +1054,29 @@ GO: **D-064-C** (task-family semantic validator + formal scenario generator + un
 
 ### Next task (single)
 D-064-C: semantic validator for candidate task families (65 P0-4), formal 8/4/17-or-larger scenario generator with manifest/hash tests, scientific MDE justification and unique sample-size freeze; then revise 64.
+
+## 2026-11-09 — D-064-C COMPLETE: semantic audit, generator verification, design freeze (64-R2)
+
+Report: `69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md`. New tests: `test_d064c_audit.py` (25/25). Power recheck: `power_final_design_check.json`. 64 revised to **R2**.
+
+### Audits (all passed)
+- Task semantics: validator rejects all 12 adversarial tampering classes.
+- 9 fault compositions: declared-vs-injected-vs-label consistent; ONE stale note fixed (permission_after_compensatable_prefix described legacy triple-fault but injects step-1 permission only; implementation matches name and R3 mechanism; R3 premise holds 52/52 families; 7/9 primary eligibility unchanged).
+- Labeler: independent AND-OR robust reachability (horizon 24) with analytic cross-check and per-cluster evidence hashes; no algorithm input; UNKNOWN 0% (not claimed perfect).
+- Split 8/4/40: disjoint, 10 profiles x 4 families, determinism + lockbox clean; semantic diversity scoped to abstract saga.
+- Hashes reproduced independently: manifest af83f065... / test-family 01b41df8... / test-scenario dded3bb7...
+
+### Power at final design (hardcode 0.85 NOT trusted)
+40 design families x 7 eligible comps, dual 15% attrition -> 34 eff families x 5 eff comps = 170 eff clusters; MDE=0.10; 10,000 MC (seed 20261113):
+- **ICC=0.20 worst case: power 0.839 [0.832, 0.846] >= 0.80 TARGET MET**
+- ICC 0/0.05/0.10: 0.979/0.953/0.922; null Type-I 0.054 calibrated.
+- Generator POWER_DESIGN updated to 0.839 + CI + provenance; MDE marked **PROPOSED_MDE_PENDING_ADVISOR_APPROVAL**.
+
+### 64-R2 frozen items
+Primary = family-level Student-t (calibrated); sign-flip sensitivity-only; bootstrap descriptive-only; UNKNOWN>5% = label-gate failure; double-15% attrition rule; test 40 families / 1,080 scenarios / 280 eligible clusters (hashes frozen); lockbox + stopping rules unchanged. Status: CANDIDATE R2 awaiting independent review + user approval.
+
+### Status
+GO: 64-R2 independent review -> user approval -> formal A-3b. HOLD unchanged: formal A-3b execution, test peeking/tuning, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox, main merges.
+
+### Next task (single)
+64-R2 independent audit; upon user approval run the 64 pre-flight checklist and execute the formal A-3b.

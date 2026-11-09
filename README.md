@@ -815,3 +815,13 @@ D-064-A 正式报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_
 - **校准**：Student-t 控制 α 良好（推荐主检验）；bootstrap CI 检验反保守。
 - **样本量**（MDE 0.10 @80%）：ICC 0/0.05/0.10/0.20 → 15/17/22/30 families；双 15% 损耗 22/30/40/40。17-family 条件性充分。
 - GO：D-064-C。HOLD 不变；64 号 REQUEST CHANGES。
+
+
+## 2026-11-09：D-064-C — 任务语义审计、生成器验证与设计冻结
+
+报告：[69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md](69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md)（`test_d064c_audit.py` 25/25）。
+
+- **审计通过**：validator 对抗性完备；9 组合一致（修复 1 处陈旧注释）；标签独立；8/4/40 零泄漏；三哈希独立重建一致（manifest af83f065…）。
+- **功效最终核验**：34 有效 families×5 comps，ICC=0.20 最坏 **power=0.839 [0.832,0.846] ≥ 0.80**（硬编码 0.85 作废已更正）；MDE=0.10 标注 **PROPOSED_MDE_PENDING_ADVISOR_APPROVAL**。
+- **64 号修订 R2**：40-family test（280 eligible clusters，哈希冻结）、family 级 Student-t 主检验、UNKNOWN≤5% 门禁。
+- GO：64-R2 独立审计→用户批准→正式 A-3b。HOLD 不变。

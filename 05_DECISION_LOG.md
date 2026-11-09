@@ -1215,3 +1215,24 @@ GO：D-064-C（任务语义 validator + 正式场景生成器 + MDE/样本量唯
 
 ### 下一步
 D-064-C：候选任务族语义 validator、8/4/17（或扩大）正式场景生成器落地测试、MDE 事前论证与样本量唯一冻结，之后才修订 64 号。
+
+
+## 决策 D-064-C：任务语义独立审计、生成器验证与统计设计冻结（2026-11-09）
+
+### 交付
+`test_d064c_audit.py`（25/25：对抗 12 + 组合 5 + 标签 3 + 确定性 4）+ `power_final_design_check.json` + `69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md` + 64 号修订为 R2。
+
+### 审计结论
+1. **任务语义**：validator 对抗性完备——12 类恶意变形（删前置/篡后置/换工具/伪回执/毁补偿序/改 goal/重复工具/伪 primary 资格/伪 legacy 等）全部拒绝。通过。
+2. **9 故障组合**：声明-注入-标签逐项一致；**发现 1 处注释陈旧**（permission_after_compensatable_prefix 注释写旧三故障、实际注入 step1 permission）——裁定为历史命名兼容+注释缺陷，实现与名称/R3 机制一致，**修注释不改注入**；R3 前提（52/52 族 step0 可补偿）结构性成立；7/9 primary eligibility 不变。
+3. **标签器**：来自独立 AND-OR 鲁棒可达判定器（horizon 24），analytic 交叉校验，无算法输入/无 id 作弊；UNKNOWN 0%（不解释为完美，有 mini-env ground-truth 锚定）。
+4. **划分**：8/4/40、零重叠、10 profiles×4 families、语义多样性限定抽象 saga 范围。
+5. **确定性**：manifest af83f065… / test-family 01b41df8… / test-scenario dded3bb7… 独立重建一致；lockbox 无泄漏。
+6. **功效复算（不采信硬编码 0.85）**：最终设计 34 有效 families×5 comps（双 15% 损耗），ICC=0.20 最坏 **power=0.839 [0.832,0.846] ≥0.80 ✓**（10,000 MC）；null 校准 0.054；生成器已更新为 0.839+provenance。
+7. **MDE=0.10** 标注 **PROPOSED_MDE_PENDING_ADVISOR_APPROVAL**（非反推、非迁就样本量；需导师确认）。
+
+### 决定
+GO：64-R2 独立审计 → 用户批准 → 正式 A-3b。HOLD 不变。
+
+### 下一步
+64-R2 独立审计；用户批准后按 64 §5 预检执行正式 A-3b。

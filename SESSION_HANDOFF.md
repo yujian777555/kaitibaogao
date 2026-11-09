@@ -2185,3 +2185,18 @@ power_hierarchical.py（22/22 测试）+ power_hierarchical.{json,report.md} + f
 
 ### 59.3 状态
 GO：D-064-C（语义 validator + 正式生成器 + MDE/样本量唯一冻结）。HOLD 不变；64 号 REQUEST CHANGES。
+
+
+## 60. D-064-C 执行轮：独立审计与设计冻结（2026-11-09）
+
+### 60.1 审计（69 号报告；test_d064c_audit.py 25/25）
+任务语义 validator 对抗性完备（12 类恶意变形全拒）；9 故障组合声明-注入-标签一致（修复 1 处陈旧注释：permission_after_compensatable_prefix）；标签器独立（AND-OR 判定器+证据哈希）；8/4/40 划分零泄漏；manifest/family/scenario 三哈希独立重建一致。
+
+### 60.2 功效最终核验（不采信硬编码 0.85）
+34 有效 families×5 comps（双 15% 损耗），ICC=0.20 最坏 **power=0.839 [0.832,0.846] ≥0.80**；null 0.054。生成器 POWER_DESIGN 更新为 0.839+provenance；MDE=0.10 标注 PROPOSED_MDE_PENDING_ADVISOR_APPROVAL。
+
+### 60.3 64 号修订 R2
+40-family test（1,080 场景/280 eligible，哈希冻结）；主检验 family 级 Student-t；bootstrap 降级描述性；UNKNOWN≤5% 门禁；损耗双 15%。状态 CANDIDATE R2。
+
+### 60.4 状态
+GO：64-R2 独立审计→用户批准→正式 A-3b。HOLD 不变。
