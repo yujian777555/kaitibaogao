@@ -1191,3 +1191,27 @@ D-064-A 已完成并通过真实 CI：
 **MDE 不冻结：** +.3175 是观察效应，不是 MDE；.1173 是历史观察效应，仅用于敏感性。D-064-B 只给条件性建议，最终样本量需等待 D-064-C 并由用户审阅。
 
 **HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍为 REQUEST CHANGES。
+
+
+## 决策 D-064-B：CondRecSucc 层级功效、ICC 敏感性与任务族样本量规划（2026-11-09）
+
+### 交付
+`power_hierarchical.py`（无硬编码历史值）+ `test_power_hierarchical.py`（22/22）+ `power_hierarchical.{json,report.md}` + `family_cluster_diagnostics.csv` + 68 号报告。输入 SHA-256 `b9498195…` 与 D-064-A 一致。
+
+### 层级复核与 ICC
+6 families × 7 comps = 42 clusters（零分母 12），**6/6 family 均值全正**（0.238–0.381）；family-mean SD 0.059。ANOVA/MoM ICC=**−0.1257**、REML 边界 0、bootstrap CI [−0.159,−0.111]——负值保留，**不解释为独立性证明**（6 families 估计不精确），以 ICC=0/0.05/0.10/0.20 敏感性网格替代点估计。
+
+### 层级推断（D-064-A 重评估）
+family-level t：**p=4.6e-05**；精确符号翻转（2^6）：**p=0.03125**（分辨率下限）；block bootstrap CI **[0.272, 0.357]** 不含 0。**层级相关下显著性保持**；p=0.000125 不再是层级 p 值。
+
+### 功效与校准（key cells 10,000 MC，sweep 2,000 MC）
+- **Student-t 校准良好（Type-I 0.050–0.056）→ 推荐主检验**；符号翻转 0.031(F=6)/0.05(F=17)；**bootstrap CI 检验反保守（0.08–0.14）不作 α 检验**。
+- 修复 2 个校准 bug（MC 符号翻转计数、块重采样中心化）后重跑。
+- 所需 families（m=7，MDE=0.10 @80%）：ICC 0→15、0.05→17、0.10→22、0.20→30；双 15% 损耗 → 22/30/40/40。MDE=0.05 在 ≤40 网格不可达。
+- **17-family 条件性充分**（低 ICC+低损耗+MDE≥0.10）；否则不足。
+
+### 决定
+GO：D-064-C（任务语义 validator + 正式场景生成器 + MDE/样本量唯一冻结）。HOLD 不变；64 号保持 REQUEST CHANGES。
+
+### 下一步
+D-064-C：候选任务族语义 validator、8/4/17（或扩大）正式场景生成器落地测试、MDE 事前论证与样本量唯一冻结，之后才修订 64 号。

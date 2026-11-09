@@ -244,3 +244,7 @@ GO：以 D-064-A CondRecSucc cluster differences 为基础，执行 task-family 
 P0-4（任务语义 validator/正式生成器）及 P1-5/6/7（MDE/样本量最终冻结、UNKNOWN/安全门细则、实现与预检冻结）仍未关闭。
 
 64 号预注册仍为 REQUEST CHANGES；正式 A-3b 继续 HOLD。
+
+### D-064-B 修复记录（2026-11-09）
+
+**P0-2（功效模拟方法学）与 P0-3（ICC 独立性）已修复**，见 `68_D064B_HIERARCHICAL_POWER_REPORT.md`：双生成机制（family-block 重采样 + ICC 层级模拟）、真实符号翻转/t/自助三检验对照、null 校准（t 0.050–0.056 ✓；bootstrap CI 检验反保守 ✗→不作 α 检验）、MCSE/区间、ICC 敏感性网格（0/0.05/0.10/0.20）、"负 ICC 不证明独立"表述落实。MDE 网格含 0.05–0.15，0.1173 仅敏感性。所需 families 表与 17-family 条件性评估完成。**P0-4 与 P1-5/6/7 转 D-064-C。**

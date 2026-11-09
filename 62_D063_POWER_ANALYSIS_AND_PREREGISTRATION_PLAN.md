@@ -423,3 +423,6 @@ D-064-A 已修复主要 estimand 错位，详见 66 号报告。R1/R2-only CondR
 
 GO：D-064-B 层级功效与 ICC 敏感性分析。  
 HOLD：正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍 REQUEST CHANGES。
+
+### D-064-B 完成更新（2026-11-09）
+以 CondRecSucc estimand 重做功效：层级显著性保持（t p=4.6e-5 / 符号翻转 p=0.031 / CI [0.272,0.357]）；ICC 网格敏感性（MoM −0.1257，不作独立性证明）；所需 families（MDE 0.10 @80%）15/17/22/30（ICC 0/0.05/0.10/0.20），双 15% 损耗 22/30/40/40；17-family 条件性充分。本计划原 t 近似表（cluster 级）作废，以 68 号层级模拟为准。

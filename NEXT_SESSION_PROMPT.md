@@ -1033,3 +1033,24 @@ D-064-B: rebuild the power analysis on the real CondRecSucc cluster-diff distrib
 **HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍为 REQUEST CHANGES。
 
 **接管后直接执行 D-064-B，不要再询问是否开始。** 具体参数、算法和验收标准以 67 号文件为准。
+
+## 2026-11-09 — D-064-B COMPLETE: hierarchical power, ICC sensitivity, family-count plan
+
+Report: `68_D064B_HIERARCHICAL_POWER_REPORT.md`. Program: `experiments/pilot_a3b/power_hierarchical.py` (no hardcoded historical values) + `test_power_hierarchical.py` (22/22). Artifacts: `power_hierarchical.json`, `power_hierarchical_report.md`, `family_cluster_diagnostics.csv`. Input SHA-256 b9498195... matches D-064-A.
+
+### Hierarchy & ICC
+6 families x 7 eligible comps = 42 clusters (12 zero-denom); ALL SIX family means positive (0.238-0.381); family-mean SD 0.059. ANOVA/MoM ICC = **-0.1257**; REML boundary 0; family-block bootstrap CI [-0.159, -0.111]. Negative ICC retained and NOT interpreted as proof of independence (6 families imprecise) -> planning uses ICC grid sensitivity instead.
+
+### Hierarchical inference (D-064-A re-qualified)
+family-level Student-t **p=4.6e-05**; exact sign-flip (2^6) **p=0.03125** (resolution floor); family-block bootstrap CI **[0.272, 0.357]** excludes 0. **Significance HOLDS under family correlation**; the cluster-level p=0.000125 is superseded for hierarchical claims.
+
+### Power & calibration (10,000 MC key cells / 2,000 MC sweep)
+- **Student-t well calibrated (Type-I 0.050-0.056) -> recommended primary test**; sign-flip 0.031(F=6)/0.05(F=17); **bootstrap-CI test anti-conservative (0.08-0.14) -> NOT an alpha test**. Two calibration bugs found and fixed (MC sign-flip counting; block-resample centering).
+- Required families (m=7, MDE=0.10 @80%): ICC 0->15, 0.05->17, 0.10->22, 0.20->30; with 15%+15% attrition: 22/30/40/40. MDE=0.05 unreachable in <=40 grid (reported).
+- **17 families conditionally sufficient** (low ICC + low attrition + MDE>=0.10); insufficient otherwise.
+
+### Status
+GO: **D-064-C** (task-family semantic validator + formal scenario generator + unique freeze of MDE/sample size). HOLD unchanged: formal A-3b, test peeking, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox. 64 stays REQUEST CHANGES.
+
+### Next task (single)
+D-064-C: semantic validator for candidate task families (65 P0-4), formal 8/4/17-or-larger scenario generator with manifest/hash tests, scientific MDE justification and unique sample-size freeze; then revise 64.

@@ -804,3 +804,14 @@ D-064-A 正式报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_
 
 **GO：** D-064-B。  
 **HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍未批准；D-064-C 的任务语义验证完成前不最终冻结 test family 数和 MDE。
+
+
+## 2026-11-09：D-064-B — CondRecSucc 层级功效与 ICC 敏感性
+
+报告：[68_D064B_HIERARCHICAL_POWER_REPORT.md](68_D064B_HIERARCHICAL_POWER_REPORT.md)（程序 `power_hierarchical.py`、22/22 测试、产物 power_hierarchical.{json,report.md} + family_cluster_diagnostics.csv）。
+
+- **层级显著性保持**：6/6 family 全正；family-level t p=4.6e-5、精确符号翻转 p=0.031、bootstrap CI [0.272,0.357]。
+- **ICC**：MoM −0.1257（REML 边界 0，CI [−0.159,−0.111]）——不作独立性证明，采用 ICC 0/0.05/0.10/0.20 敏感性。
+- **校准**：Student-t 控制 α 良好（推荐主检验）；bootstrap CI 检验反保守。
+- **样本量**（MDE 0.10 @80%）：ICC 0/0.05/0.10/0.20 → 15/17/22/30 families；双 15% 损耗 22/30/40/40。17-family 条件性充分。
+- GO：D-064-C。HOLD 不变；64 号 REQUEST CHANGES。

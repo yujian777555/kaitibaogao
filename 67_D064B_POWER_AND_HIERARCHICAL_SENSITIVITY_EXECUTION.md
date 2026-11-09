@@ -485,3 +485,20 @@ D-064-B 是否通过；D-064-C 是否可进入；正式 A-3b 是否继续 HOLD�
 8. 每轮更新并推送仓库和接管提示词。
 
 **D-064-B 的交付目标是得到可信的功效曲线和条件性样本量方案，不是为了证明现有 17 个 task families 一定够用。**
+
+---
+
+## D-064-B 执行完成记录（2026-11-09）
+
+交付：`power_hierarchical.py` + `test_power_hierarchical.py`（22/22）+ `power_hierarchical.json` + `power_hierarchical_report.md` + `family_cluster_diagnostics.csv` + `68_D064B_HIERARCHICAL_POWER_REPORT.md`。
+
+- **Task A ✓**：6 families × 7 comps = 42 clusters、零分母 12、seed 嵌套正确、无重复——零问题。
+- **Task B ✓**：ANOVA/MoM ICC=−0.1257、REML 边界 0、family-block bootstrap CI [−0.159,−0.111]；负值保留且不解释为独立性证明；敏感性网格替代点估计。
+- **Task C ✓**：双机制（family-block 重采样 + ICC 层级模拟，边际方差匹配，越界率 ~1e-5）；MDE 网格 0.05–0.15；ICC 0/0.05/0.10/0.20；key cells 10,000 次、sweep 2,000 次含 MCSE/CI；null 校准：**t 0.050–0.056 ✓、符号翻转 0.031(F=6)/0.05(F=17) ✓、bootstrap CI 检验 0.08–0.14 反保守 ✗**（发现并修复 2 个校准 bug：MC 计数、块中心化）。
+- **Task D ✓**：所需 families 表（MDE 0.10 @80%：ICC 0→15、0.05→17、0.10→22、0.20→30；双 15% 损耗 22/30/40/40）；design 153 vs eligible 119 区分；DE 公式仅核对。
+- **Task E ✓**：层级推断保持显著（t p=4.6e-5、精确符号翻转 p=0.031=2/64、block bootstrap CI [0.272,0.357]）；6/6 family 全正；外推范围限定于 6 抽样单位。
+- **Task F ✓**：R3 AB 0.226 vs NSGA-II 0.679；R4 0.800 vs 0.933——权衡如实。
+
+**17-family 评估**：条件性充分（低 ICC + 低损耗 + MDE≥0.10）；ICC=0.10 或 15% 损耗或 MDE=0.08 时不足（须 22–40 families）。
+
+**状态**：GO=D-064-C（语义 validator + 正式生成器 + MDE/样本量唯一冻结）；HOLD 不变；64 号保持 REQUEST CHANGES。

@@ -348,3 +348,6 @@ D-064-A 已从 diagnostic3 原始数据完成 CondRecSucc R1/R2-only 独立分�
 
 GO：D-064-B（完整执行规格见 67 号提示词）。  
 HOLD：正式 A-3b、任何 held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
+
+### D-064-B 更新（2026-11-09）
+层级功效与 ICC 敏感性完成（68 号）：t 检验为校准主检验；所需 families（MDE 0.10 @80%）ICC 敏感 15–30，双 15% 损耗 22–40；17-family 条件性充分。数据门禁不变；下一步 D-064-C 语义 validator 与正式生成器。

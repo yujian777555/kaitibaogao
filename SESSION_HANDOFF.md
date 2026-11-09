@@ -2170,3 +2170,18 @@ D-064-A 的点估计和原始数据复算保留；但 42-cluster CI/sign-flip �
 **GO：** D-064-B 统计、功效、ICC 敏感性、代码、测试和仓库维护。
 
 **HOLD：** 正式 A-3b、test peeking/tuning、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍未批准。
+
+
+## 59. D-064-B 执行轮：层级功效与 ICC 敏感性（2026-11-09）
+
+### 59.1 交付
+power_hierarchical.py（22/22 测试）+ power_hierarchical.{json,report.md} + family_cluster_diagnostics.csv + 68 号报告。
+
+### 59.2 核心结果
+- 6/6 family 均值全正；ANOVA ICC=−0.1257（REML 边界 0，CI [−0.159,−0.111]）——**不解释为独立性证明**，改用 ICC 网格敏感性。
+- **层级推断显著性保持**：t p=4.6e-5、精确符号翻转 p=0.031、block bootstrap CI [0.272,0.357]。
+- 校准：**t 检验控制 α 良好（0.050–0.056）**；bootstrap CI 检验反保守（0.08–0.14）；修复 2 个校准 bug。
+- 所需 families（MDE 0.10 @80%）：ICC 0/0.05/0.10/0.20 → 15/17/22/30；双 15% 损耗 22/30/40/40。**17-family 条件性充分**。
+
+### 59.3 状态
+GO：D-064-C（语义 validator + 正式生成器 + MDE/样本量唯一冻结）。HOLD 不变；64 号 REQUEST CHANGES。
