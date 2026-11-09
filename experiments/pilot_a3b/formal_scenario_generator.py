@@ -257,6 +257,10 @@ def _build_cluster(family, split, composition, seed_base=SEED_BASE):
         "n_repeats": len(scenarios),
     }
     problems = []
+    if label_info["class"] == "UNKNOWN":
+        problems.append(
+            f"{cluster['cluster_id']}: reachability evidence {label_info['evidence']}"
+        )
     if len(set(analytic_labels)) != 1:
         problems.append(f"{cluster['cluster_id']}: analytic labels vary across repeats")
     if not label_info["agreement"] and disagreement_reason is None:
