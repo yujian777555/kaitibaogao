@@ -46,7 +46,7 @@ FORMAL_COMPOSITIONS = (
     + tuple(HELDOUT_COMPOSITIONS)
 )
 FORMAL_COMPOSITIONS = tuple(
-    "permission_after_compensatable_prefix" if c == "permission_after_compensatable_prefix" else c
+    "permission_after_compensatable_prefix" if c == "delay_rate_permission" else c
     for c in FORMAL_COMPOSITIONS
 )
 ALLOWED_CLASSES_BY_COMPOSITION = {

@@ -92,23 +92,6 @@ class FormalScenarioGeneratorTests(unittest.TestCase):
         self.assertEqual(result["analytic_class"], "R3")
         self.assertTrue(result["agreement"])
 
-    def test_debug_partial_compensation_initial_belief(self):
-        from a3_verdicts import make_pattern_spec
-        from reachability import ReachabilityChecker, GOAL_ZERO_RESIDUAL
-        from pilot_a3 import TOOLS
-        faults = ("partial_commit", "timeout_after", None)
-        idem = tuple(TOOLS[t]["idempotent"] for t in self.tools)
-        comp = tuple(TOOLS[t]["compensatable"] for t in self.tools)
-        availability = (False, True, True)
-        spec = make_pattern_spec(
-            "debug-partial", faults, idem, comp, availability,
-            horizon=24, start_at_first_fault=True,
-        )
-        self.assertTrue(all(h[0][0] == 3 for h in spec.initial_hidden))
-        self.assertTrue(all(h[1][0] is False for h in spec.initial_hidden))
-        result = ReachabilityChecker(spec, horizon=24, max_nodes=500000).solve(GOAL_ZERO_RESIDUAL)
-        print("DEBUG_PARTIAL_ZERO_RESIDUAL", result.status, result.nodes_expanded, result.cutoff, result.policy_tree)
-
     def test_partial_compensation_failure_is_not_assumed_successful(self):
         faults = make_fault_vector(self.tools, "partial_comp_failure", 11, 29)
         partial_idx = next(i for i, f in enumerate(faults) if f["fault"] == "partial_commit")
