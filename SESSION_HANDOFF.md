@@ -1,9 +1,9 @@
 # SESSION HANDOFF — 开题研究项目
 
-**最后更新：** 2026-11-09  
+**最后更新：** 2026-11-09（D-064-A 完成；D-064-B 接管任务已冻结）  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** D-063 工程交付完成；D-064 独立审查 64 号预注册草案（REQUEST CHANGES）；正式 A-3b HOLD  
+**当前阶段：** D-064-A 完成（CondRecSucc 独立复算）；D-064-B READY_TO_EXECUTE（层级功效/ICC 敏感性）；64 号预注册 REQUEST CHANGES；正式 A-3b HOLD  
 **最终题目：** 尚未确定  
 **最终创新点：** 尚未确定
 
@@ -2130,3 +2130,43 @@ AB R3 0.226 / R4 0.80 vs NSGA-II 0.679 / 0.933——主要终点领先不掩盖�
 
 ### 58.4 状态
 GO：D-064-B（CondRecSucc 功效重做 + ICC 敏感性）。HOLD 不变；65 其余阻断项待后续。
+
+
+## 59. D-064-A 完成与 D-064-B 接管（2026-11-09）
+
+### 59.1 D-064-A 验收事实
+
+- Final HEAD：`16e255de627b37713f0ea936df0ddb0dd03ac084`；main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
+- CI run `42631223393` 在 final HEAD 上 success；109/109 tests。
+- 原始 diagnostic3 SHA-256：`b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c`。
+- CondRecSucc 仅 R1/R2；42 eligible task×composition clusters，12 zero-denominator clusters。
+- AB 0.5582 vs NSGA-II 0.2407；Δ=+0.3175；cluster SD=.318856；D-064-A cluster bootstrap CI [.218254,.411376]；cluster-level sign-flip MC p=.000125（8000 次）。
+- 42 clusters 嵌套在 6 个 task families 中，每个 family 当前 7 个 eligible compositions；不能假设 42 个独立 family。
+- R3 AB .226 vs NSGA-II .679；R4 AB .800 vs NSGA-II .933。主要终点优势不能掩盖安全行为率落后。
+
+### 59.2 D-064-B 的科学问题
+
+D-064-A 的点估计和原始数据复算保留；但 42-cluster CI/sign-flip 对 family 内相关性敏感。D-064-B 必须以 task family 为高层级抽样单位，重新评估 ICC、family-level 推断和功效。历史 ICC 负点估计不构成独立性证明。
+
+64 的候选 test 是 17×9=153 design clusters；若沿用当前 7/9 primary eligibility，只有约 119 primary-eligible clusters（条件性投影，待 D-064-C 正式生成器验证）。
+
+### 59.3 D-064-B 执行规格
+
+完整提示词与执行清单：`67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md`。
+
+- 重建 6 families×7 eligible clusters 层级结构；
+- ANOVA method-of-moments + random-intercept REML ICC，并给不确定性；
+- family-block empirical bootstrap + ICC-controlled hierarchical simulation；
+- ICC=0/.05/.10/.20；
+- MDE=.05/.08/.10/.1173/.15（.1173 仅历史敏感性，不是已选 MDE）；
+- 双侧 alpha=.05，80%/90% power，报告 null Type-I error、MCSE 和区间；
+- family-level t、family-level exact/MC sign-flip、family-block bootstrap 对照；
+- families 6/8/10/12/15/17/19/22/25/30/40；eligible compositions 6/7/8/9；cluster/family attrition 分开；
+- 区分 design clusters 与 primary-eligible clusters；不得将 153 直接当成 153 个 CondRecSucc 样本；
+- D-064-B 只给条件性样本量建议，最终 MDE/test family 数等待 D-064-C 和用户审阅。
+
+### 59.4 当前 GO / HOLD
+
+**GO：** D-064-B 统计、功效、ICC 敏感性、代码、测试和仓库维护。
+
+**HOLD：** 正式 A-3b、test peeking/tuning、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍未批准。
