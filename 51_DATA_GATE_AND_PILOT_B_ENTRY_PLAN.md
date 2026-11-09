@@ -248,14 +248,65 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 59/60/61 号报告落地。复核确认 D-061 的 0.36 违规率系评价器 artifact（正确 ROLLBACK 被误伤），真实损害仅 7 例重复（`TIMEOUT→VERIFY 谎言→RETRY→DUPLICATE`）。修复评价器并实现 WAIT-SLA 契约 + B-new。第三轮（diagnostic3，manifest 017b3454…）：**AB vs A +0.119 p=0.0002（B-new 成立）**；**WAIT-SLA vs A +0.089 p=0.005、vs 固定等待 +0.054 p=0.003**；AB vs AwaitSLA +0.031 p=0.007（搜索独立增益）；validation AB vs A +0.142 p=0.008。负结果：Safety Gate 有害、B 单独无效、未超 hand（−0.282）。判定：三机制独立证据齐备，第一项创新接近成立。下一步：功效核算 → preregistration 交用户批准 → 正式 A-3b。
 
 
-## 11. D-063：正式 A-3b 功效与预注册 Gate（2026-11-08）
+## 11. D-063：统计复现、经验功效与预注册 Gate（2026-11-09 更新）
 
-D-062 diagnostic3 已完成，但正式确认性实验仍 HOLD。完整计划见 `62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md`。
+**当前状态：ACTIVE PLAN；Stage 0 尚未完成；正式 A-3b = HOLD。**  
+完整计划与执行验收标准见 [62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md](62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md)。唯一接管入口为 [NEXT_SESSION_PROMPT.md](NEXT_SESSION_PROMPT.md)。
 
-- **主要证据限制：** AB vs NSGA-II all +0.1049 / p=.062（54 clusters）；validation +0.1173 / p=.2277（18 clusters），均未显著。AB vs A validation +.142 / p=.0082 支持 B-new 增量，但不能替代标准 EA 主比较。AB vs AwaitSLA validation +.031 / p=.244，Q10 独立搜索增益尚未泛化。AB vs Hand −.282，仍落后强手工。
-- **统计阻断：** `stats.py` 仍硬编码读取 diagnostic2；`run_diagnostic3.py` 不生成统计摘要；AwaitSLA 相关比较缺少完整可执行复算入口。先实现并测试 diagnostic3 专用分析器。
-- **初步样本量：** validation-only SD=.3914，双侧 alpha=.05，MDE=.10，80%/90% power 约需 123/163 个可分析 task×fault-composition clusters；加 15% 失效预留约 145/192。MDE=.08 则约需 190/254。最终数字须以 empirical cluster simulation 冻结。
-- **数据扩展：** 当前 validation 只有 18 clusters（2 个 task families ×9 compositions）。新增独立任务族/故障组合，不得仅增加 seeds 或重复 episodes 凑数。
-- **预注册：** AB vs NSGA-II 为唯一主要对比；次要对比 Holm；Hand 为参考；安全为硬门，合同假设必须写明；Q10 必须在新 held-out test 验证。
-- **GO：** 统计复现、功效仿真、任务族扩展审计、预注册草案、CI。
-- **HOLD：** 正式 A-3b、held-out 调参/查看、Pilot B、A800/ARWM、真实 API、UndoBench TEST、ThinkingBox。用户明确批准预注册后再冻结并另行授权正式实验。
+### 11.1 必须保留的 D-062 证据边界
+
+- AB vs NSGA-II all +0.1049 / p=.062（54 clusters）；validation +0.1173 / p=.2277（18 clusters），均未显著。
+- AB vs A validation +.142 / p=.0082，支持 B-new 在 A 上的增量，但不能替代 AB vs NSGA-II 主比较。
+- AB vs AwaitSLA validation +.031 / p=.244，Q10 搜索增量尚未证明泛化。
+- AB vs Hand −.282，仍落后强手工策略。
+- AwaitSLA vs A +.089 / p=.0047；AwaitSLA vs AwaitFixed +.054 / p=.0032。
+- B 单独和 Safety Gate 的负结果必须保留；安全保证严格限定于明确工具合同假设。
+
+### 11.2 Stage 0：统计分析器与独立复算（唯一首要任务）
+
+当前 stats.py 仍有 diagnostic2 硬编码读取路径，diagnostic3 需要单独可复现的分析入口。新增 analyse_diagnostic3.py 或显式输入参数的通用 CLI，必须：
+
+- 从 diagnostic3 原始 JSON 读取数据，输出 all/train/validation；
+- 重新计算七组主要/次要比较：AB vs NSGA-II、AB vs A、AwaitSLA vs A、AwaitSLA vs AwaitFixed、AB vs AwaitSLA、AB vs Hand、B vs NSGA-II；
+- 以 task × fault-composition cluster 为推断单位，seed 为嵌套因素；
+- 检查 episode ID 唯一、实验臂配对完整、cluster 成员一致、split 隔离、分母和 R1/R2/R3/R4 标签语义；
+- 输出 cluster SD、95% CI、paired sign-flip p、适用的 Holm-adjusted p、效应量和 seed 稳定性；
+- 保存输入 JSON / manifest / 分析配置哈希、分析命令和版本；
+- 对缺失配对、重复 episode、cluster mismatch、seed 缺失、split 泄漏、分母错误设置 fail-closed 测试；
+- 独立再生统计摘要，并逐项对账 61 号报告；差异要解释，不得硬编码结果以匹配历史数字。
+
+### 11.3 Stage 1：经验功效仿真
+
+- 使用 Stage 0 再生的 cluster-level paired differences。
+- 主要设计只针对新 held-out test 上 AB vs canonical NSGA-II。
+- 报告 MDE=.08/.10/.1173、双侧 alpha=.05、80%/90% power。
+- 用 cluster-level Monte Carlo resampling / sign-flip 估计功效，并报告模拟次数、Monte Carlo 误差与稳定性。
+- 做 15% cluster 失效预留与 SD 敏感性分析。
+- validation 仅 18 clusters，SD 估计不稳定，必须披露。
+- 不能通过增加同一 cluster 的 episodes 或 seeds 伪造独立样本。
+
+### 11.4 Stage 2：任务族与 cluster 扩展审计
+
+旧文档同时出现“总计 6 个任务族”和“validation 2 个任务族 ×9 compositions =18 clusters”。可能分别指全体任务族和 validation 子集，必须从真实 task/split/scenario manifests 对账。
+
+63 号审计需列出 task family、生成规则、工具依赖、9 类 fault composition 适用性、确定性 cluster ID、近重复/模板泄漏、train/validation/test 泄漏矩阵、可用独立 cluster 数和扩展成本。目标 cluster 数以经验功效仿真为准；145 只是 MDE=.10、80% power、15% 预留下的初步 t 近似值，不是冻结样本量。
+
+### 11.5 Stage 3：预注册草案
+
+64 号草案必须先澄清主要终点：R1/R2 的条件恢复与 R3/R4 的正确升级不是同一语义；给出逐类公式、分母、类别权重、cluster 聚合顺序，UNKNOWN 按预先定义的规则处理。
+
+- 唯一主要比较：AB vs canonical NSGA-II；
+- 双侧 alpha=.05；主要终点、MDE、目标 power 和 cluster 数事前冻结；
+- 次要比较 Holm 校正；
+- Hand 仅作强手工参考，不声称超越专家；
+- 安全作为硬门，合同假设与事件级指标明确；
+- 代码、算法版本、初始化、预算、种子、排除规则、锁箱 manifest 和哈希全部冻结；
+- 文件状态为 DRAFT — NOT FROZEN，提交用户审阅。
+
+### 11.6 GO / HOLD
+
+**GO：** 统计复现、synthetic tests、经验功效仿真、任务族审计、预注册草案、CI 和文档维护。
+
+**HOLD：** 正式 A-3b、查看/调参新 held-out test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。用户批准预注册后，正式 A-3b 仍需单独授权。
+
+**下一会话唯一首要任务：** Stage 0 — 从 diagnostic3 原始数据建立独立、可复现的分析入口。
