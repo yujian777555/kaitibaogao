@@ -97,6 +97,9 @@ class FormalScenarioGeneratorTests(unittest.TestCase):
         self.assertIsNotNone(reason)
         scenario["tools"][0] = "calendar"
         self.assertIsNone(_explain_analytic_disagreement(scenario, "R2", "R1"))
+        scenario["tools"][0] = "inventory"
+        scenario["faults"][0]["fault"] = "delayed_visibility"
+        self.assertIsNotNone(_explain_analytic_disagreement(scenario, "R2", "R1"))
 
 
 if __name__ == "__main__":

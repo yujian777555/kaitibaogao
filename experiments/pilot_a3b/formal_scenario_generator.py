@@ -194,11 +194,11 @@ def _explain_analytic_disagreement(scenario, robust_label, analytic_label):
     """Whitelist only the known legacy heuristic gap, never arbitrary mismatches."""
     if robust_label == "R2" and analytic_label == "R1":
         for tool, fault in zip(scenario["tools"], scenario["faults"]):
-            if fault["fault"] == "timeout_after" and not TOOLS[tool]["idempotent"]:
+            if fault["fault"] in ("timeout_after", "delayed_visibility") and not TOOLS[tool]["idempotent"]:
                 return (
-                    "legacy scenario_verdict labels timeout_after as R1; the robust "
-                    "AND-OR checker requires compensation for this non-idempotent "
-                    "ambiguous-commit case and therefore labels it R2"
+                    "legacy scenario_verdict labels ambiguous commit/visibility faults as R1; "
+                    "the robust AND-OR checker requires compensation for this non-idempotent "
+                    "tool state and therefore labels it R2"
                 )
     return None
 
