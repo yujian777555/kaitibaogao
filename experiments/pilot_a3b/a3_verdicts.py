@@ -22,7 +22,7 @@ from reachability import (
 )
 from a3_bridge import scenario_verdict
 
-ACTIONS = ("CALL", "RETRY", "VERIFY", "WAIT", "COMPENSATE", "ROLLBACK", "ESCALATE", "STOP_SAFE")
+ACTIONS = ("CALL", "RETRY", "VERIFY", "WAIT", "REPAIR", "COMPENSATE", "ROLLBACK", "ESCALATE", "STOP_SAFE")
 VIS_BOUND = 4
 
 # hidden = (states, comps, delays, waitc, spent, last_obs, stopped, done)
