@@ -1,6 +1,7 @@
 # 69 — D-064-C：任务语义独立审计、正式场景生成器验证与统计设计冻结
 
 **日期：** 2026-11-09（D-064-C）  
+> **勘误（2026-11-10，R1 发现 R2-003）**：本报告记录的 manifest `af83f065…` 为 POWER_DESIGN 元数据修订前的 **superseded** 值；当前冻结值为 **fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a**（独立重建与 CI run 42661732606 一致）。test-family `01b41df8…` / test-scenario `dded3bb7…` 不变。另：本报告"validator 对抗性完备"为过强表述，应读作"已覆盖的 12 类恶意变形均被拒绝，测试范围内未发现绕过"。  
 **审计对象：** `task_semantics.py`、`formal_scenario_generator.py`、标签器链、8/4/40 划分、确定性与哈希、40-family 功效  
 **新增测试：** `test_d064c_audit.py` 25/25（对抗性 ×12、组合真实性 ×5、标签边界 ×3、确定性 ×4、其余一致性）  
 **产物：** `power_final_design_check.json`（最终设计功效复算）  

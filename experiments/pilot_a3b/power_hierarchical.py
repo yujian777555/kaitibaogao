@@ -273,6 +273,29 @@ def icc_bootstrap_ci(h, reps=BOOT_REPS, seed=SEED):
 # ---------------------------------------------------------------------------
 # Task E: hierarchical inference on the observed data
 # ---------------------------------------------------------------------------
+def family_t_df(n_families):
+    """Degrees of freedom for the primary two-sided family-level Student-t:
+    df = F_observed - 1 (NEVER a fixed constant: 40 families -> 39,
+    34 effective families -> 33; see 64-R3 / R1 finding R2-002)."""
+    if n_families < 2:
+        raise ValueError("family-level Student-t requires at least 2 families")
+    return n_families - 1
+
+
+def missing_data_rules():
+    """Frozen missing-data policy (R1 finding R2-004 / 64-R3)."""
+    return {
+        "technical_missing": "exclude run, count, do not replace seeds",
+        "behavioural_failure": "score as class_success=0 (measured endpoint)",
+        "null_class_success_on_labelled_row": "fail closed (analysis refuses)",
+        "family_min_valid_compositions": 1,
+        "family_zero_valid_compositions": "drop family, count family_loss",
+        "design_floor_families": 34,
+        "below_design_floor": "proceed with df=F_observed-1 and raise design_deviation flag",
+        "selective_deletion": "forbidden",
+    }
+
+
 def family_level_tests(h, seed=SEED):
     fam_means = np.array([h["fam_means"][f] for f in sorted(h["fam_means"])], dtype=float)
     F = len(fam_means)
@@ -282,15 +305,28 @@ def family_level_tests(h, seed=SEED):
     tval = mean / (sd / math.sqrt(F)) if sd > 0 else float("inf")
     # two-sided p via survival function of t(F-1); use scipy-free integration:
     p_t = _t_sf(abs(tval), F - 1) * 2
-    # exact sign-flip (2^F enumeration)
+    # sign-flip test: exact 2^F enumeration only for small F; Monte Carlo
+    # sign flips otherwise (F=40 would be 2^40 enumerations)
     obs = abs(mean)
-    extreme = 0
-    total = 2 ** F
-    for signs in itertools.product((1, -1), repeat=F):
-        s = sum(s * v for s, v in zip(signs, fam_means)) / F
-        if abs(s) >= obs - 1e-12:
-            extreme += 1
-    p_sf = extreme / total
+    if F <= 15:
+        extreme = 0
+        total = 2 ** F
+        for signs in itertools.product((1.0, -1.0), repeat=F):
+            s = sum(s * v for s, v in zip(signs, fam_means)) / F
+            if abs(s) >= obs - 1e-12:
+                extreme += 1
+        p_sf = extreme / total
+        sf_method = f"exact enumeration (2^{F})"
+    else:
+        rng_sf = random.Random(seed + 1)
+        reps_sf = 10000
+        extreme = 0
+        for _ in range(reps_sf):
+            s = sum((1.0 if rng_sf.random() < 0.5 else -1.0) * v for v in fam_means) / F
+            if abs(s) >= obs - 1e-12:
+                extreme += 1
+        p_sf = (extreme + 1) / (reps_sf + 1)
+        sf_method = f"Monte Carlo sign-flip ({reps_sf} reps)"
     # family-block bootstrap CI (percentile, resample F families)
     rng = random.Random(seed)
     boots = []
@@ -305,8 +341,8 @@ def family_level_tests(h, seed=SEED):
         "family_means": {f: round(h["fam_means"][f], 6) for f in sorted(h["fam_means"])},
         "mean": round(mean, 6),
         "family_mean_sd": round(sd, 6),
-        "student_t": {"t": round(tval, 4), "df": F - 1, "p_two_sided": round(p_t, 6)},
-        "signflip_exact": {"p": round(p_sf, 6), "enumeration": total},
+        "student_t": {"t": round(tval, 4), "df": family_t_df(F), "p_two_sided": round(p_t, 6)},
+        "signflip_exact": {"p": round(p_sf, 6), "method": sf_method},
         "block_bootstrap_ci95": ci,
     }
 
