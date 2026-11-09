@@ -1072,3 +1072,36 @@ HOLD：正式 A-3b、任何 held-out test 调参/查看、Pilot B、A800/ARWM、
 - 安全保证只限明确工具合同假设。
 
 **授权：** GO 仅限统计复现、synthetic tests、历史诊断数据功效规划、任务族审计、预注册草案、CI 和文档维护。正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。即使用户批准预注册，正式 A-3b 仍需另行明确授权。
+
+
+## 决策 D-063：统计独立复算、Monte Carlo 功效、任务族扩展审计与预注册草案（2026-11-08）
+
+### Stage 0 — 独立复算入口（analyse_diagnostic3.py，17/17 测试绿）
+- 独立读取 diagnostic3 原始 rows，结构检查（配对/seed 嵌套/cluster 分组/重复/泄漏/分母）零问题；manifest 复算一致。
+- **全部 7 个对比的 Δ 与 61 号逐位一致**（AB vs nsga2 +0.1049、AB vs A +0.1193、AwaitSLA vs A +0.0885、AwaitSLA vs Fixed +0.0535、AB vs AwaitSLA +0.0309、AB vs hand −0.2819、B vs nsga2 −0.0741）。
+- p 值第 3 位微差（如 primary 0.0647 vs 61 的 0.062）——置换检验 MC 种子不同所致，显著性结论不变；已如实记录，未改计算逻辑。
+- 输出：diagnostic3_recomputed.{json,csv,md}；测试覆盖配对/缺臂/重复/cluster 失配/seed 缺失/泄漏/分母/可复现性/Holm/哈希变化。
+
+### Stage 1 — Monte Carlo 功效（power_simulation.json，2000 次/点，seed 20261110）
+- 基于真实 cluster 差值（主对比 sd=0.404；validation-18cl sd=0.391）；seed 嵌套不膨胀。
+- **主对比（AB vs NSGA-II）所需 test clusters：MDE 0.08→254、0.10→145、0.1173→110（80%）**；含 15% 失效预留 299/171/130。90% 档更高。
+- 校正 t 近似表：旧表对应 validation sd；用主对比 sd 需求上浮（145 vs 123 @MDE0.10）。
+- ICC ≈ −0.09（任务族间无相关性检出，cluster 独立性假设成立）；18 clusters 方差不稳已如实声明（三源敏感性并报）。
+
+### Stage 2 — 任务族扩展审计（63 号，task_family_expansion_audit.json）
+- 576 个合同语义有意义的三步序列、18 种合同 profile；**朴素按 profile 选择会集中 ledger（重叠 2.0/3），多样性贪心降至 0.83/3、零重叠对 144/406**。
+- 推荐划分：train 8 族 / val 4 族 / **test 锁箱 17 族** = 72/36/**153 clusters**。
+- 功效缺口（153 vs 含预留 171）替代序：MDE 降至 0.1173（充足）→ 接受 75–80% 实际功效 → 扩至 19 族；**禁止**重复 episode 冒充 cluster。
+- 泄漏面登记：10 工具池共享（主张限定为新序列/合同组合）、故障词汇共享、生成器同源。
+
+### Stage 3 — 正式预注册草案（64 号，CANDIDATE）
+主要唯一比较 AB vs NSGA-II；次要 4 项 Holm；Hand 只作参考；指标含 CondRecSucc 公式、R3/R4 判定、硬安全门（>0 即判负、不外推真实工具）；协议冻结（pop48×60、种子 411/522/633、场景 base 2026111100、test 459 场景 153 clusters 锁箱、预算/排除/停止/存档规则）；解释边界预注册。
+
+### 科学结论
+- 统计证据经独立复算**成立**（Δ 全对齐、结论不变）。
+- 功效规划**可辩护**（MC + ICC + 敏感性），但 test 153 对 MDE=0.10 含预留目标略低——预注册已内建替代序。
+- 任务族扩展**可行**（泄漏受控、主张限定）。
+- 正式 A-3b **待批准**；其余 HOLD 不变。
+
+### 下一步
+用户审阅 64 号预注册草案 → 批准后按 §5 清单冻结场景哈希并执行正式 A-3b。

@@ -829,3 +829,27 @@ D-062 diagnostic3 结果必须如实继承：
 12. 下一阶段唯一任务。
 
 **接管后立即开始 Stage 0，不要再询问用户是否开始。不得把计划写成已完成，不得擅自启动正式 A-3b。**
+
+## 2026-11-08 — D-063 COMPLETE: independent recomputation, power simulation, expansion audit, preregistration candidate
+
+### Stage 0 (analyse_diagnostic3.py, 17/17 tests)
+- Independent recomputation from diagnostic3 raw rows; structural checks (pairing/seed nesting/clusters/duplicates/leakage/denominators) all clean; manifest verified.
+- **All 7 contrast effect sizes match report 61 EXACTLY** (AB vs nsga2 +0.1049; AB vs A +0.1193; AwaitSLA vs A +0.0885; AwaitSLA vs Fixed +0.0535; AB vs AwaitSLA +0.0309; AB vs hand -0.2819; B vs nsga2 -0.0741). p-values drift at 3rd decimal (permutation MC seed difference); conclusions unchanged.
+- Outputs: diagnostic3_recomputed.{json,csv,report.md}.
+
+### Stage 1 (power_simulation.json, 2000 MC/point, seed 20261110)
+- Primary contrast (AB vs NSGA-II, cluster sd 0.404) test clusters needed @80%: MDE 0.08 -> 254, 0.10 -> **145**, 0.1173 -> 110 (with 15% attrition: 299/171/130). ICC ~ -0.09 (cluster independence supported). 18-cluster variance instability honestly reported via 3-source sensitivity.
+
+### Stage 2 (63_D063_TASK_FAMILY_EXPANSION_AUDIT.md)
+- 576 contract-meaningful 3-step sequences, 18 contract profiles. Naive per-profile selection concentrates on ledger (overlap 2.0/3); greedy diversity panel = 0.83/3, 144/406 zero-overlap pairs.
+- Proposed split: train 8 / val 4 / **test-locked 17 families** = 72/36/**153 clusters** (power gap vs 171-with-attrition covered by pre-registered fallback: MDE 0.1173 or accept 75-80%; never inflate with repeats).
+- Leakage registered: shared 10-tool pool (claim limited to new sequences/contract combos), shared fault vocabulary, shared generator.
+
+### Stage 3 (64_A3B_PREREGISTRATION_CANDIDATE.md — awaiting user approval)
+Primary sole contrast AB vs NSGA-II; 4 secondary w/ Holm; Hand reference only. Frozen: metrics formulas, hard safety gate (any violation -> fail, scoped claims), pop 48x60, seeds 411/522/633, scenario base 2026111100, train/val/test 216/108/459 scenarios (test 153 clusters locked), budget/exclusion/stopping/archival rules.
+
+### Status
+GO: user review of 64. HOLD: formal A-3b (until approved AND checklist 64 §5 done), test peeking, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox.
+
+### Next task (single)
+User reviews 64_A3B_PREREGISTRATION_CANDIDATE.md -> upon approval run pre-flight checklist (freeze scenario hashes, record code SHA, tests green) -> execute formal A-3b.

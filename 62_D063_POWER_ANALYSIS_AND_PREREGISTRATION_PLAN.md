@@ -346,3 +346,13 @@ D-062 执行报告称 79/79 测试通过，但当前已有 `.github/workflows/pi
 - GitHub Actions 真实运行成功，或如实标记未触发/失败。
 
 **当前唯一下一步仍是 Stage 0：审查原始 diagnostic3 数据与 stats.py，建立可复现的 diagnostic3 独立分析入口。**
+
+---
+
+## D-063 执行完成记录（2026-11-08）
+
+- **Stage 0 ✅**：`analyse_diagnostic3.py` + `test_analyse_diagnostic3.py`（17/17）；7 对比 Δ 与 61 号逐位一致，p 值置换 MC 微差已如实记录；输出 `diagnostic3_recomputed.{json,csv,report.md}`。
+- **Stage 1 ✅**：`power_simulation.py` / `power_simulation.json`——主对比 MDE 0.08/0.10/0.1173 @80% 需 254/145/110 clusters（含 15% 失效 299/171/130）；ICC≈−0.09；18-cluster 敏感性三源并报。本计划中的 t 近似表对应 validation sd，主对比 sd 下需求上浮，已在 63/64 号采用 MC 值。
+- **Stage 2 ✅**：`63_D063_TASK_FAMILY_EXPANSION_AUDIT.md`——576 候选/18 profile，多样性面板 0.83/3 重叠；train/val/test=8/4/17 族=72/36/153 clusters；功效缺口替代序（MDE 0.1173 或接受 75–80%；禁止重复冒充）。
+- **Stage 3 ✅**：`64_A3B_PREREGISTRATION_CANDIDATE.md`——正式预注册草案，冻结主要/次要比较、指标公式、硬安全门、协议参数、排除/停止/存档规则与解释边界。
+- **状态**：GO=用户审阅 64；HOLD=正式 A-3b（批准 + 64 §5 预检清单后解锁）及其余全项。

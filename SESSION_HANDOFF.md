@@ -2051,3 +2051,21 @@ HOLD：正式 A-3b、held-out 调参/查看、Pilot B、A800/ARWM、真实 LLM A
 ### 维护规则
 
 每次实质性研究、实验、代码、协议、审计或决策变化后，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、README.md、05_DECISION_LOG.md 和相关计划文件。所有 SHA、测试、CI 和科学结论必须来自真实仓库或运行结果；不得把计划写成完成。
+
+
+## 57. D-063 执行轮：统计复算、功效、扩展审计、预注册（2026-11-08）
+
+### 57.1 Stage 0 独立复算（analyse_diagnostic3.py，17/17 测试）
+结构检查零问题；7 对比 Δ 与 61 号逐位一致；p 值 3 位微差=置换 MC 种子差异（结论不变）。输出 diagnostic3_recomputed.{json,csv,md}。
+
+### 57.2 Stage 1 功效（Monte Carlo 2000/点）
+主对比需 test clusters（80%）：MDE 0.10→**145**（含 15% 失效 171）、0.1173→110、0.08→254；ICC≈−0.09 支持 cluster 独立；18-cluster 方差不稳已敏感性声明。
+
+### 57.3 Stage 2 扩展审计（63 号）
+576 候选序列/18 profile；多样性选择重叠 0.83/3（朴素 2.0/3）；train/val/test = 8/4/17 族 = 72/36/**153 clusters**；功效缺口替代序已定；泄漏面已登记。
+
+### 57.4 Stage 3 预注册草案（64 号，CANDIDATE）
+主要唯一对比 AB vs NSGA-II；次要 4 项 Holm；硬安全门；协议全冻结（pop48×60、seeds 411/522/633、test 459 场景锁箱）。
+
+### 57.5 状态与下一步
+GO：用户审阅 64。HOLD：正式 A-3b（批准+清单后解锁）及其他全项。下一步：批准 → 预检 → 正式 A-3b。

@@ -733,3 +733,12 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 最近一次实验代码回归 workflow： [Actions run 42398278551](https://github.com/yujian777555/kaitibaogao/actions/runs/42398278551)，在代码提交 `c0078d5c3db17380e81faca5752ac6a64f555a6d` 上成功，`pilot_a_recovery` 与 `pilot_a3b` 两个测试步骤均成功。其后为文档维护提交；文档更新本身未触发该代码路径 workflow。不得将历史 CI run 描述为最新文档 HEAD 的 CI。
 
 **下一会话唯一首要任务：Stage 0 — 审查 diagnostic3 原始数据与 stats.py，建立可复现的独立分析入口。**
+
+
+## 2026-11-08：D-063 — 统计独立复算、功效仿真、任务族扩展审计、预注册草案
+
+- **Stage 0**（`analyse_diagnostic3.py`，17/17 测试）：7 对比 Δ 与 61 号**逐位一致**，p 值 MC 微差已解释；结构检查零问题；输出 `diagnostic3_recomputed.{json,csv,md}`。
+- **Stage 1**（`power_simulation.json`）：主对比 MDE=0.10 @80% 需 **145** test clusters（含失效 171）；ICC≈−0.09。
+- **Stage 2**（[63_D063_TASK_FAMILY_EXPANSION_AUDIT.md](63_D063_TASK_FAMILY_EXPANSION_AUDIT.md)）：576 候选、多样性面板重叠 0.83/3；train/val/test=8/4/17 族=72/36/**153 clusters**，泄漏受控。
+- **Stage 3**（[64_A3B_PREREGISTRATION_CANDIDATE.md](64_A3B_PREREGISTRATION_CANDIDATE.md)）：正式预注册草案（主要对比 AB vs NSGA-II、Holm、硬安全门、协议冻结）——**待用户批准**。
+- GO：审阅 64。HOLD：正式 A-3b（批准+预检后解锁）及全部既有 HOLD 项。
