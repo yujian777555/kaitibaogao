@@ -2,8 +2,8 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** Pilot A-3 simulator implementation / CI validation pending  
-**状态日期：** 2026-11-05
+**当前阶段：** D-063 — diagnostic3 统计复现、经验功效仿真、任务族扩展审计与预注册草案；正式 A-3b HOLD  
+**状态日期：** 2026-11-09
 
 ## 1. 项目边界（必须遵守）
 
@@ -687,12 +687,49 @@ ToolMisuseBench v0.2 large 有 6,000 train、900 dev、1,200 public-test records
 - **负结果**：B 单独劣于 NSGA-II（−0.074）；Safety Gate 有害（AB−ABG +0.193）；AB 仍显著落后 Hand（−0.282）。不得声称超越专家，也不得提前声称正式优于 NSGA-II。
 - D-062 代码、测试和 diagnostic3 完成；正式 A-3b 仍 HOLD。下一步转入 D-063：统计分析可复现性、held-out cluster 功效仿真、预注册草案。
 
-## 2026-11-08：D-063 — 正式 A-3b 功效与预注册准备
+## 2026-11-09：D-063 执行接管更新（当前状态）
 
-计划：[62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md](62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md)。
+**当前阶段：D-063 准备工作；Stage 0 尚未执行完成；正式 A-3b 仍 HOLD。**
 
-- 首先修复 `stats.py` 仍硬编码 diagnostic2、缺少 diagnostic3 完整对比复算入口的问题。
-- 初步 paired-cluster t 近似：validation-only SD=0.3914，MDE=0.10 时 80%/90% power 约需 123/163 个可分析 clusters；加 15% 预留约 145/192。
-- 当前 validation 只有 18 个 task×fault-composition clusters；不能用更多 seeds/episodes 代替独立 cluster。
-- 主要确认性比较拟定 AB vs NSGA-II；Q10 的 AB vs AwaitSLA 必须在新 held-out test 验证；Hand 只作参考。
-- 正式 A-3b、held-out 调参、Pilot B、A800/ARWM 和真实 LLM API 继续 HOLD，等待用户批准预注册。
+接管唯一入口：[NEXT_SESSION_PROMPT.md](NEXT_SESSION_PROMPT.md)。完整执行计划：[62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md](62_D063_POWER_ANALYSIS_AND_PREREGISTRATION_PLAN.md)。
+
+### 当前仓库核验基线
+
+- 仓库：`yujian777555/kaitibaogao`
+- 工作分支：`pilot-a-stateful-recovery`
+- 本轮维护开始前 HEAD：`e6fee3bde05e8dea3fcc54f2ea1d97bc54837867`
+- main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`
+- 开始前分支相对 main：ahead 123 / behind 0
+- main 不得修改；接管时重新查询实时 HEAD，不得把上述基线当成未来最新值。
+
+### D-062 证据边界（必须继承）
+
+- AB vs A +0.119，p=0.0002；AB vs A validation +0.142，p=0.0082。
+- AwaitSLA vs A +0.089，p=0.0047；AwaitSLA vs AwaitFixed +0.054，p=0.0032。
+- AB vs AwaitSLA 全数据 +0.031，p=0.0072；validation +0.031，p=0.244，搜索增量尚未证明独立泛化。
+- AB vs NSGA-II 全数据 +0.1049，p=0.062；validation +0.1173，p=0.2277，均未显著。
+- AB vs Hand −0.282，仍落后强手工策略。
+- B 单独和 Safety Gate 的负结果必须保留；安全保证只限明确工具合同假设。
+
+### D-063 执行顺序
+
+1. **Stage 0：** 新增 diagnostic3 专用分析入口，从原始 JSON 独立复算 all/train/validation，检查配对、cluster、seed、split、分母、重复 episode 和哈希；对账 61 号报告。
+2. **Stage 1：** 基于复算的 cluster-level paired differences 做 empirical Monte Carlo power simulation；报告 MDE 0.08/0.10/0.1173、双侧 alpha 0.05、80%/90% power 和 15% 失效预留。
+3. **Stage 2：** 从 task/split/scenario manifest 核实任务族总数、validation 18 clusters 的来源、cluster 独立性和泄漏；输出 63 号任务族扩展审计。
+4. **Stage 3：** 形成 64 号预注册草案，澄清 R1/R2 恢复与 R3/R4 正确升级的主要终点定义；主比较 AB vs canonical NSGA-II，次要比较 Holm，Hand 仅作参考。
+5. **交用户审阅：** 预注册必须标记 DRAFT — NOT FROZEN；用户批准预注册不等于正式 A-3b 授权，正式实验仍需另行明确批准。
+
+### 数据与授权纪律
+
+- 当前 diagnostic3 validation 已被使用，不得充当正式 test。
+- 不得查看或调参新的 held-out test。
+- 不得用更多 episode/seed 伪造独立 cluster。
+- 当前“总任务族 6 个”与“validation 2 个任务族 ×9=18 clusters”需要从 manifest 对账，不得猜测。
+- GO：统计复现、synthetic tests、功效仿真、任务族审计、预注册草案和文档维护。
+- HOLD：正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
+
+### CI 状态
+
+最近一次实验代码回归 workflow： [Actions run 42398278551](https://github.com/yujian777555/kaitibaogao/actions/runs/42398278551)，在代码提交 `c0078d5c3db17380e81faca5752ac6a64f555a6d` 上成功，`pilot_a_recovery` 与 `pilot_a3b` 两个测试步骤均成功。其后为文档维护提交；文档更新本身未触发该代码路径 workflow。不得将历史 CI run 描述为最新文档 HEAD 的 CI。
+
+**下一会话唯一首要任务：Stage 0 — 审查 diagnostic3 原始数据与 stats.py，建立可复现的独立分析入口。**
