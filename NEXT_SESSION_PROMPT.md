@@ -2,12 +2,12 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-09（D-064-A 完成；D-064-B READY_TO_EXECUTE；64 号草案仍 REQUEST CHANGES）**  
+**最后维护日期：2026-11-10（D-064-C 完成；64-R2 独立审计 R1 = REQUEST CHANGES；正式 A-3b HOLD）**  
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
 
-> **当前任务优先级说明（2026-11-09）：** 本文件后部最新的 **D-064-B 执行接管指令**覆盖所有较早阶段中的历史“下一步”指令（包括 D-063、D-064-A）。旧段落保留作研究轨迹，不代表当前任务。下一会话必须先读 67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md，然后直接执行 D-064-B；不得启动正式 A-3b。
+> **当前任务优先级说明（2026-11-10）：** D-064-A/B/C 均已完成；当前唯一任务是处理 70_64R2_INDEPENDENT_REVIEW_R1.md 中的 REQUEST CHANGES，修订 64_A3B_PREREGISTRATION_CANDIDATE.md R2 并请求独立 R2 复审。本文中较早的 D-064-A/B/C 执行说明均为历史记录，不得覆盖本优先级。正式 A-3b 继续 HOLD，直到独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 §5 pre-flight。
 
 ---
 
@@ -1064,7 +1064,7 @@ Report: `69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md`. New tests: `test_d064
 - 9 fault compositions: declared-vs-injected-vs-label consistent; ONE stale note fixed (permission_after_compensatable_prefix described legacy triple-fault but injects step-1 permission only; implementation matches name and R3 mechanism; R3 premise holds 52/52 families; 7/9 primary eligibility unchanged).
 - Labeler: independent AND-OR robust reachability (horizon 24) with analytic cross-check and per-cluster evidence hashes; no algorithm input; UNKNOWN 0% (not claimed perfect).
 - Split 8/4/40: disjoint, 10 profiles x 4 families, determinism + lockbox clean; semantic diversity scoped to abstract saga.
-- Hashes reproduced independently: manifest af83f065... / test-family 01b41df8... / test-scenario dded3bb7...
+- Hashes reproduced independently: manifest fb832bcc...（最终 CI run 42661732606）/ test-family 01b41df8... / test-scenario dded3bb7...
 
 ### Power at final design (hardcode 0.85 NOT trusted)
 40 design families x 7 eligible comps, dual 15% attrition -> 34 eff families x 5 eff comps = 170 eff clusters; MDE=0.10; 10,000 MC (seed 20261113):
@@ -1076,7 +1076,18 @@ Report: `69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md`. New tests: `test_d064
 Primary = family-level Student-t (calibrated); sign-flip sensitivity-only; bootstrap descriptive-only; UNKNOWN>5% = label-gate failure; double-15% attrition rule; test 40 families / 1,080 scenarios / 280 eligible clusters (hashes frozen); lockbox + stopping rules unchanged. Status: CANDIDATE R2 awaiting independent review + user approval.
 
 ### Status
-GO: 64-R2 independent review -> user approval -> formal A-3b. HOLD unchanged: formal A-3b execution, test peeking/tuning, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox, main merges.
+GO: correct 64-R2 findings and request independent R2 review. HOLD: formal A-3b, test peeking/tuning, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox, main merges. Formal A-3b additionally requires advisor approval of MDE=0.10, explicit user approval, and a passing §5 pre-flight.
 
 ### Next task (single)
-64-R2 independent audit; upon user approval run the 64 pre-flight checklist and execute the formal A-3b.
+Resolve 70_64R2_INDEPENDENT_REVIEW_R1.md REQUEST CHANGES: correct §2 primary/secondary inference, dynamic df, final manifest hash, conservative attrition wording, and advisor-approval gate; update README/05_DECISION_LOG/SESSION_HANDOFF/NEXT_SESSION_PROMPT; run tests and CI; request independent R2 review. Do not run formal A-3b until independent review ACCEPTED + advisor MDE approval + explicit user approval + §5 pre-flight.
+
+
+## 2026-11-10 — 64-R2 independent review R1: REQUEST CHANGES
+
+Reviewed: 64_A3B_PREREGISTRATION_CANDIDATE.md R2; report: 70_64R2_INDEPENDENT_REVIEW_R1.md.
+
+Current verified state: work branch HEAD fa3bc2c5699c0fad8df384bebd44e5510d1d8927; main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653; ahead 170 / behind 0; CI run 42661732606 success, 174/174. Final manifest SHA fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a; family/scenario hashes unchanged.
+
+Blocking findings: §2 cluster-level bootstrap/sign-flip conflicts with §4 family-level Student-t; df=39 must be dynamic F_observed−1 (expected df=33 at 34 families after attrition); stale manifest hash; secondary test specification incomplete; deterministic floor attrition requires explicit conservative wording; MDE=0.10 still needs advisor approval. See report 70.
+
+Only next task: correct 64-R2 and re-review. Formal A-3b remains HOLD until independent review passes, advisor accepts MDE, user explicitly approves, and §5 pre-flight passes.

@@ -1,9 +1,9 @@
 # SESSION HANDOFF — 开题研究项目
 
-**最后更新：** 2026-11-09（D-064-A 完成；D-064-B 接管任务已冻结）  
+**最后更新：** 2026-11-10（D-064-C 完成；64-R2 独立审计 R1 = REQUEST CHANGES）  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** D-064-A 完成（CondRecSucc 独立复算）；D-064-B READY_TO_EXECUTE（层级功效/ICC 敏感性）；64 号预注册 REQUEST CHANGES；正式 A-3b HOLD  
+**当前阶段：** D-064-C 完成（语义审计、8/4/40 场景生成、功效复核）；64-R2 独立审计 R1 = REQUEST CHANGES；正式 A-3b HOLD（待修订、复审、导师 MDE 认可及用户批准）  
 **最终题目：** 尚未确定  
 **最终创新点：** 尚未确定
 
@@ -2200,3 +2200,28 @@ GO：D-064-C（语义 validator + 正式生成器 + MDE/样本量唯一冻结）
 
 ### 60.4 状态
 GO：64-R2 独立审计→用户批准→正式 A-3b。HOLD 不变。
+
+
+## 61. 64-R2 独立审计 R1（2026-11-10）
+
+结论：REQUEST CHANGES；正式 A-3b 继续 HOLD。
+
+### 已核验的 D-064-C 最终交付
+- 工作分支 HEAD：fa3bc2c5699c0fad8df384bebd44e5510d1d8927；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 170 / behind 0。
+- CI run 42661732606：success；pilot_a_recovery 28/28 + pilot_a3b 146/146 = 174/174。
+- 最终 manifest SHA：fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a；test-family 01b41df8…；test-scenario dded3bb7…。
+- 实际提交链：1908026b → fa53d19876dec51681dc4ba5a9e1e760965ef328 → fa3bc2c5699c0fad8df384bebd44e5510d1d8927。
+
+### 64-R2 必须修复
+1. §2 与 §4 主检验冲突：统一为 family-level two-sided Student-t；sign-flip 仅敏感性；bootstrap CI 仅描述性；明确次要检验与 Holm。
+2. df=39 改为 df=F_observed−1；完整 40 families 时 39，预期损耗后 34 families 时 33。
+3. 更新 candidate manifest hash 至最终 CI 值；旧 af83f065… 仅保留为 superseded history。
+4. 明确功效模拟采用固定向下取整的保守保留规模（40→34 families；7→5 eligible comps），并预注册实际缺失数据处理。
+5. MDE=0.10 仍待导师认可；必须列为正式执行前置审批门。
+6. 次要比较的检验方法和 Holm family 必须无歧义。
+
+### 维护勘误
+69 号报告、README、05_DECISION_LOG、NEXT_SESSION_PROMPT 已同步最终 manifest hash、CI 174/174 和最新状态；NEXT_SESSION_PROMPT 顶部优先级已更新。status.json 在当前分支不存在，不创建虚假状态文件。
+
+### 唯一下一任务
+修订 64-R2 并更新仓库；运行必要测试与 CI；请求独立 R2 复审。审计通过后，先取得导师 MDE 认可，再取得用户明确批准，按 64 §5 pre-flight 执行。不得提前启动正式 A-3b 或接触 Test 结果。

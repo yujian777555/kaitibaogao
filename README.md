@@ -2,8 +2,8 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** D-064-A 完成（CondRecSucc 独立复算）；D-064-B READY_TO_EXECUTE（层级功效与 ICC 敏感性）；64 号预注册仍 REQUEST CHANGES；正式 A-3b HOLD  
-**状态日期：** 2026-11-09
+**当前阶段：** D-064-C 完成；64-R2 独立审计 R1 = REQUEST CHANGES；正式 A-3b HOLD（须先修订预注册、独立复审、取得 MDE 导师认可及用户批准）  
+**状态日期：** 2026-11-10
 
 ## 1. 项目边界（必须遵守）
 
@@ -821,7 +821,14 @@ D-064-A 正式报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_
 
 报告：[69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md](69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md)（`test_d064c_audit.py` 25/25）。
 
-- **审计通过**：validator 对抗性完备；9 组合一致（修复 1 处陈旧注释）；标签独立；8/4/40 零泄漏；三哈希独立重建一致（manifest af83f065…）。
+- **审计通过**：validator 在已覆盖的 12 类对抗变形测试中全部拒绝（不宣称对任意攻击完备）；9 组合一致（修复 1 处陈旧注释）；标签独立；8/4/40 零泄漏；三哈希独立重建一致（manifest fb832bcc…（最终 CI run 42661732606；旧 af83f065… 已废止））。
 - **功效最终核验**：34 有效 families×5 comps，ICC=0.20 最坏 **power=0.839 [0.832,0.846] ≥ 0.80**（硬编码 0.85 作废已更正）；MDE=0.10 标注 **PROPOSED_MDE_PENDING_ADVISOR_APPROVAL**。
 - **64 号修订 R2**：40-family test（280 eligible clusters，哈希冻结）、family 级 Student-t 主检验、UNKNOWN≤5% 门禁。
-- GO：64-R2 独立审计→用户批准→正式 A-3b。HOLD 不变。
+- 最终 CI：run 42661732606 @ fa3bc2c success，174/174；Git 提交链 1908026b → fa53d198 → fa3bc2c。
+- 64-R2 独立审计 R1：REQUEST CHANGES。发现主检验文字冲突、df 与 attrition 不一致、旧 manifest hash、测试计数与接管提示词陈旧、MDE 导师审批门未进入执行顺序等问题；详见 70_64R2_INDEPENDENT_REVIEW_R1.md。
+- GO：修订 64-R2 并请求独立 R2 复审。HOLD：正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、合并 main；MDE 导师认可与用户批准均未完成。
+
+
+## 2026-11-10：64-R2 独立审计 R1 — REQUEST CHANGES
+
+本轮独立审查发现 64-R2 仍有预注册内部矛盾：§2 仍写 cluster-level bootstrap/sign-flip，§4 才写 family-level Student-t；df=39 未随 34 个有效 families 的损耗设计动态化；candidate manifest 仍引用旧 SHA；secondary tests 的检验定义不够明确；MDE 导师审批门未进入 GO 顺序。D-064-C 维护文档也已发现最终 CI hash、测试计数和 handoff 顶部状态需要勘误。见 70_64R2_INDEPENDENT_REVIEW_R1.md。正式 A-3b 继续 HOLD。

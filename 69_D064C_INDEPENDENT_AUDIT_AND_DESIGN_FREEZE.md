@@ -61,7 +61,7 @@
 
 ## 5. 确定性与哈希（D-064-C-5）
 
-- manifest SHA-256 **af83f065cf8ac47871a1e00380febe55fc2804d06279069a05d844f7c6b20195**（独立重建两次一致）；
+- manifest SHA-256 **fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a**（最终 CI run 42661732606 输出；POWER_DESIGN 元数据修订前的旧候选 manifest 已废止）；
 - test-family SHA **01b41df8…**、test-scenario SHA **dded3bb7…**——与上次 CI 记录逐字符一致；
 - 同输入确定性 ✓；不同 repeat 仅参数数值变化、故障模式 cluster 内固定 ✓；scenario_id/seed 全局唯一 ✓；
 - 修改标签内容会改变 hash（tampering 测试）✓；
@@ -97,16 +97,23 @@
 ## 9. 测试与 CI
 
 - 新增 `test_d064c_audit.py` **25/25**（对抗 12 + 组合 5 + 标签 3 + 确定性 4 + 一致性 1）；
-- 全套件见 CI 记录（本地 pilot_a3b 126 + pilot_a_recovery 28）；
-- CI：见仓库 Actions（本轮提交后触发，head SHA 与结论如实记录于维护文档）；
-- clean-clone 复算：manifest 哈希重建一致（确定性测试内独立二次构建）。
+- 全套件以最终 CI 为准：run 42661732606 @ fa3bc2c，pilot_a_recovery 28/28 + pilot_a3b 146/146 = 174/174；
+- CI：https://github.com/yujian777555/kaitibaogao/actions/runs/42661732606，head fa3bc2c5699c0fad8df384bebd44e5510d1d8927，结论 success；
+- CI 在干净 runner checkout 上完成复算；确定性测试独立二次构建的 manifest 哈希一致（不将其表述为单独的第二个 clone 实验）。
 
 ## 10. 科学结论
 
-**获支持**：任务语义契约与 validator 对抗性完备；9 组合声明-注入-标签一致（1 处注释修复）；标签独立且有证据链；8/4/40 划分与哈希确定性成立；**40-family 设计在 ICC=0.20 上满足 0.80 功效（0.839）**。  
+**获支持**：任务语义契约与 validator 在已覆盖的 12 类对抗变形测试中全部拒绝；不据此宣称对任意攻击完备；9 组合声明-注入-标签一致（1 处注释修复）；标签独立且有证据链；8/4/40 划分与哈希确定性成立；**40-family 设计在 ICC=0.20 上满足 0.80 功效（0.839）**。  
 **仍无证据**：正式 A-3b 的算法增益（未运行）；MDE=0.10 的导师认可；真实业务语义泛化（明确限定抽象 saga）；AB 超过 Hand（D-062 已示未超过）。
 
 ## 11. GO / HOLD
 
 **GO**：64-R2 独立审计 → 用户批准 → 正式 A-3b。  
 **HOLD 不变**：正式 A-3b 运行、test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、擅自合并 main。
+
+
+## 12. 最终 CI 记录勘误（2026-11-10）
+
+最终 CI 42661732606 在 HEAD fa3bc2c5699c0fad8df384bebd44e5510d1d8927 的实际输出为 manifest SHA-256 fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a；test-family 01b41df8b06c318f90a4fc7aed45f673d13b50f14c08f56304ddffbb625a1411 与 test-scenario dded3bb72a08143177dd6b7f5c4c4ef5100b547028c9cc40fa2b87b6bd70c919 不变。旧 manifest af83f065cf8ac47871a1e00380febe55fc2804d06279069a05d844f7c6b20195 是最终 POWER_DESIGN 元数据修订前的值，不再作为当前冻结值。
+
+同一 CI job 的测试计数为 pilot_a_recovery 28/28 + pilot_a3b 146/146 = 174/174。Git 实际提交链为 1908026b → fa53d19876dec51681dc4ba5a9e1e760965ef328 → fa3bc2c5699c0fad8df384bebd44e5510d1d8927；中间提交为 D-064-C 审计/修订，最终提交为维护文档同步。

@@ -1223,11 +1223,11 @@ D-064-C：候选任务族语义 validator、8/4/17（或扩大）正式场景生
 `test_d064c_audit.py`（25/25：对抗 12 + 组合 5 + 标签 3 + 确定性 4）+ `power_final_design_check.json` + `69_D064C_INDEPENDENT_AUDIT_AND_DESIGN_FREEZE.md` + 64 号修订为 R2。
 
 ### 审计结论
-1. **任务语义**：validator 对抗性完备——12 类恶意变形（删前置/篡后置/换工具/伪回执/毁补偿序/改 goal/重复工具/伪 primary 资格/伪 legacy 等）全部拒绝。通过。
+1. **任务语义**：validator 在已覆盖的 12 类对抗变形测试中全部拒绝（不宣称对任意攻击完备）——12 类恶意变形（删前置/篡后置/换工具/伪回执/毁补偿序/改 goal/重复工具/伪 primary 资格/伪 legacy 等）全部拒绝。通过。
 2. **9 故障组合**：声明-注入-标签逐项一致；**发现 1 处注释陈旧**（permission_after_compensatable_prefix 注释写旧三故障、实际注入 step1 permission）——裁定为历史命名兼容+注释缺陷，实现与名称/R3 机制一致，**修注释不改注入**；R3 前提（52/52 族 step0 可补偿）结构性成立；7/9 primary eligibility 不变。
 3. **标签器**：来自独立 AND-OR 鲁棒可达判定器（horizon 24），analytic 交叉校验，无算法输入/无 id 作弊；UNKNOWN 0%（不解释为完美，有 mini-env ground-truth 锚定）。
 4. **划分**：8/4/40、零重叠、10 profiles×4 families、语义多样性限定抽象 saga 范围。
-5. **确定性**：manifest af83f065… / test-family 01b41df8… / test-scenario dded3bb7… 独立重建一致；lockbox 无泄漏。
+5. **确定性**：manifest fb832bcc…（最终 CI 42661732606；旧 hash 已废止） / test-family 01b41df8… / test-scenario dded3bb7… 独立重建一致；lockbox 无泄漏。
 6. **功效复算（不采信硬编码 0.85）**：最终设计 34 有效 families×5 comps（双 15% 损耗），ICC=0.20 最坏 **power=0.839 [0.832,0.846] ≥0.80 ✓**（10,000 MC）；null 校准 0.054；生成器已更新为 0.839+provenance。
 7. **MDE=0.10** 标注 **PROPOSED_MDE_PENDING_ADVISOR_APPROVAL**（非反推、非迁就样本量；需导师确认）。
 
@@ -1236,3 +1236,25 @@ GO：64-R2 独立审计 → 用户批准 → 正式 A-3b。HOLD 不变。
 
 ### 下一步
 64-R2 独立审计；用户批准后按 64 §5 预检执行正式 A-3b。
+
+
+## 决策 D-064-R2-REVIEW-R1：预注册独立审计 REQUEST CHANGES（2026-11-10）
+
+### 审查对象与证据
+审查 64_A3B_PREREGISTRATION_CANDIDATE.md R2、69 号 D-064-C 报告、power_final_design_check.json、生成器及 GitHub Actions run 42661732606。最终 CI HEAD fa3bc2c5699c0fad8df384bebd44e5510d1d8927，regression success；测试 28 + 146 = 174/174。最终 manifest SHA fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a；test-family/test-scenario SHA 保持 01b41df8… / dded3bb7…。
+
+### 独立审计发现
+1. P0 — 主检验协议冲突：64 §2 仍声明 cluster-level paired bootstrap + sign-flip 为主检验，§4 与 R2 摘要却声明 family-level Student-t。必须统一为经过 D-064-B 校准的 family-level two-sided Student-t；sign-flip 仅敏感性，bootstrap CI 仅描述性，并明确每个次要对比的检验与 Holm family。
+2. P0 — 自由度写死错误：64 §4 写 df=39，但双损耗功效设计使用 F_eff=34，power_hierarchical.py 的 Student-t 使用 F-1，损耗场景 df 应为 33。正式分析应规定 df=F_observed-1；39 仅适用于完整 40 families。
+3. P1 — manifest SHA 过期：64/69/README/决策日志/NEXT_SESSION_PROMPT 的当前状态曾引用旧 af83f065…；最终 CI 42661732606 输出 fb832bcc5cbbfd68557d17caf86c1af168493c75dfdfff3818599e85e2f1b31a。test-family 与 test-scenario hash 不变。64 R2 尚未修订，保持 REQUEST CHANGES。
+4. P1 — 测试计数记录错误：69 §9 的 126+28 与 CI 实际 146+28=174 不符，已在本轮维护勘误中更正。
+5. P1 — 接管提示词顶部状态陈旧：NEXT_SESSION_PROMPT 顶部仍指向 D-064-B，虽尾部已有 D-064-C 完成记录；已更新顶部优先级指针。
+6. P1 — MDE 审批顺序缺失：MDE 仍是 PROPOSED_MDE_PENDING_ADVISOR_APPROVAL。正式执行前必须取得导师对 MDE=0.10 的认可，再完成用户明确批准与执行前预检。
+7. P1 — attrition 解释需明确：功效代码采用 floor(40*0.85)=34、floor(7*0.85)=5 的固定保守有效规模，不是随机 15% cluster-loss Monte Carlo。预注册须明确这是保守的整数保留设计，并规定实际 family/cluster 缺失的分析规则。
+8. P2 — 提交链与措辞：实际 Git 链为 1908026b → fa53d198 → fa3bc2c；“validator 对抗性完备”应降为“12 类已测对抗变形均被拒绝”，不能外推任意攻击完备。
+
+### 决定
+64-R2：REQUEST CHANGES。不批准正式 A-3b，不查看或调参 Test。先完成 64-R2 修订（保留候选状态），修复哈希/统计/审批/损耗定义，重新运行 CI，再请求独立 R2 复审。
+
+### 唯一下一任务
+修订 64-R2 并更新对应维护文件；独立复审通过后，再取得导师 MDE 认可和用户批准，最后才执行 §5 pre-flight。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和合并 main 继续 HOLD。
