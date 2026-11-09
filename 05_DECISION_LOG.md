@@ -1105,3 +1105,35 @@ HOLD：正式 A-3b、任何 held-out test 调参/查看、Pilot B、A800/ARWM、
 
 ### 下一步
 用户审阅 64 号预注册草案 → 批准后按 §5 清单冻结场景哈希并执行正式 A-3b。
+
+
+## 决策 D-064：64 号预注册草案独立审查 — REQUEST CHANGES（2026-11-09）
+
+### 审查基线
+
+- D-063 final HEAD：`4f23abed3150e09703839b980ad3afc9bb14dfb3`。
+- main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
+- GitHub Actions run `42615985837`：真实 success；pilot_a_recovery 28/28、pilot_a3b 68/68，96/96。
+- 独立审查记录：`65_D064_PREREGISTRATION_INDEPENDENT_AUDIT.md`。
+
+### 判定
+
+D-063 工程交付通过；64 号预注册草案 **REQUEST CHANGES**。CI 通过不等于科学设计/统计预注册通过，正式 A-3b 继续 HOLD。
+
+### 阻断项
+
+1. **主要 estimand 与功效输入不一致：** 64 §3 的 CondRecSucc 只使用 R1+R2；`power_simulation.py` 使用全 R1–R4 的 `class_success`，54 clusters / SD=.404 / Δ=.1049 不是 primary estimand 的功效输入。审查用快速聚合发现 R1/R2-only 只有 42/54 clusters；Δ≈+.3175、SD≈.3189（非正式值，需正式分析入口重算）。
+2. **功效方法不符：** 当前代码用参数化正态 N(MDE, empirical SD) 生成；经验重采样分支未调用；所谓 signflip 分支仍用正态近似；无 MCSE，部分小样本 null FPR 偏高。
+3. **ICC 证据不足：** ICC 只基于 6 个 task families，validation 只有 2 个；负点估计不能证明 task×composition cluster 独立。
+4. **任务族语义/接入未完成：** 576 候选由排列和合同属性筛选，没有语义前后置条件验证；贪心只最小化工具重叠，不优化 profile diversity；所选 23 族覆盖 11/18 profiles、test 覆盖 10/18。正式 8/4/17 场景生成器尚未接入当前固定 6 任务族运行路径。
+5. **样本量/MDE 未唯一冻结：** MDE=.10、80% 需 145 有效/171 招募 clusters；153 test clusters 经过 15% 失效后约 130。MDE=.1173 来自历史观察效应，不得未经实质性论证自动作为 MDE。
+6. **标签/安全/冻结项不完整：** UNKNOWN 上限、R1/R2 有效 cluster 数和分母、硬安全门对两臂的解释、零事件置信上界、60 初始池实际只使用前 48 个、代码 SHA/CI 证据均需冻结。
+
+### 下一步
+
+唯一首要任务 D-064-A：在 `analyse_diagnostic3.py` 新增 R1/R2-only CondRecSucc paired cluster contrast，输出有效 clusters、每 cluster 分母、Δ、SD、95% CI 和 cluster sign-flip p；R3/R4 分开统计。之后重做功效与层级相关敏感性，再完善正式任务生成器和 64 修订版。
+
+### 授权
+
+**GO：** D-064-A/B/C/D 统计、任务语义、正式场景生成、标签验证、预注册修订、测试和 CI。  
+**HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 即使获批准，正式 A-3b 仍需另行明确授权。
