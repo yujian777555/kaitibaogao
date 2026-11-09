@@ -201,3 +201,18 @@ D-063 执行汇报将复算 p 值差异描述为“仅第 3 位微差”。逐�
 - all AB vs AwaitSLA：0.009498 vs 0.0072，差 0.002298。
 
 这些差异可能来自置换 Monte Carlo 随机种子不同（复算 20261110、旧报告 20261108），且当前显著性分类未改变；但不能一概表述为“仅第三位微差”。正式报告应给出绝对差值、置换次数和 Monte Carlo 不确定性，并将复算结果作为唯一可执行复现值。效应量 Δ 对齐不意味着 p 值逐项一致。
+
+---
+
+## D-064-A 修复记录（2026-11-09）
+
+**P0-1（主要终点 estimand 不一致）已修复**，正式产物：`experiments/pilot_a3b/condrec_analysis.py` + `test_condrec_analysis.py`（13/13）+ `condrec_diagnostic3.{json,csv,report.md}`，详见 `66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md`：
+
+1. CondRecSucc 仅用 R1+R2（64 §3 定义）；R3 CorrectEscalation / R4 DamageContainment 独立输出。
+2. 四层配对（scenario×seed 配对 → seed 嵌套均值 → cluster 聚合 → cluster 等权），scenario 加权敏感性并报；缺失配对/重复/cluster 失配/零分母全部显式检查。
+3. **零分母规则预规定**：无 R1/R2 的 cluster 排除并登记（12 个 = delay_rate_permission + partial_comp_failure × 6 任务族），不补零不静默删除。
+4. 真实复算：**eligible 42 clusters、Δ=+0.3175、SD=0.3189、CI [0.218, 0.411] 不含 0、sign-flip p=0.000125**（真实 cluster 级符号翻转 MC 8000 次，非 z 近似）；scenario 加权 Δ=0.3145 一致。本审查的快速核对值（+0.3175/0.3189/42）与正式复算逐位一致。
+5. **结论翻转**：正确 estimand 下 AB vs NSGA-II 强显著（原全类别 +0.1049/0.065 系 R3/R4 稀释）。
+6. R3/R4 权衡如实记录：AB R3 0.226 vs NSGA-II 0.679、R4 0.80 vs 0.933——主要终点领先不掩盖安全行为率落后。
+
+**P0-2/3/4、P1-5/6/7 未处理**（属 D-064-B 及后续：功效/ICC 敏感性重做、任务族语义 validator 与正式生成器、MDE/样本量唯一冻结、安全门细则）。

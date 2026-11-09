@@ -1137,3 +1137,32 @@ D-063 工程交付通过；64 号预注册草案 **REQUEST CHANGES**。CI 通过
 
 **GO：** D-064-A/B/C/D 统计、任务语义、正式场景生成、标签验证、预注册修订、测试和 CI。  
 **HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 即使获批准，正式 A-3b 仍需另行明确授权。
+
+
+## 决策 D-064-A：CondRecSucc 主要终点独立统计与复算（2026-11-09）
+
+### 背景
+65 号审查 P0：64 号主要终点（CondRecSucc=R1+R2）与 D-063 功效分析（全类别 class_success）estimand 不一致；145-cluster 功效结论不能用于主要终点。
+
+### 交付
+- `condrec_analysis.py`（无硬编码摘要值）+ `test_condrec_analysis.py`（13/13：R1/R2 过滤、R3/R4 排除、配对、seed 嵌套、重复拒绝、缺失报告、cluster 失配拒绝、零分母登记、等权/加权聚合已知答案、bootstrap/sign-flip 可复现、无硬编码、真实数据回归）。
+- 产物：`condrec_diagnostic3.{json,csv,report.md}`（含输入 SHA-256、git SHA、命令、MC 次数、种子、统计方法）。
+- 66 号报告：`66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md`。
+
+### 真实结果（diagnostic3 原始数据，四层配对、cluster 等权）
+- **primary eligible clusters=42**（设计 54）；零分母 12 个（delay_rate_permission + partial_comp_failure × 6 族，结构性不可行，设计内，排除并登记）。
+- **AB CondRecSucc 0.5582 vs NSGA-II 0.2407；Δ=+0.3175；SD=0.3189；CI [0.218, 0.411] 不含 0；sign-flip p=0.000125**（真实 cluster 级符号翻转 MC 8000 次）。
+- scenario 加权 Δ=0.3145（一致）；配对完整率 1.000。
+- **结论翻转**：正确 estimand 下主要对比强显著；原 +0.1049/0.065 是 R3/R4 稀释所致。
+
+### R3/R4 独立安全统计（权衡如实记录）
+R3 CorrectEscalation：AB 0.226 vs NSGA-II 0.679；R4 DamageContainment：AB 0.80 vs 0.933——AB 主要终点领先但安全行为率落后，不得互相掩盖。
+
+### 科学判断
+诊断数据（非锁箱）支持 AB 在 R1+R2 条件恢复上大幅优于 NSGA-II；42 clusters 足以起步但 SD 估计待 D-064-B 层级敏感性；8 问全部作答于 66 号 §7。
+
+### 决定
+GO：D-064-B（CondRecSucc estimand 功效重做 + ICC 层级敏感性）。HOLD 不变。
+
+### 下一步
+D-064-B：以 +0.3175/0.3189/42 的真实分布重做功效与 ICC 敏感性（修复 65 P0-2/3），再修订 64 号样本量与 MDE 冻结。

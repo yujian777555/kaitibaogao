@@ -962,3 +962,22 @@ User reviews 64_A3B_PREREGISTRATION_CANDIDATE.md -> upon approval run pre-flight
 按以下格式报告：仓库 SHA/main/ahead-behind；primary CondRecSucc 正式复算；与旧全类别统计的差异；修正功效与 ICC 敏感性；任务序列语义 validator 与新生成器测试；64 修订点；CI 实际结果；剩余 HOLD；下一唯一任务。
 
 **接管后直接执行 D-064-A，不要再询问是否开始；不得擅自启动正式 A-3b。**
+
+## 2026-11-09 — D-064-A COMPLETE: CondRecSucc primary endpoint independently recomputed — CONCLUSION REVERSED
+
+Report: `66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md`. Program: `experiments/pilot_a3b/condrec_analysis.py` (no hardcoded summaries) + `test_condrec_analysis.py` (13/13). Artifacts: `condrec_diagnostic3.{json,csv,report.md}` (input SHA-256, git SHA, command, MC reps, seeds recorded).
+
+### Primary result (R1+R2 only, 4-level pairing, cluster-equal-weight, real diagnostic3 rows)
+- primary eligible clusters **42** (of 54 design clusters); zero-denominator 12 (= delay_rate_permission + partial_comp_failure x 6 task families, structurally infeasible by design, excluded per pre-specified rule and registered).
+- **AB CondRecSucc 0.5582 vs NSGA-II 0.2407; delta = +0.3175; cluster SD 0.3189; 95% CI [0.218, 0.411] (excludes 0); cluster-level sign-flip MC p = 0.000125** (8000 real sign flips, not z-approx).
+- scenario-weighted sensitivity +0.3145 (consistent); pairing completeness 1.000.
+- **CONCLUSION REVERSED vs all-class +0.1049 (p=0.065)**: the old statistic diluted the effect with 12 R3/R4-only clusters where both methods tie. 65's quick-check numbers (+0.3175 / 0.3189 / 42) match this formal recomputation digit-for-digit.
+
+### R3/R4 independent safety stats (trade-off reported honestly)
+R3 CorrectEscalation: AB 0.226 vs NSGA-II 0.679. R4 DamageContainment: AB 0.80 vs 0.933. AB leads the primary endpoint but trails on safe-escalation behaviour; neither masks the other.
+
+### Status
+GO: **D-064-B** (power re-analysis on the CondRecSucc estimand + ICC hierarchical sensitivity = 65 P0-2/P0-3). HOLD unchanged: formal A-3b, test peeking, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox. 65 P0-4/P1-5/6/7 remain open after D-064-B.
+
+### Next task (single)
+D-064-B: rebuild the power analysis on the real CondRecSucc cluster-diff distribution (delta 0.3175, sd 0.3189, 42 clusters) with empirical resampling + proper sign-flip/Student-t tests + ICC hierarchical sensitivity (0/0.05/0.10/0.20), then revise 64's sample-size/MDE freeze.

@@ -765,3 +765,13 @@ D-063 的工程交付已远端核验：最终基线 `4f23abed3150e09703839b980ad
 
 **GO：** D-064 统计、数据生成、标签验证和预注册修订。  
 **HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
+
+
+## 2026-11-09：D-064-A — CondRecSucc 主要终点独立复算（结论翻转）
+
+报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md)。程序 `condrec_analysis.py`（无硬编码）+ 13/13 测试 + `condrec_diagnostic3.{json,csv,report.md}`。
+
+- **正确 estimand（R1+R2 only）：42 clusters，Δ=+0.3175，SD=0.3189，CI [0.218, 0.411] 不含 0，sign-flip p=0.000125——主要对比强显著。**
+- 原全类别 +0.1049（p=0.065）系 12 个 R3/R4-only 稀释；scenario 加权一致（0.3145）；配对 1.000。
+- R3/R4 权衡如实：AB 0.226/0.80 vs NSGA-II 0.679/0.933。
+- GO：D-064-B（功效+ICC 敏感性）。HOLD 不变。

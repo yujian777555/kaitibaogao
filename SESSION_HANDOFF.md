@@ -2115,3 +2115,18 @@ UNKNOWN 上限、类别分布、primary eligible clusters、硬安全门对 AB/N
 
 **GO：** D-064-A/B/C/D 修复、统计与场景生成测试、预注册修订、CI。  
 **HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。即使 64 获用户批准，正式 A-3b 仍需另行明确授权。
+
+
+## 58. D-064-A 执行轮：CondRecSucc 主要终点独立复算（2026-11-09）
+
+### 58.1 修复 P0-1（estimand 不一致）
+`condrec_analysis.py` + 13/13 测试 + `condrec_diagnostic3.{json,csv,report.md}` + 66 号报告。CondRecSucc 仅 R1+R2；R3/R4 独立；四层配对；零分母 12 cluster 预规定排除并登记；真实 sign-flip MC；无硬编码。
+
+### 58.2 真实结果（结论翻转）
+**42 eligible clusters；Δ=+0.3175；SD=0.3189；CI [0.218, 0.411] 不含 0；p=0.000125**；scenario 加权 0.3145 一致；配对 1.000。原全类别 +0.1049/0.065 系 12 个 R3/R4-only cluster 稀释。65 快速核对值与正式复算逐位一致。
+
+### 58.3 R3/R4 权衡（如实）
+AB R3 0.226 / R4 0.80 vs NSGA-II 0.679 / 0.933——主要终点领先不掩盖安全行为率落后。
+
+### 58.4 状态
+GO：D-064-B（CondRecSucc 功效重做 + ICC 敏感性）。HOLD 不变；65 其余阻断项待后续。
