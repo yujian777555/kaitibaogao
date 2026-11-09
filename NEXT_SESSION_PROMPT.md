@@ -2,7 +2,7 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-09（D-063 工程交付完成；D-064 独立审查 64 号草案 REQUEST CHANGES）**  
+**最后维护日期：2026-11-09（D-064-A 完成；D-064-B READY_TO_EXECUTE；64 号草案仍 REQUEST CHANGES）**  
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
@@ -981,3 +981,53 @@ GO: **D-064-B** (power re-analysis on the CondRecSucc estimand + ICC hierarchica
 
 ### Next task (single)
 D-064-B: rebuild the power analysis on the real CondRecSucc cluster-diff distribution (delta 0.3175, sd 0.3189, 42 clusters) with empirical resampling + proper sign-flip/Student-t tests + ICC hierarchical sensitivity (0/0.05/0.10/0.20), then revise 64's sample-size/MDE freeze.
+
+
+---
+
+# D-064-B 执行接管指令（2026-11-09；当前唯一下一任务）
+
+**本轮状态：D-064-A 已完成；D-064-B 已获准执行；正式 A-3b 仍 HOLD。**
+
+下一会话必须先完整阅读并直接执行：
+
+`67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md`
+
+该文件是 D-064-B 的完整可复制提示词，包含数据基线、层级结构、ICC 估计、两类功效生成机制、MDE 网格、检验校准、样本量换算、测试和仓库维护要求。
+
+## D-064-A 事实基线
+
+- 最终 D-064-A HEAD：`16e255de627b37713f0ea936df0ddb0dd03ac084`；main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
+- CI run `42631223393`：head SHA 匹配，success；109/109 tests。
+- 原始 diagnostic3 SHA-256：`b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c`。
+- CondRecSucc 仅 R1+R2：42 eligible task×composition clusters、12 zero-denominator clusters。
+- 42 个 clusters 嵌套于 6 个 task families，每个 family 当前 7 个 eligible compositions。
+- AB 0.5582 vs NSGA-II 0.2407；Δ=+0.3175；cluster SD=0.318856；D-064-A cluster bootstrap CI [0.218254, 0.411376]；cluster-level sign-flip p=0.000125（8000 次）。
+- R3 AB 0.226 vs NSGA-II 0.679；R4 AB 0.800 vs NSGA-II 0.933。安全行为权衡必须保留。
+
+## D-064-B 必须解决的核心问题
+
+**不能把 42 个 task×composition clusters 当成 42 个已证明独立的抽样单位。** 高层级单位是 task family，目前只有 6 个。D-064-A 的 cluster-level CI/p 对 family 内相关性敏感，必须通过 family-level 与 hierarchical sensitivity 重新评估。
+
+另外，64 号草案的候选 test 为 17 families×9 compositions=153 design clusters；如果延续当前 7/9 R1/R2 eligibility，则约为 119 primary-eligible clusters（尚未扣除 attrition）。不得将 153 design clusters 写成 153 primary-eligible clusters。
+
+## D-064-B 执行顺序
+
+1. 从原始 rows / D-064-A 可追溯产物复建 family→composition→scenario→seed 层级，验证 6 families×7 eligible clusters。
+2. 输出 family means、within/between variance、ICC（至少 ANOVA method-of-moments + random-intercept REML）和不确定性区间；负 ICC 不等于独立。
+3. 使用 family-block empirical resampling 和 ICC-controlled random-intercept simulation 两类 DGP。
+4. ICC 场景：0/.05/.10/.20；MDE 场景：.05/.08/.10/.1173/.15；双侧 alpha=.05；80%/90% power；至少 10,000 MC/config 或达到预先声明的 MCSE 精度。
+5. 检验至少比较 family-level Student-t、family-level exact/MC sign-flip、family-block bootstrap；在 null 下校准 Type-I error。ICC>0 时禁止把 42 clusters 当独立样本做主检验。
+6. 设计网格至少 6/8/10/12/15/17/19/22/25/30/40 families；每 family eligible compositions 6/7/8/9；区分 cluster-level 与 family-level 15% attrition。
+7. 输出 families、design clusters、primary-eligible clusters、attrition 后数量和 power；不以增加 seed/episode 凑独立单位。
+8. 0.1173 仅为历史观察效应敏感性值；+0.3175 不是 MDE。不得按观察效应挑选 MDE。
+9. D-064-B 给出条件性样本量建议，但在 D-064-C 任务语义 validator / 正式场景生成器完成前，不冻结最终 test family 数、eligibility 数和 MDE。
+10. 更新 67 号文件、65 审计、62 计划、README、05_DECISION_LOG、SESSION_HANDOFF 和本接管提示；测试、CI、push、SHA 核验。
+
+## GO / HOLD
+
+**GO：** D-064-B 功效与 ICC 层级敏感性分析、代码、测试、历史诊断数据重算和仓库维护。
+
+**HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍为 REQUEST CHANGES。
+
+**接管后直接执行 D-064-B，不要再询问是否开始。** 具体参数、算法和验收标准以 67 号文件为准。
