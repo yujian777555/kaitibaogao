@@ -1044,3 +1044,31 @@ D-062 已完成诊断性阶段，但正式确认性实验仍未获授权。完�
 ### 授权
 GO：统计流水线修复、empirical power simulation、任务族扩展可行性、预注册草案和 CI。
 HOLD：正式 A-3b、任何 held-out test 调参/查看、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。预注册须交用户审阅批准后才冻结。
+
+
+### D-063 执行接管边界补充（2026-11-09）
+
+本次仅细化 D-063 的执行顺序、交付和授权边界；**不代表统计分析器、功效仿真、任务族扩展或预注册已经完成**。当前状态：Stage 0 NOT STARTED / formal A-3b HOLD。
+
+**唯一首要任务：Stage 0 — diagnostic3 独立统计复现。**
+
+1. 新增 experiments/pilot_a3b/analyse_diagnostic3.py（或显式输入参数的通用 CLI），必须从 diagnostic3_results.json 读取，不得静默回退 diagnostic2。
+2. 输出 all/train/validation；完整复算 AB vs NSGA-II、AB vs A、AwaitSLA vs A、AwaitSLA vs AwaitFixed、AB vs AwaitSLA、AB vs Hand、B vs NSGA-II。
+3. 推断单位为 task × fault-composition cluster；seed 为嵌套重复。报告 cluster SD、95% CI、paired cluster sign-flip p、效应量、seed 稳定性和适用的 Holm 校正。
+4. 对 episode 唯一性、配对完整性、cluster 一致性、seed 缺失、split 泄漏、分母语义、输入与 manifest 哈希设置 fail-closed 检查和 synthetic tests。
+5. 从原始数据独立再生 61 号统计；任何差异必须解释，不得为了匹配报告而硬编码结果。
+
+**Stage 1：** 使用复算后的 cluster-level paired differences 做经验 Monte Carlo 功效仿真；至少报告 MDE=.08/.10/.1173、双侧 alpha=.05、80%/90% power、15% cluster 失效预留、Monte Carlo 误差及 SD 敏感性。18 个 validation clusters 的 SD 估计不稳定，必须披露。
+
+**Stage 2：** 从原始 task/split/scenario manifests 核实“总计 6 个任务族”与“validation 2 个任务族 ×9=18 clusters”的计数关系；检查模板/轨迹近重复与 split 泄漏，报告真实可用独立 cluster 数。不得通过增加 episode 或 seed 伪造独立 cluster。
+
+**Stage 3：** 起草 64 号预注册候选。唯一主要比较为 AB vs canonical NSGA-II；必须先澄清 R1/R2 条件恢复与 R3/R4 正确升级的主要终点公式、分母、类别权重和 cluster 聚合。次要比较 Holm；Hand 仅作参考。文件标记 DRAFT — NOT FROZEN，提交用户审阅。
+
+**证据边界继续有效：**
+- AB vs NSGA-II all p=.062、validation p=.2277，均未显著；
+- AB vs AwaitSLA validation p=.244，Q10 搜索增量尚未证明泛化；
+- AB vs Hand −.282，仍落后强手工策略；
+- AB vs A、WAIT-SLA 的正向诊断性结果不能替代主要比较；
+- 安全保证只限明确工具合同假设。
+
+**授权：** GO 仅限统计复现、synthetic tests、历史诊断数据功效规划、任务族审计、预注册草案、CI 和文档维护。正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。即使用户批准预注册，正式 A-3b 仍需另行明确授权。
