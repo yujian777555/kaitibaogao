@@ -1,7 +1,7 @@
 # 62 — D-063：正式 A-3b 功效核算与预注册冻结计划
 
 **日期：** 2026-11-09  
-**状态：** ACTIVE PLAN — D-063 文档/统计准备可执行；Stage 0 尚未完成；正式 A-3b 仍 HOLD  
+**状态：** D-063 ENGINEERING DELIVERABLES COMPLETE；64 号预注册经 D-064 独立审查 REQUEST CHANGES；正式 A-3b 仍 HOLD  
 **本轮维护起始 HEAD：** `e6fee3bde05e8dea3fcc54f2ea1d97bc54837867`（历史基线；接管时必须实时查询）  
 **Main：** `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`（保持不动）  
 **前序：** D-062（59 复核、60 设计、61 diagnostic3）  
@@ -356,3 +356,35 @@ D-062 执行报告称 79/79 测试通过，但当前已有 `.github/workflows/pi
 - **Stage 2 ✅**：`63_D063_TASK_FAMILY_EXPANSION_AUDIT.md`——576 候选/18 profile，多样性面板 0.83/3 重叠；train/val/test=8/4/17 族=72/36/153 clusters；功效缺口替代序（MDE 0.1173 或接受 75–80%；禁止重复冒充）。
 - **Stage 3 ✅**：`64_A3B_PREREGISTRATION_CANDIDATE.md`——正式预注册草案，冻结主要/次要比较、指标公式、硬安全门、协议参数、排除/停止/存档规则与解释边界。
 - **状态**：GO=用户审阅 64；HOLD=正式 A-3b（批准 + 64 §5 预检清单后解锁）及其余全项。
+
+
+---
+
+## 9. D-064 独立审查更正（2026-11-09）
+
+D-063 工程交付（统计复算代码、功效脚本、任务族候选枚举、预注册草案和 CI）已完成；但独立审查发现原 Stage 1 功效输入与 64 号主要终点不一致。完整审查见 `65_D064_PREREGISTRATION_INDEPENDENT_AUDIT.md`。
+
+### 9.1 主要 estimand mismatch
+
+64 §3 的 CondRecSucc 只使用 R1+R2；当前 `power_simulation.py` 未按标签过滤，混合 R1/R2/R3/R4 的 `class_success`。因此 54 clusters / SD=.404 / Δ=.1049 不是 CondRecSucc 的功效参数。
+
+审查用快速聚合（非正式产物）显示：diagnostic3 54 clusters 中只有 42 个包含 R1/R2；R1/R2-only AB−NSGA-II Δ≈+.3175、SD≈.3189。必须由正式分析入口重算，不得直接把此审查值作为预注册结果。
+
+### 9.2 功效模拟性质更正
+
+当前脚本实际为 `N(MDE, empirical SD)` 参数化正态 Monte Carlo；经验重采样分支未运行，signflip 分支使用正态近似，未输出 MCSE。此前“empirical cluster power simulation”的表述不准确。应先完成 CondRecSucc primary 对比，再进行经验/层级 Monte Carlo、null FPR 校准和 ICC 敏感性。
+
+### 9.3 task-family 独立性与生成有效性
+
+ICC 只基于 6 个 task families（validation 2 个），负估计不能证明 153 个 task×composition clusters 独立。63 号任务族脚本仅用三步排列与合同属性筛选，未验证任务语义前置/后置条件；多样性目标只最小化工具重叠，未优化 profile diversity。正式 8/4/17 scenario generator 尚未接入当前固定 6 任务族运行路径。
+
+### 9.4 样本量决策需重做
+
+旧参数化结果 MDE=.10 / 80% 需要 145 个有效 clusters，15% 失效预留为 171；当前 test 153 经 15% 失效约 130。MDE=.1173 来自观察效应点估计，不能未经实质意义论证自动成为 MDE。以上数字也不是 CondRecSucc 的最终功效结论。
+
+### 9.5 当前状态与下一步
+
+- D-063 工程交付：ACCEPTED（代码/产物/CI 层面）。
+- 64 号预注册：REQUEST CHANGES。
+- 正式 A-3b：HOLD。
+- 唯一下一步：D-064-A，在 `analyse_diagnostic3.py` 新增 R1/R2-only CondRecSucc paired cluster contrast，输出有效 cluster 数、每 cluster 分母、Δ、cluster SD、95% CI 和 sign-flip p；R3/R4 独立统计。之后重做功效和 64 修订。
