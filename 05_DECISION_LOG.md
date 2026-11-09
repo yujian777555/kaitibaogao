@@ -1166,3 +1166,28 @@ GO：D-064-B（CondRecSucc estimand 功效重做 + ICC 层级敏感性）。HOLD
 
 ### 下一步
 D-064-B：以 +0.3175/0.3189/42 的真实分布重做功效与 ICC 敏感性（修复 65 P0-2/3），再修订 64 号样本量与 MDE 冻结。
+
+
+## 决策 D-064-B：进入 CondRecSucc 层级功效与 ICC 敏感性分析（2026-11-09）
+
+### 依据
+
+D-064-A 已完成并通过真实 CI：
+- final HEAD：`16e255de627b37713f0ea936df0ddb0dd03ac084`；
+- CI run `42631223393` success，109/109；
+- CondRecSucc R1/R2-only：42 eligible task×composition clusters，AB=.5582、NSGA-II=.2407、Δ=+.3175、cluster SD=.318856、cluster bootstrap CI [.218254,.411376]、cluster-level sign-flip p=.000125；
+- 原始 diagnostic3 SHA-256：`b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c`。
+
+### 决策原因
+
+42 个 cluster 嵌套于 6 个 task families，每 family 当前 7 个 eligible compositions。composition clusters 不能被直接视为 42 个独立 family；D-064-A 的 cluster-level CI/p 需要层级相关敏感性。
+
+### 授权范围
+
+**GO：D-064-B**——重建 family→composition→scenario→seed 层级；计算 ICC 和不确定性；用 family-block empirical resampling 与 ICC-controlled hierarchical simulation 重做 power；对 ICC=0/.05/.10/.20、MDE=.05/.08/.10/.1173/.15、80%/90% power、不同 family 数及 attrition 做敏感性；校准 Type-I error 并报告 MCSE。
+
+17 families×9 compositions 是 153 design clusters；按当前 7/9 eligibility 仅约 119 primary-eligible clusters，且此 projection 必须由 D-064-C 任务语义/标签生成器重新核验。
+
+**MDE 不冻结：** +.3175 是观察效应，不是 MDE；.1173 是历史观察效应，仅用于敏感性。D-064-B 只给条件性建议，最终样本量需等待 D-064-C 并由用户审阅。
+
+**HOLD：** 正式 A-3b、held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。64 号预注册仍为 REQUEST CHANGES。
