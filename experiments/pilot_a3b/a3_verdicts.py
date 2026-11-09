@@ -316,11 +316,11 @@ def classify_scenario(scenario, horizon=24, max_nodes=500000):
     The recovery decision begins immediately after the first fault has been
     observed; all earlier workflow steps are initialized as committed. This
     prevents trivial pre-execution escalation from turning every hard scenario
-    into R3. Compensation availability is fixed to the declared scenario
-    contract for ordinary compositions. For partial_comp_failure, the failing
-    compensation step is hidden/uncertain (both success and failure are included
-    in the observation-equivalent initial belief). No tested policy or outcome
-    is used to generate the label.
+    into R3. Compensation availability is fixed by the evaluator-side fault
+    plan. For partial_comp_failure, the ground-truth availability is false but
+    remains hidden from the policy until it receives COMP_FAILED. This is one
+    fixed scenario state, not a mixture of mutually exclusive fault plans. No
+    tested policy or outcome is used to generate the label.
     """
     tools = tuple(scenario["tools"])
     fault_specs = scenario["faults"]
@@ -335,12 +335,7 @@ def classify_scenario(scenario, horizon=24, max_nodes=500000):
     compensatable = tuple(bool(TOOL_CONTRACTS[t]["compensatable"]) for t in tools)
     comp_options = []
     for i, spec in enumerate(fault_specs):
-        if (scenario.get("composition") == "partial_comp_failure"
-                and spec["fault"] == "partial_commit"
-                and compensatable[i]):
-            comp_options.append(None)
-        else:
-            comp_options.append(bool(spec.get("compensation_available", False)))
+        comp_options.append(bool(spec.get("compensation_available", False)))
     comp_options = tuple(comp_options)
 
     label, evidence = _classify_pattern_cached(
