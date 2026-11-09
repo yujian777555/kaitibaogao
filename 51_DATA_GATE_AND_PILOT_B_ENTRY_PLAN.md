@@ -2,7 +2,7 @@
 
 日期：2026-11-06
 所属项目：kaitibaogao / 第一项创新候选
-状态：D-063 ENGINEERING COMPLETE / D-064 PREREG REVIEW=REQUEST CHANGES / FORMAL A-3B=HOLD
+状态：D-064-A COMPLETE / D-064-B READY_TO_EXECUTE / PREREGISTRATION=REQUEST CHANGES / FORMAL A-3B=HOLD
 工作分支：pilot-a-stateful-recovery
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
@@ -331,3 +331,20 @@ Phase A、B、C 全部通过后，才提交 Pilot B preregistration。正式比�
 **当前 HOLD：** 正式 A-3b、任何 held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
 
 **下一步唯一首要任务：** D-064-A — 对 diagnostic3 原始 rows 建立 R1/R2-only CondRecSucc 配对 cluster 分析；在 primary estimand 和功效方案修正前，不批准 64 号草案。
+
+
+---
+
+## 13. D-064-A 完成后的数据门禁更新（2026-11-09）
+
+D-064-A 已从 diagnostic3 原始数据完成 CondRecSucc R1/R2-only 独立分析（66 号报告）：
+- 42 个 primary-eligible task×composition clusters，12 个 zero-denominator clusters；
+- 42 个 clusters 嵌套在 6 个 task families 中，每 family 7 个 eligible compositions；
+- AB=.5582、NSGA-II=.2407、Δ=+.3175、cluster SD=.318856；
+- D-064-A cluster-level CI [.218254,.411376]，sign-flip p=.000125；
+- R3/R4 行为率权衡独立保留。
+
+**当前关键数据门禁：** 不得假设 42 个 composition clusters 独立。D-064-B 必须先评估 family 内相关性、ICC 不确定性、family-level 推断与层级功效。17×9=153 是 design clusters；在 7/9 eligibility 条件下约 119 才是 primary-eligible clusters，且需要 D-064-C 标签生成器核验。
+
+GO：D-064-B（完整执行规格见 67 号提示词）。  
+HOLD：正式 A-3b、任何 held-out test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox。
