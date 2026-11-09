@@ -28,3 +28,16 @@ jobs:
         run: python -m unittest discover -s experiments/pilot_a_recovery -p "test_*.py" -v
       - name: Test pilot_a3b
         run: python -m unittest discover -s experiments/pilot_a3b -p "test_*.py" -v
+      - name: Generate D-064-C formal scenario manifest candidate
+        run: |
+          mkdir -p "$RUNNER_TEMP/d064c"
+          python experiments/pilot_a3b/formal_scenario_generator.py --outdir "$RUNNER_TEMP/d064c"
+      - name: Upload D-064-C manifest candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: d064c-formal-scenario-manifest-candidate
+          path: |
+            \${{ runner.temp }}/d064c/formal_scenario_manifest_candidate.json
+            \${{ runner.temp }}/d064c/formal_scenario_manifest_report.md
+          if-no-files-found: error
+

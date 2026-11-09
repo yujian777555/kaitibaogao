@@ -23,7 +23,7 @@ from reachability import (
 from a3_bridge import scenario_verdict
 
 ACTIONS = ("CALL", "RETRY", "VERIFY", "WAIT", "COMPENSATE", "ROLLBACK", "ESCALATE", "STOP_SAFE")
-VIS_BOUND = 3
+VIS_BOUND = 4
 
 # hidden = (states, comps, delays, waitc, spent, last_obs, stopped, done)
 # states per step: 0 NONE, 1 COMMITTED_INVISIBLE, 2 COMMITTED_VISIBLE, 3 PARTIAL, 4 COMPENSATED
@@ -32,10 +32,13 @@ VIS_BOUND = 3
 
 def make_pattern_spec(name, faults, idempotent, compensatable, comp_available, horizon=12):
     n = len(faults)
+    if isinstance(comp_available, (list, tuple)) and len(comp_available) != n:
+        raise ValueError("comp_available sequence must match the fault vector length")
     comp_opts = []
     for i, f in enumerate(faults):
         if f in ("partial_commit", "timeout_after", "delayed_visibility") and compensatable[i]:
-            comp_opts.append((True, False) if comp_available is None else (bool(comp_available),))
+            available = comp_available[i] if isinstance(comp_available, (list, tuple)) else comp_available
+            comp_opts.append((True, False) if available is None else (bool(available),))
         else:
             comp_opts.append((True,))
     delay_opts = []
@@ -241,3 +244,70 @@ if __name__ == "__main__":
     agree = Counter((r["analytic"], r["checker"]) for r in rows)
     for (a, c), n in sorted(agree.items(), key=lambda kv: -kv[1]):
         print(f"  analytic={a:8s} checker={c:8s} n={n}")
+
+
+# ---------------------------------------------------------------------------
+# Scenario-level robust labels for the D-064-C formal generator
+# ---------------------------------------------------------------------------
+from functools import lru_cache
+
+from pilot_a3 import TOOLS as TOOL_CONTRACTS
+
+
+@lru_cache(maxsize=50000)
+def _classify_pattern_cached(faults, idempotent, compensatable,
+                             comp_available, horizon, max_nodes):
+    """Cache labels by public fault pattern and contract profile, never policy output."""
+    name = "formal|" + "|".join(str(x or "none") for x in faults)
+    name += "|" + "|".join(
+        ("1" if i else "0") + ("1" if c else "0")
+        for i, c in zip(idempotent, compensatable)
+    )
+    spec = make_pattern_spec(
+        name, faults, idempotent, compensatable, comp_available,
+        horizon=horizon,
+    )
+    result = classify(spec, horizon=horizon, max_nodes=max_nodes)
+    return result.label, result.evidence
+
+
+def classify_scenario(scenario, horizon=12, max_nodes=200000):
+    """Return robust R1-R4/UNKNOWN label plus an analytic cross-check.
+
+    Compensation availability is fixed to the declared scenario contract for
+    ordinary compositions. For partial_comp_failure, the failing compensation
+    step is treated as hidden/uncertain (both success and failure are included
+    in the observation-equivalent initial belief). The labeler is independent
+    of any tested controller or its outcome.
+    """
+    tools = tuple(scenario["tools"])
+    fault_specs = scenario["faults"]
+    if len(tools) != len(fault_specs):
+        raise ValueError("tools/faults length mismatch")
+
+    faults = tuple(
+        None if spec["fault"] in (None, "none") else spec["fault"]
+        for spec in fault_specs
+    )
+    idempotent = tuple(bool(TOOL_CONTRACTS[t]["idempotent"]) for t in tools)
+    compensatable = tuple(bool(TOOL_CONTRACTS[t]["compensatable"]) for t in tools)
+    comp_options = []
+    for i, spec in enumerate(fault_specs):
+        if (scenario.get("composition") == "partial_comp_failure"
+                and spec["fault"] == "partial_commit"
+                and compensatable[i]):
+            comp_options.append(None)
+        else:
+            comp_options.append(bool(spec.get("compensation_available", False)))
+    comp_options = tuple(comp_options)
+
+    label, evidence = _classify_pattern_cached(
+        faults, idempotent, compensatable, comp_options, int(horizon), int(max_nodes)
+    )
+    analytic = scenario_verdict(scenario)["class"]
+    return {
+        "class": label,
+        "evidence": evidence,
+        "analytic_class": analytic,
+        "agreement": label == analytic,
+    }
