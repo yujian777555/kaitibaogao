@@ -5,7 +5,7 @@
 **本轮维护起始 HEAD：** `e6fee3bde05e8dea3fcc54f2ea1d97bc54837867`（历史基线；接管时必须实时查询）  
 **Main：** `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`（保持不动）  
 **前序：** D-062（59 复核、60 设计、61 diagnostic3）  
-**下一会话入口：** `NEXT_SESSION_PROMPT.md` 的 D-063 节
+**下一会话入口：** `NEXT_SESSION_PROMPT.md` 的 D-064-B 节；完整提示词见 `67_D064B_POWER_AND_HIERARCHICAL_SENSITIVITY_EXECUTION.md`
 
 ---
 
