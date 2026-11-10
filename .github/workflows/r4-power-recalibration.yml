@@ -1,0 +1,47 @@
+name: R4 power recalibration
+
+on:
+  push:
+    branches:
+      - pilot-a-stateful-recovery
+    paths:
+      - "experiments/pilot_a3b/power_r4_design.py"
+      - "experiments/pilot_a3b/power_hierarchical.py"
+      - "experiments/pilot_a3b/diagnostic3_results.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  r4-power:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install numerical dependency
+        run: python -m pip install --disable-pip-version-check numpy
+
+      - name: Run frozen R4 ICC / Type-I / power grid
+        run: |
+          python experiments/pilot_a3b/power_r4_design.py \
+            --input experiments/pilot_a3b/diagnostic3_results.json \
+            --outdir "$RUNNER_TEMP/r4-power" \
+            --reps 10000 \
+            --seed 20261114
+
+      - name: Upload R4 power evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: r4-power-recalibration-10000mc
+          path: |
+            ${{ runner.temp }}/r4-power/power_r4_design.json
+            ${{ runner.temp }}/r4-power/power_r4_design_report.md
+          if-no-files-found: error
