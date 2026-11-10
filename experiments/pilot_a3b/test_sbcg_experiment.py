@@ -130,6 +130,22 @@ class ComparisonMatrixTests(unittest.TestCase):
         self.assertTrue(all(row["validation_selection"]["status"] in {"SELECTED", "HOLD"} for row in result["results"]))
         json.dumps(result)
 
+
+    def test_legacy_evolution_does_not_count_population_reuse_as_cache_hits(self):
+        pool = make_shared_initial_pool(19, size=2, include_hand=True)
+        self.assertEqual(len({fsm_fingerprint(item) for item in pool}), 2)
+        with patch("ea.evaluate_controller", side_effect=fake_metrics), patch(
+            "ea.crossover", side_effect=lambda left, right, rng: left
+        ), patch("ea.mutate", side_effect=lambda candidate, rng: candidate):
+            from ea import run_evolution
+            result = run_evolution(
+                "nsga2", pool, [SCENARIO], VERDICTS,
+                pop_size=2, generations=1, eval_budget=4, seed=19,
+            )
+        self.assertEqual(result["unique_evaluations"], 2)
+        self.assertEqual(result["cache_hits"], 2)
+        self.assertEqual(result["evaluation_calls"], 4)
+
     def test_legacy_evolution_reports_unique_and_cache_counts(self):
         with patch("ea.evaluate_controller", side_effect=fake_metrics):
             result = run_evolution(

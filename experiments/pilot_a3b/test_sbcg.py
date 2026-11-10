@@ -167,6 +167,7 @@ class ArchiveTests(unittest.TestCase):
         report = validation_selection_report([infeasible])
         self.assertEqual(report["status"], "HOLD")
         self.assertIn("selection_rule", report)
+        self.assertEqual(report["pareto_front"], [])
 
     def test_validation_uses_pareto_then_worst_family_not_sum(self):
         a = record("a", [0.2, 0.2], family_values={"f1": 0.2, "f2": 0.2})

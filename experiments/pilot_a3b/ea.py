@@ -523,15 +523,14 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
                     break
             population = [combined[i] for i in picked]
 
-        results = []
-        for g in population:
-            cached = cache.get(fingerprint(g))
-            if cached is None:
-                cached = evaluate_direct(g)
-            else:
-                cache_hits += 1
-                evaluation_calls += 1
-            results.append(cached)
+        # Reuse the result already associated with each selected genome.
+        # Re-querying the cache here is not an evaluation and must not inflate
+        # cache_hits/evaluation_calls.
+        result_by_fingerprint = {
+            fingerprint(genome): result
+            for genome, result in zip(combined, results_all)
+        }
+        results = [result_by_fingerprint[fingerprint(genome)] for genome in population]
         objs = [r["objectives"] for r in results]
 
         # ranks/crowd for next-gen tournament

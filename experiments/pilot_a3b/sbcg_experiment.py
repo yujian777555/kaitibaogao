@@ -278,8 +278,8 @@ def write_algorithm_matrix_outputs(result, outdir):
         "",
         "**Interpretation:** Validation is used for candidate selection. These selected Validation metrics are exploratory selection metrics, not an unbiased final generalization estimate. No Test payload or Test outcomes are used.",
         "",
-        "| Algorithm | Seed | Train episodes | Validation episodes | Selection | CondRecSucc | Avoidable harm | Action cost | Hard violations |",
-        "|---|---:|---:|---:|---|---:|---:|---:|---:|",
+        "| Algorithm | Seed | Train episodes | Validation episodes | Pareto candidates | Selection | CondRecSucc | Avoidable harm | Action cost | Hard violations |",
+        "|---|---:|---:|---:|---:|---|---:|---:|---:|---:|",
     ]
     for row in result["results"]:
         metrics = row.get("best_result") or {}
@@ -287,9 +287,10 @@ def write_algorithm_matrix_outputs(result, outdir):
         hard = sum(float(metrics.get(key, 0.0)) for key in ("dup", "sla_viol", "violations"))
         def fmt(value):
             return "NA" if value is None else f"{float(value):.4f}"
+        pareto_count = (row.get("validation_report") or {}).get("pareto_candidates", 0)
         lines.append(
             f"| {row['algorithm']} | {row['seed']} | {row['train_episodes']} | "
-            f"{row['validation_episodes']} | {selection} | "
+            f"{row['validation_episodes']} | {pareto_count} | {selection} | "
             f"{fmt(metrics.get('cond_rec'))} | {fmt(metrics.get('avoid_resid'))} | "
             f"{fmt(metrics.get('unnec_actions_r12'))} | {hard:.4f} |"
         )

@@ -368,6 +368,17 @@ def validation_selection_report(records):
         "candidate_count": len(records),
         "feasible_candidates": len(feasible),
         "pareto_candidates": len(_non_dominated(feasible)),
+        "pareto_front": [
+            {
+                "fingerprint": item.fingerprint,
+                "objectives": list(item.objectives),
+                "constraints": dict(item.constraints),
+                "family_coverage": item.family_coverage,
+                "worst_family_condrec": item.worst_family_condrec,
+                "source_split": item.source_split,
+            }
+            for item in _non_dominated(feasible)
+        ],
         "hard_constraint_limit": 0.0,
         "selection_rule": selection["rule"],
         "equal_weight_sum_used": False,
