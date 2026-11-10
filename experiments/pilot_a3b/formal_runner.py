@@ -127,8 +127,9 @@ def run_formal_analysis(
     analysis_split="test",
     git_head=None,
     code_paths=None,
+    test_execution_receipt=None,
 ):
-    """Execute the formal primary and secondary analyses on one locked input."""
+    """Execute formal analysis; Test input requires a receipt from the one-time wrapper."""
     actual_manifest_sha = _manifest_sha256(manifest)
     if manifest.get("manifest_sha256") != actual_manifest_sha:
         raise ValueError("manifest hash mismatch")
@@ -141,9 +142,24 @@ def run_formal_analysis(
             or len(set(composition_ids)) != 5):
         raise ValueError("formal runner requires exactly five unique primary compositions")
 
+    code_sha = _code_sha256(code_paths)
+    if analysis_split == "test":
+        receipt = test_execution_receipt
+        if not isinstance(receipt, dict) or receipt.get("status") != "COMPLETED":
+            raise PermissionError("Test analysis requires a completed one-time execution receipt")
+        if receipt.get("manifest_sha256") != actual_manifest_sha or receipt.get("code_sha256") != code_sha:
+            raise ValueError("final-evaluation receipt hash mismatch")
+        ledger_path = Path(receipt.get("ledger_path", ""))
+        if not ledger_path.is_file():
+            raise PermissionError("one-time final-evaluation ledger is missing")
+        consumed = json.loads(ledger_path.read_text(encoding="utf-8"))
+        if consumed.get("state") != "CONSUMED" or consumed.get("manifest_sha256") != actual_manifest_sha or consumed.get("code_sha256") != code_sha:
+            raise PermissionError("one-time final-evaluation ledger does not match the receipt")
+        if receipt.get("outcome_ledger_sha256") != _canonical_sha256(ledger):
+            raise ValueError("outcome ledger does not match the final-evaluation receipt")
     provenance = {
         "manifest_sha256": actual_manifest_sha,
-        "code_sha256": _code_sha256(code_paths),
+        "code_sha256": code_sha,
         "git_head": git_head or _git_head(),
         "primary_composition_ids": list(composition_ids),
     }

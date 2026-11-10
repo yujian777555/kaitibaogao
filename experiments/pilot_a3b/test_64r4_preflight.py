@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from formal_preflight import run_formal_preflight, write_preflight_report
+from formal_preflight import run_formal_preflight, run_postrun_integrity_check, write_preflight_report
 
 
 def good_context():
@@ -32,15 +32,6 @@ def good_context():
         "test_family_count": 40,
         "test_scenario_count": 1080,
         "expected_roster_valid": True,
-        "paired_rows_valid": True,
-        "duplicate_count": 0,
-        "labelled_null_count": 0,
-        "metadata_mismatch_count": 0,
-        "n_observed_families": 40,
-        "family_composition_counts": {f"F{i:02d}": 5 for i in range(40)},
-        "family_loss": [],
-        "technical_missing_runs": 0,
-        "design_deviation": False,
         "analysis_schema_valid": True,
         "budget_within_cap": True,
         "seed_recorded": True,
@@ -88,25 +79,45 @@ class FormalPreflightTests(unittest.TestCase):
         context["split_overlap_count"] = 1
         self.assertEqual(run_formal_preflight(context)["status"], "HOLD")
 
-    def test_underpowered_family_count_forces_hold(self):
+    def test_pre_run_gate_does_not_require_post_run_outcome_rows(self):
         context = good_context()
-        context["n_observed_families"] = 33
-        context["family_composition_counts"] = {f"F{i:02d}": 5 for i in range(33)}
-        context["design_deviation"] = True
         result = run_formal_preflight(context)
-        self.assertEqual(result["status"], "HOLD")
-        self.assertTrue(any("34" in x for x in result["blocking_reasons"]))
+        self.assertEqual(result["status"], "GO")
+        self.assertEqual(result["phase"], "PRE_RUN_AUTHORIZATION")
+        self.assertNotIn("n_observed_families", result["checked_fields"])
 
-    def test_incomplete_composition_count_forces_hold(self):
-        context = good_context()
-        context["family_composition_counts"]["F00"] = 4
-        self.assertEqual(run_formal_preflight(context)["status"], "HOLD")
-
-    def test_test_access_or_consumed_ledger_forces_hold(self):
+    def test_test_access_or_consumed_ledger_forces_pre_run_hold(self):
         context = good_context()
         context["test_access_log_count"] = 1
         context["one_time_ledger_state"] = "CONSUMED"
         self.assertEqual(run_formal_preflight(context)["status"], "HOLD")
+
+    def test_post_run_gate_checks_outcomes_only_after_one_time_consumption(self):
+        context = {
+            "paired_rows_valid": True, "duplicate_count": 0,
+            "labelled_null_count": 0, "metadata_mismatch_count": 0,
+            "n_observed_families": 34,
+            "family_composition_counts": {f"F{i:02d}": 5 for i in range(34)},
+            "family_loss": [], "technical_missing_runs": 0,
+            "design_deviation": False, "test_access_log_count": 1,
+            "one_time_ledger_state": "CONSUMED",
+        }
+        result = run_postrun_integrity_check(context)
+        self.assertEqual(result["phase"], "POST_RUN_ANALYSIS_INTEGRITY")
+        self.assertEqual(result["status"], "GO")
+        self.assertTrue(result["analysis_eligible"])
+
+    def test_post_run_gate_rejects_incomplete_family(self):
+        context = {
+            "paired_rows_valid": True, "duplicate_count": 0,
+            "labelled_null_count": 0, "metadata_mismatch_count": 0,
+            "n_observed_families": 33,
+            "family_composition_counts": {f"F{i:02d}": 5 for i in range(33)},
+            "family_loss": ["F33"], "technical_missing_runs": 1,
+            "design_deviation": True, "test_access_log_count": 1,
+            "one_time_ledger_state": "CONSUMED",
+        }
+        self.assertEqual(run_postrun_integrity_check(context)["status"], "HOLD")
 
     def test_invalid_hash_or_missing_required_field_fails_closed(self):
         context = good_context()

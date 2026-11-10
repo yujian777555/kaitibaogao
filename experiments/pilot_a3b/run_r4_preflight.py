@@ -70,15 +70,6 @@ def run_current_preflight(
         "expected_roster_valid": bool(
             manifest["gate"]["passed"] and len(primary_ids) == len(set(primary_ids)) == 5
         ),
-        "paired_rows_valid": False,
-        "duplicate_count": None,
-        "labelled_null_count": None,
-        "metadata_mismatch_count": None,
-        "n_observed_families": 0,
-        "family_composition_counts": {},
-        "family_loss": [],
-        "technical_missing_runs": 0,
-        "design_deviation": True,
         "analysis_schema_valid": analysis_schema_valid,
         "budget_within_cap": True,
         "seed_recorded": True,
@@ -91,7 +82,8 @@ def run_current_preflight(
         result["blocking_reasons"].append("R4 preregistration file is missing")
         result["status"] = "HOLD"
     result["execution_context"] = {
-        "scope": "metadata-only pre-run gate",
+        "phase": "PRE_RUN_AUTHORIZATION",
+        "scope": "metadata-only pre-run authorization gate; no outcome rows are expected here",
         "outcome_ledger_state": "NOT_RUN",
         "manifest_gate": "PASS" if manifest["gate"]["passed"] else "FAIL",
         "test_summary": summary,

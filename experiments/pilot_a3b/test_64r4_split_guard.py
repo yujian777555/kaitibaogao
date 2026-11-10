@@ -16,6 +16,9 @@ from split_access import (
 def approval(manifest_sha="manifest-ok", code_sha="code-ok"):
     return {
         "status": "APPROVED",
+        "preflight_status": "GO",
+        "ci_conclusion": "success",
+        "tests_passed": True,
         "independent_review_status": "ACCEPTED",
         "advisor_mde_approved": True,
         "user_approved": True,
@@ -110,6 +113,18 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
                     ledger, approval(), "manifest-ok", "manifest-ok", "code-ok", "code-ok", loader, evaluator
                 )
             self.assertEqual(calls, {"loader": 1, "evaluator": 1})
+
+    def test_missing_preflight_go_does_not_read_payload(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger = Path(tmp) / "one-time.json"
+            bad = approval()
+            bad.pop("preflight_status")
+            with self.assertRaises(PermissionError):
+                consume_final_evaluation_once(
+                    ledger, bad, "manifest-ok", "manifest-ok", "code-ok", "code-ok",
+                    lambda: {"sentinel": True}, lambda value: value,
+                )
+            self.assertFalse(ledger.exists())
 
     def test_unapproved_call_does_not_read_payload(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -1,10 +1,4 @@
-"""R4 machine-readable, fail-closed formal pre-flight.
-
-This module accepts metadata and gate results only. It must never load, inspect,
-or serialize Test scenario labels or episode outcomes. The only Test fields
-permitted here are counts, hashes, split summaries, access-log counts, and the
-one-time ledger state.
-"""
+"""R4 two-phase, fail-closed authorization and post-run integrity gates."""
 from __future__ import annotations
 
 import json
@@ -21,55 +15,56 @@ REQUIRED_MANIFEST_HASHES = (
     "test_family_sha256",
     "test_scenario_sha256",
 )
-REQUIRED_FIELDS = (
-    "r4_preregistration_sha256",
-    "implementation_sha256",
-    "git_head",
-    "independent_review_status",
-    "advisor_mde_status",
-    "user_approved",
-    "ci_conclusion",
-    "tests_passed",
-    "manifest_hashes",
-    "split_overlap_count",
-    "train_runner_split",
-    "validation_use",
-    "test_payload_exposed",
-    "test_payload_disclosed",
-    "test_family_count",
-    "test_scenario_count",
-    "expected_roster_valid",
-    "paired_rows_valid",
-    "duplicate_count",
-    "labelled_null_count",
-    "metadata_mismatch_count",
-    "n_observed_families",
-    "family_composition_counts",
-    "family_loss",
-    "technical_missing_runs",
-    "design_deviation",
-    "analysis_schema_valid",
-    "budget_within_cap",
-    "seed_recorded",
-    "stopping_rule_frozen",
-    "test_access_log_count",
+PRE_RUN_REQUIRED_FIELDS = (
+    "r4_preregistration_sha256", "implementation_sha256", "git_head",
+    "independent_review_status", "advisor_mde_status", "user_approved",
+    "ci_conclusion", "tests_passed", "manifest_hashes", "split_overlap_count",
+    "train_runner_split", "validation_use", "test_payload_exposed",
+    "test_payload_disclosed", "test_family_count", "test_scenario_count",
+    "expected_roster_valid", "analysis_schema_valid", "budget_within_cap",
+    "seed_recorded", "stopping_rule_frozen", "test_access_log_count",
     "one_time_ledger_state",
+)
+POST_RUN_REQUIRED_FIELDS = (
+    "paired_rows_valid", "duplicate_count", "labelled_null_count",
+    "metadata_mismatch_count", "n_observed_families",
+    "family_composition_counts", "family_loss", "technical_missing_runs",
+    "design_deviation", "test_access_log_count", "one_time_ledger_state",
 )
 
 
-def run_formal_preflight(context):
-    """Return GO only when every approval, integrity, split, and design gate passes."""
-    reasons = []
-    if not isinstance(context, dict):
-        return {
-            "status": "HOLD",
-            "blocking_reasons": ["pre-flight context must be an object"],
-            "checked_fields": [],
-        }
+def _hold(reasons, phase, context=None):
+    context = context or {}
+    hashes = context.get("manifest_hashes")
+    return {
+        "phase": phase,
+        "status": "HOLD" if reasons else "GO",
+        "blocking_reasons": reasons,
+        "checked_fields": list(PRE_RUN_REQUIRED_FIELDS if phase == "PRE_RUN_AUTHORIZATION" else POST_RUN_REQUIRED_FIELDS),
+        "provenance": {
+            "r4_preregistration_sha256": context.get("r4_preregistration_sha256"),
+            "implementation_sha256": context.get("implementation_sha256"),
+            "git_head": context.get("git_head"),
+            "manifest_hashes": hashes if isinstance(hashes, dict) else {},
+        },
+        "test_lock": {
+            "payload_exposed": context.get("test_payload_exposed"),
+            "payload_disclosed": context.get("test_payload_disclosed"),
+            "access_log_count": context.get("test_access_log_count"),
+            "one_time_ledger_state": context.get("one_time_ledger_state"),
+        },
+    }
 
-    missing = [field for field in REQUIRED_FIELDS if field not in context]
+
+def run_formal_preflight(context):
+    """Pre-run authorization only: never requires outcome rows that do not yet exist."""
+    phase = "PRE_RUN_AUTHORIZATION"
+    if not isinstance(context, dict):
+        return _hold(["pre-flight context must be an object"], phase)
+    reasons = []
+    missing = [field for field in PRE_RUN_REQUIRED_FIELDS if field not in context]
     if missing:
-        reasons.append("missing required pre-flight fields: " + ", ".join(missing))
+        reasons.append("missing pre-run fields: " + ", ".join(missing))
 
     for field in ("r4_preregistration_sha256", "implementation_sha256"):
         value = context.get(field)
@@ -95,7 +90,6 @@ def run_formal_preflight(context):
         reasons.append("explicit user approval is absent")
     if context.get("ci_conclusion") != "success" or context.get("tests_passed") is not True:
         reasons.append("required tests/CI are not successful")
-
     if context.get("split_overlap_count") != 0:
         reasons.append("Train/Validation/Test split overlap is nonzero")
     if context.get("train_runner_split") != "train":
@@ -110,15 +104,32 @@ def run_formal_preflight(context):
         reasons.append("frozen Test family count must be 40")
     if context.get("test_scenario_count") != 1080:
         reasons.append("frozen Test scenario count must be 1080")
-
     if context.get("expected_roster_valid") is not True:
         reasons.append("frozen expected roster validation failed")
+    for field in ("analysis_schema_valid", "budget_within_cap", "seed_recorded", "stopping_rule_frozen"):
+        if context.get(field) is not True:
+            reasons.append(f"{field} gate is not satisfied")
+    if context.get("test_access_log_count") != 0:
+        reasons.append("Test access log must be empty before execution")
+    if context.get("one_time_ledger_state") != "UNUSED":
+        reasons.append("one-time final-evaluation ledger must be UNUSED before execution")
+    return _hold(reasons, phase, context)
+
+
+def run_postrun_integrity_check(context):
+    """Post-run data-integrity gate; it cannot authorize or reopen Test access."""
+    phase = "POST_RUN_ANALYSIS_INTEGRITY"
+    if not isinstance(context, dict):
+        return _hold(["post-run context must be an object"], phase)
+    reasons = []
+    missing = [field for field in POST_RUN_REQUIRED_FIELDS if field not in context]
+    if missing:
+        reasons.append("missing post-run fields: " + ", ".join(missing))
     if context.get("paired_rows_valid") is not True:
         reasons.append("paired AB/NSGA-II rows are incomplete")
     for field in ("duplicate_count", "labelled_null_count", "metadata_mismatch_count"):
         if context.get(field) != 0:
             reasons.append(f"{field} must be zero")
-
     n_families = context.get("n_observed_families")
     if not isinstance(n_families, int) or isinstance(n_families, bool) or n_families < 34:
         reasons.append("at least 34 complete families are required")
@@ -129,78 +140,48 @@ def run_formal_preflight(context):
         reasons.append("every retained family must have exactly five primary compositions")
     elif n_families != len(composition_counts):
         reasons.append("observed family count does not match composition-count roster")
-
-    family_loss = context.get("family_loss")
-    if not isinstance(family_loss, list):
+    if not isinstance(context.get("family_loss"), list):
         reasons.append("family_loss must be an explicit list")
-    if context.get("design_deviation") is not False:
-        reasons.append("design_deviation is active")
     missing_runs = context.get("technical_missing_runs")
     if not isinstance(missing_runs, int) or isinstance(missing_runs, bool) or missing_runs < 0:
         reasons.append("technical_missing_runs must be a non-negative integer")
-
-    for field in ("analysis_schema_valid", "budget_within_cap", "seed_recorded", "stopping_rule_frozen"):
-        if context.get(field) is not True:
-            reasons.append(f"{field} gate is not satisfied")
-
-    if context.get("test_access_log_count") != 0:
-        reasons.append("Test access log is non-empty")
-    if context.get("one_time_ledger_state") != "UNUSED":
-        reasons.append("one-time final-evaluation ledger is not UNUSED")
-
-    return {
-        "status": "GO" if not reasons else "HOLD",
-        "blocking_reasons": reasons,
-        "checked_fields": list(REQUIRED_FIELDS),
-        "provenance": {
-            "r4_preregistration_sha256": context.get("r4_preregistration_sha256"),
-            "implementation_sha256": context.get("implementation_sha256"),
-            "git_head": context.get("git_head"),
-            "manifest_hashes": hashes if isinstance(hashes, dict) else {},
-        },
-        "design": {
-            "n_observed_families": n_families,
-            "family_loss": family_loss,
-            "technical_missing_runs": missing_runs,
-            "family_composition_counts": composition_counts if isinstance(composition_counts, dict) else {},
-        },
-        "test_lock": {
-            "payload_exposed": context.get("test_payload_exposed"),
-            "payload_disclosed": context.get("test_payload_disclosed"),
-            "access_log_count": context.get("test_access_log_count"),
-            "one_time_ledger_state": context.get("one_time_ledger_state"),
-        },
+    if context.get("design_deviation") is not False:
+        reasons.append("design_deviation is active")
+    if not isinstance(context.get("test_access_log_count"), int) or context.get("test_access_log_count", 0) < 1:
+        reasons.append("post-run Test access must be recorded")
+    if context.get("one_time_ledger_state") != "CONSUMED":
+        reasons.append("one-time final-evaluation ledger must be CONSUMED")
+    result = _hold(reasons, phase, context)
+    result["analysis_eligible"] = not reasons
+    result["design"] = {
+        "n_observed_families": n_families,
+        "family_loss": context.get("family_loss"),
+        "technical_missing_runs": missing_runs,
+        "family_composition_counts": composition_counts if isinstance(composition_counts, dict) else {},
     }
+    return result
 
 
 def write_preflight_report(result, json_path, markdown_path):
-    """Write JSON and Markdown gate outputs; no Test payload is accepted."""
+    """Write machine-readable gate output without accepting Test payload."""
     json_path = Path(json_path)
     markdown_path = Path(markdown_path)
     json_path.parent.mkdir(parents=True, exist_ok=True)
     markdown_path.parent.mkdir(parents=True, exist_ok=True)
-    json_path.write_text(
-        json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+    json_path.write_text(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
     lines = [
-        "# R4 Formal Pre-flight",
-        "",
-        f"Status: **{result.get('status', 'HOLD')}**",
-        "",
-        "## Blocking reasons",
-        "",
+        "# R4 Gate Report", "",
+        f"- Phase: {result.get('phase')}",
+        f"- Status: **{result.get('status', 'HOLD')}**", "",
+        "## Blocking reasons", "",
     ]
     reasons = result.get("blocking_reasons", [])
     lines.extend([f"- {reason}" for reason in reasons] if reasons else ["- None"])
     lines.extend([
-        "",
-        "## Test lock",
-        "",
+        "", "## Test lock", "",
         f"- Payload exposed: {result.get('test_lock', {}).get('payload_exposed')}",
         f"- Payload disclosed: {result.get('test_lock', {}).get('payload_disclosed')}",
         f"- Access log count: {result.get('test_lock', {}).get('access_log_count')}",
-        f"- One-time ledger: {result.get('test_lock', {}).get('one_time_ledger_state')}",
-        "",
+        f"- One-time ledger: {result.get('test_lock', {}).get('one_time_ledger_state')}", "",
     ])
     markdown_path.write_text("\n".join(lines), encoding="utf-8")

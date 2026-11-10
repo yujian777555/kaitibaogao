@@ -99,12 +99,15 @@ def consume_final_evaluation_once(
     """
     required = (
         approval_record.get("status") == "APPROVED"
+        and approval_record.get("preflight_status") == "GO"
+        and approval_record.get("ci_conclusion") == "success"
+        and approval_record.get("tests_passed") is True
         and approval_record.get("independent_review_status") == "ACCEPTED"
         and approval_record.get("advisor_mde_approved") is True
         and approval_record.get("user_approved") is True
     )
     if not required:
-        raise PermissionError("final evaluation requires independent, advisor, and user approval")
+        raise PermissionError("final evaluation requires pre-flight GO, successful CI/tests, independent, advisor, and user approval")
     if (approval_record.get("manifest_sha256") != expected_manifest_sha256
             or approval_record.get("code_sha256") != expected_code_sha256):
         raise ValueError("approval record hash mismatch")
@@ -134,3 +137,38 @@ def consume_final_evaluation_once(
 
     test_payload = payload_loader()
     return evaluator(test_payload)
+
+
+def execute_final_evaluation_once(
+    ledger_path,
+    approval_record,
+    preflight_result,
+    expected_manifest_sha256,
+    actual_manifest_sha256,
+    expected_code_sha256,
+    actual_code_sha256,
+    payload_loader,
+    evaluator,
+):
+    """Production wrapper: require pre-run GO, consume once, then issue a bound receipt."""
+    if not isinstance(preflight_result, dict) or preflight_result.get("phase") != "PRE_RUN_AUTHORIZATION" or preflight_result.get("status") != "GO":
+        raise PermissionError("final evaluation requires a successful PRE_RUN_AUTHORIZATION GO")
+    approved = dict(approval_record)
+    approved["preflight_status"] = preflight_result["status"]
+    outcome_ledger = consume_final_evaluation_once(
+        ledger_path, approved,
+        expected_manifest_sha256, actual_manifest_sha256,
+        expected_code_sha256, actual_code_sha256,
+        payload_loader, evaluator,
+    )
+    if not isinstance(outcome_ledger, dict):
+        raise ValueError("final evaluator must return a run-ledger object")
+    canonical = json.dumps(outcome_ledger, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    receipt = {
+        "status": "COMPLETED",
+        "manifest_sha256": actual_manifest_sha256,
+        "code_sha256": actual_code_sha256,
+        "ledger_path": str(ledger_path),
+        "outcome_ledger_sha256": __import__("hashlib").sha256(canonical).hexdigest(),
+    }
+    return outcome_ledger, receipt

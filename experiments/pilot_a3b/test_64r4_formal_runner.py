@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from formal_runner import run_formal_analysis, write_formal_analysis_outputs
+from formal_runner import _canonical_sha256, _code_sha256, run_formal_analysis, write_formal_analysis_outputs
 
 
 SEEDS = (411, 522)
@@ -82,9 +82,30 @@ def make_fixture(n_families=34):
 
 
 class FormalRunnerTests(unittest.TestCase):
+    def _run_synthetic(self, manifest, ledger, roster):
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger_path = Path(tmp) / "one-time.json"
+            code_sha = _code_sha256()
+            ledger_path.write_text(json.dumps({
+                "state": "CONSUMED",
+                "manifest_sha256": manifest["manifest_sha256"],
+                "code_sha256": code_sha,
+            }), encoding="utf-8")
+            receipt = {
+                "status": "COMPLETED",
+                "manifest_sha256": manifest["manifest_sha256"],
+                "code_sha256": code_sha,
+                "ledger_path": str(ledger_path),
+                "outcome_ledger_sha256": _canonical_sha256(ledger),
+            }
+            return run_formal_analysis(
+                manifest, ledger, roster, SEEDS, git_head=GIT_HEAD,
+                test_execution_receipt=receipt,
+            )
+
     def test_ledger_to_family_primary_secondary_and_provenance(self):
         manifest, ledger, roster = make_fixture()
-        result = run_formal_analysis(manifest, ledger, roster, SEEDS, git_head=GIT_HEAD)
+        result = self._run_synthetic(manifest, ledger, roster)
         self.assertEqual(result["runner_version"], "d064-r4-formal-runner-v1")
         self.assertEqual(result["primary"]["n_families"], 34)
         self.assertEqual(result["primary"]["student_t"]["df"], 33)
@@ -103,13 +124,13 @@ class FormalRunnerTests(unittest.TestCase):
         manifest, ledger, roster = make_fixture()
         manifest["manifest_sha256"] = "0" * 64
         with self.assertRaisesRegex(ValueError, "manifest hash"):
-            run_formal_analysis(manifest, ledger, roster, SEEDS, git_head=GIT_HEAD)
+            self._run_synthetic(manifest, ledger, roster)
 
     def test_labelled_null_fails_closed_through_runner(self):
         manifest, ledger, roster = make_fixture()
         ledger["runs"][0]["rows"][0]["class_success"] = None
         with self.assertRaisesRegex(ValueError, "labelled null"):
-            run_formal_analysis(manifest, ledger, roster, SEEDS, git_head=GIT_HEAD)
+            self._run_synthetic(manifest, ledger, roster)
 
     def test_wrong_composition_roster_fails_closed(self):
         manifest, ledger, roster = make_fixture()
@@ -117,7 +138,7 @@ class FormalRunnerTests(unittest.TestCase):
             if item["composition_id"] == "C00":
                 item["composition_id"] = "C99"
         with self.assertRaisesRegex(ValueError, "composition IDs"):
-            run_formal_analysis(manifest, ledger, roster, SEEDS, git_head=GIT_HEAD)
+            self._run_synthetic(manifest, ledger, roster)
 
     def test_explicit_technical_missing_is_counted_without_replacement(self):
         manifest, ledger, roster = make_fixture()
@@ -131,7 +152,7 @@ class FormalRunnerTests(unittest.TestCase):
             "method": "AB", "seed": SEEDS[0], "scenario_id": removed["scenario_id"],
             "category": "infrastructure", "reason": "synthetic process crash",
         }]
-        result = run_formal_analysis(manifest, ledger, roster, SEEDS, git_head=GIT_HEAD)
+        result = self._run_synthetic(manifest, ledger, roster)
         self.assertEqual(result["primary"]["technical_missing_runs"], 1)
         self.assertEqual(result["primary"]["family_loss"], ["F00"])
         self.assertEqual(result["primary"]["n_families"], 33)
@@ -142,11 +163,11 @@ class FormalRunnerTests(unittest.TestCase):
         manifest, ledger, roster = make_fixture()
         ledger["runs"][0]["rows"].append(dict(ledger["runs"][0]["rows"][0]))
         with self.assertRaisesRegex(ValueError, "duplicate run"):
-            run_formal_analysis(manifest, ledger, roster, SEEDS, git_head=GIT_HEAD)
+            self._run_synthetic(manifest, ledger, roster)
 
     def test_report_outputs_contain_real_results(self):
         manifest, ledger, roster = make_fixture()
-        result = run_formal_analysis(manifest, ledger, roster, SEEDS, git_head=GIT_HEAD)
+        result = self._run_synthetic(manifest, ledger, roster)
         with tempfile.TemporaryDirectory() as tmp:
             json_path, markdown_path = write_formal_analysis_outputs(result, tmp)
             saved = json.loads(Path(json_path).read_text(encoding="utf-8"))
