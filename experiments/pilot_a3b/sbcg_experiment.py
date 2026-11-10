@@ -222,13 +222,91 @@ def run_algorithm_arm(
             "reason": validation_selection.get("reason"),
         },
         "validation_report": validation_report,
-        "best": selected.fsm if selected is not None else None,
+        "best_fsm": _fsm_view(selected.fsm) if selected is not None else None,
         "best_result": selected.metrics if selected is not None else None,
         "history": out.get("history", []),
         "strata": out.get("strata", []),
         "mutation_audit": out.get("mutation_audit", []),
-        "raw_result": out,
     }
+
+
+
+def _fsm_view(fsm):
+    """JSON-safe genome representation for reproducible pilot artifacts."""
+    if fsm is None:
+        return None
+    genes = []
+    for key, gene in sorted(fsm.genes.items(), key=lambda item: repr(item[0])):
+        genes.append({
+            "state": list(key) if isinstance(key, tuple) else str(key),
+            "action": gene.action,
+            "wait_n": gene.wait_n,
+        })
+    return {
+        "fingerprint": fsm_fingerprint(fsm),
+        "genes": genes,
+        "default_action": fsm.default_action,
+        "default_wait": fsm.default_wait,
+        "sla_aware": getattr(fsm, "sla_aware", None),
+        "fixed_wait": getattr(fsm, "fixed_wait", None),
+    }
+
+
+def write_algorithm_matrix_outputs(result, outdir):
+    """Persist a JSON-safe matrix and a concise per-arm Validation-selection report."""
+    from pathlib import Path
+
+    outdir = Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    json_path = outdir / "matrix_results.json"
+    report_path = outdir / "matrix_report.md"
+    json_path.write_text(
+        json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    lines = [
+        "# SBCG 14-arm Train/Validation exploratory pilot",
+        "",
+        f"- Matrix version: {result['matrix_version']}",
+        f"- Status: {result['status']}",
+        f"- Seeds: {result['seeds']}",
+        f"- Arms: {result['algorithm_count']}; runs: {result['run_count']}",
+        f"- Train scenarios: {result['train_scenario_count']}",
+        f"- Validation scenarios: {result['validation_scenario_count']}",
+        f"- Population / generations: {result['population']} / {result['generations']}",
+        f"- Train episode budget per evolutionary arm: {result['per_evolutionary_arm_train_episode_budget']}",
+        "",
+        "**Interpretation:** Validation is used for candidate selection. These selected Validation metrics are exploratory selection metrics, not an unbiased final generalization estimate. No Test payload or Test outcomes are used.",
+        "",
+        "| Algorithm | Seed | Train episodes | Validation episodes | Selection | CondRecSucc | Avoidable harm | Action cost | Hard violations |",
+        "|---|---:|---:|---:|---|---:|---:|---:|---:|",
+    ]
+    for row in result["results"]:
+        metrics = row.get("best_result") or {}
+        selection = row.get("validation_selection", {}).get("status", "NOT_RUN")
+        hard = sum(float(metrics.get(key, 0.0)) for key in ("dup", "sla_viol", "violations"))
+        def fmt(value):
+            return "NA" if value is None else f"{float(value):.4f}"
+        lines.append(
+            f"| {row['algorithm']} | {row['seed']} | {row['train_episodes']} | "
+            f"{row['validation_episodes']} | {selection} | "
+            f"{fmt(metrics.get('cond_rec'))} | {fmt(metrics.get('avoid_resid'))} | "
+            f"{fmt(metrics.get('unnec_actions_r12'))} | {hard:.4f} |"
+        )
+    lines.extend([
+        "",
+        "## Scope and limits",
+        "",
+        "- This is a non-confirmatory development pilot on the generated synthetic A-3b Train/Validation simulator.",
+        "- Train is used for evolutionary fitness; Validation is used once after each arm's Train search to select a candidate.",
+        "- Validation metrics are subject to selection optimism and must not be presented as unbiased generalization performance.",
+        "- No Test scenarios are passed to the optimization or evaluation runners; no Test outcomes are read.",
+        "- Reflection is a deterministic proxy, not an LLM call.",
+        "- This run does not authorize formal A-3b, Test access, or a confirmatory paper claim.",
+        "",
+    ])
+    report_path.write_text("\n".join(lines), encoding="utf-8")
+    return json_path, report_path
 
 
 def run_algorithm_matrix(

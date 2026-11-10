@@ -1,4 +1,5 @@
 """Synthetic tests for the SBCG comparison matrix and accounting interfaces."""
+import json
 import unittest
 from unittest.mock import patch
 
@@ -127,6 +128,7 @@ class ComparisonMatrixTests(unittest.TestCase):
         self.assertTrue(all("no_test" in row["information_scope"] for row in result["results"]))
         self.assertTrue(all(row["validation_calls"] >= 1 for row in result["results"]))
         self.assertTrue(all(row["validation_selection"]["status"] in {"SELECTED", "HOLD"} for row in result["results"]))
+        json.dumps(result)
 
     def test_legacy_evolution_reports_unique_and_cache_counts(self):
         with patch("ea.evaluate_controller", side_effect=fake_metrics):
