@@ -155,11 +155,32 @@ def execute_final_evaluation_once(
         raise PermissionError("final evaluation requires a successful PRE_RUN_AUTHORIZATION GO")
     approved = dict(approval_record)
     approved["preflight_status"] = preflight_result["status"]
+    access_log_path = Path(str(ledger_path) + ".access.json")
+
+    def logged_payload_loader():
+        access_record = {
+            "event": "TEST_PAYLOAD_LOAD_ATTEMPT",
+            "state": "RECORDED",
+            "manifest_sha256": actual_manifest_sha256,
+            "code_sha256": actual_code_sha256,
+        }
+        flags = os.O_CREAT | os.O_EXCL | os.O_WRONLY
+        try:
+            fd = os.open(str(access_log_path), flags, 0o600)
+        except FileExistsError as exc:
+            raise RuntimeError("Test access log already exists; refusing another load") from exc
+        try:
+            os.write(fd, json.dumps(access_record, sort_keys=True).encode("utf-8"))
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+        return payload_loader()
+
     outcome_ledger = consume_final_evaluation_once(
         ledger_path, approved,
         expected_manifest_sha256, actual_manifest_sha256,
         expected_code_sha256, actual_code_sha256,
-        payload_loader, evaluator,
+        logged_payload_loader, evaluator,
     )
     if not isinstance(outcome_ledger, dict):
         raise ValueError("final evaluator must return a run-ledger object")
@@ -169,6 +190,8 @@ def execute_final_evaluation_once(
         "manifest_sha256": actual_manifest_sha256,
         "code_sha256": actual_code_sha256,
         "ledger_path": str(ledger_path),
+        "access_log_path": str(access_log_path),
+        "test_access_log_count": 1,
         "outcome_ledger_sha256": __import__("hashlib").sha256(canonical).hexdigest(),
     }
     return outcome_ledger, receipt

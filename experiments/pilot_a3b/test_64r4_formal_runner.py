@@ -113,6 +113,8 @@ class FormalRunnerTests(unittest.TestCase):
         result = self._run_synthetic(manifest, ledger, roster)
         self.assertEqual(result["runner_version"], "d064-r4-formal-runner-v1")
         self.assertEqual(result["primary"]["n_families"], 34)
+        self.assertEqual(result["post_run_integrity"]["status"], "GO")
+        self.assertTrue(result["post_run_integrity"]["analysis_eligible"])
         self.assertEqual(result["primary"]["student_t"]["df"], 33)
         self.assertEqual(result["primary"]["confirmatory_status"], "ELIGIBLE")
         self.assertEqual(result["secondary"]["hypothesis_count"], 4)

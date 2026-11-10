@@ -13,6 +13,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from formal_analysis import analyze_primary_endpoint, analyze_secondary_endpoints
+from formal_preflight import run_postrun_integrity_check
 
 RUNNER_VERSION = "d064-r4-formal-runner-v1"
 HERE = Path(__file__).parent
@@ -157,6 +158,18 @@ def run_formal_analysis(
             raise PermissionError("one-time final-evaluation ledger does not match the receipt")
         if receipt.get("outcome_ledger_sha256") != _canonical_sha256(ledger):
             raise ValueError("outcome ledger does not match the final-evaluation receipt")
+        access_log_path = Path(receipt.get("access_log_path", ""))
+        if not access_log_path.is_file():
+            raise PermissionError("one-time Test access log is missing")
+        access_record = json.loads(access_log_path.read_text(encoding="utf-8"))
+        if (
+            access_record.get("event") != "TEST_PAYLOAD_LOAD_ATTEMPT"
+            or access_record.get("state") != "RECORDED"
+            or access_record.get("manifest_sha256") != actual_manifest_sha
+            or access_record.get("code_sha256") != code_sha
+            or receipt.get("test_access_log_count") != 1
+        ):
+            raise PermissionError("one-time Test access log does not match the receipt")
     provenance = {
         "manifest_sha256": actual_manifest_sha,
         "code_sha256": code_sha,
@@ -190,6 +203,24 @@ def run_formal_analysis(
         provenance=provenance,
         primary_composition_ids=composition_ids,
     )
+    postrun_integrity = None
+    if analysis_split == "test":
+        postrun_integrity = run_postrun_integrity_check({
+            "paired_rows_valid": primary["n_missing_run_keys"] == primary["technical_missing_runs"],
+            "duplicate_count": 0,
+            "labelled_null_count": 0,
+            "metadata_mismatch_count": 0,
+            "n_observed_families": primary["n_families"],
+            "family_composition_counts": primary["family_composition_counts"],
+            "family_loss": primary["family_loss"],
+            "technical_missing_runs": primary["technical_missing_runs"],
+            "design_deviation": primary["design_deviation"],
+            "test_access_log_count": test_execution_receipt["test_access_log_count"],
+            "one_time_ledger_state": "CONSUMED",
+        })
+        if postrun_integrity["status"] != "GO":
+            primary["confirmatory_status"] = "NOT_ELIGIBLE_POSTRUN_INTEGRITY"
+            primary["student_t"] = None
     return {
         "kind": "D064_R4_FORMAL_ANALYSIS_RUN",
         "runner_version": RUNNER_VERSION,
@@ -205,6 +236,7 @@ def run_formal_analysis(
         "family_rosters": _family_rosters(expected_roster, primary),
         "primary": primary,
         "secondary": secondary,
+        "post_run_integrity": postrun_integrity,
     }
 
 

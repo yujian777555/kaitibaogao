@@ -130,6 +130,9 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
             self.assertEqual(receipt["status"], "COMPLETED")
             self.assertTrue(ledger.exists())
             self.assertEqual(json.loads(ledger.read_text())["state"], "CONSUMED")
+            access_log = Path(str(ledger) + ".access.json")
+            self.assertTrue(access_log.exists())
+            self.assertEqual(json.loads(access_log.read_text())["event"], "TEST_PAYLOAD_LOAD_ATTEMPT")
 
     def test_production_wrapper_rejects_hold_preflight_before_payload_read(self):
         with tempfile.TemporaryDirectory() as tmp:
