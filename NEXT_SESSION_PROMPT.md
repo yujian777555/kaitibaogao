@@ -1180,3 +1180,7 @@ R4 has a real manifest+ledger formal runner, frozen outcome-blind five-compositi
 No real Train/Validation algorithm diagnostic or Test access occurred. No performance uplift or ablation claim is supported. Safety non-inferiority margins and the hypervolume reference point remain OPEN.
 
 Only next task: independent R4 review. After ACCEPTED + advisor MDE approval + explicit user approval + real pre-flight, freeze the remaining safety/hypervolume rules before any Train-only SBCG comparison. Keep formal A-3b, Test, Pilot B, A800/ARWM, real LLM APIs, and main merges on HOLD.
+
+
+## 最新状态追加（2026-11-10 D-078）
+先读取 `experiments/pilot_a3b/results/d078_train_validation_pilot/matrix_report.md`。D-078 已在合成 A-3b simulator 完成 14 臂×3 seeds=42 runs，CI 42820836080 success，回归 CI 42820836104 success。Train=216、Validation=108，pop=8、G=5、LLM API=0、Test 未访问。多数算法的 selected Validation 指标完全相同（CondRecSucc=1.0、AvoidableHarm=2.4444、ActionCost=4.3929），SBCG 暂无可见性能提升；Reflection HOLD；no-M3 表现较差。Validation 指标有 selection optimism，不可当作无偏泛化结果。D-076 review 是旧 SHA 的复审，若干 SBCG 阻断已由后续 D-078 commits 修正；R4 technical-missing power / pre-run-post-run gate 仍需独立核验。下一任务 D-079：做 per-family/per-scenario diagnostics、确认天花板效应/相同 FSM 收敛原因，构造预注册难度分层合成挑战集；不访问 Test、不启动真实 LLM/A800。

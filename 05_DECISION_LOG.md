@@ -1452,3 +1452,16 @@ R4 状态只能是 **READY_FOR_INDEPENDENT_REVIEW**，提交独立 Reviewer，�
 - 正式 A-3b、真实 Train/Validation 算法诊断、Test、Pilot B、A800/ARWM、真实 LLM API 继续 HOLD。
 - 唯一下一任务：D-078 corrective revision，修复上述阻断并重新独立复审。
 
+
+
+## 决策 D-079：D-078 首轮合成 Train/Validation 结果不支持性能提升（2026-11-10）
+
+D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/actions/runs/42820836080) success；回归 workflow [42820836104](https://github.com/yujian777555/kaitibaogao/actions/runs/42820836104) success。提交 `7cbbac54e2f3d8680a4851f7a7c79cd02b3cd8d3` 保存结果。
+
+- 14 arms × 3 seeds = 42 runs；合成 Train=216、Validation=108；pop=8、G=5；Test 未访问，LLM API=0。
+- 多数算法 selected Validation metrics 完全重合：CondRecSucc=1.0000、AvoidableHarm=2.4444、ActionCost=4.3929。当前 SBCG 没有展示主指标提升证据。
+- Reflection proxy 三个 seed 均 HOLD；no-M3 三个 seed 的 CondRecSucc 为 0、0、0.3929。
+- Pareto candidate count 差异只是搜索/多样性现象，不等于任务性能改善。Validation 是经过候选选择的指标，存在 selection optimism。
+- D-076 复审报告对应旧代码 SHA；后续 D-078 已修订 canonical NSGA-III、M1 f3、Train→Validation selection 和 cache accounting，需以最新代码与 CI 为准。R4 technical-missing power 与 pre-run/post-run gate 仍独立待核验。
+
+**决策：** 不宣称 SBCG 优于基线。下一任务 D-079：按 family/scenario 拆解结果，审查 CondRecSucc 天花板和不同臂相同结果的原因，构造更有区分度的难度分层合成挑战集，并预注册后再做机制实验。Test/A800/真实 LLM 继续冻结。

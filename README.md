@@ -896,3 +896,24 @@ SBCG 已实现五维安全目标、零容差硬约束、family×signature×safet
 - 结论：R4 **REQUEST CHANGES**；SBCG **NOT READY FOR TRAIN/VALIDATION PERFORMANCE DIAGNOSTICS**。正式 A-3b、真实 Train/Validation 算法诊断和 Test 均继续 HOLD。
 
 详见 [78_D076_INDEPENDENT_REVIEW.md](78_D076_INDEPENDENT_REVIEW.md)。
+
+
+
+## 2026-11-10 D-078：已完成首轮合成 Train/Validation 探索实验
+
+**最新实验提交：** `7cbbac54e2f3d8680a4851f7a7c79cd02b3cd8d3`（CI 自动保存结果）  
+**实验 workflow：** [42820836080](https://github.com/yujian777555/kaitibaogao/actions/runs/42820836080) — success  
+**回归 workflow：** [42820836104](https://github.com/yujian777555/kaitibaogao/actions/runs/42820836104) — success  
+**实验报告：** [matrix_report.md](experiments/pilot_a3b/results/d078_train_validation_pilot/matrix_report.md)
+
+- 14 臂 × 3 seeds = **42 runs**。
+- 生成的合成 A-3b Train 216 scenarios、Validation 108 scenarios；Test payload/outcomes 未传入 runner、未读取。
+- population=8、generations=5；每个进化臂计划 Train episode budget=10,368；LLM API calls=0。
+- SBCG/NSGA-II/NSGA-III/Random/Rule/Hand 等多数臂的 Validation selected CondRecSucc=1.0000、AvoidableHarm=2.4444、ActionCost=4.3929，结果高度重合；SBCG 未显示可见的主指标提升。
+- Reflection proxy 三个 seed 均 HOLD（无可行 Validation 候选）；no-M3 消融三个 seed 的 CondRecSucc 分别为 0、0、0.3929，表现明显不稳定/较差。
+- 不同算法的 Pareto candidate counts 有差异，但不能据此认定性能提升。
+- 这些是合成开发模拟器上的探索性、选择后 Validation 指标，存在 Validation selection optimism；不是无偏泛化估计，不是正式 A-3b，不是 Test 结果，不足以支持论文主张。
+
+**对 D-076 独立复审的状态更新：** D-076 的 `78_D076_INDEPENDENT_REVIEW.md` 是针对旧基线 `3d2dacf` 的审查记录。其指出的若干 SBCG 阻断（canonical NSGA-III、f3 公式、Train→Validation 选择、cache accounting）已在后续 D-078 代码提交中作了修订并通过对应 CI；不能继续把旧审查结论当作当前代码状态。R4 pre-run/post-run gate、technical-missing power 校准等必须单独核验，不因 D-078 合成 pilot 通过而视为关闭。
+
+**下一步：** 不扩大到 Test、不启动 A800/真实 LLM。先做 D-079 结果诊断：按 scenario/family 拆解指标与 Pareto 差异，检查 1.0 CondRecSucc 是否天花板效应、为什么多个优化器收敛到相同 FSM/结果；再设计难度分层的合成挑战集与预注册的 Train-only 机制诊断。只有能稳定区分算法的任务机制才进入后续更大规模验证。
