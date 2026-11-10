@@ -87,6 +87,7 @@ class ComparisonMatrixTests(unittest.TestCase):
                 "objectives": (0.5, 0.0, 0.2, 0.0, 0.0),
                 "constraints": {"duplicate": 0.0, "sla_violation": 0.0, "invariant_violation": 0.0},
                 "family_coverage": 1, "worst_family_condrec": 0.5,
+                "per_family_condrec": {"f1": 0.5},
                 "metrics": {"cond_rec": 0.5}, "feasible": True, "fsm": hand_fsm(),
             })()
             result = run_algorithm_arm(

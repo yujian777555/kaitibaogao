@@ -262,7 +262,7 @@ def _solve_linear_system(matrix, rhs):
     return [aug[i][-1] for i in range(n)]
 
 
-def _nsga3_normalize(objs):
+def _nsga3_normalize(objs, extreme_indices=None):
     """Canonical NSGA-III ideal/extreme-point/intercept normalization."""
     if not objs or not objs[0]:
         raise ValueError("NSGA-III requires a non-empty objective matrix")
@@ -272,12 +272,15 @@ def _nsga3_normalize(objs):
     ideal = [min(row[j] for row in objs) for j in range(m)]
     shifted = [[float(row[j]) - ideal[j] for j in range(m)] for row in objs]
 
+    extreme_indices = list(range(len(shifted))) if extreme_indices is None else list(extreme_indices)
+    if not extreme_indices:
+        raise ValueError("NSGA-III normalization requires a non-empty first front")
     extremes = []
     for objective in range(m):
         weights = [1e-6] * m
         weights[objective] = 1.0
         index = min(
-            range(len(shifted)),
+            extreme_indices,
             key=lambda i: max(shifted[i][j] / weights[j] for j in range(m)),
         )
         extremes.append(shifted[index])
@@ -318,7 +321,7 @@ def _associate_reference_directions(normalized, dirs):
     return associations, distances
 
 
-def niching_select(objs, front, dirs, selected=(), rng=None):
+def niching_select(objs, front, dirs, selected=(), rng=None, extreme_indices=None):
     """Canonical NSGA-III splitting-front niching using full-population normalization.
 
     Earlier accepted fronts contribute to niche counts. Empty niches select their
@@ -328,7 +331,7 @@ def niching_select(objs, front, dirs, selected=(), rng=None):
         return []
     if not dirs:
         raise ValueError("NSGA-III requires at least one reference direction")
-    normalized, _ideal, _intercepts = _nsga3_normalize(objs)
+    normalized, _ideal, _intercepts = _nsga3_normalize(objs, extreme_indices=extreme_indices)
     associations, distances = _associate_reference_directions(normalized, dirs)
     niche_count = [0] * len(dirs)
     for index in selected:
@@ -513,7 +516,7 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
                 else:
                     remain = pop_size - len(picked)
                     if method == "nsga3":
-                        picked.extend(niching_select(objs_all, f, reference_dirs(), selected=picked, rng=rng)[:remain])
+                        picked.extend(niching_select(objs_all, f, reference_dirs(), selected=picked, rng=rng, extreme_indices=fronts[0])[:remain])
                     else:
                         cd = crowding_distance(objs_all, f)
                         picked.extend(sorted(f, key=lambda i: -cd[i])[:remain])

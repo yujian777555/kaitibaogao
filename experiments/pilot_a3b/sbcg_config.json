@@ -1,15 +1,24 @@
 {
   "algorithm": "SBCG-NSGA-III",
-  "status": "IMPLEMENTED_SYNTHETIC_TESTED_NO_BENCHMARK_RESULTS",
+  "status": "CORRECTED_CODE_PENDING_CI_AND_FORMAL_APPROVALS_NO_BENCHMARK_RESULTS",
   "objectives_minimize": [
     "1 - CondRecSucc",
     "AvoidableHarm",
-    "UnnecessaryEscalation + UnnecessaryActionCost/10",
+    "UnnecessaryActionCost",
     "1 - CorrectEscalation",
     "1 - DamageContainment"
   ],
-  "hard_constraints_zero_tolerance": ["duplicate", "sla_violation", "invariant_violation"],
-  "nsga3_reference_directions": {"dimensions": 5, "divisions": 3, "count": 35},
+  "hard_constraints_zero_tolerance": [
+    "duplicate",
+    "sla_violation",
+    "invariant_violation"
+  ],
+  "nsga3_reference_directions": {
+    "dimensions": 5,
+    "divisions": 3,
+    "count": 35,
+    "implementation": "canonical NSGA-III: ideal point, first-front ASF extreme points, intercept normalization, perpendicular association, prior-front niche counts"
+  },
   "counterexample_sampling": {
     "strata": "task_family x failure_signature x safety_class",
     "rule": "uniform over observed strata; probability 1/S",
@@ -32,8 +41,16 @@
   },
   "population": 48,
   "generations": 60,
-  "evolution_seeds": [411, 522, 633],
-  "ablations": ["no-M1", "no-M2", "no-M3"],
+  "evolution_seeds": [
+    411,
+    522,
+    633
+  ],
+  "ablations": [
+    "no-M1",
+    "no-M2",
+    "no-M3"
+  ],
   "data_access": {
     "current_phase": "synthetic fixtures only",
     "real_train_validation_diagnostics": "HOLD until R4 ACCEPTED + advisor MDE + user approval + pre-flight",
@@ -43,5 +60,12 @@
     "safety non-inferiority margins are not yet justified or frozen",
     "hypervolume reference point is not yet justified or frozen",
     "no Train/Validation performance or ablation evidence has been produced"
-  ]
+  ],
+  "validation_selection": {
+    "optimization_split": "train",
+    "candidate_evaluation_split": "validation",
+    "selection_rule": "feasible Pareto; family coverage; worst-family CondRecSucc; frozen lexicographic tie-break",
+    "validation_enters_fitness_or_offspring": false
+  },
+  "cache_accounting": "reuse each offspring evaluation record during environmental selection; unique_evaluations + cache_hits = evaluation_calls"
 }

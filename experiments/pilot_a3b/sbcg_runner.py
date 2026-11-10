@@ -37,10 +37,13 @@ def _record_view(record):
     }
 
 
-def _niching_records(records, indices, dirs, needed, selected=(), rng=None):
+def _niching_records(records, indices, dirs, needed, selected=(), rng=None, extreme_indices=None):
     """Use canonical NSGA-III association and niche counts across accepted fronts."""
     objectives = [record.objectives for record in records]
-    return niching_select(objectives, indices, dirs, selected=selected, rng=rng)[:needed]
+    return niching_select(
+        objectives, indices, dirs, selected=selected, rng=rng,
+        extreme_indices=extreme_indices,
+    )[:needed]
 
 
 def _select_survivor_records(records, count, optimizer, dirs, rng=None):
@@ -69,7 +72,7 @@ def _select_survivor_records(records, count, optimizer, dirs, rng=None):
             else:
                 picked = _niching_records(
                     feasible, front_indices, dirs, needed,
-                    selected=selected_indices, rng=rng,
+                    selected=selected_indices, rng=rng, extreme_indices=fronts[0],
                 )
             chosen.extend(feasible[i] for i in picked)
             break
