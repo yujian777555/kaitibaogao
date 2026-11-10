@@ -101,7 +101,7 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
                 return {"count": len(payload)}
 
             result = consume_final_evaluation_once(
-                ledger, approval(), "manifest-ok", "code-ok", loader, evaluator
+                ledger, approval(), "manifest-ok", "manifest-ok", "code-ok", "code-ok", loader, evaluator
             )
             self.assertEqual(result, {"count": 1})
             self.assertEqual(calls, {"loader": 1, "evaluator": 1})
@@ -124,7 +124,7 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
             bad["user_approved"] = False
             with self.assertRaises(PermissionError):
                 consume_final_evaluation_once(
-                    ledger, bad, "manifest-ok", "code-ok", loader, lambda x: x
+                    ledger, bad, "manifest-ok", "manifest-ok", "code-ok", "code-ok", loader, lambda x: x
                 )
             self.assertEqual(calls["loader"], 0)
             self.assertFalse(ledger.exists())
@@ -140,7 +140,7 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
 
             with self.assertRaisesRegex(ValueError, "hash mismatch"):
                 consume_final_evaluation_once(
-                    ledger, approval(), "wrong-manifest", "code-ok", loader, lambda x: x
+                    ledger, approval(), "manifest-ok", "wrong-manifest", "code-ok", "code-ok", loader, lambda x: x
                 )
             self.assertEqual(calls["loader"], 0)
             self.assertFalse(ledger.exists())
@@ -154,12 +154,12 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
 
             with self.assertRaisesRegex(OSError, "synthetic read failure"):
                 consume_final_evaluation_once(
-                    ledger, approval(), "manifest-ok", "code-ok", broken_loader, lambda x: x
+                    ledger, approval(), "manifest-ok", "manifest-ok", "code-ok", "code-ok", broken_loader, lambda x: x
                 )
             self.assertTrue(ledger.exists())
             with self.assertRaisesRegex(RuntimeError, "already consumed"):
                 consume_final_evaluation_once(
-                    ledger, approval(), "manifest-ok", "code-ok", lambda: {}, lambda x: x
+                    ledger, approval(), "manifest-ok", "manifest-ok", "code-ok", "code-ok", lambda: {}, lambda x: x
                 )
 
 
