@@ -56,6 +56,13 @@ class StudentTBoundaryTests(unittest.TestCase):
         self.assertIsNone(student_t_summary(np.zeros(34))["ci95"])
         self.assertIsNone(student_t_summary(np.full(34, 0.1))["ci95"])
 
+    def test_monte_carlo_mode_skips_ci_inversion_without_changing_p(self):
+        values = np.array([1., 2., 3., 4., 5.])
+        full = student_t_summary(values)
+        fast = student_t_summary(values, include_ci=False)
+        self.assertEqual(fast["p_two_sided"], full["p_two_sided"])
+        self.assertIsNone(fast["ci95"])
+
     def test_power_simulation_uses_same_zero_variance_rule(self):
         rows = np.zeros((3, 34), dtype=float)
         p_values = _pvals_student_t(rows)
