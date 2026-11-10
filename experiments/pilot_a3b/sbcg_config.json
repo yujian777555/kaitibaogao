@@ -67,5 +67,23 @@
     "selection_rule": "feasible Pareto; family coverage; worst-family CondRecSucc; frozen lexicographic tie-break",
     "validation_enters_fitness_or_offspring": false
   },
-  "cache_accounting": "reuse each offspring evaluation record during environmental selection; unique_evaluations + cache_hits = evaluation_calls"
+  "cache_accounting": "reuse each offspring evaluation record during environmental selection; unique_evaluations + cache_hits = evaluation_calls",
+  "exploratory_development_pilot": {
+    "status": "AUTHORIZED_BY_USER_FOR_NONCONFIRMATORY_SYNTHETIC_TRAIN_VALIDATION_SCREENING",
+    "scope": "generated A-3b synthetic Train/Validation scenarios only; no Test outcomes or payload passed to an optimizer/evaluator",
+    "arms": 14,
+    "seeds": [
+      411,
+      522,
+      633
+    ],
+    "population": 8,
+    "generations": 5,
+    "initial_pool_size": 60,
+    "per_evolutionary_arm_train_episode_budget": "8 * (5 + 1) * number_of_Train_scenarios",
+    "validation": "one post-search candidate-selection pass per arm/seed; no feedback into Train evolution",
+    "inference": "descriptive only; selected Validation metrics are selection-biased and are not an unbiased generalization estimate",
+    "llm_api_calls": 0,
+    "test_access": false
+  }
 }
