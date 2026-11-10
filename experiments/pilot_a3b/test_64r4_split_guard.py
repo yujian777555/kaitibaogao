@@ -8,6 +8,7 @@ from a3_bridge import evaluate_controller, hand_fsm
 from ea import run_evolution
 from split_access import (
     consume_final_evaluation_once,
+    execute_final_evaluation_once,
     public_manifest_view,
     scenarios_for_split,
 )
@@ -113,6 +114,38 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
                     ledger, approval(), "manifest-ok", "manifest-ok", "code-ok", "code-ok", loader, evaluator
                 )
             self.assertEqual(calls, {"loader": 1, "evaluator": 1})
+
+    def test_production_wrapper_requires_preflight_go_and_returns_bound_receipt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger = Path(tmp) / "one-time.json"
+            approvals = approval()
+            approvals.update({"ci_conclusion": "success", "tests_passed": True})
+            preflight = {"phase": "PRE_RUN_AUTHORIZATION", "status": "GO"}
+            outcome, receipt = execute_final_evaluation_once(
+                ledger, approvals, preflight,
+                "manifest-ok", "manifest-ok", "code-ok", "code-ok",
+                lambda: {"synthetic": True}, lambda payload: {"runs": [payload]},
+            )
+            self.assertEqual(outcome, {"runs": [{"synthetic": True}]})
+            self.assertEqual(receipt["status"], "COMPLETED")
+            self.assertTrue(ledger.exists())
+            self.assertEqual(json.loads(ledger.read_text())["state"], "CONSUMED")
+
+    def test_production_wrapper_rejects_hold_preflight_before_payload_read(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger = Path(tmp) / "one-time.json"
+            calls = {"loader": 0}
+            def loader():
+                calls["loader"] += 1
+                return {}
+            with self.assertRaises(PermissionError):
+                execute_final_evaluation_once(
+                    ledger, approval(), {"phase": "PRE_RUN_AUTHORIZATION", "status": "HOLD"},
+                    "manifest-ok", "manifest-ok", "code-ok", "code-ok",
+                    loader, lambda payload: payload,
+                )
+            self.assertEqual(calls["loader"], 0)
+            self.assertFalse(ledger.exists())
 
     def test_missing_preflight_go_does_not_read_payload(self):
         with tempfile.TemporaryDirectory() as tmp:

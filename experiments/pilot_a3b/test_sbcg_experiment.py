@@ -4,13 +4,14 @@ from unittest.mock import patch
 
 from a3_bridge import hand_fsm
 from ea import run_evolution
-from sbcg import make_shared_initial_pool
+from sbcg import CandidateRecord, make_shared_initial_pool
 from sbcg_experiment import (
     algorithm_specs,
     run_algorithm_matrix,
     reflection_proxy_fsm,
     rule_based_fsm,
     run_algorithm_arm,
+    run_algorithm_matrix,
 )
 from sbcg import fsm_fingerprint
 
@@ -110,6 +111,22 @@ class ComparisonMatrixTests(unittest.TestCase):
                     [{"scenario_id": "sentinel", "split": "test"}], {},
                     eval_budget=1, seed=3, pop_size=2, generations=0,
                 )
+
+
+    def test_matrix_runs_all_14_arms_with_train_then_validation_and_no_test(self):
+        with patch("ea.evaluate_controller", side_effect=fake_metrics), patch(
+            "sbcg.evaluate_controller", side_effect=fake_metrics
+        ):
+            result = run_algorithm_matrix(
+                [SCENARIO], [VALIDATION_SCENARIO], VERDICTS,
+                seeds=(7,), eval_budget=8, pop_size=2, generations=1,
+                initial_pool_size=12,
+            )
+        self.assertEqual(result["algorithm_count"], 14)
+        self.assertEqual(result["run_count"], 14)
+        self.assertTrue(all("no_test" in row["information_scope"] for row in result["results"]))
+        self.assertTrue(all(row["validation_calls"] >= 1 for row in result["results"]))
+        self.assertTrue(all(row["validation_selection"]["status"] in {"SELECTED", "HOLD"} for row in result["results"]))
 
     def test_legacy_evolution_reports_unique_and_cache_counts(self):
         with patch("ea.evaluate_controller", side_effect=fake_metrics):

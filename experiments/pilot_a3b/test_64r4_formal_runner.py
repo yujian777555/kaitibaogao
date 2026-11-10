@@ -8,7 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from formal_runner import _canonical_sha256, _code_sha256, run_formal_analysis, write_formal_analysis_outputs
+from formal_runner import _code_sha256, run_formal_analysis, write_formal_analysis_outputs
+from split_access import execute_final_evaluation_once
 
 
 SEEDS = (411, 522)
@@ -86,20 +87,24 @@ class FormalRunnerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             ledger_path = Path(tmp) / "one-time.json"
             code_sha = _code_sha256()
-            ledger_path.write_text(json.dumps({
-                "state": "CONSUMED",
-                "manifest_sha256": manifest["manifest_sha256"],
-                "code_sha256": code_sha,
-            }), encoding="utf-8")
-            receipt = {
-                "status": "COMPLETED",
-                "manifest_sha256": manifest["manifest_sha256"],
-                "code_sha256": code_sha,
-                "ledger_path": str(ledger_path),
-                "outcome_ledger_sha256": _canonical_sha256(ledger),
+            approvals = {
+                "status": "APPROVED",
+                "independent_review_status": "ACCEPTED",
+                "advisor_mde_approved": True,
+                "user_approved": True,
+                "ci_conclusion": "success",
+                "tests_passed": True,
             }
+            preflight = {"phase": "PRE_RUN_AUTHORIZATION", "status": "GO"}
+            evaluated_ledger, receipt = execute_final_evaluation_once(
+                ledger_path, approvals, preflight,
+                manifest["manifest_sha256"], manifest["manifest_sha256"],
+                code_sha, code_sha,
+                payload_loader=lambda: {"synthetic_test_sentinel": True},
+                evaluator=lambda _payload: ledger,
+            )
             return run_formal_analysis(
-                manifest, ledger, roster, SEEDS, git_head=GIT_HEAD,
+                manifest, evaluated_ledger, roster, SEEDS, git_head=GIT_HEAD,
                 test_execution_receipt=receipt,
             )
 
