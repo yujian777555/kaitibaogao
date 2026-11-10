@@ -1,7 +1,9 @@
 """Synthetic-only R4 tests for actual H2-H5 paired analysis and Holm."""
 import unittest
 
-from formal_analysis import analyze_secondary_endpoints, holm_adjust
+from formal_analysis import analyze_secondary_endpoints as _analyze_secondary_endpoints, holm_adjust
+
+PROVENANCE = {\n    \"manifest_sha256\": \"a\" * 64,\n    \"code_sha256\": \"b\" * 64,\n    \"git_head\": \"c\" * 40,\n}\n\ndef analyze_secondary_endpoints(*args, **kwargs):\n    kwargs.setdefault(\"provenance\", PROVENANCE)\n    return _analyze_secondary_endpoints(*args, **kwargs)
 
 
 SEEDS = (11, 22)
