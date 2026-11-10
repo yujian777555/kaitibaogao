@@ -203,9 +203,6 @@ def simulate_type_i_replication(
         "pooled_mcse": math.sqrt(pooled_rate * (1.0 - pooled_rate) / total_trials),
         "pooled_ci95_wilson": wilson_interval(total_rejections, total_trials),
         "cells": cells,
-        "missing_rate_grid": list(MISSING_RATE_GRID),
-        "missing_sensitivity": missing_sensitivity,
-        "type_i_replication": type_i_replication,
     }
 
 
@@ -339,6 +336,9 @@ def run(input_path, outdir, reps=DEFAULT_REPS, seed=DEFAULT_SEED):
         "mde": MDE_R4,
         "alpha": ALPHA_R4,
         "cells": cells,
+        "missing_rate_grid": list(MISSING_RATE_GRID),
+        "missing_sensitivity": missing_sensitivity,
+        "type_i_replication": type_i_replication,
     }
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)
