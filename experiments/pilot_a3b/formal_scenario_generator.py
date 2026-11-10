@@ -63,6 +63,32 @@ ALLOWED_CLASSES_BY_COMPOSITION = {
 PRIMARY_CLASSES = {"R1", "R2"}
 UNKNOWN_LIMIT = 0.05
 
+# R4 freezes five of the seven R1/R2-eligible compositions by mechanism
+# coverage, before any confirmatory outcomes are observed.
+PRIMARY_ANALYSIS_COMPOSITIONS = (
+    "single_timeout",
+    "timeout_then_rate_limit",
+    "partial_then_delay",
+    "independent_mixed_val",
+    "triple_mixed",
+)
+SENSITIVITY_ONLY_PRIMARY_COMPOSITIONS = (
+    "schema_then_timeout",
+    "partial_then_timeout_val",
+)
+if len(PRIMARY_ANALYSIS_COMPOSITIONS) != 5 or len(set(PRIMARY_ANALYSIS_COMPOSITIONS)) != 5:
+    raise RuntimeError("R4 primary composition roster must contain five unique compositions")
+if any(c not in ALLOWED_CLASSES_BY_COMPOSITION
+       or not (ALLOWED_CLASSES_BY_COMPOSITION[c] & PRIMARY_CLASSES)
+       for c in PRIMARY_ANALYSIS_COMPOSITIONS):
+    raise RuntimeError("R4 primary composition roster contains a non-primary composition")
+if set(PRIMARY_ANALYSIS_COMPOSITIONS) & set(SENSITIVITY_ONLY_PRIMARY_COMPOSITIONS):
+    raise RuntimeError("R4 primary and sensitivity-only composition rosters overlap")
+if set(PRIMARY_ANALYSIS_COMPOSITIONS) | set(SENSITIVITY_ONLY_PRIMARY_COMPOSITIONS) != {
+    c for c, labels in ALLOWED_CLASSES_BY_COMPOSITION.items() if labels & PRIMARY_CLASSES
+}:
+    raise RuntimeError("R4 must partition all seven primary-eligible compositions")
+
 # D-064-B candidate design freeze. These are planning assumptions, not an
 # empirical claim about the true ICC or a claim that a formal experiment ran.
 POWER_DESIGN = {
@@ -79,10 +105,39 @@ POWER_DESIGN = {
     "eligible_compositions_per_family": 7,
     "test_design_clusters": 360,
     "test_primary_eligible_clusters": 280,
+    "primary_analysis_compositions_per_family": 5,
+    "primary_analysis_composition_ids": list(PRIMARY_ANALYSIS_COMPOSITIONS),
+    "primary_analysis_selection_rule": (
+        "outcome-blind mechanism-coverage roster frozen in R4: simple timeout, "
+        "ordered timeout/rate-limit, partial-effect/delayed-visibility, "
+        "independent mixed faults, and triple mixed faults; no outcome or Test "
+        "label is used for selection"
+    ),
+    "sensitivity_only_primary_eligible_composition_ids": list(SENSITIVITY_ONLY_PRIMARY_COMPOSITIONS),
+    "test_primary_analysis_clusters": 200,
     "effective_families_after_attrition": 34,
     "effective_eligible_compositions_per_family_after_attrition": 5,
     "effective_primary_clusters_after_attrition": 170,
     "expected_power_from_D064B_MC": 0.839,
+    "r4_power_recalibration": {
+        "input_sha256": "2946bcf97883c74c407a204d5ce50bb325e4597a47be4831ccaff4ef8a4f414c",
+        "code_commit": "3258399bbc238b83cba5e0fb0fcde69b76129ea0",
+        "seed": 20261114,
+        "mc_reps_per_cell": 10000,
+        "families": [33, 34, 40],
+        "compositions_per_family": 5,
+        "icc_grid": [0.0, 0.05, 0.10, 0.20],
+        "mde": 0.10,
+        "f34_icc020_power": 0.8427,
+        "f34_icc020_power_ci95": [0.8354326572499048, 0.8497041502668335],
+        "f34_icc020_type_i": 0.0503,
+        "f34_icc020_type_i_ci95": [0.04618626511967923, 0.05475910301490729],
+        "f40_icc020_power": 0.9028,
+        "f40_icc020_power_ci95": [0.8968383804179927, 0.9084522704945903],
+        "f40_icc020_type_i": 0.0547,
+        "f40_icc020_type_i_ci95": [0.05041173530937794, 0.05933025363954662],
+        "source_note": "Variance/residual calibration uses historical six-family, 42-cluster diagnostic data; this is a simulation assumption, not an empirical ICC estimate."
+    },
     "expected_power_ci95": [0.832, 0.846],
     "expected_power_provenance": ("recomputed 2026-11-09 with power_hierarchical.mc_power_at "
                                  "on the CondRecSucc cluster-diff distribution from "
