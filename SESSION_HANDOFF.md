@@ -1,5 +1,16 @@
 # SESSION HANDOFF — 开题研究项目
 
+## 0A. 最新权威状态（2026-11-10，覆盖下文旧状态）
+
+- 本轮维护前远端 work HEAD：14a8a1bef23f3195436de0f5d1d66803f9c100e7；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 222 / behind 0。
+- CI run 42793004533 @ 14a8a1b：regression success；最近完整测试计数 240 tests 为 run 42791224479 @ f4d8d0d。接手时必须重新核验最新 CI 和测试计数。
+- R4 已有真实代码实现：共享 Student-t/CI、family-level primary analyzer、H2–H5 family-level exploratory + Holm、Train-only evolution guard、ordinary Test guard、public manifest Test payload removal、atomic one-time gate、metadata-only pre-flight。
+- R4 尚未完成：formal runner 接线、outcome-blind primary composition roster 冻结、ICC/MDE/Type-I/power 10,000 MC、R4 预注册、独立复审。
+- 算法候选 75：SBCG-NSGA-III（五维安全 Pareto、分层反例变异、hand-anchor elite archive）。这是**未实现/未验证候选**。历史 AB 在 CondRecSucc 上优于 NSGA-II，但 CorrectEscalation、DamageContainment、AvoidableHarm 明显退化，且低于 Hand FSM；不能声称算法已有综合提升。
+- **唯一执行任务书：** 76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md。先完成 R4 阻断项；并行完成 SBCG 源代码审查、模块化实现和合成测试。真实 benchmark Train/Validation 运行须按 75 号候选的审批顺序；Test 不得访问。
+- 正式 A-3b 仍 HOLD；导师 MDE 认可、用户批准、独立审计 ACCEPTED 和 R4 pre-flight 全通过之前，不运行正式实验。
+
+
 **最后更新：** 2026-11-10（R4 统计、H2–H5、split guard、pre-flight 初版 CI success）  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  

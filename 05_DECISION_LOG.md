@@ -1394,3 +1394,21 @@ Executor 按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成：
 - pilot_a_recovery 28 tests；pilot_a3b 212 tests；总计 **240 tests**。
 - D-064-C gate PASS；manifest fb832bcc...、test-family 01b41df8...、test-scenario dded3bb7... 保持不变。
 - 尚未完成正式 runner 接线、R4 power/Type-I 10,000 MC、R4 预注册和独立审计。正式 A-3b 与真实 Test 继续 HOLD。
+
+## 决策 D-076：R4 收尾与 SBCG-NSGA-III 算法提升并行准备（2026-11-10）
+
+### 现状
+- R4 已有 Student-t/CI、family-level primary analyzer、H2–H5 exploratory + Holm、Train-only/Test guard、one-time gate、metadata-only pre-flight 初版。
+- 尚待 formal runner 接线、outcome-blind composition roster 冻结、power/Type-I 10,000 MC、R4 preregistration 和独立审计。
+- 最近完整测试记录：CI 42791224479 @ f4d8d0d，28+212=240 tests success；之后 run 42793004533 @ 14a8a1b regression success。
+- 算法候选 75 提出的 SBCG-NSGA-III 尚未实现或验证。历史 AB 的 R1/R2 优势伴随 R3/R4 与 avoidable harm 退化，不能视为整体提升。
+
+### 决策
+1. 先收尾 R4 阻断项，准备独立审计。
+2. 同时完成 SBCG-NSGA-III 的源代码缺口审计、模块化算法实现和合成测试。
+3. R4 独立审计、导师 MDE 认可、用户批准前，不运行真实 benchmark Train/Validation 算法诊断；正式 A-3b 与真实 Test 继续 HOLD。
+4. 审批后，以 Train 开发、Validation 冻结选择、Test 独立一次性评价；采用 matched-objective NSGA-II/NSGA-III、Hand、Random、Rule、Reflection、A、AB 和三项消融，保持相同预算、seed、初始化和信息访问权限。
+5. 不保证候选必然成功；若无法在安全约束下超越强基线，保留负结果并修改或否决方法。
+
+### 执行规范
+唯一任务书：76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md。本决策不授权正式 A-3b、Test 访问、A800/ARWM 或真实 LLM API。

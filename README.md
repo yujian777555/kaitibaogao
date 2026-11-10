@@ -1,5 +1,14 @@
 # kaitibaogao — 硕士学位论文开题研究
 
+## 最新执行状态（2026-11-10）
+
+- 本轮维护前 work HEAD：14a8a1bef23f3195436de0f5d1d66803f9c100e7；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 222 / behind 0。
+- CI run [42793004533](https://github.com/yujian777555/kaitibaogao/actions/runs/42793004533)：regression success；最近完整测试 240 tests 为 run 42791224479。
+- R4 部分实现已存在；正式 runner、5-composition roster、10,000 MC power/Type-I、R4 preregistration 和独立复审仍待完成。
+- 算法提升候选见 [75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md](75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md)：SBCG-NSGA-III 尚未实现/验证。不得把历史 AB 的单一 CondRecSucc 优势称为综合算法提升。
+- 当前 Executor 任务书：[76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md](76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md)。正式 A-3b 与真实 Test 继续 HOLD。
+
+
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
 **当前阶段：** R3 独立审计仍为 REQUEST CHANGES；R4 已完成 Student-t、family-level 主分析、H2–H5、split guard、one-time gate 和 metadata-only pre-flight 初版；功效重算、R4 预注册及独立复审仍未完成；正式 A-3b = HOLD
