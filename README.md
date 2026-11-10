@@ -842,3 +842,14 @@ D-064-A 正式报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_
 - 附带修复：F>15 符号翻转 MC 化（原 2^F 枚举挂死）。
 - 功效复算一致（ICC=0.20 t=0.840 [0.833,0.847]）；全套件 189 绿。
 - GO：**64-R3 独立复审**（71 号非审计）。HOLD 不变。
+
+
+## 2026-11-10：64-R3 独立审计 — REQUEST CHANGES
+
+独立审计报告：[72_64R3_INDEPENDENT_REVIEW.md](72_64R3_INDEPENDENT_REVIEW.md)。审计基线为工作分支 `ca7bb12f89dd72deaac205ffab89cf3054e6be06`、main `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；CI run 42670236796 success，测试为 28+161=189/189。独立重建 manifest/test-family/test-scenario 哈希均一致。
+
+本轮不接受 71 号“全部已修复+已验证”的结论：R2-003 已关闭，动态 df 与 MDE 审批门文本部分成立，但 R2-001/004/006 的实现未关闭。新增阻断发现包括：R3 §5 pre-flight 错指 §6；`missing_data_rules()` 只是字典，labelled null 不 fail-closed，technical_missing_runs/family_loss/design_deviation 未实际计算；最低 1 composition 与固定 34×5 功效假设冲突；全零 family 差值被 `family_level_tests()` 误判为 `t=inf,p=0`，而模拟函数返回 p=1；正式 40-family 分析入口与 H2–H5 family-t/四项 Holm 路径尚未实现；Test payload 可由生成器返回，演化接口无 split guard，一次性解锁路径不存在。
+
+独立功效复算：固定 34×5、ICC=0.20 时 power=0.8400 [0.8328,0.8472]；但 17 族 m=5、17 族 m=1 的合法不平衡情形 power 降至 0.5777 [0.5680,0.5874]。证据见 `experiments/pilot_a3b/audit_64r3_independent_checks.json`。
+
+**唯一下一任务：** Executor 完成 R4 corrective revision 并提交新的独立复审。正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和合并 main 继续 HOLD；即使审计通过，仍需导师 MDE 认可、用户批准和真实 pre-flight。

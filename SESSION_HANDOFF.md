@@ -2237,3 +2237,33 @@ df 39/33/动态✓、family 等权✓、缺失规则✓、Holm 边界✓、功�
 
 ### 61.3 状态
 GO：**64-R3 独立复审**（71 号为 Executor 验证非审计）。HOLD 不变。下一步：独立复审 → 导师 MDE → 用户批准 → pre-flight → 正式 A-3b。
+
+
+## 62. 64-R3 独立审计：REQUEST CHANGES（2026-11-10）
+
+### 当前权威结论
+`72_64R3_INDEPENDENT_REVIEW.md` 为当前权威独立审计。它取代此前“64-R3 六项已全部修复+已验证”的 Executor 状态表述。正式 A-3b 继续 HOLD；未运行正式实验，未读取 Test 逐场景标签或结果，未修改实验代码或 R3。
+
+### 基线与验证
+- 工作分支审计基线：`ca7bb12f89dd72deaac205ffab89cf3054e6be06`；main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
+- CI run 42670236796：success；测试 28+161=189/189；本地复跑一致。
+- manifest/test-family/test-scenario 哈希独立重建均与 CI 一致。
+- 独立证据：`experiments/pilot_a3b/audit_64r3_independent_checks.json`。
+
+### 必须保留的发现
+1. R2-003 已关闭；动态 df 成立；MDE 审批门文本存在，但批准未完成。
+2. R2-001/004/006 的实现未关闭。R3 文本不能替代正式 40-family 分析系统。
+3. pre-flight 错指 §6；labelled null 不 fail-closed；technical_missing_runs/family_loss/design_deviation 未实际计算。
+4. `family_min_valid_compositions=1` 与固定 34×5 功效不一致。独立模拟 ICC=0.20：平衡 power=0.8400；17 族 m=5 + 17 族 m=1 时 power=0.5777。
+5. 全零 family 差值在正式 helper 中 `t=inf,p=0`，在模拟 helper 中 p=1；必须统一边界。
+6. H2–H5 的 family-t/四项 Holm 未实现；H2/H3 校准不足；H4/H5 探索性无正式报告路径。
+7. 历史 diagnostic 未发现 Test 使用，但 Test payload 会由生成器返回，演化接口无 split guard，一次性解锁路径不存在。
+8. `signflip_exact` 在 MC 下命名误导，实际 seed 未随结果记录。
+
+### 唯一下一任务
+Executor 完成 R4 corrective revision 并请求新的独立复审。修复范围见 72 号 §11：正式 40-family 入口、真实缺失处理、至少 5 comps 或不平衡功效重证、统一 Student-t 边界、H2–H5 family-t/四项 Holm、pre-flight、结构性 Test 锁箱、sign-flip 输出和真实路径测试。
+
+### 可直接复制的接班提示词
+你是本项目的 Executor。先重新核验远端工作分支和 main HEAD，读取 `72_64R3_INDEPENDENT_REVIEW.md`、`64_A3B_PREREGISTRATION_CANDIDATE_R3.md`、`experiments/pilot_a3b/audit_64r3_independent_checks.json` 及其实际代码。当前审计结论为 REQUEST CHANGES，不得把 189 个测试通过或 71 号 Executor 报告当作 ACCEPTED。
+
+只执行 R4 corrective revision：保留 R2/R3 历史文件，修复 72 号 §11 的全部阻断项；不得运行正式 A-3b，不得读取或调参 Test，不得修改 main，不得启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox。所有缺失数据测试必须调用真实处理函数；不平衡功效必须保存配置、seed、MCSE/CI 和原始输出；Test 隔离用合成 sentinel 验证。完成后更新 README、05_DECISION_LOG、SESSION_HANDOFF、NEXT_SESSION_PROMPT，提交并核验远端，再交独立 Reviewer 复审。即使 ACCEPTED，仍需导师 MDE 认可、用户明确批准和真实 pre-flight。

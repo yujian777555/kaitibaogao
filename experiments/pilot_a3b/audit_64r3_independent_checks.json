@@ -1,0 +1,574 @@
+{
+  "student_t_boundary": {
+    "all_zero": {
+      "n": 34,
+      "mean": 0.0,
+      "sd": 0.0,
+      "formal_family_level_tests": {
+        "t": "inf",
+        "df": 33,
+        "p": 0.0
+      },
+      "power_simulation__pvals_student_t": 1.0,
+      "signflip": {
+        "p": 1.0,
+        "method": "Monte Carlo sign-flip (10000 reps)"
+      }
+    },
+    "all_positive_constant": {
+      "n": 34,
+      "mean": 0.2,
+      "sd": 0.0,
+      "formal_family_level_tests": {
+        "t": "inf",
+        "df": 33,
+        "p": 0.0
+      },
+      "power_simulation__pvals_student_t": 0.0,
+      "signflip": {
+        "p": 0.0001,
+        "method": "Monte Carlo sign-flip (10000 reps)"
+      }
+    },
+    "all_negative_constant": {
+      "n": 34,
+      "mean": -0.2,
+      "sd": 0.0,
+      "formal_family_level_tests": {
+        "t": "inf",
+        "df": 33,
+        "p": 0.0
+      },
+      "power_simulation__pvals_student_t": 0.0,
+      "signflip": {
+        "p": 0.0001,
+        "method": "Monte Carlo sign-flip (10000 reps)"
+      }
+    },
+    "tiny_variance": {
+      "n": 34,
+      "mean": 0.20000000000002943,
+      "sd": 1.714995515829694e-13,
+      "formal_family_level_tests": {
+        "t": 6799961680395.666,
+        "df": 33,
+        "p": 0.0
+      },
+      "power_simulation__pvals_student_t": 0.0,
+      "signflip": {
+        "p": 0.0001,
+        "method": "Monte Carlo sign-flip (10000 reps)"
+      }
+    },
+    "normal_variance": {
+      "n": 34,
+      "mean": 0.23,
+      "sd": 0.1991649232838621,
+      "formal_family_level_tests": {
+        "t": 6.7337,
+        "df": 33,
+        "p": 0.0
+      },
+      "power_simulation__pvals_student_t": 1.132403712175159e-07,
+      "signflip": {
+        "p": 0.0001,
+        "method": "Monte Carlo sign-flip (10000 reps)"
+      },
+      "scipy_reference": {
+        "t": 6.733710503344878,
+        "p": 1.1324037121977622e-07
+      }
+    }
+  },
+  "signflip": {
+    "15": {
+      "p": 6.1e-05,
+      "method": "exact enumeration (2^15)",
+      "output_key_is_signflip_exact": true
+    },
+    "16": {
+      "p": 0.0001,
+      "method": "Monte Carlo sign-flip (10000 reps)",
+      "output_key_is_signflip_exact": true
+    },
+    "34": {
+      "p": 0.0001,
+      "method": "Monte Carlo sign-flip (10000 reps)",
+      "output_key_is_signflip_exact": true
+    },
+    "40": {
+      "p": 0.0001,
+      "method": "Monte Carlo sign-flip (10000 reps)",
+      "output_key_is_signflip_exact": true
+    }
+  },
+  "missing_data": {
+    "null_labelled_condrec": {
+      "integrity_problems": [],
+      "missing_pairs": [],
+      "n_paired_scenarios": 2,
+      "mean_paired_diff": 1.0,
+      "returned_without_exception": true
+    },
+    "technical_missing_run_condrec": {
+      "integrity_problems": [
+        "scenario sets differ between AB/nsga2 at seed 1",
+        "missing run nsga2/1"
+      ],
+      "returned_without_exception": true,
+      "missing_pairs": [
+        {
+          "scenario_id": "f1|c1|R1",
+          "unpaired_seeds": [
+            1
+          ]
+        },
+        {
+          "scenario_id": "f1|c2|R2",
+          "unpaired_seeds": [
+            1
+          ]
+        }
+      ],
+      "technical_missing_runs_field_present": false
+    },
+    "behavioural_zero_condrec": {
+      "n_paired_scenarios": 2,
+      "n_r12_rows_a": 2,
+      "mean_paired_diff": 0.0,
+      "zero_kept_in_denominator": true
+    },
+    "null_labelled_diagnostic3_pipeline": {
+      "blocking_problems": [
+        "unclassified scenario ids (seed 1): ['f1|c1|R1', 'f1|c2|R2', 'f2|c1|R3']",
+        "unclassified scenario ids (seed 2): ['f1|c1|R1', 'f1|c2|R2', 'f2|c1|R3']",
+        "null class_success on labelled row AB/1/f1|c1|R1"
+      ],
+      "n_contrasts_returned": 2,
+      "returned_without_exception": true
+    },
+    "null_labelled_build_hierarchy": {
+      "problems": [
+        "unpaired seeds at f1|c1|R1",
+        "expected 6 families, got 1",
+        "expected 42 eligible clusters, got 2",
+        "family f1 has 2 eligible compositions, expected 7",
+        "expected 12 zero-denom clusters, got 1"
+      ],
+      "returned_without_exception": true,
+      "family_loss_field_present": false,
+      "design_deviation_field_present": false
+    },
+    "rules_dict": {
+      "technical_missing": "exclude run, count, do not replace seeds",
+      "behavioural_failure": "score as class_success=0 (measured endpoint)",
+      "null_class_success_on_labelled_row": "fail closed (analysis refuses)",
+      "family_min_valid_compositions": 1,
+      "family_zero_valid_compositions": "drop family, count family_loss",
+      "design_floor_families": 34,
+      "below_design_floor": "proceed with df=F_observed-1 and raise design_deviation flag",
+      "selective_deletion": "forbidden"
+    }
+  },
+  "power_recheck": {
+    "reps": 10000,
+    "seed": 20261113,
+    "alpha": 0.05,
+    "icc_grid": [
+      0.0,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "mde": 0.1,
+    "n_families": 34,
+    "balanced_compositions": 5,
+    "total_var": 0.10166903256334146,
+    "eps_pool_n": 42,
+    "unbalanced_patterns": {
+      "balanced5": "m_f=5 for all 34 families",
+      "alternating_5_1": "17 families m=5 and 17 families m=1",
+      "binomial_floor1": "m_f=max(1,Binomial(7,5/7)) independently per MC replicate/family"
+    },
+    "results": {
+      "icc_0.00_null": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.0501,
+          "mcse_student_t": 0.0022,
+          "ci95_student_t": [
+            0.0458,
+            0.0544
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.0494,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0452,
+            0.0536
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.019854122820107976
+        },
+        "custom_alternating_5_1": {
+          "power": 0.0488,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0446,
+            0.053
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.05959633883385702
+        },
+        "custom_binomial_floor1": {
+          "power": 0.0494,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0452,
+            0.0536
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.021412480824431257
+        }
+      },
+      "icc_0.00_mde_0.10": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.9787,
+          "mcse_student_t": 0.0014,
+          "ci95_student_t": [
+            0.9759,
+            0.9815
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.9803,
+          "mcse": 0.0014,
+          "ci95": [
+            0.9776,
+            0.983
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.019854122820107976
+        },
+        "custom_alternating_5_1": {
+          "power": 0.633,
+          "mcse": 0.0048,
+          "ci95": [
+            0.6236,
+            0.6424
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.05959633883385702
+        },
+        "custom_binomial_floor1": {
+          "power": 0.9703,
+          "mcse": 0.0017,
+          "ci95": [
+            0.967,
+            0.9736
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.021412480824431257
+        }
+      },
+      "icc_0.05_null": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.0489,
+          "mcse_student_t": 0.0022,
+          "ci95_student_t": [
+            0.0447,
+            0.0531
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.0497,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0454,
+            0.054
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.02392175532407818
+        },
+        "custom_alternating_5_1": {
+          "power": 0.0483,
+          "mcse": 0.0021,
+          "ci95": [
+            0.0441,
+            0.0525
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.06168620890875483
+        },
+        "custom_binomial_floor1": {
+          "power": 0.0511,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0468,
+            0.0554
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.02539754010860672
+        }
+      },
+      "icc_0.05_mde_0.10": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.9533,
+          "mcse_student_t": 0.0021,
+          "ci95_student_t": [
+            0.9492,
+            0.9574
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.957,
+          "mcse": 0.002,
+          "ci95": [
+            0.953,
+            0.961
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.02392175532407818
+        },
+        "custom_alternating_5_1": {
+          "power": 0.6154,
+          "mcse": 0.0049,
+          "ci95": [
+            0.6059,
+            0.6249
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.06168620890875483
+        },
+        "custom_binomial_floor1": {
+          "power": 0.9408,
+          "mcse": 0.0024,
+          "ci95": [
+            0.9362,
+            0.9454
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.02539754010860672
+        }
+      },
+      "icc_0.10_null": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.0481,
+          "mcse_student_t": 0.0021,
+          "ci95_student_t": [
+            0.0439,
+            0.0523
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.0514,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0471,
+            0.0557
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.02800911971204878
+        },
+        "custom_alternating_5_1": {
+          "power": 0.0513,
+          "mcse": 0.0022,
+          "ci95": [
+            0.047,
+            0.0556
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.0637899821056303
+        },
+        "custom_binomial_floor1": {
+          "power": 0.0507,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0464,
+            0.055
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.029405233894594606
+        }
+      },
+      "icc_0.10_mde_0.10": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.9191,
+          "mcse_student_t": 0.0027,
+          "ci95_student_t": [
+            0.9138,
+            0.9244
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.9203,
+          "mcse": 0.0027,
+          "ci95": [
+            0.915,
+            0.9256
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.02800911971204878
+        },
+        "custom_alternating_5_1": {
+          "power": 0.6029,
+          "mcse": 0.0049,
+          "ci95": [
+            0.5933,
+            0.6125
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.0637899821056303
+        },
+        "custom_binomial_floor1": {
+          "power": 0.9069,
+          "mcse": 0.0029,
+          "ci95": [
+            0.9012,
+            0.9126
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.029405233894594606
+        }
+      },
+      "icc_0.20_null": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.0504,
+          "mcse_student_t": 0.0022,
+          "ci95_student_t": [
+            0.0461,
+            0.0547
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.0517,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0474,
+            0.056
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.036193157592054485
+        },
+        "custom_alternating_5_1": {
+          "power": 0.0518,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0475,
+            0.0561
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.06800408771133025
+        },
+        "custom_binomial_floor1": {
+          "power": 0.0504,
+          "mcse": 0.0022,
+          "ci95": [
+            0.0461,
+            0.0547
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.037431299967052946
+        }
+      },
+      "icc_0.20_mde_0.10": {
+        "builtin_balanced_34x5": {
+          "power_student_t": 0.84,
+          "mcse_student_t": 0.0037,
+          "ci95_student_t": [
+            0.8328,
+            0.8472
+          ]
+        },
+        "custom_balanced5": {
+          "power": 0.8431,
+          "mcse": 0.0036,
+          "ci95": [
+            0.836,
+            0.8502
+          ],
+          "mean_m": 5.0,
+          "sd_m": 0.0,
+          "p_m_eq_1": 0.0,
+          "family_mean_variance_empirical": 0.036193157592054485
+        },
+        "custom_alternating_5_1": {
+          "power": 0.5777,
+          "mcse": 0.0049,
+          "ci95": [
+            0.568,
+            0.5874
+          ],
+          "mean_m": 3.0,
+          "sd_m": 2.0,
+          "p_m_eq_1": 0.5,
+          "family_mean_variance_empirical": 0.06800408771133025
+        },
+        "custom_binomial_floor1": {
+          "power": 0.8321,
+          "mcse": 0.0037,
+          "ci95": [
+            0.8248,
+            0.8394
+          ],
+          "mean_m": 4.999982352941177,
+          "sd_m": 1.192863583608933,
+          "p_m_eq_1": 0.0027588235294117645,
+          "family_mean_variance_empirical": 0.037431299967052946
+        }
+      }
+    },
+    "theoretical_variance_icc020": {
+      "model": "Var(family mean)=tau^2+sigma^2/m_f; Var(equal-weight grand mean)=tau^2/F+sigma^2/F^2*sum(1/m_f)",
+      "icc": 0.2,
+      "tau2": 0.020333806512668293,
+      "sigma2": 0.08133522605067317,
+      "balanced_m5_family_variance": 0.036600851722802925,
+      "m1_family_variance": 0.10166903256334146,
+      "alternating_mean_family_variance": 0.0691349421430722,
+      "alternating_over_balanced_variance_ratio": 1.888888888888889
+    }
+  }
+}

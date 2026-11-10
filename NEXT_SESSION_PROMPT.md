@@ -2,12 +2,12 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-10（D-064-C 完成；64-R2 独立审计 R1 = REQUEST CHANGES；正式 A-3b HOLD）**  
+**最后维护日期：2026-11-10（64-R3 独立审计 = REQUEST CHANGES；正式 A-3b HOLD）**
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
 
-> **当前任务优先级说明（2026-11-10）：** D-064-A/B/C 均已完成；当前唯一任务是处理 70_64R2_INDEPENDENT_REVIEW_R1.md 中的 REQUEST CHANGES，修订 64_A3B_PREREGISTRATION_CANDIDATE.md R2 并请求独立 R2 复审。本文中较早的 D-064-A/B/C 执行说明均为历史记录，不得覆盖本优先级。正式 A-3b 继续 HOLD，直到独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 §5 pre-flight。
+> **当前任务优先级说明（2026-11-10）：** 72_64R3_INDEPENDENT_REVIEW.md 对 64-R3 给出 REQUEST CHANGES。当前唯一任务是完成 R4 corrective revision：实现正式 40-family 分析、真实缺失数据处理和不平衡功效复核，修复 Student-t 零方差、pre-flight 交叉引用、H2–H5 与 Test 锁箱路径，再提交独立复审。本文中较早的 D-064-A/B/C/R2/R3 执行说明均为历史记录，不得覆盖本优先级。正式 A-3b 继续 HOLD，直到独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过真实 pre-flight。
 
 ---
 
@@ -1115,3 +1115,27 @@ GO: **64-R3 independent re-review** (71 is executor validation, NOT an audit). H
 
 ### Next task (single)
 Submit 64-R3 + 71 for independent R2 re-review; upon ACCEPTED obtain advisor MDE acceptance, then user approval, then run the 64-R3 §6 pre-flight and execute the formal A-3b.
+
+
+## 2026-11-10 — 64-R3 independent review: REQUEST CHANGES
+
+Current authoritative audit: `72_64R3_INDEPENDENT_REVIEW.md`. Independent evidence: `experiments/pilot_a3b/audit_64r3_independent_checks.json`.
+
+Verified baseline: work branch `ca7bb12f89dd72deaac205ffab89cf3054e6be06`; main `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`; CI run 42670236796 success with 28+161=189 tests. Manifest/test-family/test-scenario hashes independently reproduced.
+
+The review does NOT accept the executor's “all six R1 findings fixed and verified” status. R2-003 is closed; dynamic df and the advisor-approval text gate are present. Implementation remains open for R2-001/004/006.
+
+Blocking findings:
+1. R3 §5 points pre-flight to §6, but no such checklist exists there.
+2. `missing_data_rules()` is only a dictionary; labelled null does not fail closed, technical_missing_runs/family_loss/design_deviation are not computed, and families can silently disappear.
+3. Power assumes fixed 34x5, while the rule permits m=1. Independent ICC=0.20 recheck: balanced power=0.8400 [0.8328,0.8472]; 17 families m=5 + 17 families m=1 gives power=0.5777 [0.5680,0.5874]. Do not claim family-equal weighting removes this precision loss.
+4. `family_level_tests()` returns `t=inf,p=0` for 34 all-zero differences; the simulation helper returns p=1 for the same case.
+5. `build_hierarchy()` hardcodes 6/42/7/12 and is a historical D-064-B diagnostic function; no formal 40-family analysis entry exists.
+6. H2-H5 have no actual family-level Student-t + four-test Holm pipeline. The historical secondary family is six cluster-level sign-flip contrasts. H2/H3 also lack dedicated calibration; H4/H5 exploratory status has no formal report path.
+7. Historical diagnostics do not use Test, but the generator returns the full Test payload to callers, `run_evolution()` has no split guard, and labels can enter fitness through `evaluate_controller()`. No one-time unlock path exists.
+8. `signflip_exact` is misleading under Monte Carlo, and the actual MC seed is not serialized.
+
+### Only next task
+Executor completes an R4 corrective revision covering every item in `72_64R3_INDEPENDENT_REVIEW.md` §11, then requests a fresh independent review. Preserve R2/R3 history. Implement the real 40-family analysis and missing-data paths; either require at least five valid compositions or preregister and validate an unbalanced missingness model; unify Student-t degenerate handling; implement H2-H5 with exactly four Holm tests; fix the pre-flight checklist; enforce split guards and one-time Test unlocking; correct sign-flip output; add real-path tests and rerun CI.
+
+Formal A-3b remains HOLD. Do not read or tune Test, merge main, start Pilot B/A800/ARWM/real LLM APIs/UndoBench TEST/ThinkingBox. Even an ACCEPTED review would still require advisor MDE acceptance, explicit user approval, and a real pre-flight.

@@ -1281,3 +1281,33 @@ GO：64-R3 **独立复审**（本报告非审计）。HOLD 不变：正式 A-3b�
 
 ### 下一步
 64-R3 独立 R2 复审 → 导师 MDE 认可 → 用户批准 → 正式 A-3b。
+
+
+## 决策 D-064-R3-REVIEW：64-R3 独立审计 REQUEST CHANGES（2026-11-10）
+
+### 审计基线与证据
+独立报告：`72_64R3_INDEPENDENT_REVIEW.md`。远端工作分支 HEAD `ca7bb12f89dd72deaac205ffab89cf3054e6be06`；main `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。CI run 42670236796 在该 HEAD 上 success，测试 28+161=189/189；本地复跑相同。独立重建 manifest=`fb832bcc…`、test-family=`01b41df8…`、test-scenario=`dded3bb7…`，与 CI 一致。独立数值证据：`experiments/pilot_a3b/audit_64r3_independent_checks.json`。
+
+### R1 关闭复核
+- R2-001：文本统一 family-t，但正式实现不存在，未关闭。
+- R2-002：动态 df 成立；零方差处理另有阻断缺陷。
+- R2-003：哈希真实重建一致，已关闭。
+- R2-004：规则未进入真实处理，且与功效假设不一致，未关闭。
+- R2-005：导师审批门文本已写入；批准仍待完成；pre-flight 引用另有问题。
+- R2-006：Holm 函数正确，但 H2–H5 未按 R3 实际执行，未关闭。
+
+### 新阻断发现
+1. R3 §5 的 pre-flight 错指 §6，真正清单不存在。
+2. `missing_data_rules()` 只返回字典；labelled null 仍输出结果，技术缺失只记录不拒绝，family_loss/design_deviation 无字段，可能静默减少 family。
+3. 功效固定 34×5，规则却允许 m=1。独立复算 ICC=0.20：平衡 power=0.8400 [0.8328,0.8472]；17 族 m=5 + 17 族 m=1 时 power=0.5777 [0.5680,0.5874]。Type-I 在本次模拟中接近 0.05，但不能外推为任意缺失机制均校准。
+4. `family_level_tests()` 对 34 个全零差值返回 `t=inf,p=0`；模拟 `_pvals_student_t()` 对同一输入返回 p=1。必须统一全零、非零常数、近零方差规则。
+5. `build_hierarchy()` 硬编码 6/42/7/12，只是 D-064-B 历史诊断函数；正式 40-family 分析入口未完成。
+6. H2–H5 没有 family-t + 四项 Holm 的实现；历史 secondary family 是六项 cluster sign-flip。H2/H3 亦未单独校准；H4/H5 探索性无正式报告执行位置。
+7. 历史 diagnostic 未发现 Test 使用，但生成器返回完整 Test payload，`run_evolution()` 不检查 split，labels 可经 `evaluate_controller()` 进入适应度；一次性解锁未实现。
+8. `signflip_exact` 在 MC 下命名误导，结果未序列化实际 seed。
+
+### 决定
+**64-R3：REQUEST CHANGES。正式 A-3b 继续 HOLD。** 不接受“测试全绿=正式分析系统完成”，不接受“字典规则=缺失数据已执行”，不接受“family 等权=composition 数不影响功效”。本轮未运行正式实验、未读取 Test 逐场景标签或结果、未修改实验代码或 R3。
+
+### 唯一下一任务
+Executor 完成 R4 corrective revision：实现正式分析/缺失数据/锁箱路径，解决不平衡功效和 Student-t 边界，补齐 H2–H5 与真实 pre-flight，重跑测试和 CI，再提交独立复审。即使复审 ACCEPTED，仍需导师 MDE 认可、用户批准和真实 pre-flight。
