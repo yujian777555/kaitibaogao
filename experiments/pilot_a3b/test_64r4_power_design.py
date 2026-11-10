@@ -1,9 +1,11 @@
 """Synthetic-only tests for the R4 power simulation driver."""
+import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 
-from power_r4_design import simulate_power_grid, wilson_interval
+from power_r4_design import json_input_hashes, simulate_power_grid, wilson_interval
 
 
 class R4PowerDesignTests(unittest.TestCase):
@@ -46,6 +48,17 @@ class R4PowerDesignTests(unittest.TestCase):
             seed=19,
         )
         self.assertEqual(simulate_power_grid(**kwargs), simulate_power_grid(**kwargs))
+
+    def test_json_content_hash_is_independent_of_line_endings(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lf = Path(tmp) / "lf.json"
+            crlf = Path(tmp) / "crlf.json"
+            lf.write_bytes(b'{"runs": []}\n')
+            crlf.write_bytes(b'{"runs": []}\r\n')
+            lf_hashes = json_input_hashes(lf)
+            crlf_hashes = json_input_hashes(crlf)
+            self.assertNotEqual(lf_hashes["raw_sha256"], crlf_hashes["raw_sha256"])
+            self.assertEqual(lf_hashes["canonical_sha256"], crlf_hashes["canonical_sha256"])
 
     def test_invalid_residual_pool_or_variance_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "residual pool"):

@@ -1,0 +1,47 @@
+{
+  "algorithm": "SBCG-NSGA-III",
+  "status": "IMPLEMENTED_SYNTHETIC_TESTED_NO_BENCHMARK_RESULTS",
+  "objectives_minimize": [
+    "1 - CondRecSucc",
+    "AvoidableHarm",
+    "UnnecessaryEscalation + UnnecessaryActionCost/10",
+    "1 - CorrectEscalation",
+    "1 - DamageContainment"
+  ],
+  "hard_constraints_zero_tolerance": ["duplicate", "sla_violation", "invariant_violation"],
+  "nsga3_reference_directions": {"dimensions": 5, "divisions": 3, "count": 35},
+  "counterexample_sampling": {
+    "strata": "task_family x failure_signature x safety_class",
+    "rule": "uniform over observed strata; probability 1/S",
+    "fallback": "standard mutation when no counterexample stratum exists",
+    "gene_targeting": "genes present in the failed decision trace"
+  },
+  "selection_rule": [
+    "hard safety feasibility",
+    "Pareto non-dominance",
+    "maximum family coverage",
+    "maximum worst-family CondRecSucc",
+    "frozen lexicographic objective and fingerprint tie-break"
+  ],
+  "equal_weight_sum_selection_forbidden": true,
+  "shared_initial_pool": {
+    "size": 60,
+    "sensible_random_seed_rule": "Random(seed*7919+29)",
+    "hand_anchor_slot": 0,
+    "all_ea_arms_share_pool_except_no_M3_ablation": true
+  },
+  "population": 48,
+  "generations": 60,
+  "evolution_seeds": [411, 522, 633],
+  "ablations": ["no-M1", "no-M2", "no-M3"],
+  "data_access": {
+    "current_phase": "synthetic fixtures only",
+    "real_train_validation_diagnostics": "HOLD until R4 ACCEPTED + advisor MDE + user approval + pre-flight",
+    "test": "locked; no payload access"
+  },
+  "open_before_any_validation_claim": [
+    "safety non-inferiority margins are not yet justified or frozen",
+    "hypervolume reference point is not yet justified or frozen",
+    "no Train/Validation performance or ablation evidence has been produced"
+  ]
+}

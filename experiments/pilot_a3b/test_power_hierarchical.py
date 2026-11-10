@@ -206,7 +206,7 @@ class RealDataRegressionTests(unittest.TestCase):
         inf = family_level_tests(h)
         # all six family means positive -> exact sign-flip minimum 2/64
         self.assertTrue(all(v > 0 for v in inf["family_means"].values()))
-        self.assertAlmostEqual(inf["signflip_exact"]["p"], 2 / 64, places=6)
+        self.assertAlmostEqual(inf["signflip"]["p"], 2 / 64, places=6)
         self.assertLess(inf["student_t"]["p_two_sided"], 0.001)
         self.assertGreater(inf["block_bootstrap_ci95"][0], 0)
 

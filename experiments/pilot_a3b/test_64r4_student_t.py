@@ -97,6 +97,24 @@ class StudentTBoundaryTests(unittest.TestCase):
         self.assertTrue(math.isinf(result["student_t"]["t"]))
         self.assertEqual(result["student_t"]["p_two_sided"], 0.0)
 
+    def test_signflip_uses_neutral_name_and_records_actual_seed(self):
+        hierarchy = {"fam_means": {f"f{i}": 0.1 + i * 0.01 for i in range(16)}}
+        result = family_level_tests(hierarchy, seed=20261112)
+        self.assertIn("signflip", result)
+        self.assertNotIn("signflip_exact", result)
+        signflip = result["signflip"]
+        self.assertEqual(signflip["n_resamples"], 10000)
+        self.assertEqual(signflip["random_seed_used"], 20261113)
+        self.assertEqual(signflip["n_families"], 16)
+        self.assertIn("Monte Carlo", signflip["method"])
+
+    def test_exact_signflip_records_no_random_seed(self):
+        hierarchy = {"fam_means": {f"f{i}": 0.1 + i * 0.01 for i in range(6)}}
+        signflip = family_level_tests(hierarchy)["signflip"]
+        self.assertEqual(signflip["n_resamples"], 64)
+        self.assertIsNone(signflip["random_seed_used"])
+        self.assertIn("exact enumeration", signflip["method"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -86,9 +86,22 @@ def simulate_power_grid(total_var, eps_pool, reps=DEFAULT_REPS, seed=DEFAULT_SEE
     return cells
 
 
+def json_input_hashes(input_path):
+    """Record raw-byte and canonical-content hashes for cross-platform audit."""
+    raw = Path(input_path).read_bytes()
+    parsed = json.loads(raw)
+    canonical = json.dumps(
+        parsed, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return {
+        "raw_sha256": hashlib.sha256(raw).hexdigest(),
+        "canonical_sha256": hashlib.sha256(canonical).hexdigest(),
+    }
+
+
 def extract_empirical_variance(input_path):
     """Estimate pilot total variance and within-family residual pool."""
-    raw = Path(input_path).read_bytes()
+    hashes = json_input_hashes(input_path)
     hierarchy = ph.build_hierarchy(input_path)
     if hierarchy["problems"]:
         raise ValueError("historical diagnostic hierarchy failed: " + "; ".join(hierarchy["problems"]))
@@ -102,7 +115,8 @@ def extract_empirical_variance(input_path):
             residuals.append(value - family_mean)
     total_var = float(np.var(np.asarray(all_cluster_means, dtype=float), ddof=1))
     return {
-        "input_sha256": hashlib.sha256(raw).hexdigest(),
+        "input_sha256": hashes["raw_sha256"],
+        "input_canonical_sha256": hashes["canonical_sha256"],
         "total_var": total_var,
         "residual_pool": residuals,
         "n_diagnostic_families": len(hierarchy["families"]),
@@ -115,7 +129,8 @@ def render_report(result):
     lines = [
         "# D-064-R4 — ICC / Type-I / power re-calibration",
         "",
-        f"- Input SHA-256: {result['input_sha256']}",
+        f"- Input raw SHA-256: {result['input_sha256']}",
+        f"- Input canonical-content SHA-256: {result['input_canonical_sha256']}",
         f"- Code commit: {result['git_commit']}",
         f"- Repetitions per cell: {result['mc_reps']}",
         f"- Base seed: {result['base_seed']}",
@@ -156,6 +171,7 @@ def run(input_path, outdir, reps=DEFAULT_REPS, seed=DEFAULT_SEED):
         "kind": "D064_R4_POWER_RECALIBRATION",
         "status": "SIMULATION_ONLY_NOT_PREREGISTRATION_APPROVAL",
         "input_sha256": empirical["input_sha256"],
+        "input_canonical_sha256": empirical["input_canonical_sha256"],
         "git_commit": ph.git_sha(),
         "base_seed": int(seed),
         "mc_reps": int(reps),

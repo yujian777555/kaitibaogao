@@ -125,10 +125,10 @@ class InferentialSeparationTests(unittest.TestCase):
         h = fake_hierarchy({f"f{i}": 3 for i in range(6)})
         res = family_level_tests(h)
         self.assertIn("student_t", res)
-        self.assertIn("signflip_exact", res)
+        self.assertIn("signflip", res)
         self.assertIn("p_two_sided", res["student_t"])
-        self.assertIn("p", res["signflip_exact"])
-        self.assertNotEqual(res["student_t"]["p_two_sided"], res["signflip_exact"]["p"])
+        self.assertIn("p", res["signflip"])
+        self.assertNotEqual(res["student_t"]["p_two_sided"], res["signflip"]["p"])
 
     def test_holm_edge_cases(self):
         self.assertEqual(holm_adjust([0.03]), [0.03])

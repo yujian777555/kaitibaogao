@@ -316,6 +316,8 @@ def family_level_tests(h, seed=SEED):
                 extreme += 1
         p_sf = extreme / total
         sf_method = f"exact enumeration (2^{F})"
+        sf_n_resamples = total
+        sf_random_seed = None
     else:
         rng_sf = random.Random(seed + 1)
         reps_sf = 10000
@@ -326,6 +328,8 @@ def family_level_tests(h, seed=SEED):
                 extreme += 1
         p_sf = (extreme + 1) / (reps_sf + 1)
         sf_method = f"Monte Carlo sign-flip ({reps_sf} reps)"
+        sf_n_resamples = reps_sf
+        sf_random_seed = seed + 1
     # family-block bootstrap CI (percentile, resample F families)
     rng = random.Random(seed)
     boots = []
@@ -347,7 +351,14 @@ def family_level_tests(h, seed=SEED):
             "status": student["status"],
             "degeneracy_tolerance": student["degeneracy_tolerance"],
         },
-        "signflip_exact": {"p": round(p_sf, 6), "method": sf_method},
+        "signflip": {
+            "p": round(p_sf, 6),
+            "method": sf_method,
+            "n_resamples": sf_n_resamples,
+            "random_seed_used": sf_random_seed,
+            "n_families": F,
+            "role": "sensitivity_only",
+        },
         "block_bootstrap_ci95": ci,
     }
 
@@ -743,7 +754,7 @@ def _write_report(out, outdir):
         f"- family-block bootstrap CI：{out['icc_family_bootstrap_ci']['ci95_raw']}（6 families，不稳定——**不解释为独立性证明**）", "",
         "## 3. 层级推断（Task E：D-064-A 重评估）",
         f"- family-level t：t={inf['student_t']['t']} df={inf['student_t']['df']} p=**{inf['student_t']['p_two_sided']}**",
-        f"- family-level exact sign-flip（2^6 枚举）：p=**{inf['signflip_exact']['p']}**",
+        f"- family-level exact sign-flip（2^6 枚举）：p=**{inf['signflip']['p']}**",
         f"- family-block bootstrap CI：{inf['block_bootstrap_ci95']}",
         f"- 对照 D-064-A 42-cluster 独立分析结果（CI/p 见 66 号报告与 condrec_diagnostic3.json）", "",
         "## 4. Type-I 校准与关键功效（Task C）",

@@ -299,6 +299,9 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
     rng = random.Random(seed)
     population = [g.clone() for g in init_pool[:pop_size]]
     episodes_used = 0
+    unique_evaluations = 0
+    cache_hits = 0
+    evaluation_calls = 0
     battery = safety_battery if (safety_battery and method.endswith("G")) else None
     cache = {}
 
@@ -306,15 +309,24 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
         return tuple(sorted((k, gene.action, gene.wait_n) for k, gene in g.genes.items())) + (
             g.default_action, g.default_wait, g.sla_aware, g.fixed_wait)
 
+    def evaluate_direct(g):
+        nonlocal episodes_used, unique_evaluations, evaluation_calls
+        res = evaluate_controller(g, scenarios, verdicts, None)
+        episodes_used += len(scenarios)
+        unique_evaluations += 1
+        evaluation_calls += 1
+        return res
+
     def evaluate(g):
-        nonlocal episodes_used
+        nonlocal cache_hits, evaluation_calls
         fp = fingerprint(g)
         if fp in cache:
+            cache_hits += 1
+            evaluation_calls += 1
             return cache[fp]
         if episodes_used + len(scenarios) > eval_budget:
             return None
-        res = evaluate_controller(g, scenarios, verdicts, None)
-        episodes_used += len(scenarios)
+        res = evaluate_direct(g)
         cache[fp] = res
         return res
 
@@ -333,8 +345,7 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
     for g in population:
         res = evaluate(g)
         if res is None:
-            res = evaluate_controller(g, scenarios, verdicts, None)
-            episodes_used += len(scenarios)
+            res = evaluate_direct(g)
         results.append(res)
     objs = [r["objectives"] for r in results]
     history = []
@@ -400,8 +411,7 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
         for g in offspring:
             res = evaluate(g)
             if res is None:
-                res = evaluate_controller(g, scenarios, verdicts, None)
-                episodes_used += len(scenarios)
+                res = evaluate_direct(g)
             off_results.append(res)
 
         # --- survivor selection -----------------------------------------
@@ -436,8 +446,15 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
                     break
             population = [combined[i] for i in picked]
 
-        results = [cache.get(fingerprint(g)) or evaluate_controller(g, scenarios, verdicts, None)
-                   for g in population]
+        results = []
+        for g in population:
+            cached = cache.get(fingerprint(g))
+            if cached is None:
+                cached = evaluate_direct(g)
+            else:
+                cache_hits += 1
+                evaluation_calls += 1
+            results.append(cached)
         objs = [r["objectives"] for r in results]
 
         # ranks/crowd for next-gen tournament
@@ -467,6 +484,9 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
         "final_population": population,
         "final_results": results,
         "episodes": episodes_used,
+        "unique_evaluations": unique_evaluations,
+        "cache_hits": cache_hits,
+        "evaluation_calls": evaluation_calls,
         "history": history,
     }
 
