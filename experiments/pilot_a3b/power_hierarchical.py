@@ -299,12 +299,11 @@ def missing_data_rules():
 def family_level_tests(h, seed=SEED):
     fam_means = np.array([h["fam_means"][f] for f in sorted(h["fam_means"])], dtype=float)
     F = len(fam_means)
-    mean = float(fam_means.mean())
-    sd = float(fam_means.std(ddof=1))
-    # Student-t
-    tval = mean / (sd / math.sqrt(F)) if sd > 0 else float("inf")
-    # two-sided p via survival function of t(F-1); use scipy-free integration:
-    p_t = _t_sf(abs(tval), F - 1) * 2
+    student = student_t_summary(fam_means)
+    mean = float(student["mean"])
+    sd = float(student["sd"])
+    tval = float(student["t"])
+    p_t = float(student["p_two_sided"])
     # sign-flip test: exact 2^F enumeration only for small F; Monte Carlo
     # sign flips otherwise (F=40 would be 2^40 enumerations)
     obs = abs(mean)
@@ -341,7 +340,13 @@ def family_level_tests(h, seed=SEED):
         "family_means": {f: round(h["fam_means"][f], 6) for f in sorted(h["fam_means"])},
         "mean": round(mean, 6),
         "family_mean_sd": round(sd, 6),
-        "student_t": {"t": round(tval, 4), "df": family_t_df(F), "p_two_sided": round(p_t, 6)},
+        "student_t": {
+            "t": round(tval, 4) if math.isfinite(tval) else tval,
+            "df": student["df"],
+            "p_two_sided": round(p_t, 6),
+            "status": student["status"],
+            "degeneracy_tolerance": student["degeneracy_tolerance"],
+        },
         "signflip_exact": {"p": round(p_sf, 6), "method": sf_method},
         "block_bootstrap_ci95": ci,
     }
@@ -384,6 +389,51 @@ def _betainc(a, b, x):
     return front * (f - 1.0)
 
 
+def student_t_summary(values):
+    """Shared two-sided one-sample Student-t calculation for analysis and power.
+
+    The frozen numerical tolerance treats spreads <= 1e-12 * max(1, max|x|)
+    as degenerate. All-zero effects return t=0, p=1. A nonzero constant
+    effect uses the zero-variance limit (signed infinite t, p=0) and is
+    explicitly marked as degenerate rather than a regular t estimate.
+    """
+    arr = np.asarray(values, dtype=float).reshape(-1)
+    F = int(arr.size)
+    if F < 2:
+        raise ValueError("Student-t inference requires at least two families")
+    if not np.all(np.isfinite(arr)):
+        raise ValueError("Student-t input contains non-finite family effects")
+
+    mean = float(np.mean(arr))
+    sd = float(np.std(arr, ddof=1))
+    scale = max(1.0, float(np.max(np.abs(arr))))
+    tolerance = 1e-12 * scale
+
+    if sd <= tolerance:
+        if abs(mean) <= tolerance:
+            tval = 0.0
+            p_value = 1.0
+            status = "zero_effect_zero_variance"
+        else:
+            tval = math.copysign(float("inf"), mean)
+            p_value = 0.0
+            status = "nonzero_constant_limit"
+    else:
+        tval = mean / (sd / math.sqrt(F))
+        p_value = min(1.0, max(0.0, _t_sf(abs(tval), F - 1) * 2))
+        status = "regular"
+
+    return {
+        "mean": mean,
+        "sd": sd,
+        "t": float(tval),
+        "df": F - 1,
+        "p_two_sided": float(p_value),
+        "status": status,
+        "degeneracy_tolerance": float(tolerance),
+    }
+
+
 # ---------------------------------------------------------------------------
 # Task C: power simulation (numpy-vectorised)
 # ---------------------------------------------------------------------------
@@ -415,14 +465,14 @@ def gen_family_means_block(rng, reps, n_fam, fam_blocks, mu_shift):
 
 
 def _pvals_student_t(means):
-    """Vectorised two-sided one-sample Student-t p-values per row."""
-    F = means.shape[1]
-    m = means.mean(axis=1)
-    s = means.std(axis=1, ddof=1)
-    s = np.where(s <= 0, 1e-12, s)
-    tval = np.abs(m / (s / math.sqrt(F)))
-    # vectorised t survival via the same continued fraction per element
-    return np.array([min(1.0, _t_sf(float(t), F - 1) * 2) for t in tval])
+    """Apply the same frozen Student-t boundary rules to each simulated row."""
+    values = np.asarray(means, dtype=float)
+    if values.ndim != 2:
+        raise ValueError("Student-t simulation input must be a 2D array")
+    return np.asarray(
+        [student_t_summary(row)["p_two_sided"] for row in values],
+        dtype=float,
+    )
 
 
 def _pvals_signflip(means, rng, inner=999):
