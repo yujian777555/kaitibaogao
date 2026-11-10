@@ -126,7 +126,7 @@ class CompositionTruthTests(unittest.TestCase):
 
     def test_labels_within_allowed_sets_and_predictable(self):
         manifest, extras = build_candidate_manifest()
-        for s in extras["all_scenarios"]:
+        for s in extras["development_scenarios"]:
             self.assertIn(s["label"], ALLOWED_CLASSES_BY_COMPOSITION[s["composition"]],
                           s["scenario_id"])
             self.assertIn(s["analytic_label"],
@@ -146,7 +146,7 @@ class CompositionTruthTests(unittest.TestCase):
         self.assertNotIn("test_scenarios", extras)
         self.assertNotIn("split_internal", extras)
         self.assertNotIn("scenarios", manifest["splits"]["test_locked"])
-        for s in extras["all_scenarios"][:30]:
+        for s in extras["development_scenarios"][:30]:
             self.assertIn("label_evidence_sha256", s)
             self.assertIn("labeler", s)
             # label must not appear as an id path segment (repeat digits like
@@ -212,7 +212,7 @@ class DeterminismTests(unittest.TestCase):
 
     def test_scenario_ids_unique(self):
         manifest, extras = build_candidate_manifest()
-        ids = [s["scenario_id"] for s in extras["all_scenarios"]]
+        ids = [s["scenario_id"] for s in extras["development_scenarios"]]
         self.assertEqual(len(ids), len(set(ids)))
 
 
