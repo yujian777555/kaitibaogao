@@ -65,7 +65,7 @@ class FormalPrimaryAnalysisTests(unittest.TestCase):
 
     def test_technical_missing_is_counted_and_family_is_lost(self):
         roster, rows = fixture()
-        missing = rows.pop()
+        missing = rows.pop(0)
         technical = [{
             "scenario_id": missing["scenario_id"],
             "seed": missing["seed"],
