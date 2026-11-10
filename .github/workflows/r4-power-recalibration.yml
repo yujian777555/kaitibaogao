@@ -8,6 +8,7 @@ on:
       - "experiments/pilot_a3b/power_r4_design.py"
       - "experiments/pilot_a3b/power_hierarchical.py"
       - "experiments/pilot_a3b/diagnostic3_results.json"
+      - ".github/workflows/r4-power-recalibration.yml"
   workflow_dispatch:
 
 permissions:
