@@ -38,10 +38,15 @@ def _provenance_status(provenance):
     manifest_sha = provenance.get("manifest_sha256")
     code_sha = provenance.get("code_sha256")
     git_head = provenance.get("git_head")
+    composition_ids = provenance.get("primary_composition_ids")
     return bool(
         isinstance(manifest_sha, str) and SHA256_RE.fullmatch(manifest_sha)
         and isinstance(code_sha, str) and SHA256_RE.fullmatch(code_sha)
         and isinstance(git_head, str) and GIT_SHA_RE.fullmatch(git_head)
+        and isinstance(composition_ids, (list, tuple))
+        and len(composition_ids) == DEFAULT_COMPOSITIONS_PER_FAMILY
+        and len(set(composition_ids)) == DEFAULT_COMPOSITIONS_PER_FAMILY
+        and all(isinstance(value, str) and value for value in composition_ids)
     )
 
 
@@ -58,7 +63,8 @@ def _nonempty_text(value, field):
     return value
 
 
-def _validate_roster(expected_roster, analysis_split, compositions_per_family):
+def _validate_roster(expected_roster, analysis_split, compositions_per_family,
+                     primary_composition_ids=None):
     if not isinstance(expected_roster, (list, tuple)) or not expected_roster:
         raise ValueError("frozen expected roster must be a non-empty sequence")
 
@@ -82,12 +88,20 @@ def _validate_roster(expected_roster, analysis_split, compositions_per_family):
         family_compositions[family].add(composition)
         composition_scenarios[(family, composition)].append(sid)
 
+    expected_compositions = None
+    if primary_composition_ids is not None:
+        expected_compositions = set(primary_composition_ids)
+        if len(expected_compositions) != compositions_per_family:
+            raise ValueError("frozen primary composition IDs must be unique and match the composition count")
+
     for family, compositions in family_compositions.items():
         if len(compositions) != compositions_per_family:
             raise ValueError(
                 f"family {family} must have exactly {compositions_per_family} "
                 "primary compositions in frozen roster"
             )
+        if expected_compositions is not None and compositions != expected_compositions:
+            raise ValueError(f"family {family} composition IDs do not match frozen R4 primary roster")
 
     return scenario_meta, family_compositions, composition_scenarios
 
@@ -104,6 +118,7 @@ def analyze_primary_endpoint(
     method_a="AB",
     method_b="nsga2",
     provenance=None,
+    primary_composition_ids=None,
 ):
     """Validate a paired episode ledger and compute family-equal paired effect.
 
@@ -129,8 +144,11 @@ def analyze_primary_endpoint(
     if not seeds or len(set(seeds)) != len(seeds):
         raise ValueError("expected optimizer seeds must be non-empty and unique")
 
+    if primary_composition_ids is None and isinstance(provenance, dict):
+        primary_composition_ids = provenance.get("primary_composition_ids")
     scenario_meta, family_compositions, composition_scenarios = _validate_roster(
-        expected_roster, analysis_split, compositions_per_family
+        expected_roster, analysis_split, compositions_per_family,
+        primary_composition_ids=primary_composition_ids,
     )
     families = sorted(family_compositions)
     if not method_a or not method_b or method_a == method_b:
@@ -279,6 +297,7 @@ def analyze_primary_endpoint(
         ],
         "expected_roster": sorted(expected_roster, key=lambda item: item["scenario_id"]),
         "expected_optimizer_seeds": sorted(seeds, key=str),
+        "primary_composition_ids": sorted(primary_composition_ids or []),
         "technical_missing": sorted(technical_records, key=lambda item: (
             str(item.get("method")), str(item.get("seed")), str(item.get("scenario_id"))
         )),
@@ -288,7 +307,12 @@ def analyze_primary_endpoint(
         "analysis_version": ANALYSIS_VERSION,
         "input_sha256": _canonical_sha256(normalized_input),
         "provenance_status": "COMPLETE" if provenance_valid else "INCOMPLETE",
-        "provenance": provenance if provenance_valid else None,
+        "provenance": ({
+            **provenance,
+            "primary_composition_roster_sha256": _canonical_sha256(
+                sorted(primary_composition_ids)
+            ),
+        } if provenance_valid else None),
         "analysis_split": analysis_split,
         "primary_contrast": f"{method_a} - {method_b}",
         "primary_endpoint": "CondRecSucc (R1+R2 class_success)",
@@ -355,6 +379,7 @@ def analyze_secondary_endpoints(
     min_families=DEFAULT_MIN_FAMILIES,
     compositions_per_family=DEFAULT_COMPOSITIONS_PER_FAMILY,
     provenance=None,
+    primary_composition_ids=None,
 ):
     """Execute H2-H5 through the same paired family-level analysis path.
 
@@ -376,6 +401,7 @@ def analyze_secondary_endpoints(
             method_a=method_a,
             method_b=method_b,
             provenance=provenance,
+            primary_composition_ids=primary_composition_ids,
         )
         result["hypothesis"] = hypothesis
         result["classification"] = "exploratory"
