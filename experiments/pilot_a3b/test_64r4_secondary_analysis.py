@@ -7,10 +7,12 @@ PROVENANCE = {
     "manifest_sha256": "a" * 64,
     "code_sha256": "b" * 64,
     "git_head": "c" * 40,
+    "primary_composition_ids": ["C00", "C01", "C02", "C03", "C04"],
 }
 
 def analyze_secondary_endpoints(*args, **kwargs):
     kwargs.setdefault("provenance", PROVENANCE)
+    kwargs.setdefault("primary_composition_ids", PROVENANCE["primary_composition_ids"])
     return _analyze_secondary_endpoints(*args, **kwargs)
 
 
