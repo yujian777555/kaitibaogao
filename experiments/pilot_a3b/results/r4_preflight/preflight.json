@@ -1,0 +1,125 @@
+{
+  "blocking_reasons": [
+    "independent review is not ACCEPTED",
+    "advisor MDE approval is not APPROVED",
+    "explicit user approval is absent",
+    "paired AB/NSGA-II rows are incomplete",
+    "duplicate_count must be zero",
+    "labelled_null_count must be zero",
+    "metadata_mismatch_count must be zero",
+    "at least 34 complete families are required",
+    "family_composition_counts must be a non-empty object",
+    "design_deviation is active"
+  ],
+  "checked_fields": [
+    "r4_preregistration_sha256",
+    "implementation_sha256",
+    "git_head",
+    "independent_review_status",
+    "advisor_mde_status",
+    "user_approved",
+    "ci_conclusion",
+    "tests_passed",
+    "manifest_hashes",
+    "split_overlap_count",
+    "train_runner_split",
+    "validation_use",
+    "test_payload_exposed",
+    "test_payload_disclosed",
+    "test_family_count",
+    "test_scenario_count",
+    "expected_roster_valid",
+    "paired_rows_valid",
+    "duplicate_count",
+    "labelled_null_count",
+    "metadata_mismatch_count",
+    "n_observed_families",
+    "family_composition_counts",
+    "family_loss",
+    "technical_missing_runs",
+    "design_deviation",
+    "analysis_schema_valid",
+    "budget_within_cap",
+    "seed_recorded",
+    "stopping_rule_frozen",
+    "test_access_log_count",
+    "one_time_ledger_state"
+  ],
+  "design": {
+    "family_composition_counts": {},
+    "family_loss": [],
+    "n_observed_families": 0,
+    "technical_missing_runs": 0
+  },
+  "execution_context": {
+    "approval_record": {
+      "advisor_mde_status": "PENDING",
+      "independent_review_status": "PENDING",
+      "user_approved": false
+    },
+    "manifest_gate": "PASS",
+    "outcome_ledger_state": "NOT_RUN",
+    "primary_composition_ids": [
+      "single_timeout",
+      "timeout_then_rate_limit",
+      "partial_then_delay",
+      "independent_mixed_val",
+      "triple_mixed"
+    ],
+    "scope": "metadata-only pre-run gate",
+    "test_summary": {
+      "cluster_label_counts": {
+        "R1": 199,
+        "R2": 81,
+        "R3": 40,
+        "R4": 40
+      },
+      "eligible_clusters_per_family_max": 7,
+      "eligible_clusters_per_family_min": 7,
+      "n_design_clusters": 360,
+      "n_families": 40,
+      "n_primary_eligible_clusters": 280,
+      "n_scenarios": 1080,
+      "n_zero_primary_denominator_clusters": 80,
+      "profile_counts": {
+        "IC|IC|NU": 4,
+        "IC|NC|NU": 4,
+        "IC|NU|IC": 4,
+        "IC|NU|NC": 4,
+        "IC|NU|NU": 4,
+        "NC|IC|NU": 4,
+        "NC|NC|NU": 4,
+        "NC|NU|IC": 4,
+        "NC|NU|NC": 4,
+        "NC|NU|NU": 4
+      },
+      "scenario_label_counts": {
+        "R1": 597,
+        "R2": 243,
+        "R3": 120,
+        "R4": 120
+      },
+      "unknown_scenario_rate": 0.0
+    }
+  },
+  "provenance": {
+    "git_head": "32b6914b08075775c0d9000fb7b80392c33ec26e",
+    "implementation_sha256": "8122757fe2c35215fd30a74d5609e929a7c19090790c97c099e4e730ddca8426",
+    "manifest_hashes": {
+      "test_family_sha256": "01b41df8b06c318f90a4fc7aed45f673d13b50f14c08f56304ddffbb625a1411",
+      "test_scenario_sha256": "dded3bb72a08143177dd6b7f5c4c4ef5100b547028c9cc40fa2b87b6bd70c919",
+      "train_family_sha256": "95c105d5534fa644e8adc3224748ea5aead705fd9dff941e557a125c3dc62b25",
+      "train_scenario_sha256": "00b0a72fc7d75eb9c524e93c3fad737fcbaf3f1382d13e56fb9829e70c3f6abc",
+      "validation_family_sha256": "2c8ea029f69d237447f5316819dc39d621bd4f91fb58e3e11f42774ec56b44a4",
+      "validation_scenario_sha256": "245712df4b39bd0c2208d2afaf862643051385d987f7b210226751fe5131b246"
+    },
+    "r4_preregistration_sha256": "f4be87d450b324613efad36fb504b7ef4e8187ae54d02fcbcc271541652c35c0"
+  },
+  "status": "HOLD",
+  "test_lock": {
+    "access_log_count": 0,
+    "one_time_ledger_state": "UNUSED",
+    "payload_disclosed": false,
+    "payload_exposed": false
+  }
+}

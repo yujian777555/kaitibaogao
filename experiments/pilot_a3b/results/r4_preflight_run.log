@@ -1,0 +1,12 @@
+R4 pre-flight: HOLD
+- independent review is not ACCEPTED
+- advisor MDE approval is not APPROVED
+- explicit user approval is absent
+- paired AB/NSGA-II rows are incomplete
+- duplicate_count must be zero
+- labelled_null_count must be zero
+- metadata_mismatch_count must be zero
+- at least 34 complete families are required
+- family_composition_counts must be a non-empty object
+- design_deviation is active
+wrote experiments\pilot_a3b\results\r4_preflight\preflight.json experiments\pilot_a3b\results\r4_preflight\preflight.md
