@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   r4-power:
@@ -32,17 +32,28 @@ jobs:
 
       - name: Run frozen R4 ICC / Type-I / power grid
         run: |
+          OUTPUT_DIR="experiments/pilot_a3b/results/r4_power_20261114"
           python experiments/pilot_a3b/power_r4_design.py \
             --input experiments/pilot_a3b/diagnostic3_results.json \
-            --outdir "$RUNNER_TEMP/r4-power" \
+            --outdir "$OUTPUT_DIR" \
             --reps 10000 \
             --seed 20261114
+
+      - name: Commit reproducible R4 power evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/pilot_a3b/results/r4_power_20261114
+          if ! git diff --cached --quiet; then
+            git commit -m "Store R4 10k power calibration results"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
 
       - name: Upload R4 power evidence
         uses: actions/upload-artifact@v4
         with:
           name: r4-power-recalibration-10000mc
           path: |
-            ${{ runner.temp }}/r4-power/power_r4_design.json
-            ${{ runner.temp }}/r4-power/power_r4_design_report.md
+            experiments/pilot_a3b/results/r4_power_20261114/power_r4_design.json
+            experiments/pilot_a3b/results/r4_power_20261114/power_r4_design_report.md
           if-no-files-found: error
