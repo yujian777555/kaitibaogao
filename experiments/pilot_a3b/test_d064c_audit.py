@@ -119,7 +119,7 @@ class CompositionTruthTests(unittest.TestCase):
     def test_permission_prefix_step0_compensatable_in_all_families(self):
         """R3 label premise: the committed prefix must be compensatable."""
         manifest, extras = build_candidate_manifest()
-        bad = [s["scenario_id"] for s in extras["all_scenarios"]
+        bad = [s["scenario_id"] for s in extras["development_scenarios"]
                if s["composition"] == "permission_after_compensatable_prefix"
                and not TOOLS[s["tools"][0]]["compensatable"]]
         self.assertEqual(bad, [])
@@ -142,6 +142,10 @@ class CompositionTruthTests(unittest.TestCase):
     def test_no_hardcoded_labels_in_scenarios(self):
         """Labels must come from the labeler, not scenario_id text or constants."""
         manifest, extras = build_candidate_manifest()
+        self.assertNotIn("all_scenarios", extras)
+        self.assertNotIn("test_scenarios", extras)
+        self.assertNotIn("split_internal", extras)
+        self.assertNotIn("scenarios", manifest["splits"]["test_locked"])
         for s in extras["all_scenarios"][:30]:
             self.assertIn("label_evidence_sha256", s)
             self.assertIn("labeler", s)
