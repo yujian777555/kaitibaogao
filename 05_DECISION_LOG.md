@@ -1488,3 +1488,21 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 - 不访问 Validation/Test，不运行正式 A-3b，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。
 - 该诊断不构成 EC 性能提升证据，不改变毕业论文创新点状态。
 
+
+
+## 决策 D-081：修正 D-079 Train family 假设并关闭 D-078 自动重跑（2026-11-10）
+
+### CI 事实
+- regression run 42827879313 在 282 tests 后失败，新增 D079 challenge generator 的 setUpClass 抛出 ValueError：其错误要求每个 Train family 同时存在 compensatable 与 uncompensatable 工具。
+- D-078 workflow run 42827879133 在 full regression preflight 失败；14-arm execution step skipped，没有新算法实验数据。
+- D-078 原始 artifact 不变，D-078 workflow 已改为 workflow_dispatch only，普通 push 不再触发重跑。
+
+### 修正
+- D6 改为 partial commit + compensation unavailable，可由工具合同不可补偿或运行时补偿不可用实现；不要求所有冻结 Train families 都包含不可补偿工具。
+- 新增 D6 测试，要求 compensation_available=false 且 robust label=R4。
+- 其他 evaluator 修复与 D-078 audit 脚本尚待下一轮 CI 验证。
+
+### 当前决策
+- 继续 D-079，不运行新的算法性能实验，直到 challenge manifest candidate 通过 CI、完成审查并将 SHA-256 锁入仓库。
+- 不访问 Validation/Test，不启动正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；main 不合并。
+

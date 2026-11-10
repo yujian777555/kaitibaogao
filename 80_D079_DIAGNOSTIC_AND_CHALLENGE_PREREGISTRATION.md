@@ -51,7 +51,7 @@ Six outcome-independent difficulty strata:
 | D3_COMPENSATABLE_PARTIAL_COMMIT | 3 | partial commit with a usable compensation path |
 | D4_CROSS_TOOL_THREE_FAULT_INTERACTION | 4 | partial commit + rate limit + schema drift across three steps |
 | D5_PERMISSION_AFTER_COMMITTED_PREFIX | 4 | permission denial after a committed prefix; prefix contracts determine R3/R4 |
-| D6_UNCOMPENSATABLE_PARTIAL_COMMIT | 5 | partial commit on a non-compensatable tool; damage containment |
+| D6_UNCOMPENSATABLE_PARTIAL_COMMIT | 5 | partial commit with compensation unavailable by contract or runtime; damage containment |
 
 The evaluator-side robust reachability checker labels every scenario R1/R2/R3/R4. UNKNOWN or an unapproved robust/analytic disagreement blocks the challenge manifest.
 

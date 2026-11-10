@@ -1,18 +1,22 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-10，D-079 接管）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；接管前远端 HEAD = 2b7903749efd46426672467a1a7d82dce221928d；main = 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 250 / behind 0。代码提交后必须重新查询真实 SHA、ahead/behind 和 CI。
+> **最新权威状态（2026-11-10，D-079 corrective round）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；接管前 HEAD=4f83ea87d333441562ca7251aa3961f994bbd9dd；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 251 / behind 0。下一次提交后必须重新查询真实 SHA、ahead/behind 和 CI。
 >
-> **D-078 实验事实：** 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；CI 42820836080 与回归 CI 42820836104 success；Test outcomes 未读取，LLM API=0。D-078 不支持 SBCG 性能提升。
+> **D-078：** 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；Test outcomes 未读取。原始 artifact 不得覆盖。D-078 workflow 已改为 workflow_dispatch only，普通 push 不再触发重跑。
 >
-> **D-079 初步诊断：** 原始 matrix_results.json 初查显示 32/42 次 selected FSM 与 Hand FSM fingerprint 完全相同；Hand 的 R1/R2 84/84 成功、R3 正确升级 0/12、R4 damage containment 12/12。另发现成功任务 active effects 被错误计入 harm，且 D-078 runner 使用 analytic label 而非 robust AND-OR label。仓库内独立审计脚本和修复已写入待提交 blob，CI 尚未验证。
+> **D-079 首轮 CI：** regression run 42827879313 failure，282 tests 中仅 D079 challenge generator setUpClass 因错误假设每个 Train family 都有不可补偿工具而失败。D-078 workflow run 42827879133 在全量测试 preflight 失败，算法执行步骤 skipped，没有新算法数据。
 >
-> **当前唯一任务：** 提交并验证 D-079 corrective diagnostics + Train-only challenge candidate；CI 通过后冻结 challenge manifest SHA-256；之后才允许按 80 号预注册启动新的 Train-only exploratory mechanism diagnostic。不得在 manifest lock 前运行新算法。
+> **已修正：** D6 现在允许通过 runtime compensation unavailable 表达 R4；补充 D6 测试；D-078 workflow 改为手动触发；harm 和 robust-label 修复仍需下一轮 CI 验证。
 >
-> **D-079 挑战集候选：** 8 Train families × 6 difficulty strata × 3 repeats × search/diagnostic = 288 scenarios，search 144、diagnostic 144，所有行 split=train。禁止构造或访问 Validation/Test。若标签出现 UNKNOWN 或非白名单 robust/analytic disagreement，必须 fail closed。
+> **D-079 原始数据初查：** 32/42 次 selected FSM 与 Hand FSM fingerprint 完全相同；Hand 的 R1/R2=84/84、R3 CorrectEscalation=0/12、R4 DamageContainment=12/12。待 D-079 仓库脚本复核。
 >
-> **关键授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。R4 的 technical-missing power 与 pre-run/post-run lifecycle 问题未因 D-078 关闭，仍需独立审计。
+> **当前唯一任务：** 推送 D6 修正与 D-078 workflow 防误触修复，核验 regression CI；CI 通过后生成并审查 D-079 challenge manifest SHA-256，提交 manifest lock。manifest lock 之前禁止运行新优化器。
 >
-> **维护纪律：** 每次实质性代码、实验、协议、审计或决策变化，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、05_DECISION_LOG.md、README.md；同时更新 51 号计划的当前门禁说明。每次回复必须说明 canonical handoff 是否更新并给出 GitHub 文件链接。
+> **挑战集候选：** 8 Train-only families × 6 difficulty strata × 3 repeats × search/diagnostic = 288 scenarios；search/diagnostic 各144；全部 split=train，不生成 Validation/Test。
+>
+> **授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。D-076 R4 的 technical-missing power 与 pre-run/post-run lifecycle 问题仍未关闭。
+>
+> **维护纪律：** 每次实质性研究、代码、实验、协议、审计或决策变化，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、05_DECISION_LOG.md、README.md 和 51 号计划。每次回复报告 canonical handoff 是否更新并提供 GitHub 文件链接。
 
 ---
 

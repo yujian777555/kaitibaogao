@@ -1,21 +1,23 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## 最新执行状态（2026-11-10，D-079）
+## 最新执行状态（2026-11-10，D-079 corrective round）
 
-- 本轮接管基线：work branch HEAD = 2b7903749efd46426672467a1a7d82dce221928d；main = 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 250 / behind 0。代码提交后必须重新查询远端。
-- 唯一仓库：yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main 不得合并或修改。
-- D-078 已完成 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；CI 42820836080 与回归 CI 42820836104 success；Test outcomes 未读取，LLM API=0。
-- D-079 初步原始数据诊断：42 runs 中 32 次 selected FSM 与 Hand FSM fingerprint 完全相同；Hand 的 R1/R2 为 84/84 成功、R3 正确升级为 0/12、R4 containment 为 12/12。此为原始数据的独立初查，待仓库内审计脚本和 CI 复核。
-- 已发现 evaluator 语义问题：成功完成任务的预期 active effects 被错误计入 harm；旧 runner 以 analytic scenario label 代替 robust AND-OR label。当前提交增加修复与独立复算脚本，CI 尚待运行。
-- D-079 挑战集候选：8 个 Train-only families × 6 难度层 × 3 repeats × search/diagnostic = 288 scenarios；不生成 Validation/Test。挑战集 manifest SHA 尚待 CI 生成并冻结。
-- 本轮没有运行新的算法性能实验。D-079 预注册与 challenge candidate 通过 CI、manifest hash lock 后，才可另行启动 Train-only 机制诊断。
-- 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。R4 的 technical-missing power 和 pre-run/post-run gate 仍须独立核验。
-- 本轮代码及测试状态：IMPLEMENTED / CI PENDING；不能写成 TESTED 或 EXPERIMENTALLY VERIFIED。
+- 接管前远端 work HEAD：4f83ea87d333441562ca7251aa3961f994bbd9dd；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 251 / behind 0。下一提交后重新查询。
+- 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main 不得合并或修改。
+- D-078 已完成 14 arms × 3 seeds = 42 runs；Train 216、Validation 108；原始结果不可覆盖。Test outcomes 未读取，LLM API=0。
+- D-079 首轮回归 CI 42827879313 failure：282 tests 中，唯一新增阻断是 challenge generator 错误假设每个 Train family 同时含 compensatable 与 uncompensatable 工具。D-078 自动触发 run 42827879133 也在全量测试 preflight 处失败，算法执行步骤 skipped，未产生新算法数据。
+- 已修正 D6：允许通过运行时 compensation unavailable 构造 R4，而不要求冻结 family catalog 每个 family 都包含不可补偿工具；新增 D6 回归测试。
+- 已将 D-078 workflow 改为 workflow_dispatch only，防止普通代码 push 意外重跑已完成的 D-078 实验。
+- D-079 初步原始数据诊断仍待仓库脚本/CI复核：32/42 次选中 FSM 与 Hand FSM fingerprint 相同；Hand R1/R2 84/84、R3 正确升级 0/12、R4 containment 12/12。
+- evaluator 修复已实现：成功完成任务的预期 active effects 不再计为 harm；前缀不可补偿 effects 纳入 R3/R4 minimum-harm；新增 robust AND-OR label evaluator helper。CI 首轮通过了既有 A3b suite，失败点在 D079 challenge catalog assumption。
+- D-079 挑战集候选：8 Train-only families × 6 难度层 × 3 repeats × search/diagnostic = 288 scenarios；不生成 Validation/Test。manifest SHA 尚待修正后 CI 生成并锁定。
+- 当前状态：D-079 corrective implementation / CI rerun pending；尚未运行新的算法性能实验。
+- 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。R4 technical-missing power 与 pre-run/post-run lifecycle gate 仍须独立核验。
 
-**研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
+**研究主线：** Evolutionary Computation for AI Agents  
 **当前阶段：** D-079 独立诊断与 Train-only 难度分层挑战集预注册  
 **当前工作题目：** 《面向状态化工具型大语言模型智能体的故障恢复策略演化与递归自我改进方法研究》（未最终冻结）  
-**当前结论：** D-078 未证明 SBCG/NSGA-III 性能提升；必须先修正评估语义与标签来源，再用有区分度的挑战集开展非确认性机制诊断。
+**当前结论：** D-078 未证明 SBCG/NSGA-III 性能提升；先修复评估语义、标签来源和挑战集构造，再做非确认性 Train-only 机制诊断。
 
 **D-079 文件：**
 - [独立诊断与挑战集预注册](80_D079_DIAGNOSTIC_AND_CHALLENGE_PREREGISTRATION.md)

@@ -78,7 +78,7 @@ class CorrectedHarmSemanticsTests(unittest.TestCase):
         self.assertEqual(verdict["class"], "R4")
         self.assertEqual(verdict["min_reachable_harm"], 1)
 
-    def test_uncompensatable_normal_prefix_is_counted_for_partial_commit(self):
+    def test_recoverable_partial_commit_does_not_treat_completed_prefix_as_harm(self):
         scenario = {
             "tools": ["ledger", "order", "payment"],
             "faults": [
@@ -152,6 +152,17 @@ class D079ChallengeTests(unittest.TestCase):
     def test_all_robust_classes_are_present(self):
         labels = {row["label"] for row in self.manifest["scenarios"]}
         self.assertEqual(labels, {"R1", "R2", "R3", "R4"})
+
+    def test_d6_uses_unavailable_compensation_not_split_leakage(self):
+        for row in self.manifest["scenarios"]:
+            if row["difficulty_stratum"] == "D6_UNCOMPENSATABLE_PARTIAL_COMMIT":
+                partial = [
+                    fault for fault in row["faults"]
+                    if fault["fault"] == "partial_commit"
+                ]
+                self.assertEqual(len(partial), 1)
+                self.assertFalse(partial[0]["compensation_available"])
+                self.assertEqual(row["label"], "R4")
 
     def test_d078_scenario_id_parser(self):
         self.assertEqual(

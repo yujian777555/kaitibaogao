@@ -1,21 +1,8 @@
 name: D-078 exploratory Train Validation pilot
 
 on:
-  push:
-    branches: [pilot-a-stateful-recovery]
-    paths:
-      - "experiments/pilot_a3b/run_sbcg_matrix.py"
-      - "experiments/pilot_a3b/sbcg_experiment.py"
-      - "experiments/pilot_a3b/sbcg_runner.py"
-      - "experiments/pilot_a3b/sbcg.py"
-      - "experiments/pilot_a3b/ea.py"
-      - "experiments/pilot_a3b/test_sbcg.py"
-      - "experiments/pilot_a3b/test_sbcg_runner.py"
-      - "experiments/pilot_a3b/test_sbcg_experiment.py"
-      - "experiments/pilot_a3b/test_nsga3_canonical.py"
-      - "experiments/pilot_a3b/sbcg_config.json"
-      - "79_D078_TRAIN_VALIDATION_EXPLORATORY_PILOT.md"
-      - ".github/workflows/d078-train-validation-pilot.yml"
+  # D-078 is a completed exploratory pilot. Never rerun it on ordinary pushes.
+  # Any rerun must be an explicit, separately authorized manual dispatch.
   workflow_dispatch:
 
 permissions:

@@ -361,3 +361,9 @@ D-079 已新增 evaluator 修复、独立 per-family/per-scenario audit 和 Trai
 
 **Pilot B 仍 HOLD。** D-079 Train-only synthetic diagnostic 不等于 ToolMisuseBench/UndoBench 适配完成，也不授权 public-test 或 UndoBench TEST。A800/ARWM、真实 LLM API、ThinkingBox 继续 HOLD。当前唯一下一任务是核验 D-079 CI 和 challenge manifest，锁定 hash 后才可运行 Train-only exploratory mechanism diagnostic。
 
+
+
+## 15. D-079 corrective update（2026-11-10）
+
+首轮 D-079 regression CI 因 challenge generator 对 Train family contract composition 的假设过强而失败：不是每个 Train family 都同时包含 contract-level compensatable 和 uncompensatable tools。D6 已改为允许 runtime compensation unavailable 表达 R4，并补充回归测试。D-078 workflow 已从 push 自动触发改为 workflow_dispatch only，防止普通维护提交重跑已完成的 14-arm pilot。该失败发生在测试 preflight，未产生新的算法实验数据。当前仍需等待 corrective CI；challenge manifest hash 未锁定前不运行新的 Train-only optimizer diagnostic。Pilot B、Test、A800/ARWM、真实 LLM API 继续 HOLD。
+

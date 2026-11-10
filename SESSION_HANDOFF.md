@@ -2355,3 +2355,15 @@ R4 = READY_FOR_INDEPENDENT_REVIEW。SBCG = IMPLEMENTED + SYNTHETIC TESTED，性�
 - 当前状态：IMPLEMENTED / CI PENDING；没有新的算法性能实验数据。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 均 HOLD。
 - 唯一下一任务：核验 D-079 CI、审计报告与挑战集 manifest；如果所有门禁通过，提交 manifest hash lock；之后才可执行独立 Train-only exploratory diagnostic。不得跳过 manifest freeze。
 
+
+
+## 0D. D-079 首轮 CI 失败与纠正（2026-11-10）
+
+- 代码提交 4f83ea87d333441562ca7251aa3961f994bbd9dd 已推送；main 保持 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。
+- regression CI 42827879313 failure。既有 A3b 测试通过；新增 D079ChallengeTests.setUpClass 阻断，原因是 challenge generator 错误要求每个 Train family 同时有 compensatable 与 uncompensatable 工具。
+- D-078 workflow run 42827879133 因同一全量测试 preflight 失败，Run 14-arm pilot 步骤 skipped；没有重新运行 D-078 算法，也没有新增 episode 数据。
+- 已修正 D6：若 family 没有 contract-level uncompensatable 工具，则选用 compensatable 工具并将 runtime compensation_available 置 false，仍形成 R4 damage-containment 情景；增加测试确保 D6 是 R4。
+- 已将 D-078 workflow 的 push trigger 移除，仅保留 workflow_dispatch，避免普通代码提交触发已完成的 D-078 实验。
+- 修正提交后的 CI 尚未运行；challenge manifest SHA 尚未生成/冻结。
+- 唯一下一任务：提交 corrective patch，等待 regression CI；若通过，审查 D-078 independent audit 与 288-scenario Train-only manifest，随后锁定 manifest hash。不得提前运行 D079 optimizer。
+

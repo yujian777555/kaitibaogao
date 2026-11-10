@@ -150,8 +150,8 @@ def make_fault_vector(tools, stratum_id, pattern_seed, parameter_seed):
     uncompensatable = [
         i for i, tool in enumerate(tools) if not TOOLS[tool]["compensatable"]
     ]
-    if not compensatable or not uncompensatable:
-        raise ValueError("D-079 family must contain compensatable and uncompensatable tools")
+    if not compensatable:
+        raise ValueError("D-079 family must contain at least one compensatable tool")
     first_non_idempotent = non_idempotent[0] if non_idempotent else 0
 
     if stratum_id == "D1_CLEAR_PRECOMMIT_TIMEOUT":
@@ -182,7 +182,11 @@ def make_fault_vector(tools, stratum_id, pattern_seed, parameter_seed):
         index = possible[0] if possible else 1
         _assign(faults, tools, index, "permission_denied", parameter_rng)
     elif stratum_id == "D6_UNCOMPENSATABLE_PARTIAL_COMMIT":
-        index = pattern_rng.choice(uncompensatable)
+        # A family need not contain a contract-level irreversible tool: a
+        # compensatable tool with runtime compensation unavailable creates
+        # the same R4 damage-containment condition without changing the
+        # frozen task-family catalog.
+        index = pattern_rng.choice(uncompensatable or compensatable)
         _assign(
             faults, tools, index, "partial_commit", parameter_rng,
             compensation_available=False,
