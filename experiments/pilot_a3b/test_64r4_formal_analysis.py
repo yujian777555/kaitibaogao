@@ -64,7 +64,9 @@ class FormalPrimaryAnalysisTests(unittest.TestCase):
     def test_wrong_primary_composition_roster_fails_closed(self):
         roster, rows = fixture()
         wrong_roster = [dict(item) for item in roster]
-        wrong_roster[0]["composition_id"] = "C99"
+        for item in wrong_roster:
+            if item["composition_id"] == "C00":
+                item["composition_id"] = "C99"
         with self.assertRaisesRegex(ValueError, "composition IDs do not match"):
             analyze_primary_endpoint(rows, wrong_roster, SEEDS)
 
