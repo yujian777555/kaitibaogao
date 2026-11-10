@@ -351,3 +351,13 @@ HOLD：正式 A-3b、任何 held-out test 查看/调参、Pilot B、A800/ARWM、
 
 ### D-064-B 更新（2026-11-09）
 层级功效与 ICC 敏感性完成（68 号）：t 检验为校准主检验；所需 families（MDE 0.10 @80%）ICC 敏感 15–30，双 15% 损耗 22–40；17-family 条件性充分。数据门禁不变；下一步 D-064-C 语义 validator 与正式生成器。
+
+
+## 14. D-079 更新（2026-11-10）：D-078 诊断与 Train-only 挑战集
+
+D-078 的 14 臂 × 3 seeds 探索结果未证明 SBCG 性能提升。D-079 初查发现 32/42 次 selected FSM 与 Hand FSM fingerprint 相同；Hand 在 R1/R2 的 84 个 Validation 场景全部成功，但 R3 正确升级为 0/12。另发现成功任务 active effects 被错误计入 harm，以及旧 analytic label 被用于评估。
+
+D-079 已新增 evaluator 修复、独立 per-family/per-scenario audit 和 Train-only 难度分层挑战集候选。挑战集计划为 8 Train families × 6 strata × 3 repeats × search/diagnostic 两角色，共 288 个场景；不构建 Validation/Test。CI 与 manifest SHA lock 尚待完成。
+
+**Pilot B 仍 HOLD。** D-079 Train-only synthetic diagnostic 不等于 ToolMisuseBench/UndoBench 适配完成，也不授权 public-test 或 UndoBench TEST。A800/ARWM、真实 LLM API、ThinkingBox 继续 HOLD。当前唯一下一任务是核验 D-079 CI 和 challenge manifest，锁定 hash 后才可运行 Train-only exploratory mechanism diagnostic。
+

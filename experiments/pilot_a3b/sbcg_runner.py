@@ -303,6 +303,9 @@ def run_sbcg_evolution(
         "final_records": [_record_view(record) for record in records],
         "train_candidates": [_record_view(record) for record in final_records],
         "train_candidate_fsms": [record.fsm for record in final_records],
+        # Reuse the already-computed records for independent Train-only
+        # candidate selection; this must not trigger another simulator pass.
+        "final_metrics": [record.metrics for record in records],
         "train_feasible_candidates": sum(record.feasible for record in final_records),
         "selection": selection,
         "best": None,

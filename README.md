@@ -1,30 +1,27 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## 最新执行状态（2026-11-10）
+## 最新执行状态（2026-11-10，D-079）
 
-- 本轮维护前 work HEAD：14a8a1bef23f3195436de0f5d1d66803f9c100e7；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 222 / behind 0。
-- CI run [42793004533](https://github.com/yujian777555/kaitibaogao/actions/runs/42793004533)：regression success；最近完整测试 240 tests 为 run 42791224479。
-- R4 部分实现已存在；正式 runner、5-composition roster、10,000 MC power/Type-I、R4 preregistration 和独立复审仍待完成。
-- 算法提升候选见 [75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md](75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md)：SBCG-NSGA-III 尚未实现/验证。不得把历史 AB 的单一 CondRecSucc 优势称为综合算法提升。
-- 当前 Executor 任务书：[76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md](76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md)。正式 A-3b 与真实 Test 继续 HOLD。
+- 本轮接管基线：work branch HEAD = 2b7903749efd46426672467a1a7d82dce221928d；main = 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 250 / behind 0。代码提交后必须重新查询远端。
+- 唯一仓库：yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main 不得合并或修改。
+- D-078 已完成 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；CI 42820836080 与回归 CI 42820836104 success；Test outcomes 未读取，LLM API=0。
+- D-079 初步原始数据诊断：42 runs 中 32 次 selected FSM 与 Hand FSM fingerprint 完全相同；Hand 的 R1/R2 为 84/84 成功、R3 正确升级为 0/12、R4 containment 为 12/12。此为原始数据的独立初查，待仓库内审计脚本和 CI 复核。
+- 已发现 evaluator 语义问题：成功完成任务的预期 active effects 被错误计入 harm；旧 runner 以 analytic scenario label 代替 robust AND-OR label。当前提交增加修复与独立复算脚本，CI 尚待运行。
+- D-079 挑战集候选：8 个 Train-only families × 6 难度层 × 3 repeats × search/diagnostic = 288 scenarios；不生成 Validation/Test。挑战集 manifest SHA 尚待 CI 生成并冻结。
+- 本轮没有运行新的算法性能实验。D-079 预注册与 challenge candidate 通过 CI、manifest hash lock 后，才可另行启动 Train-only 机制诊断。
+- 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。R4 的 technical-missing power 和 pre-run/post-run gate 仍须独立核验。
+- 本轮代码及测试状态：IMPLEMENTED / CI PENDING；不能写成 TESTED 或 EXPERIMENTALLY VERIFIED。
 
-
-**唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** R3 独立审计仍为 REQUEST CHANGES；R4 已完成 Student-t、family-level 主分析、H2–H5、split guard、one-time gate 和 metadata-only pre-flight 初版；功效重算、R4 预注册及独立复审仍未完成；正式 A-3b = HOLD
-**状态日期：** 2026-11-10
+**当前阶段：** D-079 独立诊断与 Train-only 难度分层挑战集预注册  
+**当前工作题目：** 《面向状态化工具型大语言模型智能体的故障恢复策略演化与递归自我改进方法研究》（未最终冻结）  
+**当前结论：** D-078 未证明 SBCG/NSGA-III 性能提升；必须先修正评估语义与标签来源，再用有区分度的挑战集开展非确认性机制诊断。
 
-## 最新权威状态（2026-11-10：R4 实现推进）
-
-- R3 独立审计仍为 72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**。
-- 最近一次代码/测试核验 HEAD：f4d8d0d1e314b29f7e6a7627f99293b306f76d92；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 207 / behind 0。
-- CI [run 42791224479](https://github.com/yujian777555/kaitibaogao/actions/runs/42791224479)：success；pilot_a_recovery 28 tests + pilot_a3b 212 tests = **240 tests**。
-- D-064-C gate PASS；manifest SHA fb832bcc...；test-family SHA 01b41df8...；test-scenario SHA dded3bb7...，均与冻结值一致。
-- R4 已实现：共享 Student-t 与 95% CI；动态 family-level primary analyzer（含输入/manifest/code/git provenance）；H2–H5 四项真实配对分析及四项 Holm（目前全部 exploratory）；Train-only evolution、普通 evaluator 禁止 Test、Test payload 不从公共 manifest audit 返回、原子 one-time gate；metadata-only fail-closed pre-flight。
-- R4 尚未完成：功效/Type-I 10,000 MC 重算、R4 预注册、正式 runner 接线、最终审计。正式 A-3b 仍 HOLD。
-- 算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md。当前 AB 的主终点诊断优势伴随 R3/R4/harm 退化；SBCG-NSGA-III 尚未实现/验证，不能声称已取得算法提升。
-- 下一任务：补齐 R4 功效设计与预注册，随后独立复审。不得读取真实 Test 标签/结果。
-
+**D-079 文件：**
+- [独立诊断与挑战集预注册](80_D079_DIAGNOSTIC_AND_CHALLENGE_PREREGISTRATION.md)
+- [D-079 D-078 结果复算脚本](experiments/pilot_a3b/d079_diagnostics.py)
+- [D-079 Train-only 挑战集生成器](experiments/pilot_a3b/d079_challenge_generator.py)
+- [D-079 回归测试](experiments/pilot_a3b/test_d079_diagnostics.py)
 
 ## 1. 项目边界（必须遵守）
 

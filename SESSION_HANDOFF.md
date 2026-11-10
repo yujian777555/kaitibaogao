@@ -1,5 +1,14 @@
 # SESSION HANDOFF — 开题研究项目
 
+## 0C. 最新权威状态（2026-11-10，D-079 corrective diagnostics）
+
+- 接管前远端 work HEAD：2b7903749efd46426672467a1a7d82dce221928d；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 250 / behind 0。提交后重新查询。
+- D-078：14 arms × 3 seeds = 42 runs；Train 216、Validation 108；CI 42820836080 和 42820836104 success；Test outcomes 未读取。
+- D-079 原始数据初查：32/42 次 selected FSM 与 Hand FSM fingerprint 完全相同；Hand R1/R2=84/84、R3 correct escalation=0/12、R4 containment=12/12。
+- D-079 已准备 evaluator harm 修复、robust label evaluator helper、D-078 per-family/per-scenario audit、8-family × 6-strata × 3-repeat × 2-role Train-only challenge generator、测试和预注册文件；CI 尚待验证。
+- 挑战集候选共288个 Train-only scenarios，search/diagnostic 各144；manifest hash 待 CI 生成并锁定；没有启动新算法运行。
+- 唯一下一任务：核验 D-079 CI 与候选 manifest，锁定 manifest hash 后，才可启动新的 Train-only exploratory mechanism diagnostic。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。
+
 ## 0B. 最新独立复审状态（2026-11-10，覆盖 D-076 执行报告中的 READY_FOR_INDEPENDENT_REVIEW）
 
 - D-076 执行提交：`3d2dacf0871ab0f030084f6ed2d62e17ba524ddd`；main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；复审前 ahead 227 / behind 0。
@@ -2333,3 +2342,16 @@ R4 = READY_FOR_INDEPENDENT_REVIEW。SBCG = IMPLEMENTED + SYNTHETIC TESTED，性�
 **对 D-076 独立复审的状态更新：** D-076 的 `78_D076_INDEPENDENT_REVIEW.md` 是针对旧基线 `3d2dacf` 的审查记录。其指出的若干 SBCG 阻断（canonical NSGA-III、f3 公式、Train→Validation 选择、cache accounting）已在后续 D-078 代码提交中作了修订并通过对应 CI；不能继续把旧审查结论当作当前代码状态。R4 pre-run/post-run gate、technical-missing power 校准等必须单独核验，不因 D-078 合成 pilot 通过而视为关闭。
 
 **下一步：** 不扩大到 Test、不启动 A800/真实 LLM。先做 D-079 结果诊断：按 scenario/family 拆解指标与 Pareto 差异，检查 1.0 CondRecSucc 是否天花板效应、为什么多个优化器收敛到相同 FSM/结果；再设计难度分层的合成挑战集与预注册的 Train-only 机制诊断。只有能稳定区分算法的任务机制才进入后续更大规模验证。
+
+
+## 0C. 最新权威状态（2026-11-10，D-079 corrective diagnostics）
+
+- 接管前远端 work HEAD：2b7903749efd46426672467a1a7d82dce221928d；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 250 / behind 0。此为提交前基线，提交后需重新核验。
+- D-078 已完成 14 arms × 3 seeds = 42 runs；Train 216、Validation 108；CI 42820836080 与回归 CI 42820836104 success；Test outcomes 未读取。
+- D-079 原始数据初查：42 次选择中 32 次与 Hand FSM fingerprint 完全相同；Hand R1/R2=84/84、R3 correct escalation=0/12、R4 containment=12/12。待仓库内独立脚本和 CI 复核。
+- 已识别并准备修复：成功完成任务的 active effects 不应作为 residual harm；permission/partial-commit 的 unavoidable prefix 需计入；robust AND-OR class 应覆盖旧 analytic class 的评估标签。
+- D-079 新增审计脚本、Train-only 难度分层挑战生成器、回归测试及预注册候选；本次更新的 CI 尚待执行。
+- 挑战集设计：8 Train-only families × 6 strata × 3 repeats × 2 roles=288 scenarios；search/diagnostic 各144；所有场景 split=train；不构建 Validation/Test。manifest hash 需经 CI 生成后锁定。
+- 当前状态：IMPLEMENTED / CI PENDING；没有新的算法性能实验数据。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 均 HOLD。
+- 唯一下一任务：核验 D-079 CI、审计报告与挑战集 manifest；如果所有门禁通过，提交 manifest hash lock；之后才可执行独立 Train-only exploratory diagnostic。不得跳过 manifest freeze。
+

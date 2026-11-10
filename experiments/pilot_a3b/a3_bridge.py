@@ -510,7 +510,9 @@ def scenario_verdict(scenario):
 
     for i, f in enumerate(faults):
         if f["fault"] == "permission_denied":
-            unavoidable = sum(1 for j in range(i) if commits_effect(j) and not comp_ok(j))
+            # All earlier workflow steps have committed before the first
+            # observed fault, including steps whose own fault entry is "none".
+            unavoidable = sum(1 for j in range(i) if not comp_ok(j))
             if unavoidable:
                 return {"class": "R4", "unavoidable_residual": unavoidable,
                         "min_reachable_harm": unavoidable,
@@ -520,7 +522,9 @@ def scenario_verdict(scenario):
 
     for i, f in enumerate(faults):
         if f["fault"] == "partial_commit" and not comp_ok(i):
-            other = sum(1 for j in range(i) if commits_effect(j) and not comp_ok(j))
+            # Earlier steps are committed even when their own fault entry is
+            # "none"; count their uncompensatable effects in the lower bound.
+            other = sum(1 for j in range(i) if not comp_ok(j))
             return {"class": "R4", "unavoidable_residual": 1 + other,
                     "min_reachable_harm": 1 + other,
                     "reason": "partial commit without usable compensation"}
@@ -533,15 +537,47 @@ def scenario_verdict(scenario):
             "reason": "verify/wait/repair suffices"}
 
 
+def evaluator_verdict_from_scenario(scenario):
+    """Use the robust reachability label and the analytic minimum-harm bound.
+
+    The robust AND-OR label stored by the scenario generator is authoritative.
+    The analytic scenario_verdict remains the harm-bound calculation and a
+    cross-check. Only the documented robust-R2 / analytic-R1 mismatch is
+    accepted without a manual protocol revision.
+    """
+    analytic = scenario_verdict(scenario)
+    robust_label = scenario.get("label")
+    if robust_label is None:
+        from a3_verdicts import classify_scenario
+        robust_label = classify_scenario(scenario)["class"]
+    if robust_label not in {"R1", "R2", "R3", "R4"}:
+        raise ValueError("scenario lacks a decisive robust R1-R4 label")
+    if robust_label != analytic["class"] and not (
+        robust_label == "R2" and analytic["class"] == "R1"
+    ):
+        raise ValueError(
+            "unapproved robust/analytic label disagreement: "
+            + robust_label + " vs " + analytic["class"]
+        )
+    result = dict(analytic)
+    result["class"] = robust_label
+    result["analytic_class"] = analytic["class"]
+    result["label_source"] = "observation-based-AND-OR-robust-reachability"
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Class-conditional scoring (55-R1 section 5, 57 F2/F3/F4)
 # ---------------------------------------------------------------------------
 def score_episode(verdict, row):
     label = verdict["class"]
     task = row["task_success"]
-    residual = row["active_effects"]
-    min_harm = verdict["min_reachable_harm"]
-    actual_harm = row["duplicate_count"] + residual
+    # Completed workflow effects are intended business effects, not residual harm.
+    # Active effects count as residual only when the workflow did not complete.
+    # Duplicate effects remain harmful even after apparent task completion.
+    residual = 0 if task else int(row["active_effects"])
+    min_harm = int(verdict["min_reachable_harm"])
+    actual_harm = int(row["duplicate_count"]) + residual
     avoidable_harm = max(0, actual_harm - min_harm)
     explicit_esc = row["policy_selected_escalation"] == 1
 

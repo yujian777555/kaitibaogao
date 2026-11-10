@@ -41,3 +41,26 @@ jobs:
             ${{ runner.temp }}/d064c/formal_scenario_manifest_report.md
           if-no-files-found: error
 
+      - name: Independently audit D-078 per-family and per-scenario outcomes
+        run: |
+          mkdir -p "$RUNNER_TEMP/d079-audit"
+          python experiments/pilot_a3b/d079_diagnostics.py --outdir "$RUNNER_TEMP/d079-audit"
+
+      - name: Generate D-079 Train-only challenge-set candidate
+        run: |
+          mkdir -p "$RUNNER_TEMP/d079-challenge"
+          python experiments/pilot_a3b/d079_challenge_generator.py --outdir "$RUNNER_TEMP/d079-challenge"
+
+      - name: Upload D-079 audit and challenge candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: d079-d078-audit-and-challenge-candidate
+          path: |
+            ${{ runner.temp }}/d079-audit/d079_d078_audit.json
+            ${{ runner.temp }}/d079-audit/d079_d078_audit_report.md
+            ${{ runner.temp }}/d079-audit/d078_scenario_diagnostics.csv
+            ${{ runner.temp }}/d079-audit/d078_family_composition_diagnostics.csv
+            ${{ runner.temp }}/d079-challenge/d079_challenge_manifest.json
+            ${{ runner.temp }}/d079-challenge/d079_challenge_candidate_report.json
+          if-no-files-found: error
+

@@ -1,18 +1,18 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-10 D-076 独立复审）：** 当前分支在复审前 HEAD=`3d2dacf0871ab0f030084f6ed2d62e17ba524ddd`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead 227 / behind 0。D-076 CI 42814630988 success（执行报告记录 290/290），但独立复审结果为 **R4 REQUEST CHANGES；SBCG NOT READY FOR TRAIN/VALIDATION PERFORMANCE DIAGNOSTICS**。必须先读 `78_D076_INDEPENDENT_REVIEW.md`。关键阻断：R4 pre-flight 将 pre-run 与 post-run outcome checks 混为不可达 GO 的门；power 缺 technical-missing 情景且 F40/ICC=.20 Type-I=0.0547 [0.0504,0.0593]；one-time gate 未闭合到生产入口；SBCG NSGA-III projection/normalization/niche count 非 canonical；M1 f3 偏离冻结公式；Validation selection 实际基于 Train；预算和 cache-hit 计数需修复。**唯一任务 D-078 corrective revision**。不得运行真实 Train/Validation 算法诊断、正式 A-3b 或 Test；不得启动 A800/ARWM、真实 LLM API、Pilot B、UndoBench TEST、ThinkingBox；不得合并 main。修复后重新提交独立复审。
-
-
-> **最新权威执行指令（2026-11-10，覆盖本文所有较早状态）：** D-076 已完成 R4 正式 runner、五 composition 核验、24 格 10,000 MC 功效、R4 预注册与真实 HOLD pre-flight，并完成 SBCG-NSGA-III 的 M1/M2/M3、14 个对照/消融接口及合成测试。R4 = READY_FOR_INDEPENDENT_REVIEW，不是 ACCEPTED；SBCG 性能 NOT RUN，尚不能判断是否提升。当前唯一任务是把 `64_A3B_PREREGISTRATION_CANDIDATE_R4.md` 与 `77_D076_R4_AND_SBCG_EXECUTION_REPORT.md` 交独立 Reviewer。不得读取真实 Test、运行真实 Train/Validation 算法诊断或合并 main。
-
-> **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
-
-**最后维护日期：** 2026-11-10（D-076 R4/SBCG 实现；290 tests 与 clean-clone 通过）
-**唯一仓库：** `yujian777555/kaitibaogao`
-**工作分支：** `pilot-a-stateful-recovery`
-**主分支：** `main`（实验期间不得擅自合并）
-**最近一次代码/测试核验：** 实现 32b6914b08075775c0d9000fb7b80392c33ec26e；证据 e92e9af964edd6963baed41b48a24073e34f99f8；功效写回/clean-clone 4c4c62fb7213868c3c8fa98f1bdd5b83edc77212；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。接手时重新查询。
-**R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md；独立审计包为 64-R4 + 77 号报告。
+> **最新权威状态（2026-11-10，D-079 接管）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；接管前远端 HEAD = 2b7903749efd46426672467a1a7d82dce221928d；main = 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 250 / behind 0。代码提交后必须重新查询真实 SHA、ahead/behind 和 CI。
+>
+> **D-078 实验事实：** 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；CI 42820836080 与回归 CI 42820836104 success；Test outcomes 未读取，LLM API=0。D-078 不支持 SBCG 性能提升。
+>
+> **D-079 初步诊断：** 原始 matrix_results.json 初查显示 32/42 次 selected FSM 与 Hand FSM fingerprint 完全相同；Hand 的 R1/R2 84/84 成功、R3 正确升级 0/12、R4 damage containment 12/12。另发现成功任务 active effects 被错误计入 harm，且 D-078 runner 使用 analytic label 而非 robust AND-OR label。仓库内独立审计脚本和修复已写入待提交 blob，CI 尚未验证。
+>
+> **当前唯一任务：** 提交并验证 D-079 corrective diagnostics + Train-only challenge candidate；CI 通过后冻结 challenge manifest SHA-256；之后才允许按 80 号预注册启动新的 Train-only exploratory mechanism diagnostic。不得在 manifest lock 前运行新算法。
+>
+> **D-079 挑战集候选：** 8 Train families × 6 difficulty strata × 3 repeats × search/diagnostic = 288 scenarios，search 144、diagnostic 144，所有行 split=train。禁止构造或访问 Validation/Test。若标签出现 UNKNOWN 或非白名单 robust/analytic disagreement，必须 fail closed。
+>
+> **关键授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。R4 的 technical-missing power 与 pre-run/post-run lifecycle 问题未因 D-078 关闭，仍需独立审计。
+>
+> **维护纪律：** 每次实质性代码、实验、协议、审计或决策变化，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、05_DECISION_LOG.md、README.md；同时更新 51 号计划的当前门禁说明。每次回复必须说明 canonical handoff 是否更新并给出 GitHub 文件链接。
 
 ---
 

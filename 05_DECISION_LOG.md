@@ -1465,3 +1465,26 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 - D-076 复审报告对应旧代码 SHA；后续 D-078 已修订 canonical NSGA-III、M1 f3、Train→Validation selection 和 cache accounting，需以最新代码与 CI 为准。R4 technical-missing power 与 pre-run/post-run gate 仍独立待核验。
 
 **决策：** 不宣称 SBCG 优于基线。下一任务 D-079：按 family/scenario 拆解结果，审查 CondRecSucc 天花板和不同臂相同结果的原因，构造更有区分度的难度分层合成挑战集，并预注册后再做机制实验。Test/A800/真实 LLM 继续冻结。
+
+
+## 决策 D-080：D-079 evaluator 修正与 Train-only challenge preregistration（2026-11-10）
+
+### 原始数据初查（D-078 matrix_results.json）
+- 42 runs 中，32 次 selected FSM fingerprint 与 Hand FSM 完全相同。
+- Hand FSM 在已选 Validation 候选上：R1/R2 84/84 成功；R3 CorrectEscalation 0/12；R4 DamageContainment 12/12。
+- 多个算法选择相同 Hand FSM 不能解释为优化器已收敛到相同算法；必须区分初始池锚点、Pareto 候选与 Validation tie-break。
+- 这些数字为原始 artifact 初查，需由 D-079 独立脚本和 CI 复核。
+
+### 实现问题与修复方向
+1. score_episode 将成功工作流的预期 active effects 计为 actual/avoidable harm；修正为成功任务不计预期 active effects，duplicate 仍计 harm，未完成任务的 active effects 才计 residual。
+2. scenario_verdict 的 R3/R4 minimum-harm 计算忽略了此前正常完成但不可补偿的前缀效果；更新为计入所有此前已提交且不可补偿的步骤。
+3. D-078 runner 以旧 analytic scenario_verdict class 评分；D-079 新 evaluator helper 使用 robust AND-OR label，analytic class 仅作为交叉核验。
+4. 增加 D-078 per-family/per-scenario 重建审计，并生成 8 Train-only families × 6 difficulty strata × 3 repeats × search/diagnostic roles 的挑战集候选。
+
+### 预注册与授权
+- 预注册候选见 80_D079_DIAGNOSTIC_AND_CHALLENGE_PREREGISTRATION.md。
+- 当前实现/测试为 CI PENDING；challenge manifest hash 尚未冻结。
+- 在 CI 成功并提交 manifest lock 前，不运行新优化器；manifest lock 后仅允许非确认性 Train-only diagnostic。
+- 不访问 Validation/Test，不运行正式 A-3b，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。
+- 该诊断不构成 EC 性能提升证据，不改变毕业论文创新点状态。
+
