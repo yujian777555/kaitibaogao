@@ -8,9 +8,9 @@
 ## 最新权威状态（2026-11-10：D-064-R3 独立审计）
 
 - 独立审计：72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**；数值证据：experiments/pilot_a3b/audit_64r3_independent_checks.json。
-- 远端工作分支：pilot-a-stateful-recovery @ 49429053f18d809d3b45e7de44c810cbeb203f7b；相对 main ahead 174 / behind 0。
+- 远端工作分支：pilot-a-stateful-recovery @ 34c7a1cac2da58f91fd468963c30780d2330303d；相对 main ahead 175 / behind 0。
 - main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653，未修改。
-- CI run [42783650910](https://github.com/yujian777555/kaitibaogao/actions/runs/42783650910)：success，28 + 161 = 189/189；D-064-C manifest gate PASS。
+- 最近一次含代码修改的 CI 为 run [42783650910](https://github.com/yujian777555/kaitibaogao/actions/runs/42783650910)，HEAD 49429053：success，28 + 161 = 189/189；D-064-C manifest gate PASS。随后 34c7a1c 是仅文档/接管规范提交，当前未观察到该文档提交触发的新 CI。
 - 唯一任务：按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成 R4 corrective revision，再交独立复审。
 - **HOLD：** 正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、合并 main。R4 实施期间不得读取真实 Test 逐场景标签或结果。
 

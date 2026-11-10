@@ -6,7 +6,7 @@
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
-**最新核验基线：** work 49429053f18d809d3b45e7de44c810cbeb203f7b；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 174 / behind 0；CI 42783650910 success（28+161=189/189）。以上为本轮写入前核验值，接手时必须重新查询。
+**最新核验基线：** work 34c7a1cac2da58f91fd468963c30780d2330303d；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 175 / behind 0。最近一次含代码修改的 CI：42783650910 @ 49429053，success（28+161=189/189）；34c7a1c 为仅文档/接管规范提交，未观察到新 CI。接手时必须重新查询。
 **R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md。
 
 > **当前任务优先级说明（2026-11-10）：** 64-R3 独立审计报告 72_64R3_INDEPENDENT_REVIEW.md = REQUEST CHANGES。唯一任务是严格执行 73_D064_R4_EXECUTOR_SPECIFICATION.md：完成 R4 新预注册、正式 40-family 主/次要终点分析、可执行缺失数据与 family-loss 处理、34×5 功效/Type-I 重新校准、Student-t 退化边界统一、结构性 Test split guard 与一次性 final-evaluation gate、真实 pre-flight 和真实路径测试。不得读取真实 Test 逐场景标签/结果。较早 D-064-A/B/C/R2/R3 指令均为历史记录，不得覆盖本优先级。正式 A-3b 继续 HOLD，直到 R4 独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 R4 §9 pre-flight。

@@ -5,8 +5,9 @@
 **权威审计：** 72_64R3_INDEPENDENT_REVIEW.md（REQUEST CHANGES）  
 **独立证据：** experiments/pilot_a3b/audit_64r3_independent_checks.json  
 **基线分支：** pilot-a-stateful-recovery  
-**本任务开始时核验 HEAD：** 49429053f18d809d3b45e7de44c810cbeb203f7b  
+**R4 Executor 接手基线 HEAD：** 34c7a1cac2da58f91fd468963c30780d2330303d  
 **main：** 683b3fe7fc52c86e917d523fdc6bbb13abbfd653（禁止合并）  
+**最近一次含代码修改的 CI：** run 42783650910 @ 49429053，success（28+161=189/189）；34c7a1c 为仅文档/接管规范提交，未观察到新 CI。  
 **状态：** R4 corrective revision — NOT STARTED / IN PROGRESS；正式 A-3b = HOLD
 
 ---
@@ -219,7 +220,7 @@ R4 §5 的 GO 条件必须指向本节。实现 run_formal_preflight() 或等效
 - 正式 missing-data validator / preflight / final-evaluation guard
 - test_64r4_*.py
 - 功效重算 JSON/报告
-- 73_R4_EXECUTION_REPORT.md（Executor 真实结果；本任务书 73 文件保留，不覆盖）
+- 74_D064_R4_EXECUTION_REPORT.md（Executor 真实结果；本任务书 73 文件保留，不覆盖）
 - 更新 README.md、05_DECISION_LOG.md、SESSION_HANDOFF.md、NEXT_SESSION_PROMPT.md
 
 保留 72 号独立审计报告不变。完成后将全部材料交独立 Reviewer；Executor 不得自评为 ACCEPTED。

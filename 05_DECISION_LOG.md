@@ -1318,7 +1318,7 @@ Executor 完成 R4 corrective revision：实现正式分析/缺失数据/锁箱�
 ### 审计依据与当前基线
 - 权威审计：72_64R3_INDEPENDENT_REVIEW.md，结论 **REQUEST CHANGES**。
 - 独立数值证据：experiments/pilot_a3b/audit_64r3_independent_checks.json。
-- 工作分支远端 HEAD：49429053f18d809d3b45e7de44c810cbeb203f7b；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 174 / behind 0。
+- 本决策记录形成前的工作分支基线：49429053f18d809d3b45e7de44c810cbeb203f7b；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 174 / behind 0。后续 Planner handoff 文档提交为 34c7a1cac2da58f91fd468963c30780d2330303d（ahead 175）。
 - CI run 42783650910：success，28+161=189/189。该 CI 不关闭 R3 的统计与实现阻断问题。
 
 ### R4 唯一任务
