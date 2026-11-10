@@ -2,8 +2,17 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** D-064-C 完成；64-R2 独立审计 R1 = REQUEST CHANGES；正式 A-3b HOLD（须先修订预注册、独立复审、取得 MDE 导师认可及用户批准）  
+**当前阶段：** 64-R3 独立审计 = REQUEST CHANGES；R4 corrective revision 待 Executor 实施；正式 A-3b = HOLD  
 **状态日期：** 2026-11-10
+
+## 最新权威状态（2026-11-10：D-064-R3 独立审计）
+
+- 独立审计：72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**；数值证据：experiments/pilot_a3b/audit_64r3_independent_checks.json。
+- 远端工作分支：pilot-a-stateful-recovery @ 49429053f18d809d3b45e7de44c810cbeb203f7b；相对 main ahead 174 / behind 0。
+- main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653，未修改。
+- CI run [42783650910](https://github.com/yujian777555/kaitibaogao/actions/runs/42783650910)：success，28 + 161 = 189/189；D-064-C manifest gate PASS。
+- 唯一任务：按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成 R4 corrective revision，再交独立复审。
+- **HOLD：** 正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、合并 main。R4 实施期间不得读取真实 Test 逐场景标签或结果。
 
 ## 1. 项目边界（必须遵守）
 
@@ -55,7 +64,7 @@
 | 05_DECISION_LOG.md | 研究决策和阶段变化记录 |
 | SESSION_HANDOFF.md | 最新状态、接班要求、下一会话提示词 |
 
-## 6. 当前状态（2026-11-02）
+## 6. 初始研究状态（2026-11-02，历史记录）
 
 - 仓库初始状态只有 README，已建立首批研究文档。
 - 已完成第一轮宽口径公开文献检索，登记了直接演化 Agent、Agent 架构搜索、相邻自进化方法、综述、benchmark 和演化计算基础文献。

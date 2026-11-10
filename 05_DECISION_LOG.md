@@ -1311,3 +1311,34 @@ GO：64-R3 **独立复审**（本报告非审计）。HOLD 不变：正式 A-3b�
 
 ### 唯一下一任务
 Executor 完成 R4 corrective revision：实现正式分析/缺失数据/锁箱路径，解决不平衡功效和 Student-t 边界，补齐 H2–H5 与真实 pre-flight，重跑测试和 CI，再提交独立复审。即使复审 ACCEPTED，仍需导师 MDE 认可、用户批准和真实 pre-flight。
+
+
+## 决策 D-064-R4-PLAN：启动 R4 corrective revision（2026-11-10）
+
+### 审计依据与当前基线
+- 权威审计：72_64R3_INDEPENDENT_REVIEW.md，结论 **REQUEST CHANGES**。
+- 独立数值证据：experiments/pilot_a3b/audit_64r3_independent_checks.json。
+- 工作分支远端 HEAD：49429053f18d809d3b45e7de44c810cbeb203f7b；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 174 / behind 0。
+- CI run 42783650910：success，28+161=189/189。该 CI 不关闭 R3 的统计与实现阻断问题。
+
+### R4 唯一任务
+Executor 按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成：
+1. 新编号 R4 预注册和真实 pre-flight 清单；
+2. 通用动态 40-family 分析入口与 family-level Student-t 唯一主检验；
+3. Student-t 全零/非零常数/近零方差边界统一；
+4. 缺失数据 fail-closed、technical missing/family_loss/design_deviation 真实计数；
+5. 固定 34×5 假设与 composition 纳入规则一致，并重新校准 ICC 网格下功效、Type-I、MCSE、CI；
+6. H2–H5 实际提取、配对、family 汇总、四项 Holm 和探索性标记；
+7. Train/Validation/Test 结构性隔离与一次性 final-evaluation gate；
+8. sign-flip 字段/方法/reps/seed 记录修正；
+9. 真实路径测试、CI 和可复核报告。
+
+### 决策边界
+- 本次维护提交只建立 Executor 规范和会话交接，不代表 R4 代码已经完成。
+- 不修改 R2/R3 历史预注册，不覆盖 72 号独立审计。
+- 不读取真实 Test 逐场景标签或结果，不运行正式 A-3b。
+- **正式 A-3b、Test 访问/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和合并 main 均继续 HOLD。**
+- R4 完成后必须由独立 Reviewer 复审；即使 ACCEPTED，仍需导师 MDE=0.10 认可、用户明确批准及真实 R4 §9 pre-flight 全通过。
+
+### 当前维护提交的性质
+本次提交只更新 Planner/Executor 规范与维护交接文件，不包含实验代码、测试或统计结果变更；不得把文档提交或既有 CI success 说成 R4 验收通过。

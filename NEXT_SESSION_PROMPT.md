@@ -6,8 +6,10 @@
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
+**最新核验基线：** work 49429053f18d809d3b45e7de44c810cbeb203f7b；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 174 / behind 0；CI 42783650910 success（28+161=189/189）。以上为本轮写入前核验值，接手时必须重新查询。
+**R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md。
 
-> **当前任务优先级说明（2026-11-10）：** 72_64R3_INDEPENDENT_REVIEW.md 对 64-R3 给出 REQUEST CHANGES。当前唯一任务是完成 R4 corrective revision：实现正式 40-family 分析、真实缺失数据处理和不平衡功效复核，修复 Student-t 零方差、pre-flight 交叉引用、H2–H5 与 Test 锁箱路径，再提交独立复审。本文中较早的 D-064-A/B/C/R2/R3 执行说明均为历史记录，不得覆盖本优先级。正式 A-3b 继续 HOLD，直到独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过真实 pre-flight。
+> **当前任务优先级说明（2026-11-10）：** 64-R3 独立审计报告 72_64R3_INDEPENDENT_REVIEW.md = REQUEST CHANGES。唯一任务是严格执行 73_D064_R4_EXECUTOR_SPECIFICATION.md：完成 R4 新预注册、正式 40-family 主/次要终点分析、可执行缺失数据与 family-loss 处理、34×5 功效/Type-I 重新校准、Student-t 退化边界统一、结构性 Test split guard 与一次性 final-evaluation gate、真实 pre-flight 和真实路径测试。不得读取真实 Test 逐场景标签/结果。较早 D-064-A/B/C/R2/R3 指令均为历史记录，不得覆盖本优先级。正式 A-3b 继续 HOLD，直到 R4 独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 R4 §9 pre-flight。
 
 ---
 
@@ -1114,7 +1116,7 @@ df tests 39/33/dynamic; family-equal weighting verified; missing-data rules test
 GO: **64-R3 independent re-review** (71 is executor validation, NOT an audit). HOLD unchanged: formal A-3b (blocked until review ACCEPTED + advisor MDE + user approval + pre-flight), test access/tuning, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox, main merges.
 
 ### Next task (single)
-Submit 64-R3 + 71 for independent R2 re-review; upon ACCEPTED obtain advisor MDE acceptance, then user approval, then run the 64-R3 §6 pre-flight and execute the formal A-3b.
+Submit 64-R3 + 71 for independent R2 re-review; upon ACCEPTED obtain advisor MDE acceptance, then user approval, then run the R4 §9 pre-flight and execute the formal A-3b.
 
 
 ## 2026-11-10 — 64-R3 independent review: REQUEST CHANGES
@@ -1139,3 +1141,8 @@ Blocking findings:
 Executor completes an R4 corrective revision covering every item in `72_64R3_INDEPENDENT_REVIEW.md` §11, then requests a fresh independent review. Preserve R2/R3 history. Implement the real 40-family analysis and missing-data paths; either require at least five valid compositions or preregister and validate an unbalanced missingness model; unify Student-t degenerate handling; implement H2-H5 with exactly four Holm tests; fix the pre-flight checklist; enforce split guards and one-time Test unlocking; correct sign-flip output; add real-path tests and rerun CI.
 
 Formal A-3b remains HOLD. Do not read or tune Test, merge main, start Pilot B/A800/ARWM/real LLM APIs/UndoBench TEST/ThinkingBox. Even an ACCEPTED review would still require advisor MDE acceptance, explicit user approval, and a real pre-flight.
+
+
+## 2026-11-10 — D-064-R4 Executor handoff
+
+当前独立审计为 72_64R3_INDEPENDENT_REVIEW.md = REQUEST CHANGES。唯一执行任务与逐项验收标准见 73_D064_R4_EXECUTOR_SPECIFICATION.md。不要把本轮 Planner 规范提交描述为代码修复或实验通过。正式 A-3b、真实 Test 访问/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main 合并继续 HOLD。

@@ -1,11 +1,20 @@
 # SESSION HANDOFF — 开题研究项目
 
-**最后更新：** 2026-11-10（D-064-C 完成；64-R2 独立审计 R1 = REQUEST CHANGES）  
+**最后更新：** 2026-11-10（64-R3 独立审计 REQUEST CHANGES；R4 corrective revision 待执行）  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** D-064-C 完成（语义审计、8/4/40 场景生成、功效复核）；64-R2 独立审计 R1 = REQUEST CHANGES；正式 A-3b HOLD（待修订、复审、导师 MDE 认可及用户批准）  
+**当前阶段：** 64-R3 独立审计 REQUEST CHANGES；唯一下一任务为 R4 corrective revision；正式 A-3b HOLD（待 R4 独立复审 ACCEPTED、导师 MDE 认可、用户批准及真实 pre-flight）  
 **最终题目：** 尚未确定  
 **最终创新点：** 尚未确定
+
+## 0. 最新权威状态与唯一任务（2026-11-10）
+
+- 审计结论：72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**；独立数值证据在 experiments/pilot_a3b/audit_64r3_independent_checks.json。
+- 远端分支 pilot-a-stateful-recovery HEAD：49429053f18d809d3b45e7de44c810cbeb203f7b；main HEAD：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 174 / behind 0。
+- CI run 42783650910：success，28+161=189/189；该结果仅证明现有测试通过，不代表 R3 可执行。
+- **唯一下一任务：** Executor 按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成 R4 corrective revision；完成后由独立 Reviewer 复审，不得自审自批。
+- **正式 A-3b = HOLD。** R4 阶段不读取真实 Test 逐场景标签/结果，不调参，不启动正式实验；不合并 main。
+- 即使 R4 独立审计 ACCEPTED，仍须导师认可 MDE=0.10、用户明确批准、R4 §9 pre-flight 全部通过，才可另行申请正式执行。
 
 ## 1. 下一会话必须先读
 
