@@ -2,19 +2,20 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** D-064-R3 独立审计 = REQUEST CHANGES；R4 corrective revision 已启动，Student-t 边界修复与正式 family-level 主分析模块初版已提交；R4 全部阻断项尚未关闭；正式 A-3b = HOLD
+**当前阶段：** R3 独立审计仍为 REQUEST CHANGES；R4 已完成 Student-t、family-level 主分析、H2–H5、split guard、one-time gate 和 metadata-only pre-flight 初版；功效重算、R4 预注册及独立复审仍未完成；正式 A-3b = HOLD
 **状态日期：** 2026-11-10
 
-## 最新权威状态（2026-11-10：R4 首批代码修复）
+## 最新权威状态（2026-11-10：R4 实现推进）
 
-- 权威审计仍为 72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**；R3 不得标记通过。
-- 最新工作分支 HEAD（本轮维护前）：f2862840d5db6ce788244fc0c2d3487089db3b1d；相对 main ahead 185 / behind 0。
-- main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653，未修改。
-- 最近一次含 R4 代码/测试修改的 CI：[run 42788079429](https://github.com/yujian777555/kaitibaogao/actions/runs/42788079429)，运行 HEAD 5e7568050be4d7c1ac7511137bb5627a08ec044d，success；pilot_a_recovery 28 tests + pilot_a3b 183 tests = **211 tests**；D-064-C gate PASS。
-- 已实现：共享 Student-t 退化边界函数；动态 family-level 主分析模块初版；合成测试覆盖全零/常数/近零方差、40/33 families、缺失/重复/null/行为失败等。
-- 算法研究：新增 75 号 SBCG-NSGA-III 优先候选说明。现有 AB 在 R1/R2 上优于 NSGA-II，但 R3/R4 与 harm 有退化，尚未证明超过 hand baseline；新算法尚未实现/验证。
-- 唯一执行优先级：继续按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成 R4；随后独立复审。算法改进实验不得接触 Test。
-- **HOLD：** 正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、合并 main。
+- R3 独立审计仍为 72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**。
+- 最近一次代码/测试核验 HEAD：f4d8d0d1e314b29f7e6a7627f99293b306f76d92；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 207 / behind 0。
+- CI [run 42791224479](https://github.com/yujian777555/kaitibaogao/actions/runs/42791224479)：success；pilot_a_recovery 28 tests + pilot_a3b 212 tests = **240 tests**。
+- D-064-C gate PASS；manifest SHA fb832bcc...；test-family SHA 01b41df8...；test-scenario SHA dded3bb7...，均与冻结值一致。
+- R4 已实现：共享 Student-t 与 95% CI；动态 family-level primary analyzer（含输入/manifest/code/git provenance）；H2–H5 四项真实配对分析及四项 Holm（目前全部 exploratory）；Train-only evolution、普通 evaluator 禁止 Test、Test payload 不从公共 manifest audit 返回、原子 one-time gate；metadata-only fail-closed pre-flight。
+- R4 尚未完成：功效/Type-I 10,000 MC 重算、R4 预注册、正式 runner 接线、最终审计。正式 A-3b 仍 HOLD。
+- 算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md。当前 AB 的主终点诊断优势伴随 R3/R4/harm 退化；SBCG-NSGA-III 尚未实现/验证，不能声称已取得算法提升。
+- 下一任务：补齐 R4 功效设计与预注册，随后独立复审。不得读取真实 Test 标签/结果。
+
 
 ## 1. 项目边界（必须遵守）
 

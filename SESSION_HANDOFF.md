@@ -1,22 +1,22 @@
 # SESSION HANDOFF — 开题研究项目
 
-**最后更新：** 2026-11-10（R4 首批代码修复；Student-t + formal primary analyzer 初版 CI 通过）  
+**最后更新：** 2026-11-10（R4 统计、H2–H5、split guard、pre-flight 初版 CI success）  
 **唯一仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** R3 独立审计 REQUEST CHANGES；R4 corrective revision 进行中；首批两个统计/分析组件已实现并通过 CI；正式 A-3b HOLD  
+**当前阶段：** R3 REQUEST CHANGES；R4 corrective revision 进行中，已有 240 tests 通过；功效重算和 R4 独立审计待完成；正式 A-3b HOLD  
 **最终题目：** 尚未确定  
 **最终创新点：** 尚未确定
 
 ## 0. 最新权威状态与唯一任务（2026-11-10）
 
-- R3 权威审计：72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**；独立数值证据仍保留。
-- 最新工作分支 HEAD（本轮维护前）：f2862840d5db6ce788244fc0c2d3487089db3b1d；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 185 / behind 0。
-- 最近一次含 R4 代码/测试修改的 CI：42788079429 @ 5e756805，success；28 + 183 = **211 tests**；D-064-C manifest gate PASS。
-- R4 已完成的首批实现：power_hierarchical.py 共享 Student-t helper；formal_analysis.py 动态 family-level primary analysis 初版；新增两组共 22 个合成测试。
-- 已知未完成：R4 预注册文件、真实缺失数据接口与输入 provenance、H2–H5 实际分析、结构性 Test guard/one-time final evaluator、可执行 pre-flight、功效/Type-I 重新校准、独立审计。
-- 算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md：当前 AB 的 R1/R2 诊断优势伴随 R3/R4/harm 退化；SBCG-NSGA-III 尚未实现或验证，不能声称提升已成立。
-- **唯一执行优先级：** 继续按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成 R4，不运行正式 A-3b，不读取真实 Test 标签/结果。
-- 正式 A-3b 仍 HOLD；即使 R4 审计通过，仍须导师 MDE=0.10 认可、用户明确批准和真实 pre-flight 全通过。
+- R3 权威审计：72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**。
+- 最近一次代码/测试核验 HEAD：f4d8d0d1e314b29f7e6a7627f99293b306f76d92；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 207 / behind 0。
+- CI 42791224479 @ f4d8d0d：success；pilot_a_recovery 28 + pilot_a3b 212 = **240 tests**；D-064-C hashes unchanged and PASS.
+- R4 已实现：Student-t/CI、动态 family-level primary analyzer + provenance、H2–H5 四项配对分析与 Holm（全 exploratory）、Train-only evolution guard、ordinary evaluator Test guard、public manifest Test payload removal、atomic one-time gate、metadata-only fail-closed pre-flight。
+- R4 尚未完成：正式 runner 接线、功效/Type-I 10,000 MC 重算、R4 预注册、独立审计。
+- 算法提升候选：75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md；现有 AB 仍有 R3/R4/harm trade-off，SBCG-NSGA-III 未实现或验证。
+- **唯一执行优先级：** 完成 R4 power/Type-I、正式预注册和真实路径接线，交独立 Reviewer。不得读取真实 Test 标签/结果，不运行正式 A-3b。
+- 正式 A-3b 仍 HOLD，须独立审计 ACCEPTED、导师 MDE=0.10 认可、用户明确批准和 R4 pre-flight 全通过。
 
 ## 1. 下一会话必须先读
 

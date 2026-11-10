@@ -85,3 +85,47 @@
 6. 新增 R4 预注册并交独立 Reviewer。
 
 真实 Test 逐场景标签/结果、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main 合并继续 HOLD。
+
+## 7. R4-P3：Test split isolation and one-time gate
+
+新增：experiments/pilot_a3b/split_access.py  
+修改：ea.py、a3_bridge.py、formal_scenario_generator.py  
+新增：test_64r4_split_guard.py
+
+- run_evolution() 在任何候选 fitness 前要求所有场景显式 split=train；Validation/Test/Battery/unknown 均拒绝。
+- ordinary evaluate_controller() 仅允许 Train/Validation，Test/Battery/unknown fail closed。
+- public_manifest_view() 的 test_locked 只保留 summary、family/scenario hash 和 payload_disclosed=false；scenarios_for_split() 仅允许 Train/Validation。
+- formal_scenario_generator.py 的公开 audit 只返回 development_scenarios（Train+Validation），不返回 test_scenarios、test_families、test_clusters、split_internal 或 all_scenarios。生成器内部仍只为哈希/汇总使用 Test，未向训练调用者暴露逐场景 payload。
+- consume_final_evaluation_once() 校验 independent review / advisor / user approvals 及 manifest/code hashes；通过 O_CREAT|O_EXCL 原子创建 ledger，先消费再调用 payload_loader。loader/evaluator 失败后 ledger 保持 consumed，禁止第二次读取。
+- 9 项 synthetic split/one-time 测试通过；不读取真实 Test 标签/结果。
+
+## 8. R4-P4：Fail-closed pre-flight 初版
+
+新增：experiments/pilot_a3b/formal_preflight.py  
+新增：test_64r4_preflight.py
+
+- pre-flight 只接收元数据，不接受或读取 Test scenario/label payload。
+- 检查 R4/implementation/git hashes、独立审计、导师 MDE、用户批准、CI/tests、六项 split manifest hashes、split overlap、Train-only runner、Validation selection-only、Test payload exposure、40 family / 1080 scenario summary、expected roster、pairing、duplicate/null/metadata mismatch、F≥34、每族恰好5 primary compositions、family loss、technical missing、design deviation、budget、seed、stopping rule、Test access log=0、one-time ledger=UNUSED。
+- 任一字段缺失或条件不满足即 HOLD；只有全部通过才 GO。
+- 提供 JSON + Markdown 报告写出函数；12 项 synthetic tests 通过。
+- 当前实际审批仍未取得，因此未运行真实 GO pre-flight。
+
+## 9. R4-P5：Student-t CI、provenance 与 H2-H5
+
+修改：power_hierarchical.py、formal_analysis.py  
+新增：test_64r4_secondary_analysis.py
+
+- Student-t helper 对 regular cases 输出双侧95% CI；degenerate cases不输出误导性区间。
+- formal_analysis 生成规范化输入 SHA-256；manifest SHA、code SHA、git HEAD 缺失/非法时，主分析即使有足够 family 也不给确认性 p 值。
+- H2 AB-A、H3 AwaitSLA-A、H4 AwaitSLA-AwaitFixed、H5 AB-AwaitSLA 均使用相同的 scenario/seed 配对、composition 汇总、family 等权和 Student-t。
+- Holm 严格要求完整四项 p 值；若某一比较不具备资格，不做部分 Holm。
+- 当前 H2-H5 全部 exploratory，等待 null/partial-null Type-I 校准；不得将其写成确认性证据。
+- 新增 5 项 secondary synthetic tests；CI 通过。
+
+## 10. 最新验证
+
+- CI run 42791224479 @ f4d8d0d1e314b29f7e6a7627f99293b306f76d92：success。
+- pilot_a_recovery：28 tests；pilot_a3b：212 tests；合计 **240 tests**。
+- D-064-C gate PASS；manifest/test-family/test-scenario hashes 与既有冻结值一致。
+- R4 尚未完成：正式 runner 接线、冻结五 composition 的 outcome-blind priority、ICC/MDE/Type-I/power 10,000 MC 重算、R4 预注册和独立审计。
+- 未运行正式 A-3b；未读取真实 Test 标签/结果；未产生新的算法性能数据。

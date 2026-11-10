@@ -2,14 +2,14 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：** 2026-11-10（R4 首批代码实现；Student-t + formal analysis 初版 CI success）
+**最后维护日期：** 2026-11-10（R4 统计/主次终点/隔离/pre-flight 初版实现；CI 240 tests success）
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
-**最近一次状态核验：** work 6c80f08fb18e9a6c8056ac91fcda584d2b944689；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 186 / behind 0。最近一次含 R4 代码/测试修改的 CI：42788079429 @ 5e756805，success（28+183=211 tests）；之后为文档维护提交。接手时必须重新查询。
+**最近一次代码/测试核验：** work f4d8d0d1e314b29f7e6a7627f99293b306f76d92；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 207 / behind 0；CI 42791224479 success（28+212=240 tests）。接手时重新查询。
 **R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md。
 
-> **当前任务优先级说明（2026-11-10）：** 64-R3 独立审计仍为 REQUEST CHANGES。R4 已有首批代码：共享 Student-t 边界 helper 和 formal_analysis.py 初版；CI 42788079429 在 5e756805 上 success（28+183=211 tests）。这不代表 R4 完成。唯一任务仍是严格执行 73_D064_R4_EXECUTOR_SPECIFICATION.md，继续实现真实缺失数据路径、H2–H5、Test split guard/one-time gate、pre-flight 和功效重新校准。算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md；尚未实现或验证。不得读取真实 Test 逐场景标签/结果。正式 A-3b 继续 HOLD，直到 R4 独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 R4 §9 pre-flight。
+> **当前任务优先级说明（2026-11-10）：** R3 独立审计仍为 REQUEST CHANGES。R4 已有实际实现：共享 Student-t/CI；正式 family-level analyzer + provenance；H2–H5 四项 family-level 配对分析与 Holm（全部 exploratory）；Train-only evolution guard、普通 evaluator Test guard、公共 manifest 不返回 Test payload、原子 one-time gate；metadata-only fail-closed pre-flight。CI 42791224479 @ f4d8d0d success（28+212=240 tests）。R4 尚未完成：正式 runner 接线、ICC/MDE/Type-I/power 10,000 MC 重算、R4 预注册和独立审计。唯一任务继续执行 73_D064_R4_EXECUTOR_SPECIFICATION.md。算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md，尚未实现/验证。不得读取真实 Test 逐场景标签/结果；正式 A-3b 继续 HOLD，直到独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准和 R4 §9 pre-flight 全通过。
 
 ---
 
@@ -1156,3 +1156,13 @@ Formal A-3b remains HOLD. Do not read or tune Test, merge main, start Pilot B/A8
 - Known R4 gaps: R4 preregistration file, real preflight, missing-data integration/provenance, H2-H5, Test split guard and one-time final evaluation, power/Type-I re-calibration, independent review.
 - Algorithm candidate note: 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md. Do not claim uplift; current AB trade-off and strong hand baseline are explicitly documented.
 - Do not access real Test labels/results or run formal A-3b.
+
+## 2026-11-10 R4 implementation checkpoint — H2-H5 / split isolation / pre-flight
+
+- Last verified code/test commit: f4d8d0d1e314b29f7e6a7627f99293b306f76d92. CI 42791224479 success; pilot_a_recovery 28, pilot_a3b 212, total 240 tests.
+- D-064-C gate PASS; manifest fb832bcc..., test-family 01b41df8..., test-scenario dded3bb7... unchanged.
+- formal_analysis.py now includes deterministic normalized input SHA-256, requires manifest/code/git provenance for confirmatory inference, and returns Student-t CI95 for regular cases.
+- H2-H5 implemented through paired family-level contrasts and one four-p-value Holm family. All four are exploratory pending null/partial-null Type-I calibration.
+- split_access.py, ea.py, a3_bridge.py and formal_scenario_generator.py enforce Train-only evolution, Test-restricted ordinary evaluation, no Test payload in public audit return, and atomic one-time final-evaluation ledger.
+- formal_preflight.py is metadata-only and fail-closed; it does not read Test payload.
+- Remaining: connect real formal runner, decide/freeze the outcome-blind five-composition roster, run R4 power/Type-I 10,000 MC, write R4 preregistration, independent review. No real Test labels/results or formal A-3b.

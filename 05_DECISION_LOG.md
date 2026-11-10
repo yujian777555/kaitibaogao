@@ -1371,3 +1371,26 @@ Executor 按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成：
 - a3_bridge.evaluate_controller() 的当前三目标未完整纳入 R3/R4；ea.py 的全局 most-common counterexample mutation 可能忽视少数高风险 failure strata；run_evolution() 最终 min(sum(objectives)) 重新引入未预注册标量化。
 - 新增 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md，提出 SBCG-NSGA-III：五维 Pareto 目标、安全可行性优先、family×failure signature 分层反例变异、共享 hand-seed 精英档案、validation 预注册选择规则。
 - 这是待验证候选，不是已实现算法或已证实创新。当前 R4 仍优先；正式 A-3b / Test 保持 HOLD。
+
+
+## 决策 D-064-R4-P2：Test 隔离与 pre-flight 初版（2026-11-10）
+
+- 新增 split_access.py：public_manifest_view() 仅暴露 Test summary/hash/count，不返回 Test scenarios/families；scenarios_for_split() 仅允许 Train/Validation；run_evolution() 在 fitness 前强制 Train-only；ordinary evaluate_controller() 禁止 Test/Battery/unknown split。
+- formal_scenario_generator.py 的公开 audit 返回只含 Train/Validation development_scenarios，不再返回 all_scenarios、test_scenarios、split_internal 或 test families/clusters；D-064-C 的标签审计测试已限制在 development split。Test 仍在生成器内部用于冻结哈希和汇总，不被训练调用者接收。
+- consume_final_evaluation_once() 要求独立审计、导师 MDE、用户批准及 manifest/code hash 一致；使用 O_CREAT|O_EXCL 原子消费 ledger，先消费再调用 payload_loader；失败后 ledger 仍 consumed。
+- formal_preflight.py 只接收元数据，不加载 Test payload；检查批准、CI、hash、split overlap、40/1080 Test roster summary、F≥34、每族5 compositions、pairing、完整性、预算、seed、stopping rule、Test access log=0、ledger=UNUSED；不满足返回 HOLD。
+- 新增 21 项 split/preflight 合成测试；Test sentinel 测试不访问真实 Test 标签。
+
+## 决策 D-064-R4-P3：H2-H5 与分析 provenance（2026-11-10）
+
+- student_t_summary() 新增基于同一 beta-tail routine 的双侧 95% CI；退化零方差/常数样本不输出误导性 CI。
+- formal_analysis.py 支持输入规范化 SHA-256，并要求 manifest SHA、code SHA、git HEAD provenance 完整才允许确认性 Student-t。
+- H2 AB-A、H3 AwaitSLA-A、H4 AwaitSLA-AwaitFixed、H5 AB-AwaitSLA 已接入同一 scenario/seed 配对→composition→family 等权→Student-t 路径。
+- 四项 p-value 必须齐全才执行完整四项 Holm；任何一项不具备确认性资格时不做部分 Holm。
+- 由于 H2/H3 尚无 null/partial-null Type-I 校准，R4 将 H2-H5 全部标记 exploratory；不能声称确认性次要终点。
+
+### 最新 CI
+- run 42791224479 @ f4d8d0d1e314b29f7e6a7627f99293b306f76d92：success。
+- pilot_a_recovery 28 tests；pilot_a3b 212 tests；总计 **240 tests**。
+- D-064-C gate PASS；manifest fb832bcc...、test-family 01b41df8...、test-scenario dded3bb7... 保持不变。
+- 尚未完成正式 runner 接线、R4 power/Type-I 10,000 MC、R4 预注册和独立审计。正式 A-3b 与真实 Test 继续 HOLD。
