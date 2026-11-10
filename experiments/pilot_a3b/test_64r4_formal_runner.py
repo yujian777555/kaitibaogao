@@ -166,6 +166,7 @@ class FormalRunnerTests(unittest.TestCase):
         self.assertEqual(result["primary"]["family_loss"], ["F00"])
         self.assertEqual(result["primary"]["n_families"], 33)
         self.assertEqual(result["primary"]["confirmatory_status"], "NOT_ELIGIBLE_UNDERPOWERED")
+        self.assertEqual(result["post_run_integrity"]["status"], "HOLD")
         self.assertIsNone(result["primary"]["student_t"])
 
     def test_duplicate_ledger_run_fails_closed(self):

@@ -218,7 +218,7 @@ def run_formal_analysis(
             "test_access_log_count": test_execution_receipt["test_access_log_count"],
             "one_time_ledger_state": "CONSUMED",
         })
-        if postrun_integrity["status"] != "GO":
+        if postrun_integrity["status"] != "GO" and primary["confirmatory_status"] == "ELIGIBLE":
             primary["confirmatory_status"] = "NOT_ELIGIBLE_POSTRUN_INTEGRITY"
             primary["student_t"] = None
     return {
