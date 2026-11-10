@@ -23,6 +23,7 @@ from collections import defaultdict
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pilot_a_recovery"))
 
 from pilot_a3 import PublicToolView, TOOLS, ToolRuntime, accepted  # noqa: E402
+from split_access import validate_evaluation_scenarios  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Action / observation vocabulary
@@ -563,6 +564,8 @@ def score_episode(verdict, row):
 
 
 def evaluate_controller(fsm, scenarios, verdicts, scenario_weights=None):
+    # Ordinary evaluation may use Train/Validation, never Test or Battery.
+    validate_evaluation_scenarios(scenarios)
     """Aggregate objectives; weights (<=2x) may emphasise counterexample
     clusters for mechanism B -- the SAME weights apply to all methods in the
     shared evaluation, and the search budget is unchanged."""
