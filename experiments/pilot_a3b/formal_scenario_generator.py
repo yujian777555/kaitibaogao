@@ -436,14 +436,16 @@ def build_candidate_manifest(seed_base=SEED_BASE):
     }
     manifest["manifest_sha256"] = sha256_json(manifest)
 
+    # Public audit output contains development scenarios only. Test payloads
+    # remain local to this builder for hashing/gate checks and are never returned.
+    development_scenarios = (
+        split_internal["train"]["scenarios"]
+        + split_internal["validation"]["scenarios"]
+    )
     audit = {
         "catalog_audit": catalog_audit,
-        "split_internal": split_internal,
         "split_summaries": split_summaries,
-        "all_scenarios": all_scenarios,
-        "test_families": test_families,
-        "test_clusters": test_clusters,
-        "test_scenarios": test_scenarios,
+        "development_scenarios": development_scenarios,
         "problems": problems,
     }
     return manifest, audit
