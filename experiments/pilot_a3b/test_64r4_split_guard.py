@@ -107,7 +107,7 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
             self.assertEqual(calls, {"loader": 1, "evaluator": 1})
             with self.assertRaisesRegex(RuntimeError, "already consumed"):
                 consume_final_evaluation_once(
-                    ledger, approval(), "manifest-ok", "code-ok", loader, evaluator
+                    ledger, approval(), "manifest-ok", "manifest-ok", "code-ok", "code-ok", loader, evaluator
                 )
             self.assertEqual(calls, {"loader": 1, "evaluator": 1})
 
