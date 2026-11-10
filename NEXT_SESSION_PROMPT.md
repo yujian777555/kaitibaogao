@@ -2,11 +2,11 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-10（R4 首批代码实现；Student-t + formal analysis 初版 CI success）
+**最后维护日期：** 2026-11-10（R4 首批代码实现；Student-t + formal analysis 初版 CI success）
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
-**最新核验基线：** work f2862840d5db6ce788244fc0c2d3487089db3b1d；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 185 / behind 0。最近一次含 R4 代码/测试修改的 CI：42788079429 @ 5e756805，success（28+183=211 tests）；当前接手必须重新查询。
+**最近一次状态核验：** work 6c80f08fb18e9a6c8056ac91fcda584d2b944689；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 186 / behind 0。最近一次含 R4 代码/测试修改的 CI：42788079429 @ 5e756805，success（28+183=211 tests）；之后为文档维护提交。接手时必须重新查询。
 **R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md。
 
 > **当前任务优先级说明（2026-11-10）：** 64-R3 独立审计仍为 REQUEST CHANGES。R4 已有首批代码：共享 Student-t 边界 helper 和 formal_analysis.py 初版；CI 42788079429 在 5e756805 上 success（28+183=211 tests）。这不代表 R4 完成。唯一任务仍是严格执行 73_D064_R4_EXECUTOR_SPECIFICATION.md，继续实现真实缺失数据路径、H2–H5、Test split guard/one-time gate、pre-flight 和功效重新校准。算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md；尚未实现或验证。不得读取真实 Test 逐场景标签/结果。正式 A-3b 继续 HOLD，直到 R4 独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 R4 §9 pre-flight。
