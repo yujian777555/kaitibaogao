@@ -160,7 +160,8 @@ class ArchiveTests(unittest.TestCase):
             select_validation_candidate([train_record])
 
     def test_validation_returns_hold_when_no_feasible_candidate_exists(self):
-        result = select_validation_candidate([record("bad", [0.1, 0.1], feasible=False)])
+        infeasible = record("bad", [0.1, 0.1], feasible=False)
+        result = select_validation_candidate([infeasible])
         self.assertEqual(result["status"], "HOLD")
         self.assertIsNone(result["candidate"])
         report = validation_selection_report([infeasible])
