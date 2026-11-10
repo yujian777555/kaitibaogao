@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 from a3_bridge import hand_fsm
 from ea import run_evolution
-from sbcg import CandidateRecord, make_shared_initial_pool
+from sbcg import CandidateRecord, fsm_fingerprint, make_shared_initial_pool
 from sbcg_experiment import (
     algorithm_specs,
     run_algorithm_matrix,

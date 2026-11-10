@@ -175,6 +175,9 @@ class ArchiveTests(unittest.TestCase):
         result = select_validation_candidate([a, b])
         self.assertEqual(result["status"], "SELECTED")
         self.assertEqual(result["candidate"].fingerprint, "b")
+        report = validation_selection_report([a, b])
+        self.assertEqual(report["pareto_candidates"], 2)
+        self.assertEqual(len(report["pareto_front"]), 2)
 
     def test_dominated_candidate_cannot_win_by_worst_family(self):
         pareto = record("pareto", [0.2, 0.2], family_values={"f1": 0.2})
