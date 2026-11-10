@@ -16,6 +16,9 @@ one-time final-evaluation gate.
 from __future__ import annotations
 
 from collections import defaultdict
+import hashlib
+import json
+import re
 from statistics import fmean
 
 from power_hierarchical import student_t_summary
@@ -25,6 +28,28 @@ PRIMARY_METHODS = ("AB", "nsga2")
 PRIMARY_LABELS = frozenset(("R1", "R2"))
 DEFAULT_MIN_FAMILIES = 34
 DEFAULT_COMPOSITIONS_PER_FAMILY = 5
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+GIT_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+
+
+def _provenance_status(provenance):
+    if not isinstance(provenance, dict):
+        return False
+    manifest_sha = provenance.get("manifest_sha256")
+    code_sha = provenance.get("code_sha256")
+    git_head = provenance.get("git_head")
+    return bool(
+        isinstance(manifest_sha, str) and SHA256_RE.fullmatch(manifest_sha)
+        and isinstance(code_sha, str) and SHA256_RE.fullmatch(code_sha)
+        and isinstance(git_head, str) and GIT_SHA_RE.fullmatch(git_head)
+    )
+
+
+def _canonical_sha256(value):
+    payload = json.dumps(
+        value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def _nonempty_text(value, field):
@@ -78,6 +103,7 @@ def analyze_primary_endpoint(
     compositions_per_family=DEFAULT_COMPOSITIONS_PER_FAMILY,
     method_a="AB",
     method_b="nsga2",
+    provenance=None,
 ):
     """Validate a paired episode ledger and compute family-equal paired effect.
 
@@ -234,16 +260,35 @@ def analyze_primary_endpoint(
 
     n_families = len(family_means)
     design_deviation = n_families < min_families
-    confirmatory_status = (
-        "NOT_ELIGIBLE_UNDERPOWERED" if design_deviation else "ELIGIBLE"
-    )
+    provenance_valid = _provenance_status(provenance)
+    if design_deviation:
+        confirmatory_status = "NOT_ELIGIBLE_UNDERPOWERED"
+    elif not provenance_valid:
+        confirmatory_status = "NOT_ELIGIBLE_PROVENANCE_INCOMPLETE"
+    else:
+        confirmatory_status = "ELIGIBLE"
     effect = fmean(family_means.values()) if family_means else None
     student = None
-    if not design_deviation and n_families >= 2:
+    if not design_deviation and provenance_valid and n_families >= 2:
         student = student_t_summary(list(family_means.values()))
+
+    normalized_input = {
+        "run_rows": [
+            {"method": method, "seed": seed, "scenario_id": sid, "class_success": value}
+            for (method, seed, sid), value in sorted(observed.items(), key=lambda item: str(item[0]))
+        ],
+        "expected_roster": sorted(expected_roster, key=lambda item: item["scenario_id"]),
+        "expected_optimizer_seeds": sorted(seeds, key=str),
+        "technical_missing": sorted(technical_records, key=lambda item: (
+            str(item.get("method")), str(item.get("seed")), str(item.get("scenario_id"))
+        )),
+    }
 
     return {
         "analysis_version": ANALYSIS_VERSION,
+        "input_sha256": _canonical_sha256(normalized_input),
+        "provenance_status": "COMPLETE" if provenance_valid else "INCOMPLETE",
+        "provenance": provenance if provenance_valid else None,
         "analysis_split": analysis_split,
         "primary_contrast": f"{method_a} - {method_b}",
         "primary_endpoint": "CondRecSucc (R1+R2 class_success)",
@@ -309,6 +354,7 @@ def analyze_secondary_endpoints(
     analysis_split="test",
     min_families=DEFAULT_MIN_FAMILIES,
     compositions_per_family=DEFAULT_COMPOSITIONS_PER_FAMILY,
+    provenance=None,
 ):
     """Execute H2-H5 through the same paired family-level analysis path.
 
@@ -329,6 +375,7 @@ def analyze_secondary_endpoints(
             compositions_per_family=compositions_per_family,
             method_a=method_a,
             method_b=method_b,
+            provenance=provenance,
         )
         result["hypothesis"] = hypothesis
         result["classification"] = "exploratory"
