@@ -6,7 +6,15 @@ import unittest
 
 from formal_analysis import analyze_primary_endpoint as _analyze_primary_endpoint
 
-PROVENANCE = {\n    \"manifest_sha256\": \"a\" * 64,\n    \"code_sha256\": \"b\" * 64,\n    \"git_head\": \"c\" * 40,\n}\n\ndef analyze_primary_endpoint(*args, **kwargs):\n    kwargs.setdefault(\"provenance\", PROVENANCE)\n    return _analyze_primary_endpoint(*args, **kwargs)
+PROVENANCE = {
+    "manifest_sha256": "a" * 64,
+    "code_sha256": "b" * 64,
+    "git_head": "c" * 40,
+}
+
+def analyze_primary_endpoint(*args, **kwargs):
+    kwargs.setdefault("provenance", PROVENANCE)
+    return _analyze_primary_endpoint(*args, **kwargs)
 
 
 METHODS = ("AB", "nsga2")
