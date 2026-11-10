@@ -5,10 +5,10 @@
 **权威审计：** 72_64R3_INDEPENDENT_REVIEW.md（REQUEST CHANGES）  
 **独立证据：** experiments/pilot_a3b/audit_64r3_independent_checks.json  
 **基线分支：** pilot-a-stateful-recovery  
-**R4 Executor 接手基线 HEAD：** 34c7a1cac2da58f91fd468963c30780d2330303d  
+**R4 Executor 接手要求：** 开始执行时重新查询当前远端 HEAD；任务书初始 handoff commit 为 34c7a1cac2da58f91fd468963c30780d2330303d，后续文档校正 commit 为 123011b395816d7cfa698d2ce630be17fcb997d1  
 **main：** 683b3fe7fc52c86e917d523fdc6bbb13abbfd653（禁止合并）  
 **最近一次含代码修改的 CI：** run 42783650910 @ 49429053，success（28+161=189/189）；34c7a1c 为仅文档/接管规范提交，未观察到新 CI。  
-**状态：** R4 corrective revision — NOT STARTED / IN PROGRESS；正式 A-3b = HOLD
+**状态：** R4 corrective revision — READY_FOR_EXECUTOR；正式 A-3b = HOLD
 
 ---
 
