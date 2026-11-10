@@ -2,14 +2,14 @@
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：2026-11-10（64-R3 独立审计 = REQUEST CHANGES；正式 A-3b HOLD）**
+**最后维护日期：2026-11-10（R4 首批代码实现；Student-t + formal analysis 初版 CI success）
 **唯一仓库：** `yujian777555/kaitibaogao`  
 **工作分支：** `pilot-a-stateful-recovery`  
 **主分支：** `main`（实验期间不得擅自合并）
-**最新核验基线：** work 34c7a1cac2da58f91fd468963c30780d2330303d；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 175 / behind 0。最近一次含代码修改的 CI：42783650910 @ 49429053，success（28+161=189/189）；34c7a1c 为仅文档/接管规范提交，未观察到新 CI。接手时必须重新查询。
+**最新核验基线：** work f2862840d5db6ce788244fc0c2d3487089db3b1d；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 185 / behind 0。最近一次含 R4 代码/测试修改的 CI：42788079429 @ 5e756805，success（28+183=211 tests）；当前接手必须重新查询。
 **R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md。
 
-> **当前任务优先级说明（2026-11-10）：** 64-R3 独立审计报告 72_64R3_INDEPENDENT_REVIEW.md = REQUEST CHANGES。唯一任务是严格执行 73_D064_R4_EXECUTOR_SPECIFICATION.md：完成 R4 新预注册、正式 40-family 主/次要终点分析、可执行缺失数据与 family-loss 处理、34×5 功效/Type-I 重新校准、Student-t 退化边界统一、结构性 Test split guard 与一次性 final-evaluation gate、真实 pre-flight 和真实路径测试。不得读取真实 Test 逐场景标签/结果。较早 D-064-A/B/C/R2/R3 指令均为历史记录，不得覆盖本优先级。正式 A-3b 继续 HOLD，直到 R4 独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 R4 §9 pre-flight。
+> **当前任务优先级说明（2026-11-10）：** 64-R3 独立审计仍为 REQUEST CHANGES。R4 已有首批代码：共享 Student-t 边界 helper 和 formal_analysis.py 初版；CI 42788079429 在 5e756805 上 success（28+183=211 tests）。这不代表 R4 完成。唯一任务仍是严格执行 73_D064_R4_EXECUTOR_SPECIFICATION.md，继续实现真实缺失数据路径、H2–H5、Test split guard/one-time gate、pre-flight 和功效重新校准。算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md；尚未实现或验证。不得读取真实 Test 逐场景标签/结果。正式 A-3b 继续 HOLD，直到 R4 独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准并通过 R4 §9 pre-flight。
 
 ---
 
@@ -1146,3 +1146,13 @@ Formal A-3b remains HOLD. Do not read or tune Test, merge main, start Pilot B/A8
 ## 2026-11-10 — D-064-R4 Executor handoff
 
 当前独立审计为 72_64R3_INDEPENDENT_REVIEW.md = REQUEST CHANGES。唯一执行任务与逐项验收标准见 73_D064_R4_EXECUTOR_SPECIFICATION.md。不要把本轮 Planner 规范提交描述为代码修复或实验通过。正式 A-3b、真实 Test 访问/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main 合并继续 HOLD。
+
+
+## 2026-11-10 R4 implementation checkpoint
+
+- Current code checkpoint: 5e7568050be4d7c1ac7511137bb5627a08ec044d; later doc-only note commit: f2862840d5db6ce788244fc0c2d3487089db3b1d. Re-query remote before work.
+- CI 42788079429 @ 5e756805: success; pilot_a_recovery 28 tests, pilot_a3b 183 tests, total 211. D-064-C manifest gate PASS.
+- Implemented: shared Student-t boundary function in power_hierarchical.py; formal_analysis.py initial dynamic family-level primary analyzer; 22 synthetic tests across test_64r4_student_t.py and test_64r4_formal_analysis.py.
+- Known R4 gaps: R4 preregistration file, real preflight, missing-data integration/provenance, H2-H5, Test split guard and one-time final evaluation, power/Type-I re-calibration, independent review.
+- Algorithm candidate note: 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md. Do not claim uplift; current AB trade-off and strong hand baseline are explicitly documented.
+- Do not access real Test labels/results or run formal A-3b.

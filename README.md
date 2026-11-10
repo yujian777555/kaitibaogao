@@ -2,17 +2,19 @@
 
 **唯一研究仓库：** https://github.com/yujian777555/kaitibaogao  
 **研究主线：** Evolutionary Computation for AI Agents（演化计算赋能大语言模型智能体）  
-**当前阶段：** 64-R3 独立审计 = REQUEST CHANGES；R4 corrective revision 待 Executor 实施；正式 A-3b = HOLD  
+**当前阶段：** D-064-R3 独立审计 = REQUEST CHANGES；R4 corrective revision 已启动，Student-t 边界修复与正式 family-level 主分析模块初版已提交；R4 全部阻断项尚未关闭；正式 A-3b = HOLD
 **状态日期：** 2026-11-10
 
-## 最新权威状态（2026-11-10：D-064-R3 独立审计）
+## 最新权威状态（2026-11-10：R4 首批代码修复）
 
-- 独立审计：72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**；数值证据：experiments/pilot_a3b/audit_64r3_independent_checks.json。
-- 远端工作分支：pilot-a-stateful-recovery @ 34c7a1cac2da58f91fd468963c30780d2330303d；相对 main ahead 175 / behind 0。
+- 权威审计仍为 72_64R3_INDEPENDENT_REVIEW.md = **REQUEST CHANGES**；R3 不得标记通过。
+- 最新工作分支 HEAD（本轮维护前）：f2862840d5db6ce788244fc0c2d3487089db3b1d；相对 main ahead 185 / behind 0。
 - main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653，未修改。
-- 最近一次含代码修改的 CI 为 run [42783650910](https://github.com/yujian777555/kaitibaogao/actions/runs/42783650910)，HEAD 49429053：success，28 + 161 = 189/189；D-064-C manifest gate PASS。随后 34c7a1c 是仅文档/接管规范提交，当前未观察到该文档提交触发的新 CI。
-- 唯一任务：按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成 R4 corrective revision，再交独立复审。
-- **HOLD：** 正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、合并 main。R4 实施期间不得读取真实 Test 逐场景标签或结果。
+- 最近一次含 R4 代码/测试修改的 CI：[run 42788079429](https://github.com/yujian777555/kaitibaogao/actions/runs/42788079429)，运行 HEAD 5e7568050be4d7c1ac7511137bb5627a08ec044d，success；pilot_a_recovery 28 tests + pilot_a3b 183 tests = **211 tests**；D-064-C gate PASS。
+- 已实现：共享 Student-t 退化边界函数；动态 family-level 主分析模块初版；合成测试覆盖全零/常数/近零方差、40/33 families、缺失/重复/null/行为失败等。
+- 算法研究：新增 75 号 SBCG-NSGA-III 优先候选说明。现有 AB 在 R1/R2 上优于 NSGA-II，但 R3/R4 与 harm 有退化，尚未证明超过 hand baseline；新算法尚未实现/验证。
+- 唯一执行优先级：继续按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成 R4；随后独立复审。算法改进实验不得接触 Test。
+- **HOLD：** 正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、合并 main。
 
 ## 1. 项目边界（必须遵守）
 

@@ -1342,3 +1342,32 @@ Executor 按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成：
 
 ### 当前维护提交的性质
 本次提交只更新 Planner/Executor 规范与维护交接文件，不包含实验代码、测试或统计结果变更；不得把文档提交或既有 CI success 说成 R4 验收通过。
+
+
+## 决策 D-064-R4-P1：首批 R4 统计/分析实现（2026-11-10）
+
+### 代码实现
+- power_hierarchical.py：新增共享 student_t_summary()，正式 family_level_tests() 与功效模拟 _pvals_student_t() 共用同一边界规则。
+- 数值规则：F<2 或非有限值拒绝；容差为 1e-12 × max(1, max|x|)；全零差值 t=0/p=1；非零常数差值按退化极限报告 ±inf/p=0 并标记 nonzero_constant_limit；常规方差使用现有 Student-t beta-tail 实现。
+- 新增 test_64r4_student_t.py：11 项合成测试，含 SciPy 已知答案 [1,2,3,4,5]。
+- 新增 formal_analysis.py：R4 正式 family-level 主终点分析初版，动态 family 数；固定每族 5 个 primary compositions；AB/NSGA-II 按 scenario/seed 配对；seed→scenario→composition→family 汇总；family 等权；显式 technical missing、family loss、behavioral failure=0；F<34 不给确认性 Student-t。
+- 新增 test_64r4_formal_analysis.py：11 项合成测试，覆盖 40/33 families、technical missing、unexplained missing、labelled null、duplicate、unknown roster、behavioral failure、composition 数门槛。
+
+### CI 与修复轨迹
+- CI run 42788079429 @ 5e7568050be4d7c1ac7511137bb5627a08ec044d：**success**。
+- 真实 job log：pilot_a_recovery 28 tests OK；pilot_a3b 183 tests OK；总计 **211 tests**。
+- D-064-C gate PASS；manifest SHA fb832bcc...；test-family SHA 01b41df8...；test-scenario SHA dded3bb7...。
+- 首轮 formal analyzer 测试发现测试 fixture 的 pop() 删除了 F33 的最后一条记录，而断言预期 F00；改为确定性 pop(0)，不是更改生产逻辑掩盖错误。修复后 CI success。
+- Student-t test-first 提交曾因 helper 尚未实现而失败；随后实现共享 helper，CI success。失败提交保留为真实开发轨迹。
+
+### 科学边界
+- 这只是 R4 首批实现，不代表 R4 全部阻断关闭或独立审计通过。
+- formal_analysis.py 仍需独立审计；尚未接入正式 runner，也未读取真实 Test。
+- 没有运行正式 A-3b，没有新增算法性能结果，没有证明算法提升。
+
+## 决策 D-075：优先验证安全均衡反例引导 NSGA-III（2026-11-10）
+
+- diagnostic3_recomputed.json 显示：AB 的 R1/R2 CondRecSucc=0.547170，高于 NSGA-II 的 0.232704；但 CorrectEscalation=0.183908 低于 NSGA-II 的 0.678161，DamageContainment=0.888889 低于 0.962963，avoidable harm=1.152263 高于 0.497942。
+- a3_bridge.evaluate_controller() 的当前三目标未完整纳入 R3/R4；ea.py 的全局 most-common counterexample mutation 可能忽视少数高风险 failure strata；run_evolution() 最终 min(sum(objectives)) 重新引入未预注册标量化。
+- 新增 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md，提出 SBCG-NSGA-III：五维 Pareto 目标、安全可行性优先、family×failure signature 分层反例变异、共享 hand-seed 精英档案、validation 预注册选择规则。
+- 这是待验证候选，不是已实现算法或已证实创新。当前 R4 仍优先；正式 A-3b / Test 保持 HOLD。
