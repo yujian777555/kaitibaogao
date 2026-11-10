@@ -47,6 +47,15 @@ class StudentTBoundaryTests(unittest.TestCase):
         self.assertEqual(result["df"], 4)
         self.assertAlmostEqual(result["p_two_sided"], 0.013235599563683, places=9)
 
+    def test_known_answer_confidence_interval(self):
+        result = student_t_summary(np.array([1., 2., 3., 4., 5.]))
+        self.assertAlmostEqual(result["ci95"][0], 1.036756838522443, places=8)
+        self.assertAlmostEqual(result["ci95"][1], 4.963243161477557, places=8)
+
+    def test_degenerate_effect_has_no_misleading_confidence_interval(self):
+        self.assertIsNone(student_t_summary(np.zeros(34))["ci95"])
+        self.assertIsNone(student_t_summary(np.full(34, 0.1))["ci95"])
+
     def test_power_simulation_uses_same_zero_variance_rule(self):
         rows = np.zeros((3, 34), dtype=float)
         p_values = _pvals_student_t(rows)
