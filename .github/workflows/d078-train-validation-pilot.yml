@@ -56,7 +56,7 @@ jobs:
           git add experiments/pilot_a3b/results/d078_train_validation_pilot
           if ! git diff --cached --quiet; then
             git commit -m "Store D-078 exploratory Train Validation pilot results"
-            git push origin "HEAD:\${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
       - name: Upload pilot outputs
