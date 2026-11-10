@@ -1412,3 +1412,21 @@ Executor 按 73_D064_R4_EXECUTOR_SPECIFICATION.md 完成：
 
 ### 执行规范
 唯一任务书：76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md。本决策不授权正式 A-3b、Test 访问、A800/ARWM 或真实 LLM API。
+
+
+## 决策 D-076-EXECUTION：R4 完成审计包，SBCG 性能仍未验证（2026-11-10）
+
+### 交付与证据
+- R4：`formal_runner.py` 已接入 `formal_analysis.py`；`64_A3B_PREREGISTRATION_CANDIDATE_R4.md`；真实 pre-flight 输出为 HOLD；功效 24 格×10,000 MC 保存并复算一致。
+- SBCG：`sbcg.py`、`sbcg_runner.py`、`sbcg_experiment.py`、`sbcg_config.json`；M1/M2/M3 独立开关、14 个基线/对照/消融、可行 Pareto 档案、无等权和选择、预算与缓存计数。
+- 报告：`77_D076_R4_AND_SBCG_EXECUTION_REPORT.md`。
+- 测试：pilot_a3b 262 + pilot_a_recovery 28 = 290/290；CI runs 42813004959 和 42813004752 success；远端 clean-clone @4c4c62f 同样 290/290。
+
+### 决定
+R4 状态只能是 **READY_FOR_INDEPENDENT_REVIEW**，提交独立 Reviewer，不自评 ACCEPTED。SBCG 当前只有合成实现证据，没有任何性能提升、强基线或消融结论；不得把代码实现写成创新成立。
+
+### 数据边界
+只运行合成 fixtures/sentinels 和历史 diagnostic3 开发数据的功效模拟；未运行真实 Train/Validation 算法诊断，未读取 Test，未启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox，未合并 main。
+
+### OPEN
+安全非劣界值和 hypervolume reference point 尚未冻结；导师 MDE、用户批准和独立 R4 ACCEPTED 均未取得。唯一下一任务是 R4 独立复审；审批满足后才可运行 Train-only SBCG 强对照/消融。

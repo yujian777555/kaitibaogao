@@ -1,18 +1,15 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威执行指令（2026-11-10，覆盖本文所有较早状态）：** 本轮维护前远端 work HEAD 为 14a8a1bef23f3195436de0f5d1d66803f9c100e7，main 为 683b3fe7fc52c86e917d523fdc6bbb13abbfd653，ahead 222 / behind 0。CI run 42793004533 @ 14a8a1b = regression success；最近完整测试计数 240 tests 的 CI 为 42791224479 @ f4d8d0d。R4 已有 Student-t、family-level analyzer、H2–H5 exploratory、Train-only/Test guards、one-time gate 和 metadata-only pre-flight 初版；尚需正式 runner 接线、outcome-blind 5-composition roster 冻结、10,000 MC power/Type-I、R4 preregistration 和独立审计。算法候选 75 = SBCG-NSGA-III，基于历史 diagnostic 的安全/伤害退化问题提出，**未实现、未验证**。当前 Executor 唯一任务书为 76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md：R4 收尾与 SBCG 机制代码/测试并行推进；真实 benchmark Train/Validation 运行仍按 75 号候选的审批顺序，真实 Test 保持锁定。不得承诺必然提升，不得伪造或挑选结果。正式 A-3b 继续 HOLD。
-
+> **最新权威执行指令（2026-11-10，覆盖本文所有较早状态）：** D-076 已完成 R4 正式 runner、五 composition 核验、24 格 10,000 MC 功效、R4 预注册与真实 HOLD pre-flight，并完成 SBCG-NSGA-III 的 M1/M2/M3、14 个对照/消融接口及合成测试。R4 = READY_FOR_INDEPENDENT_REVIEW，不是 ACCEPTED；SBCG 性能 NOT RUN，尚不能判断是否提升。当前唯一任务是把 `64_A3B_PREREGISTRATION_CANDIDATE_R4.md` 与 `77_D076_R4_AND_SBCG_EXECUTION_REPORT.md` 交独立 Reviewer。不得读取真实 Test、运行真实 Train/Validation 算法诊断或合并 main。
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**
 
-**最后维护日期：** 2026-11-10（R4 统计/主次终点/隔离/pre-flight 初版实现；CI 240 tests success）
-**唯一仓库：** `yujian777555/kaitibaogao`  
-**工作分支：** `pilot-a-stateful-recovery`  
+**最后维护日期：** 2026-11-10（D-076 R4/SBCG 实现；290 tests 与 clean-clone 通过）
+**唯一仓库：** `yujian777555/kaitibaogao`
+**工作分支：** `pilot-a-stateful-recovery`
 **主分支：** `main`（实验期间不得擅自合并）
-**最近一次代码/测试核验：** work f4d8d0d1e314b29f7e6a7627f99293b306f76d92；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 207 / behind 0；CI 42791224479 success（28+212=240 tests）。接手时重新查询。
-**R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md。
-
-> **当前任务优先级说明（2026-11-10）：** R3 独立审计仍为 REQUEST CHANGES。R4 已有实际实现：共享 Student-t/CI；正式 family-level analyzer + provenance；H2–H5 四项 family-level 配对分析与 Holm（全部 exploratory）；Train-only evolution guard、普通 evaluator Test guard、公共 manifest 不返回 Test payload、原子 one-time gate；metadata-only fail-closed pre-flight。CI 42791224479 @ f4d8d0d success（28+212=240 tests）。R4 尚未完成：正式 runner 接线、ICC/MDE/Type-I/power 10,000 MC 重算、R4 预注册和独立审计。唯一任务继续执行 73_D064_R4_EXECUTOR_SPECIFICATION.md。算法提升候选见 75_AGENT_EC_ALGORITHM_UPLIFT_CANDIDATE.md，尚未实现/验证。不得读取真实 Test 逐场景标签/结果；正式 A-3b 继续 HOLD，直到独立审计 ACCEPTED、导师认可 MDE=0.10、用户明确批准和 R4 §9 pre-flight 全通过。
+**最近一次代码/测试核验：** 实现 32b6914b08075775c0d9000fb7b80392c33ec26e；证据 e92e9af964edd6963baed41b48a24073e34f99f8；功效写回/clean-clone 4c4c62fb7213868c3c8fa98f1bdd5b83edc77212；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。接手时重新查询。
+**R4 任务规范：** 73_D064_R4_EXECUTOR_SPECIFICATION.md；独立审计包为 64-R4 + 77 号报告。
 
 ---
 
@@ -1169,3 +1166,14 @@ Formal A-3b remains HOLD. Do not read or tune Test, merge main, start Pilot B/A8
 - split_access.py, ea.py, a3_bridge.py and formal_scenario_generator.py enforce Train-only evolution, Test-restricted ordinary evaluation, no Test payload in public audit return, and atomic one-time final-evaluation ledger.
 - formal_preflight.py is metadata-only and fail-closed; it does not read Test payload.
 - Remaining: connect real formal runner, decide/freeze the outcome-blind five-composition roster, run R4 power/Type-I 10,000 MC, write R4 preregistration, independent review. No real Test labels/results or formal A-3b.
+
+
+## 2026-11-10 — D-076 execution complete; independent R4 review is next
+
+Read first: `64_A3B_PREREGISTRATION_CANDIDATE_R4.md`, `77_D076_R4_AND_SBCG_EXECUTION_REPORT.md`, `experiments/pilot_a3b/results/r4_preflight/preflight.json`, and `sbcg_config.json`.
+
+R4 has a real manifest+ledger formal runner, frozen outcome-blind five-composition analysis, 24-cell 10,000-MC power/Type-I evidence, neutral sign-flip metadata, and an executable pre-flight currently returning HOLD. SBCG implements M1/M2/M3, 14 controls/ablations, budget/cache accounting, and JSON-safe validation selection. Local and clean-clone tests are 290/290; CI regression 42813004959 and power 42813004752 succeeded.
+
+No real Train/Validation algorithm diagnostic or Test access occurred. No performance uplift or ablation claim is supported. Safety non-inferiority margins and the hypervolume reference point remain OPEN.
+
+Only next task: independent R4 review. After ACCEPTED + advisor MDE approval + explicit user approval + real pre-flight, freeze the remaining safety/hypervolume rules before any Train-only SBCG comparison. Keep formal A-3b, Test, Pilot B, A800/ARWM, real LLM APIs, and main merges on HOLD.

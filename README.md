@@ -874,3 +874,14 @@ D-064-A 正式报告：[66_D064A_CONDREC_PRIMARY_ENDPOINT_ANALYSIS.md](66_D064A_
 独立功效复算：固定 34×5、ICC=0.20 时 power=0.8400 [0.8328,0.8472]；但 17 族 m=5、17 族 m=1 的合法不平衡情形 power 降至 0.5777 [0.5680,0.5874]。证据见 `experiments/pilot_a3b/audit_64r3_independent_checks.json`。
 
 **唯一下一任务：** Executor 完成 R4 corrective revision 并提交新的独立复审。正式 A-3b、Test 查看/调参、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和合并 main 继续 HOLD；即使审计通过，仍需导师 MDE 认可、用户批准和真实 pre-flight。
+
+
+## 2026-11-10：D-076 — R4 收尾与 SBCG-NSGA-III 合成验证完成
+
+执行报告：[77_D076_R4_AND_SBCG_EXECUTION_REPORT.md](77_D076_R4_AND_SBCG_EXECUTION_REPORT.md)；R4 候选：[64_A3B_PREREGISTRATION_CANDIDATE_R4.md](64_A3B_PREREGISTRATION_CANDIDATE_R4.md)。
+
+R4 新增 `formal_runner.py`，将 frozen manifest + run ledger 接入 family-level 主/次要分析；冻结五 composition 的既有实现已核验；24 格 ICC/MDE/Type-I 均以 10,000 MC 重算；R4 pre-flight 已真实执行并因审批/正式数据未满足而 HOLD。新增 sign-flip 中性字段、实际 seed 和跨换行环境的 canonical input hash。
+
+SBCG 已实现五维安全目标、零容差硬约束、family×signature×safety-class 分层反例、可行 Pareto 精英档案、Hand-anchor 和无等权和选择；注册 14 个基线/对照/消融臂，补齐唯一评价与缓存计数。**没有运行真实 Train/Validation/Test 算法实验，因此尚不能判断性能提升。**
+
+本地与 clean-clone 均为 290/290 tests；CI regression 42813004959、R4 power 42813004752 均 success。R4 仅 READY_FOR_INDEPENDENT_REVIEW；正式 A-3b、真实 Test、Pilot B、A800/ARWM、真实 LLM API 和 main 合并继续 HOLD。

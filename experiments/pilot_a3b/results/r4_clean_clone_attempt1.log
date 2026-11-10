@@ -1,0 +1,6 @@
+Cloning into '.clean_clone_d076'...
+error: RPC failed; curl 56 schannel: server closed abruptly (missing close_notify)
+error: 24 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output

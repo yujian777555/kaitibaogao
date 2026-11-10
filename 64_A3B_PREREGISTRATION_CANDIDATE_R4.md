@@ -123,7 +123,7 @@ manifest 当前值包含 R4 五 composition 元数据；早期 fb832bcc… 是 r
 
 ## 10. R4 功效与 Type-I 重新校准
 
-实现：`power_r4_design.py`；原始结果：`experiments/pilot_a3b/results/r4_power_20261114/power_r4_design.json`。每格 10,000 MC，base seed 20261114；输出逐格 seed、MCSE 和 95% Wilson 区间。方差与残差形状来自历史六族 diagnostic3 开发数据，属于模拟假设，不是真实 ICC 估计或算法有效性证据。
+实现：`power_r4_design.py`；原始结果：`experiments/pilot_a3b/results/r4_power_20261114/power_r4_design.json`。每格 10,000 MC，base seed 20261114；输出逐格 seed、MCSE 和 95% Wilson 区间。方差与残差形状来自历史六族 diagnostic3 开发数据，属于模拟假设，不是真实 ICC 估计或算法有效性证据。输入同时记录 raw SHA-256 与跨换行环境稳定的 canonical-content SHA-256；当前 canonical 值为 `9b1d90279852843bf93d92e66dab3e726ff1e19bc14b94e07ba260fc34eb68a7`。
 
 | F | ICC | MDE=0.10 power | 95% Wilson CI | Null Type-I |
 |---:|---:|---:|---|---:|

@@ -2,19 +2,17 @@
 
 ## 0A. 最新权威状态（2026-11-10，覆盖下文旧状态）
 
-- 本轮维护前远端 work HEAD：14a8a1bef23f3195436de0f5d1d66803f9c100e7；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 222 / behind 0。
-- CI run 42793004533 @ 14a8a1b：regression success；最近完整测试计数 240 tests 为 run 42791224479 @ f4d8d0d。接手时必须重新核验最新 CI 和测试计数。
-- R4 已有真实代码实现：共享 Student-t/CI、family-level primary analyzer、H2–H5 family-level exploratory + Holm、Train-only evolution guard、ordinary Test guard、public manifest Test payload removal、atomic one-time gate、metadata-only pre-flight。
-- R4 尚未完成：formal runner 接线、outcome-blind primary composition roster 冻结、ICC/MDE/Type-I/power 10,000 MC、R4 预注册、独立复审。
-- 算法候选 75：SBCG-NSGA-III（五维安全 Pareto、分层反例变异、hand-anchor elite archive）。这是**未实现/未验证候选**。历史 AB 在 CondRecSucc 上优于 NSGA-II，但 CorrectEscalation、DamageContainment、AvoidableHarm 明显退化，且低于 Hand FSM；不能声称算法已有综合提升。
-- **唯一执行任务书：** 76_EXECUTOR_R4_AND_ALGORITHM_UPLIFT.md。先完成 R4 阻断项；并行完成 SBCG 源代码审查、模块化实现和合成测试。真实 benchmark Train/Validation 运行须按 75 号候选的审批顺序；Test 不得访问。
-- 正式 A-3b 仍 HOLD；导师 MDE 认可、用户批准、独立审计 ACCEPTED 和 R4 pre-flight 全通过之前，不运行正式实验。
+- D-076 已完成 R4 正式 runner、五 composition 核验、24 格 10,000 MC 功效、R4 预注册与真实 HOLD pre-flight；R4 = **READY_FOR_INDEPENDENT_REVIEW**，不是 ACCEPTED。
+- SBCG-NSGA-III 已实现 M1/M2/M3、14 个对照/消融接口、预算/缓存计数和合成测试；**性能 NOT RUN，尚不能判断是否提升**。
+- 实现提交：32b6914b08075775c0d9000fb7b80392c33ec26e；证据提交：e92e9af964edd6963baed41b48a24073e34f99f8；功效写回/clean-clone：4c4c62fb7213868c3c8fa98f1bdd5b83edc77212；main 保持 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。
+- 本地与 clean-clone 均为 262+28=290 tests OK；CI regression 42813004959 与 R4 power 42813004752 success。
+- 真实 Train/Validation 算法诊断未运行，Test 未读取；pre-flight 因独立审计、导师 MDE、用户批准和正式 outcome ledger 未满足而 HOLD。
+- 唯一任务：将 `64_A3B_PREREGISTRATION_CANDIDATE_R4.md` 与 `77_D076_R4_AND_SBCG_EXECUTION_REPORT.md` 交独立 Reviewer。只有 ACCEPTED、导师 MDE、用户批准和真实 pre-flight 后，才可冻结安全非劣/hypervolume 规则并运行 Train-only 强对照。
 
-
-**最后更新：** 2026-11-10（R4 统计、H2–H5、split guard、pre-flight 初版 CI success）  
-**唯一仓库：** https://github.com/yujian777555/kaitibaogao  
-**研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** R3 REQUEST CHANGES；R4 corrective revision 进行中，已有 240 tests 通过；功效重算和 R4 独立审计待完成；正式 A-3b HOLD  
+**最后更新：** 2026-11-10（D-076 R4/SBCG 实现与验证）
+**唯一仓库：** https://github.com/yujian777555/kaitibaogao
+**研究主线：** Evolutionary Computation for AI Agents
+**当前阶段：** R4 READY_FOR_INDEPENDENT_REVIEW；SBCG synthetic-tested、性能未验证；正式 A-3b HOLD
 **最终题目：** 尚未确定  
 **最终创新点：** 尚未确定
 
@@ -2289,3 +2287,18 @@ Executor 完成 R4 corrective revision 并请求新的独立复审。修复范�
 你是本项目的 Executor。先重新核验远端工作分支和 main HEAD，读取 `72_64R3_INDEPENDENT_REVIEW.md`、`64_A3B_PREREGISTRATION_CANDIDATE_R3.md`、`experiments/pilot_a3b/audit_64r3_independent_checks.json` 及其实际代码。当前审计结论为 REQUEST CHANGES，不得把 189 个测试通过或 71 号 Executor 报告当作 ACCEPTED。
 
 只执行 R4 corrective revision：保留 R2/R3 历史文件，修复 72 号 §11 的全部阻断项；不得运行正式 A-3b，不得读取或调参 Test，不得修改 main，不得启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox。所有缺失数据测试必须调用真实处理函数；不平衡功效必须保存配置、seed、MCSE/CI 和原始输出；Test 隔离用合成 sentinel 验证。完成后更新 README、05_DECISION_LOG、SESSION_HANDOFF、NEXT_SESSION_PROMPT，提交并核验远端，再交独立 Reviewer 复审。即使 ACCEPTED，仍需导师 MDE 认可、用户明确批准和真实 pre-flight。
+
+
+## 63. D-076 执行完成记录（2026-11-10）
+
+### 交付
+- `64_A3B_PREREGISTRATION_CANDIDATE_R4.md`
+- `77_D076_R4_AND_SBCG_EXECUTION_REPORT.md`
+- `formal_runner.py`、`run_r4_preflight.py`、`sbcg.py`、`sbcg_runner.py`、`sbcg_experiment.py`、`sbcg_config.json`
+- `results/r4_preflight/`、`results/r4_runner_synthetic/`、`results/r4_power_20261114/`、`results/r4_clean_clone.log`
+
+### 状态
+R4 = READY_FOR_INDEPENDENT_REVIEW。SBCG = IMPLEMENTED + SYNTHETIC TESTED，性能 NOT RUN。290/290 本地及 clean-clone 测试通过；CI regression/power success。pre-flight 当前 HOLD，未伪造任何批准。
+
+### 唯一下一任务
+提交 R4 独立复审。复审 ACCEPTED、导师 MDE=0.10 认可、用户批准和真实 pre-flight 前，禁止真实 Train/Validation 算法诊断、Test 访问、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API 和 main 合并。
