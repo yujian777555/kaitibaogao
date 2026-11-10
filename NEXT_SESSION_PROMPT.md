@@ -1,5 +1,8 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+> **最新权威状态（2026-11-10 D-076 独立复审）：** 当前分支在复审前 HEAD=`3d2dacf0871ab0f030084f6ed2d62e17ba524ddd`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead 227 / behind 0。D-076 CI 42814630988 success（执行报告记录 290/290），但独立复审结果为 **R4 REQUEST CHANGES；SBCG NOT READY FOR TRAIN/VALIDATION PERFORMANCE DIAGNOSTICS**。必须先读 `78_D076_INDEPENDENT_REVIEW.md`。关键阻断：R4 pre-flight 将 pre-run 与 post-run outcome checks 混为不可达 GO 的门；power 缺 technical-missing 情景且 F40/ICC=.20 Type-I=0.0547 [0.0504,0.0593]；one-time gate 未闭合到生产入口；SBCG NSGA-III projection/normalization/niche count 非 canonical；M1 f3 偏离冻结公式；Validation selection 实际基于 Train；预算和 cache-hit 计数需修复。**唯一任务 D-078 corrective revision**。不得运行真实 Train/Validation 算法诊断、正式 A-3b 或 Test；不得启动 A800/ARWM、真实 LLM API、Pilot B、UndoBench TEST、ThinkingBox；不得合并 main。修复后重新提交独立复审。
+
+
 > **最新权威执行指令（2026-11-10，覆盖本文所有较早状态）：** D-076 已完成 R4 正式 runner、五 composition 核验、24 格 10,000 MC 功效、R4 预注册与真实 HOLD pre-flight，并完成 SBCG-NSGA-III 的 M1/M2/M3、14 个对照/消融接口及合成测试。R4 = READY_FOR_INDEPENDENT_REVIEW，不是 ACCEPTED；SBCG 性能 NOT RUN，尚不能判断是否提升。当前唯一任务是把 `64_A3B_PREREGISTRATION_CANDIDATE_R4.md` 与 `77_D076_R4_AND_SBCG_EXECUTION_REPORT.md` 交独立 Reviewer。不得读取真实 Test、运行真实 Train/Validation 算法诊断或合并 main。
 
 > **强制规则：本文件是下一会话唯一权威接管提示词。每次实质性研究、实验、代码、协议、审计或决策发生变化后，必须在同一轮更新本文件，并同步 README、05_DECISION_LOG.md、SESSION_HANDOFF.md。不得只在聊天中交代进展，不得让接管提示词落后于仓库事实。**

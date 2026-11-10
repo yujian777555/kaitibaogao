@@ -1,5 +1,15 @@
 # SESSION HANDOFF — 开题研究项目
 
+## 0B. 最新独立复审状态（2026-11-10，覆盖 D-076 执行报告中的 READY_FOR_INDEPENDENT_REVIEW）
+
+- D-076 执行提交：`3d2dacf0871ab0f030084f6ed2d62e17ba524ddd`；main：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；复审前 ahead 227 / behind 0。
+- CI run 42814630988 success；执行报告记录 290/290。复审未重新运行测试，也未运行真实 benchmark。
+- 独立复审结论见 `78_D076_INDEPENDENT_REVIEW.md`：**R4 REQUEST CHANGES；SBCG NOT READY FOR TRAIN/VALIDATION PERFORMANCE DIAGNOSTICS**。
+- 主要阻断：pre-flight pre-run/post-run lifecycle circularity；power 未模拟 technical missing，F=40/ICC=.20 Type-I=0.0547 [0.0504,0.0593]；one-time gate 未闭合到生产分析入口；NSGA-III niching 投影公式/normalization/niche count 非 canonical；M1 f3 公式偏离 75 号候选；Validation 选择仍在 Train archive 上；budget/cache 统计需修复。
+- **当前唯一任务：D-078 corrective revision**，先修复 78 号报告列出的阻断项并重新提交独立复审。
+- 正式 A-3b、真实 Train/Validation 性能诊断、Test、Pilot B、A800/ARWM、真实 LLM API 继续 HOLD。没有任何新算法性能数据。
+
+
 ## 0A. 最新权威状态（2026-11-10，覆盖下文旧状态）
 
 - D-076 已完成 R4 正式 runner、五 composition 核验、24 格 10,000 MC 功效、R4 预注册与真实 HOLD pre-flight；R4 = **READY_FOR_INDEPENDENT_REVIEW**，不是 ACCEPTED。

@@ -885,3 +885,14 @@ R4 新增 `formal_runner.py`，将 frozen manifest + run ledger 接入 family-le
 SBCG 已实现五维安全目标、零容差硬约束、family×signature×safety-class 分层反例、可行 Pareto 精英档案、Hand-anchor 和无等权和选择；注册 14 个基线/对照/消融臂，补齐唯一评价与缓存计数。**没有运行真实 Train/Validation/Test 算法实验，因此尚不能判断性能提升。**
 
 本地与 clean-clone 均为 290/290 tests；CI regression 42813004959、R4 power 42813004752 均 success。R4 仅 READY_FOR_INDEPENDENT_REVIEW；正式 A-3b、真实 Test、Pilot B、A800/ARWM、真实 LLM API 和 main 合并继续 HOLD。
+
+
+## 2026-11-10：D-076 独立复审 — REQUEST CHANGES
+
+独立复审基线 `3d2dacf0871ab0f030084f6ed2d62e17ba524ddd`。CI 42814630988 success（执行报告记录 290/290）；本轮未运行真实算法性能实验。
+
+- R4 阻断：pre-flight 将 pre-run 授权和 post-run Test outcome 完整性混为一门，当前状态不可达 GO；power grid 未模拟 technical missing，F=40 / ICC=0.20 的 Type-I=0.0547（95% Wilson CI [0.0504,0.0593]）需调查；one-time gate 尚未与生产分析入口闭环。
+- SBCG 阻断：NSGA-III 参考方向投影/归一化/niche count 不符合 canonical NSGA-III；M1 f3 与 75 号候选公式不一致；Validation 选择实际在 Train archive 上执行；矩阵预算与 cache-hit 统计需修正。
+- 结论：R4 **REQUEST CHANGES**；SBCG **NOT READY FOR TRAIN/VALIDATION PERFORMANCE DIAGNOSTICS**。正式 A-3b、真实 Train/Validation 算法诊断和 Test 均继续 HOLD。
+
+详见 [78_D076_INDEPENDENT_REVIEW.md](78_D076_INDEPENDENT_REVIEW.md)。

@@ -1430,3 +1430,25 @@ R4 状态只能是 **READY_FOR_INDEPENDENT_REVIEW**，提交独立 Reviewer，�
 
 ### OPEN
 安全非劣界值和 hypervolume reference point 尚未冻结；导师 MDE、用户批准和独立 R4 ACCEPTED 均未取得。唯一下一任务是 R4 独立复审；审批满足后才可运行 Train-only SBCG 强对照/消融。
+
+
+## 决策 D-078：D-076 独立复审 REQUEST CHANGES（2026-11-10）
+
+复审基线：`3d2dacf0871ab0f030084f6ed2d62e17ba524ddd`；main 未变为 `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。CI run 42814630988 success；执行报告记录 290/290；本轮无真实算法性能数据。
+
+### R4 结论：REQUEST CHANGES
+1. `run_current_preflight` 固定 paired_rows_valid=false、数据质量计数 None、observed families=0、composition counts={}、design_deviation=true；正式 preflight 又要求这些 outcome-dependent 字段通过，同时要求 Test access log=0、one-time ledger=UNUSED，导致 pre-run GO 生命周期循环。
+2. Power 24 格只覆盖 F × ICC × null/MDE，固定每族 5 compositions，未模拟 technical missing / composition attrition。F=40、ICC=.20 的 null Type-I=0.0547，95% Wilson CI [0.0504,0.0593]，需要调查。
+3. `consume_final_evaluation_once` 未要求 preflight GO / CI 状态；`formal_runner` 未与一次性 gate 形成唯一生产调用链。
+
+### SBCG 结论：NOT READY FOR TRAIN/VALIDATION PERFORMANCE DIAGNOSTICS
+1. 新旧 niching 投影均未除以方向向量平方范数；新 runner 的归一化和 niche count 也不是 canonical NSGA-III；legacy NSGA-III 还使用 min(sum(objectives))。
+2. M1 f3 实际为 `unnec_esc + unnec_actions_r12/10`，偏离 75 号候选的 `UnnecessaryActionCost`。
+3. `run_sbcg_evolution` 在 Train archive 上调用 `select_validation_candidate`，Validation 流程未接通。
+4. 14 臂仅注册/单臂执行，统一预算 orchestrator 尚缺；offspring 二次 cache lookup 夸大 cache_hits。
+
+### 决策
+- 新增 `78_D076_INDEPENDENT_REVIEW.md`，结论 REQUEST CHANGES。
+- 正式 A-3b、真实 Train/Validation 算法诊断、Test、Pilot B、A800/ARWM、真实 LLM API 继续 HOLD。
+- 唯一下一任务：D-078 corrective revision，修复上述阻断并重新独立复审。
+
