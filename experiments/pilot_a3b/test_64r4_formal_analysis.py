@@ -10,10 +10,12 @@ PROVENANCE = {
     "manifest_sha256": "a" * 64,
     "code_sha256": "b" * 64,
     "git_head": "c" * 40,
+    "primary_composition_ids": ["C00", "C01", "C02", "C03", "C04"],
 }
 
 def analyze_primary_endpoint(*args, **kwargs):
     kwargs.setdefault("provenance", PROVENANCE)
+    kwargs.setdefault("primary_composition_ids", PROVENANCE["primary_composition_ids"])
     return _analyze_primary_endpoint(*args, **kwargs)
 
 
@@ -58,6 +60,13 @@ class FormalPrimaryAnalysisTests(unittest.TestCase):
         self.assertTrue(all(n == 5 for n in result["family_composition_counts"].values()))
         self.assertAlmostEqual(result["family_equal_weight_effect"], 1.0)
         self.assertEqual(result["student_t"]["df"], 39)
+
+    def test_wrong_primary_composition_roster_fails_closed(self):
+        roster, rows = fixture()
+        wrong_roster = [dict(item) for item in roster]
+        wrong_roster[0]["composition_id"] = "C99"
+        with self.assertRaisesRegex(ValueError, "composition IDs do not match"):
+            analyze_primary_endpoint(rows, wrong_roster, SEEDS)
 
     def test_missing_provenance_withholds_confirmatory_inference(self):
         roster, rows = fixture()
