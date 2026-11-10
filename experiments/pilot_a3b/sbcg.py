@@ -140,7 +140,11 @@ class EliteArchive:
 def select_validation_candidate(records):
     """Validation-only feasibility -> Pareto -> coverage -> worst-family selection."""
     if not records:
-        return {"status": "HOLD", "candidate": None, "reason": "no Validation candidates"}
+        return {
+            "status": "HOLD", "candidate": None,
+            "reason": "no Validation candidates",
+            "rule": "Validation feasibility gate; no candidate available",
+        }
     if any(record.source_split != "validation" for record in records):
         raise ValueError("Validation selector accepts Validation-evaluated candidates only")
     feasible = [record for record in records if record.feasible]
@@ -149,6 +153,7 @@ def select_validation_candidate(records):
             "status": "HOLD",
             "candidate": None,
             "reason": "no candidate satisfies the frozen hard safety constraints",
+            "rule": "zero-tolerance hard safety feasibility before Pareto selection",
         }
     candidates = _non_dominated(feasible)
     chosen = min(
