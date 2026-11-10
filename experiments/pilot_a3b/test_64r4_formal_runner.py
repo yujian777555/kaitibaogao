@@ -94,6 +94,8 @@ class FormalRunnerTests(unittest.TestCase):
                 "user_approved": True,
                 "ci_conclusion": "success",
                 "tests_passed": True,
+                "manifest_sha256": manifest["manifest_sha256"],
+                "code_sha256": code_sha,
             }
             preflight = {"phase": "PRE_RUN_AUTHORIZATION", "status": "GO"}
             evaluated_ledger, receipt = execute_final_evaluation_once(

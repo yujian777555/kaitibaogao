@@ -1,4 +1,5 @@
 """R4 synthetic tests for split access and one-time final evaluation."""
+import json
 import tempfile
 import unittest
 from pathlib import Path
