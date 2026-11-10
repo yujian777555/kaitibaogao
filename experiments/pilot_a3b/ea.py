@@ -242,46 +242,120 @@ def reference_dirs(m=3, p=6):
     return dirs
 
 
-def niching_select(objs, front, dirs):
-    """NSGA-III-style: associate to nearest reference direction, then niche
-    counting with closest-member picking (our reimplementation)."""
+def _solve_linear_system(matrix, rhs):
+    """Small deterministic Gaussian elimination with partial pivoting."""
+    n = len(rhs)
+    aug = [list(map(float, matrix[i])) + [float(rhs[i])] for i in range(n)]
+    for col in range(n):
+        pivot = max(range(col, n), key=lambda row: abs(aug[row][col]))
+        if abs(aug[pivot][col]) < 1e-12:
+            raise ArithmeticError("singular extreme-point hyperplane")
+        aug[col], aug[pivot] = aug[pivot], aug[col]
+        scale = aug[col][col]
+        aug[col] = [value / scale for value in aug[col]]
+        for row in range(n):
+            if row == col:
+                continue
+            factor = aug[row][col]
+            if factor:
+                aug[row] = [a - factor * b for a, b in zip(aug[row], aug[col])]
+    return [aug[i][-1] for i in range(n)]
+
+
+def _nsga3_normalize(objs):
+    """Canonical NSGA-III ideal/extreme-point/intercept normalization."""
+    if not objs or not objs[0]:
+        raise ValueError("NSGA-III requires a non-empty objective matrix")
     m = len(objs[0])
+    if any(len(row) != m for row in objs):
+        raise ValueError("objective dimensions are inconsistent")
+    ideal = [min(row[j] for row in objs) for j in range(m)]
+    shifted = [[float(row[j]) - ideal[j] for j in range(m)] for row in objs]
+
+    extremes = []
+    for objective in range(m):
+        weights = [1e-6] * m
+        weights[objective] = 1.0
+        index = min(
+            range(len(shifted)),
+            key=lambda i: max(shifted[i][j] / weights[j] for j in range(m)),
+        )
+        extremes.append(shifted[index])
+
+    intercepts = None
+    try:
+        coefficients = _solve_linear_system(extremes, [1.0] * m)
+        candidate = [1.0 / value for value in coefficients]
+        if all(math.isfinite(value) and value > 1e-12 for value in candidate):
+            intercepts = candidate
+    except (ArithmeticError, ZeroDivisionError):
+        intercepts = None
+
+    if intercepts is None:
+        intercepts = [max(row[j] for row in shifted) for j in range(m)]
+    intercepts = [value if value > 1e-12 else 1.0 for value in intercepts]
+    normalized = [[shifted[i][j] / intercepts[j] for j in range(m)] for i in range(len(objs))]
+    return normalized, ideal, intercepts
+
+
+def _associate_reference_directions(normalized, dirs):
+    associations, distances = [], []
+    for vector in normalized:
+        best_direction, best_distance = 0, float("inf")
+        for direction_index, direction in enumerate(dirs):
+            norm_sq = sum(value * value for value in direction)
+            if norm_sq <= 0:
+                raise ValueError("reference direction must be non-zero")
+            projection = sum(vector[k] * direction[k] for k in range(len(vector))) / norm_sq
+            distance = math.sqrt(max(
+                0.0,
+                sum((vector[k] - projection * direction[k]) ** 2 for k in range(len(vector))),
+            ))
+            if distance < best_distance:
+                best_direction, best_distance = direction_index, distance
+        associations.append(best_direction)
+        distances.append(best_distance)
+    return associations, distances
+
+
+def niching_select(objs, front, dirs, selected=(), rng=None):
+    """Canonical NSGA-III splitting-front niching using full-population normalization.
+
+    Earlier accepted fronts contribute to niche counts. Empty niches select their
+    closest associated member; occupied niches select a seeded random member.
+    """
     if not front:
         return []
-    mn = [min(objs[i][d] for i in front) for d in range(m)]
-    mx = [max(objs[i][d] for i in front) for d in range(m)]
-    span = [(mx[d] - mn[d]) or 1.0 for d in range(m)]
-    assoc = {}
-    for i in front:
-        z = [(objs[i][d] - mn[d]) / span[d] for d in range(m)]
-        best, bestd = 0, float("inf")
-        for di, dvec in enumerate(dirs):
-            t = sum(z[k] * dvec[k] for k in range(m))
-            perp = math.sqrt(max(0.0, sum((z[k] - t * dvec[k]) ** 2 for k in range(m))))
-            if perp < bestd:
-                best, bestd = di, perp
-        assoc[i] = best
-    by_dir = defaultdict(list)
-    for i, d in assoc.items():
-        by_dir[d].append(i)
+    if not dirs:
+        raise ValueError("NSGA-III requires at least one reference direction")
+    normalized, _ideal, _intercepts = _nsga3_normalize(objs)
+    associations, distances = _associate_reference_directions(normalized, dirs)
+    niche_count = [0] * len(dirs)
+    for index in selected:
+        if index < 0 or index >= len(objs):
+            raise IndexError("selected NSGA-III index is out of range")
+        niche_count[associations[index]] += 1
+
+    remaining_by_direction = defaultdict(list)
+    for index in front:
+        remaining_by_direction[associations[index]].append(index)
+    for members in remaining_by_direction.values():
+        members.sort()
+    rng = rng or random.Random(0)
     chosen = []
-    remaining = set(front)
-    while remaining and len(chosen) < len(front):
-        # niche counting: pick from the least occupied non-empty niche
-        order = sorted(by_dir, key=lambda d: (len(by_dir[d]), d))
-        progressed = False
-        for d in order:
-            cand = [i for i in by_dir[d] if i in remaining]
-            if not cand:
-                continue
-            pick = min(cand, key=lambda i: sum(objs[i]))
-            chosen.append(pick)
-            remaining.discard(pick)
-            progressed = True
+    while len(chosen) < len(front):
+        available = [d for d, members in remaining_by_direction.items() if members]
+        if not available:
             break
-        if not progressed:
-            chosen.extend(sorted(remaining))
-            break
+        direction = min(available, key=lambda d: (niche_count[d], d))
+        candidates = remaining_by_direction[direction]
+        if niche_count[direction] == 0:
+            pick = min(candidates, key=lambda i: (distances[i], i))
+        else:
+            pick = rng.choice(candidates)
+        candidates.remove(pick)
+        chosen.append(pick)
+        niche_count[direction] += 1
     return chosen
 
 
@@ -439,7 +513,7 @@ def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
                 else:
                     remain = pop_size - len(picked)
                     if method == "nsga3":
-                        picked.extend(niching_select(objs_all, f, reference_dirs())[:remain])
+                        picked.extend(niching_select(objs_all, f, reference_dirs(), selected=picked, rng=rng)[:remain])
                     else:
                         cd = crowding_distance(objs_all, f)
                         picked.extend(sorted(f, key=lambda i: -cd[i])[:remain])

@@ -12,7 +12,7 @@ from collections import Counter, defaultdict
 
 from a3_bridge import hand_fsm, repair_fsm
 from contract_validator import validate_genome
-from ea import crossover, crowding_distance, fast_non_dominated_sort, mutate, reference_dirs
+from ea import crossover, crowding_distance, fast_non_dominated_sort, mutate, niching_select, reference_dirs
 from sbcg import (
     EliteArchive,
     StratifiedCounterexamplePool,
@@ -29,6 +29,7 @@ def _record_view(record):
         "constraints": dict(record.constraints),
         "per_family_condrec": dict(record.per_family_condrec),
         "fingerprint": record.fingerprint,
+        "source_split": record.source_split,
         "valid_genome": record.valid_genome,
         "feasible": record.feasible,
         "family_coverage": record.family_coverage,
@@ -36,73 +37,41 @@ def _record_view(record):
     }
 
 
-def _niching_records(records, indices, dirs, needed):
-    """Reference-direction niching without sum-of-objectives scalarization."""
-    if not indices:
-        return []
-    dimensions = len(records[0].objectives)
-    minima = [min(records[i].objectives[d] for i in indices) for d in range(dimensions)]
-    maxima = [max(records[i].objectives[d] for i in indices) for d in range(dimensions)]
-    spans = [(maxima[d] - minima[d]) or 1.0 for d in range(dimensions)]
-    normalized = {
-        i: [(records[i].objectives[d] - minima[d]) / spans[d] for d in range(dimensions)]
-        for i in indices
-    }
-    by_direction = defaultdict(list)
-    for i in indices:
-        z = normalized[i]
-        best_direction, best_distance = 0, float("inf")
-        for di, direction in enumerate(dirs):
-            projection = sum(z[k] * direction[k] for k in range(dimensions))
-            distance = max(0.0, sum((z[k] - projection * direction[k]) ** 2 for k in range(dimensions)))
-            if distance < best_distance:
-                best_direction, best_distance = di, distance
-        by_direction[best_direction].append(i)
-    remaining = set(indices)
-    loads = Counter()
-    chosen = []
-    while remaining and len(chosen) < needed:
-        available = [d for d, members in by_direction.items() if any(i in remaining for i in members)]
-        if not available:
-            break
-        direction = min(available, key=lambda d: (loads[d], d))
-        candidates = [i for i in by_direction[direction] if i in remaining]
-        pick = min(candidates, key=lambda i: (
-            max(normalized[i]), tuple(records[i].objectives), records[i].fingerprint,
-        ))
-        chosen.append(pick)
-        remaining.remove(pick)
-        loads[direction] += 1
-    return chosen
+def _niching_records(records, indices, dirs, needed, selected=(), rng=None):
+    """Use canonical NSGA-III association and niche counts across accepted fronts."""
+    objectives = [record.objectives for record in records]
+    return niching_select(objectives, indices, dirs, selected=selected, rng=rng)[:needed]
 
 
-def _select_survivor_records(records, count, optimizer, dirs):
-    """Select records directly; feasibility always precedes Pareto selection."""
+def _select_survivor_records(records, count, optimizer, dirs, rng=None):
+    """Feasibility first, then NSGA-II crowding or canonical NSGA-III niching."""
     feasible = [record for record in records if record.feasible]
     infeasible = [record for record in records if not record.feasible]
     chosen = []
+    selected_indices = []
     if feasible:
-        fronts = fast_non_dominated_sort([record.objectives for record in feasible])
+        objectives = [record.objectives for record in feasible]
+        fronts = fast_non_dominated_sort(objectives)
         for front_indices in fronts:
             front = [feasible[i] for i in front_indices]
             if len(chosen) + len(front) <= count:
                 chosen.extend(front)
+                selected_indices.extend(front_indices)
                 continue
             needed = count - len(chosen)
             if optimizer == "nsga2":
-                distances = crowding_distance(
-                    [record.objectives for record in feasible], front_indices
-                )
+                distances = crowding_distance(objectives, front_indices)
                 ordered = sorted(
                     front_indices,
                     key=lambda i: (-distances[i], feasible[i].fingerprint),
                 )
-                chosen.extend(feasible[i] for i in ordered[:needed])
+                picked = ordered[:needed]
             else:
-                local_indices = list(range(len(front)))
-                local_dirs = dirs
-                picked = _niching_records(front, local_indices, local_dirs, needed)
-                chosen.extend(front[i] for i in picked)
+                picked = _niching_records(
+                    feasible, front_indices, dirs, needed,
+                    selected=selected_indices, rng=rng,
+                )
+            chosen.extend(feasible[i] for i in picked)
             break
     if len(chosen) < count:
         infeasible.sort(key=lambda record: (
@@ -259,9 +228,10 @@ def run_sbcg_evolution(
             offspring.append(child)
             pending.append((audit, child, record, valid))
 
-        combined = records + [evaluate(child) for child in offspring]
-        combined = [record for record in combined if record is not None]
-        records = _select_survivor_records(combined, pop_size, optimizer, directions)
+        # Reuse the exact evaluated offspring records; a second cache lookup would
+        # inflate cache_hits/evaluation_calls without performing an evaluation.
+        combined = records + [item[2] for item in pending]
+        records = _select_survivor_records(combined, pop_size, optimizer, directions, rng=rng)
         population = [record.fsm for record in records]
         if archive is not None:
             archive.update(combined)
@@ -292,12 +262,13 @@ def run_sbcg_evolution(
         })
 
     final_records = archive.records if archive is not None and archive.records else records
-    selection = select_validation_candidate(final_records)
-    selected = selection["candidate"]
+    train_source = "train_elite_archive" if archive is not None and archive.records else "train_final_population"
+    # Train search must not masquerade as Validation selection. Validation is a
+    # separate, explicit evaluation stage in sbcg_experiment.py.
     selection = {
-        **selection,
-        "candidate": _record_view(selected) if selected is not None else None,
-        "input": "train_elite_archive" if archive is not None and archive.records else "train_final_population",
+        "status": "PENDING_VALIDATION",
+        "candidate": None,
+        "input": train_source,
         "validation_used": False,
     }
     return {
@@ -327,7 +298,10 @@ def run_sbcg_evolution(
         "mutation_audit": mutation_audit,
         "archive": [_record_view(record) for record in archive.records] if archive is not None else [],
         "final_records": [_record_view(record) for record in records],
+        "train_candidates": [_record_view(record) for record in final_records],
+        "train_candidate_fsms": [record.fsm for record in final_records],
+        "train_feasible_candidates": sum(record.feasible for record in final_records),
         "selection": selection,
-        "best": selected.fsm if selected is not None else None,
+        "best": None,
         "final_population": population,
     }

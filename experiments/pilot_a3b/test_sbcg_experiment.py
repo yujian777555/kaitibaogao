@@ -7,6 +7,7 @@ from ea import run_evolution
 from sbcg import make_shared_initial_pool
 from sbcg_experiment import (
     algorithm_specs,
+    run_algorithm_matrix,
     reflection_proxy_fsm,
     rule_based_fsm,
     run_algorithm_arm,
@@ -15,7 +16,8 @@ from sbcg import fsm_fingerprint
 
 
 SCENARIO = {"scenario_id": "train|synthetic", "split": "train", "task": "f1"}
-VERDICTS = {"train|synthetic": {"class": "R1"}}
+VALIDATION_SCENARIO = {"scenario_id": "validation|synthetic", "split": "validation", "task": "f1"}
+VERDICTS = {"train|synthetic": {"class": "R1"}, "validation|synthetic": {"class": "R1"}}
 
 
 def fake_metrics(fsm, scenarios, verdicts, _weights=None):
@@ -79,15 +81,24 @@ class ComparisonMatrixTests(unittest.TestCase):
 
     def test_fixed_baseline_has_explicit_episode_and_unique_evaluation_counts(self):
         spec = next(s for s in algorithm_specs() if s.name == "Hand FSM")
-        with patch("sbcg_experiment.evaluate_controller", side_effect=fake_metrics):
+        with patch("sbcg_experiment.evaluate_sbcg_candidate") as mocked:
+            mocked.return_value = type("Record", (), {
+                "source_split": "validation", "fingerprint": "fixed",
+                "objectives": (0.5, 0.0, 0.2, 0.0, 0.0),
+                "constraints": {"duplicate": 0.0, "sla_violation": 0.0, "invariant_violation": 0.0},
+                "family_coverage": 1, "worst_family_condrec": 0.5,
+                "metrics": {"cond_rec": 0.5}, "feasible": True, "fsm": hand_fsm(),
+            })()
             result = run_algorithm_arm(
                 spec, make_shared_initial_pool(3, size=4), [SCENARIO], VERDICTS,
                 eval_budget=1, seed=3, pop_size=2, generations=0,
+                validation_scenarios=[VALIDATION_SCENARIO],
             )
-        self.assertEqual(result["episodes"], 1)
-        self.assertEqual(result["unique_evaluations"], 1)
+        self.assertEqual(result["episodes"], 0)
+        self.assertEqual(result["unique_evaluations"], 0)
         self.assertEqual(result["cache_hits"], 0)
-        self.assertEqual(result["information_scope"], "train_only_no_test")
+        self.assertEqual(result["validation_calls"], 1)
+        self.assertEqual(result["information_scope"], "validation_only_no_test")
 
     def test_test_sentinel_is_rejected_before_fixed_evaluation(self):
         spec = next(s for s in algorithm_specs() if s.name == "Hand FSM")

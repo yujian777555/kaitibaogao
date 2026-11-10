@@ -30,7 +30,7 @@ def sbcg_objectives(metrics):
     return (
         1.0 - metrics["cond_rec"],
         float(metrics["avoid_resid"]),
-        float(metrics["unnec_esc"]) + float(metrics["unnec_actions_r12"]) / 10.0,
+        float(metrics["unnec_actions_r12"]),
         1.0 - metrics["corr_esc"],
         1.0 - metrics["containment"],
     )
@@ -63,6 +63,7 @@ class CandidateRecord:
     fingerprint: str
     valid_genome: bool
     metrics: dict = field(default_factory=dict)
+    source_split: str = "unknown"
 
     @property
     def feasible(self):
@@ -137,10 +138,11 @@ class EliteArchive:
 
 
 def select_validation_candidate(records):
-    """Feasibility -> Pareto -> coverage -> worst family -> frozen tie-break.
-
-    No sum or equal-weight scalarization is used.
-    """
+    """Validation-only feasibility -> Pareto -> coverage -> worst-family selection."""
+    if not records:
+        return {"status": "HOLD", "candidate": None, "reason": "no Validation candidates"}
+    if any(record.source_split != "validation" for record in records):
+        raise ValueError("Validation selector accepts Validation-evaluated candidates only")
     feasible = [record for record in records if record.feasible]
     if not feasible:
         return {
@@ -300,6 +302,10 @@ def evaluate_sbcg_candidate(
     use_five_objectives=True,
 ):
     """Evaluate one controller and construct its feasibility/objective record."""
+    splits = {scenario.get("split") for scenario in scenarios}
+    if len(splits) != 1 or not splits.issubset({"train", "validation"}):
+        raise ValueError("candidate evaluation requires one explicit Train or Validation split")
+    source_split = next(iter(splits))
     metrics = evaluate_controller(fsm, scenarios, verdicts, None)
     if scenario_families is None:
         scenario_families = {
@@ -329,6 +335,7 @@ def evaluate_sbcg_candidate(
         fingerprint=fsm_fingerprint(fsm),
         valid_genome=not validity.genome_invalid and validity.rule_invalid == 0,
         metrics=metrics,
+        source_split=source_split,
     )
 
 
@@ -344,6 +351,7 @@ def validation_selection_report(records):
             "constraints": dict(candidate.constraints),
             "per_family_condrec": dict(candidate.per_family_condrec),
             "fingerprint": candidate.fingerprint,
+            "source_split": candidate.source_split,
             "family_coverage": candidate.family_coverage,
             "worst_family_condrec": candidate.worst_family_condrec,
         }

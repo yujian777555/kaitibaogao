@@ -72,14 +72,16 @@ class EvolutionLoopTests(unittest.TestCase):
         self.assertTrue(result["config"]["use_five_objectives"])
         self.assertTrue(result["config"]["use_stratified_counterexamples"])
         self.assertTrue(result["config"]["use_elite_archive"])
-        self.assertEqual(result["selection"]["status"], "SELECTED")
-        self.assertEqual(len(result["selection"]["candidate"]["objectives"]), 5)
+        self.assertEqual(result["selection"]["status"], "PENDING_VALIDATION")
+        self.assertIsNone(result["selection"]["candidate"])
+        self.assertTrue(result["train_candidates"])
+        self.assertEqual(len(result["train_candidates"][0]["objectives"]), 5)
         self.assertEqual(result["reference_direction_count"], 35)
 
     def test_m1_ablation_uses_only_legacy_three_objectives(self):
         result = run_with("sbcg.evaluate_controller", use_five_objectives=False)
         self.assertFalse(result["config"]["use_five_objectives"])
-        self.assertEqual(len(result["selection"]["candidate"]["objectives"]), 3)
+        self.assertEqual(len(result["train_candidates"][0]["objectives"]), 3)
 
     def test_m2_ablation_uses_standard_mutation(self):
         result = run_with("sbcg.evaluate_controller", use_stratified_counterexamples=False)
@@ -134,7 +136,8 @@ class EvolutionLoopTests(unittest.TestCase):
                 make_shared_initial_pool(41, size=12), SCENARIOS, VERDICTS,
                 pop_size=4, generations=1, eval_budget=16, seed=7,
             )
-        self.assertEqual(result["selection"]["status"], "HOLD")
+        self.assertEqual(result["selection"]["status"], "PENDING_VALIDATION")
+        self.assertEqual(result["train_feasible_candidates"], 0)
 
     def test_invalid_optimizer_or_test_split_fails_before_fitness(self):
         with patch("sbcg.evaluate_controller", side_effect=AssertionError("fitness must not run")):

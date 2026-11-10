@@ -45,6 +45,7 @@ def record(name, objectives, *, feasible=True, family_values=None):
         per_family_condrec=family_values or {"f1": 0.5},
         fingerprint=name,
         valid_genome=True,
+        source_split="validation",
     )
 
 
@@ -54,7 +55,7 @@ class ObjectiveTests(unittest.TestCase):
         self.assertEqual(len(result), 5)
         self.assertAlmostEqual(result[0], 0.5)
         self.assertAlmostEqual(result[1], 0.2)
-        self.assertAlmostEqual(result[2], 0.1 + 0.03)
+        self.assertAlmostEqual(result[2], 0.3)
         self.assertAlmostEqual(result[3], 0.6)
         self.assertAlmostEqual(result[4], 0.3)
 
@@ -151,6 +152,12 @@ class ArchiveTests(unittest.TestCase):
             record("rare-family", [0.4, 0.4], family_values={"f2": 0.8}),
         ])
         self.assertIn("rare-family", {r.fingerprint for r in archive.records})
+
+    def test_validation_selector_rejects_train_candidate_records(self):
+        train_record = record("train", [0.1, 0.2])
+        train_record.source_split = "train"
+        with self.assertRaisesRegex(ValueError, "Validation-evaluated"):
+            select_validation_candidate([train_record])
 
     def test_validation_returns_hold_when_no_feasible_candidate_exists(self):
         result = select_validation_candidate([record("bad", [0.1, 0.1], feasible=False)])
