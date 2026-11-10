@@ -45,7 +45,7 @@ class StudentTBoundaryTests(unittest.TestCase):
         result = student_t_summary(np.array([1., 2., 3., 4., 5.]))
         self.assertAlmostEqual(result["t"], 4.242640687119285, places=10)
         self.assertEqual(result["df"], 4)
-        self.assertAlmostEqual(result["p_two_sided"], 0.013846832988859, places=9)
+        self.assertAlmostEqual(result["p_two_sided"], 0.013235599563683, places=9)
 
     def test_power_simulation_uses_same_zero_variance_rule(self):
         rows = np.zeros((3, 34), dtype=float)
