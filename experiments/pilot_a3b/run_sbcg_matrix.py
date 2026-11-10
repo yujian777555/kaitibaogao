@@ -12,6 +12,7 @@ ROOT = HERE.parents[1]
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
+from a3_bridge import scenario_verdict
 from formal_scenario_generator import build_candidate_manifest
 from sbcg_experiment import run_algorithm_matrix, write_algorithm_matrix_outputs
 from split_access import scenarios_for_split
@@ -53,14 +54,15 @@ def run(outdir, seeds=(411, 522, 633), pop_size=8, generations=5, initial_pool_s
     if any(row.get("split") != "validation" for row in validation):
         raise RuntimeError("non-Validation scenario entered the selection split")
 
-    development_rows = audit.get("development_scenarios", [])
+    development_rows = train + validation
     verdicts = {
-        row["scenario_id"]: {"class": row["label"]}
+        row["scenario_id"]: scenario_verdict(row)
         for row in development_rows
-        if row.get("split") in {"train", "validation"}
     }
     if len(verdicts) != len(train) + len(validation):
         raise RuntimeError("development verdict map does not cover Train and Validation exactly")
+    if any("min_reachable_harm" not in verdict for verdict in verdicts.values()):
+        raise RuntimeError("scenario verdict map lacks the evaluator's required reachable-harm contract")
 
     episode_budget = pop_size * (generations + 1) * len(train)
     result = run_algorithm_matrix(
