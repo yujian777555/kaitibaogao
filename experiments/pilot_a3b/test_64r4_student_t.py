@@ -8,7 +8,7 @@ import unittest
 
 import numpy as np
 
-from power_hierarchical import _pvals_student_t, student_t_summary
+from power_hierarchical import _pvals_student_t, family_level_tests, student_t_summary
 
 
 class StudentTBoundaryTests(unittest.TestCase):
@@ -66,6 +66,20 @@ class StudentTBoundaryTests(unittest.TestCase):
     def test_rejects_non_finite_values(self):
         with self.assertRaises(ValueError):
             student_t_summary([0.1, float("nan")])
+
+    def test_family_level_analysis_reports_all_zero_as_p_one(self):
+        hierarchy = {"fam_means": {"f0": 0.0, "f1": 0.0}}
+        result = family_level_tests(hierarchy)
+        self.assertEqual(result["student_t"]["status"], "zero_effect_zero_variance")
+        self.assertEqual(result["student_t"]["t"], 0.0)
+        self.assertEqual(result["student_t"]["p_two_sided"], 1.0)
+
+    def test_family_level_analysis_marks_nonzero_constant_limit(self):
+        hierarchy = {"fam_means": {"f0": 0.1, "f1": 0.1}}
+        result = family_level_tests(hierarchy)
+        self.assertEqual(result["student_t"]["status"], "nonzero_constant_limit")
+        self.assertTrue(math.isinf(result["student_t"]["t"]))
+        self.assertEqual(result["student_t"]["p_two_sided"], 0.0)
 
 
 if __name__ == "__main__":
