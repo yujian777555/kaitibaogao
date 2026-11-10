@@ -76,8 +76,10 @@ def analyze_primary_endpoint(
     analysis_split="test",
     min_families=DEFAULT_MIN_FAMILIES,
     compositions_per_family=DEFAULT_COMPOSITIONS_PER_FAMILY,
+    method_a="AB",
+    method_b="nsga2",
 ):
-    """Validate a paired episode ledger and compute family-equal primary effect.
+    """Validate a paired episode ledger and compute family-equal paired effect.
 
     expected_roster contains one record per scenario with scenario_id,
     family_id, composition_id, label, and split. The five primary compositions
@@ -105,9 +107,12 @@ def analyze_primary_endpoint(
         expected_roster, analysis_split, compositions_per_family
     )
     families = sorted(family_compositions)
+    if not method_a or not method_b or method_a == method_b:
+        raise ValueError("contrast requires two distinct method names")
+    pair_methods = (method_a, method_b)
     expected_keys = {
         (method, seed, sid)
-        for method in PRIMARY_METHODS
+        for method in pair_methods
         for seed in seeds
         for sid in scenario_meta
     }
@@ -123,9 +128,9 @@ def analyze_primary_endpoint(
         if row.get("split") != analysis_split:
             raise ValueError(f"run split mismatch for {sid}")
         method = row.get("method")
+        if method not in pair_methods:
+            continue
         seed = row.get("seed")
-        if method not in PRIMARY_METHODS:
-            raise ValueError(f"unknown primary method: {method}")
         if seed not in seeds:
             raise ValueError(f"unexpected optimizer seed for {sid}: {seed}")
         if "family_id" in row and row["family_id"] != scenario_meta[sid][0]:
@@ -160,6 +165,8 @@ def analyze_primary_endpoint(
             key = (item["method"], item["seed"], item["scenario_id"])
         except KeyError as exc:
             raise ValueError("technical missing record lacks run identity") from exc
+        if key[0] not in pair_methods:
+            continue
         if key not in expected_keys:
             raise ValueError(f"technical missing record outside frozen roster: {key}")
         if item.get("category") != "infrastructure" or not str(item.get("reason", "")).strip():
@@ -183,13 +190,13 @@ def analyze_primary_endpoint(
         for sid in scenario_ids:
             diffs = []
             for seed in seeds:
-                key_a = ("AB", seed, sid)
-                key_b = ("nsga2", seed, sid)
+                key_a = (method_a, seed, sid)
+                key_b = (method_b, seed, sid)
                 if key_a in technical_keys or key_b in technical_keys:
                     incomplete_compositions.add((family, composition))
                     continue
                 if key_a not in observed or key_b not in observed:
-                    raise ValueError(f"unpaired AB/NSGA-II run for {sid}, seed={seed}")
+                    raise ValueError(f"unpaired {method_a}/{method_b} run for {sid}, seed={seed}")
                 diffs.append(observed[key_a] - observed[key_b])
                 paired_run_count += 1
             if len(diffs) != len(seeds):
@@ -238,7 +245,7 @@ def analyze_primary_endpoint(
     return {
         "analysis_version": ANALYSIS_VERSION,
         "analysis_split": analysis_split,
-        "primary_contrast": "AB - nsga2",
+        "primary_contrast": f"{method_a} - {method_b}",
         "primary_endpoint": "CondRecSucc (R1+R2 class_success)",
         "n_expected_families": len(families),
         "n_families": n_families,
@@ -264,4 +271,90 @@ def analyze_primary_endpoint(
         "design_deviation": design_deviation,
         "confirmatory_status": confirmatory_status,
         "student_t": student,
+    }
+
+
+SECONDARY_COMPARISONS = {
+    "H2": ("AB", "A"),
+    "H3": ("AwaitSLA", "A"),
+    "H4": ("AwaitSLA", "AwaitFixed"),
+    "H5": ("AB", "AwaitSLA"),
+}
+
+
+def holm_adjust(p_values):
+    """Holm step-down adjusted p-values, preserving input order."""
+    values = [float(p) for p in p_values]
+    if len(values) != 4:
+        raise ValueError("R4 secondary family must contain exactly four p-values")
+    if any(not 0.0 <= p <= 1.0 for p in values):
+        raise ValueError("p-values must be finite values in [0,1]")
+    order = sorted(range(len(values)), key=lambda i: values[i])
+    adjusted = [0.0] * len(values)
+    running = 0.0
+    m = len(values)
+    for rank, idx in enumerate(order):
+        candidate = min(1.0, (m - rank) * values[idx])
+        running = max(running, candidate)
+        adjusted[idx] = running
+    return adjusted
+
+
+def analyze_secondary_endpoints(
+    run_rows,
+    expected_roster,
+    expected_optimizer_seeds,
+    technical_missing=None,
+    *,
+    analysis_split="test",
+    min_families=DEFAULT_MIN_FAMILIES,
+    compositions_per_family=DEFAULT_COMPOSITIONS_PER_FAMILY,
+):
+    """Execute H2-H5 through the same paired family-level analysis path.
+
+    No secondary endpoint is confirmatory in R4 because null/partial-null
+    family-wise Type-I calibration has not yet been completed. Holm is still
+    applied to the complete four-comparison exploratory family.
+    """
+    results = {}
+    raw_p = {}
+    for hypothesis, (method_a, method_b) in SECONDARY_COMPARISONS.items():
+        result = analyze_primary_endpoint(
+            run_rows,
+            expected_roster,
+            expected_optimizer_seeds,
+            technical_missing,
+            analysis_split=analysis_split,
+            min_families=min_families,
+            compositions_per_family=compositions_per_family,
+            method_a=method_a,
+            method_b=method_b,
+        )
+        result["hypothesis"] = hypothesis
+        result["classification"] = "exploratory"
+        result["confirmatory"] = False
+        result["exploratory_reason"] = (
+            "H2-H5 remain exploratory pending null/partial-null Type-I calibration"
+        )
+        p = result["student_t"]["p_two_sided"] if result["student_t"] else None
+        raw_p[hypothesis] = p
+        results[hypothesis] = result
+
+    all_eligible = all(value is not None for value in raw_p.values())
+    adjusted = (
+        holm_adjust([raw_p[h] for h in SECONDARY_COMPARISONS])
+        if all_eligible else [None] * 4
+    )
+    for hypothesis, adjusted_p in zip(SECONDARY_COMPARISONS, adjusted):
+        results[hypothesis]["p_raw"] = raw_p[hypothesis]
+        results[hypothesis]["p_holm_adjusted"] = adjusted_p
+
+    return {
+        "analysis_version": ANALYSIS_VERSION,
+        "secondary_family": "H2-H5",
+        "hypothesis_count": 4,
+        "holm_method": "Holm step-down" if all_eligible else None,
+        "status": "COMPLETE" if all_eligible else "NOT_ELIGIBLE",
+        "all_exploratory": True,
+        "results": results,
     }
