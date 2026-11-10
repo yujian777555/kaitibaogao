@@ -5,7 +5,10 @@ from pathlib import Path
 
 import numpy as np
 
-from power_r4_design import json_input_hashes, simulate_power_grid, wilson_interval
+from power_r4_design import (
+    json_input_hashes, simulate_missing_sensitivity,
+    simulate_power_grid, simulate_type_i_replication, wilson_interval,
+)
 
 
 class R4PowerDesignTests(unittest.TestCase):
@@ -59,6 +62,38 @@ class R4PowerDesignTests(unittest.TestCase):
             crlf_hashes = json_input_hashes(crlf)
             self.assertNotEqual(lf_hashes["raw_sha256"], crlf_hashes["raw_sha256"])
             self.assertEqual(lf_hashes["canonical_sha256"], crlf_hashes["canonical_sha256"])
+
+    def test_technical_missing_sensitivity_tracks_family_loss_and_eligibility(self):
+        cells = simulate_missing_sensitivity(
+            total_var=0.08,
+            eps_pool=np.array([-0.2, -0.1, 0.0, 0.1, 0.2]),
+            reps=100,
+            seed=11,
+            missing_rates=(0.0, 0.05),
+        )
+        self.assertEqual(len(cells), 8)
+        zero = [c for c in cells if c["missing_rate_per_composition_cluster"] == 0.0]
+        self.assertTrue(all(c["analysis_eligibility_rate"] == 1.0 for c in zero))
+        high_missing_f40 = [
+            c for c in cells
+            if c["n_families_design"] == 40
+            and c["missing_rate_per_composition_cluster"] == 0.05
+        ]
+        self.assertTrue(all(c["analysis_eligibility_rate"] < 1.0 for c in high_missing_f40))
+
+    def test_independent_seed_type_i_replication_is_reproducible(self):
+        kwargs = dict(
+            total_var=0.08,
+            eps_pool=np.array([-0.2, -0.1, 0.0, 0.1, 0.2]),
+            reps=100,
+            seed=13,
+            n_replicates=3,
+        )
+        first = simulate_type_i_replication(**kwargs)
+        second = simulate_type_i_replication(**kwargs)
+        self.assertEqual(first, second)
+        self.assertEqual(first["total_mc_reps"], 300)
+        self.assertEqual(len(first["cells"]), 3)
 
     def test_invalid_residual_pool_or_variance_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "residual pool"):
