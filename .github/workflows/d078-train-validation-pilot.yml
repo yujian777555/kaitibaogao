@@ -9,9 +9,14 @@ on:
       - "experiments/pilot_a3b/sbcg_runner.py"
       - "experiments/pilot_a3b/sbcg.py"
       - "experiments/pilot_a3b/ea.py"
+      - "experiments/pilot_a3b/test_sbcg.py"
+      - "experiments/pilot_a3b/test_sbcg_runner.py"
+      - "experiments/pilot_a3b/test_sbcg_experiment.py"
+      - "experiments/pilot_a3b/test_nsga3_canonical.py"
       - "experiments/pilot_a3b/sbcg_config.json"
       - "79_D078_TRAIN_VALIDATION_EXPLORATORY_PILOT.md"
       - ".github/workflows/d078-train-validation-pilot.yml"
+  workflow_dispatch:
 
 permissions:
   contents: write
