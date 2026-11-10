@@ -32,6 +32,8 @@ from a3_bridge import (
     run_episode_fsm,
 )
 
+from split_access import validate_evolution_scenarios
+
 # ---------------------------------------------------------------------------
 # Variation (all methods: exactly ONE mutate call per child)
 # ---------------------------------------------------------------------------
@@ -289,6 +291,8 @@ def niching_select(objs, front, dirs):
 def run_evolution(method, init_pool, scenarios, verdicts, pop_size, generations,
                   eval_budget, seed, safety_battery=None, battery_verdicts=None,
                   counterexample_cap=None):
+    # Fail before cloning/evaluating any candidate if a non-Train split is supplied.
+    validate_evolution_scenarios(scenarios)
     """method: random | ga | nsga2 | nsga3 | A | B | AB | ABG
     (A = contract repair; B = counterexample-guided mutation;
      G suffix = behavioural safety gate)."""
