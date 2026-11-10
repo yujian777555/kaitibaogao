@@ -2,7 +2,7 @@
 
 - Input raw SHA-256: 2946bcf97883c74c407a204d5ce50bb325e4597a47be4831ccaff4ef8a4f414c
 - Input canonical-content SHA-256: 9b1d90279852843bf93d92e66dab3e726ff1e19bc14b94e07ba260fc34eb68a7
-- Code commit: e92e9af964edd6963baed41b48a24073e34f99f8
+- Code commit: 013f5174d125ed96df4bab5f9237f389e37399f5
 - Repetitions per cell: 10000
 - Base seed: 20261114
 - Pilot total variance: 0.10166903
@@ -37,6 +37,33 @@
 | 40 | 0.10 | mde_power | 0.10 | 0.9523 | 0.0021 | [0.9479, 0.9563] | True |
 | 40 | 0.20 | null_type_i | 0.00 | 0.0547 | 0.0023 | [0.0504, 0.0593] | True |
 | 40 | 0.20 | mde_power | 0.10 | 0.9028 | 0.0030 | [0.8968, 0.9085] | True |
+
+## Technical-missing sensitivity (MCAR at composition-cluster level)
+
+| F design | Missing rate | Role | Mean complete F | Eligibility rate | Conditional rejection when eligible | Joint rejection rate |
+|---:|---:|---|---:|---:|---:|---:|
+| 34 | 0.00% | null_type_i | 34.00 | 1.0000 | 0.0491 | 0.0491 |
+| 34 | 0.00% | mde_power | 34.00 | 1.0000 | 0.8472 | 0.8472 |
+| 34 | 1.00% | null_type_i | 32.36 | 0.1857 | 0.0495 | 0.0092 |
+| 34 | 1.00% | mde_power | 32.33 | 0.1801 | 0.8368 | 0.1507 |
+| 34 | 2.00% | null_type_i | 30.71 | 0.0318 | 0.0566 | 0.0018 |
+| 34 | 2.00% | mde_power | 30.71 | 0.0299 | 0.8629 | 0.0258 |
+| 34 | 5.00% | null_type_i | 26.28 | 0.0002 | 0.0000 | 0.0000 |
+| 34 | 5.00% | mde_power | 26.33 | 0.0001 | 1.0000 | 0.0001 |
+| 40 | 0.00% | null_type_i | 40.00 | 1.0000 | 0.0552 | 0.0552 |
+| 40 | 0.00% | mde_power | 40.00 | 1.0000 | 0.9026 | 0.9026 |
+| 40 | 1.00% | null_type_i | 38.03 | 0.9970 | 0.0509 | 0.0507 |
+| 40 | 1.00% | mde_power | 38.03 | 0.9963 | 0.8857 | 0.8824 |
+| 40 | 2.00% | null_type_i | 36.12 | 0.9141 | 0.0520 | 0.0475 |
+| 40 | 2.00% | mde_power | 36.17 | 0.9160 | 0.8702 | 0.7971 |
+| 40 | 5.00% | null_type_i | 30.94 | 0.1641 | 0.0451 | 0.0074 |
+| 40 | 5.00% | mde_power | 30.96 | 0.1704 | 0.8539 | 0.1455 |
+
+## Independent-seed Type-I replication (F=40, ICC=0.20, null)
+
+- Replicates: 5 × 10,000 MC
+- Pooled Type-I: 0.0489
+- Pooled 95% Wilson CI: [0.0470, 0.0508]
 
 ## Interpretation limits
 
