@@ -405,7 +405,7 @@ def student_t_critical_value(df, alpha=0.05):
     return (lo + hi) / 2.0
 
 
-def student_t_summary(values):
+def student_t_summary(values, include_ci=True):
     """Shared two-sided one-sample Student-t calculation for analysis and power.
 
     The frozen numerical tolerance treats spreads <= 1e-12 * max(1, max|x|)
@@ -439,9 +439,12 @@ def student_t_summary(values):
     else:
         tval = mean / (sd / math.sqrt(F))
         p_value = min(1.0, max(0.0, _t_sf(abs(tval), F - 1) * 2))
-        critical = student_t_critical_value(F - 1, 0.05)
-        half_width = critical * sd / math.sqrt(F)
-        ci95 = [float(mean - half_width), float(mean + half_width)]
+        if include_ci:
+            critical = student_t_critical_value(F - 1, 0.05)
+            half_width = critical * sd / math.sqrt(F)
+            ci95 = [float(mean - half_width), float(mean + half_width)]
+        else:
+            ci95 = None
         status = "regular"
 
     return {
@@ -492,7 +495,7 @@ def _pvals_student_t(means):
     if values.ndim != 2:
         raise ValueError("Student-t simulation input must be a 2D array")
     return np.asarray(
-        [student_t_summary(row)["p_two_sided"] for row in values],
+        [student_t_summary(row, include_ci=False)["p_two_sided"] for row in values],
         dtype=float,
     )
 
