@@ -139,6 +139,28 @@ class CompositionTruthTests(unittest.TestCase):
             s = {"tools": GOOD_TOOLS, "faults": faults}
             self.assertEqual(scenario_verdict(s)["class"], "R4")
 
+    def test_r4_primary_composition_roster_is_frozen_outcome_blind(self):
+        manifest, extras = build_candidate_manifest()
+        power = manifest["power_design_candidate"]
+        primary = power["primary_analysis_composition_ids"]
+        sensitivity = power["sensitivity_only_primary_eligible_composition_ids"]
+        self.assertEqual(len(primary), 5)
+        self.assertEqual(len(set(primary)), 5)
+        self.assertEqual(set(primary), {
+            "single_timeout",
+            "timeout_then_rate_limit",
+            "partial_then_delay",
+            "independent_mixed_val",
+            "triple_mixed",
+        })
+        self.assertEqual(set(sensitivity), {
+            "schema_then_timeout",
+            "partial_then_timeout_val",
+        })
+        self.assertEqual(power["test_primary_analysis_clusters"], 200)
+        self.assertIn("outcome-blind", power["primary_analysis_selection_rule"])
+        self.assertNotIn("test_scenarios", extras)
+
     def test_no_hardcoded_labels_in_scenarios(self):
         """Labels must come from the labeler, not scenario_id text or constants."""
         manifest, extras = build_candidate_manifest()
