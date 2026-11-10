@@ -4,7 +4,9 @@ No real Test payload or labels are read by these tests.
 """
 import unittest
 
-from formal_analysis import analyze_primary_endpoint
+from formal_analysis import analyze_primary_endpoint as _analyze_primary_endpoint
+
+PROVENANCE = {\n    \"manifest_sha256\": \"a\" * 64,\n    \"code_sha256\": \"b\" * 64,\n    \"git_head\": \"c\" * 40,\n}\n\ndef analyze_primary_endpoint(*args, **kwargs):\n    kwargs.setdefault(\"provenance\", PROVENANCE)\n    return _analyze_primary_endpoint(*args, **kwargs)
 
 
 METHODS = ("AB", "nsga2")
@@ -48,6 +50,13 @@ class FormalPrimaryAnalysisTests(unittest.TestCase):
         self.assertTrue(all(n == 5 for n in result["family_composition_counts"].values()))
         self.assertAlmostEqual(result["family_equal_weight_effect"], 1.0)
         self.assertEqual(result["student_t"]["df"], 39)
+
+    def test_missing_provenance_withholds_confirmatory_inference(self):
+        roster, rows = fixture()
+        result = _analyze_primary_endpoint(rows, roster, SEEDS)
+        self.assertEqual(result["confirmatory_status"], "NOT_ELIGIBLE_PROVENANCE_INCOMPLETE")
+        self.assertIsNone(result["student_t"])
+        self.assertEqual(result["provenance_status"], "INCOMPLETE")
 
     def test_fewer_than_34_observed_families_is_underpowered(self):
         roster, rows = fixture(n_families=33)
