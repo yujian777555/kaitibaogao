@@ -389,6 +389,22 @@ def _betainc(a, b, x):
     return front * (f - 1.0)
 
 
+def student_t_critical_value(df, alpha=0.05):
+    """Two-sided Student-t critical value using the same beta-tail routine."""
+    if int(df) < 1 or not 0.0 < float(alpha) < 1.0:
+        raise ValueError("invalid Student-t critical-value parameters")
+    lo, hi = 0.0, 1.0
+    while 2.0 * _t_sf(hi, int(df)) > alpha:
+        hi *= 2.0
+    for _ in range(100):
+        mid = (lo + hi) / 2.0
+        if 2.0 * _t_sf(mid, int(df)) > alpha:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2.0
+
+
 def student_t_summary(values):
     """Shared two-sided one-sample Student-t calculation for analysis and power.
 
@@ -396,6 +412,7 @@ def student_t_summary(values):
     as degenerate. All-zero effects return t=0, p=1. A nonzero constant
     effect uses the zero-variance limit (signed infinite t, p=0) and is
     explicitly marked as degenerate rather than a regular t estimate.
+    A 95% confidence interval is returned only for regular, estimable cases.
     """
     arr = np.asarray(values, dtype=float).reshape(-1)
     F = int(arr.size)
@@ -418,9 +435,13 @@ def student_t_summary(values):
             tval = math.copysign(float("inf"), mean)
             p_value = 0.0
             status = "nonzero_constant_limit"
+        ci95 = None
     else:
         tval = mean / (sd / math.sqrt(F))
         p_value = min(1.0, max(0.0, _t_sf(abs(tval), F - 1) * 2))
+        critical = student_t_critical_value(F - 1, 0.05)
+        half_width = critical * sd / math.sqrt(F)
+        ci95 = [float(mean - half_width), float(mean + half_width)]
         status = "regular"
 
     return {
@@ -429,6 +450,7 @@ def student_t_summary(values):
         "t": float(tval),
         "df": F - 1,
         "p_two_sided": float(p_value),
+        "ci95": ci95,
         "status": status,
         "degeneracy_tolerance": float(tolerance),
     }
