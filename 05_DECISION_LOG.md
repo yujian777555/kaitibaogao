@@ -1506,3 +1506,21 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 - 继续 D-079，不运行新的算法性能实验，直到 challenge manifest candidate 通过 CI、完成审查并将 SHA-256 锁入仓库。
 - 不访问 Validation/Test，不启动正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；main 不合并。
 
+
+
+## 决策 D-082：D-081 corrective commit 已推送，等待 CI（2026-11-11）
+
+### 已核实事实
+- D-081 commit：`192f958847fb31d7d704cfa0760201dcd8371e32`，提交信息：D-079: fix Train-only R4 strata and disable D-078 auto-rerun。
+- 工作分支相对 main：ahead 252 / behind 0；main 未修改。
+- D-079 首轮 regression run 42827879313 失败于新增 challenge generator 的 family composition 假设；D-078 run 42827879133 在全量测试 preflight 失败，14-arm 算法执行 skipped。
+- 修复内容：D6 允许 runtime compensation unavailable 作为 R4；D-078 workflow 改为 workflow_dispatch only。
+- D-081 commit 的 combined status 查询返回空 checks；尚无 corrective CI success 证据。
+
+### 判断与约束
+- 代码修复已提交不等于测试通过。D-079 harm/robust-label audit 与 challenge generator 仍须通过完整 regression CI。
+- D-078 42-run artifact 不得覆盖；D-079 288 场景 manifest 未锁 hash 前不得启动新优化器。
+- formal A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续 HOLD。
+
+### 唯一下一任务
+核验 D-081 对应 GitHub Actions regression run；若成功，审查并复核 D-079 audit outputs 与 Train-only challenge manifest，随后提交 SHA-256 manifest lock。若 CI 未触发，先触发 CI，不得绕过门禁。
