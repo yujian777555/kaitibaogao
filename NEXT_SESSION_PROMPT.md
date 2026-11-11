@@ -1,6 +1,6 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-11，D-081 corrective commit）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；最新代码修正提交 `192f958847fb31d7d704cfa0760201dcd8371e32`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead 252 / behind 0。每次接管必须重新查询分支 HEAD、ahead/behind 与 CI。
+> **最新权威状态（2026-11-11，D-082 maintenance sync）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；D-081 代码修正提交 `192f958847fb31d7d704cfa0760201dcd8371e32`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。本次文档同步前远端 HEAD=`aa8fea16d5293611a6360992318222953d348650`，ahead 257 / behind 0；本次 handoff refresh 会再产生一个文档提交。接管时必须动态查询最终 HEAD、ahead/behind 和 CI。
 >
 > **D-078：** 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；Test outcomes 未读取，LLM API=0。原始 artifact 不得覆盖。D-078 workflow 已改为 workflow_dispatch only。
 >
@@ -1186,3 +1186,13 @@ Only next task: independent R4 review. After ACCEPTED + advisor MDE approval + e
 
 ## 最新状态追加（2026-11-10 D-078）
 先读取 `experiments/pilot_a3b/results/d078_train_validation_pilot/matrix_report.md`。D-078 已在合成 A-3b simulator 完成 14 臂×3 seeds=42 runs，CI 42820836080 success，回归 CI 42820836104 success。Train=216、Validation=108，pop=8、G=5、LLM API=0、Test 未访问。多数算法的 selected Validation 指标完全相同（CondRecSucc=1.0、AvoidableHarm=2.4444、ActionCost=4.3929），SBCG 暂无可见性能提升；Reflection HOLD；no-M3 表现较差。Validation 指标有 selection optimism，不可当作无偏泛化结果。D-076 review 是旧 SHA 的复审，若干 SBCG 阻断已由后续 D-078 commits 修正；R4 technical-missing power / pre-run-post-run gate 仍需独立核验。下一任务 D-079：做 per-family/per-scenario diagnostics、确认天花板效应/相同 FSM 收敛原因，构造预注册难度分层合成挑战集；不访问 Test、不启动真实 LLM/A800。
+
+
+## 2026-11-11 — D-082 handoff maintenance sync
+
+- D-081 corrective code commit: `192f958847fb31d7d704cfa0760201dcd8371e32`; D6 now permits runtime compensation unavailable as R4, and D-078 workflow is `workflow_dispatch` only.
+- The previous regression failure remains recorded: run 42827879313 failed after 282 tests due to the old requirement that each Train family contain both contract-level compensatable and uncompensatable tools. D-078 run 42827879133 stopped at preflight; no algorithm rerun occurred.
+- Current check of D-081 commit combined status returned an empty status list; no corrective CI success has been verified. Documentation synchronization commits are not evidence of tests.
+- Current branch comparison before this prompt refresh: ahead 257 / behind 0; main remains `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`.
+- **唯一下一任务：** verify the regression Actions run for D-081. After CI passes, inspect D-079 audit artifacts and the 288-row Train-only challenge manifest; verify R1-R4 labels, UNKNOWN/disagreement, counts, search/diagnostic pairing, IDs and SHA-256; then commit the manifest lock. Do not run a new optimizer before the manifest lock.
+- Formal A-3b, Test, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox and main merge remain HOLD.
