@@ -1643,3 +1643,14 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 回归同时证明同 ID Train 行可能命中 Validation 缓存，因此将 split 显式加入唯一键，防止跨 split 结果复用。新增逐行 JSON 解析、ledger_stats 保留和 Train/Validation 隔离测试；独立审计只使用 Validation 行重算选中候选。
 
 这些是基础设施修复，不是算法调参。场景、阈值、seeds、目标、基线和预算均未改变。下一步只允许以修复实现重跑一次探索，并保留首次失败证据。
+
+## D-086-RESULT：Full NO_GO，普通 NSGA-III 仅探索性积极信号（2026-11-11）
+
+- 新 manifest 与固定策略门证明依赖、备选路径、可靠性/成本和确认预算形成自然非封顶空间；无固定方法在两个 split 共同支配其他方法。
+- 实际完成 40 runs、316,416 行原始账本；独立审计确认初始池、预算、ledger 统计、选中指标和判据一致。
+- 普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、硬约束为 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II。它是预注册普通基线，不是新算法；只构成探索性 EC 信号。
+- Full C-NSGA-III R3 均值 0.9、成本 5.6，未满足 r3_all_one/no_regression_vs_ea，明确 NO_GO，不得通过平均成本或部分 seed 包装为整体提升。
+- 消融：NoAlternate R3=0.5、R4=0；NoPendingVerification R3≈0.0667、R4=0；NoFailureFeedback R3=1 但成本 8.4667；NoDependencyPriority 与 Full 无差异。
+- 首次 JSONL 失败目录和审计分组失败报告均保留；split 缓存键已修复，之后独立审计全部通过。没有改变任务、阈值、seeds、基线或预算。
+
+**唯一下一任务：** 按 `92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md` 对已冻结普通 NSGA-III 候选进行新 Validation family 复制评价；不得重训、调参、追加预算或访问 Test。复制实验当前 NOT RUN。

@@ -7,7 +7,15 @@
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
 
-## 0I. D-086 非封顶模型、固定策略门与演化预注册（2026-11-11）
+## 0J. D-086 探索结果与独立复制门（2026-11-11）
+
+实际探索 40 runs、316,416 行原始账本，独立审计全部通过；本地完整回归 385+28=413。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、约束 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II；这是探索性 EC 信号，不是确认性创新。
+
+Full C-NSGA-III R3 均值 0.9、成本 5.6，未满足 r3_all_one/no_regression_vs_ea，明确 NO_GO。NoAlternate/NoPendingVerification 明显破坏恢复，NoFailureFeedback 成本上升，NoDependencyPriority 贡献未识别。首次 JSONL 失败与审计分组失败均保留；split 缓存键已修复。
+
+唯一下一任务：`92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md`，用已冻结普通 NSGA-III 候选在新 Validation family 复制评价一次；不重训、不追加预算、不访问 Test。复制实验 NOT RUN；正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+
+## 0I. D-086 非封顶模型与演化预注册（历史状态）
 
 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`。新环境只向策略暴露公开合同、提示、依赖和自身回执，不含隐藏 schedule、label 或实际延迟。
 

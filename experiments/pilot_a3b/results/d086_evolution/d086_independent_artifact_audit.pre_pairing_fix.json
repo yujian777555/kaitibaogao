@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "archive_cap": true,
+    "decision_recomputed": true,
+    "eight_arms_five_seeds": true,
+    "forty_runs": true,
+    "history_complete": true,
+    "initial_pool_shared": false,
+    "initial_pool_size": true,
+    "ledger_stats_match_raw": true,
+    "no_budget_exhaustion": true,
+    "raw_row_count": true,
+    "seed_pairs": true,
+    "selected_metrics_recomputed": true,
+    "train_budget": true,
+    "train_raw_budget": true,
+    "validation_raw_budget": true
+  },
+  "full_mean_r3_cost": 5.6,
+  "greedy_r3_cost": 15.166666666666666,
+  "ok": false,
+  "optimizer_runs_in_audit": 0,
+  "raw_row_count": 316416,
+  "recomputed_failed_criteria": [
+    "no_regression_vs_ea",
+    "r3_all_one"
+  ],
+  "recomputed_status": "NO_GO",
+  "run_count": 40,
+  "selected_metric_mismatches": [],
+  "test_accessed": false
+}

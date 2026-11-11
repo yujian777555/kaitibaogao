@@ -33,12 +33,10 @@ def audit_artifact(outdir=OUTDIR):
     )
     checks["initial_pool_size"] = all(len(run["initial_pool"]) == 12 for run in runs)
     checks["initial_pool_shared"] = all(
-        run["initial_pool"] == runs[0]["initial_pool"]
-        for run in runs if run["ablation"] is None
-    ) and all(
         run["initial_pool"] == group[0]["initial_pool"]
-        for ablation in {run["ablation"] for run in runs if run["ablation"] is not None}
-        for group in [[run for run in runs if run["ablation"] == ablation]]
+        for seed in EXPECTED_SEEDS
+        for ablation in {run["ablation"] for run in runs}
+        for group in [[run for run in runs if run["seed"] == seed and run["ablation"] == ablation]]
         for run in group
     )
     checks["archive_cap"] = all(len(run["archive"]) <= 84 for run in runs)

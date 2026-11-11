@@ -1,5 +1,17 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+> **D-086 实际探索结果（2026-11-11）：** 8 个搜索/消融臂×5 seeds=40 runs、316,416 行原始账本，独立审计全部通过。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、硬约束为 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II。**只是探索性 EC 信号，不是确认性创新。**
+>
+> **Full 明确 NO_GO：** Full C-NSGA-III R3 均值 0.9、成本 5.6，未满足 `r3_all_one` 和 `no_regression_vs_ea`，不得用平均成本掩盖其落后普通 NSGA-III。NoAlternate 和 NoPendingVerification 显著破坏恢复，NoFailureFeedback 成本上升，NoDependencyPriority 贡献未识别。
+>
+> **非封顶机制：** 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`。公开依赖、备选路径、可靠性/成本和确认预算形成真实策略差异；固定门 768 行，无共同支配方法。
+>
+> **失败证据：** 首次 JSONL 失败目录保留，split 缓存键已修复。审计初版错误要求跨 seeds 同池的失败报告也保留；修正后预算、账本、选中指标与判据全部一致。本地完整回归 385+28=413，结果提交后的远端 CI 待核验。
+>
+> **唯一下一任务：** 按 `92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md` 对已冻结普通 NSGA-III 候选做新 Validation family 复制评价；不重训、不追加预算、不访问 Test，复制实验 NOT RUN。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+>
+> **仓库纪律：** 工作分支 `pilot-a-stateful-recovery`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。每次提交后核验远端 SHA、ahead/behind、工作区和真实 CI，不以旧 run 替代。
+
 > **D-086 当前阶段（2026-11-11）：** 新独立非封顶模型与固定策略门已完成，实际 EA 尚未运行。新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`；8 个固定方法产生 768 行原始数据，无固定方法在两个 split 共同支配其他方法。
 >
 > **关键结果：** Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware Validation 未全通过。长链确认场景呈现可靠路径—成本—等待预算的真实权衡，不是标签/隐藏信息错误。

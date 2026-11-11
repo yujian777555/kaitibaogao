@@ -1,4 +1,16 @@
-## 0I. 最新权威接管状态（2026-11-11，D-086 非封顶模型与演化预注册）
+## 0J. 最新权威接管状态（2026-11-11，D-086 探索结果）
+
+- D-085 独立复审 = ACCEPTED_WITH_LIMITATIONS；封顶事实成立，但算法有效性未获证明。
+- 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`；依赖、备选路径、可靠性/成本、未决回执和确认预算形成真实非封顶决策边界。固定门 768 行，无共同支配方法。
+- 实际探索 40 runs、316,416 行原始账本。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、约束 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II。**仅为探索性信号，不是新算法创新证明。**
+- Full C-NSGA-III 的 R3 均值 0.9、成本 5.6，未满足 r3_all_one/no_regression_vs_ea，明确 **NO_GO**，不得宣称优于普通 NSGA-III。
+- NoAlternate 使 R3 降至 0.5、R4 为 0；NoPendingVerification 使 R3 约 0.0667、R4 为 0；NoFailureFeedback 成功为 1 但成本升至 8.4667；NoDependencyPriority 与 Full 无差异，贡献未识别。
+- 首次 JSONL 失败目录和审计分组失败报告均保留；split 缓存键已修复，最终独立审计全通过。配置、seeds、预算、指标与原始账本一致。本地完整回归 385+28=413，结果提交后的远端 CI 待核验。
+- 唯一下一任务：`92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md`，只复制评价已冻结普通 NSGA-III 候选到新 Validation family；不重训、不调参、不追加预算、不访问 Test。复制实验 NOT RUN；正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续禁止。
+
+---
+
+## 0I. 历史接管状态（2026-11-11，D-086 非封顶模型与演化预注册）
 
 - `88_D085_INDEPENDENT_REVIEW_D086.md` = ACCEPTED_WITH_LIMITATIONS；D-085 数据可复现，但旧环境缺少顺序、可靠性和独立验证空间。
 - 新 `dependency_recovery.py` 独立环境具备公开依赖、primary/alternate、成本/提示、延迟回执、未决状态和重复副作用；没有向策略提供隐藏 schedule、label 或实际延迟。
