@@ -1524,3 +1524,11 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 
 ### 唯一下一任务
 核验 D-081 对应 GitHub Actions regression run；若成功，审查并复核 D-079 audit outputs 与 Train-only challenge manifest，随后提交 SHA-256 manifest lock。若 CI 未触发，先触发 CI，不得绕过门禁。
+
+## D-083 — Paper 1 baseline selection and D-079 manifest integrity (2026-11-11)
+
+- Keep the thesis work in `kaitibaogao`; do not mix other repositories.
+- Select EvoTool (ACL 2026, official code) as the primary evolutionary baseline for faithful reproduction; treat EvoFSM as a close representation comparator, and DART/Evidence-Guided Recovery/EvoUndo as recovery-domain related work.
+- The D-078 pilot does not establish EC uplift. Do not write a positive results claim.
+- D-079 v1 manifest canonical SHA matched, but scenario-level `cluster_id` included the role while the 48-cluster registry did not. Reject the v1 manifest for locking.
+- Correct the manifest representation and add regression tests before creating any manifest lock. No optimizer, held-out Test, A800/ARWM, or real LLM API run is authorized by this decision.

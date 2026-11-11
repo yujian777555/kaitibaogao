@@ -1196,3 +1196,36 @@ Only next task: independent R4 review. After ACCEPTED + advisor MDE approval + e
 - Current branch comparison before this prompt refresh: ahead 257 / behind 0; main remains `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`.
 - **唯一下一任务：** verify the regression Actions run for D-081. After CI passes, inspect D-079 audit artifacts and the 288-row Train-only challenge manifest; verify R1-R4 labels, UNKNOWN/disagreement, counts, search/diagnostic pairing, IDs and SHA-256; then commit the manifest lock. Do not run a new optimizer before the manifest lock.
 - Formal A-3b, Test, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox and main merge remain HOLD.
+
+## D-083 continuation instructions — 2026-11-11
+
+You are continuing the thesis project in **yujian777555/kaitibaogao only**. Do not mix other repositories.
+
+The user wants a short paper for Agent × Evolutionary Computation using the research workflow: select a recent open-source conference baseline, faithfully reproduce it, decompose its modules, compare related mechanisms, propose a targeted algorithmic improvement, and prove it with controlled experiments.
+
+### Current paper candidate
+
+Working title: **面向状态化工具调用智能体的契约约束恢复策略演化方法**.
+
+Primary evolutionary baseline: **EvoTool (ACL 2026)**, paper https://aclanthology.org/2026.acl-long.2016/ and official code https://github.com/SYang2000/ACL_2026_EvoTool. It uses Planner/Selector/Caller/Synthesizer, trajectory-grounded blame attribution, feedback-guided targeted mutation, and diversity-aware population selection. First reproduce an official stateful benchmark slice (prefer tau-Bench) exactly before adapting it.
+
+Related work requiring comparison: EvoFSM (FSM evolution), DART (semantic recoverability), Evidence-Guided Recovery (ambiguous outcomes/partial execution), EvoUndo (recoverability-constrained harness self-evolution), ToolMisuseBench, AgentRx, and Failing Tools. Do not claim novelty as the first Agent recovery or first FSM evolution method.
+
+### Immediate repository task
+
+D-081 CI passed. Independent audit of the D-079 v1 artifact found:
+- canonical v1 manifest hash matched;
+- 288 Train-only rows, 8 families, 6 strata, 144 search + 144 diagnostic, no UNKNOWN, no robust/analytic disagreements;
+- **blocking issue:** scenario `cluster_id` contains `family|stratum|role`, while the declared 48-cluster registry uses `family|stratum`. Thus 96 scenario cluster IDs cannot be joined to the 48 registry entries.
+
+D-079 v1 is not locked. Correct the generator to v2 with scenario cluster IDs `family|stratum`, validate 48 clusters × 6 rows × 3 rows per role, and add tests. Then run CI and independently audit the regenerated artifact. Only after that may a new `d079_manifest_lock.json` be committed.
+
+### Research and authorization boundaries
+
+- D-078 does not establish EC uplift; Hand FSM dominates selected Validation candidates, and its R3 correct-escalation is 0/36.
+- D-079 is Train-only, non-confirmatory mechanism discovery.
+- No formal A-3b, locked Test, external benchmark Test, A800/ARWM, or real LLM API execution is authorized by the current protocol.
+- Do not fabricate results or claim a paper-level effect.
+- After manifest integrity is restored, prepare a faithful EvoTool reproduction protocol. Wait for separate authorization before any experiment that crosses the current gates.
+
+Read `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`, `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`, and the latest handoff before acting.

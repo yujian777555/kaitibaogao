@@ -918,3 +918,10 @@ SBCG 已实现五维安全目标、零容差硬约束、family×signature×safet
 **对 D-076 独立复审的状态更新：** D-076 的 `78_D076_INDEPENDENT_REVIEW.md` 是针对旧基线 `3d2dacf` 的审查记录。其指出的若干 SBCG 阻断（canonical NSGA-III、f3 公式、Train→Validation 选择、cache accounting）已在后续 D-078 代码提交中作了修订并通过对应 CI；不能继续把旧审查结论当作当前代码状态。R4 pre-run/post-run gate、technical-missing power 校准等必须单独核验，不因 D-078 合成 pilot 通过而视为关闭。
 
 **下一步：** 不扩大到 Test、不启动 A800/真实 LLM。先做 D-079 结果诊断：按 scenario/family 拆解指标与 Pareto 差异，检查 1.0 CondRecSucc 是否天花板效应、为什么多个优化器收敛到相同 FSM/结果；再设计难度分层的合成挑战集与预注册的 Train-only 机制诊断。只有能稳定区分算法的任务机制才进入后续更大规模验证。
+
+## Research update — 2026-11-11
+
+- D-081 CI passed, but independent D-079 v1 artifact review found a cluster-ID registry mismatch; the v1 manifest is not locked.
+- D-079 v2 generator/test correction is being prepared. No optimizer run is authorized.
+- Paper 1 working direction: contract-aware evolutionary recovery policies for stateful tool-using Agents. Primary evolutionary baseline: EvoTool (ACL 2026); see `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`.
+- Audit: `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`.

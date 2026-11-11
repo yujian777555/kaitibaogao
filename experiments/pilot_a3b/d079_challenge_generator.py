@@ -28,7 +28,7 @@ from task_semantics import (
     enumerate_primary_compatible_sequences,
 )
 
-GENERATOR_VERSION = "d079-train-only-difficulty-strata-v1"
+GENERATOR_VERSION = "d079-train-only-difficulty-strata-v2"
 SEED_BASE = 2026111200
 REPEATS_PER_CLUSTER = 3
 ROLES = ("search", "diagnostic")
@@ -221,7 +221,7 @@ def build_challenge_manifest(seed_base=SEED_BASE):
                     )
                     scenario = {
                         "scenario_id": scenario_id,
-                        "cluster_id": family_id + "|" + stratum_id + "|" + role,
+                        "cluster_id": family_id + "|" + stratum_id,
                         "task_family_id": family_id,
                         "split": "train",
                         "evaluation_role": role,
@@ -327,30 +327,106 @@ def build_challenge_manifest(seed_base=SEED_BASE):
 
 def validate_challenge_manifest(manifest):
     problems = []
+    scenarios = manifest.get("scenarios", [])
+    clusters = manifest.get("clusters", [])
     if manifest.get("train_only") is not True:
         problems.append("manifest is not Train-only")
     if manifest.get("validation_included") is not False:
         problems.append("Validation must not be included")
     if manifest.get("test_included") is not False or manifest.get("test_outcomes_read") is not False:
         problems.append("Test isolation declaration failed")
-    if manifest.get("family_count") != 8:
-        problems.append("expected eight Train families")
-    if manifest.get("scenario_count") != 288:
-        problems.append("expected 288 scenarios")
+    if manifest.get("family_count") != 8 or len(manifest.get("families", [])) != 8:
+        problems.append("expected exactly eight Train families")
+    if manifest.get("scenario_count") != 288 or len(scenarios) != 288:
+        problems.append("expected exactly 288 scenarios")
     if manifest.get("search_scenario_count") != 144:
         problems.append("expected 144 search scenarios")
     if manifest.get("diagnostic_scenario_count") != 144:
         problems.append("expected 144 diagnostic scenarios")
-    if any(row.get("split") != "train" for row in manifest.get("scenarios", [])):
+    if manifest.get("cluster_count") != 48 or len(clusters) != 48:
+        problems.append("expected exactly 48 family-by-stratum clusters")
+
+    if any(row.get("split") != "train" for row in scenarios):
         problems.append("non-Train scenario found")
-    if any(row.get("label") == "UNKNOWN" for row in manifest.get("scenarios", [])):
-        problems.append("UNKNOWN label found")
-    if len({row["scenario_id"] for row in manifest.get("scenarios", [])}) != 288:
+    if any(row.get("label") not in {"R1", "R2", "R3", "R4"} for row in scenarios):
+        problems.append("UNKNOWN or invalid robust label found")
+    if any(row.get("analytic_label") not in {"R1", "R2", "R3", "R4"} for row in scenarios):
+        problems.append("UNKNOWN or invalid analytic label found")
+    if len({row.get("scenario_id") for row in scenarios}) != 288:
         problems.append("scenario IDs are not unique")
-    labels = {row["label"] for row in manifest.get("scenarios", [])}
-    if labels != {"R1", "R2", "R3", "R4"}:
+    if {row.get("label") for row in scenarios} != {"R1", "R2", "R3", "R4"}:
         problems.append("challenge must cover all R1-R4 classes")
-    return {"ok": not problems, "problems": problems}
+
+    family_ids = {family.get("family_id") for family in manifest.get("families", [])}
+    if len(family_ids) != 8:
+        problems.append("family IDs are not unique")
+    if {row.get("task_family_id") for row in scenarios} != family_ids:
+        problems.append("scenario family IDs differ from the family catalog")
+
+    cluster_registry = {cluster.get("cluster_id"): cluster for cluster in clusters}
+    if len(cluster_registry) != len(clusters):
+        problems.append("cluster registry contains duplicate IDs")
+    scenario_cluster_ids = {row.get("cluster_id") for row in scenarios}
+    if scenario_cluster_ids != set(cluster_registry):
+        problems.append("scenario cluster IDs do not match the cluster registry")
+
+    for row in scenarios:
+        expected_cluster_id = (
+            str(row.get("task_family_id")) + "|" + str(row.get("difficulty_stratum"))
+        )
+        if row.get("cluster_id") != expected_cluster_id:
+            problems.append("scenario cluster ID must identify family × stratum")
+        expected_scenario_id = (
+            "d079|train|" + str(row.get("evaluation_role")) + "|"
+            + str(row.get("task_family_id")) + "|"
+            + str(row.get("difficulty_stratum")) + "|r" + str(row.get("repeat"))
+        )
+        if row.get("scenario_id") != expected_scenario_id:
+            problems.append("scenario ID fields are inconsistent")
+        if row.get("label") != row.get("analytic_label"):
+            allowed_legacy_mismatch = (
+                row.get("label") == "R2"
+                and row.get("analytic_label") == "R1"
+                and bool(row.get("analytic_disagreement_reason"))
+            )
+            if not allowed_legacy_mismatch:
+                problems.append("unapproved robust/analytic label disagreement")
+        evidence_sha = row.get("label_evidence_sha256", "")
+        if len(evidence_sha) != 64 or any(c not in "0123456789abcdef" for c in evidence_sha):
+            problems.append("invalid label evidence SHA-256")
+
+    for cluster_id, cluster in cluster_registry.items():
+        rows = [row for row in scenarios if row.get("cluster_id") == cluster_id]
+        if len(rows) != 6 or cluster.get("scenario_count") != 6:
+            problems.append("cluster must contain six scenarios: " + str(cluster_id))
+        role_counts = Counter(row.get("evaluation_role") for row in rows)
+        if role_counts != Counter({"search": 3, "diagnostic": 3}):
+            problems.append("cluster must contain three scenarios per role: " + str(cluster_id))
+        if {row.get("label") for row in rows} != {cluster.get("label")}:
+            problems.append("cluster label differs from its scenarios: " + str(cluster_id))
+        if {row.get("task_family_id") for row in rows} != {cluster.get("task_family_id")}:
+            problems.append("cluster family differs from its scenarios: " + str(cluster_id))
+        if {row.get("difficulty_stratum") for row in rows} != {cluster.get("difficulty_stratum")}:
+            problems.append("cluster stratum differs from its scenarios: " + str(cluster_id))
+
+    role_counts = Counter(row.get("evaluation_role") for row in scenarios)
+    if role_counts != Counter({"search": 144, "diagnostic": 144}):
+        problems.append("role counts must be 144 search and 144 diagnostic")
+    label_counts = {
+        role: dict(sorted(Counter(
+            row.get("label") for row in scenarios
+            if row.get("evaluation_role") == role
+        ).items()))
+        for role in ROLES
+    }
+    if manifest.get("label_counts_by_role") != label_counts:
+        problems.append("label_counts_by_role does not match scenario labels")
+
+    stored_hash = manifest.get("manifest_sha256")
+    hash_payload = {key: value for key, value in manifest.items() if key != "manifest_sha256"}
+    if stored_hash != _sha256(hash_payload):
+        problems.append("manifest SHA-256 does not match canonical content")
+    return {"ok": not problems, "problems": sorted(set(problems))}
 
 
 def write_manifest(manifest, outdir):

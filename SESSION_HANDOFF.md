@@ -2379,3 +2379,27 @@ R4 = READY_FOR_INDEPENDENT_REVIEW。SBCG = IMPLEMENTED + SYNTHETIC TESTED，性�
 - 修正提交后的 CI 尚未运行；challenge manifest SHA 尚未生成/冻结。
 - 唯一下一任务：提交 corrective patch，等待 regression CI；若通过，审查 D-078 independent audit 与 288-scenario Train-only manifest，随后锁定 manifest hash。不得提前运行 D079 optimizer。
 
+## 2026-11-11 Research Handoff — D-083
+
+**Repository:** `yujian777555/kaitibaogao` only  
+**Branch at handoff:** `pilot-a-stateful-recovery`  
+**Baseline direction:** EvoTool (ACL 2026) is the primary evolutionary baseline; DART and Evidence-Guided Recovery are direct recovery-domain comparators; EvoUndo and EvoFSM are adjacent related work.
+
+### Verified current state
+
+- D-081 workflow run 42828590264 succeeded on `192f958847fb31d7d704cfa0760201dcd8371e32`.
+- D-078 independent audit: 42 runs, 14 arms, 3 seeds; 32/42 selected FSMs exactly equal Hand FSM; 33/42 Validation Pareto fronts contained Hand FSM; Hand R3 correct escalation = 0/36.
+- D-079 v1 candidate hash `cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa` recomputes correctly, but the scenario `cluster_id` field is role-fragmented while the cluster registry has 48 cross-role clusters. Do not lock v1.
+- See `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md` and `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`.
+
+### Next steps
+
+1. Apply the D-079 v2 cluster-ID correction and validator tests.
+2. Run CI; independently inspect the new artifact and verify hash, 48 cluster IDs, six rows per cluster, three rows per role, labels, IDs, and Train-only isolation.
+3. Only after all checks pass, create `d079_manifest_lock.json`; do not reuse the v1 hash.
+4. Keep D-079 as non-confirmatory mechanism discovery. Do not access held-out Test or run the optimizer until separately authorized.
+5. Begin faithful EvoTool reproduction planning from its official code and tau-Bench protocol; exact reproduction must precede adaptation claims.
+
+### Hard boundaries
+
+No mixing with other repositories. No formal A-3b, locked Test, external benchmark Test, A800/ARWM, or real LLM API execution under the current D-079 authorization. Do not claim algorithmic uplift from D-078.
