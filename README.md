@@ -1,6 +1,13 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## 最新执行状态（2026-11-11，D-085 Prefix 机制审计）
+## 最新执行状态（2026-11-11，D-086 独立复审完成）
+
+- **D-086 / Task 1：** `88_D085_INDEPENDENT_REVIEW_D086.md` = **ACCEPTED_WITH_LIMITATIONS**。96 行机制数据、192 行封顶数据和 manifest 均重新生成一致，Train/Validation family 无交集，未发现隐藏信息或 gold label 进入策略；基线回归 369/369。
+- **封顶根因：** 旧环境补偿相互独立，顺序不改变结果或成本；重试只返回缓存结果；验证只重读公开回执。旧 `policy_selected_escalation` 还混合 ESCALATE/STOP_SAFE，下一协议将拆分。不能据此主张演化学会了恢复排序。
+- **当前唯一下一任务：** 建立独立的新状态转移模型，验证公开补偿依赖、异构可靠性、不确定回执和真实成本能否自然形成可学习边界；先过可达性/标签/非封顶门，再决定是否运行 NSGA-II/III。
+- **D-085 历史结论保留：** R4 代码与协议 ACCEPTED；固定 Prefix 机制可行；旧 manifest 上 EC 功效 NO-GO / NOT RUN。
+
+## D-085 交付与历史状态（保留）
 
 - 唯一仓库：yujian777555/kaitibaogao；工作分支 `pilot-a-stateful-recovery`；接管基线 `33672562ebaeb6c3a533e7e0fd975cbac045b5e3`；main 保持 `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，不修改、不合并。
 - **R4：** `85_D064_R4_INDEPENDENT_REVIEW_R2.md` = ACCEPTED，仅限代码与协议复审；不是正式 A-3b 批准。导师 MDE、用户批准和真实 pre-flight 仍是独立硬门。

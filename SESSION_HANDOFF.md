@@ -1,4 +1,13 @@
-## 0G. 最新权威接管状态（2026-11-11，D-085 机制与预注册完成）
+## 0H. 最新权威接管状态（2026-11-11，D-086 Task 1 独立复审）
+
+- 接管基线 `c5a4db452d30688c317bf9e6173c5e5413dd1c14`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；初始 ahead 269 / behind 0，工作区干净，最新 CI `43020422598` success。
+- `88_D085_INDEPENDENT_REVIEW_D086.md` = **ACCEPTED_WITH_LIMITATIONS**：96 行机制与 192 行封顶数据、manifest 重生成完全一致，33 项复算通过，Train/Validation family 无交集，无隐藏信息或 gold label 进入策略，历史 artifact 未覆盖。基线回归 369/369。
+- 封顶根因不是控制器表面参数不足，而是旧环境语义没有有效优化空间：补偿相互独立；重试只返回缓存结果；回执验证没有独立信息增益。后续协议还需将 ESCALATE 与 STOP_SAFE 分账。
+- 唯一下一任务：建立独立的新状态转移模型，验证公开依赖、异构可靠性、不确定回执与真实成本的自然策略差异；非封顶固定策略门通过前不运行 NSGA-II/III。Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续禁止。
+
+---
+
+## 0G. 历史接管状态（2026-11-11，D-085 机制与预注册完成）
 
 - 工作仓库：yujian777555/kaitibaogao；分支 `pilot-a-stateful-recovery`；接管基线 `33672562ebaeb6c3a533e7e0fd975cbac045b5e3`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。实现提交 `34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`；R4 自动证据提交 `fd66ad8c3a6fcc678936fcf533f8f69ba553570a`，父节点正确，只有 git/raw-SHA 元数据变化。
 - R4 复审 `85_D064_R4_INDEPENDENT_REVIEW_R2.md` = ACCEPTED，仅限代码与协议，不授权正式 A-3b；后续 Prefix/标签 delta 需独立绑定最终 SHA。

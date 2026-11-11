@@ -1,0 +1,33 @@
+{
+  "schema": "d086-d085-independent-review-v1",
+  "head": "c5a4db452d30688c317bf9e6173c5e5413dd1c14",
+  "main": "683b3fe7fc52c86e917d523fdc6bbb13abbfd653",
+  "ahead": 269,
+  "behind": 0,
+  "verdict": "ACCEPTED_WITH_LIMITATIONS",
+  "baseline_tests": {
+    "pilot_a3b": 341,
+    "pilot_a_recovery": 28,
+    "total": 369,
+    "conclusion": "success"
+  },
+  "latest_ci_run": 43020422598,
+  "mechanism_rows_regenerated_identical": 96,
+  "ceiling_rows_regenerated_identical": 192,
+  "manifest_regenerated_identical": true,
+  "manifest_sha256": "cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492",
+  "train_validation_family_overlap": [],
+  "independent_csv_json_checks_passed": 33,
+  "hidden_information_path_found": false,
+  "gold_labels_passed_to_policy": false,
+  "historical_d078_d079_artifacts_overwritten": false,
+  "limitations": [
+    "prefix_reverse changes order only; independent compensation has no outcome or cost difference",
+    "compensation retries return cached results and provide no new information",
+    "VERIFY_PREFIX rereads public receipts and is not independent external verification",
+    "ESCALATE and STOP_SAFE share policy_selected_escalation and must be separated in the next protocol",
+    "the generalized label-space crosscheck remains OPEN"
+  ],
+  "optimizer_runs": 0,
+  "test_accessed": false
+}

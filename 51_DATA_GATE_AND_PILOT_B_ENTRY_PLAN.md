@@ -7,7 +7,13 @@
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
 
-## 0G. D-085 当前权威门禁（2026-11-11，覆盖早期状态）
+## 0H. D-086 Task 1 独立复审（2026-11-11）
+
+`88_D085_INDEPENDENT_REVIEW_D086.md` = ACCEPTED_WITH_LIMITATIONS。D-085 原始数据与 manifest 重生成一致，33 项复算通过，无隐藏信息/gold label 入策略，family 隔离和历史保留成立，基线 369/369。封顶根因是旧环境缺少真实顺序、可靠性学习和独立验证空间；下一状态模型必须将 ESCALATE 与 STOP_SAFE 分账。
+
+唯一下一任务：建立独立的新状态转移模型并完成可达性、标签和固定策略非封顶审计；通过前不运行 NSGA-II/III。Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+
+## 0G. D-085 历史门禁（2026-11-11）
 
 - R4 ACCEPTED 仅限代码与协议复审，不代替导师 MDE、用户批准或真实 pre-flight。
 - 新 Prefix 开发 manifest 为 Train=72、Validation=24，family 不相交；SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`，committed lock=`experiments/pilot_a3b/prefix_manifest_lock.json`。Test 未生成、未读取，精确 roster 与独立保管承诺为 OPEN。

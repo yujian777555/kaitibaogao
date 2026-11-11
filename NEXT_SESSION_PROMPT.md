@@ -1,5 +1,11 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+> **D-086 / Task 1（2026-11-11）：** `88_D085_INDEPENDENT_REVIEW_D086.md` = **ACCEPTED_WITH_LIMITATIONS**。D-085 的 96 行机制、192 行封顶和 manifest 重生成一致，33 项复算通过，无隐藏信息/gold label 入策略，Train/Validation family 无交集，基线回归 369/369。
+>
+> **当前唯一下一任务：** 建立独立的新状态转移模型，验证公开补偿依赖、异构可靠性、不确定回执与真实成本的自然策略差异；固定策略非封顶门通过前不运行 NSGA-II/III。旧环境中顺序不改变结果、重试只读缓存、验证只读回执；下一协议将 ESCALATE 与 STOP_SAFE 分账。Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+>
+> **仓库纪律：** 工作分支 `pilot-a-stateful-recovery`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。每次提交后核验远端 SHA、ahead/behind、工作区与真实 CI，不以旧 run 替代。
+
 > **最新权威状态（2026-11-11，D-085）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 `pilot-a-stateful-recovery`；实现提交 `34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`；R4 自动证据提交 `fd66ad8c3a6fcc678936fcf533f8f69ba553570a`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。最终维护 SHA 与远端状态仍须在接手时重新查询。
 >
 > **R4：** `85_D064_R4_INDEPENDENT_REVIEW_R2.md` = ACCEPTED，仅限代码与协议复审，不是正式 A-3b 批准；导师 MDE、用户批准和真实 pre-flight 仍是独立硬门。

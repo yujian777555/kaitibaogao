@@ -1610,3 +1610,12 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 ### Clean-clone 补充边界
 
 同提交本地独立干净克隆通过 369 项测试；GitHub clean-clone 两次均在网络阶段超时/停止，未进入测试，状态为 NOT VERIFIED，不得写成成功。该本地网络限制不改变 CI 已核验的事实，也不改变当前 EC 功效实验 HOLD。
+
+## D-086-TASK1：D-085 独立复审 ACCEPTED_WITH_LIMITATIONS（2026-11-11）
+
+- 基线 `c5a4db452d30688c317bf9e6173c5e5413dd1c14`，main 未变，ahead 269 / behind 0，工作区干净；回归 369/369，CI 43020422598 success。
+- 96 行机制数据、192 行封顶数据、manifest 重生成完全一致；33 项独立复算通过，Train/Validation family 无交集，无隐藏信息或 gold label 入策略，历史 artifact 未覆盖。
+- 限制：旧环境顺序不改变结果/成本，补偿重试只返回缓存结果，回执验证无独立信息增益；`policy_selected_escalation` 混合 ESCALATE/STOP_SAFE，下一协议必须拆分。广义标签空间仍未完全关闭。
+- 因此 D-085 事实与可复现性成立，但算法有效性不成立。下一任务是独立的新状态转移模型与固定策略非封顶门，未通过前不得运行 NSGA-II/III。
+
+证据：`88_D085_INDEPENDENT_REVIEW_D086.md` 与 `experiments/pilot_a3b/results/d086_d085_review/review_checks.json`。
