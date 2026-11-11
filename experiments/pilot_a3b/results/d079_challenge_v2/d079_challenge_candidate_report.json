@@ -1,0 +1,57 @@
+{
+  "cluster_count": 48,
+  "diagnostic_scenario_count": 144,
+  "family_count": 8,
+  "generator_version": "d079-train-only-difficulty-strata-v2",
+  "label_counts_by_role": {
+    "diagnostic": {
+      "R1": 48,
+      "R2": 48,
+      "R3": 24,
+      "R4": 24
+    },
+    "search": {
+      "R1": 48,
+      "R2": 48,
+      "R3": 24,
+      "R4": 24
+    }
+  },
+  "manifest_sha256": "09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca",
+  "scenario_count": 288,
+  "search_scenario_count": 144,
+  "seed_base": 2026111200,
+  "strata": [
+    {
+      "description": "Timeout before execution; no committed-effect ambiguity.",
+      "id": "D1_CLEAR_PRECOMMIT_TIMEOUT",
+      "level": 1
+    },
+    {
+      "description": "Timeout after execution on a non-idempotent tool.",
+      "id": "D2_AMBIGUOUS_NONIDEMPOTENT_COMMIT",
+      "level": 2
+    },
+    {
+      "description": "Partial commit with an available compensation path.",
+      "id": "D3_COMPENSATABLE_PARTIAL_COMMIT",
+      "level": 3
+    },
+    {
+      "description": "Partial commit, rate limit and schema drift across three saga steps.",
+      "id": "D4_CROSS_TOOL_THREE_FAULT_INTERACTION",
+      "level": 4
+    },
+    {
+      "description": "Permission denial after a committed prefix; contracts determine R3/R4.",
+      "id": "D5_PERMISSION_AFTER_COMMITTED_PREFIX",
+      "level": 4
+    },
+    {
+      "description": "Partial commit on a non-compensatable tool; damage containment.",
+      "id": "D6_UNCOMPENSATABLE_PARTIAL_COMMIT",
+      "level": 5
+    }
+  ],
+  "train_only": true
+}

@@ -1543,3 +1543,27 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 
 ### 唯一下一任务
 R4 独立复审；算法侧仅预注册一个针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融和新的挑战划分。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 与 main 合并继续 HOLD。
+## D-083 — Paper 1 baseline selection and D-079 manifest integrity (2026-11-11)
+
+- Keep the thesis work in `kaitibaogao`; do not mix other repositories.
+- Select EvoTool (ACL 2026, official code) as the primary evolutionary baseline for faithful reproduction; treat EvoFSM as a close representation comparator, and DART/Evidence-Guided Recovery/EvoUndo as recovery-domain related work.
+- The D-078 pilot does not establish EC uplift. Do not write a positive results claim.
+- D-079 v1 manifest canonical SHA matched, but scenario-level `cluster_id` included the role while the 48-cluster registry did not. Reject the v1 manifest for locking.
+- Correct the manifest representation and add regression tests before creating any manifest lock. No optimizer, held-out Test, A800/ARWM, or real LLM API run is authorized by this decision.
+
+## D-084 — Freeze D-079 v2 Train-only manifest; audit EvoTool reproduction (2026-11-11)
+
+- D-079 v2 CI run 42952176661 passed. Independent artifact audit verified canonical manifest SHA `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`, 288 unique Train rows, 48 joinable clusters, 6 rows per cluster, 3 rows per role, 144/144 roles, all R1-R4, no UNKNOWN/disagreement, and no Validation/Test access.
+- Commit `experiments/pilot_a3b/d079_manifest_lock.json`; regression tests regenerate and match the lock.
+- D-079 lock is data-integrity only; it does not authorize optimizer execution.
+- EvoTool (ACL 2026) remains the primary evolutionary baseline. Its paper states G=8/B=3, while released code defaults to 90 generations; do not use defaults as a faithful reproduction. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- No A800/ARWM, real LLM API, formal A-3b, or held-out Test execution is authorized yet.
+
+
+## 决策 D-082-V2：撤销 v1 lock，以 v2 诊断作为唯一有效结果（2026-11-11）
+
+D-083/D-084 独立审计发现 v1 的 cluster 注册表与 scenario cluster_id 不一致。v1 虽通过数量和哈希检查，但 cluster 语义不可 join，因此撤销 v1 lock；v1 诊断仅保留为 superseded 历史结果。
+
+v2 修正为 `family|stratum` cluster_id，role 独立。独立审计确认 288 Train 行、48 clusters、每簇 6 行/每角色 3 行、0 UNKNOWN/disagreement，并匹配 committed lock。v2 manifest SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`。
+
+runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重新运行 42 个 Train-only runs。所有臂指标与 v1 一致；独立核验预算/缓存/角色违规和汇总重算不一致均为 0。最终结论不变：SBCG 当前整体 NO-GO，R3=0 仍是核心障碍。

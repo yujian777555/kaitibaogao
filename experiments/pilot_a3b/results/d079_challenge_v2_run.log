@@ -1,0 +1,22 @@
+{
+  "status": "D079_CHALLENGE_CANDIDATE_READY_FOR_PREREGISTRATION_LOCK",
+  "manifest_sha256": "09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca",
+  "family_count": 8,
+  "search_scenarios": 144,
+  "diagnostic_scenarios": 144,
+  "label_counts_by_role": {
+    "search": {
+      "R1": 48,
+      "R2": 48,
+      "R3": 24,
+      "R4": 24
+    },
+    "diagnostic": {
+      "R1": 48,
+      "R2": 48,
+      "R3": 24,
+      "R4": 24
+    }
+  },
+  "test_outcomes_read": false
+}

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 import unittest
 from pathlib import Path
 
@@ -13,6 +14,7 @@ from a3_bridge import (
 from d079_challenge_generator import (
     build_challenge_manifest,
     validate_challenge_manifest,
+    validate_manifest_lock,
 )
 from d079_diagnostics import (
     audit_matrix,
@@ -124,6 +126,10 @@ class D079ChallengeTests(unittest.TestCase):
         self.assertFalse(self.manifest["validation_included"])
         self.assertFalse(self.manifest["test_included"])
 
+    def test_manifest_matches_committed_lock(self):
+        gate = validate_manifest_lock(self.manifest)
+        self.assertTrue(gate["ok"], gate["problems"])
+
     def test_manifest_hash_is_deterministic(self):
         again = build_challenge_manifest()
         self.assertEqual(
@@ -163,6 +169,35 @@ class D079ChallengeTests(unittest.TestCase):
                 self.assertEqual(len(partial), 1)
                 self.assertFalse(partial[0]["compensation_available"])
                 self.assertEqual(row["label"], "R4")
+
+    def test_scenario_cluster_ids_match_manifest_registry(self):
+        registry = {
+            cluster["cluster_id"]: cluster
+            for cluster in self.manifest["clusters"]
+        }
+        self.assertEqual(len(registry), 48)
+        self.assertEqual(
+            {row["cluster_id"] for row in self.manifest["scenarios"]},
+            set(registry),
+        )
+        for cluster_id, cluster in registry.items():
+            rows = [
+                row for row in self.manifest["scenarios"]
+                if row["cluster_id"] == cluster_id
+            ]
+            self.assertEqual(len(rows), 6)
+            self.assertEqual(
+                Counter(row["evaluation_role"] for row in rows),
+                Counter({"search": 3, "diagnostic": 3}),
+            )
+            self.assertEqual({row["label"] for row in rows}, {cluster["label"]})
+
+    def test_manifest_validator_rejects_role_fragmented_cluster_id(self):
+        broken = json.loads(json.dumps(self.manifest))
+        broken["scenarios"][0]["cluster_id"] += "|search"
+        gate = validate_challenge_manifest(broken)
+        self.assertFalse(gate["ok"])
+        self.assertTrue(any("cluster" in problem for problem in gate["problems"]))
 
     def test_d078_scenario_id_parser(self):
         self.assertEqual(

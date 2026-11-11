@@ -104,6 +104,41 @@ class TrainOnlyDiagnosticTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Train"):
             select_train_diagnostic_candidate([record])
 
+    def test_committed_content_level_lock_schema_is_accepted(self):
+        manifest = build_challenge_manifest()
+        lock = {
+            "lock_schema_version": 1,
+            "protocol_id": "D-079",
+            "generator_version": manifest["generator_version"],
+            "manifest_sha256": manifest["manifest_sha256"],
+            "scenario_count": manifest["scenario_count"],
+            "cluster_count": manifest["cluster_count"],
+            "family_count": manifest["family_count"],
+            "train_only": True,
+            "validation_included": False,
+            "test_included": False,
+            "test_outcomes_read": False,
+            "role_counts": {"search": 144, "diagnostic": 144},
+            "label_counts_by_role": manifest["label_counts_by_role"],
+        }
+        content_lock_path = Path(self.tmp.name) / "content_lock.json"
+        content_lock_path.write_text(json.dumps(lock), encoding="utf-8")
+        search_result = {
+            "episodes": 576, "unique_evaluations": 4, "cache_hits": 0,
+            "evaluation_calls": 4, "train_candidate_fsms": [hand_fsm()],
+            "final_population": [hand_fsm()], "strata": [],
+            "mutation_audit": [], "history": [],
+        }
+        with patch("d079_train_only_diagnostic.run_sbcg_evolution", return_value=search_result), \
+                patch("d079_train_only_diagnostic.evaluate_sbcg_candidate",
+                      side_effect=lambda fsm, scenarios, verdicts, **kwargs: self._record(fsm)):
+            result = run_d079_train_only_diagnostic(
+                self.manifest_path, content_lock_path, self.outdir,
+                seeds=(7,), spec_names=("SBCG-NSGA-III",), pop_size=2, generations=1,
+            )
+        self.assertEqual(result["run_count"], 1)
+        self.assertEqual(result["manifest_sha256"], manifest["manifest_sha256"])
+
 
 if __name__ == "__main__":
     unittest.main()

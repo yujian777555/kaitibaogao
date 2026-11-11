@@ -5,6 +5,7 @@
 **起始 HEAD：** `0726f779e00c82ca4fd96e4a3adb3ac8b67bda88`  
 **main：** `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`（未修改）  
 **范围：** D-081 CI 验收、D-078 独立复算、288 场景挑战集、manifest lock、Train-only 探索性算法诊断  
+**版本修正：** 本报告首次写入时使用 v1 角色碎片化 cluster_id。后续 D-083/D-084 独立审计撤销了 v1 lock 资格；v1 诊断仅保留为 superseded。最终有效结果来自 v2 及 committed lock，见 §8。
 **正式 A-3b / Test / Pilot B / A800 / 真实 LLM API：** 均未运行或未访问
 
 ## 1. D-081 CI 验收
@@ -204,3 +205,40 @@ SBCG 相对 Hand 的 CondRecSucc 在每个 seed 都更低（−0.3125、−0.562
 - `test_d079_manifest_lock.py`、`test_d079_train_only_diagnostic.py`：lock 与 runner 的真实路径测试。
 
 本报告不构成正式 A-3b、Test、Pilot B、A800/ARWM 或真实 LLM API 授权。
+
+
+## 8. D-083/D-084 后续审计：v1 撤销与 v2 有效诊断
+
+后续独立审计发现 v1 的 scenario `cluster_id` 为 `family|stratum|role`，而 48 个注册 cluster 使用 `family|stratum`，产生 96 个无法与注册表 join 的角色碎片化 ID。因此：
+
+- **v1 manifest lock 被撤销；v1 诊断只保留为 superseded 历史数据，不能作为最终算法证据。**
+- 合并 v2 修正后，scenario cluster_id 统一为 `family|stratum`，evaluation_role 作为独立维度；
+- 重新生成 v2 manifest，内容 SHA 为 **`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`**；
+- 使用 D-084 committed lock `experiments/pilot_a3b/d079_manifest_lock.json` 重新运行完整 14×3 诊断；
+- 新 runner 同时支持文件级 lock 与 committed content-level lock，并用测试覆盖两种 schema。
+
+### v2 独立结构审计
+
+`results/d079_challenge_v2/independent_audit.json` 证明：
+
+- 288 个唯一 Train 行、288 个唯一 seed、0 UNKNOWN、0 robust/analytic disagreement；
+- 恰好 48 个可 join clusters；每簇 6 行，Search/Diagnostic 各 3；
+- manifest gate 与 committed lock 均 PASS；
+- v2 raw manifest file SHA-256=`f2dfc57cc8d2444680e589cd82efad7383bfebc269527709f9ffa18e16ed9d27`。
+
+### v2 算法结果
+
+v2 与 v1 的 cluster 表示修正不改变 episode 语义；独立比较显示所有臂的场景级指标完全一致。最终有效结果位于 `results/d079_train_only_diagnostic_v2/`：
+
+| Arm | CondRecSucc | R3 Correct | R4 Containment | AvoidableHarm | ConstraintViolation |
+|---|---:|---:|---:|---:|---:|
+| Hand | 0.7812 | 0.0000 | 0.0000 | 0.4375 | 0.1458 |
+| Matched NSGA-II | 0.2396 | 0.0000 | 0.3333 | 0.7569 | 0.0000 |
+| SBCG | 0.2292 | 0.0000 | 0.6667 | 0.3472 | 0.0000 |
+| no-M1 | 0.4896 | 0.0000 | 0.6667 | 0.4444 | 0.0000 |
+| no-M2 | 0.3854 | 0.0000 | 0.0000 | 0.7014 | 0.0000 |
+| no-M3 | 0.2500 | 0.0000 | 0.3333 | 0.6875 | 0.0000 |
+
+`independent_verification.json` 再次确认：42 runs、4320 诊断行、预算/缓存/角色违规 0、汇总重算不一致 0。
+
+**最终结论仍以 v2 为准：SBCG 当前整体 NO-GO。** R4 containment 和硬约束的正向信号不构成恢复性能提升；所有臂 R3 CorrectEscalation=0 的问题仍未解决。

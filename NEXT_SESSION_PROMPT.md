@@ -2,7 +2,7 @@
 
 > **最新权威状态（2026-11-11，D-082 执行完成）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。D-081 corrective CI run 42828590264 @192f958 已 success（28+290=318 tests）。D-078 已独立复算 42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；robust/analytic disagreement=0。
 >
-> **D-079 挑战集已锁定：** 288 Train-only scenarios（Search/Diagnostic 各144），8 families×6 strata×3 repeats×2 roles；0 UNKNOWN；内容 SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`；lock 篡改测试通过。
+> **D-079 最终有效挑战集为 v2：** 后续 D-083/D-084 审计发现 v1 cluster_id 与注册表不一致，v1 lock 和诊断已撤销为 superseded。v2 含 288 Train-only scenarios（Search/Diagnostic 各144）、48 个可 join clusters、0 UNKNOWN；内容 SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`；committed lock=`experiments/pilot_a3b/d079_manifest_lock.json`。v2 诊断已重跑并独立核验。
 >
 > **算法诊断已实际运行：** 14 arms×3 seeds=42 runs；SBCG 相对 Hand 的 CondRecSucc 配对均值 −0.5521，R4 containment +0.6667，constraint violation −0.1458。没有整体提升，当前 SBCG=NO-GO；所有臂 R3 CorrectEscalation=0。详见 81_D082_EXECUTION_AND_TRAIN_ONLY_DIAGNOSTIC.md。
 >
@@ -1205,3 +1205,54 @@ D-079 challenge: 288 Train-only scenarios, 144 Search + 144 Diagnostic, eight fa
 The locked Train-only diagnostic actually ran 14 arms x 3 seeds = 42 runs. SBCG minus Hand: CondRecSucc −0.5521, R4 containment +0.6667, constraint violation −0.1458. SBCG minus matched NSGA-II CondRecSucc −0.0104. No overall uplift; current SBCG is NO-GO. Every arm has R3 CorrectEscalation=0. Initial and final diagnostic artifacts are preserved; independent CSV recomputation found zero mismatches.
 
 Only next task: independent R4 review. For the algorithm, preregister exactly one R3 mechanism revision—prefix rollback/compensation before escalation—with its own ablation and a fresh challenge split. Do not tune repeatedly on the same Diagnostic role. Formal A-3b, Test access, Pilot B, A800/ARWM, real LLM APIs, UndoBench TEST, ThinkingBox, and main merges remain forbidden.
+## D-083 continuation instructions — 2026-11-11
+
+You are continuing the thesis project in **yujian777555/kaitibaogao only**. Do not mix other repositories.
+
+The user wants a short paper for Agent × Evolutionary Computation using the research workflow: select a recent open-source conference baseline, faithfully reproduce it, decompose its modules, compare related mechanisms, propose a targeted algorithmic improvement, and prove it with controlled experiments.
+
+### Current paper candidate
+
+Working title: **面向状态化工具调用智能体的契约约束恢复策略演化方法**.
+
+Primary evolutionary baseline: **EvoTool (ACL 2026)**, paper https://aclanthology.org/2026.acl-long.2016/ and official code https://github.com/SYang2000/ACL_2026_EvoTool. It uses Planner/Selector/Caller/Synthesizer, trajectory-grounded blame attribution, feedback-guided targeted mutation, and diversity-aware population selection. First reproduce an official stateful benchmark slice (prefer tau-Bench) exactly before adapting it.
+
+Related work requiring comparison: EvoFSM (FSM evolution), DART (semantic recoverability), Evidence-Guided Recovery (ambiguous outcomes/partial execution), EvoUndo (recoverability-constrained harness self-evolution), ToolMisuseBench, AgentRx, and Failing Tools. Do not claim novelty as the first Agent recovery or first FSM evolution method.
+
+### Immediate repository task
+
+D-081 CI passed. Independent audit of the D-079 v1 artifact found:
+- canonical v1 manifest hash matched;
+- 288 Train-only rows, 8 families, 6 strata, 144 search + 144 diagnostic, no UNKNOWN, no robust/analytic disagreements;
+- **blocking issue:** scenario `cluster_id` contains `family|stratum|role`, while the declared 48-cluster registry uses `family|stratum`. Thus 96 scenario cluster IDs cannot be joined to the 48 registry entries.
+
+D-079 v1 is not locked. Correct the generator to v2 with scenario cluster IDs `family|stratum`, validate 48 clusters × 6 rows × 3 rows per role, and add tests. Then run CI and independently audit the regenerated artifact. Only after that may a new `d079_manifest_lock.json` be committed.
+
+### Research and authorization boundaries
+
+- D-078 does not establish EC uplift; Hand FSM dominates selected Validation candidates, and its R3 correct-escalation is 0/36.
+- D-079 is Train-only, non-confirmatory mechanism discovery.
+- No formal A-3b, locked Test, external benchmark Test, A800/ARWM, or real LLM API execution is authorized by the current protocol.
+- Do not fabricate results or claim a paper-level effect.
+- After manifest integrity is restored, prepare a faithful EvoTool reproduction protocol. Wait for separate authorization before any experiment that crosses the current gates.
+
+Read `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`, `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`, and the latest handoff before acting.
+
+## D-084 continuation — 2026-11-11
+
+The D-079 v2 Train-only manifest is independently audited. Its canonical SHA is `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`; it contains 288 unique Train rows, 48 cluster IDs, six rows per cluster (three per role), 144 search + 144 diagnostic, all R1-R4 labels, zero UNKNOWN/disagreement, and no Validation/Test payload or outcome access. The lock is `experiments/pilot_a3b/d079_manifest_lock.json`. A regression test checks regenerated content against the lock.
+
+Paper 1 primary baseline is EvoTool ACL 2026. Important reproduction finding: the paper Appendix A.6 says G=8/B=3, but the released code default derives 90 generations from three epochs × 30 batches. Do not run the default and call it a faithful reproduction. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`; use the paper-faithful G=8 override only after authorization.
+
+Next actions:
+1. Verify CI for the D-084 lock commit.
+2. Inspect workflow result and confirm the lock regression test passed.
+3. Prepare, but do not execute, the EvoTool Qwen3-8B tau-bench reproduction preflight.
+4. Ask the user for explicit authorization before launching vLLM/A800, any real LLM API, formal A-3b optimizer, or held-out Test.
+
+Keep all work in `kaitibaogao`; do not merge other repositories. D-078 has no EC uplift; D-079 is Train-only diagnostic, not confirmatory.
+
+
+## 2026-11-11 — D-082 v2 correction
+
+The D-083/D-084 audit revoked the v1 lock because role-fragmented scenario cluster IDs did not join the 48-cluster registry. Keep the v1 diagnostic only as superseded history. The sole valid manifest is v2 with SHA `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca` and committed lock `experiments/pilot_a3b/d079_manifest_lock.json`. V2 has 288 Train rows, 48 joinable clusters, six rows per cluster and three per role. The 42-run diagnostic was rerun on v2 and independently verified. SBCG remains NO-GO; R3 CorrectEscalation remains zero for every arm.

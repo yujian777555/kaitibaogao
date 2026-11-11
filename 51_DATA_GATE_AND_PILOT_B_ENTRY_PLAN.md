@@ -389,3 +389,10 @@ D-081 corrective CI 已成功：run 42828590264 @192f958，318/318 tests。D-078
 在 lock 通过后已运行 Train-only 14-arm×3-seed exploratory diagnostic。SBCG 未超过 Hand/Rule-based，且 matched NSGA-II 差异不支持提升；当前算法整体 NO-GO。该诊断不等于 Pilot B、正式 A-3b、UndoBench/ToolMisuseBench 或真实 LLM 验证。
 
 **Pilot B 与真实 Test 继续 HOLD。** 下一步先做 R4 独立复审；算法侧只允许预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融与新挑战划分，不得在同一 Diagnostic 上反复调参。
+
+
+## 18. D-082 v2 数据门禁修正（2026-11-11）
+
+v1 manifest 因 cluster_id 角色碎片化而被撤销，不再视为有效 lock。v2 以 `family|stratum` 表示统计簇，role 独立；288 Train-only 行恰好映射到 48 个可 join clusters，每簇 6 行、每角色 3 行。
+
+唯一有效 manifest SHA 为 `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`，lock 为 `experiments/pilot_a3b/d079_manifest_lock.json`。v2 Train-only 诊断已重跑并通过独立核验。Pilot B、正式 A-3b、Test、A800/ARWM 与真实 LLM API 继续 HOLD。

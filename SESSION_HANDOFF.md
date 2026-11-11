@@ -3,7 +3,7 @@
 - 工作仓库：yujian777555/kaitibaogao；分支 pilot-a-stateful-recovery；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。
 - D-081 corrective CI run 42828590264 @192f958 已 success，28+290=318 tests；首轮失败及 D-078 skipped 记录保留。
 - D-078 独立复算：42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；Hand R1/R2=1.0、R3=0、R4=1.0；robust/analytic disagreement=0；成功工作流预期 active effects 不再误计为 harm。
-- D-079 挑战集 288 Train-only scenarios 已锁定；manifest SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`；0 UNKNOWN、ID/seed 全唯一、角色配对一致。
+- D-079 v1 因 cluster_id 与注册表不一致被后续审计撤销；v2 才是最终有效挑战集：288 Train-only scenarios、48 个可 join clusters、0 UNKNOWN；manifest SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`；committed lock=`experiments/pilot_a3b/d079_manifest_lock.json`。v2 诊断已重跑并独立核验。
 - D-079 Train-only 诊断 14 arms×3 seeds=42 runs 已完成并独立核验；SBCG 对 Hand 的 CondRecSucc −0.5521，R4 containment +0.6667，硬约束 −0.1458。**整体提升不成立，当前候选 NO-GO；所有臂 R3=0。**
 - 当前唯一任务：R4 独立复审；算法侧仅可预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融和新挑战划分，不得在同一 Diagnostic 上反复调参。
 - 不运行正式 A-3b，不访问 Test，不运行 Pilot B，不启动 A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox；不合并 main。D-076 R4 的 technical-missing power 和 pre-run/post-run gate 仍需独立复核。
@@ -2406,3 +2406,42 @@ D-081 CI 已修复并 success。挑战集 288 Train-only 场景和 lock 通过�
 
 ### 唯一下一任务
 R4 独立复审。算法侧仅可预注册 prefix rollback/compensation-before-escalation 的单机制消融与新的挑战划分。不得用同一 Diagnostic 反复调参；不得访问 Test、启动正式 A-3b、Pilot B、A800/ARWM、真实 LLM API 或合并 main。
+## 2026-11-11 Research Handoff — D-083
+
+**Repository:** `yujian777555/kaitibaogao` only
+**Branch at handoff:** `pilot-a-stateful-recovery`
+**Baseline direction:** EvoTool (ACL 2026) is the primary evolutionary baseline; DART and Evidence-Guided Recovery are direct recovery-domain comparators; EvoUndo and EvoFSM are adjacent related work.
+
+### Verified current state
+
+- D-081 workflow run 42828590264 succeeded on `192f958847fb31d7d704cfa0760201dcd8371e32`.
+- D-078 independent audit: 42 runs, 14 arms, 3 seeds; 32/42 selected FSMs exactly equal Hand FSM; 33/42 Validation Pareto fronts contained Hand FSM; Hand R3 correct escalation = 0/36.
+- D-079 v1 candidate hash `cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa` recomputes correctly, but the scenario `cluster_id` field is role-fragmented while the cluster registry has 48 cross-role clusters. Do not lock v1.
+- See `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md` and `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`.
+
+### Next steps
+
+1. Apply the D-079 v2 cluster-ID correction and validator tests.
+2. Run CI; independently inspect the new artifact and verify hash, 48 cluster IDs, six rows per cluster, three rows per role, labels, IDs, and Train-only isolation.
+3. Only after all checks pass, create `d079_manifest_lock.json`; do not reuse the v1 hash.
+4. Keep D-079 as non-confirmatory mechanism discovery. Do not access held-out Test or run the optimizer until separately authorized.
+5. Begin faithful EvoTool reproduction planning from its official code and tau-Bench protocol; exact reproduction must precede adaptation claims.
+
+### Hard boundaries
+
+No mixing with other repositories. No formal A-3b, locked Test, external benchmark Test, A800/ARWM, or real LLM API execution under the current D-079 authorization. Do not claim algorithmic uplift from D-078.
+
+## 2026-11-11 D-084 Handoff
+
+- Branch: `pilot-a-stateful-recovery`; previous head `c1246f847e49a2c3808cb961584743fe76c68794`.
+- D-079 v2 manifest SHA: `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`.
+- D-079 v2 independent audit passed: 288 Train rows, 48 clusters, 6 rows/cluster, 3 search + 3 diagnostic per cluster, 144/144 roles, all R1-R4, zero UNKNOWN and zero label disagreement, hash verified.
+- Lock file: `experiments/pilot_a3b/d079_manifest_lock.json`; regression now checks regenerated manifest against it.
+- D-079 remains Train-only and non-confirmatory; no optimizer execution or Test access authorized.
+- Paper 1: primary evolutionary baseline EvoTool (ACL 2026). Code-paper budget discrepancy documented: paper G=8/B=3 vs code default 90 generations. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- Next: verify CI for the lock commit; then prepare the exact EvoTool Qwen3-8B tau-bench reproduction preflight. Do not start model serving, paid API, A800, formal A-3b, or Test until explicit approval.
+
+
+## 65. D-082 v2 修正交接（2026-11-11）
+
+v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 superseded。v2 manifest SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`，48 个 cluster 可 join，committed lock 验证通过。v2 诊断已重跑 42 runs，指标与 v1 一致，独立核验通过。当前 SBCG 仍 NO-GO，所有臂 R3=0。唯一下一任务不变：R4 独立复审及 R3 单机制预注册。

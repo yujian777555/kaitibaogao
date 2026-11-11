@@ -931,3 +931,22 @@ D-079 挑战集已锁定：288 Train-only scenarios（Search/Diagnostic 各144�
 Train-only 诊断实际完成 14 arms×3 seeds=42 runs。SBCG 相对 Hand 的 CondRecSucc 为 **−0.5521**，R4 containment **+0.6667**，constraint violation **−0.1458**；相对 matched NSGA-II 的 CondRecSucc −0.0104。**没有整体提升，当前 SBCG 为 NO-GO；所有臂 R3 CorrectEscalation=0。** 原始首次与最终诊断、CSV/JSON/报告和独立核验均保留。
 
 唯一下一任务：R4 独立复审；算法侧仅可预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融及新挑战划分。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API 和 main 合并继续 HOLD。
+## Research update — 2026-11-11
+
+- D-081 CI passed, but independent D-079 v1 artifact review found a cluster-ID registry mismatch; the v1 manifest is not locked.
+- D-079 v2 generator/test correction is being prepared. No optimizer run is authorized.
+- Paper 1 working direction: contract-aware evolutionary recovery policies for stateful tool-using Agents. Primary evolutionary baseline: EvoTool (ACL 2026); see `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`.
+- Audit: `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`.
+
+## Paper 1 reproduction audit — 2026-11-11
+
+- D-079 v2 Train-only challenge manifest is independently audited and frozen; see `experiments/pilot_a3b/d079_manifest_lock.json` and `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`.
+- Paper 1 baseline: EvoTool (ACL 2026). Its paper/code generation budget must be reconciled: paper Appendix A.6 says G=8, while released defaults derive 90 generations. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- No EvoTool reproduction or formal A-3b optimizer run has been launched; current execution authorization remains unchanged.
+
+
+## 2026-11-11：D-082 v2 修正——v1 lock 撤销，v2 诊断有效
+
+后续 D-083/D-084 审计发现 v1 scenario cluster_id 含 role，而 48 个注册 cluster 不含 role，导致 96 个角色碎片化 ID 无法 join。v1 lock 与诊断因此仅保留为 superseded，不能作为最终算法证据。
+
+v2 使用 `family|stratum` cluster_id，role 独立；288 Train-only 行、48 clusters、每簇 6 行且每角色 3 行，manifest/lock 均 PASS。v2 SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`，committed lock=`experiments/pilot_a3b/d079_manifest_lock.json`。v2 已重新运行 42 个 Train-only runs，指标与 v1 一致，独立核验零不一致；SBCG 整体结论仍为 NO-GO。详见 81 号报告 §8 与 `results/d079_train_only_diagnostic_v2/`。

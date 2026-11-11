@@ -308,10 +308,14 @@ def run_d079_train_only_diagnostic(
 ):
     """Run the registered matrix only after manifest-lock verification passes."""
     lock = json.loads(Path(lock_path).read_text(encoding="utf-8"))
-    lock_check = verify_manifest_lock_files(manifest_path, lock)
+    manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
+    if "lock_schema_version" in lock:
+        from d079_challenge_generator import validate_manifest_lock
+        lock_check = validate_manifest_lock(manifest, lock_path=lock_path)
+    else:
+        lock_check = verify_manifest_lock_files(manifest_path, lock)
     if not lock_check["ok"]:
         raise ValueError("manifest lock verification failed: " + "; ".join(lock_check["problems"]))
-    manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
     if not (manifest["train_only"] and not manifest["validation_included"] and not manifest["test_included"]):
         raise ValueError("D-079 diagnostic requires a Train-only manifest")
 
@@ -435,13 +439,16 @@ def run_d079_train_only_diagnostic(
         public.pop("scenario_by_id", None)
         public.pop("verdicts", None)
         summary_results.append(public)
+    manifest_file_sha = hashlib.sha256(Path(manifest_path).read_bytes()).hexdigest()
     output = {
         "diagnostic_version": DIAGNOSTIC_VERSION,
         "status": "EXECUTED_TRAIN_ONLY_EXPLORATORY_NO_TEST",
-        "manifest_sha256": lock["manifest_content_sha256"],
-        "manifest_file_sha256": lock["manifest_file_sha256"],
-        "scenario_ids_sha256": lock["scenario_ids_sha256"],
-        "lock_version": lock["lock_version"],
+        "manifest_sha256": lock.get("manifest_content_sha256") or lock["manifest_sha256"],
+        "manifest_file_sha256": lock.get("manifest_file_sha256") or manifest_file_sha,
+        "scenario_ids_sha256": lock.get("scenario_ids_sha256") or _canonical_sha256(
+            sorted(row["scenario_id"] for row in scenarios)
+        ),
+        "lock_version": lock.get("lock_version") or f"schema-{lock.get('lock_schema_version')}",
         "generator_version": manifest["generator_version"],
         "seed_base": manifest["seed_base"],
         "label_source": "observation-based-AND-OR-robust-reachability",
