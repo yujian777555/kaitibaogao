@@ -90,3 +90,12 @@ A paper-level EC improvement claim requires the combined method to outperform ma
 ## 9. Initial target venues
 
 For an EC-centered method paper, first assess GECCO and IEEE CEC; also consider Swarm and Evolutionary Computation or Applied Soft Computing depending on the strength of the algorithmic result. Agent/NLP venues are secondary options if the paper's strongest contribution becomes the Agent recovery benchmark or system evaluation rather than the evolutionary method.
+
+
+## 10. Module-level comparison revision — 2026-11-11
+
+GEPA (ICLR 2026 Oral; https://arxiv.org/abs/2507.19457; https://github.com/gepa-ai/gepa) is added as the selection/reflection comparator. Its documented loop selects from a Pareto frontier of candidates that excel on different task subsets, reflects on full execution traces, mutates using accumulated lessons, and can merge complementary candidates.
+
+The current hypothesis is narrowed from generic CACGE to a more specific **Fault-Stratified Pareto Archive Evolution (FSPAE)** selection mechanism. The intended archive descriptor is task-family × fault-stratum (48 Train clusters in D-079 v2), with recoverability class retained as a separate audited field. This is a proposed mechanism, not a validated result. See `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
+
+The existing SBCG implementation already has five objectives, zero-tolerance safety constraints, a family × failure-signature × safety-class counterexample pool, and a global Pareto elite archive with a per-family CondRecSucc guard. The new hypothesis is specifically to preserve and sample **per fault-stratum Pareto specialists**, rather than relying only on a global population and per-family CondRecSucc guard.

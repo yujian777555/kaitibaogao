@@ -2413,3 +2413,12 @@ No mixing with other repositories. No formal A-3b, locked Test, external benchma
 - D-079 remains Train-only and non-confirmatory; no optimizer execution or Test access authorized.
 - Paper 1: primary evolutionary baseline EvoTool (ACL 2026). Code-paper budget discrepancy documented: paper G=8/B=3 vs code default 90 generations. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
 - Next: verify CI for the lock commit; then prepare the exact EvoTool Qwen3-8B tau-bench reproduction preflight. Do not start model serving, paid API, A800, formal A-3b, or Test until explicit approval.
+
+## 2026-11-11 D-085 Research Handoff
+
+- D-079 v2 manifest lock regression passed: workflow run 42953293607, commit `e36cd9e5abe7c60991f1e63bd27fe1de4a71c532`.
+- Locked Train-only manifest SHA: `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`; 288 rows, 48 clusters, 6 rows/cluster, 3 search + 3 diagnostic per cluster.
+- Paper 1 baseline: EvoTool (ACL 2026); GEPA (ICLR 2026 Oral) is the selection/reflection comparator. Detailed decomposition and G=8/B=3 vs 90-generation code-default discrepancy: `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- New method hypothesis: FSPAE, a fault-stratified Pareto archive with coverage-deficit parent sampling. Details: `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
+- D-078 remains NO_UPLIFT; 32/42 selections equal Hand, Hand R3 correct escalation 0.0. FSPAE is only a hypothesis.
+- Next action: prepare the exact EvoTool Qwen3-8B tau-bench baseline preflight; ask user before launching vLLM/A800 or any real API. No formal A-3b optimizer, Validation/Test, or external benchmark Test is authorized.

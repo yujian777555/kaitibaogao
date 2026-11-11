@@ -931,3 +931,11 @@ SBCG 已实现五维安全目标、零容差硬约束、family×signature×safet
 - D-079 v2 Train-only challenge manifest is independently audited and frozen; see `experiments/pilot_a3b/d079_manifest_lock.json` and `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`.
 - Paper 1 baseline: EvoTool (ACL 2026). Its paper/code generation budget must be reconciled: paper Appendix A.6 says G=8, while released defaults derive 90 generations. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
 - No EvoTool reproduction or formal A-3b optimizer run has been launched; current execution authorization remains unchanged.
+
+## Paper 1 module-level research update — 2026-11-11
+
+- D-079 v2 Train-only manifest is frozen at `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`; lock regression CI passed in run 42953293607.
+- Primary evolutionary baseline: EvoTool (ACL 2026). GEPA (ICLR 2026 Oral) is the Pareto/reflection module comparator.
+- New provisional algorithm hypothesis: Fault-Stratified Pareto Archive Evolution (FSPAE), described in `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
+- EvoTool paper/code generation-budget mismatch is documented in `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- No baseline reproduction or optimizer experiment has been run.

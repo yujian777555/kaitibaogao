@@ -1540,3 +1540,12 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 - D-079 lock is data-integrity only; it does not authorize optimizer execution.
 - EvoTool (ACL 2026) remains the primary evolutionary baseline. Its paper states G=8/B=3, while released code defaults to 90 generations; do not use defaults as a faithful reproduction. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
 - No A800/ARWM, real LLM API, formal A-3b, or held-out Test execution is authorized yet.
+
+## D-085 — Narrow Paper 1 innovation to fault-stratified Pareto selection (2026-11-11)
+
+- D-084 lock regression CI passed on commit `e36cd9e5abe7c60991f1e63bd27fe1de4a71c532` (workflow run 42953293607).
+- Module-level comparison: EvoTool uses instance-wise winner retention; GEPA uses Pareto-front candidates with reflection/merge; current SBCG uses global NSGA-II/III survivor selection plus a global archive and per-family CondRec guard.
+- D-078 shows Hand selected in 32/42 runs and R3 CorrectEscalation=0.0. This motivates, but does not prove, a selection-module failure.
+- Provisional method hypothesis: FSPAE, a per-task-family × fault-stratum Pareto archive with coverage-deficit parent sampling and zero-tolerance hard safety constraints.
+- FSPAE is not validated. D-079 is Train-only and non-confirmatory; no optimizer run is authorized.
+- EvoTool faithful reproduction must use paper G=8/B=3, not released default 90 generations, pending explicit user approval.
