@@ -1,0 +1,64 @@
+{
+  "d079_lock_validated": true,
+  "d079_manifest_sha256": "09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca",
+  "data_splits": [
+    "train"
+  ],
+  "git_head_at_audit": "33672562ebaeb6c3a533e7e0fd975cbac045b5e3",
+  "historical_artifacts_overwritten": false,
+  "methods": {
+    "Hand": {
+      "R3": {
+        "avoidable_harm_mean": 1.0,
+        "class_success_rate": 0.0,
+        "class_success_sum": 0,
+        "constraint_violation_sum": 0,
+        "n": 24,
+        "prefix_compensation_success_sum": 0,
+        "residual_side_effects_mean": 1.0
+      },
+      "R4": {
+        "avoidable_harm_mean": 1.25,
+        "class_success_rate": 0.0,
+        "class_success_sum": 0,
+        "constraint_violation_sum": 0,
+        "n": 24,
+        "prefix_compensation_success_sum": null,
+        "residual_side_effects_mean": 2.25
+      }
+    },
+    "PrefixAware": {
+      "R3": {
+        "avoidable_harm_mean": 0.0,
+        "class_success_rate": 1.0,
+        "class_success_sum": 24,
+        "constraint_violation_sum": 0,
+        "n": 24,
+        "prefix_compensation_success_sum": 24,
+        "residual_side_effects_mean": 0.0
+      },
+      "R4": {
+        "avoidable_harm_mean": 0.0,
+        "class_success_rate": 1.0,
+        "class_success_sum": 24,
+        "constraint_violation_sum": 0,
+        "n": 24,
+        "prefix_compensation_success_sum": null,
+        "residual_side_effects_mean": 1.0
+      }
+    }
+  },
+  "optimizer_runs": 0,
+  "protocol": "D-085-R3-ROOT-CAUSE",
+  "scenario_count_per_method": 48,
+  "source_sha256": {
+    "experiments/pilot_a3b/a3_bridge.py": "3eabf66f54d66a594862079acf4920082a81f3c1dd06b5567722e55b04346ca1",
+    "experiments/pilot_a3b/d079_challenge_generator.py": "ae2133c68f891adf09aa40d9bc77b7fc60c7fb0ad6060afce99013fa4fe2c672",
+    "experiments/pilot_a3b/prefix_mechanism_audit.py": "515463d577a53ff808804b5f83051c93c91f9d5948d7e269937d5125481a8558",
+    "experiments/pilot_a3b/prefix_recovery.py": "55d9c94f6087759de7053bf1f45e903b4bf9aca90be5d2a0230a1eadc96cd3f4",
+    "experiments/pilot_a_recovery/pilot_a3.py": "bc2a4bc70e1eb6ef5215d8d259f3e0b3375c567052f080de80af3f890f242675"
+  },
+  "status": "MECHANISM_REACHABILITY_ONLY_NOT_ALGORITHM_PERFORMANCE_PROOF",
+  "test_accessed": false,
+  "validation_accessed": false
+}

@@ -1,0 +1,15 @@
+{
+  "config_version": "d064-r4-execution-v1",
+  "population": 48,
+  "generations": 60,
+  "train_scenarios": 216,
+  "budget_rule": "48*(60+1)*216 real simulator episodes plus explicitly counted safety-battery episodes; cached genomes are not new unique evaluations",
+  "optimizer_seeds": [411, 522, 633],
+  "power_base_seed": 20261114,
+  "signflip_base_seed": 20261112,
+  "signflip_mc_seed": 20261113,
+  "stopping_rule": "budget_exhaustion_no_early_significance_stop",
+  "train_runner_split": "train",
+  "validation_use": "selection_only",
+  "test_access": "one_time_approved_wrapper_only"
+}

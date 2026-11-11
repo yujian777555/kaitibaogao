@@ -36,11 +36,11 @@ def make_pattern_spec(name, faults, idempotent, compensatable, comp_available, h
         raise ValueError("comp_available sequence must match the fault vector length")
     comp_opts = []
     for i, f in enumerate(faults):
-        if f in ("partial_commit", "timeout_after", "delayed_visibility") and compensatable[i]:
+        if compensatable[i]:
             available = comp_available[i] if isinstance(comp_available, (list, tuple)) else comp_available
             comp_opts.append((True, False) if available is None else (bool(available),))
         else:
-            comp_opts.append((True,))
+            comp_opts.append((False,))
     delay_opts = []
     for f in faults:
         if f in ("timeout_after", "delayed_visibility"):

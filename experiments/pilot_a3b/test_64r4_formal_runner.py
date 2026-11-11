@@ -97,7 +97,16 @@ class FormalRunnerTests(unittest.TestCase):
                 "manifest_sha256": manifest["manifest_sha256"],
                 "code_sha256": code_sha,
             }
-            preflight = {"phase": "PRE_RUN_AUTHORIZATION", "status": "GO"}
+            preflight = {
+                "phase": "PRE_RUN_AUTHORIZATION", "status": "GO",
+                "provenance": {"git_head": GIT_HEAD, "implementation_sha256": code_sha},
+                "test_lock": {"access_log_count": 0, "one_time_ledger_state": "UNUSED"},
+            }
+            approvals["git_head"] = GIT_HEAD
+            approvals["preflight_artifact"] = preflight
+            approvals["preflight_sha256"] = hashlib.sha256(
+                json.dumps(preflight, sort_keys=True, separators=(",", ":")).encode("utf-8")
+            ).hexdigest()
             evaluated_ledger, receipt = execute_final_evaluation_once(
                 ledger_path, approvals, preflight,
                 manifest["manifest_sha256"], manifest["manifest_sha256"],

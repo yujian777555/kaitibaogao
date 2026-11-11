@@ -375,6 +375,8 @@ def _betainc(a, b, x):
         return 0.0
     if x >= 1:
         return 1.0
+    if x > 0.5:
+        return 1.0 - _betainc(b, a, 1.0 - x)
     lbeta = math.lgamma(a) + math.lgamma(b) - math.lgamma(a + b)
     front = math.exp(math.log(x) * a + math.log(1 - x) * b - lbeta) / a
     # Lentz continued fraction

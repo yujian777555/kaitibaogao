@@ -13,6 +13,7 @@ PROVENANCE = {
 def analyze_secondary_endpoints(*args, **kwargs):
     kwargs.setdefault("provenance", PROVENANCE)
     kwargs.setdefault("primary_composition_ids", PROVENANCE["primary_composition_ids"])
+    kwargs.setdefault("allow_synthetic", True)
     return _analyze_secondary_endpoints(*args, **kwargs)
 
 

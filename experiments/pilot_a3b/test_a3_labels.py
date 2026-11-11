@@ -54,6 +54,21 @@ class A3VerdictTests(unittest.TestCase):
         }
         self.assertEqual(scenario_verdict(s)["class"], "R4")
 
+    def test_robust_label_respects_runtime_compensation_unavailable_on_normal_prefix(self):
+        from a3_verdicts import classify_scenario
+        scenario = {
+            "tools": ["customer", "order", "shipment"],
+            "faults": [
+                {"fault": "none", "delay": 0, "retry_after": 0, "compensation_available": False},
+                {"fault": "permission_denied", "delay": 0, "retry_after": 0, "compensation_available": True},
+                {"fault": "none", "delay": 0, "retry_after": 0, "compensation_available": True},
+            ],
+        }
+        self.assertEqual(scenario_verdict(scenario)["class"], "R4")
+        verdict = classify_scenario(scenario)
+        self.assertEqual(verdict["class"], "R4")
+        self.assertTrue(verdict["agreement"])
+
     def test_verdicts_deterministic_and_have_harm_fields(self):
         for comp in ("single_timeout", "partial_comp_failure", "triple_mixed"):
             v1 = scenario_verdict(sc("inventory_order_payment", comp, 11))

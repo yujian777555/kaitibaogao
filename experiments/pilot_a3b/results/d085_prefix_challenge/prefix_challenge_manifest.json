@@ -1,0 +1,4271 @@
+{
+  "allocation": {
+    "train": [
+      "customer_order_shipment",
+      "inventory_calendar_order",
+      "inventory_order_payment",
+      "subscription_ledger_notification",
+      "tf_calendar__refund__subscription",
+      "tf_customer__notification__payment"
+    ],
+    "validation": [
+      "calendar_order_ledger",
+      "return_refund_restock"
+    ]
+  },
+  "development_only": true,
+  "expected_labels": {
+    "P1_PERMISSION_COMPENSATABLE_PREFIX": "R3",
+    "P2_PERMISSION_COMPENSATION_UNAVAILABLE": "R4",
+    "P3_RECOVERABLE_PARTIAL_CONTROL": "R2",
+    "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL": "R1"
+  },
+  "families": [
+    {
+      "family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ]
+    },
+    {
+      "family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ]
+    },
+    {
+      "family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ]
+    },
+    {
+      "family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ]
+    },
+    {
+      "family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ]
+    },
+    {
+      "family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ]
+    },
+    {
+      "family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ]
+    },
+    {
+      "family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ]
+    }
+  ],
+  "family_counts": {
+    "train": 6,
+    "validation": 2
+  },
+  "generator_version": "d085-prefix-development-v1",
+  "label_counts": {
+    "train": {
+      "R1": 18,
+      "R2": 18,
+      "R3": 18,
+      "R4": 18
+    },
+    "validation": {
+      "R1": 6,
+      "R2": 6,
+      "R3": 6,
+      "R4": 6
+    }
+  },
+  "manifest_sha256": "cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492",
+  "protocol_id": "D-085-PREFIX",
+  "repeats_per_family_stratum": 3,
+  "scenario_count": 96,
+  "scenario_counts": {
+    "train": 72,
+    "validation": 24
+  },
+  "scenarios": [
+    {
+      "analytic_label": "R3",
+      "cluster_id": "customer_order_shipment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "11e10d1aeef148c7a096a520d821a722bc789c716823a431235a80aa9ff983b5",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|customer_order_shipment|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 14474983262820635629,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "customer_order_shipment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "11e10d1aeef148c7a096a520d821a722bc789c716823a431235a80aa9ff983b5",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|customer_order_shipment|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 10740560358456758986,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "customer_order_shipment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "11e10d1aeef148c7a096a520d821a722bc789c716823a431235a80aa9ff983b5",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|customer_order_shipment|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 16408582536265334336,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "customer_order_shipment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "17b44be9cd967bd1cb112aff10bdeba838dd0e3e2c727b96974037e61ce82956",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 0,
+      "scenario_id": "d085|train|customer_order_shipment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 5580983813953915337,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "customer_order_shipment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "17b44be9cd967bd1cb112aff10bdeba838dd0e3e2c727b96974037e61ce82956",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 1,
+      "scenario_id": "d085|train|customer_order_shipment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 14072290859833770736,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "customer_order_shipment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "17b44be9cd967bd1cb112aff10bdeba838dd0e3e2c727b96974037e61ce82956",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 2,
+      "scenario_id": "d085|train|customer_order_shipment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 16844222870733809899,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "customer_order_shipment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "0d6f67d2cfb17f515dd98aa81dee7d2ce406f6c752c789c4fa226c94ade775ab",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|customer_order_shipment|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 10259764640766602982,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "customer_order_shipment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "0d6f67d2cfb17f515dd98aa81dee7d2ce406f6c752c789c4fa226c94ade775ab",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|customer_order_shipment|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 8887202182438951595,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "customer_order_shipment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "0d6f67d2cfb17f515dd98aa81dee7d2ce406f6c752c789c4fa226c94ade775ab",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|customer_order_shipment|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 587522495141610644,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "customer_order_shipment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "82f5d45e64e99093c53cea41a803dfc07501b0ceeb949a6df364db35bd463710",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|customer_order_shipment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 18314884306654393461,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "customer_order_shipment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "82f5d45e64e99093c53cea41a803dfc07501b0ceeb949a6df364db35bd463710",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|customer_order_shipment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 12818025437001365242,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "customer_order_shipment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "82f5d45e64e99093c53cea41a803dfc07501b0ceeb949a6df364db35bd463710",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|customer_order_shipment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 9602808227342942462,
+      "split": "train",
+      "task": "customer_order_shipment",
+      "task_family_id": "customer_order_shipment",
+      "tools": [
+        "customer",
+        "order",
+        "shipment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "inventory_calendar_order|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "f7a6eac4c3ff8581a829c8c1ef9d63466bb7f2b8f3813654949a28867f5d9198",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_calendar_order|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 4078473473590391008,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "inventory_calendar_order|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "f7a6eac4c3ff8581a829c8c1ef9d63466bb7f2b8f3813654949a28867f5d9198",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_calendar_order|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 5074221244940473139,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "inventory_calendar_order|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "f7a6eac4c3ff8581a829c8c1ef9d63466bb7f2b8f3813654949a28867f5d9198",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_calendar_order|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 6015607050956003163,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "inventory_calendar_order|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "0a8187bdcfcee6cddcc614c20780a14d33368b45e3b6c08492f1c760801ec734",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_calendar_order|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 11282768634007568285,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "inventory_calendar_order|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "0a8187bdcfcee6cddcc614c20780a14d33368b45e3b6c08492f1c760801ec734",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_calendar_order|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 16078667030847737376,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "inventory_calendar_order|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "0a8187bdcfcee6cddcc614c20780a14d33368b45e3b6c08492f1c760801ec734",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_calendar_order|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 4285051694417705767,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "inventory_calendar_order|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "6fab3080611d5beff59d97ba277ec464f515defc49d82813a4727ccfb5c1586f",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_calendar_order|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 1195557845989393388,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "inventory_calendar_order|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "6fab3080611d5beff59d97ba277ec464f515defc49d82813a4727ccfb5c1586f",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_calendar_order|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 13897154045467855969,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "inventory_calendar_order|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "6fab3080611d5beff59d97ba277ec464f515defc49d82813a4727ccfb5c1586f",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_calendar_order|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 13412893777849390598,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "inventory_calendar_order|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "59a961c53f7a46a76d0a2bd51e5a8d9b36aeea13007a517629db96a15be3b956",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_calendar_order|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 12766392124078134065,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "inventory_calendar_order|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "59a961c53f7a46a76d0a2bd51e5a8d9b36aeea13007a517629db96a15be3b956",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_calendar_order|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 6106109476534284983,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "inventory_calendar_order|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "59a961c53f7a46a76d0a2bd51e5a8d9b36aeea13007a517629db96a15be3b956",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_calendar_order|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 16929821341190928702,
+      "split": "train",
+      "task": "inventory_calendar_order",
+      "task_family_id": "inventory_calendar_order",
+      "tools": [
+        "inventory",
+        "calendar",
+        "order"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "inventory_order_payment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "b6ba52744138b4de4141a5a45fc724862b487bfc8c5ff3e16fe8d6826468db86",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_order_payment|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 5293034778778434012,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "inventory_order_payment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "b6ba52744138b4de4141a5a45fc724862b487bfc8c5ff3e16fe8d6826468db86",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_order_payment|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 10618592241997849976,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "inventory_order_payment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "b6ba52744138b4de4141a5a45fc724862b487bfc8c5ff3e16fe8d6826468db86",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_order_payment|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 935199167498588973,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "inventory_order_payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "87a95bbd4cf00a46b5ac5d97085be85e3385a79b5c027fa8fba99fb400d99fde",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 2,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_order_payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 6606345722295818141,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 2
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "inventory_order_payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "87a95bbd4cf00a46b5ac5d97085be85e3385a79b5c027fa8fba99fb400d99fde",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 2,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_order_payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 6554744536370273361,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 2
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "inventory_order_payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "87a95bbd4cf00a46b5ac5d97085be85e3385a79b5c027fa8fba99fb400d99fde",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 2,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_order_payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 6726525442607063196,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 2
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "inventory_order_payment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "d9e828d3199cb3674344a33271a53c5ccf76594d3fe57e431f5cba0d809a0cc9",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_order_payment|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 1498419869335588402,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "inventory_order_payment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "d9e828d3199cb3674344a33271a53c5ccf76594d3fe57e431f5cba0d809a0cc9",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_order_payment|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 12618843816733466072,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "inventory_order_payment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "d9e828d3199cb3674344a33271a53c5ccf76594d3fe57e431f5cba0d809a0cc9",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_order_payment|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 1040893573588143016,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "inventory_order_payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "40b2a8952a97f00a7cf15485db5de50cabb11600f754b2562fb1de2e872649b4",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|inventory_order_payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 5596583104571323846,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "inventory_order_payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "40b2a8952a97f00a7cf15485db5de50cabb11600f754b2562fb1de2e872649b4",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|inventory_order_payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 7909253395508993338,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "inventory_order_payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "40b2a8952a97f00a7cf15485db5de50cabb11600f754b2562fb1de2e872649b4",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|inventory_order_payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 6843053267283782492,
+      "split": "train",
+      "task": "inventory_order_payment",
+      "task_family_id": "inventory_order_payment",
+      "tools": [
+        "inventory",
+        "order",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "subscription_ledger_notification|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "a1b4c2e3f9e6a3ace2e50af80bc8b56b83374e4b76512826a5f3c95cffde00cd",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|subscription_ledger_notification|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 6833655580863202598,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "subscription_ledger_notification|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "a1b4c2e3f9e6a3ace2e50af80bc8b56b83374e4b76512826a5f3c95cffde00cd",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|subscription_ledger_notification|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 11894783487164051147,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "subscription_ledger_notification|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "a1b4c2e3f9e6a3ace2e50af80bc8b56b83374e4b76512826a5f3c95cffde00cd",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|subscription_ledger_notification|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 10367038924186197250,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "subscription_ledger_notification|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "01364d47c1537a8c4d2768f5e508e645705905a3942b706555bfea08e4c887cd",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 0,
+      "scenario_id": "d085|train|subscription_ledger_notification|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 6672984266456155675,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "subscription_ledger_notification|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "01364d47c1537a8c4d2768f5e508e645705905a3942b706555bfea08e4c887cd",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 1,
+      "scenario_id": "d085|train|subscription_ledger_notification|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 5446760146166023191,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "subscription_ledger_notification|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "01364d47c1537a8c4d2768f5e508e645705905a3942b706555bfea08e4c887cd",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 2,
+      "scenario_id": "d085|train|subscription_ledger_notification|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 3756700956718598132,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "subscription_ledger_notification|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "c618d32f471d4a832957733ff4749855d1d129764d084082099c49463af135c0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|subscription_ledger_notification|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 5818687380281447883,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "subscription_ledger_notification|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "c618d32f471d4a832957733ff4749855d1d129764d084082099c49463af135c0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|subscription_ledger_notification|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 15206968074654250208,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "subscription_ledger_notification|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "c618d32f471d4a832957733ff4749855d1d129764d084082099c49463af135c0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|subscription_ledger_notification|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 13294151782531574548,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "subscription_ledger_notification|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "13fe3fbecf9c0816e927ff630c6a4859d866bac514a11e4826eddf01855c864d",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|subscription_ledger_notification|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 12168979648798362195,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "subscription_ledger_notification|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "13fe3fbecf9c0816e927ff630c6a4859d866bac514a11e4826eddf01855c864d",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|subscription_ledger_notification|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 1255929599693789709,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "subscription_ledger_notification|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "13fe3fbecf9c0816e927ff630c6a4859d866bac514a11e4826eddf01855c864d",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|subscription_ledger_notification|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 7542839913520810049,
+      "split": "train",
+      "task": "subscription_ledger_notification",
+      "task_family_id": "subscription_ledger_notification",
+      "tools": [
+        "subscription",
+        "ledger",
+        "notification"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "tf_calendar__refund__subscription|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "dcbd048bd4885ad0f5279ffa58199f908af093a7fbbd720002ddac2e258d9435",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 11552473843463535789,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "tf_calendar__refund__subscription|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "dcbd048bd4885ad0f5279ffa58199f908af093a7fbbd720002ddac2e258d9435",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 8851327957045311468,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "tf_calendar__refund__subscription|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "dcbd048bd4885ad0f5279ffa58199f908af093a7fbbd720002ddac2e258d9435",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 8429656575203496467,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "tf_calendar__refund__subscription|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "1f36ba5ac49766a7561f63387387a39672e9076fd6241cf2d80149b50685f0bc",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 13456677898537611765,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "tf_calendar__refund__subscription|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "1f36ba5ac49766a7561f63387387a39672e9076fd6241cf2d80149b50685f0bc",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 16796337148067289713,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "tf_calendar__refund__subscription|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "1f36ba5ac49766a7561f63387387a39672e9076fd6241cf2d80149b50685f0bc",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 16062790045541391310,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "tf_calendar__refund__subscription|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "17d194cb048125739a3f89717f37b79574fe7ce974480a61194d58f9cbda3ec0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 9723839412771660718,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "tf_calendar__refund__subscription|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "17d194cb048125739a3f89717f37b79574fe7ce974480a61194d58f9cbda3ec0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 834506202116122760,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "tf_calendar__refund__subscription|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "17d194cb048125739a3f89717f37b79574fe7ce974480a61194d58f9cbda3ec0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 13884101950565852684,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "tf_calendar__refund__subscription|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "4138c0d02d1faef7d514ea19dada3fc6b5942c602fc180e9d04fdc662fbf1d41",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 15879661622750736364,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "tf_calendar__refund__subscription|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "4138c0d02d1faef7d514ea19dada3fc6b5942c602fc180e9d04fdc662fbf1d41",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 2106307222881652018,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "tf_calendar__refund__subscription|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "4138c0d02d1faef7d514ea19dada3fc6b5942c602fc180e9d04fdc662fbf1d41",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_calendar__refund__subscription|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 13770647390487377398,
+      "split": "train",
+      "task": "tf_calendar__refund__subscription",
+      "task_family_id": "tf_calendar__refund__subscription",
+      "tools": [
+        "calendar",
+        "refund",
+        "subscription"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "tf_customer__notification__payment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "c84dfadb85cc46a0a52d609a3a0759a9598af7de8caeb183269e6602ccbca94a",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 7650947910543056668,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "tf_customer__notification__payment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "c84dfadb85cc46a0a52d609a3a0759a9598af7de8caeb183269e6602ccbca94a",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 9562280385674807199,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "tf_customer__notification__payment|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "c84dfadb85cc46a0a52d609a3a0759a9598af7de8caeb183269e6602ccbca94a",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 1505675968149164168,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "tf_customer__notification__payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "c6a1ae22858afd409ff9d6a1aa2784f834463b04ba778643684cd454530a700e",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 13182761783317154088,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "tf_customer__notification__payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "c6a1ae22858afd409ff9d6a1aa2784f834463b04ba778643684cd454530a700e",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 10478233425826195583,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "tf_customer__notification__payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "c6a1ae22858afd409ff9d6a1aa2784f834463b04ba778643684cd454530a700e",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 17429525600796309926,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "tf_customer__notification__payment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "bc9a8482e9f369b648c1cfdf7c1fb2b1ddc6e99d05e73537d2ae7aa3502cbbc0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 17168511694431977380,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "tf_customer__notification__payment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "bc9a8482e9f369b648c1cfdf7c1fb2b1ddc6e99d05e73537d2ae7aa3502cbbc0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 612174277785656782,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "tf_customer__notification__payment|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "bc9a8482e9f369b648c1cfdf7c1fb2b1ddc6e99d05e73537d2ae7aa3502cbbc0",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 13582803902120177698,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "tf_customer__notification__payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "f6eb92a55b7d58245d9ba3e69621d5982e9a5500825bfa29333e55a7897c19e7",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 14868040420354752639,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "tf_customer__notification__payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "f6eb92a55b7d58245d9ba3e69621d5982e9a5500825bfa29333e55a7897c19e7",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 756387469620344724,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "tf_customer__notification__payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "search",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "f6eb92a55b7d58245d9ba3e69621d5982e9a5500825bfa29333e55a7897c19e7",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|train|tf_customer__notification__payment|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 2051603552030861309,
+      "split": "train",
+      "task": "tf_customer__notification__payment",
+      "task_family_id": "tf_customer__notification__payment",
+      "tools": [
+        "customer",
+        "notification",
+        "payment"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "calendar_order_ledger|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "11e10d1aeef148c7a096a520d821a722bc789c716823a431235a80aa9ff983b5",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|validation|calendar_order_ledger|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 12348129356058855603,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "calendar_order_ledger|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "11e10d1aeef148c7a096a520d821a722bc789c716823a431235a80aa9ff983b5",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|validation|calendar_order_ledger|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 6282373340853671691,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "calendar_order_ledger|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "11e10d1aeef148c7a096a520d821a722bc789c716823a431235a80aa9ff983b5",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|validation|calendar_order_ledger|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 1550422450915792283,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "calendar_order_ledger|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "b4ac4d687198ecf7cc2b0c52697fbfcb03366b20cc194be333795931e9c4f627",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 2,
+      "repeat": 0,
+      "scenario_id": "d085|validation|calendar_order_ledger|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 13119817284822445727,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 2
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "calendar_order_ledger|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "b4ac4d687198ecf7cc2b0c52697fbfcb03366b20cc194be333795931e9c4f627",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 2,
+      "repeat": 1,
+      "scenario_id": "d085|validation|calendar_order_ledger|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 1292696469174884565,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 2
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "calendar_order_ledger|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "b4ac4d687198ecf7cc2b0c52697fbfcb03366b20cc194be333795931e9c4f627",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 2,
+      "repeat": 2,
+      "scenario_id": "d085|validation|calendar_order_ledger|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 2013246165235420920,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 2
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "calendar_order_ledger|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "a68dce03cf0a8923ac9ba238d02d997cf468b7dc600d6bc6514311663d7019ea",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|validation|calendar_order_ledger|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 13964168530784865344,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "calendar_order_ledger|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "a68dce03cf0a8923ac9ba238d02d997cf468b7dc600d6bc6514311663d7019ea",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|validation|calendar_order_ledger|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 4707637810215233653,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "calendar_order_ledger|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "a68dce03cf0a8923ac9ba238d02d997cf468b7dc600d6bc6514311663d7019ea",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|validation|calendar_order_ledger|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 16418213744894617096,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "calendar_order_ledger|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "82f5d45e64e99093c53cea41a803dfc07501b0ceeb949a6df364db35bd463710",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|validation|calendar_order_ledger|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 17675052705056224986,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "calendar_order_ledger|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "82f5d45e64e99093c53cea41a803dfc07501b0ceeb949a6df364db35bd463710",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|validation|calendar_order_ledger|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 6207448361804206183,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "calendar_order_ledger|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "82f5d45e64e99093c53cea41a803dfc07501b0ceeb949a6df364db35bd463710",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|validation|calendar_order_ledger|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 9868477020825342380,
+      "split": "validation",
+      "task": "calendar_order_ledger",
+      "task_family_id": "calendar_order_ledger",
+      "tools": [
+        "calendar",
+        "order",
+        "ledger"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "return_refund_restock|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "f17af64d4c514ff45859a3d9d012fda7df816e7bdb374976c3cb88800e8ea7aa",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|validation|return_refund_restock|P1_PERMISSION_COMPENSATABLE_PREFIX|r0",
+      "seed": 10120451864866803593,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "return_refund_restock|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "f17af64d4c514ff45859a3d9d012fda7df816e7bdb374976c3cb88800e8ea7aa",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|validation|return_refund_restock|P1_PERMISSION_COMPENSATABLE_PREFIX|r1",
+      "seed": 6492927770349294245,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R3",
+      "cluster_id": "return_refund_restock|P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "composition": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "difficulty_stratum": "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R3",
+      "label_evidence_sha256": "f17af64d4c514ff45859a3d9d012fda7df816e7bdb374976c3cb88800e8ea7aa",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|validation|return_refund_restock|P1_PERMISSION_COMPENSATABLE_PREFIX|r2",
+      "seed": 13345909176161602042,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "return_refund_restock|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "41a8faa0f1e2a5553b4d22c2b095fdafff9b38dd1bfa0bc1debbfe820f501a63",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 0,
+      "scenario_id": "d085|validation|return_refund_restock|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r0",
+      "seed": 1583654547103258426,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "return_refund_restock|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "41a8faa0f1e2a5553b4d22c2b095fdafff9b38dd1bfa0bc1debbfe820f501a63",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 1,
+      "scenario_id": "d085|validation|return_refund_restock|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r1",
+      "seed": 7408530444817766314,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R4",
+      "cluster_id": "return_refund_restock|P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "composition": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "difficulty_stratum": "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "permission_denied",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R4",
+      "label_evidence_sha256": "41a8faa0f1e2a5553b4d22c2b095fdafff9b38dd1bfa0bc1debbfe820f501a63",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 1,
+      "repeat": 2,
+      "scenario_id": "d085|validation|return_refund_restock|P2_PERMISSION_COMPENSATION_UNAVAILABLE|r2",
+      "seed": 8831230720490951979,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 1
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "return_refund_restock|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "4a34679c0e78926476722537e78cee2e4bdc6a8c21c99b12f2552522065c4a5a",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|validation|return_refund_restock|P3_RECOVERABLE_PARTIAL_CONTROL|r0",
+      "seed": 14225502191194779272,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "return_refund_restock|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "4a34679c0e78926476722537e78cee2e4bdc6a8c21c99b12f2552522065c4a5a",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|validation|return_refund_restock|P3_RECOVERABLE_PARTIAL_CONTROL|r1",
+      "seed": 15586932928538255252,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R2",
+      "cluster_id": "return_refund_restock|P3_RECOVERABLE_PARTIAL_CONTROL",
+      "composition": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "difficulty_stratum": "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "partial_commit",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R2",
+      "label_evidence_sha256": "4a34679c0e78926476722537e78cee2e4bdc6a8c21c99b12f2552522065c4a5a",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|validation|return_refund_restock|P3_RECOVERABLE_PARTIAL_CONTROL|r2",
+      "seed": 12980218852658543912,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "return_refund_restock|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "ad4c6915aea7d89f57d4048bd1763e6bb2c3510336e5ebd3b2250c90a27816c4",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 0,
+      "scenario_id": "d085|validation|return_refund_restock|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r0",
+      "seed": 10123150247507257967,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "return_refund_restock|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "ad4c6915aea7d89f57d4048bd1763e6bb2c3510336e5ebd3b2250c90a27816c4",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 1,
+      "scenario_id": "d085|validation|return_refund_restock|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r1",
+      "seed": 6832304938754321948,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    },
+    {
+      "analytic_label": "R1",
+      "cluster_id": "return_refund_restock|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "composition": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "difficulty_stratum": "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL",
+      "evaluation_role": "validation_selection",
+      "faults": [
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": false,
+          "delay": 0,
+          "fault": "timeout_before",
+          "retry_after": 0
+        },
+        {
+          "compensation_available": true,
+          "delay": 0,
+          "fault": "none",
+          "retry_after": 0
+        }
+      ],
+      "label": "R1",
+      "label_evidence_sha256": "ad4c6915aea7d89f57d4048bd1763e6bb2c3510336e5ebd3b2250c90a27816c4",
+      "labeler": "observation-based-AND-OR-robust-reachability-v1",
+      "min_reachable_harm": 0,
+      "repeat": 2,
+      "scenario_id": "d085|validation|return_refund_restock|P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL|r2",
+      "seed": 8299780376173768915,
+      "split": "validation",
+      "task": "return_refund_restock",
+      "task_family_id": "return_refund_restock",
+      "tools": [
+        "order",
+        "refund",
+        "inventory"
+      ],
+      "unavoidable_residual": 0
+    }
+  ],
+  "seed_base": 2026111500,
+  "strata": [
+    "P1_PERMISSION_COMPENSATABLE_PREFIX",
+    "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+    "P3_RECOVERABLE_PARTIAL_CONTROL",
+    "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL"
+  ],
+  "test_included": false,
+  "test_outcomes_read": false,
+  "test_protocol": {
+    "family_count": 40,
+    "family_roster": "OPEN_INDEPENDENT_CUSTODIAN_COMMITMENT_REQUIRED",
+    "repeats_per_stratum": 5,
+    "scenario_count": 800,
+    "scenario_id_namespace": "d085|test|",
+    "seed_base": 2026111900,
+    "split": "test",
+    "status": "SEALED_NOT_GENERATED_OR_READ",
+    "strata": [
+      "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL"
+    ]
+  }
+}

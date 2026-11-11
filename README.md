@@ -1,31 +1,30 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## 最新执行状态（2026-11-11，D-079 corrective CI pending）
+## 最新执行状态（2026-11-11，D-085 Prefix 机制审计）
 
-- 唯一仓库：yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main 保持 683b3fe7fc52c86e917d523fdc6bbb13abbfd653，不得合并。
-- D-078 已完成 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；Test outcomes 未读取，LLM API=0。原始 artifact 不可覆盖。
-- D-079 首轮 regression CI 42827879313 failure：282 tests 中仅 D079 challenge generator 的 family contract 假设阻断；D-078 workflow run 42827879133 在 preflight 失败，算法步骤 skipped，没有新实验数据。
-- D-081 corrective commit 已推送：`192f958847fb31d7d704cfa0760201dcd8371e32`。修复 D6：允许通过 runtime compensation unavailable 构造 R4，不要求每个 Train family 同时包含 compensatable 与 uncompensatable tools；并将 D-078 workflow 改为 workflow_dispatch only。
-- D-081 commit 的 combined status 当前无 status checks；尚未取得 corrective regression run 的成功证据。不得把修复提交表述为 CI 通过。
-- D-079 evaluator/harm/robust-label 修复、D-078 独立审计和 288 个 Train-only challenge candidate 尚待 corrective CI 验证。manifest SHA 未锁定；不得运行新 optimizer。
-- 当前唯一下一任务：核验 D-081 commit 对应的 regression Actions run（含 282 tests 之后新增 D079 tests）；若无 run，先通过可审计的 branch push 触发；CI 通过后审查 audit outputs 与 288-scenario manifest，复核 labels/counts/hash，再提交 manifest lock。manifest lock 前不运行 D079 optimizer。
-- 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD；main 不合并。D-076 R4 technical-missing power 与 pre-run/post-run lifecycle 问题仍需独立复审。
-
-**研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** D-079 corrective CI / Train-only challenge manifest gate  
-**当前工作题目：** 《面向状态化工具型大语言模型智能体的故障恢复策略演化与递归自我改进方法研究》（未最终冻结）  
-**当前结论：** D-078 未证明 SBCG/NSGA-III 性能提升；先完成评估语义、标签来源与挑战集门禁，禁止提前扩大实验。
+- 唯一仓库：yujian777555/kaitibaogao；工作分支 `pilot-a-stateful-recovery`；接管基线 `33672562ebaeb6c3a533e7e0fd975cbac045b5e3`；main 保持 `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，不修改、不合并。
+- **R4：** `85_D064_R4_INDEPENDENT_REVIEW_R2.md` = ACCEPTED，仅限代码与协议复审；不是正式 A-3b 批准。导师 MDE、用户批准和真实 pre-flight 仍是独立硬门。
+- **R3 根因：** 当前 D5 动作空间可达到补偿后零残余；原 Hand 在权限拒绝后直接升级、遗漏已提交前缀。稳健标签器对“正常前缀运行期补偿不可用”的反例也已保守修正；D-079 v2 的 288 场景和 SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca` 保持不变。
+- **机制证据：** 两个固定控制器的 96 行审计显示，PrefixAware 在 D5/R3 为 24/24、D6/R4 为 24/24 且达到最小残余，Hand 两组均 0/24；这不是优化器性能提升。原始 CSV/JSON、来源哈希和独立复算均已保存。
+- **新隔离数据：** Train=72、Validation=24，family 不相交，UNKNOWN=0；manifest SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`。Test 只有封存规则，未生成、未读取，精确 roster 和保管承诺为 OPEN。
+- **封顶结论：** 修正后的固定 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规。当前简单挑战集没有 EC 功效改进空间，优化器运行数为 0；不得事后改看成本制造创新。
+- **测试：** 本地完整回归 `341+28=369` 全部通过；新 CI 已配置重算机制与封顶审计，远端 run 尚待提交后核验，不能沿用旧 CI 代替。
+- **当前唯一下一任务：** 由新的独立会话审查 `86_D085_R3_PREFIX_MECHANISM_AUDIT.md`、`87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md`、最终实现与封顶门；审查前不得运行新优化器。
+- 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。D-078/D-079 原始 artifact 和本轮修复前证据均保留。
 
 **研究主线：** Evolutionary Computation for AI Agents  
-**当前阶段：** D-079 独立诊断与 Train-only 难度分层挑战集预注册  
+**当前阶段：** Prefix-aware 机制可行；EC 实验因固定规则封顶而 HOLD
 **当前工作题目：** 《面向状态化工具型大语言模型智能体的故障恢复策略演化与递归自我改进方法研究》（未最终冻结）  
-**当前结论：** D-078 未证明 SBCG/NSGA-III 性能提升；先修复评估语义、标签来源和挑战集构造，再做非确认性 Train-only 机制诊断。
+**当前结论：** SBCG 整体 NO-GO；Prefix 机制可行不等于演化算法创新成立。
 
-**D-079 文件：**
-- [独立诊断与挑战集预注册](80_D079_DIAGNOSTIC_AND_CHALLENGE_PREREGISTRATION.md)
-- [D-079 D-078 结果复算脚本](experiments/pilot_a3b/d079_diagnostics.py)
-- [D-079 Train-only 挑战集生成器](experiments/pilot_a3b/d079_challenge_generator.py)
-- [D-079 回归测试](experiments/pilot_a3b/test_d079_diagnostics.py)
+**D-085 交付：**
+- [R4 独立复审](85_D064_R4_INDEPENDENT_REVIEW_R2.md)
+- [R3 根因与 Prefix 机制审计](86_D085_R3_PREFIX_MECHANISM_AUDIT.md)
+- [Prefix-aware 实验预注册候选](87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md)
+- [Prefix 控制器与专项测试](experiments/pilot_a3b/prefix_recovery.py)
+- [隔离挑战集生成与锁](experiments/pilot_a3b/prefix_challenge_generator.py)
+- [机制原始数据](experiments/pilot_a3b/results/d085_prefix_mechanism_audit/)
+- [固定控制器封顶审计](experiments/pilot_a3b/prefix_ceiling_audit.py)
 
 ## 1. 项目边界（必须遵守）
 

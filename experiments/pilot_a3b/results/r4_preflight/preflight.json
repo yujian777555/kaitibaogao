@@ -2,14 +2,7 @@
   "blocking_reasons": [
     "independent review is not ACCEPTED",
     "advisor MDE approval is not APPROVED",
-    "explicit user approval is absent",
-    "paired AB/NSGA-II rows are incomplete",
-    "duplicate_count must be zero",
-    "labelled_null_count must be zero",
-    "metadata_mismatch_count must be zero",
-    "at least 34 complete families are required",
-    "family_composition_counts must be a non-empty object",
-    "design_deviation is active"
+    "explicit user approval is absent"
   ],
   "checked_fields": [
     "r4_preregistration_sha256",
@@ -29,15 +22,6 @@
     "test_family_count",
     "test_scenario_count",
     "expected_roster_valid",
-    "paired_rows_valid",
-    "duplicate_count",
-    "labelled_null_count",
-    "metadata_mismatch_count",
-    "n_observed_families",
-    "family_composition_counts",
-    "family_loss",
-    "technical_missing_runs",
-    "design_deviation",
     "analysis_schema_valid",
     "budget_within_cap",
     "seed_recorded",
@@ -45,20 +29,16 @@
     "test_access_log_count",
     "one_time_ledger_state"
   ],
-  "design": {
-    "family_composition_counts": {},
-    "family_loss": [],
-    "n_observed_families": 0,
-    "technical_missing_runs": 0
-  },
   "execution_context": {
     "approval_record": {
       "advisor_mde_status": "PENDING",
       "independent_review_status": "PENDING",
       "user_approved": false
     },
+    "execution_config_sha256": "2ff8e8dacb9bcc23b4e34a46ccf5d15196d8ba76acf908ce5d5a69d844ad456f",
     "manifest_gate": "PASS",
     "outcome_ledger_state": "NOT_RUN",
+    "phase": "PRE_RUN_AUTHORIZATION",
     "primary_composition_ids": [
       "single_timeout",
       "timeout_then_rate_limit",
@@ -66,7 +46,7 @@
       "independent_mixed_val",
       "triple_mixed"
     ],
-    "scope": "metadata-only pre-run gate",
+    "scope": "metadata-only pre-run authorization gate; no outcome rows are expected here",
     "test_summary": {
       "cluster_label_counts": {
         "R1": 199,
@@ -102,9 +82,10 @@
       "unknown_scenario_rate": 0.0
     }
   },
+  "phase": "PRE_RUN_AUTHORIZATION",
   "provenance": {
-    "git_head": "32b6914b08075775c0d9000fb7b80392c33ec26e",
-    "implementation_sha256": "8122757fe2c35215fd30a74d5609e929a7c19090790c97c099e4e730ddca8426",
+    "git_head": "33672562ebaeb6c3a533e7e0fd975cbac045b5e3",
+    "implementation_sha256": "33d5033a610c536fb627f02913672c1913d864178efd885437d0c78ce2bd6ee5",
     "manifest_hashes": {
       "test_family_sha256": "01b41df8b06c318f90a4fc7aed45f673d13b50f14c08f56304ddffbb625a1411",
       "test_scenario_sha256": "dded3bb72a08143177dd6b7f5c4c4ef5100b547028c9cc40fa2b87b6bd70c919",
@@ -113,7 +94,7 @@
       "validation_family_sha256": "2c8ea029f69d237447f5316819dc39d621bd4f91fb58e3e11f42774ec56b44a4",
       "validation_scenario_sha256": "245712df4b39bd0c2208d2afaf862643051385d987f7b210226751fe5131b246"
     },
-    "r4_preregistration_sha256": "f4be87d450b324613efad36fb504b7ef4e8187ae54d02fcbcc271541652c35c0"
+    "r4_preregistration_sha256": "4c9a55e3edc5d0f5c28fa164f0f1f2c6b02040e44c02a7de511e1877c1090b6f"
   },
   "status": "HOLD",
   "test_lock": {

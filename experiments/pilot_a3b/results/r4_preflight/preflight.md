@@ -1,19 +1,13 @@
-# R4 Formal Pre-flight
+# R4 Gate Report
 
-Status: **HOLD**
+- Phase: PRE_RUN_AUTHORIZATION
+- Status: **HOLD**
 
 ## Blocking reasons
 
 - independent review is not ACCEPTED
 - advisor MDE approval is not APPROVED
 - explicit user approval is absent
-- paired AB/NSGA-II rows are incomplete
-- duplicate_count must be zero
-- labelled_null_count must be zero
-- metadata_mismatch_count must be zero
-- at least 34 complete families are required
-- family_composition_counts must be a non-empty object
-- design_deviation is active
 
 ## Test lock
 

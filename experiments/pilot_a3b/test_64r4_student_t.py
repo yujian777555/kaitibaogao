@@ -8,7 +8,7 @@ import unittest
 
 import numpy as np
 
-from power_hierarchical import _pvals_student_t, family_level_tests, student_t_summary
+from power_hierarchical import _pvals_student_t, _t_sf, family_level_tests, student_t_summary
 
 
 class StudentTBoundaryTests(unittest.TestCase):
@@ -40,8 +40,14 @@ class StudentTBoundaryTests(unittest.TestCase):
         self.assertGreater(result["p_two_sided"], 0.0)
         self.assertLess(result["p_two_sided"], 1.0)
 
+    def test_small_t_tail_matches_independent_scipy_reference(self):
+        # Two-sided references computed with scipy.stats.t.sf on df=39.
+        self.assertAlmostEqual(2 * _t_sf(0.001, 39), 0.9992072133047887, places=9)
+        self.assertAlmostEqual(2 * _t_sf(0.01, 39), 0.9920722672096238, places=9)
+        self.assertAlmostEqual(2 * _t_sf(0.01, 1), 0.9936340144701835, places=9)
+
     def test_known_answer_student_t(self):
-        # [1,2,3,4,5]: t=4.2426406871, df=4, two-sided p=0.013846832988...
+        # [1,2,3,4,5]: t=4.2426406871, df=4, two-sided p=0.013235599563683
         result = student_t_summary(np.array([1., 2., 3., 4., 5.]))
         self.assertAlmostEqual(result["t"], 4.242640687119285, places=10)
         self.assertEqual(result["df"], 4)

@@ -11,10 +11,13 @@ Contract semantics (from 47_PILOT_A3_PROTOCOL / pilot_a3 TOOLS):
 - PARTIAL commit on a non-compensatable tool cannot be cleared by COMPENSATE;
   COMPENSATE on such a tool is contract-blocked and must not be relied on;
 - PERMISSION denial is never fixed by retry/wait/verify/compensate/repair;
+  ROLLBACK with a confirmed prior prefix clears earlier effects rather than
+  retrying the denied action;
 - SCHEMA drift is only fixable by REPAIR (schema repair), not by retry loops;
-- ROLLBACK presupposes at least one confirmed prior effect; as a static rule
-  it is legal everywhere (runtime records emptiness), but default actions
-  must be total (cover every guard).
+- ROLLBACK presupposes at least one confirmed prior effect; an empty rollback
+  fails closed at runtime, and default actions must cover every guard;
+- VERIFY_PREFIX reads compensation receipts after COMPENSATED/COMP_FAILED;
+  it does not expose latent commit or fault state.
 """
 from __future__ import annotations
 
@@ -26,6 +29,7 @@ from typing import List
 ACTIONS = (
     "RETRY",
     "VERIFY",
+    "VERIFY_PREFIX",
     "WAIT",
     "COMPENSATE",
     "ROLLBACK",
@@ -36,7 +40,7 @@ ACTIONS = (
 
 ERRORS = ("START", "TIMEOUT", "PARTIAL", "RATE_LIMIT", "SCHEMA", "PERMISSION",
           "COMMITTED", "NOT_COMMITTED", "COMPENSATED", "COMP_FAILED",
-          "WAITED", "DUPLICATE", "NOOP")
+          "PREFIX_VERIFIED", "WAITED", "DUPLICATE", "NOOP")
 
 
 @dataclass
@@ -73,7 +77,13 @@ def _rule_error(gene: RuleGene) -> str:
     if act == "REPAIR" and e != "SCHEMA" and e != "START":
         return "REPAIR only meaningful for SCHEMA drift"
 
-    if e == "PERMISSION" and act in ("RETRY", "WAIT", "VERIFY", "COMPENSATE", "ROLLBACK", "REPAIR"):
+    if act == "VERIFY_PREFIX" and e not in ("COMPENSATED", "COMP_FAILED"):
+        return "VERIFY_PREFIX requires a compensation observation"
+
+    if e == "PERMISSION" and act == "ROLLBACK" and not gene.stack:
+        return "PERMISSION rollback requires a confirmed prior prefix"
+
+    if e == "PERMISSION" and act in ("RETRY", "WAIT", "VERIFY", "COMPENSATE", "REPAIR"):
         return "PERMISSION cannot be fixed by " + act
 
     if e == "SCHEMA" and act in ("RETRY", "WAIT", "VERIFY", "COMPENSATE", "ROLLBACK"):
@@ -126,8 +136,10 @@ def validate_genome(genes, default_action: str, default_wait: int = 2) -> Valida
     # genome-level: default action must be total and legal-ish
     if default_action not in ACTIONS:
         rep.genome_violations.append(f"default action unknown: {default_action}")
-    if default_action == "REPAIR":
-        rep.genome_violations.append("default action REPAIR not total (needs SCHEMA context)")
+    if default_action in ("REPAIR", "VERIFY_PREFIX"):
+        rep.genome_violations.append(
+            "default action " + default_action + " not total (needs recovery context)"
+        )
     if default_wait < 1 or default_wait > 4:
         rep.genome_violations.append(f"default wait out of range {default_wait}")
 

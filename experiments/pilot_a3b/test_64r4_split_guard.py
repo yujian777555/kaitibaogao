@@ -1,4 +1,5 @@
 """R4 synthetic tests for split access and one-time final evaluation."""
+import hashlib
 import json
 import tempfile
 import unittest
@@ -16,6 +17,13 @@ from split_access import (
 
 
 def approval(manifest_sha="manifest-ok", code_sha="code-ok"):
+    artifact = {
+        "phase": "PRE_RUN_AUTHORIZATION",
+        "status": "GO",
+        "provenance": {"git_head": "git-ok", "implementation_sha256": code_sha},
+        "test_lock": {"access_log_count": 0, "one_time_ledger_state": "UNUSED"},
+    }
+    canonical = json.dumps(artifact, sort_keys=True, separators=(",", ":"))
     return {
         "status": "APPROVED",
         "preflight_status": "GO",
@@ -26,6 +34,9 @@ def approval(manifest_sha="manifest-ok", code_sha="code-ok"):
         "user_approved": True,
         "manifest_sha256": manifest_sha,
         "code_sha256": code_sha,
+        "git_head": "git-ok",
+        "preflight_artifact": artifact,
+        "preflight_sha256": hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
     }
 
 
@@ -116,12 +127,26 @@ class OneTimeFinalEvaluationTests(unittest.TestCase):
                 )
             self.assertEqual(calls, {"loader": 1, "evaluator": 1})
 
+    def test_production_wrapper_rejects_unbound_preflight_dictionary(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger = Path(tmp) / "one-time.json"
+            calls = {"loader": 0}
+            with self.assertRaises(PermissionError):
+                execute_final_evaluation_once(
+                    ledger, approval(), {"phase": "PRE_RUN_AUTHORIZATION", "status": "GO"},
+                    "manifest-ok", "manifest-ok", "code-ok", "code-ok",
+                    lambda: calls.__setitem__("loader", calls["loader"] + 1),
+                    lambda payload: payload,
+                )
+            self.assertEqual(calls["loader"], 0)
+            self.assertFalse(ledger.exists())
+
     def test_production_wrapper_requires_preflight_go_and_returns_bound_receipt(self):
         with tempfile.TemporaryDirectory() as tmp:
             ledger = Path(tmp) / "one-time.json"
             approvals = approval()
             approvals.update({"ci_conclusion": "success", "tests_passed": True})
-            preflight = {"phase": "PRE_RUN_AUTHORIZATION", "status": "GO"}
+            preflight = approvals["preflight_artifact"]
             outcome, receipt = execute_final_evaluation_once(
                 ledger, approvals, preflight,
                 "manifest-ok", "manifest-ok", "code-ok", "code-ok",

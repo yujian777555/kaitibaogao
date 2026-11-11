@@ -532,3 +532,7 @@
      类型：DIRECT EC PRIOR ART / STRONG BASELINE。利用 GA 搜索过程副产物学习变量重要性与交互，无需额外 fitness evaluations，并将结果用于 reproduction operators。TCAIL 必须比较零额外评价成本的在线交互学习路线。
 
 **对 P150–P153 的共同决策：** Fitness-based linkage、conditional/local linkage 和 GA-side-effect interaction learning 均已有直接先例。TCAIL 的候选差异只能落在 task-context + current-parent 双条件化、随机 task-block 配对、合法配置支持、posterior uncertainty/abstention、主动评价预算及其下游 GOM 搜索收益的联合机制上；新颖性仍待实验验证。
+## P. D-085：Prefix-aware 恢复机制的新颖性边界（2026-11-11）
+
+154. **Chang, E. Y., & Geng, L. (2025). Context Management, Validation, and Transaction Guarantees for Multi-Agent LLM Planning. Proceedings of the VLDB Endowment, 18(12), 4874–4886. DOI: 10.14778/3750601.3750611.** [arXiv:2503.11951v2](https://arxiv.org/html/2503.11951v2) · [PVLDB](https://www.vldb.org/pvldb/vol18/p4874-chang.pdf)
+     类型：PUBLISHED / DIRECT RECOVERY PRIOR ART。SagaLLM 已包含事务状态识别/checkpoint、补偿回滚、独立验证及多 Agent 依赖管理。与本条在 `49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md` 的早期登记一致；本轮复核正文后进一步确认：前缀状态、补偿顺序和验证本身不能作为本项目的新颖性主张。当前候选只能检验公开前缀状态与约束演化的组合是否在非封顶任务上带来可归因收益，现有固定规则封顶结果不支持该主张。

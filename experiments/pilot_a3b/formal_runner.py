@@ -14,6 +14,7 @@ from pathlib import Path
 
 from formal_analysis import analyze_primary_endpoint, analyze_secondary_endpoints
 from formal_preflight import run_postrun_integrity_check
+from split_access import flatten_run_ledger, validate_execution_receipt
 
 RUNNER_VERSION = "d064-r4-formal-runner-v1"
 HERE = Path(__file__).parent
@@ -57,32 +58,6 @@ def _git_head():
     return subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=str(HERE), text=True
     ).strip()
-
-
-def flatten_run_ledger(ledger):
-    """Flatten method/seed runs while preserving and checking row metadata."""
-    if not isinstance(ledger, dict) or not isinstance(ledger.get("runs"), list):
-        raise ValueError("run ledger must contain a runs list")
-    rows_out = []
-    for run in ledger["runs"]:
-        if not isinstance(run, dict) or not isinstance(run.get("rows"), list):
-            raise ValueError("each run must contain a rows list")
-        method = run.get("method")
-        seed = run.get("seed")
-        if not isinstance(method, str) or not method or seed is None:
-            raise ValueError("each run requires method and seed")
-        for original in run["rows"]:
-            if not isinstance(original, dict):
-                raise ValueError("ledger rows must be objects")
-            row = dict(original)
-            if "method" in row and row["method"] != method:
-                raise ValueError("row/run method mismatch")
-            if "seed" in row and row["seed"] != seed:
-                raise ValueError("row/run optimizer seed mismatch")
-            row["method"] = method
-            row["seed"] = seed
-            rows_out.append(row)
-    return rows_out
 
 
 def _family_rosters(expected_roster, primary_result):
@@ -145,31 +120,9 @@ def run_formal_analysis(
 
     code_sha = _code_sha256(code_paths)
     if analysis_split == "test":
-        receipt = test_execution_receipt
-        if not isinstance(receipt, dict) or receipt.get("status") != "COMPLETED":
-            raise PermissionError("Test analysis requires a completed one-time execution receipt")
-        if receipt.get("manifest_sha256") != actual_manifest_sha or receipt.get("code_sha256") != code_sha:
-            raise ValueError("final-evaluation receipt hash mismatch")
-        ledger_path = Path(receipt.get("ledger_path", ""))
-        if not ledger_path.is_file():
-            raise PermissionError("one-time final-evaluation ledger is missing")
-        consumed = json.loads(ledger_path.read_text(encoding="utf-8"))
-        if consumed.get("state") != "CONSUMED" or consumed.get("manifest_sha256") != actual_manifest_sha or consumed.get("code_sha256") != code_sha:
-            raise PermissionError("one-time final-evaluation ledger does not match the receipt")
-        if receipt.get("outcome_ledger_sha256") != _canonical_sha256(ledger):
-            raise ValueError("outcome ledger does not match the final-evaluation receipt")
-        access_log_path = Path(receipt.get("access_log_path", ""))
-        if not access_log_path.is_file():
-            raise PermissionError("one-time Test access log is missing")
-        access_record = json.loads(access_log_path.read_text(encoding="utf-8"))
-        if (
-            access_record.get("event") != "TEST_PAYLOAD_LOAD_ATTEMPT"
-            or access_record.get("state") != "RECORDED"
-            or access_record.get("manifest_sha256") != actual_manifest_sha
-            or access_record.get("code_sha256") != code_sha
-            or receipt.get("test_access_log_count") != 1
-        ):
-            raise PermissionError("one-time Test access log does not match the receipt")
+        validate_execution_receipt(
+            test_execution_receipt, actual_manifest_sha, code_sha, ledger
+        )
     provenance = {
         "manifest_sha256": actual_manifest_sha,
         "code_sha256": code_sha,
@@ -193,6 +146,8 @@ def run_formal_analysis(
         analysis_split=analysis_split,
         provenance=provenance,
         primary_composition_ids=composition_ids,
+        test_execution_receipt=test_execution_receipt,
+        execution_ledger=ledger,
     )
     secondary = analyze_secondary_endpoints(
         run_rows,
@@ -202,6 +157,8 @@ def run_formal_analysis(
         analysis_split=analysis_split,
         provenance=provenance,
         primary_composition_ids=composition_ids,
+        test_execution_receipt=test_execution_receipt,
+        execution_ledger=ledger,
     )
     postrun_integrity = None
     if analysis_split == "test":

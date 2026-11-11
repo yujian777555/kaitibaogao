@@ -2,12 +2,20 @@
 
 日期：2026-11-06
 所属项目：kaitibaogao / 第一项创新候选
-状态：D-064-A COMPLETE / D-064-B READY_TO_EXECUTE / PREREGISTRATION=REQUEST CHANGES / FORMAL A-3B=HOLD
+状态：D-085 / R4 代码与协议 ACCEPTED / PREFIX 固定机制可行 / EC 功效实验因封顶 HOLD / FORMAL A-3B=HOLD
 工作分支：pilot-a-stateful-recovery
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
 
-## 0. 本阶段唯一目标
+## 0G. D-085 当前权威门禁（2026-11-11，覆盖早期状态）
+
+- R4 ACCEPTED 仅限代码与协议复审，不代替导师 MDE、用户批准或真实 pre-flight。
+- 新 Prefix 开发 manifest 为 Train=72、Validation=24，family 不相交；SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`，committed lock=`experiments/pilot_a3b/prefix_manifest_lock.json`。Test 未生成、未读取，精确 roster 与独立保管承诺为 OPEN。
+- 固定 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规。当前简单集合不能证明 EC 增益，优化器运行数为 0；不得事后改用成本指标制造提升。
+- 本地完整回归 341+28=369；新 regression workflow 的远端结果在提交前为 NOT RUN。唯一下一任务是由独立会话审查 86/87、最终实现与封顶门。
+- 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 均继续 HOLD。
+
+## 0. 本阶段唯一目标（历史计划）
 
 在不启动 A800、不调用真实 LLM API、不进入大规模演化搜索的前提下，完成两项前置验收：
 

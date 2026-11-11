@@ -22,6 +22,8 @@ import re
 from statistics import fmean
 
 from power_hierarchical import student_t_summary
+from split_access import validate_execution_receipt
+from split_access import flatten_run_ledger, validate_execution_receipt
 
 ANALYSIS_VERSION = "d064-r4-family-primary-v1"
 PRIMARY_METHODS = ("AB", "nsga2")
@@ -119,6 +121,9 @@ def analyze_primary_endpoint(
     method_b="nsga2",
     provenance=None,
     primary_composition_ids=None,
+    allow_synthetic=False,
+    test_execution_receipt=None,
+    execution_ledger=None,
 ):
     """Validate a paired episode ledger and compute family-equal paired effect.
 
@@ -135,6 +140,20 @@ def analyze_primary_endpoint(
     For fewer than min_families complete families, descriptive family means
     are returned but confirmatory Student-t inference is withheld.
     """
+    if analysis_split == "test" and not allow_synthetic:
+        if not isinstance(test_execution_receipt, dict) or test_execution_receipt.get("status") != "COMPLETED":
+            raise PermissionError("Test analysis requires a completed one-time execution receipt")
+        if not isinstance(provenance, dict):
+            raise PermissionError("Test analysis requires bound provenance")
+        validate_execution_receipt(
+            test_execution_receipt,
+            provenance["manifest_sha256"],
+            provenance["code_sha256"],
+            execution_ledger,
+        )
+    if execution_ledger is not None:
+        if run_rows != flatten_run_ledger(execution_ledger):
+            raise ValueError("analysis rows do not match the execution ledger")
     if min_families < 2:
         raise ValueError("min_families must be at least two")
     if compositions_per_family < 1:
@@ -380,6 +399,9 @@ def analyze_secondary_endpoints(
     compositions_per_family=DEFAULT_COMPOSITIONS_PER_FAMILY,
     provenance=None,
     primary_composition_ids=None,
+    allow_synthetic=False,
+    test_execution_receipt=None,
+    execution_ledger=None,
 ):
     """Execute H2-H5 through the same paired family-level analysis path.
 
@@ -402,6 +424,9 @@ def analyze_secondary_endpoints(
             method_b=method_b,
             provenance=provenance,
             primary_composition_ids=primary_composition_ids,
+            allow_synthetic=allow_synthetic,
+            test_execution_receipt=test_execution_receipt,
+            execution_ledger=execution_ledger,
         )
         result["hypothesis"] = hypothesis
         result["classification"] = "exploratory"

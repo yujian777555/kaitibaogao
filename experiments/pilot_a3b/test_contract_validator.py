@@ -22,6 +22,24 @@ class ContractValidatorTests(unittest.TestCase):
         rep = validate_genome(genes_with(OBS_PERMISSION, ACT_RETRY), ACT_ESCALATE)
         self.assertGreater(rep.rule_invalid, 0)
 
+    def test_permission_rollback_requires_a_committed_prefix(self):
+        guarded = validate_genome(
+            [RuleGene(OBS_PERMISSION, 0, True, "ROLLBACK")], ACT_ESCALATE
+        )
+        unguarded = validate_genome(
+            [RuleGene(OBS_PERMISSION, 0, False, "ROLLBACK")], ACT_ESCALATE
+        )
+        self.assertEqual(guarded.rule_invalid, 0)
+        self.assertGreater(unguarded.rule_invalid, 0)
+
+    def test_prefix_verification_requires_a_compensation_observation(self):
+        valid = validate_genome(
+            genes_with("COMPENSATED", "VERIFY_PREFIX"), ACT_ESCALATE
+        )
+        invalid = validate_genome(genes_with("START", "VERIFY_PREFIX"), ACT_ESCALATE)
+        self.assertEqual(valid.rule_invalid, 0)
+        self.assertGreater(invalid.rule_invalid, 0)
+
     def test_partial_bare_retry_is_illegal(self):
         rep = validate_genome(genes_with(OBS_PARTIAL, ACT_RETRY), ACT_ESCALATE)
         self.assertGreater(rep.rule_invalid, 0)

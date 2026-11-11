@@ -267,6 +267,9 @@ class ToolRuntime:
         self.last_compensation_result = "COMPENSATED"
         return self.last_compensation_result
 
+    def compensation_status(self):
+        return self.last_compensation_result
+
 
 class PublicToolView:
     """Restricted policy interface; latent simulator fields stay in ToolRuntime."""
@@ -276,6 +279,9 @@ class PublicToolView:
         self.__runtime = runtime
         self.contract = dict(runtime.contract)
         self.retry_after = runtime.retry_after
+
+    def compensation_status(self):
+        return self.__runtime.compensation_status()
 
     def retry(self):
         return self.__runtime.retry()

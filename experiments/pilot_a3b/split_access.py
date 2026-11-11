@@ -7,6 +7,7 @@ All tests in this module use synthetic sentinels only.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from copy import deepcopy
@@ -14,6 +15,32 @@ from pathlib import Path
 
 
 DEVELOPMENT_SPLITS = frozenset(("train", "validation"))
+
+
+def _canonical_sha256(value):
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _validate_preflight_binding(preflight_result, approval_record):
+    """Bind execution to the exact approved pre-run artifact, not a caller flag."""
+    preflight_result = preflight_result or approval_record.get("preflight_artifact")
+    if not isinstance(preflight_result, dict):
+        raise PermissionError("final evaluation requires the actual pre-run result")
+    if (preflight_result.get("phase") != "PRE_RUN_AUTHORIZATION"
+            or preflight_result.get("status") != "GO"):
+        raise PermissionError("final evaluation requires PRE_RUN_AUTHORIZATION GO")
+    provenance = preflight_result.get("provenance", {})
+    if provenance.get("git_head") != approval_record.get("git_head"):
+        raise PermissionError("pre-flight git HEAD does not match the approval record")
+    if provenance.get("implementation_sha256") != approval_record.get("code_sha256"):
+        raise PermissionError("pre-flight code hash does not match the approval record")
+    test_lock = preflight_result.get("test_lock", {})
+    if (test_lock.get("access_log_count") != 0
+            or test_lock.get("one_time_ledger_state") != "UNUSED"):
+        raise PermissionError("pre-flight Test lock is not unused")
+    if approval_record.get("preflight_sha256") != _canonical_sha256(preflight_result):
+        raise PermissionError("approval record is not bound to the exact pre-flight artifact")
 
 
 def public_manifest_view(manifest):
@@ -72,6 +99,32 @@ def validate_evolution_scenarios(scenarios):
             raise ValueError("run_evolution accepts train split only")
 
 
+def flatten_run_ledger(ledger):
+    """Flatten method/seed runs while preserving and checking row metadata."""
+    if not isinstance(ledger, dict) or not isinstance(ledger.get("runs"), list):
+        raise ValueError("run ledger must contain a runs list")
+    rows_out = []
+    for run in ledger["runs"]:
+        if not isinstance(run, dict) or not isinstance(run.get("rows"), list):
+            raise ValueError("each run must contain a rows list")
+        method = run.get("method")
+        seed = run.get("seed")
+        if not isinstance(method, str) or not method or seed is None:
+            raise ValueError("each run requires method and seed")
+        for original in run["rows"]:
+            if not isinstance(original, dict):
+                raise ValueError("ledger rows must be objects")
+            row = dict(original)
+            if "method" in row and row["method"] != method:
+                raise ValueError("row/run method mismatch")
+            if "seed" in row and row["seed"] != seed:
+                raise ValueError("row/run optimizer seed mismatch")
+            row["method"] = method
+            row["seed"] = seed
+            rows_out.append(row)
+    return rows_out
+
+
 def validate_evaluation_scenarios(scenarios):
     """Ordinary evaluator accepts Train/Validation, but never Test or Battery."""
     if not scenarios:
@@ -90,6 +143,8 @@ def consume_final_evaluation_once(
     actual_code_sha256,
     payload_loader,
     evaluator,
+    *,
+    preflight_result=None,
 ):
     """Consume an atomic one-time ledger before invoking the Test payload loader.
 
@@ -97,6 +152,7 @@ def consume_final_evaluation_once(
     deliberate fail-closed behavior: a failed final attempt cannot be retried
     by silently opening Test a second time.
     """
+    _validate_preflight_binding(preflight_result, approval_record)
     required = (
         approval_record.get("status") == "APPROVED"
         and approval_record.get("preflight_status") == "GO"
@@ -139,6 +195,38 @@ def consume_final_evaluation_once(
     return evaluator(test_payload)
 
 
+def validate_execution_receipt(receipt, manifest_sha256, code_sha256, outcome_ledger):
+    """Verify receipt, consumed ledger, outcome hash, and one-time access log."""
+    if not isinstance(receipt, dict) or receipt.get("status") != "COMPLETED":
+        raise PermissionError("final evaluation requires a completed receipt")
+    if (receipt.get("manifest_sha256") != manifest_sha256
+            or receipt.get("code_sha256") != code_sha256):
+        raise PermissionError("final-evaluation receipt hash mismatch")
+    ledger_path = Path(receipt.get("ledger_path", ""))
+    if not ledger_path.is_file():
+        raise PermissionError("one-time final-evaluation ledger is missing")
+    consumed = json.loads(ledger_path.read_text(encoding="utf-8"))
+    if (consumed.get("state") != "CONSUMED"
+            or consumed.get("manifest_sha256") != manifest_sha256
+            or consumed.get("code_sha256") != code_sha256):
+        raise PermissionError("one-time ledger does not match the receipt")
+    if not isinstance(outcome_ledger, dict):
+        raise PermissionError("final evaluator did not return a run-ledger object")
+    if receipt.get("outcome_ledger_sha256") != _canonical_sha256(outcome_ledger):
+        raise PermissionError("outcome ledger does not match the receipt")
+    access_log_path = Path(receipt.get("access_log_path", ""))
+    if not access_log_path.is_file():
+        raise PermissionError("one-time Test access log is missing")
+    access_record = json.loads(access_log_path.read_text(encoding="utf-8"))
+    if (access_record.get("event") != "TEST_PAYLOAD_LOAD_ATTEMPT"
+            or access_record.get("state") != "RECORDED"
+            or access_record.get("manifest_sha256") != manifest_sha256
+            or access_record.get("code_sha256") != code_sha256
+            or receipt.get("test_access_log_count") != 1):
+        raise PermissionError("one-time Test access log does not match the receipt")
+    return True
+
+
 def execute_final_evaluation_once(
     ledger_path,
     approval_record,
@@ -155,6 +243,7 @@ def execute_final_evaluation_once(
         raise PermissionError("final evaluation requires a successful PRE_RUN_AUTHORIZATION GO")
     approved = dict(approval_record)
     approved["preflight_status"] = preflight_result["status"]
+    approved["preflight_artifact"] = preflight_result
     access_log_path = Path(str(ledger_path) + ".access.json")
 
     def logged_payload_loader():
@@ -181,6 +270,7 @@ def execute_final_evaluation_once(
         expected_manifest_sha256, actual_manifest_sha256,
         expected_code_sha256, actual_code_sha256,
         logged_payload_loader, evaluator,
+        preflight_result=preflight_result,
     )
     if not isinstance(outcome_ledger, dict):
         raise ValueError("final evaluator must return a run-ledger object")

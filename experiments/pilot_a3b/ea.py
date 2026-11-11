@@ -22,6 +22,8 @@ from collections import Counter, defaultdict
 
 from a3_bridge import (
     ACTIONS,
+    ACT_ESCALATE,
+    ACT_STOP,
     OBS_ALL,
     Gene,
     StatefulFSM,
@@ -33,6 +35,7 @@ from a3_bridge import (
 )
 
 from split_access import validate_evolution_scenarios
+from prefix_recovery import PrefixAwareFSM
 
 # ---------------------------------------------------------------------------
 # Variation (all methods: exactly ONE mutate call per child)
@@ -46,10 +49,18 @@ def mutate(fsm: StatefulFSM, rng: random.Random, rate: float = 0.15) -> Stateful
         gene.action = rng.choice(ACTIONS)
         if rng.random() < 0.3:
             gene.wait_n = rng.randint(1, 4)
+    if isinstance(g, PrefixAwareFSM):
+        for name in ("prefix_reverse", "prefix_verify", "prefix_retry_failed"):
+            if rng.random() < 0.2:
+                setattr(g, name, not getattr(g, name))
+        if rng.random() < 0.2:
+            g.prefix_stop_action = rng.choice((ACT_ESCALATE, ACT_STOP))
     return g
 
 
 def crossover(a: StatefulFSM, b: StatefulFSM, rng: random.Random) -> StatefulFSM:
+    if type(a) is not type(b):
+        raise ValueError("crossover requires identical controller representations")
     genes = []
     for key in sorted(set(a.genes) | set(b.genes)):
         src = a.genes.get(key) if rng.random() < 0.5 else b.genes.get(key)
@@ -57,7 +68,16 @@ def crossover(a: StatefulFSM, b: StatefulFSM, rng: random.Random) -> StatefulFSM
             src = a.genes.get(key) or b.genes[key]
         genes.append(src.clone())
     default = (a.default_action, a.default_wait) if rng.random() < 0.5 else (b.default_action, b.default_wait)
-    return StatefulFSM(genes, default, a.sla_aware or b.sla_aware, a.fixed_wait or b.fixed_wait)
+    prefix_kwargs = {}
+    if isinstance(a, PrefixAwareFSM) or isinstance(b, PrefixAwareFSM):
+        prefix_kwargs = {
+            "prefix_reverse": a.prefix_reverse if rng.random() < 0.5 else b.prefix_reverse,
+            "prefix_verify": a.prefix_verify if rng.random() < 0.5 else b.prefix_verify,
+            "prefix_retry_failed": a.prefix_retry_failed if rng.random() < 0.5 else b.prefix_retry_failed,
+            "prefix_stop_action": a.prefix_stop_action if rng.random() < 0.5 else b.prefix_stop_action,
+        }
+    return type(a)(genes, default, a.sla_aware or b.sla_aware,
+                   a.fixed_wait or b.fixed_wait, **prefix_kwargs)
 
 
 # ---------------------------------------------------------------------------

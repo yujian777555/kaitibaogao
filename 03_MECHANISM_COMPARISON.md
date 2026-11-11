@@ -438,3 +438,15 @@ Przewozniczek et al. (2025) 的 DLED 在给定个体附近翻转两个基因及�
 ### 13.4 新的比较要求
 
 所有 estimator 尽量共用同一 FOS builder，以隔离 estimator 的增量价值；另做 builder sensitivity。至少包含 SLL-MI/LT-GOMEA、FBL/scaled FBLT、FBL incremental、DLED/cDLED-P3M、CGOMEA、LMM、ALI/AIM、Tinós/GAwLL2、random linkage、oracle local linkage。所有原论文复现与 paper-setting adaptation 必须分开报告。
+
+## 14. D-085：Prefix-aware 恢复控制与已有工作（2026-11-11）
+
+| 工作/方法 | 已覆盖机制 | 对本候选的限制 |
+|---|---|---|
+| SagaLLM (PVLDB 2025) | 事务状态、补偿回滚、独立验证、依赖管理 | 前缀状态和 compensation-before-escalation 不是独立创新 |
+| EvoMAS / EvoCF | 执行轨迹反馈、失败条件变异、经验记忆 | 把失败轨迹用于演化不是充分差异 |
+| HFlow / GEPA | 多目标候选、实例级 Pareto、反馈演化 | 普通 Pareto archive 或逐任务选择不是充分差异 |
+| Hand / Rule-Prefix | 固定补偿顺序和失败后清理 | 若固定规则封顶，不能开展有意义的 EC 功效比较 |
+| NSGA-II / NSGA-III / C-NSGA-III | 标准多目标与约束搜索 | 必须同初始基础种群、同唯一 episode-equivalent、同信息权限比较 |
+
+当前候选的可证伪缺口仅为：**公开前缀状态与约束演化表示的组合能否在非平凡任务上超过强手工 Prefix 规则及标准 EA**。本地新开发集的固定 Prefix 已达成全部类别成功、零可避免伤害和零硬约束违规，故当前 manifest 不支持此功效实验；没有优化器运行或创新成立结论。详见 `86_D085_R3_PREFIX_MECHANISM_AUDIT.md` 和 `87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md`。

@@ -2,9 +2,15 @@
 
 No real Test payload or labels are read by these tests.
 """
+import tempfile
 import unittest
+from pathlib import Path
 
 from formal_analysis import analyze_primary_endpoint as _analyze_primary_endpoint
+from formal_runner import _code_sha256, flatten_run_ledger
+from split_access import execute_final_evaluation_once
+from test_64r4_formal_runner import COMPOSITIONS, SEEDS as RUNNER_SEEDS, make_fixture, make_manifest
+from test_64r4_split_guard import approval
 
 PROVENANCE = {
     "manifest_sha256": "a" * 64,
@@ -16,6 +22,7 @@ PROVENANCE = {
 def analyze_primary_endpoint(*args, **kwargs):
     kwargs.setdefault("provenance", PROVENANCE)
     kwargs.setdefault("primary_composition_ids", PROVENANCE["primary_composition_ids"])
+    kwargs.setdefault("allow_synthetic", True)
     return _analyze_primary_endpoint(*args, **kwargs)
 
 
@@ -61,6 +68,66 @@ class FormalPrimaryAnalysisTests(unittest.TestCase):
         self.assertAlmostEqual(result["family_equal_weight_effect"], 1.0)
         self.assertEqual(result["student_t"]["df"], 39)
 
+    def test_direct_test_analysis_requires_receipt_or_explicit_synthetic_mode(self):
+        roster, rows = fixture()
+        with self.assertRaises(PermissionError):
+            _analyze_primary_endpoint(
+                rows, roster, SEEDS,
+                provenance=PROVENANCE,
+                primary_composition_ids=PROVENANCE["primary_composition_ids"],
+            )
+        synthetic = _analyze_primary_endpoint(
+            rows, roster, SEEDS,
+            provenance=PROVENANCE,
+            primary_composition_ids=PROVENANCE["primary_composition_ids"],
+            allow_synthetic=True,
+        )
+        self.assertEqual(synthetic["confirmatory_status"], "ELIGIBLE")
+
+    def test_hash_only_receipt_cannot_authorize_direct_test_analysis(self):
+        roster, rows = fixture()
+        with self.assertRaises(PermissionError):
+            _analyze_primary_endpoint(
+                rows, roster, SEEDS,
+                provenance=PROVENANCE,
+                primary_composition_ids=PROVENANCE["primary_composition_ids"],
+                test_execution_receipt={
+                    "status": "COMPLETED",
+                    "manifest_sha256": "a" * 64,
+                    "code_sha256": "b" * 64,
+                },
+            )
+
+    def test_execution_ledger_and_analysis_rows_must_match(self):
+        manifest, ledger, roster = make_fixture()
+        code_sha = _code_sha256()
+        with tempfile.TemporaryDirectory() as tmp:
+            ledger_path = Path(tmp) / "one-time.json"
+            approvals = approval(
+                manifest_sha=manifest["manifest_sha256"], code_sha=code_sha,
+            )
+            evaluated_ledger, receipt = execute_final_evaluation_once(
+                ledger_path, approvals, approvals["preflight_artifact"],
+                manifest["manifest_sha256"], manifest["manifest_sha256"],
+                code_sha, code_sha,
+                payload_loader=lambda: {"synthetic": True},
+                evaluator=lambda _payload: ledger,
+            )
+            mismatched = flatten_run_ledger(evaluated_ledger)
+            mismatched[0]["class_success"] = 0
+            with self.assertRaisesRegex(ValueError, "analysis rows"):
+                _analyze_primary_endpoint(
+                    mismatched, roster, RUNNER_SEEDS,
+                    provenance={
+                        "manifest_sha256": manifest["manifest_sha256"],
+                        "code_sha256": code_sha,
+                        "git_head": "c" * 40,
+                        "primary_composition_ids": list(COMPOSITIONS),
+                    },
+                    test_execution_receipt=receipt,
+                    execution_ledger=evaluated_ledger,
+                )
+
     def test_wrong_primary_composition_roster_fails_closed(self):
         roster, rows = fixture()
         wrong_roster = [dict(item) for item in roster]
@@ -72,7 +139,7 @@ class FormalPrimaryAnalysisTests(unittest.TestCase):
 
     def test_missing_provenance_withholds_confirmatory_inference(self):
         roster, rows = fixture()
-        result = _analyze_primary_endpoint(rows, roster, SEEDS)
+        result = _analyze_primary_endpoint(rows, roster, SEEDS, allow_synthetic=True)
         self.assertEqual(result["confirmatory_status"], "NOT_ELIGIBLE_PROVENANCE_INCOMPLETE")
         self.assertIsNone(result["student_t"])
         self.assertEqual(result["provenance_status"], "INCOMPLETE")

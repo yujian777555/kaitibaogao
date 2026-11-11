@@ -1,0 +1,57 @@
+{
+  "allocation": {
+    "train": [
+      "customer_order_shipment",
+      "inventory_calendar_order",
+      "inventory_order_payment",
+      "subscription_ledger_notification",
+      "tf_calendar__refund__subscription",
+      "tf_customer__notification__payment"
+    ],
+    "validation": [
+      "calendar_order_ledger",
+      "return_refund_restock"
+    ]
+  },
+  "development_only": true,
+  "family_counts": {
+    "train": 6,
+    "validation": 2
+  },
+  "generator_source_sha256": "574aa7e79e9edc21734c9548114e553b651e9b217ff60fcb932b619ea9d1157f",
+  "generator_version": "d085-prefix-development-v1",
+  "lock_schema_version": 1,
+  "lock_status": "FROZEN_DEVELOPMENT_MANIFEST_NOT_EXPERIMENT_AUTHORIZATION",
+  "manifest_sha256": "cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492",
+  "protocol_id": "D-085-PREFIX",
+  "scenario_count": 96,
+  "scenario_counts": {
+    "train": 72,
+    "validation": 24
+  },
+  "seed_base": 2026111500,
+  "strata": [
+    "P1_PERMISSION_COMPENSATABLE_PREFIX",
+    "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+    "P3_RECOVERABLE_PARTIAL_CONTROL",
+    "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL"
+  ],
+  "test_included": false,
+  "test_outcomes_read": false,
+  "test_protocol": {
+    "family_count": 40,
+    "family_roster": "OPEN_INDEPENDENT_CUSTODIAN_COMMITMENT_REQUIRED",
+    "repeats_per_stratum": 5,
+    "scenario_count": 800,
+    "scenario_id_namespace": "d085|test|",
+    "seed_base": 2026111900,
+    "split": "test",
+    "status": "SEALED_NOT_GENERATED_OR_READ",
+    "strata": [
+      "P1_PERMISSION_COMPENSATABLE_PREFIX",
+      "P2_PERMISSION_COMPENSATION_UNAVAILABLE",
+      "P3_RECOVERABLE_PARTIAL_CONTROL",
+      "P4_CLEAR_PRECOMMIT_TIMEOUT_CONTROL"
+    ]
+  }
+}

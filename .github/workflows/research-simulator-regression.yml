@@ -64,3 +64,23 @@ jobs:
             ${{ runner.temp }}/d079-challenge/d079_challenge_candidate_report.json
           if-no-files-found: error
 
+      - name: Generate and lock-check D-085 development-only challenge
+        run: python experiments/pilot_a3b/prefix_challenge_generator.py
+
+      - name: Recompute D-085 mechanism and fixed-controller ceiling audits
+        run: |
+          mkdir -p "$RUNNER_TEMP/d085-mechanism"
+          python experiments/pilot_a3b/prefix_mechanism_audit.py --outdir "$RUNNER_TEMP/d085-mechanism"
+          python experiments/pilot_a3b/prefix_ceiling_audit.py --outfile "$RUNNER_TEMP/d085-fixed-controller-ceiling.json"
+
+      - name: Upload D-085 development and mechanism evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: d085-prefix-development-and-mechanism-audit
+          path: |
+            experiments/pilot_a3b/prefix_manifest_lock.json
+            experiments/pilot_a3b/results/d085_prefix_challenge/prefix_challenge_manifest.json
+            ${{ runner.temp }}/d085-mechanism/
+            ${{ runner.temp }}/d085-fixed-controller-ceiling.json
+          if-no-files-found: error
+

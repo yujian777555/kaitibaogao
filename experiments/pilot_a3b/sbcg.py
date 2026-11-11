@@ -14,6 +14,7 @@ from a3_bridge import ACTIONS, evaluate_controller, hand_fsm
 from contract_validator import validate_genome
 from ea import CounterexamplePool, _SIG_REPAIR, dominates, mutate, reference_dirs
 from run_diagnostic3 import sensible_random_fsm
+from prefix_recovery import prefix_hand_fsm, prefix_random_fsm
 
 OBJECTIVE_NAMES = (
     "1_minus_CondRecSucc",
@@ -182,23 +183,33 @@ def select_train_diagnostic_candidate(records):
 
 
 def fsm_fingerprint(fsm):
+    prefix = tuple(
+        getattr(fsm, name, None)
+        for name in ("prefix_reverse", "prefix_verify", "prefix_retry_failed", "prefix_stop_action")
+    )
     return repr((
         tuple(sorted((key, gene.action, gene.wait_n) for key, gene in fsm.genes.items())),
         fsm.default_action,
         fsm.default_wait,
         fsm.sla_aware,
         fsm.fixed_wait,
+        prefix,
     ))
 
 
-def make_shared_initial_pool(seed, size=60, include_hand=True):
+def make_shared_initial_pool(seed, size=60, include_hand=True, prefix_aware=False):
     """All EA arms share the same sensible-random pool; only slot 0 is anchored."""
     if size < 1:
         raise ValueError("initial pool must be non-empty")
     rng = random.Random(seed * 7919 + 29)
-    pool = [sensible_random_fsm(rng) for _ in range(size)]
+    base_pool = [sensible_random_fsm(rng) for _ in range(size)]
+    if prefix_aware:
+        prefix_rng = random.Random(seed * 104729 + 37)
+        pool = [prefix_random_fsm(prefix_rng, base) for base in base_pool]
+    else:
+        pool = base_pool
     if include_hand:
-        pool[0] = hand_fsm()
+        pool[0] = prefix_hand_fsm() if prefix_aware else hand_fsm()
     return pool
 
 

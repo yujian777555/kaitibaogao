@@ -1575,3 +1575,25 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 - Provisional method hypothesis: FSPAE, a per-task-family × fault-stratum Pareto archive with coverage-deficit parent sampling and zero-tolerance hard safety constraints.
 - FSPAE is not validated. D-079 is Train-only and non-confirmatory; no optimizer run is authorized.
 - EvoTool faithful reproduction must use paper G=8/B=3, not released default 90 generations, pending explicit user approval.
+
+## 决策 D-085-EXECUTION：R4 复审、Prefix 机制可行性与 EC 封顶门（2026-11-11）
+
+### 事实与证据
+
+- `85_D064_R4_INDEPENDENT_REVIEW_R2.md` 对 R4 代码与协议给出 ACCEPTED；不是正式实验批准。后续 Prefix/标签修改必须由新独立审查绑定最终代码哈希。
+- D5 已证明补偿后零残余可达；原 Hand 的直接升级遗漏前缀。标签搜索对正常前缀运行期补偿不可用的错误已修正，D-079 v2 的 288 场景与 manifest SHA `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca` 未改变。
+- `prefix_mechanism_audit.py` 保存 96 行固定控制器结果：PrefixAware D5/R3=24/24、D6/R4=24/24 且达到最小残余；Hand 两组均 0/24。独立 CSV/JSON 复算 33 项检查全部通过。
+- 新 manifest Train=72、Validation=24，family 不相交，SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`。Test 未生成、未读取；精确 roster 与独立保管承诺为 OPEN。
+- `prefix_ceiling_audit.py` 重算 192 行固定控制器数据：修正后的 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规。
+- 本地完整回归 341+28=369 全部通过；新 regression workflow 将重算开发集锁、机制和封顶审计，但远端 CI 在提交前仍为 NOT RUN。
+
+### 决策
+
+1. Prefix-aware 的公开状态、失败补偿语义和补偿后重做机制可以在当前合成环境中实现；这不等于演化算法有效。
+2. **当前简单 manifest 的 EC 功效实验 NO-GO / NOT RUN。** 固定规则已封顶，不得以事后成本指标替代预注册主要终点。
+3. SagaLLM 已覆盖事务状态、补偿回滚与验证，因此这些机制本身不构成创新。当前候选只保留“公开前缀状态 + 约束演化是否在非平凡任务上超过强基线”的可证伪问题。
+4. `87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md` 冻结封顶门、配对预算、强基线、消融、指标和停止规则；它是候选协议，不是执行授权。
+
+### 唯一下一任务
+
+将 86/87、最终实现、原始 CSV 复算与封顶门交新的独立审查会话。审查前不运行新优化器；正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续 HOLD。

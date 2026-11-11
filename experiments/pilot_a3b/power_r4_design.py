@@ -135,6 +135,8 @@ def simulate_missing_sensitivity(
                 )
                 joint_rate = float(rejected.mean())
                 eligibility_rate = float(eligible.mean())
+                conditional_rejections = int(rejected[eligible].sum())
+                joint_rejections = int(rejected.sum())
                 cells.append({
                     "n_families_design": n_families,
                     "compositions_per_family": COMPOSITIONS_PER_FAMILY_R4,
@@ -150,7 +152,19 @@ def simulate_missing_sensitivity(
                         max(eligibility_rate * (1.0 - eligibility_rate), 0.0) / reps
                     ),
                     "conditional_rejection_rate_when_eligible": conditional_rate,
+                    "conditional_rejections_when_eligible": conditional_rejections,
+                    "conditional_rejection_mcse": (
+                        math.sqrt(max(conditional_rate * (1.0 - conditional_rate), 0.0) / eligible_n)
+                        if eligible_n else None
+                    ),
+                    "conditional_ci95_wilson": (
+                        wilson_interval(conditional_rejections, eligible_n)
+                        if eligible_n else None
+                    ),
                     "joint_rejection_rate": joint_rate,
+                    "joint_rejections": joint_rejections,
+                    "joint_rejection_mcse": math.sqrt(max(joint_rate * (1.0 - joint_rate), 0.0) / reps),
+                    "joint_ci95_wilson": wilson_interval(joint_rejections, reps),
                     "eligible_replicates": eligible_n,
                     "out_of_range_rate": overflow,
                 })
@@ -204,6 +218,79 @@ def simulate_type_i_replication(
         "pooled_ci95_wilson": wilson_interval(total_rejections, total_trials),
         "cells": cells,
     }
+
+
+def simulate_adversarial_missing(
+    total_var, eps_pool, reps=DEFAULT_REPS, seed=DEFAULT_SEED,
+    missing_rates=MISSING_RATE_GRID,
+):
+    """Non-random contiguous-prefix missingness, not an MCAR substitute."""
+    residuals = np.asarray(eps_pool, dtype=float).reshape(-1)
+    if residuals.size < 2 or not np.all(np.isfinite(residuals)):
+        raise ValueError("empirical residual pool must contain at least two finite values")
+    cells = []
+    for n_families in (34, 40):
+        for missing_rate in missing_rates:
+            if not 0.0 <= missing_rate < 1.0:
+                raise ValueError("missing rates must be in [0, 1)")
+            missing_clusters = int(math.ceil(n_families * COMPOSITIONS_PER_FAMILY_R4 * missing_rate))
+            for mu, role in ((0.0, "null_type_i"), (MDE_R4, "mde_power")):
+                cell_seed = int(seed) + 11000000 + n_families * 10000 + int(missing_rate * 10000) * 10 + int(mu * 1000)
+                rng = np.random.default_rng(cell_seed)
+                family_means, overflow = ph.gen_family_means_hier(
+                    rng, reps, n_families, COMPOSITIONS_PER_FAMILY_R4,
+                    0.20, mu, total_var, residuals,
+                )
+                missing = np.zeros((reps, n_families, COMPOSITIONS_PER_FAMILY_R4), dtype=bool)
+                for flat_index in range(missing_clusters):
+                    missing[:, flat_index // COMPOSITIONS_PER_FAMILY_R4,
+                            flat_index % COMPOSITIONS_PER_FAMILY_R4] = True
+                complete_counts = n_families - missing.any(axis=2).sum(axis=1)
+                eligible = complete_counts >= 34
+                rejected = np.zeros(reps, dtype=bool)
+                for observed_f in sorted(set(int(v) for v in complete_counts[eligible])):
+                    row_indices = np.flatnonzero(complete_counts == observed_f)
+                    samples = np.vstack([
+                        family_means[row_index][~missing[row_index].any(axis=1)]
+                        for row_index in row_indices
+                    ])
+                    p_values = ph._pvals_student_t(samples)
+                    rejected[row_indices] = p_values < ALPHA_R4
+                eligible_n = int(eligible.sum())
+                conditional_rejections = int(rejected[eligible].sum())
+                joint_rejections = int(rejected.sum())
+                conditional_rate = float(rejected[eligible].mean()) if eligible_n else None
+                joint_rate = float(rejected.mean())
+                eligibility_rate = float(eligible.mean())
+                cells.append({
+                    "n_families_design": n_families,
+                    "compositions_per_family": COMPOSITIONS_PER_FAMILY_R4,
+                    "icc": 0.20,
+                    "missing_pattern": "contiguous_prefix",
+                    "missing_clusters": missing_clusters,
+                    "missing_rate_per_composition_cluster": float(missing_rate),
+                    "mu": mu,
+                    "role": role,
+                    "mc_reps": reps,
+                    "random_seed": cell_seed,
+                    "mean_complete_families": float(complete_counts.mean()),
+                    "analysis_eligibility_rate": eligibility_rate,
+                    "analysis_eligibility_mcse": math.sqrt(max(eligibility_rate * (1.0 - eligibility_rate), 0.0) / reps),
+                    "conditional_rejection_rate_when_eligible": conditional_rate,
+                    "conditional_rejections_when_eligible": conditional_rejections,
+                    "conditional_rejection_mcse": (
+                        math.sqrt(max(conditional_rate * (1.0 - conditional_rate), 0.0) / eligible_n)
+                        if eligible_n else None
+                    ),
+                    "conditional_ci95_wilson": wilson_interval(conditional_rejections, eligible_n) if eligible_n else None,
+                    "joint_rejection_rate": joint_rate,
+                    "joint_rejections": joint_rejections,
+                    "joint_rejection_mcse": math.sqrt(max(joint_rate * (1.0 - joint_rate), 0.0) / reps),
+                    "joint_ci95_wilson": wilson_interval(joint_rejections, reps),
+                    "eligible_replicates": eligible_n,
+                    "out_of_range_rate": overflow,
+                })
+    return cells
 
 
 def json_input_hashes(input_path):
@@ -274,15 +361,34 @@ def render_report(result):
         "",
         "## Technical-missing sensitivity (MCAR at composition-cluster level)",
         "",
-        "| F design | Missing rate | Role | Mean complete F | Eligibility rate | Conditional rejection when eligible | Joint rejection rate |",
-        "|---:|---:|---|---:|---:|---:|---:|",
+        "| F design | Missing rate | Role | Mean complete F | Eligibility rate | Eligible N | Conditional rejection | Conditional 95% CI | Joint rejection rate |",
+        "|---:|---:|---|---:|---:|---:|---:|---|---:|",
     ])
     for cell in result.get("missing_sensitivity", []):
         conditional = "NA" if cell["conditional_rejection_rate_when_eligible"] is None else f'{cell["conditional_rejection_rate_when_eligible"]:.4f}'
+        conditional_ci = cell.get("conditional_ci95_wilson")
+        ci_text = "NA" if conditional_ci is None else f'[{conditional_ci[0]:.4f}, {conditional_ci[1]:.4f}]'
         lines.append(
             f'| {cell["n_families_design"]} | {cell["missing_rate_per_composition_cluster"]:.2%} | '
             f'{cell["role"]} | {cell["mean_complete_families"]:.2f} | '
-            f'{cell["analysis_eligibility_rate"]:.4f} | {conditional} | {cell["joint_rejection_rate"]:.4f} |'
+            f'{cell["analysis_eligibility_rate"]:.4f} | {cell["eligible_replicates"]} | '
+            f'{conditional} | {ci_text} | {cell["joint_rejection_rate"]:.4f} |'
+        )
+    lines.extend([
+        "",
+        "## Adversarial contiguous-prefix technical missing (ICC=0.20)",
+        "",
+        "| F design | Missing rate | Role | Eligible N | Conditional rejection | Conditional 95% CI | Joint rejection rate |",
+        "|---:|---:|---|---:|---:|---|---:|",
+    ])
+    for cell in result.get("adversarial_missing", []):
+        conditional = "NA" if cell["conditional_rejection_rate_when_eligible"] is None else f'{cell["conditional_rejection_rate_when_eligible"]:.4f}'
+        conditional_ci = cell.get("conditional_ci95_wilson")
+        ci_text = "NA" if conditional_ci is None else f'[{conditional_ci[0]:.4f}, {conditional_ci[1]:.4f}]'
+        lines.append(
+            f'| {cell["n_families_design"]} | {cell["missing_rate_per_composition_cluster"]:.2%} | '
+            f'{cell["role"]} | {cell["eligible_replicates"]} | {conditional} | {ci_text} | '
+            f'{cell["joint_rejection_rate"]:.4f} |'
         )
     replication = result.get("type_i_replication", {})
     pooled_ci = replication.get("pooled_ci95_wilson")
@@ -315,6 +421,9 @@ def run(input_path, outdir, reps=DEFAULT_REPS, seed=DEFAULT_SEED):
     missing_sensitivity = simulate_missing_sensitivity(
         empirical["total_var"], empirical["residual_pool"], reps, seed
     )
+    adversarial_missing = simulate_adversarial_missing(
+        empirical["total_var"], empirical["residual_pool"], reps, seed
+    )
     type_i_replication = simulate_type_i_replication(
         empirical["total_var"], empirical["residual_pool"], reps, seed
     )
@@ -338,6 +447,7 @@ def run(input_path, outdir, reps=DEFAULT_REPS, seed=DEFAULT_SEED):
         "cells": cells,
         "missing_rate_grid": list(MISSING_RATE_GRID),
         "missing_sensitivity": missing_sensitivity,
+        "adversarial_missing": adversarial_missing,
         "type_i_replication": type_i_replication,
     }
     outdir = Path(outdir)

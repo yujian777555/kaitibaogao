@@ -1,14 +1,18 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-11，D-082 执行完成）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。D-081 corrective CI run 42828590264 @192f958 已 success（28+290=318 tests）。D-078 已独立复算 42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；robust/analytic disagreement=0。最终算法/证据提交为 `87a9e01314b8d3adc7960bc7ea7e62d77e6ca9ca`；对应 CI run 42958156080 = success（303+28=331 tests），v2 manifest 与 committed lock 通过。
+> **最新权威状态（2026-11-11，D-085）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 `pilot-a-stateful-recovery`；接管基线 `33672562ebaeb6c3a533e7e0fd975cbac045b5e3`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。最终 commit 与 CI run 必须在接手时重新查询。
 >
-> **D-079 最终有效挑战集为 v2：** 后续 D-083/D-084 审计发现 v1 cluster_id 与注册表不一致，v1 lock 和诊断已撤销为 superseded。v2 含 288 Train-only scenarios（Search/Diagnostic 各144）、48 个可 join clusters、0 UNKNOWN；内容 SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`；committed lock=`experiments/pilot_a3b/d079_manifest_lock.json`。v2 诊断已重跑并独立核验。
+> **R4：** `85_D064_R4_INDEPENDENT_REVIEW_R2.md` = ACCEPTED，仅限代码与协议复审，不是正式 A-3b 批准；导师 MDE、用户批准和真实 pre-flight 仍是独立硬门。
 >
-> **算法诊断已实际运行：** 14 arms×3 seeds=42 runs；SBCG 相对 Hand 的 CondRecSucc 配对均值 −0.5521，R4 containment +0.6667，constraint violation −0.1458。没有整体提升，当前 SBCG=NO-GO；所有臂 R3 CorrectEscalation=0。详见 81_D082_EXECUTION_AND_TRAIN_ONLY_DIAGNOSTIC.md。
+> **Prefix 机制已实现并合成验证：** 原 Hand 遗漏已提交前缀的补偿顺序。修正后的 PrefixAware 在 D5/R3=24/24、D6/R4=24/24 且达到最小残余，Hand 两组均 0/24；96 行原始数据与独立 CSV 复算一致。公开状态不含隐藏故障、延迟或运行时内部提交状态。标签反例已保守修正，D-079 v2 SHA 保持 `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`。
 >
-> **当前唯一任务：** 提交 R4 独立复审；算法侧只能预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融和新挑战划分，不得在同一 Diagnostic 上反复调参。
+> **新数据与封顶门：** Train=72、Validation=24，family 不相交，manifest SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`，lock=`experiments/pilot_a3b/prefix_manifest_lock.json`。固定 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规，故当前集合不能证明 EC 增益。优化器 runs=0；Test 未生成、未读取，精确 roster 与保管承诺为 OPEN。
 >
-> **授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。保留 D-078 与 D-079 首次/最终诊断原始 artifact。
+> **验证：** 本地完整回归 341+28=369 全通过；新 regression workflow 将重算机制与封顶审计，远端 CI 在本轮提交前 NOT RUN。
+>
+> **当前唯一任务：** 新独立会话审查 `86_D085_R3_PREFIX_MECHANISM_AUDIT.md`、`87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md`、最终实现、原始 CSV 和封顶门。审查前不得运行新优化器；不得把固定规则可行或工程测试通过写成算法创新。
+>
+> **授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。保留 D-078、D-079 及本轮修复前全部 artifact。
 >
 > **维护纪律：** 每次实质性研究、代码、实验、协议、审计或决策变化，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、05_DECISION_LOG.md、README.md 和 51 号计划。每次回复报告 canonical handoff 是否更新并提供 GitHub 文件链接。
 

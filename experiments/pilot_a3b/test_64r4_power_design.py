@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from power_r4_design import (
-    json_input_hashes, simulate_missing_sensitivity,
+    json_input_hashes, simulate_adversarial_missing, simulate_missing_sensitivity,
     simulate_power_grid, simulate_type_i_replication, wilson_interval,
 )
 
@@ -94,6 +94,39 @@ class R4PowerDesignTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual(first["total_mc_reps"], 300)
         self.assertEqual(len(first["cells"]), 3)
+
+    def test_missing_sensitivity_reports_conditional_and_joint_uncertainty(self):
+        cells = simulate_missing_sensitivity(
+            total_var=0.08,
+            eps_pool=np.array([-0.2, -0.1, 0.0, 0.1, 0.2]),
+            reps=100,
+            seed=23,
+            missing_rates=(0.0, 0.01),
+        )
+        for cell in cells:
+            self.assertIn("conditional_rejections_when_eligible", cell)
+            self.assertIn("conditional_rejection_mcse", cell)
+            self.assertIn("conditional_ci95_wilson", cell)
+            self.assertIn("joint_rejections", cell)
+            self.assertIn("joint_rejection_mcse", cell)
+            self.assertIn("joint_ci95_wilson", cell)
+
+    def test_adversarial_missing_is_reproducible_and_explicitly_labelled(self):
+        kwargs = dict(
+            total_var=0.08,
+            eps_pool=np.array([-0.2, -0.1, 0.0, 0.1, 0.2]),
+            reps=100,
+            seed=29,
+            missing_rates=(0.0, 0.05),
+        )
+        first = simulate_adversarial_missing(**kwargs)
+        second = simulate_adversarial_missing(**kwargs)
+        self.assertEqual(first, second)
+        self.assertEqual(len(first), 8)
+        self.assertTrue(all(c["missing_pattern"] == "contiguous_prefix" for c in first))
+        self.assertTrue(all("conditional_ci95_wilson" in c for c in first))
+        zero = [c for c in first if c["missing_rate_per_composition_cluster"] == 0.0]
+        self.assertTrue(all(c["analysis_eligibility_rate"] == 1.0 for c in zero))
 
     def test_invalid_residual_pool_or_variance_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "residual pool"):

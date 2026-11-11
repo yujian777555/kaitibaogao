@@ -30,14 +30,15 @@ from split_access import validate_evaluation_scenarios  # noqa: E402
 # ---------------------------------------------------------------------------
 ACT_RETRY = "RETRY"
 ACT_VERIFY = "VERIFY"
+ACT_VERIFY_PREFIX = "VERIFY_PREFIX"
 ACT_WAIT = "WAIT"
 ACT_COMPENSATE = "COMPENSATE"
 ACT_ROLLBACK = "ROLLBACK"
 ACT_REPAIR = "REPAIR"
 ACT_ESCALATE = "ESCALATE"
 ACT_STOP = "STOP_SAFE"
-ACTIONS = (ACT_RETRY, ACT_VERIFY, ACT_WAIT, ACT_COMPENSATE, ACT_ROLLBACK,
-           ACT_REPAIR, ACT_ESCALATE, ACT_STOP)
+ACTIONS = (ACT_RETRY, ACT_VERIFY, ACT_VERIFY_PREFIX, ACT_WAIT, ACT_COMPENSATE,
+           ACT_ROLLBACK, ACT_REPAIR, ACT_ESCALATE, ACT_STOP)
 
 OBS_START = "START"
 OBS_COMMITTED = "COMMITTED"
@@ -50,11 +51,12 @@ OBS_PERMISSION = "PERMISSION"
 OBS_WAITED = "WAITED"
 OBS_COMPENSATED = "COMPENSATED"
 OBS_COMP_FAILED = "COMP_FAILED"
+OBS_PREFIX_VERIFIED = "PREFIX_VERIFIED"
 OBS_DUPLICATE = "DUPLICATE"
 OBS_NOOP = "NOOP"
 OBS_ALL = (OBS_START, OBS_TIMEOUT, OBS_PARTIAL, OBS_RATE_LIMIT, OBS_SCHEMA,
            OBS_PERMISSION, OBS_COMMITTED, OBS_NOT_COMMITTED, OBS_WAITED,
-           OBS_COMPENSATED, OBS_COMP_FAILED, OBS_DUPLICATE, OBS_NOOP)
+           OBS_COMPENSATED, OBS_COMP_FAILED, OBS_PREFIX_VERIFIED, OBS_DUPLICATE, OBS_NOOP)
 
 MAX_DECISIONS = 24  # per-episode controller decision budget
 
@@ -84,9 +86,10 @@ class ControllerState:
 
     __slots__ = ("step_idx", "attempts", "last_obs", "confirmed", "comp_stack",
                  "decisions", "phase", "ambiguous", "sla_waits", "visibility_bound",
-                 "compensated_since_ambiguity", "cleared_to_retry")
+                 "compensated_since_ambiguity", "cleared_to_retry", "prefix",
+                 "compensation_scope")
 
-    def __init__(self, n_steps):
+    def __init__(self, n_steps, tools=None):
         self.step_idx = 0
         self.attempts = 0
         self.last_obs = OBS_START
@@ -99,6 +102,18 @@ class ControllerState:
         self.visibility_bound = 4       # public: from tool contract
         self.compensated_since_ambiguity = False
         self.cleared_to_retry = False   # post-SLA VERIFY confirmed NOT_COMMITTED
+        self.compensation_scope = "NONE"  # own last compensation action: CURRENT | PREFIX
+        self.prefix = [
+            {
+                "state": "NOT_COMMITTED",
+                "confirmed": False,
+                "compensatable": bool(tool.contract["compensatable"]),
+                "compensated": False,
+                "compensation_failed": False,
+                "compensation_status": "NOT_ATTEMPTED",
+            }
+            for tool in (tools or [])
+        ]
 
     def att_bucket(self):
         return 0 if self.attempts == 0 else (1 if self.attempts == 1 else 2)
@@ -246,13 +261,20 @@ def repair_fsm(fsm: StatefulFSM) -> StatefulFSM:
     g2 = fsm.clone()
     for gene in g2.genes_list():
         fix = _REPAIR_MAP.get((gene.error, gene.action))
+        if gene.error == OBS_PERMISSION and gene.action == ACT_ROLLBACK and gene.stack:
+            fix = None
         if fix is not None:
             gene.action = fix
         if gene.action == ACT_REPAIR and gene.error != OBS_SCHEMA:
             gene.action = ACT_VERIFY
+        if (gene.action == ACT_VERIFY_PREFIX
+                and gene.error not in (OBS_COMPENSATED, OBS_COMP_FAILED)):
+            gene.action = _REPAIR_MAP.get((gene.error, ACT_VERIFY), ACT_VERIFY)
         gene.wait_n = max(1, min(4, gene.wait_n))
     if g2.default_action == ACT_REPAIR:
         g2.default_action = ACT_ESCALATE
+    if g2.default_action == ACT_VERIFY_PREFIX:
+        g2.default_action = ACT_VERIFY
     g2.default_wait = max(1, min(4, g2.default_wait))
     return g2
 
@@ -299,10 +321,13 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
     controller's COMPENSATE / ROLLBACK actions (57 F1).
     """
     tools = [ToolRuntime(name, spec) for name, spec in zip(scenario["tools"], scenario["faults"])]
+    public_tools = [PublicToolView(tool) for tool in tools]
     n = len(tools)
-    state = ControllerState(n)
+    state = ControllerState(n, public_tools)
     decision_trace = []           # (obs, att_bucket, stack, action) for mech B
     comp_log = []                 # (target_step, order, result)
+    prefix_verification_log = []
+    last_rollback_steps = []
     policy_selected_escalation = False
     runtime_forced_abort = False
     escalation_reason = ""
@@ -319,13 +344,31 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
         during a safe-abort sequence must NOT be charged as a violation."""
         return idx == 0 or all(step_done(j) for j in range(idx))
 
+    def update_prefix(index, result):
+        item = state.prefix[index]
+        if accepted(result):
+            item.update(state="COMMITTED", confirmed=True, compensated=False,
+                        compensation_failed=False, compensation_status="NOT_ATTEMPTED")
+        elif result in ("PARTIAL", "PARTIAL_REPLAY"):
+            item.update(state="PARTIAL", confirmed=True, compensated=False)
+        elif result == "COMPENSATED":
+            item.update(state="COMPENSATED", confirmed=False, compensated=True,
+                        compensation_failed=False, compensation_status="COMPENSATED")
+        elif result in ("FAILED", "CONTRACT_BLOCKED"):
+            item.update(compensated=False, compensation_failed=True,
+                        compensation_status="FAILED")
+        elif result == "NO_EFFECT":
+            item.update(compensated=False, compensation_status="UNKNOWN")
+        elif result == "NOT_COMMITTED" and not item["compensated"]:
+            item.update(state="NOT_COMMITTED", confirmed=False)
+
     while state.phase == "RECOVER":
         idx = state.step_idx
         if idx >= n:
             state.phase = "DONE"
             break
 
-        tool = PublicToolView(tools[idx])
+        tool = public_tools[idx]
         if state.attempts == 0 and state.last_obs == OBS_START:
             state.visibility_bound = tool.contract["visibility_bound"]
             if not execute_allowed(idx):
@@ -337,18 +380,18 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
             result = tools[idx].execute()
             state.attempts += 1
             state.last_obs = _obs_of_result(result)
+            update_prefix(idx, result)
             if accepted(result):
                 state.confirmed[idx] = True
                 state.comp_stack.append(idx)
                 state.step_idx += 1
                 state.attempts = 0
                 state.last_obs = OBS_START
-            else:
-                if state.last_obs == OBS_TIMEOUT:
-                    state.ambiguous = True
-                    state.sla_waits = 0
-                    state.compensated_since_ambiguity = False
-                    state.cleared_to_retry = False
+            elif state.last_obs == OBS_TIMEOUT:
+                state.ambiguous = True
+                state.sla_waits = 0
+                state.compensated_since_ambiguity = False
+                state.cleared_to_retry = False
             continue
 
         # recovery decision loop
@@ -380,9 +423,28 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
                 state.step_idx += 1
                 state.attempts = 0
                 state.last_obs = OBS_START
+                update_prefix(idx, result)
             elif result == "NOT_COMMITTED" and state.sla_waits >= state.visibility_bound:
                 # post-SLA query confirms non-commitment: retry is now safe
                 state.cleared_to_retry = True
+                update_prefix(idx, result)
+            continue
+
+        if action == ACT_VERIFY_PREFIX:
+            statuses = [
+                (j, public_tools[j].compensation_status())
+                for j in last_rollback_steps
+            ]
+            prefix_verification_log.extend(statuses)
+            for j, result in statuses:
+                update_prefix(j, result)
+            state.attempts += 1
+            state.last_obs = (
+                OBS_PREFIX_VERIFIED
+                if statuses and all(result == "COMPENSATED" for _j, result in statuses)
+                else OBS_COMP_FAILED
+            )
+            last_rollback_steps = []
             continue
 
         if action == ACT_WAIT:
@@ -411,6 +473,7 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
             result = tool.retry()
             state.attempts += 1
             state.last_obs = _obs_of_result(result)
+            update_prefix(idx, result)
             if accepted(result):
                 state.ambiguous = False
                 state.confirmed[idx] = True
@@ -423,6 +486,7 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
             continue
 
         if action == ACT_COMPENSATE:
+            state.compensation_scope = "CURRENT"
             res = tool.compensate()
             comp_log.append((idx, "current", res))
             state.attempts += 1
@@ -430,20 +494,34 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
             if res == "COMPENSATED":
                 state.ambiguous = False
                 state.compensated_since_ambiguity = True
+            update_prefix(idx, res)
             continue
 
         if action == ACT_ROLLBACK:
-            # explicit reverse-order compensation of confirmed prior steps
-            order = 0
-            for j in reversed(list(state.comp_stack)):
-                order += 1
+            state.compensation_scope = "PREFIX"
+            rollback_steps = (
+                list(reversed(list(state.comp_stack)))
+                if getattr(fsm, "prefix_reverse", True)
+                else list(state.comp_stack)
+            )
+            last_rollback_steps = list(rollback_steps)
+            rollback_results = []
+            for order, j in enumerate(rollback_steps, 1):
                 res = tools[j].compensate()
+                rollback_results.append(res)
                 comp_log.append((j, f"rollback{order}", res))
                 if res == "COMPENSATED":
                     state.confirmed[j] = False
-            state.comp_stack = []
+                update_prefix(j, res)
+            state.comp_stack = [
+                j for j in state.comp_stack if not state.prefix[j]["compensated"]
+            ]
             state.attempts += 1
-            state.last_obs = OBS_COMPENSATED
+            state.last_obs = (
+                OBS_COMPENSATED
+                if rollback_steps and all(res == "COMPENSATED" for res in rollback_results)
+                else OBS_COMP_FAILED
+            )
             continue
 
         # unknown action: treat as no-op observation
@@ -460,6 +538,7 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
     active = sum(t.active_effects for t in tools)
     duplicates = sum(t.duplicate_count for t in tools)
     comp_failures = sum(t.compensation_failures for t in tools)
+    fsm.last_controller_state = state
     return {
         "task_success": task_success,
         "safe": int(violation == 0),
@@ -477,9 +556,11 @@ def run_episode_fsm(fsm: StatefulFSM, scenario):
         "compensation_failures": comp_failures,
         "compensation_failure": int(comp_failures > 0),
         "decision_count": state.decisions,
-        "action_count": state.decisions + n,  # decisions + first calls
+        "action_count": state.decisions + n,  # legacy controller-cost proxy
+        "tool_action_count": sum(tool.action_count for tool in tools),
         "decision_trace": decision_trace,
         "comp_log": comp_log,
+        "prefix_verification_log": prefix_verification_log,
     }
 
 

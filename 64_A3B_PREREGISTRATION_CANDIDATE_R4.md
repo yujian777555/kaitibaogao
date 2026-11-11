@@ -69,7 +69,7 @@ manifest 当前值包含 R4 五 composition 元数据；早期 fb832bcc… 是 r
 1. R4 独立审计 **ACCEPTED**；
 2. 导师认可 **MDE=0.10**，或按导师意见重新论证并重跑功效；
 3. 用户明确批准最终 R4 文本；
-4. **§9 真实 pre-flight 全部通过**。
+4. **§9.1 pre-run 授权门为 GO**；执行完成后还必须通过 §9.2 post-run 完整性门，才能进行确认性分析。
 
 任何一项缺失均为 HOLD。CI 绿色、代码实现、功效达标或合成测试通过都不能替代批准。
 
@@ -89,9 +89,10 @@ manifest 当前值包含 R4 五 composition 元数据；早期 fb832bcc… 是 r
 - Train/Validation/Test 接口分离；`run_evolution()` 在评价前只接受 split=train。
 - 普通 `evaluate_controller()` 只接受 Train/Validation；Test/Battery/unknown fail closed。
 - 公开 manifest/audit 不向开发调用者返回 Test scenario/family/label payload。
-- Test 只能由独立 final-evaluation wrapper 在独立审计、导师 MDE、用户批准及 manifest/code hash 匹配后访问。
-- one-time ledger 以原子创建先消费再读 payload；重复、并发、hash 不符、加载或评价失败均 fail closed，不得重开。
-- final evaluation 只读，不写回种群、适应度、参数、算子或 early stopping。
+- Test 只能由 `split_access.execute_final_evaluation_once()` 在 §9.1 pre-run GO、独立审计、导师 MDE、用户批准、CI/tests 及 manifest/code hash 全部匹配后访问。
+- one-time ledger 以原子创建先消费再读 payload；access log 同步原子记录；重复、并发、hash 不符、加载或评价失败均 fail closed，不得重开。
+- wrapper 返回绑定 manifest/code/outcome-ledger/access-log 的 `COMPLETED` receipt；`formal_runner.run_formal_analysis()` 必须验证该 receipt 后才接受 Test ledger。
+- final evaluation 只读，不写回种群、适应度、参数、算子或 early stopping；正式分析后必须执行 §9.2 post-run 完整性检查。
 
 ## 8. 停止与解释
 
@@ -102,24 +103,32 @@ manifest 当前值包含 R4 五 composition 元数据；早期 fb832bcc… 是 r
 - 历史 AB 未超过 Hand 及 R3/R4 退化必须保留。
 - 合成 runner、功效模拟或 CI 均不是算法增益证据。
 
-## 9. 真实 pre-flight
+## 9. 两阶段真实门禁
 
-`formal_preflight.run_formal_preflight()` 与 `run_r4_preflight.run_current_preflight()` 生成机器可读 JSON 和人类报告。当前执行输出保存于 `experiments/pilot_a3b/results/r4_preflight/`。
+`formal_preflight.py` 将授权与数据完整性拆成两个不同生命周期的门；`run_r4_preflight.py` 只生成 pre-run 元数据，不读取 Test payload。当前输出保存于 `experiments/pilot_a3b/results/r4_preflight/`。
 
-逐项检查：
+### 9.1 Pre-run authorization gate
+
+`run_formal_preflight()` 在 Test 执行前仅检查：
 
 1. R4 文本 SHA、实现代码 SHA、Git HEAD；
-2. 独立审计、导师 MDE、用户批准状态；
-3. 本地/CI 测试状态；
+2. 独立审计 ACCEPTED、导师 MDE APPROVED、用户明确批准；
+3. 本地/CI 测试成功；
 4. train/validation/test family 与 scenario hashes；
 5. split 零交叉、Train-only runner、Validation selection-only、Test 不暴露；
-6. roster、配对、duplicate/null/metadata 完整性；
-7. F≥34、每族恰好 5、family_loss、technical missing、design_deviation；
-8. 正式 runner/analysis schema 与函数版本；
-9. 预算、seed、停止规则；
-10. Test access log=0、one-time ledger=UNUSED；pre-flight 自身不读取 Test。
+6. 冻结 roster 和分析 schema；
+7. 预算、seed、停止规则；
+8. Test access log=0、one-time ledger=UNUSED。
 
-任一字段缺失或不满足均 HOLD。当前没有独立 ACCEPTED、导师 MDE 或用户批准，因此当前输出必须是 HOLD，而不是 GO。
+**不要求任何尚未产生的 Test outcome rows、配对完整性、family_loss 或 labelled null 数据。** 只有这些 pre-run 条件全部满足才返回 GO。
+
+### 9.2 Post-run analysis-integrity gate
+
+`run_postrun_integrity_check()` 在一次性 Test 执行完成后检查：配对完整、duplicate/null/metadata 错误为 0、F≥34、每族恰好 5、family_loss、technical_missing_runs、design_deviation、Test access 已记录、ledger=CONSUMED。
+
+该门只决定确认性分析资格，不能授权或重开 Test。post-run 失败时正式 runner 将确认性 Student-t 置为不可用。
+
+任一阶段的任一必需字段缺失或不满足均为 HOLD。当前没有独立 ACCEPTED、导师 MDE 或用户批准，因此当前 pre-run 输出必须仍为 HOLD，而不是 GO。
 
 ## 10. R4 功效与 Type-I 重新校准
 
@@ -142,6 +151,25 @@ manifest 当前值包含 R4 五 composition 元数据；早期 fb832bcc… 是 r
 
 F=33 仅为 family-loss 边界敏感性，不具备确认性资格。F=34 为最低有效设计，F=40 为完整设计。最坏 ICC=0.20 时 F=34 功效仍高于 0.80。该结论只适用于每族恰好 5 个 primary compositions 的冻结设计。
 
+### 10.1 Technical-missing 与 Type-I 复核
+
+`simulate_missing_sensitivity()` 在 ICC=0.20 下对 composition-cluster MCAR technical missing 率 0%、1%、2%、5% 进行 10,000 MC；family 只有五个 primary compositions 全完整才纳入，F<34 不执行确认性推断。
+
+| F design | missing | 平均完整 F | 分析 eligible 率 | eligible 时 null 拒绝率 | MDE 联合拒绝率 |
+|---:|---:|---:|---:|---:|---:|
+| 34 | 1% | 32.36 | 0.1857 | 0.0495 | 0.1507 |
+| 34 | 2% | 30.71 | 0.0318 | 0.0566 | 0.0258 |
+| 34 | 5% | 26.28 | 0.0002 | 0.0000 | 0.0001 |
+| 40 | 1% | 38.03 | 0.9970 | 0.0509 | 0.8824 |
+| 40 | 2% | 36.12 | 0.9141 | 0.0520 | 0.7971 |
+| 40 | 5% | 30.94 | 0.1641 | 0.0451 | 0.1455 |
+
+该表说明 missing 会使设计迅速失去确认性资格；不得把条件性 power 当作完整实验保证。MCAR 仍是模拟假设，不覆盖所有非随机缺失机制。
+
+`simulate_type_i_replication()` 对 F=40、ICC=0.20、null 使用 5 个独立 seed × 10,000 MC。 pooled Type-I=**0.0489**，95% Wilson CI **[0.0470,0.0508]**。此前单 cell 0.0547 不作为独立校准证据；多 seed 复核与名义 0.05 一致。
+
+所有原始格子、逐格 seed、rejections、MCSE 和区间均保存在同一 `power_r4_design.json`，不是只写报告汇总。
+
 ## 11. 实现与可复现性
 
 - `formal_runner.run_formal_analysis()`：manifest + 原始 run ledger → 主/次要 family-level 分析、每层 roster hash、输入/manifest/code/git provenance。
@@ -152,3 +180,29 @@ F=33 仅为 family-loss 边界敏感性，不具备确认性资格。F=34 为最
 - `test_64r4_*.py` 与 `test_sbcg*.py`：只使用合成 fixtures/sentinels。
 
 R4 材料完成后只能标记 **READY_FOR_INDEPENDENT_REVIEW**，Executor 不得自评 ACCEPTED。
+
+
+## 10.2 D-085 统计修复后的当前功效表
+
+本轮独立复审发现 `_betainc()` 在 x→1 时的小 |t| 数值不稳定。现按对称关系 `I_x(a,b)=1−I_(1−x)(b,a)` 修复，并加入 t=0.001/0.01、df=39/1 的 SciPy 已知答案测试。正式分析与模拟继续共用同一 `student_t_summary()`。
+
+以下为修复后重新生成的当前值；§10 旧表仅作修复前历史记录。
+
+| F | ICC | MDE=0.10 power | 95% Wilson CI | Null Type-I |
+|---:|---:|---:|---|---:|
+| 33 | 0.00 | 0.9788 | [0.9758, 0.9814] | 0.0490 |
+| 33 | 0.05 | 0.9507 | [0.9463, 0.9548] | 0.0460 |
+| 33 | 0.10 | 0.9121 | [0.9064, 0.9175] | 0.0506 |
+| 33 | 0.20 | 0.8308 | [0.8233, 0.8380] | 0.0467 |
+| **34** | 0.00 | 0.9798 | [0.9769, 0.9824] | 0.0479 |
+| **34** | 0.05 | 0.9529 | [0.9486, 0.9569] | 0.0496 |
+| **34** | 0.10 | 0.9197 | [0.9142, 0.9249] | 0.0480 |
+| **34** | 0.20 | **0.8427** | **[0.8354, 0.8497]** | **0.0491** |
+| 40 | 0.00 | 0.9912 | [0.9892, 0.9929] | 0.0507 |
+| 40 | 0.05 | 0.9781 | [0.9750, 0.9808] | 0.0490 |
+| 40 | 0.10 | 0.9523 | [0.9479, 0.9563] | 0.0479 |
+| 40 | 0.20 | 0.9028 | [0.8968, 0.9085] | 0.0538 |
+
+修复后 F=40/ICC=0.20 的 5×10,000 独立-seed null 复核 pooled Type-I 为 **0.04754**，95% Wilson CI **[0.045709, 0.049440]**。完整当前 JSON 含 24 主格、16 MCAR 格、16 个连续前缀不利缺失格及 5 个 Type-I replication；pre-fix JSON/Markdown 另存为 `power_r4_design.pre_d085.json/.md`。
+
+连续前缀缺失是明确的非随机不利情景：F=34 时只要 1% 缺失就会降到 33 个完整 family，全部 10,000 个 replicate 均不具备确认性资格；F=40 时 1%/2%/5% 的 MDE 联合拒绝率分别为 0.8954/0.8947/0.8828。MCAR 与连续前缀结果都保留，不能只报告有利机制。
