@@ -1,8 +1,8 @@
 # D-064-R4 — ICC / Type-I / power re-calibration
 
-- Input raw SHA-256: b9498195b80901c2de2da928dd044e678e798cf5f6a8e30047a60bd7b93c9f4c
+- Input raw SHA-256: 2946bcf97883c74c407a204d5ce50bb325e4597a47be4831ccaff4ef8a4f414c
 - Input canonical-content SHA-256: 9b1d90279852843bf93d92e66dab3e726ff1e19bc14b94e07ba260fc34eb68a7
-- Code commit: 33672562ebaeb6c3a533e7e0fd975cbac045b5e3
+- Code commit: 34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf
 - Repetitions per cell: 10000
 - Base seed: 20261114
 - Pilot total variance: 0.10166903
