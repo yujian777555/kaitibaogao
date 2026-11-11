@@ -13,7 +13,7 @@ Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_re
 
 固定门共 768 行；Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17，AdaptiveProbe/CostAware Validation 未全通过，无共同支配固定方法。`90_D086_EVOLUTION_PREREGISTRATION.md` 已冻结配置，演化实现只完成专项合成测试，实际 EA=NOT RUN。
 
-唯一下一任务：实现一次性运行器与独立统计核验，按冻结配置运行一次探索。不得调 Validation、追加预算或访问 Test。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+`dependency_experiment.py` 与冻结 config 已就绪，配置差异和 HOLD 失败路径测试通过。唯一下一任务：按冻结配置运行一次探索并独立复算。实验 workflow 仅 `workflow_dispatch`，不得调 Validation、追加预算或访问 Test。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
 
 ## 0H. D-086 Task 1 独立复审（历史状态）
 

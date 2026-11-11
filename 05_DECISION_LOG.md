@@ -1629,3 +1629,9 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 - `90_D086_EVOLUTION_PREREGISTRATION.md` 冻结 12 个体、6 代、5 seeds、84 候选和 6048 episode-equivalent/arm/seed。基因、搜索、约束选择与预算账本已通过专项合成测试，**实际 EA 尚未运行**。
 
 唯一下一任务：实现一次性运行器与独立统计核验，按冻结配置执行一次探索。不得通过调 Validation、追加预算或改标签制造提升。
+
+## D-086-RUNNER：冻结一次性实验入口（2026-11-11）
+
+`dependency_experiment.py` 和 `d086_experiment_config.json` 已实现：严格配置校验、8 个搜索/消融臂、5 个配对 seeds、每 arm/seed 6,048 Train episode-equivalent 上限、Validation 单独记账、原始 JSONL.gz 账本和探索性配对分析。配置差异与 HOLD 失败路径均经测试拒绝。实验 workflow 仅 `workflow_dispatch`，普通 push 不会重跑实验。
+
+下一步是按 90 号冻结配置实际运行一次，独立核验 Full 相对 Greedy、Random Search、NSGA-II、NSGA-III 的安全与成本差异。当前仍为 NOT RUN，不预设提升。

@@ -6,7 +6,7 @@
 >
 > **冻结实现：** `90_D086_EVOLUTION_PREREGISTRATION.md` 规定 12 个体、6 代、5 seeds、84 候选和 6048 episode-equivalent/arm/seed。`dependency_genome.py`、`dependency_evolution.py` 已实现单字段变异、NSGA-II/III、可行性优先、预算缓存和冻结选择；只做专项合成测试，未运行 manifest EA。
 >
-> **唯一下一任务：** 实现一次性实验运行器与独立统计核验，按 90 号配置运行一次 Train/Validation 探索；不重调 Validation、不追加预算、不访问 Test。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+> **唯一下一任务：** `dependency_experiment.py` 和冻结 config 已实现并通过配置/HOLD 测试。按 90 号配置运行一次 Train/Validation 探索并独立复算；不重调 Validation、不追加预算、不访问 Test。实验 workflow 仅 `workflow_dispatch`。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
 
 > **D-086 / Task 1（2026-11-11）：** `88_D085_INDEPENDENT_REVIEW_D086.md` = **ACCEPTED_WITH_LIMITATIONS**。D-085 的 96 行机制、192 行封顶和 manifest 重生成一致，33 项复算通过，无隐藏信息/gold label 入策略，Train/Validation family 无交集，基线回归 369/369。
 >

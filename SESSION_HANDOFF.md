@@ -5,7 +5,8 @@
 - 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`，committed lock=`experiments/pilot_a3b/dependency_manifest_lock.json`。Test 未生成、未读取。
 - 固定门 768 行：Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware Validation 未全通过，无共同支配固定策略，状态 CANDIDATE_SPACE_REVIEW_REQUIRED。
 - `90_D086_EVOLUTION_PREREGISTRATION.md` 已冻结 12 个体、6 代、5 seeds、84 候选/seed、6048 episode-equivalent。基因、NSGA-II/III、约束生存者、缓存预算和 Validation 选择已实现专项测试；实际 EA=NOT RUN。
-- 唯一下一任务：实现一次性实验运行器及独立统计/原始结果核验，仅按 90 号配置执行。不得用调 Validation 或增加预算制造提升。Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续禁止。
+- `dependency_experiment.py` 与 `d086_experiment_config.json` 已冻结运行器；配置差异、HOLD、预算/数据边界均有专项测试。workflow 仅 `workflow_dispatch`，不随 push 重跑。
+- 唯一下一任务：按 90 号配置执行一次探索，保存全量原始账本并独立复算 Full vs Greedy/Random/NSGA。不得用调 Validation 或增加预算制造提升。Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续禁止。
 
 ---
 

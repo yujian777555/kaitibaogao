@@ -1,0 +1,31 @@
+name: D-086 dependency recovery exploratory evolution
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exploratory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify frozen configuration and regression tests
+        run: |
+          python -m unittest discover -s experiments/pilot_a_recovery -p "test_*.py" -v
+          python -m unittest discover -s experiments/pilot_a3b -p "test_*.py" -v
+      - name: Run frozen Train/Validation exploratory protocol
+        run: python experiments/pilot_a3b/dependency_experiment.py
+      - name: Independently verify raw artifact structure
+        run: python experiments/pilot_a3b/dependency_experiment.py --verify-only
+      - name: Upload D-086 exploratory evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: d086-evolution-exploratory-evidence
+          path: experiments/pilot_a3b/results/d086_evolution/
+          if-no-files-found: error

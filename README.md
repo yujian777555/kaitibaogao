@@ -6,7 +6,7 @@
 - **新模型与锁：** `dependency_recovery.py` 实现公开依赖、备选路径、异构成本/可靠性提示、延迟回执及重复副作用。新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`，Test 未生成、未读取。
 - **固定策略门：** 8 个基线共 768 行；Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware 在 Validation 未封顶。没有固定方法在两个 split 共同支配其他方法，状态=CANDIDATE_SPACE_REVIEW_REQUIRED。
 - **已冻结：** `90_D086_EVOLUTION_PREREGISTRATION.md`，12 个体、6 代、5 seeds、每 arm/seed 84 候选和 6,048 episode-equivalent。基因、搜索、预算账本、NSGA-II/III 与可行性优先选择已实现专项测试；**实际演化实验仍未运行**。
-- **当前唯一下一任务：** 实现一次性实验运行器和原始结果/统计核验，然后仅按 90 号冻结配置运行 Train/Validation 探索。不得超过 Greedy、Random 或普通 NSGA 才称为改进。
+- **当前唯一下一任务：** `dependency_experiment.py` 和冻结配置已就绪，配置差异与 HOLD 失败路径均有回归测试。按 90 号冻结配置运行一次 Train/Validation 探索并独立复算；不得超过 Greedy、Random 或普通 NSGA 才称为改进。实验 workflow 仅 `workflow_dispatch`，不会随 push 重跑。
 
 ## D-086 Task 1 独立复审（历史状态）
 
