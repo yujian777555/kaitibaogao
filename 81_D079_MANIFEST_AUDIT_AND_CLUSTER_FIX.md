@@ -73,3 +73,13 @@ The corrected generator ran in CI on commit `c1246f847e49a2c3808cb961584743fe76c
 Independent v2 audit: all checks passed. The canonical SHA matches; 288 unique Train rows map to exactly 48 cluster IDs; every cluster contains six rows, with three `search` and three `diagnostic`; all 144 role pairs share fault-type patterns; all R1-R4 labels are present; robust/analytic disagreements and UNKNOWN labels are zero; all 288 seeds and scenario IDs are unique; Validation and Test are excluded and Test outcomes were not read.
 
 The committed lock is `experiments/pilot_a3b/d079_manifest_lock.json`. The regression suite now regenerates the manifest and checks it against the lock through `validate_manifest_lock`. This lock freezes only the Train-only candidate manifest; it is **not** permission to execute the optimizer or access Validation/Test.
+
+
+## 7. Lock regression confirmation
+
+The lock was committed at `experiments/pilot_a3b/d079_manifest_lock.json`. The first lock-test CI attempt exposed a missing test import; the import was corrected in commit `e36cd9e5abe7c60991f1e63bd27fe1de4a71c532`.
+
+- Final workflow run: [42953293607](https://github.com/yujian777555/kaitibaogao/actions/runs/42953293607) — PASS.
+- Both `Test pilot_a_recovery` and `Test pilot_a3b` passed.
+- The lock-matching regression test passed as part of `Test pilot_a3b`.
+- D-079 v2 manifest remains frozen; no D-079 optimizer run is authorized.

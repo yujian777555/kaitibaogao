@@ -1256,3 +1256,23 @@ Keep all work in `kaitibaogao`; do not merge other repositories. D-078 has no EC
 ## 2026-11-11 — D-082 v2 correction
 
 The D-083/D-084 audit revoked the v1 lock because role-fragmented scenario cluster IDs did not join the 48-cluster registry. Keep the v1 diagnostic only as superseded history. The sole valid manifest is v2 with SHA `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca` and committed lock `experiments/pilot_a3b/d079_manifest_lock.json`. V2 has 288 Train rows, 48 joinable clusters, six rows per cluster and three per role. The 42-run diagnostic was rerun on v2 and independently verified. SBCG remains NO-GO; R3 CorrectEscalation remains zero for every arm.
+## D-085 continuation — 2026-11-11
+
+Read `83_EVOTOOL_REPRODUCTION_AUDIT.md` and `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
+
+The D-079 v2 Train-only manifest lock is committed and its regression test passed in workflow run 42953293607 (commit `e36cd9e5abe7c60991f1e63bd27fe1de4a71c532`). The manifest SHA is `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`.
+
+Paper 1:
+- Primary baseline: EvoTool ACL 2026.
+- Selection comparator: GEPA ICLR 2026 Oral.
+- Provisional method hypothesis: FSPAE — per-task-family × fault-stratum Pareto archive with coverage-deficit parent sampling and hard safety feasibility.
+- Motivation only: D-078 selected Hand in 32/42 runs; Hand R3 CorrectEscalation was 0.0. This does not prove selection is the only cause and does not establish uplift.
+- Important baseline reproduction discrepancy: paper G=8/B=3, released code default 90 generations. Use the explicit G=8 override only after approval.
+
+Next:
+1. Prepare the EvoTool Qwen3-8B tau-bench reproduction preflight and compare exact paper/code settings.
+2. Ask user for explicit authorization before vLLM/A800 or any real LLM API call.
+3. Do not run D-079 optimizer, formal A-3b, Validation/Test, or external benchmark Test without separate authorization.
+4. Do not write positive results or claim FSPAE works until matched-budget experiments and a locked shift test pass.
+
+All work remains in `kaitibaogao`; never merge the user's other repositories.

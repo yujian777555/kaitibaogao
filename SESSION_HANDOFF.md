@@ -2445,3 +2445,11 @@ No mixing with other repositories. No formal A-3b, locked Test, external benchma
 ## 65. D-082 v2 修正交接（2026-11-11）
 
 v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 superseded。v2 manifest SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`，48 个 cluster 可 join，committed lock 验证通过。v2 诊断已重跑 42 runs，指标与 v1 一致，独立核验通过。当前 SBCG 仍 NO-GO，所有臂 R3=0。唯一下一任务不变：R4 独立复审及 R3 单机制预注册。
+## 2026-11-11 D-085 Research Handoff
+
+- D-079 v2 manifest lock regression passed: workflow run 42953293607, commit `e36cd9e5abe7c60991f1e63bd27fe1de4a71c532`.
+- Locked Train-only manifest SHA: `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`; 288 rows, 48 clusters, 6 rows/cluster, 3 search + 3 diagnostic per cluster.
+- Paper 1 baseline: EvoTool (ACL 2026); GEPA (ICLR 2026 Oral) is the selection/reflection comparator. Detailed decomposition and G=8/B=3 vs 90-generation code-default discrepancy: `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- New method hypothesis: FSPAE, a fault-stratified Pareto archive with coverage-deficit parent sampling. Details: `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
+- D-078 remains NO_UPLIFT; 32/42 selections equal Hand, Hand R3 correct escalation 0.0. FSPAE is only a hypothesis.
+- Next action: prepare the exact EvoTool Qwen3-8B tau-bench baseline preflight; ask user before launching vLLM/A800 or any real API. No formal A-3b optimizer, Validation/Test, or external benchmark Test is authorized.

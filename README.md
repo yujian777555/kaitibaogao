@@ -950,3 +950,10 @@ Train-only 诊断实际完成 14 arms×3 seeds=42 runs。SBCG 相对 Hand 的 Co
 后续 D-083/D-084 审计发现 v1 scenario cluster_id 含 role，而 48 个注册 cluster 不含 role，导致 96 个角色碎片化 ID 无法 join。v1 lock 与诊断因此仅保留为 superseded，不能作为最终算法证据。
 
 v2 使用 `family|stratum` cluster_id，role 独立；288 Train-only 行、48 clusters、每簇 6 行且每角色 3 行，manifest/lock 均 PASS。v2 SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`，committed lock=`experiments/pilot_a3b/d079_manifest_lock.json`。v2 已重新运行 42 个 Train-only runs，指标与 v1 一致，独立核验零不一致；SBCG 整体结论仍为 NO-GO。详见 81 号报告 §8 与 `results/d079_train_only_diagnostic_v2/`。
+## Paper 1 module-level research update — 2026-11-11
+
+- D-079 v2 Train-only manifest is frozen at `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`; lock regression CI passed in run 42953293607.
+- Primary evolutionary baseline: EvoTool (ACL 2026). GEPA (ICLR 2026 Oral) is the Pareto/reflection module comparator.
+- New provisional algorithm hypothesis: Fault-Stratified Pareto Archive Evolution (FSPAE), described in `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
+- EvoTool paper/code generation-budget mismatch is documented in `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- No baseline reproduction or optimizer experiment has been run.

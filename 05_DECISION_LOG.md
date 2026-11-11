@@ -1567,3 +1567,11 @@ D-083/D-084 独立审计发现 v1 的 cluster 注册表与 scenario cluster_id �
 v2 修正为 `family|stratum` cluster_id，role 独立。独立审计确认 288 Train 行、48 clusters、每簇 6 行/每角色 3 行、0 UNKNOWN/disagreement，并匹配 committed lock。v2 manifest SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`。
 
 runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重新运行 42 个 Train-only runs。所有臂指标与 v1 一致；独立核验预算/缓存/角色违规和汇总重算不一致均为 0。最终结论不变：SBCG 当前整体 NO-GO，R3=0 仍是核心障碍。
+## D-085 — Narrow Paper 1 innovation to fault-stratified Pareto selection (2026-11-11)
+
+- D-084 lock regression CI passed on commit `e36cd9e5abe7c60991f1e63bd27fe1de4a71c532` (workflow run 42953293607).
+- Module-level comparison: EvoTool uses instance-wise winner retention; GEPA uses Pareto-front candidates with reflection/merge; current SBCG uses global NSGA-II/III survivor selection plus a global archive and per-family CondRec guard.
+- D-078 shows Hand selected in 32/42 runs and R3 CorrectEscalation=0.0. This motivates, but does not prove, a selection-module failure.
+- Provisional method hypothesis: FSPAE, a per-task-family × fault-stratum Pareto archive with coverage-deficit parent sampling and zero-tolerance hard safety constraints.
+- FSPAE is not validated. D-079 is Train-only and non-confirmatory; no optimizer run is authorized.
+- EvoTool faithful reproduction must use paper G=8/B=3, not released default 90 generations, pending explicit user approval.
