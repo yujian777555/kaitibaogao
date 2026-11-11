@@ -367,3 +367,14 @@ D-079 已新增 evaluator 修复、独立 per-family/per-scenario audit 和 Trai
 
 首轮 D-079 regression CI 因 challenge generator 对 Train family contract composition 的假设过强而失败：不是每个 Train family 都同时包含 contract-level compensatable 和 uncompensatable tools。D6 已改为允许 runtime compensation unavailable 表达 R4，并补充回归测试。D-078 workflow 已从 push 自动触发改为 workflow_dispatch only，防止普通维护提交重跑已完成的 14-arm pilot。该失败发生在测试 preflight，未产生新的算法实验数据。当前仍需等待 corrective CI；challenge manifest hash 未锁定前不运行新的 Train-only optimizer diagnostic。Pilot B、Test、A800/ARWM、真实 LLM API 继续 HOLD。
 
+
+
+## 16. D-081 corrective commit / D-079 CI gate（2026-11-11）
+
+D-081 已推送到 `pilot-a-stateful-recovery`：`192f958847fb31d7d704cfa0760201dcd8371e32`。修复 D6 对 Train family contract composition 的过强假设：若没有 contract-level uncompensatable tool，可在 compensatable tool 上设置 runtime compensation unavailable，形成 R4 damage-containment 场景；同时新增 D6 回归测试。D-078 workflow 改为 `workflow_dispatch` only，普通 push 不会重跑已完成的 14-arm pilot。
+
+首轮失败记录保留：regression run 42827879313 在 282 tests 后失败；D-078 run 42827879133 在 full regression preflight 失败、算法步骤 skipped。D-081 commit combined status 当前无 checks，corrective CI 尚未验证成功。
+
+**唯一下一任务：** 核验 D-081 regression CI。成功后检查 D-079 D-078 audit artifacts 与 288-scenario Train-only challenge manifest，审查 R1-R4 分布、UNKNOWN/label disagreement、scenario ID、search/diagnostic 配对及 manifest SHA，再提交 manifest lock。manifest lock 前禁止运行新优化器。
+
+**HOLD：** 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge。
