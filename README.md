@@ -8,7 +8,8 @@
 - **机制证据：** 两个固定控制器的 96 行审计显示，PrefixAware 在 D5/R3 为 24/24、D6/R4 为 24/24 且达到最小残余，Hand 两组均 0/24；这不是优化器性能提升。原始 CSV/JSON、来源哈希和独立复算均已保存。
 - **新隔离数据：** Train=72、Validation=24，family 不相交，UNKNOWN=0；manifest SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`。Test 只有封存规则，未生成、未读取，精确 roster 和保管承诺为 OPEN。
 - **封顶结论：** 修正后的固定 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规。当前简单挑战集没有 EC 功效改进空间，优化器运行数为 0；不得事后改看成本制造创新。
-- **测试：** 本地完整回归 `341+28=369` 全部通过；新 CI 已配置重算机制与封顶审计，远端 run 尚待提交后核验，不能沿用旧 CI 代替。
+- **提交与 CI：** 实现提交 `34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`；R4 自动证据提交 `fd66ad8c3a6fcc678936fcf533f8f69ba553570a`（仅更新 git/raw-SHA 元数据，统计值不变）。CI regression `43013066595`、R4 power `43013066576`、Pilot A recovery `43013066525` 均 success；D-085 与 R4 artifact 已下载复核。
+- **测试：** 本地与 CI 均为 `341+28=369` 全部通过；独立 CSV/JSON 复算 33 项通过。同提交本地干净克隆也通过 369 项；GitHub clean-clone 两次因网络超时未验证，不能写成成功。
 - **当前唯一下一任务：** 由新的独立会话审查 `86_D085_R3_PREFIX_MECHANISM_AUDIT.md`、`87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md`、最终实现与封顶门；审查前不得运行新优化器。
 - 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 继续 HOLD。D-078/D-079 原始 artifact 和本轮修复前证据均保留。
 

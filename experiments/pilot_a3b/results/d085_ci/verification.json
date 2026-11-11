@@ -1,0 +1,97 @@
+{
+  "schema": "d085-ci-verification-v1",
+  "code_commit": "34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf",
+  "evidence_commit": "fd66ad8c3a6fcc678936fcf533f8f69ba553570a",
+  "evidence_parent": "34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf",
+  "main": "683b3fe7fc52c86e917d523fdc6bbb13abbfd653",
+  "local_tests": {
+    "pilot_a3b": 341,
+    "pilot_a_recovery": 28,
+    "total": 369,
+    "conclusion": "success"
+  },
+  "ci_runs": [
+    {
+      "run_id": 43013066595,
+      "job_id": 130497218621,
+      "name": "Research simulator regression tests",
+      "head_sha": "34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf",
+      "conclusion": "success",
+      "test_counts": {
+        "pilot_a3b": 341,
+        "pilot_a_recovery": 28,
+        "total": 369
+      },
+      "required_d085_steps": [
+        "Generate and lock-check D-085 development-only challenge",
+        "Recompute D-085 mechanism and fixed-controller ceiling audits",
+        "Upload D-085 development and mechanism evidence"
+      ],
+      "required_steps_conclusion": "success",
+      "artifact": {
+        "id": 13850733899,
+        "name": "d085-prefix-development-and-mechanism-audit",
+        "digest": "sha256:d993ae80297f6ee4010226d9f0db015ccf99fd50dadc8b7af3274b6514c16dfc",
+        "download_verified": true,
+        "manifest_sha256": "cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492",
+        "mechanism_rows": 96,
+        "ceiling_rows": 192
+      }
+    },
+    {
+      "run_id": 43013066576,
+      "job_id": 130497218700,
+      "name": "R4 power recalibration",
+      "head_sha": "34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf",
+      "conclusion": "success",
+      "mc_reps": 10000,
+      "f34_icc020_power": 0.8427,
+      "artifact": {
+        "id": 13851606841,
+        "name": "r4-power-recalibration-10000mc",
+        "digest": "sha256:f6016c3e911e8276c659abe6dc555eb9d878bdf7afd7fe7888a7595b798c64c6",
+        "download_verified": true,
+        "matches_committed_json": true
+      },
+      "evidence_commit_changes": [
+        "git_commit",
+        "input_sha256"
+      ],
+      "numeric_results_changed": false,
+      "input_canonical_sha256": "9b1d90279852843bf93d92e66dab3e726ff1e19bc14b94e07ba260fc34eb68a7"
+    },
+    {
+      "run_id": 43013066525,
+      "name": "Pilot A recovery simulator",
+      "head_sha": "34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf",
+      "conclusion": "success",
+      "scope": "existing simulator only; not formal A-3b or a new optimizer experiment"
+    }
+  ],
+  "remote_blob_content_checks": {
+    "count": 5,
+    "matched": true
+  },
+  "independent_csv_json_checks": {
+    "count": 33,
+    "matched": true
+  },
+  "clean_clone": {
+    "local_commit_clone": {
+      "status": "success",
+      "source": "file://D:/kaitibaogao",
+      "head_sha": "fd66ad8c3a6fcc678936fcf533f8f69ba553570a",
+      "tests": 369
+    },
+    "remote_github_clone": {
+      "status": "NOT_VERIFIED_NETWORK_TIMEOUT",
+      "attempts": 2,
+      "test_started": false,
+      "detail": "Full clone timed out at 300 seconds; shallow clone exceeded 240 seconds and was stopped before tests"
+    }
+  },
+  "optimizer_runs": 0,
+  "test_accessed": false,
+  "independent_scientific_review": "OPEN",
+  "ec_efficacy_experiment": "NO-GO / NOT RUN on the current ceiling manifest"
+}

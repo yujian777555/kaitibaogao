@@ -12,7 +12,7 @@ Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_re
 - R4 ACCEPTED 仅限代码与协议复审，不代替导师 MDE、用户批准或真实 pre-flight。
 - 新 Prefix 开发 manifest 为 Train=72、Validation=24，family 不相交；SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`，committed lock=`experiments/pilot_a3b/prefix_manifest_lock.json`。Test 未生成、未读取，精确 roster 与独立保管承诺为 OPEN。
 - 固定 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规。当前简单集合不能证明 EC 增益，优化器运行数为 0；不得事后改用成本指标制造提升。
-- 本地完整回归 341+28=369；新 regression workflow 的远端结果在提交前为 NOT RUN。唯一下一任务是由独立会话审查 86/87、最终实现与封顶门。
+- 本地与 CI 完整回归均为 341+28=369。实现提交 `34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`；R4 自动证据提交 `fd66ad8c3a6fcc678936fcf533f8f69ba553570a`。CI regression 43013066595、R4 power 43013066576、Pilot A recovery 43013066525 均 success；D-085/R4 artifact 已下载复核。同提交本地干净克隆通过；GitHub clean-clone 两次网络超时未验证。唯一下一任务是由独立会话审查 86/87、最终实现与封顶门。
 - 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 均继续 HOLD。
 
 ## 0. 本阶段唯一目标（历史计划）

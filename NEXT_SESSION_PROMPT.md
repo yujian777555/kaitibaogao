@@ -1,6 +1,6 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-11，D-085）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 `pilot-a-stateful-recovery`；接管基线 `33672562ebaeb6c3a533e7e0fd975cbac045b5e3`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。最终 commit 与 CI run 必须在接手时重新查询。
+> **最新权威状态（2026-11-11，D-085）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 `pilot-a-stateful-recovery`；实现提交 `34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`；R4 自动证据提交 `fd66ad8c3a6fcc678936fcf533f8f69ba553570a`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。最终维护 SHA 与远端状态仍须在接手时重新查询。
 >
 > **R4：** `85_D064_R4_INDEPENDENT_REVIEW_R2.md` = ACCEPTED，仅限代码与协议复审，不是正式 A-3b 批准；导师 MDE、用户批准和真实 pre-flight 仍是独立硬门。
 >
@@ -8,7 +8,7 @@
 >
 > **新数据与封顶门：** Train=72、Validation=24，family 不相交，manifest SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`，lock=`experiments/pilot_a3b/prefix_manifest_lock.json`。固定 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规，故当前集合不能证明 EC 增益。优化器 runs=0；Test 未生成、未读取，精确 roster 与保管承诺为 OPEN。
 >
-> **验证：** 本地完整回归 341+28=369 全通过；新 regression workflow 将重算机制与封顶审计，远端 CI 在本轮提交前 NOT RUN。
+> **验证：** 本地与 CI 完整回归均为 341+28=369 全通过。CI regression `43013066595`、R4 power `43013066576`、Pilot A recovery `43013066525` 均 success；D-085/R4 artifact 已下载复核。证据见 `experiments/pilot_a3b/results/d085_ci/verification.json`。同提交本地干净克隆通过；GitHub clean-clone 两次网络超时，未验证成功。
 >
 > **当前唯一任务：** 新独立会话审查 `86_D085_R3_PREFIX_MECHANISM_AUDIT.md`、`87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md`、最终实现、原始 CSV 和封顶门。审查前不得运行新优化器；不得把固定规则可行或工程测试通过写成算法创新。
 >

@@ -1597,3 +1597,16 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 ### 唯一下一任务
 
 将 86/87、最终实现、原始 CSV 复算与封顶门交新的独立审查会话。审查前不运行新优化器；正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续 HOLD。
+
+## D-085-CI：远端证据链核验（2026-11-11）
+
+- 实现 commit：`34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`。
+- R4 自动证据 commit：`fd66ad8c3a6fcc678936fcf533f8f69ba553570a`，父节点为 34d76c68；差异仅为 `git_commit` 和输入 raw SHA（换行差异），canonical SHA 及统计值不变。
+- CI `43013066595`：success，日志实际执行 341+28=369 tests；D-085 生成、锁校验、机制审计、封顶审计均成功。artifact `13850733899` 已下载验证 manifest lock、96 行机制和 192 行封顶数据。
+- CI `43013066576`：success，10,000 MC，F=34/ICC=.20 功效 0.8427；artifact `13851606841` 与远端 JSON 一致。
+- CI `43013066525`：success，Pilot A recovery 各既有步骤完成；没有将其解释为正式 A-3b 或新算法实验。
+- 远端文件 blob 已抽查一致，main 保持 `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。独立科学审查仍为 OPEN，当前 EC 功效实验仍为 NO-GO / NOT RUN。
+
+### Clean-clone 补充边界
+
+同提交本地独立干净克隆通过 369 项测试；GitHub clean-clone 两次均在网络阶段超时/停止，未进入测试，状态为 NOT VERIFIED，不得写成成功。该本地网络限制不改变 CI 已核验的事实，也不改变当前 EC 功效实验 HOLD。

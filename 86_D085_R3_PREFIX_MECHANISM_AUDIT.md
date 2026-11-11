@@ -126,3 +126,18 @@ D6 的 Prefix 结果达到逐场景 `min_reachable_harm`，不是把不可补偿
 - **OPEN-5：** 尚无 Hand/Rule/NSGA-II/NSGA-III/Constrained NSGA-III 的配对优化器结果；算法创新仍不成立。
 
 **唯一下一步：** 由新的独立审查会话审查本报告、`87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md`、最终实现及封顶门。审查通过前不得启动新优化器；不得以本报告作为 GO。
+
+## 8. 提交与 CI 核验
+
+- 实现提交：`34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`。
+- R4 power workflow 自动证据提交：`fd66ad8c3a6fcc678936fcf533f8f69ba553570a`，其父节点为 34d76c68；只更新 `git_commit` 和输入 raw SHA，canonical SHA 与统计结果不变。
+- Regression run `43013066595`：success，日志为 341+28=369 tests，所有 D-085 生成、锁校验、机制和封顶步骤均成功。artifact `13850733899` 已下载验证，manifest、96 行机制数据与 192 行封顶数据正确。
+- R4 power run `43013066576`：success；10,000 MC，F=34/ICC=0.20 功效 0.8427；artifact `13851606841` 与远端 JSON 一致。
+- Pilot A recovery run `43013066525`：success；仅证明既有模拟器步骤完成，不是正式 A-3b 或新优化器实验。
+- 独立复算保存于 `prefix_mechanism_independent_check.json`，33 项通过；远端文件 blob 抽查一致，main 未修改。
+
+这些证据只支持可复现性和机制语义，不支持 EC 性能提升。后续独立会话仍需审查最终实现与封顶门。
+
+### 8.1 Clean-clone 边界
+
+同一提交 `fd66ad8c3a6fcc678936fcf533f8f69ba553570a` 的本地独立干净克隆已通过 341+28=369 项测试。两次 GitHub clean-clone 均阻塞在网络阶段（全量 300 秒超时、浅克隆超过 240 秒后停止），未进入测试；不得表述为远端 clean-clone 已通过。真实 GitHub CI 和 artifact 下载复核不受此本地网络失败影响。

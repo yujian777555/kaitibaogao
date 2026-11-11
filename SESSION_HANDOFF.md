@@ -1,12 +1,12 @@
 ## 0G. 最新权威接管状态（2026-11-11，D-085 机制与预注册完成）
 
-- 工作仓库：yujian777555/kaitibaogao；分支 `pilot-a-stateful-recovery`；接管基线 `33672562ebaeb6c3a533e7e0fd975cbac045b5e3`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。最终 commit 和 CI run 须在推送后重新查询。
+- 工作仓库：yujian777555/kaitibaogao；分支 `pilot-a-stateful-recovery`；接管基线 `33672562ebaeb6c3a533e7e0fd975cbac045b5e3`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改。实现提交 `34d76c68c9370fa0c93095c36ea4b4f0ecd8bedf`；R4 自动证据提交 `fd66ad8c3a6fcc678936fcf533f8f69ba553570a`，父节点正确，只有 git/raw-SHA 元数据变化。
 - R4 复审 `85_D064_R4_INDEPENDENT_REVIEW_R2.md` = ACCEPTED，仅限代码与协议，不授权正式 A-3b；后续 Prefix/标签 delta 需独立绑定最终 SHA。
 - R3 根因已查明：D5 可通过补偿前缀后升级达到零残余，原 Hand 遗漏顺序。正常前缀运行期补偿不可用的标签反例已保守修复，D-079 v2 SHA 保持 `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`。
 - PrefixAware 固定控制器 D5/R3=24/24、D6/R4=24/24 且达到最小残余，Hand 两组均 0/24；96 行原始数据和独立 CSV 复算保存在 `results/d085_prefix_mechanism_audit/`。这是机制可达性，不是 EC 提升。
 - 新隔离 manifest：Train=72、Validation=24，SHA=`cf769671873c594ec73e9a9e7df75bf1774135af6745da54b3411fb08c45d492`；lock=`experiments/pilot_a3b/prefix_manifest_lock.json`。Test 未生成、未读取，精确 roster 和保管承诺 OPEN。
 - **封顶结论：** 修正后的固定 Prefix 在新 Train/Validation 全部类别成功、零可避免伤害、零硬约束违规；当前集合不具备 EC 功效改进空间，优化器 runs=0，禁止事后换成本指标制造创新。
-- 本地完整回归 **341+28=369** 全通过；新 regression workflow 会在 CI 重算机制与封顶审计，远端结果在提交前 NOT RUN。
+- 本地与 CI 完整回归均为 **341+28=369** 全通过。CI regression `43013066595`、R4 power `43013066576`、Pilot A recovery `43013066525` 均 success；D-085/R4 artifact 已下载复核，run/job/step 与 artifact 证据保存于 `experiments/pilot_a3b/results/d085_ci/verification.json`。同提交本地干净克隆通过 369 项；GitHub clean-clone 两次网络超时，未验证成功。
 - 交付文件：`85_D064_R4_INDEPENDENT_REVIEW_R2.md`、`86_D085_R3_PREFIX_MECHANISM_AUDIT.md`、`87_PREFIX_AWARE_EXPERIMENT_PREREGISTRATION.md`；实现为 `prefix_recovery.py`、`prefix_mechanism_audit.py`、`prefix_challenge_generator.py`、`prefix_ceiling_audit.py` 及相应测试。
 - **唯一下一任务：** 新独立会话审查 86/87、最终实现、CSV 复算和封顶门；审查前不启动新优化器。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续 HOLD。
 
