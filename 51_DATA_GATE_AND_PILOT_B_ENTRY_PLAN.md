@@ -9,7 +9,7 @@ Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_re
 
 ## 0J. D-086 探索结果与独立复制门（2026-11-11）
 
-实际探索 40 runs、316,416 行原始账本，独立审计全部通过；本地完整回归 385+28=413。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、约束 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II；这是探索性 EC 信号，不是确认性创新。
+实际探索 40 runs、316,416 行原始账本，独立审计全部通过；本地完整回归 385+28=413。结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` = success。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、约束 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II；这是探索性 EC 信号，不是确认性创新。
 
 Full C-NSGA-III R3 均值 0.9、成本 5.6，未满足 r3_all_one/no_regression_vs_ea，明确 NO_GO。NoAlternate/NoPendingVerification 明显破坏恢复，NoFailureFeedback 成本上升，NoDependencyPriority 贡献未识别。首次 JSONL 失败与审计分组失败均保留；split 缓存键已修复。
 

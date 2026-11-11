@@ -6,7 +6,7 @@
 >
 > **非封顶机制：** 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`。公开依赖、备选路径、可靠性/成本和确认预算形成真实策略差异；固定门 768 行，无共同支配方法。
 >
-> **失败证据：** 首次 JSONL 失败目录保留，split 缓存键已修复。审计初版错误要求跨 seeds 同池的失败报告也保留；修正后预算、账本、选中指标与判据全部一致。本地完整回归 385+28=413，结果提交后的远端 CI 待核验。
+> **失败证据：** 首次 JSONL 失败目录保留，split 缓存键已修复。审计初版错误要求跨 seeds 同池的失败报告也保留；修正后预算、账本、选中指标与判据全部一致。本地完整回归 385+28=413；结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` = success。
 >
 > **唯一下一任务：** 按 `92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md` 对已冻结普通 NSGA-III 候选做新 Validation family 复制评价；不重训、不追加预算、不访问 Test，复制实验 NOT RUN。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
 >

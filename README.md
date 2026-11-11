@@ -4,7 +4,7 @@
 
 - **D-085 独立复审：** `88_D085_INDEPENDENT_REVIEW_D086.md` = ACCEPTED_WITH_LIMITATIONS，数据、隔离与封顶事实成立，但不证明算法有效。
 - **非封顶模型：** 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`；公开依赖、备选路径、可靠性/成本和确认预算形成真实策略差异。固定门 768 行，无共同支配方法。
-- **实际探索：** 8 个搜索/消融臂×5 seeds=40 runs，316,416 行原始账本，独立审计全部通过；本地完整回归 385+28=413。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、硬约束为 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II。**这是探索性 EC 信号，不是确认性创新证明。**
+- **实际探索：** 8 个搜索/消融臂×5 seeds=40 runs，316,416 行原始账本，独立审计全部通过；本地完整回归 385+28=413。结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` 为 success，D-086 manifest 和固定门 artifact 已上传。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、硬约束为 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II。**这是探索性 EC 信号，不是确认性创新证明。**
 - **Full C-NSGA-III：** R3 均值 0.9、成本 5.6，未满足 `r3_all_one` 与 `no_regression_vs_ea`，明确 **NO_GO**。不得用 Full 的平均成本掩盖其落后普通 NSGA-III。
 - **失败与复算：** 首次 JSONL 失败目录保留；修复 split 缓存键。初始池审计误分组的失败报告亦保留，修正后原始行数、预算、指标和判据全部一致。
 - **唯一下一任务：** 按 `92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md` 对**已冻结普通 NSGA-III 候选**做全新 Validation family 复制评价；不重新训练、不追加预算、不访问 Test，复制实验目前 NOT RUN。

@@ -5,7 +5,7 @@
 - 实际探索 40 runs、316,416 行原始账本。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、约束 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II。**仅为探索性信号，不是新算法创新证明。**
 - Full C-NSGA-III 的 R3 均值 0.9、成本 5.6，未满足 r3_all_one/no_regression_vs_ea，明确 **NO_GO**，不得宣称优于普通 NSGA-III。
 - NoAlternate 使 R3 降至 0.5、R4 为 0；NoPendingVerification 使 R3 约 0.0667、R4 为 0；NoFailureFeedback 成功为 1 但成本升至 8.4667；NoDependencyPriority 与 Full 无差异，贡献未识别。
-- 首次 JSONL 失败目录和审计分组失败报告均保留；split 缓存键已修复，最终独立审计全通过。配置、seeds、预算、指标与原始账本一致。本地完整回归 385+28=413，结果提交后的远端 CI 待核验。
+- 首次 JSONL 失败目录和审计分组失败报告均保留；split 缓存键已修复，最终独立审计全通过。配置、seeds、预算、指标与原始账本一致。本地完整回归 385+28=413；结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` = success。
 - 唯一下一任务：`92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md`，只复制评价已冻结普通 NSGA-III 候选到新 Validation family；不重训、不调参、不追加预算、不访问 Test。复制实验 NOT RUN；正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续禁止。
 
 ---

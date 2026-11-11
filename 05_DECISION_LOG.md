@@ -1654,3 +1654,7 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 - 首次 JSONL 失败目录和审计分组失败报告均保留；split 缓存键已修复，之后独立审计全部通过。没有改变任务、阈值、seeds、基线或预算。
 
 **唯一下一任务：** 按 `92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md` 对已冻结普通 NSGA-III 候选进行新 Validation family 复制评价；不得重训、调参、追加预算或访问 Test。复制实验当前 NOT RUN。
+
+## D-086-CI：最终结果提交核验（2026-11-11）
+
+结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` 为 success。日志实际执行 385+28=413 项测试；D-086 manifest 锁与固定策略门均重新生成并上传 artifact。独立 artifact 审计和 `nsga3_candidate_assessment.json` 结论不变：Full NO_GO，普通 NSGA-III 仅为探索性积极信号，下一阶段仍需按 92 号协议复制验证。

@@ -92,3 +92,7 @@ NSGA-III 的选中基因组并不等同于固定 Greedy：它们使用成本权�
 下一阶段应先审查本报告和 `nsga3_candidate_assessment.json`，再按 `92_D086_INDEPENDENT_VALIDATION_PREREGISTRATION.md` 执行冻结候选的独立复制。独立复制不是继续优化，也不是访问 Test。
 
 若普通 NSGA-III 在新 family 上退化，必须保留该负结果，不能返回当前 Validation 调参。若 Full 继续落后，不再通过增加约束模块包装其失败。A800/ARWM、真实 LLM、正式 A-3b、Pilot B、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+
+## 8. 最终 CI 证据
+
+结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` 为 success。日志实际执行 385+28=413 项测试，并重新生成 D-086 manifest、锁及 768 行固定策略门数据；D-086 artifact 已上传。该 CI 证据支持可复现性，不改变 Full NO_GO 与普通 NSGA-III 仍需独立复制的结论。
