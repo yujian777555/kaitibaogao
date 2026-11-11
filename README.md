@@ -6,7 +6,8 @@
 - **新模型与锁：** `dependency_recovery.py` 实现公开依赖、备选路径、异构成本/可靠性提示、延迟回执及重复副作用。新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`，Test 未生成、未读取。
 - **固定策略门：** 8 个基线共 768 行；Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware 在 Validation 未封顶。没有固定方法在两个 split 共同支配其他方法，状态=CANDIDATE_SPACE_REVIEW_REQUIRED。
 - **已冻结：** `90_D086_EVOLUTION_PREREGISTRATION.md`，12 个体、6 代、5 seeds、每 arm/seed 84 候选和 6,048 episode-equivalent。基因、搜索、预算账本、NSGA-II/III 与可行性优先选择已实现专项测试；**实际演化实验仍未运行**。
-- **当前唯一下一任务：** `dependency_experiment.py` 和冻结配置已就绪，配置差异与 HOLD 失败路径均有回归测试。按 90 号冻结配置运行一次 Train/Validation 探索并独立复算；不得超过 Greedy、Random 或普通 NSGA 才称为改进。实验 workflow 仅 `workflow_dispatch`，不会随 push 重跑。
+- **首次执行失败与修复：** 原始账本误用多行 JSON 充当 JSONL，末次校验失败；失败目录 `d086_evolution_failed_pretty_jsonl/` 完整保留，未计为有效结果。已修复为逐行 JSON，并把 split 加入缓存键，防止同 ID Train 结果复用为 Validation。新增解析、账本统计和 split 隔离回归。
+- **当前唯一下一任务：** 以修复后的冻结实现重跑一次 Train/Validation 探索并独立复算；不改变任务、阈值、seeds 或基线。不得超过 Greedy、Random 或普通 NSGA 才称为改进。实验 workflow 仅 `workflow_dispatch`，不会随 push 重跑。
 
 ## D-086 Task 1 独立复审（历史状态）
 

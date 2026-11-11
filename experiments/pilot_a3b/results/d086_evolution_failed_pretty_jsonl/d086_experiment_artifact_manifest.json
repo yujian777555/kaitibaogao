@@ -1,0 +1,9 @@
+{
+  "files": {
+    "d086_experiment_report.md": "6f052a806ffe9fd5fc338bc17e4339cccc38272c99860baece0b356297736ba6",
+    "d086_experiment_rows.jsonl.gz": "fc607a2a4eba59e7e5cd1df105a8fa2e312a884197d76d1fe966b5bc3f273de9",
+    "d086_experiment_runs.json": "5c1589d3b144f58718d3529b97edd5d9f9749054812af4abffb2fff5b83cdc72",
+    "d086_experiment_summary.json": "be6d9b0175249bafe7a38a7a30793a13a2f86cf7112c5e9398253e598eb84ac9"
+  },
+  "raw_row_count": 316416
+}

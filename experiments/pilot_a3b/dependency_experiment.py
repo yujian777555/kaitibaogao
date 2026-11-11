@@ -224,14 +224,17 @@ def write_outputs(runs, analysis, outdir=OUTDIR):
     serial_runs = []
     raw_lines = []
     for run in runs:
-        serial_runs.append({key: value for key, value in run.items() if key != "ledger"})
+        serial_runs.append({
+            **{key: value for key, value in run.items() if key != "ledger"},
+            "ledger_stats": run["ledger"].stats,
+        })
         for key, row in run["ledger"].rows.items():
-            raw_lines.append(_json_text({
+            raw_lines.append(json.dumps({
                 "arm": run["arm"],
                 "optimizer_seed": run["seed"],
                 "ledger_key": list(key),
                 "row": row,
-            }).rstrip("\n"))
+            }, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
     config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
     buffer = io.BytesIO()
     with gzip.GzipFile(filename="", mode="wb", fileobj=buffer, mtime=0) as handle:

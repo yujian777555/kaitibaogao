@@ -1635,3 +1635,11 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 `dependency_experiment.py` 和 `d086_experiment_config.json` 已实现：严格配置校验、8 个搜索/消融臂、5 个配对 seeds、每 arm/seed 6,048 Train episode-equivalent 上限、Validation 单独记账、原始 JSONL.gz 账本和探索性配对分析。配置差异与 HOLD 失败路径均经测试拒绝。实验 workflow 仅 `workflow_dispatch`，普通 push 不会重跑实验。
 
 下一步是按 90 号冻结配置实际运行一次，独立核验 Full 相对 Greedy、Random Search、NSGA-II、NSGA-III 的安全与成本差异。当前仍为 NOT RUN，不预设提升。
+
+## D-086-FIRST-RUN-FAILURE：无效 JSONL 与 split 缓存边界（2026-11-11）
+
+首次实际执行在校验阶段失败：原始记录使用缩进多行 JSON，却按 JSONL 读取，触发 `JSONDecodeError`。原始失败目录已保留为 `results/d086_evolution_failed_pretty_jsonl/`，不得计为有效实验。
+
+回归同时证明同 ID Train 行可能命中 Validation 缓存，因此将 split 显式加入唯一键，防止跨 split 结果复用。新增逐行 JSON 解析、ledger_stats 保留和 Train/Validation 隔离测试；独立审计只使用 Validation 行重算选中候选。
+
+这些是基础设施修复，不是算法调参。场景、阈值、seeds、目标、基线和预算均未改变。下一步只允许以修复实现重跑一次探索，并保留首次失败证据。

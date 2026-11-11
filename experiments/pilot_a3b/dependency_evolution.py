@@ -54,7 +54,7 @@ class EvaluationLedger:
                 raise ValueError("evaluation split is restricted to " + role)
             key = (
                 "d086-dependency-v1", self.manifest_sha, self.evaluator_version,
-                fp, scenario["scenario_id"], scenario["seed"],
+                fp, scenario["scenario_id"], scenario["seed"], role,
             )
             self.stats["evaluation_calls"][role] += 1
             if key in self.rows:
