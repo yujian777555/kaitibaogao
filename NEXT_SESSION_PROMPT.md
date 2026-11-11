@@ -1,20 +1,18 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-10，D-079 corrective round）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；接管前 HEAD=4f83ea87d333441562ca7251aa3961f994bbd9dd；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead 251 / behind 0。下一次提交后必须重新查询真实 SHA、ahead/behind 和 CI。
+> **最新权威状态（2026-11-11，D-081 corrective commit）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；最新代码修正提交 `192f958847fb31d7d704cfa0760201dcd8371e32`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead 252 / behind 0。每次接管必须重新查询分支 HEAD、ahead/behind 与 CI。
 >
-> **D-078：** 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；Test outcomes 未读取。原始 artifact 不得覆盖。D-078 workflow 已改为 workflow_dispatch only，普通 push 不再触发重跑。
+> **D-078：** 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；Test outcomes 未读取，LLM API=0。原始 artifact 不得覆盖。D-078 workflow 已改为 workflow_dispatch only。
 >
-> **D-079 首轮 CI：** regression run 42827879313 failure，282 tests 中仅 D079 challenge generator setUpClass 因错误假设每个 Train family 都有不可补偿工具而失败。D-078 workflow run 42827879133 在全量测试 preflight 失败，算法执行步骤 skipped，没有新算法数据。
+> **D-079 首轮 CI：** regression run 42827879313 failure，282 tests 后仅 D079 challenge generator 的 family contract 假设阻断；D-078 workflow run 42827879133 在全量测试 preflight 失败，算法执行步骤 skipped，没有新算法数据。
 >
-> **已修正：** D6 现在允许通过 runtime compensation unavailable 表达 R4；补充 D6 测试；D-078 workflow 改为手动触发；harm 和 robust-label 修复仍需下一轮 CI 验证。
+> **D-081 已推送：** D6 允许通过 runtime compensation unavailable 表达 R4，不要求每个 Train family 都同时有 contract-level compensatable/uncompensatable 工具；新增 D6 回归测试；D-078 workflow 改为手动触发。D-081 combined status 当前无 checks，corrective CI 尚未确认成功。
 >
-> **D-079 原始数据初查：** 32/42 次 selected FSM 与 Hand FSM fingerprint 完全相同；Hand 的 R1/R2=84/84、R3 CorrectEscalation=0/12、R4 DamageContainment=12/12。待 D-079 仓库脚本复核。
+> **当前唯一任务：** 核验 D-081 regression Actions run；CI 通过后审查 D-079 D-078 audit 与 288-scenario Train-only manifest，复核 label/count/pairing/hash 并提交 manifest lock。manifest lock 之前禁止运行新优化器。
 >
-> **当前唯一任务：** 推送 D6 修正与 D-078 workflow 防误触修复，核验 regression CI；CI 通过后生成并审查 D-079 challenge manifest SHA-256，提交 manifest lock。manifest lock 之前禁止运行新优化器。
+> **挑战集候选：** 8 Train-only families × 6 difficulty strata × 3 repeats × search/diagnostic = 288 scenarios；search/diagnostic 各144，全部 split=train，不生成 Validation/Test。
 >
-> **挑战集候选：** 8 Train-only families × 6 difficulty strata × 3 repeats × search/diagnostic = 288 scenarios；search/diagnostic 各144；全部 split=train，不生成 Validation/Test。
->
-> **授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。D-076 R4 的 technical-missing power 与 pre-run/post-run lifecycle 问题仍未关闭。
+> **授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。D-076 R4 technical-missing power 与 pre-run/post-run lifecycle 问题仍需独立核验。
 >
 > **维护纪律：** 每次实质性研究、代码、实验、协议、审计或决策变化，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、05_DECISION_LOG.md、README.md 和 51 号计划。每次回复报告 canonical handoff 是否更新并提供 GitHub 文件链接。
 
