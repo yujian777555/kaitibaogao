@@ -14,6 +14,7 @@ from a3_bridge import (
 from d079_challenge_generator import (
     build_challenge_manifest,
     validate_challenge_manifest,
+    validate_manifest_lock,
 )
 from d079_diagnostics import (
     audit_matrix,
