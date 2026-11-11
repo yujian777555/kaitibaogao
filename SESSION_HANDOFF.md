@@ -1,3 +1,15 @@
+## 0E. 最新权威接管状态（2026-11-11，D-081 corrective commit）
+
+- 工作仓库：yujian777555/kaitibaogao；分支 pilot-a-stateful-recovery；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。
+- 最新代码修正提交：192f958847fb31d7d704cfa0760201dcd8371e32（D-079: fix Train-only R4 strata and disable D-078 auto-rerun）；相对 main ahead 252 / behind 0。
+- D-079 首轮 regression run 42827879313 在 282 tests 后失败，原因是 D6 generator 错误要求每个 Train family 同时包含 compensatable 和 uncompensatable tools。D-078 run 42827879133 在全量测试 preflight 失败，算法执行 skipped；没有新算法数据。
+- D-081 修复已推送：D6 可在没有 contract-level uncompensatable tool 时，以 compensatable tool + runtime compensation unavailable 构造 R4；新增 D6 回归测试。D-078 workflow 改为 workflow_dispatch only，避免普通 push 重跑已完成的 pilot。
+- D-081 combined status 当前返回空 statuses；corrective CI 尚未核实成功。D-078 原始数据未覆盖。
+- 当前唯一任务：核验 D-081 regression CI。CI 通过后读取 D-079 audit/challenge artifacts，逐项审查 288 Train-only scenarios、R1-R4 label distribution、UNKNOWN/disagreement、scenario ID/role pairing、manifest SHA；提交 manifest lock 后才可申请新的 Train-only exploratory diagnostic。
+- 不运行正式 A-3b，不访问 Test，不运行 Pilot B，不启动 A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox；不合并 main。D-076 R4 的 technical-missing power 和 pre-run/post-run gate 仍未关闭。
+
+---
+
 # SESSION HANDOFF — 开题研究项目
 
 ## 0C. 最新权威状态（2026-11-10，D-079 corrective diagnostics）
