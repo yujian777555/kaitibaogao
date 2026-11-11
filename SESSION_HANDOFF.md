@@ -1,7 +1,7 @@
 ## 0F. 最新权威接管状态（2026-11-11，D-082 执行完成）
 
 - 工作仓库：yujian777555/kaitibaogao；分支 pilot-a-stateful-recovery；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。
-- D-081 corrective CI run 42828590264 @192f958 已 success，28+290=318 tests；首轮失败及 D-078 skipped 记录保留。
+- D-081 corrective CI run 42828590264 @192f958 已 success，28+290=318 tests；首轮失败及 D-078 skipped 记录保留。最终算法/证据提交为 `87a9e01314b8d3adc7960bc7ea7e62d77e6ca9ca`；对应 CI run 42958156080 = success（303+28=331 tests），v2 manifest 与 committed lock 通过。
 - D-078 独立复算：42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；Hand R1/R2=1.0、R3=0、R4=1.0；robust/analytic disagreement=0；成功工作流预期 active effects 不再误计为 harm。
 - D-079 v1 因 cluster_id 与注册表不一致被后续审计撤销；v2 才是最终有效挑战集：288 Train-only scenarios、48 个可 join clusters、0 UNKNOWN；manifest SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`；committed lock=`experiments/pilot_a3b/d079_manifest_lock.json`。v2 诊断已重跑并独立核验。
 - D-079 Train-only 诊断 14 arms×3 seeds=42 runs 已完成并独立核验；SBCG 对 Hand 的 CondRecSucc −0.5521，R4 containment +0.6667，硬约束 −0.1458。**整体提升不成立，当前候选 NO-GO；所有臂 R3=0。**

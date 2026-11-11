@@ -1,6 +1,6 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-11，D-082 执行完成）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。D-081 corrective CI run 42828590264 @192f958 已 success（28+290=318 tests）。D-078 已独立复算 42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；robust/analytic disagreement=0。
+> **最新权威状态（2026-11-11，D-082 执行完成）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。D-081 corrective CI run 42828590264 @192f958 已 success（28+290=318 tests）。D-078 已独立复算 42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；robust/analytic disagreement=0。最终算法/证据提交为 `87a9e01314b8d3adc7960bc7ea7e62d77e6ca9ca`；对应 CI run 42958156080 = success（303+28=331 tests），v2 manifest 与 committed lock 通过。
 >
 > **D-079 最终有效挑战集为 v2：** 后续 D-083/D-084 审计发现 v1 cluster_id 与注册表不一致，v1 lock 和诊断已撤销为 superseded。v2 含 288 Train-only scenarios（Search/Diagnostic 各144）、48 个可 join clusters、0 UNKNOWN；内容 SHA=`09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`；committed lock=`experiments/pilot_a3b/d079_manifest_lock.json`。v2 诊断已重跑并独立核验。
 >
