@@ -1619,3 +1619,13 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 - 因此 D-085 事实与可复现性成立，但算法有效性不成立。下一任务是独立的新状态转移模型与固定策略非封顶门，未通过前不得运行 NSGA-II/III。
 
 证据：`88_D085_INDEPENDENT_REVIEW_D086.md` 与 `experiments/pilot_a3b/results/d086_d085_review/review_checks.json`。
+
+## D-086-MODEL：非封顶空间成立，冻结小规模演化协议（2026-11-11）
+
+- 独立新环境具备依赖闭合、备选补偿路径、可靠性提示与成本、延迟回执和重复副作用；公开视图不暴露隐藏 schedule、label 或实际延迟。
+- 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`，无 Test payload。
+- 固定策略门共 768 行：Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware Validation 未全通过，无共同支配固定方法。
+- 具体长链场景中 Greedy 10 次决策/成本27完成，CostAware 24 次未最终确认，AdaptiveProbe 有未决回执，证明可学习权衡不是人为标签失败。
+- `90_D086_EVOLUTION_PREREGISTRATION.md` 冻结 12 个体、6 代、5 seeds、84 候选和 6048 episode-equivalent/arm/seed。基因、搜索、约束选择与预算账本已通过专项合成测试，**实际 EA 尚未运行**。
+
+唯一下一任务：实现一次性运行器与独立统计核验，按冻结配置执行一次探索。不得通过调 Validation、追加预算或改标签制造提升。

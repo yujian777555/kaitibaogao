@@ -84,3 +84,21 @@ jobs:
             ${{ runner.temp }}/d085-fixed-controller-ceiling.json
           if-no-files-found: error
 
+      - name: Generate and lock-check D-086 dependency challenge
+        run: |
+          mkdir -p "$RUNNER_TEMP/d086-challenge"
+          python experiments/pilot_a3b/dependency_challenge.py --outdir "$RUNNER_TEMP/d086-challenge" --lock-path "$RUNNER_TEMP/d086-lock.json"
+
+      - name: Recompute D-086 fixed-policy optimization-space gate
+        run: python experiments/pilot_a3b/dependency_gate.py --manifest "$RUNNER_TEMP/d086-challenge/dependency_manifest.json" --outdir "$RUNNER_TEMP/d086-fixed-gate"
+
+      - name: Upload D-086 development and fixed-policy evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: d086-dependency-development-and-fixed-gate
+          path: |
+            ${{ runner.temp }}/d086-challenge/
+            ${{ runner.temp }}/d086-lock.json
+            ${{ runner.temp }}/d086-fixed-gate/
+          if-no-files-found: error
+

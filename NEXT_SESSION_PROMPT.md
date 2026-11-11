@@ -1,5 +1,13 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+> **D-086 当前阶段（2026-11-11）：** 新独立非封顶模型与固定策略门已完成，实际 EA 尚未运行。新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`；8 个固定方法产生 768 行原始数据，无固定方法在两个 split 共同支配其他方法。
+>
+> **关键结果：** Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware Validation 未全通过。长链确认场景呈现可靠路径—成本—等待预算的真实权衡，不是标签/隐藏信息错误。
+>
+> **冻结实现：** `90_D086_EVOLUTION_PREREGISTRATION.md` 规定 12 个体、6 代、5 seeds、84 候选和 6048 episode-equivalent/arm/seed。`dependency_genome.py`、`dependency_evolution.py` 已实现单字段变异、NSGA-II/III、可行性优先、预算缓存和冻结选择；只做专项合成测试，未运行 manifest EA。
+>
+> **唯一下一任务：** 实现一次性实验运行器与独立统计核验，按 90 号配置运行一次 Train/Validation 探索；不重调 Validation、不追加预算、不访问 Test。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+
 > **D-086 / Task 1（2026-11-11）：** `88_D085_INDEPENDENT_REVIEW_D086.md` = **ACCEPTED_WITH_LIMITATIONS**。D-085 的 96 行机制、192 行封顶和 manifest 重生成一致，33 项复算通过，无隐藏信息/gold label 入策略，Train/Validation family 无交集，基线回归 369/369。
 >
 > **当前唯一下一任务：** 建立独立的新状态转移模型，验证公开补偿依赖、异构可靠性、不确定回执与真实成本的自然策略差异；固定策略非封顶门通过前不运行 NSGA-II/III。旧环境中顺序不改变结果、重试只读缓存、验证只读回执；下一协议将 ESCALATE 与 STOP_SAFE 分账。Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。

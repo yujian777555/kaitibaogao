@@ -1,4 +1,15 @@
-## 0H. 最新权威接管状态（2026-11-11，D-086 Task 1 独立复审）
+## 0I. 最新权威接管状态（2026-11-11，D-086 非封顶模型与演化预注册）
+
+- `88_D085_INDEPENDENT_REVIEW_D086.md` = ACCEPTED_WITH_LIMITATIONS；D-085 数据可复现，但旧环境缺少顺序、可靠性和独立验证空间。
+- 新 `dependency_recovery.py` 独立环境具备公开依赖、primary/alternate、成本/提示、延迟回执、未决状态和重复副作用；没有向策略提供隐藏 schedule、label 或实际延迟。
+- 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`，committed lock=`experiments/pilot_a3b/dependency_manifest_lock.json`。Test 未生成、未读取。
+- 固定门 768 行：Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware Validation 未全通过，无共同支配固定策略，状态 CANDIDATE_SPACE_REVIEW_REQUIRED。
+- `90_D086_EVOLUTION_PREREGISTRATION.md` 已冻结 12 个体、6 代、5 seeds、84 候选/seed、6048 episode-equivalent。基因、NSGA-II/III、约束生存者、缓存预算和 Validation 选择已实现专项测试；实际 EA=NOT RUN。
+- 唯一下一任务：实现一次性实验运行器及独立统计/原始结果核验，仅按 90 号配置执行。不得用调 Validation 或增加预算制造提升。Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox、main merge 继续禁止。
+
+---
+
+## 0H. 历史接管状态（2026-11-11，D-086 Task 1 独立复审）
 
 - 接管基线 `c5a4db452d30688c317bf9e6173c5e5413dd1c14`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；初始 ahead 269 / behind 0，工作区干净，最新 CI `43020422598` success。
 - `88_D085_INDEPENDENT_REVIEW_D086.md` = **ACCEPTED_WITH_LIMITATIONS**：96 行机制与 192 行封顶数据、manifest 重生成完全一致，33 项复算通过，Train/Validation family 无交集，无隐藏信息或 gold label 进入策略，历史 artifact 未覆盖。基线回归 369/369。

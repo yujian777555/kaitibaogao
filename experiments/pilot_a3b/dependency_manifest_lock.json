@@ -1,0 +1,57 @@
+{
+  "allocation": {
+    "train": [
+      "df01",
+      "df02",
+      "df03",
+      "df04",
+      "df05",
+      "df06"
+    ],
+    "validation": [
+      "df07",
+      "df08"
+    ]
+  },
+  "development_only": true,
+  "family_counts": {
+    "train": 6,
+    "validation": 2
+  },
+  "generator_source_sha256": "e914d4e5029d81e080ba9b4d4221ef18b58a881c8ae81153230970b6a68422bf",
+  "generator_version": "d086-dependency-recovery-v1",
+  "lock_schema_version": 1,
+  "lock_status": "FROZEN_DEVELOPMENT_MANIFEST_NOT_EXECUTION_AUTHORIZATION",
+  "manifest_sha256": "362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67",
+  "protocol_id": "D-086-DEPENDENCY",
+  "scenario_count": 96,
+  "scenario_counts": {
+    "train": 72,
+    "validation": 24
+  },
+  "seed_base": 2026112100,
+  "strata": [
+    "D1_RECOVERABLE_TIMEOUT",
+    "D2_PARTIAL_THEN_REDO",
+    "D3_DEPENDENT_ABORT",
+    "D4_BLOCKED_COMPENSATION"
+  ],
+  "test_included": false,
+  "test_outcomes_read": false,
+  "test_protocol": {
+    "family_count": 40,
+    "family_roster": "OPEN_INDEPENDENT_CUSTODIAN_COMMITMENT_REQUIRED",
+    "repeats_per_stratum": 5,
+    "scenario_count": 800,
+    "scenario_id_namespace": "d086|test|",
+    "seed_base": 2026120100,
+    "split": "test",
+    "status": "SEALED_NOT_GENERATED_OR_READ",
+    "strata": [
+      "D1_RECOVERABLE_TIMEOUT",
+      "D2_PARTIAL_THEN_REDO",
+      "D3_DEPENDENT_ABORT",
+      "D4_BLOCKED_COMPENSATION"
+    ]
+  }
+}

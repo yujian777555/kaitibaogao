@@ -1,0 +1,558 @@
+{
+  "interpretation": "legitimate confirmation-budget tradeoff, not a label or hidden-information failure",
+  "methods": {
+    "AdaptiveProbe": {
+      "action_cost": 26,
+      "class_success": 0,
+      "constraint_violation": 1,
+      "decision_count": 24,
+      "pending_compensation": 1,
+      "residual_side_effects": 0,
+      "runtime_forced_abort": 1,
+      "trace": [
+        {
+          "action": [
+            "COMPENSATE",
+            "C",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "FAILED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "A",
+            "alternate"
+          ],
+          "cost": 1,
+          "observation": "TIMEOUT",
+          "tick": 0
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 0
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 1
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 1
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 2
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 2
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 3
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "COMPENSATED",
+          "tick": 3
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "B",
+            "alternate"
+          ],
+          "cost": 1,
+          "observation": "TIMEOUT",
+          "tick": 3
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 3
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 4
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 4
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 5
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 5
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 6
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "COMPENSATED",
+          "tick": 6
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "C",
+            "alternate"
+          ],
+          "cost": 1,
+          "observation": "TIMEOUT",
+          "tick": 6
+        },
+        {
+          "action": [
+            "VERIFY",
+            "C"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 6
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 7
+        },
+        {
+          "action": [
+            "VERIFY",
+            "C"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 7
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 8
+        },
+        {
+          "action": [
+            "VERIFY",
+            "C"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 8
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 9
+        }
+      ]
+    },
+    "CostAware": {
+      "action_cost": 24,
+      "class_success": 0,
+      "constraint_violation": 0,
+      "decision_count": 24,
+      "pending_compensation": 0,
+      "residual_side_effects": 0,
+      "runtime_forced_abort": 1,
+      "trace": [
+        {
+          "action": [
+            "COMPENSATE",
+            "A",
+            "alternate"
+          ],
+          "cost": 1,
+          "observation": "TIMEOUT",
+          "tick": 0
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 0
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 1
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 1
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 2
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 2
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 3
+        },
+        {
+          "action": [
+            "VERIFY",
+            "A"
+          ],
+          "cost": 1,
+          "observation": "COMPENSATED",
+          "tick": 3
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "B",
+            "alternate"
+          ],
+          "cost": 1,
+          "observation": "TIMEOUT",
+          "tick": 3
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 3
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 4
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 4
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 5
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 5
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 6
+        },
+        {
+          "action": [
+            "VERIFY",
+            "B"
+          ],
+          "cost": 1,
+          "observation": "COMPENSATED",
+          "tick": 6
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "C",
+            "alternate"
+          ],
+          "cost": 1,
+          "observation": "TIMEOUT",
+          "tick": 6
+        },
+        {
+          "action": [
+            "VERIFY",
+            "C"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 6
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 7
+        },
+        {
+          "action": [
+            "VERIFY",
+            "C"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 7
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 8
+        },
+        {
+          "action": [
+            "VERIFY",
+            "C"
+          ],
+          "cost": 1,
+          "observation": "PENDING",
+          "tick": 8
+        },
+        {
+          "action": [
+            "WAIT"
+          ],
+          "cost": 1,
+          "observation": "WAITED",
+          "tick": 9
+        },
+        {
+          "action": [
+            "VERIFY",
+            "C"
+          ],
+          "cost": 1,
+          "observation": "COMPENSATED",
+          "tick": 9
+        }
+      ]
+    },
+    "Greedy": {
+      "action_cost": 27,
+      "class_success": 1,
+      "constraint_violation": 0,
+      "decision_count": 10,
+      "pending_compensation": 0,
+      "residual_side_effects": 0,
+      "runtime_forced_abort": 0,
+      "trace": [
+        {
+          "action": [
+            "COMPENSATE",
+            "C",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "FAILED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "C",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "FAILED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "C",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "COMPENSATED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "B",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "FAILED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "B",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "FAILED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "B",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "COMPENSATED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "A",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "FAILED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "A",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "FAILED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "COMPENSATE",
+            "A",
+            "primary"
+          ],
+          "cost": 3,
+          "observation": "COMPENSATED",
+          "tick": 0
+        },
+        {
+          "action": [
+            "ESCALATE"
+          ],
+          "cost": 0,
+          "observation": "ESCALATED",
+          "tick": 0
+        }
+      ]
+    }
+  },
+  "scenario_id": "d086|validation|df07|D3_DEPENDENT_ABORT|r2"
+}

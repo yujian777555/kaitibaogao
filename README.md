@@ -1,6 +1,14 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## 最新执行状态（2026-11-11，D-086 独立复审完成）
+## 最新执行状态（2026-11-11，D-086 非封顶模型与演化预注册）
+
+- **独立复审：** `88_D085_INDEPENDENT_REVIEW_D086.md` = ACCEPTED_WITH_LIMITATIONS，D-085 数据与封顶事实成立；旧环境的顺序、缓存重试和回执读取没有有效学习空间。
+- **新模型与锁：** `dependency_recovery.py` 实现公开依赖、备选路径、异构成本/可靠性提示、延迟回执及重复副作用。新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`，Test 未生成、未读取。
+- **固定策略门：** 8 个基线共 768 行；Greedy Train R3=18/18、成本14.00，Validation R3=6/6、成本15.17；AdaptiveProbe/CostAware 在 Validation 未封顶。没有固定方法在两个 split 共同支配其他方法，状态=CANDIDATE_SPACE_REVIEW_REQUIRED。
+- **已冻结：** `90_D086_EVOLUTION_PREREGISTRATION.md`，12 个体、6 代、5 seeds、每 arm/seed 84 候选和 6,048 episode-equivalent。基因、搜索、预算账本、NSGA-II/III 与可行性优先选择已实现专项测试；**实际演化实验仍未运行**。
+- **当前唯一下一任务：** 实现一次性实验运行器和原始结果/统计核验，然后仅按 90 号冻结配置运行 Train/Validation 探索。不得超过 Greedy、Random 或普通 NSGA 才称为改进。
+
+## D-086 Task 1 独立复审（历史状态）
 
 - **D-086 / Task 1：** `88_D085_INDEPENDENT_REVIEW_D086.md` = **ACCEPTED_WITH_LIMITATIONS**。96 行机制数据、192 行封顶数据和 manifest 均重新生成一致，Train/Validation family 无交集，未发现隐藏信息或 gold label 进入策略；基线回归 369/369。
 - **封顶根因：** 旧环境补偿相互独立，顺序不改变结果或成本；重试只返回缓存结果；验证只重读公开回执。旧 `policy_selected_escalation` 还混合 ESCALATE/STOP_SAFE，下一协议将拆分。不能据此主张演化学会了恢复排序。
