@@ -125,6 +125,10 @@ class D079ChallengeTests(unittest.TestCase):
         self.assertFalse(self.manifest["validation_included"])
         self.assertFalse(self.manifest["test_included"])
 
+    def test_manifest_matches_committed_lock(self):
+        gate = validate_manifest_lock(self.manifest)
+        self.assertTrue(gate["ok"], gate["problems"])
+
     def test_manifest_hash_is_deterministic(self):
         again = build_challenge_manifest()
         self.assertEqual(

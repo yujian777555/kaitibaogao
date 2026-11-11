@@ -429,6 +429,37 @@ def validate_challenge_manifest(manifest):
     return {"ok": not problems, "problems": sorted(set(problems))}
 
 
+def validate_manifest_lock(manifest, lock_path=None):
+    """Fail-closed check against the committed D-079 Train-only manifest lock."""
+    path = Path(lock_path) if lock_path is not None else Path(__file__).with_name("d079_manifest_lock.json")
+    problems = []
+    if not path.exists():
+        return {"ok": False, "problems": ["committed D-079 manifest lock is missing"]}
+    try:
+        lock = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return {"ok": False, "problems": [f"cannot read D-079 manifest lock: {exc}"]}
+    expected = {
+        "protocol_id": "D-079",
+        "generator_version": manifest.get("generator_version"),
+        "manifest_sha256": manifest.get("manifest_sha256"),
+        "scenario_count": manifest.get("scenario_count"),
+        "cluster_count": manifest.get("cluster_count"),
+        "family_count": manifest.get("family_count"),
+        "train_only": True,
+        "validation_included": False,
+        "test_included": False,
+        "test_outcomes_read": False,
+    }
+    for key, value in expected.items():
+        if lock.get(key) != value:
+            problems.append(f"manifest lock mismatch: {key}")
+    if lock.get("role_counts") != {"search": 144, "diagnostic": 144}:
+        problems.append("manifest lock role counts mismatch")
+    if lock.get("label_counts_by_role") != manifest.get("label_counts_by_role"):
+        problems.append("manifest lock label counts mismatch")
+    return {"ok": not problems, "problems": sorted(set(problems))}
+
 def write_manifest(manifest, outdir):
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)

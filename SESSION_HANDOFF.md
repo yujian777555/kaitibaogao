@@ -2403,3 +2403,13 @@ R4 = READY_FOR_INDEPENDENT_REVIEW。SBCG = IMPLEMENTED + SYNTHETIC TESTED，性�
 ### Hard boundaries
 
 No mixing with other repositories. No formal A-3b, locked Test, external benchmark Test, A800/ARWM, or real LLM API execution under the current D-079 authorization. Do not claim algorithmic uplift from D-078.
+
+## 2026-11-11 D-084 Handoff
+
+- Branch: `pilot-a-stateful-recovery`; previous head `c1246f847e49a2c3808cb961584743fe76c68794`.
+- D-079 v2 manifest SHA: `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`.
+- D-079 v2 independent audit passed: 288 Train rows, 48 clusters, 6 rows/cluster, 3 search + 3 diagnostic per cluster, 144/144 roles, all R1-R4, zero UNKNOWN and zero label disagreement, hash verified.
+- Lock file: `experiments/pilot_a3b/d079_manifest_lock.json`; regression now checks regenerated manifest against it.
+- D-079 remains Train-only and non-confirmatory; no optimizer execution or Test access authorized.
+- Paper 1: primary evolutionary baseline EvoTool (ACL 2026). Code-paper budget discrepancy documented: paper G=8/B=3 vs code default 90 generations. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- Next: verify CI for the lock commit; then prepare the exact EvoTool Qwen3-8B tau-bench reproduction preflight. Do not start model serving, paid API, A800, formal A-3b, or Test until explicit approval.

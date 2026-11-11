@@ -1532,3 +1532,11 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 - The D-078 pilot does not establish EC uplift. Do not write a positive results claim.
 - D-079 v1 manifest canonical SHA matched, but scenario-level `cluster_id` included the role while the 48-cluster registry did not. Reject the v1 manifest for locking.
 - Correct the manifest representation and add regression tests before creating any manifest lock. No optimizer, held-out Test, A800/ARWM, or real LLM API run is authorized by this decision.
+
+## D-084 — Freeze D-079 v2 Train-only manifest; audit EvoTool reproduction (2026-11-11)
+
+- D-079 v2 CI run 42952176661 passed. Independent artifact audit verified canonical manifest SHA `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`, 288 unique Train rows, 48 joinable clusters, 6 rows per cluster, 3 rows per role, 144/144 roles, all R1-R4, no UNKNOWN/disagreement, and no Validation/Test access.
+- Commit `experiments/pilot_a3b/d079_manifest_lock.json`; regression tests regenerate and match the lock.
+- D-079 lock is data-integrity only; it does not authorize optimizer execution.
+- EvoTool (ACL 2026) remains the primary evolutionary baseline. Its paper states G=8/B=3, while released code defaults to 90 generations; do not use defaults as a faithful reproduction. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- No A800/ARWM, real LLM API, formal A-3b, or held-out Test execution is authorized yet.

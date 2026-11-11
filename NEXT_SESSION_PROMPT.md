@@ -1229,3 +1229,17 @@ D-079 v1 is not locked. Correct the generator to v2 with scenario cluster IDs `f
 - After manifest integrity is restored, prepare a faithful EvoTool reproduction protocol. Wait for separate authorization before any experiment that crosses the current gates.
 
 Read `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`, `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`, and the latest handoff before acting.
+
+## D-084 continuation — 2026-11-11
+
+The D-079 v2 Train-only manifest is independently audited. Its canonical SHA is `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`; it contains 288 unique Train rows, 48 cluster IDs, six rows per cluster (three per role), 144 search + 144 diagnostic, all R1-R4 labels, zero UNKNOWN/disagreement, and no Validation/Test payload or outcome access. The lock is `experiments/pilot_a3b/d079_manifest_lock.json`. A regression test checks regenerated content against the lock.
+
+Paper 1 primary baseline is EvoTool ACL 2026. Important reproduction finding: the paper Appendix A.6 says G=8/B=3, but the released code default derives 90 generations from three epochs × 30 batches. Do not run the default and call it a faithful reproduction. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`; use the paper-faithful G=8 override only after authorization.
+
+Next actions:
+1. Verify CI for the D-084 lock commit.
+2. Inspect workflow result and confirm the lock regression test passed.
+3. Prepare, but do not execute, the EvoTool Qwen3-8B tau-bench reproduction preflight.
+4. Ask the user for explicit authorization before launching vLLM/A800, any real LLM API, formal A-3b optimizer, or held-out Test.
+
+Keep all work in `kaitibaogao`; do not merge other repositories. D-078 has no EC uplift; D-079 is Train-only diagnostic, not confirmatory.

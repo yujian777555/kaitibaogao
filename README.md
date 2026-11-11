@@ -925,3 +925,9 @@ SBCG 已实现五维安全目标、零容差硬约束、family×signature×safet
 - D-079 v2 generator/test correction is being prepared. No optimizer run is authorized.
 - Paper 1 working direction: contract-aware evolutionary recovery policies for stateful tool-using Agents. Primary evolutionary baseline: EvoTool (ACL 2026); see `82_PAPER1_BASELINE_AND_METHOD_CANDIDATE.md`.
 - Audit: `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`.
+
+## Paper 1 reproduction audit — 2026-11-11
+
+- D-079 v2 Train-only challenge manifest is independently audited and frozen; see `experiments/pilot_a3b/d079_manifest_lock.json` and `81_D079_MANIFEST_AUDIT_AND_CLUSTER_FIX.md`.
+- Paper 1 baseline: EvoTool (ACL 2026). Its paper/code generation budget must be reconciled: paper Appendix A.6 says G=8, while released defaults derive 90 generations. See `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
+- No EvoTool reproduction or formal A-3b optimizer run has been launched; current execution authorization remains unchanged.
