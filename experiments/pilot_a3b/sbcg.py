@@ -137,16 +137,16 @@ class EliteArchive:
         }
 
 
-def select_validation_candidate(records):
-    """Validation-only feasibility -> Pareto -> coverage -> worst-family selection."""
+def _select_candidate(records, required_split):
     if not records:
         return {
             "status": "HOLD", "candidate": None,
-            "reason": "no Validation candidates",
-            "rule": "Validation feasibility gate; no candidate available",
+            "reason": f"no {required_split} candidates",
+            "rule": f"{required_split} feasibility gate; no candidate available",
         }
-    if any(record.source_split != "validation" for record in records):
-        raise ValueError("Validation selector accepts Validation-evaluated candidates only")
+    if any(record.source_split != required_split for record in records):
+        split_label = required_split.capitalize()
+        raise ValueError(f"{split_label} selector accepts {split_label}-evaluated candidates only")
     feasible = [record for record in records if record.feasible]
     if not feasible:
         return {
@@ -169,6 +169,16 @@ def select_validation_candidate(records):
         "candidate": chosen,
         "rule": "feasible Pareto; family coverage; worst-family CondRecSucc; frozen lexicographic tie-break",
     }
+
+
+def select_validation_candidate(records):
+    """Validation-only feasibility -> Pareto -> coverage -> worst-family selection."""
+    return _select_candidate(records, "validation")
+
+
+def select_train_diagnostic_candidate(records):
+    """Apply the same frozen rule to Train diagnostic candidates only."""
+    return _select_candidate(records, "train")
 
 
 def fsm_fingerprint(fsm):

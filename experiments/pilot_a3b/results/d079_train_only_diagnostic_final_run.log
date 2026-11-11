@@ -1,0 +1,9 @@
+{
+  "status": "EXECUTED_TRAIN_ONLY_EXPLORATORY_NO_TEST",
+  "run_count": 42,
+  "algorithm_count": 14,
+  "manifest_sha256": "cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa",
+  "search_budget": 6912,
+  "outdir": "experiments/pilot_a3b/results/d079_train_only_diagnostic_final",
+  "test_outcomes_read": false
+}

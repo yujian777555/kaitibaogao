@@ -1,0 +1,1405 @@
+algorithm,seed,family_id,composition,robust_label,n,class_success,mean_avoidable_harm_corrected,mean_actual_harm_corrected,mean_action_count,duplicate_rate,sla_violation_rate,invariant_violation_rate
+A,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+A,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+AB,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Hand FSM,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-II,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Matched-objective NSGA-III,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-II,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+NSGA-III,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Random,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+Rule-based,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M1,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,411,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,522,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_calendar__notification__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_customer__inventory__ledger,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,single_timeout,R1,3,1.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,1.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M2,633,tf_payment__ledger__shipment,triple_mixed,R1,3,1.0,0.0,0.0,9.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,independent_mixed_val,R1,3,0.0,1.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,partial_comp_failure,R4,3,0.0,0.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,partial_then_delay,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,single_timeout,R1,3,0.0,1.0,1.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_calendar__notification__shipment,triple_mixed,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,independent_mixed_val,R1,3,0.0,2.0,2.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,partial_comp_failure,R4,3,0.0,0.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,partial_then_delay,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,single_timeout,R1,3,0.0,1.0,1.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_customer__inventory__ledger,triple_mixed,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,0.0,0.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,partial_then_delay,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,single_timeout,R1,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_inventory__shipment__subscription,triple_mixed,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,independent_mixed_val,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,partial_comp_failure,R4,3,0.0,0.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,partial_then_delay,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,single_timeout,R1,3,0.0,1.0,1.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,411,tf_payment__ledger__shipment,triple_mixed,R1,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,independent_mixed_val,R1,3,0.0,0.0,0.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,partial_then_delay,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,single_timeout,R1,3,0.0,1.0,1.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_calendar__notification__shipment,triple_mixed,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,independent_mixed_val,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,partial_then_delay,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,single_timeout,R1,3,0.0,1.0,1.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_customer__inventory__ledger,triple_mixed,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,partial_then_delay,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,single_timeout,R1,3,0.0,0.0,0.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_inventory__shipment__subscription,triple_mixed,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,independent_mixed_val,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,partial_then_delay,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,schema_then_timeout,R1,3,0.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,single_timeout,R1,3,0.0,1.0,1.0,7.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,522,tf_payment__ledger__shipment,triple_mixed,R1,3,0.0,0.0,0.0,5.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,independent_mixed_val,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,8.666666666666666,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,9.333333333333334,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,schema_then_timeout,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,single_timeout,R1,3,1.0,0.0,0.0,8.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_calendar__notification__shipment,triple_mixed,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,independent_mixed_val,R1,3,0.0,2.0,2.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,partial_comp_failure,R4,3,1.0,0.0,1.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,partial_then_delay,R2,3,1.0,0.0,0.0,8.666666666666666,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,partial_then_timeout_val,R2,3,1.0,0.0,0.0,9.333333333333334,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,schema_then_timeout,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,single_timeout,R1,3,1.0,0.0,0.0,7.333333333333333,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_customer__inventory__ledger,triple_mixed,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,independent_mixed_val,R1,3,0.0,0.0,0.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,partial_comp_failure,R4,3,1.0,0.0,1.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,partial_then_delay,R2,3,1.0,0.0,0.0,9.333333333333334,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,partial_then_timeout_val,R2,3,1.0,0.0,0.0,9.333333333333334,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,schema_then_timeout,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,single_timeout,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_inventory__shipment__subscription,triple_mixed,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,independent_mixed_val,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,partial_comp_failure,R4,3,1.0,0.0,1.0,6.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,partial_then_delay,R2,3,1.0,0.0,0.0,9.333333333333334,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,partial_then_timeout_val,R2,3,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,permission_after_compensatable_prefix,R3,3,0.0,1.0,1.0,4.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,schema_then_timeout,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,single_timeout,R1,3,1.0,0.0,0.0,6.666666666666667,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,timeout_then_rate_limit,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0
+SBCG-NSGA-III-no-M3,633,tf_payment__ledger__shipment,triple_mixed,R1,3,0.0,1.0,1.0,27.0,0.0,0.0,0.0

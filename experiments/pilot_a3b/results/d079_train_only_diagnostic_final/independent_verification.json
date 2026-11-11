@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "run_count": 42,
+  "scenario_row_count": 4320,
+  "budget_violations": 0,
+  "cache_accounting_violations": 0,
+  "diagnostic_role_violations": 0,
+  "summary_recompute_mismatches": 0,
+  "sbcg_minus_hand_cond_rec_mean": -0.5520833333333334,
+  "sbcg_minus_hand_damage_containment_mean": 0.6666666666666666,
+  "sbcg_minus_hand_constraint_violation_mean": -0.14583333333333334,
+  "sbcg_minus_hand_per_seed_cond_rec": {
+    "411": -0.3125,
+    "522": -0.5625,
+    "633": -0.78125
+  },
+  "method": "independent final CSV-to-summary recomputation; no Test or Validation access"
+}

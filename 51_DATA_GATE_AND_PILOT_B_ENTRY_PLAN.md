@@ -378,3 +378,14 @@ D-081 已推送到 `pilot-a-stateful-recovery`：`192f958847fb31d7d704cfa0760201
 **唯一下一任务：** 核验 D-081 regression CI。成功后检查 D-079 D-078 audit artifacts 与 288-scenario Train-only challenge manifest，审查 R1-R4 分布、UNKNOWN/label disagreement、scenario ID、search/diagnostic 配对及 manifest SHA，再提交 manifest lock。manifest lock 前禁止运行新优化器。
 
 **HOLD：** 正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge。
+
+
+## 17. D-082 数据门禁与挑战集冻结结果（2026-11-11）
+
+D-081 corrective CI 已成功：run 42828590264 @192f958，318/318 tests。D-078 原始 artifact 未覆盖；D-079 独立复算、288 场景挑战集与 manifest lock 均已完成。
+
+挑战集只含 Train：8 families×6 difficulty strata×3 repeats×Search/Diagnostic=288 scenarios；无 Validation/Test；0 UNKNOWN；robust/analytic disagreement=0。manifest 内容 SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`，raw-file SHA=`0072550d432d306d4c02912bebaaa4a4756edb33a68c962cf59e9fb198d6c152`，scenario-ID SHA=`4d7b19605155bdbfde61216ecfda6019f09d78a76fa7162fd16c18496114ec99`。
+
+在 lock 通过后已运行 Train-only 14-arm×3-seed exploratory diagnostic。SBCG 未超过 Hand/Rule-based，且 matched NSGA-II 差异不支持提升；当前算法整体 NO-GO。该诊断不等于 Pilot B、正式 A-3b、UndoBench/ToolMisuseBench 或真实 LLM 验证。
+
+**Pilot B 与真实 Test 继续 HOLD。** 下一步先做 R4 独立复审；算法侧只允许预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融与新挑战划分，不得在同一 Diagnostic 上反复调参。

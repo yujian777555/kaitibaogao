@@ -1,18 +1,14 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-> **最新权威状态（2026-11-11，D-082 maintenance sync）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；D-081 代码修正提交 `192f958847fb31d7d704cfa0760201dcd8371e32`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。本次文档同步前远端 HEAD=`aa8fea16d5293611a6360992318222953d348650`，ahead 257 / behind 0；本次 handoff refresh 会再产生一个文档提交。接管时必须动态查询最终 HEAD、ahead/behind 和 CI。
+> **最新权威状态（2026-11-11，D-082 执行完成）：** 唯一仓库 yujian777555/kaitibaogao；工作分支 pilot-a-stateful-recovery；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。D-081 corrective CI run 42828590264 @192f958 已 success（28+290=318 tests）。D-078 已独立复算 42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；robust/analytic disagreement=0。
 >
-> **D-078：** 14 arms × 3 seeds = 42 runs；Train=216、Validation=108；Test outcomes 未读取，LLM API=0。原始 artifact 不得覆盖。D-078 workflow 已改为 workflow_dispatch only。
+> **D-079 挑战集已锁定：** 288 Train-only scenarios（Search/Diagnostic 各144），8 families×6 strata×3 repeats×2 roles；0 UNKNOWN；内容 SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`；lock 篡改测试通过。
 >
-> **D-079 首轮 CI：** regression run 42827879313 failure，282 tests 后仅 D079 challenge generator 的 family contract 假设阻断；D-078 workflow run 42827879133 在全量测试 preflight 失败，算法执行步骤 skipped，没有新算法数据。
+> **算法诊断已实际运行：** 14 arms×3 seeds=42 runs；SBCG 相对 Hand 的 CondRecSucc 配对均值 −0.5521，R4 containment +0.6667，constraint violation −0.1458。没有整体提升，当前 SBCG=NO-GO；所有臂 R3 CorrectEscalation=0。详见 81_D082_EXECUTION_AND_TRAIN_ONLY_DIAGNOSTIC.md。
 >
-> **D-081 已推送：** D6 允许通过 runtime compensation unavailable 表达 R4，不要求每个 Train family 都同时有 contract-level compensatable/uncompensatable 工具；新增 D6 回归测试；D-078 workflow 改为手动触发。D-081 combined status 当前无 checks，corrective CI 尚未确认成功。
+> **当前唯一任务：** 提交 R4 独立复审；算法侧只能预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融和新挑战划分，不得在同一 Diagnostic 上反复调参。
 >
-> **当前唯一任务：** 核验 D-081 regression Actions run；CI 通过后审查 D-079 D-078 audit 与 288-scenario Train-only manifest，复核 label/count/pairing/hash 并提交 manifest lock。manifest lock 之前禁止运行新优化器。
->
-> **挑战集候选：** 8 Train-only families × 6 difficulty strata × 3 repeats × search/diagnostic = 288 scenarios；search/diagnostic 各144，全部 split=train，不生成 Validation/Test。
->
-> **授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。D-076 R4 technical-missing power 与 pre-run/post-run lifecycle 问题仍需独立核验。
+> **授权边界：** 不运行正式 A-3b，不读 Test，不启动 Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST 或 ThinkingBox；不合并 main。保留 D-078 与 D-079 首次/最终诊断原始 artifact。
 >
 > **维护纪律：** 每次实质性研究、代码、实验、协议、审计或决策变化，同轮更新 NEXT_SESSION_PROMPT.md、SESSION_HANDOFF.md、05_DECISION_LOG.md、README.md 和 51 号计划。每次回复报告 canonical handoff 是否更新并提供 GitHub 文件链接。
 
@@ -1196,3 +1192,16 @@ Only next task: independent R4 review. After ACCEPTED + advisor MDE approval + e
 - Current branch comparison before this prompt refresh: ahead 257 / behind 0; main remains `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`.
 - **唯一下一任务：** verify the regression Actions run for D-081. After CI passes, inspect D-079 audit artifacts and the 288-row Train-only challenge manifest; verify R1-R4 labels, UNKNOWN/disagreement, counts, search/diagnostic pairing, IDs and SHA-256; then commit the manifest lock. Do not run a new optimizer before the manifest lock.
 - Formal A-3b, Test, Pilot B, A800/ARWM, real LLM API, UndoBench TEST, ThinkingBox and main merge remain HOLD.
+
+
+## 2026-11-11 — D-082 completed: challenge locked, Train-only diagnostic = NO-GO
+
+Read first: `81_D082_EXECUTION_AND_TRAIN_ONLY_DIAGNOSTIC.md` and the D-079 result artifacts.
+
+Verified D-081 CI: run 42828590264 @192f958, success, 318/318. D-078 independently recomputed: 42 runs, 32/42 Hand-selected, 33/42 Hand in Validation Pareto front, zero robust/analytic disagreements. Successful intended active effects are no longer counted as harm; R4 unavoidable residual enters the minimum-harm bound.
+
+D-079 challenge: 288 Train-only scenarios, 144 Search + 144 Diagnostic, eight families, six strata, three repeats, zero UNKNOWN, unique IDs/seeds. Manifest content SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`; raw-file SHA=`0072550d432d306d4c02912bebaaa4a4756edb33a68c962cf59e9fb198d6c152`; scenario-ID SHA=`4d7b19605155bdbfde61216ecfda6019f09d78a76fa7162fd16c18496114ec99`. Lock and tamper tests pass.
+
+The locked Train-only diagnostic actually ran 14 arms x 3 seeds = 42 runs. SBCG minus Hand: CondRecSucc −0.5521, R4 containment +0.6667, constraint violation −0.1458. SBCG minus matched NSGA-II CondRecSucc −0.0104. No overall uplift; current SBCG is NO-GO. Every arm has R3 CorrectEscalation=0. Initial and final diagnostic artifacts are preserved; independent CSV recomputation found zero mismatches.
+
+Only next task: independent R4 review. For the algorithm, preregister exactly one R3 mechanism revision—prefix rollback/compensation before escalation—with its own ablation and a fresh challenge split. Do not tune repeatedly on the same Diagnostic role. Formal A-3b, Test access, Pilot B, A800/ARWM, real LLM APIs, UndoBench TEST, ThinkingBox, and main merges remain forbidden.

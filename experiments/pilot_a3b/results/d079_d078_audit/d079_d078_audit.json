@@ -1,0 +1,1479 @@
+{
+  "algorithm_count": 14,
+  "arms": {
+    "A": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "AB": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "Hand FSM": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "Matched-objective NSGA-II": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "Matched-objective NSGA-III": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "NSGA-II": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "NSGA-III": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "Random": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "Reflection": {
+      "corrected_actual_harm_per_scenario": null,
+      "corrected_avoidable_harm_per_scenario": null,
+      "corrected_class_success": null,
+      "duplicate_rate": null,
+      "hand_in_pareto_front_count": 0,
+      "invariant_violation_rate": null,
+      "mean_action_count": null,
+      "runs": 3,
+      "selected_hand_count": 0,
+      "sla_violation_rate": null,
+      "unique_selected_fingerprints": 0
+    },
+    "Rule-based": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 0,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 0,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "SBCG-NSGA-III": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "SBCG-NSGA-III-no-M1": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 2,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 2
+    },
+    "SBCG-NSGA-III-no-M2": {
+      "corrected_actual_harm_per_scenario": 0.2222222222222222,
+      "corrected_avoidable_harm_per_scenario": 0.1111111111111111,
+      "corrected_class_success": 0.8888888888888888,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 3,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 6.75,
+      "runs": 3,
+      "selected_hand_count": 3,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 1
+    },
+    "SBCG-NSGA-III-no-M3": {
+      "corrected_actual_harm_per_scenario": 0.5462962962962963,
+      "corrected_avoidable_harm_per_scenario": 0.4351851851851852,
+      "corrected_class_success": 0.17592592592592593,
+      "duplicate_rate": 0.0,
+      "hand_in_pareto_front_count": 0,
+      "invariant_violation_rate": 0.0,
+      "mean_action_count": 10.037037037037036,
+      "runs": 3,
+      "selected_hand_count": 0,
+      "sla_violation_rate": 0.0,
+      "unique_selected_fingerprints": 3
+    }
+  },
+  "git_head": "d12d0283f90e764ced05760ea2e06f7131f65d35",
+  "hand_primary_scenario_count": 252,
+  "hand_primary_success": 1.0,
+  "hand_r3_correct_escalation": 0.0,
+  "hand_r3_scenario_count": 36,
+  "hand_r4_damage_containment": 1.0,
+  "hand_r4_scenario_count": 36,
+  "label_disagreements": [],
+  "manifest_sha256": "3ce3f49e2a4fa09f03d1ca1411e9bd9ac566dfbd223935c4915ca4ac1caa9298",
+  "matrix_version": "sbcg-14-arm-train-validation-v1",
+  "robust_vs_analytic_label_disagreements": 0,
+  "run_count": 42,
+  "run_summaries": [
+    {
+      "algorithm": "Hand FSM",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Random",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Rule-based",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 1), (('TIMEOUT', 0, True), 'WAIT', 1), (('TIMEOUT', 1, False), 'WAIT', 1), (('TIMEOUT', 1, True), 'WAIT', 1), (('TIMEOUT', 2, False), 'WAIT', 1), (('TIMEOUT', 2, True), 'WAIT', 1), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, True)",
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Reflection",
+      "corrected_class_success": {},
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 0,
+      "robust_label_counts": {},
+      "seed": 411,
+      "selected_fsm_fingerprint": null,
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": null,
+        "cond_rec": null,
+        "containment": null,
+        "corr_esc": null,
+        "dup": null,
+        "sla_viol": null,
+        "unnec_actions_r12": null,
+        "violations": null
+      },
+      "validation_rows": 0
+    },
+    {
+      "algorithm": "NSGA-II",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Matched-objective NSGA-II",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 8,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Matched-objective NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 8,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "A",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 6,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "AB",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 6,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 9,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M1",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 13,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M2",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 10,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M3",
+      "corrected_class_success": {
+        "R1": 0.0,
+        "R2": 0.0,
+        "R3": 0.0,
+        "R4": 0.0
+      },
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 4,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 411,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'ROLLBACK', 1), (('COMMITTED', 0, True), 'VERIFY', 1), (('COMMITTED', 1, False), 'ESCALATE', 2), (('COMMITTED', 1, True), 'VERIFY', 3), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'ESCALATE', 1), (('COMPENSATED', 0, False), 'STOP_SAFE', 2), (('COMPENSATED', 0, True), 'ESCALATE', 1), (('COMPENSATED', 1, False), 'STOP_SAFE', 1), (('COMPENSATED', 1, True), 'WAIT', 3), (('COMPENSATED', 2, False), 'VERIFY', 3), (('COMPENSATED', 2, True), 'VERIFY', 4), (('COMP_FAILED', 0, False), 'WAIT', 3), (('COMP_FAILED', 0, True), 'COMPENSATE', 4), (('COMP_FAILED', 1, False), 'RETRY', 4), (('COMP_FAILED', 1, True), 'RETRY', 1), (('COMP_FAILED', 2, False), 'VERIFY', 2), (('COMP_FAILED', 2, True), 'STOP_SAFE', 3), (('DUPLICATE', 0, False), 'WAIT', 3), (('DUPLICATE', 0, True), 'VERIFY', 2), (('DUPLICATE', 1, False), 'VERIFY', 2), (('DUPLICATE', 1, True), 'STOP_SAFE', 4), (('DUPLICATE', 2, False), 'ESCALATE', 4), (('DUPLICATE', 2, True), 'ROLLBACK', 1), (('NOOP', 0, False), 'WAIT', 4), (('NOOP', 0, True), 'VERIFY', 4), (('NOOP', 1, False), 'STOP_SAFE', 4), (('NOOP', 1, True), 'VERIFY', 4), (('NOOP', 2, False), 'RETRY', 3), (('NOOP', 2, True), 'ROLLBACK', 4), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'ROLLBACK', 4), (('NOT_COMMITTED', 1, False), 'RETRY', 3), (('NOT_COMMITTED', 1, True), 'VERIFY', 2), (('NOT_COMMITTED', 2, False), 'WAIT', 3), (('NOT_COMMITTED', 2, True), 'COMPENSATE', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'ESCALATE', 3), (('PARTIAL', 1, False), 'COMPENSATE', 1), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 3), (('PARTIAL', 2, True), 'COMPENSATE', 3), (('PERMISSION', 0, False), 'ESCALATE', 4), (('PERMISSION', 0, True), 'ESCALATE', 3), (('PERMISSION', 1, False), 'ESCALATE', 4), (('PERMISSION', 1, True), 'ESCALATE', 4), (('PERMISSION', 2, False), 'ESCALATE', 3), (('PERMISSION', 2, True), 'ESCALATE', 3), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'RETRY', 2), (('RATE_LIMIT', 1, True), 'STOP_SAFE', 4), (('RATE_LIMIT', 2, False), 'VERIFY', 3), (('RATE_LIMIT', 2, True), 'COMPENSATE', 1), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 1), (('SCHEMA', 1, True), 'ESCALATE', 3), (('SCHEMA', 2, False), 'REPAIR', 1), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'WAIT', 3), (('START', 0, True), 'WAIT', 2), (('START', 1, False), 'WAIT', 4), (('START', 1, True), 'ROLLBACK', 3), (('START', 2, False), 'RETRY', 4), (('START', 2, True), 'WAIT', 2), (('TIMEOUT', 0, False), 'VERIFY', 1), (('TIMEOUT', 0, True), 'VERIFY', 1), (('TIMEOUT', 1, False), 'STOP_SAFE', 1), (('TIMEOUT', 1, True), 'ROLLBACK', 1), (('TIMEOUT', 2, False), 'ROLLBACK', 3), (('TIMEOUT', 2, True), 'ROLLBACK', 2), (('WAITED', 0, False), 'VERIFY', 4), (('WAITED', 0, True), 'ESCALATE', 4), (('WAITED', 1, False), 'VERIFY', 1), (('WAITED', 1, True), 'COMPENSATE', 4), (('WAITED', 2, False), 'ESCALATE', 1), (('WAITED', 2, True), 'STOP_SAFE', 1)), 'VERIFY', 1, False, False)",
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 0.5277777777777778,
+        "cond_rec": 0.0,
+        "containment": 0.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.0,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Hand FSM",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Random",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Rule-based",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 1), (('TIMEOUT', 0, True), 'WAIT', 1), (('TIMEOUT', 1, False), 'WAIT', 1), (('TIMEOUT', 1, True), 'WAIT', 1), (('TIMEOUT', 2, False), 'WAIT', 1), (('TIMEOUT', 2, True), 'WAIT', 1), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, True)",
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Reflection",
+      "corrected_class_success": {},
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 0,
+      "robust_label_counts": {},
+      "seed": 522,
+      "selected_fsm_fingerprint": null,
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": null,
+        "cond_rec": null,
+        "containment": null,
+        "corr_esc": null,
+        "dup": null,
+        "sla_viol": null,
+        "unnec_actions_r12": null,
+        "violations": null
+      },
+      "validation_rows": 0
+    },
+    {
+      "algorithm": "NSGA-II",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Matched-objective NSGA-II",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 7,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Matched-objective NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 6,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "A",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 4,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "AB",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 6,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 12,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M1",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 7,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M2",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 7,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M3",
+      "corrected_class_success": {
+        "R1": 0.0,
+        "R2": 0.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 7,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 522,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'WAIT', 3), (('COMMITTED', 0, True), 'VERIFY', 4), (('COMMITTED', 1, False), 'RETRY', 3), (('COMMITTED', 1, True), 'RETRY', 2), (('COMMITTED', 2, False), 'VERIFY', 2), (('COMMITTED', 2, True), 'ESCALATE', 3), (('COMPENSATED', 0, False), 'VERIFY', 4), (('COMPENSATED', 0, True), 'STOP_SAFE', 1), (('COMPENSATED', 1, False), 'VERIFY', 3), (('COMPENSATED', 1, True), 'RETRY', 2), (('COMPENSATED', 2, False), 'ESCALATE', 2), (('COMPENSATED', 2, True), 'ESCALATE', 2), (('COMP_FAILED', 0, False), 'VERIFY', 4), (('COMP_FAILED', 0, True), 'VERIFY', 4), (('COMP_FAILED', 1, False), 'WAIT', 2), (('COMP_FAILED', 1, True), 'ROLLBACK', 3), (('COMP_FAILED', 2, False), 'ESCALATE', 4), (('COMP_FAILED', 2, True), 'VERIFY', 2), (('DUPLICATE', 0, False), 'VERIFY', 3), (('DUPLICATE', 0, True), 'ESCALATE', 4), (('DUPLICATE', 1, False), 'ROLLBACK', 1), (('DUPLICATE', 1, True), 'STOP_SAFE', 4), (('DUPLICATE', 2, False), 'VERIFY', 1), (('DUPLICATE', 2, True), 'RETRY', 2), (('NOOP', 0, False), 'ESCALATE', 1), (('NOOP', 0, True), 'ESCALATE', 3), (('NOOP', 1, False), 'ESCALATE', 3), (('NOOP', 1, True), 'RETRY', 3), (('NOOP', 2, False), 'VERIFY', 1), (('NOOP', 2, True), 'VERIFY', 3), (('NOT_COMMITTED', 0, False), 'RETRY', 1), (('NOT_COMMITTED', 0, True), 'COMPENSATE', 1), (('NOT_COMMITTED', 1, False), 'COMPENSATE', 4), (('NOT_COMMITTED', 1, True), 'WAIT', 1), (('NOT_COMMITTED', 2, False), 'STOP_SAFE', 4), (('NOT_COMMITTED', 2, True), 'ROLLBACK', 4), (('PARTIAL', 0, False), 'COMPENSATE', 3), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 4), (('PARTIAL', 2, True), 'COMPENSATE', 3), (('PERMISSION', 0, False), 'STOP_SAFE', 3), (('PERMISSION', 0, True), 'STOP_SAFE', 1), (('PERMISSION', 1, False), 'STOP_SAFE', 2), (('PERMISSION', 1, True), 'ESCALATE', 4), (('PERMISSION', 2, False), 'STOP_SAFE', 3), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 2), (('RATE_LIMIT', 0, True), 'STOP_SAFE', 1), (('RATE_LIMIT', 1, False), 'VERIFY', 1), (('RATE_LIMIT', 1, True), 'ROLLBACK', 3), (('RATE_LIMIT', 2, False), 'RETRY', 1), (('RATE_LIMIT', 2, True), 'VERIFY', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 3), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'ESCALATE', 2), (('SCHEMA', 2, True), 'STOP_SAFE', 3), (('START', 0, False), 'WAIT', 2), (('START', 0, True), 'VERIFY', 3), (('START', 1, False), 'WAIT', 1), (('START', 1, True), 'COMPENSATE', 3), (('START', 2, False), 'ESCALATE', 1), (('START', 2, True), 'STOP_SAFE', 2), (('TIMEOUT', 0, False), 'WAIT', 1), (('TIMEOUT', 0, True), 'ESCALATE', 1), (('TIMEOUT', 1, False), 'COMPENSATE', 2), (('TIMEOUT', 1, True), 'COMPENSATE', 4), (('TIMEOUT', 2, False), 'ROLLBACK', 2), (('TIMEOUT', 2, True), 'COMPENSATE', 3), (('WAITED', 0, False), 'RETRY', 3), (('WAITED', 0, True), 'ESCALATE', 2), (('WAITED', 1, False), 'WAIT', 1), (('WAITED', 1, True), 'ESCALATE', 1), (('WAITED', 2, False), 'STOP_SAFE', 1), (('WAITED', 2, True), 'ESCALATE', 3)), 'ESCALATE', 1, False, False)",
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 0.19444444444444445,
+        "cond_rec": 0.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 3.75,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Hand FSM",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Random",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Rule-based",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 1), (('TIMEOUT', 0, True), 'WAIT', 1), (('TIMEOUT', 1, False), 'WAIT', 1), (('TIMEOUT', 1, True), 'WAIT', 1), (('TIMEOUT', 2, False), 'WAIT', 1), (('TIMEOUT', 2, True), 'WAIT', 1), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, True)",
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Reflection",
+      "corrected_class_success": {},
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 0,
+      "robust_label_counts": {},
+      "seed": 633,
+      "selected_fsm_fingerprint": null,
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": null,
+        "cond_rec": null,
+        "containment": null,
+        "corr_esc": null,
+        "dup": null,
+        "sla_viol": null,
+        "unnec_actions_r12": null,
+        "violations": null
+      },
+      "validation_rows": 0
+    },
+    {
+      "algorithm": "NSGA-II",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 1,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Matched-objective NSGA-II",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 7,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "Matched-objective NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 7,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "A",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 4,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "AB",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 5,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 10,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M1",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 9,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 1), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M2",
+      "corrected_class_success": {
+        "R1": 1.0,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": true,
+      "pareto_candidate_count": 9,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'STOP_SAFE', 2), (('COMMITTED', 0, True), 'STOP_SAFE', 2), (('COMMITTED', 1, False), 'STOP_SAFE', 2), (('COMMITTED', 1, True), 'STOP_SAFE', 2), (('COMMITTED', 2, False), 'STOP_SAFE', 2), (('COMMITTED', 2, True), 'STOP_SAFE', 2), (('COMPENSATED', 0, False), 'RETRY', 2), (('COMPENSATED', 0, True), 'ROLLBACK', 2), (('COMPENSATED', 1, False), 'RETRY', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 2), (('COMPENSATED', 2, False), 'RETRY', 2), (('COMPENSATED', 2, True), 'ROLLBACK', 2), (('COMP_FAILED', 0, False), 'ESCALATE', 2), (('COMP_FAILED', 0, True), 'ESCALATE', 2), (('COMP_FAILED', 1, False), 'ESCALATE', 2), (('COMP_FAILED', 1, True), 'ESCALATE', 2), (('COMP_FAILED', 2, False), 'ESCALATE', 2), (('COMP_FAILED', 2, True), 'ESCALATE', 2), (('DUPLICATE', 0, False), 'ESCALATE', 2), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 2), (('DUPLICATE', 1, True), 'ESCALATE', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'ESCALATE', 2), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 2), (('NOOP', 1, False), 'VERIFY', 2), (('NOOP', 1, True), 'VERIFY', 2), (('NOOP', 2, False), 'VERIFY', 2), (('NOOP', 2, True), 'VERIFY', 2), (('NOT_COMMITTED', 0, False), 'RETRY', 2), (('NOT_COMMITTED', 0, True), 'RETRY', 2), (('NOT_COMMITTED', 1, False), 'RETRY', 2), (('NOT_COMMITTED', 1, True), 'RETRY', 2), (('NOT_COMMITTED', 2, False), 'RETRY', 2), (('NOT_COMMITTED', 2, True), 'RETRY', 2), (('PARTIAL', 0, False), 'COMPENSATE', 2), (('PARTIAL', 0, True), 'COMPENSATE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 2), (('PARTIAL', 1, True), 'COMPENSATE', 2), (('PARTIAL', 2, False), 'COMPENSATE', 2), (('PARTIAL', 2, True), 'COMPENSATE', 2), (('PERMISSION', 0, False), 'ESCALATE', 2), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 2), (('PERMISSION', 2, False), 'ESCALATE', 2), (('PERMISSION', 2, True), 'ESCALATE', 2), (('RATE_LIMIT', 0, False), 'WAIT', 3), (('RATE_LIMIT', 0, True), 'WAIT', 3), (('RATE_LIMIT', 1, False), 'WAIT', 3), (('RATE_LIMIT', 1, True), 'WAIT', 3), (('RATE_LIMIT', 2, False), 'WAIT', 3), (('RATE_LIMIT', 2, True), 'WAIT', 3), (('SCHEMA', 0, False), 'REPAIR', 2), (('SCHEMA', 0, True), 'REPAIR', 2), (('SCHEMA', 1, False), 'REPAIR', 2), (('SCHEMA', 1, True), 'REPAIR', 2), (('SCHEMA', 2, False), 'REPAIR', 2), (('SCHEMA', 2, True), 'REPAIR', 2), (('START', 0, False), 'RETRY', 2), (('START', 0, True), 'RETRY', 2), (('START', 1, False), 'RETRY', 2), (('START', 1, True), 'RETRY', 2), (('START', 2, False), 'RETRY', 2), (('START', 2, True), 'RETRY', 2), (('TIMEOUT', 0, False), 'WAIT', 4), (('TIMEOUT', 0, True), 'WAIT', 4), (('TIMEOUT', 1, False), 'WAIT', 4), (('TIMEOUT', 1, True), 'WAIT', 4), (('TIMEOUT', 2, False), 'WAIT', 4), (('TIMEOUT', 2, True), 'WAIT', 4), (('WAITED', 0, False), 'VERIFY', 2), (('WAITED', 0, True), 'VERIFY', 2), (('WAITED', 1, False), 'VERIFY', 2), (('WAITED', 1, True), 'VERIFY', 2), (('WAITED', 2, False), 'VERIFY', 2), (('WAITED', 2, True), 'VERIFY', 2)), 'ESCALATE', 2, False, False)",
+      "selected_fsm_is_hand": true,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 2.4444444444444446,
+        "cond_rec": 1.0,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 4.392857142857143,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    },
+    {
+      "algorithm": "SBCG-NSGA-III-no-M3",
+      "corrected_class_success": {
+        "R1": 0.15,
+        "R2": 1.0,
+        "R3": 0.0,
+        "R4": 1.0
+      },
+      "hand_present_in_validation_pareto_front": false,
+      "pareto_candidate_count": 7,
+      "robust_label_counts": {
+        "R1": 60,
+        "R2": 24,
+        "R3": 12,
+        "R4": 12
+      },
+      "seed": 633,
+      "selected_fsm_fingerprint": "(((('COMMITTED', 0, False), 'WAIT', 2), (('COMMITTED', 0, True), 'ROLLBACK', 4), (('COMMITTED', 1, False), 'VERIFY', 4), (('COMMITTED', 1, True), 'VERIFY', 1), (('COMMITTED', 2, False), 'WAIT', 1), (('COMMITTED', 2, True), 'STOP_SAFE', 3), (('COMPENSATED', 0, False), 'RETRY', 4), (('COMPENSATED', 0, True), 'ROLLBACK', 3), (('COMPENSATED', 1, False), 'ESCALATE', 2), (('COMPENSATED', 1, True), 'ROLLBACK', 1), (('COMPENSATED', 2, False), 'RETRY', 1), (('COMPENSATED', 2, True), 'STOP_SAFE', 4), (('COMP_FAILED', 0, False), 'VERIFY', 1), (('COMP_FAILED', 0, True), 'VERIFY', 3), (('COMP_FAILED', 1, False), 'COMPENSATE', 1), (('COMP_FAILED', 1, True), 'STOP_SAFE', 3), (('COMP_FAILED', 2, False), 'VERIFY', 4), (('COMP_FAILED', 2, True), 'COMPENSATE', 4), (('DUPLICATE', 0, False), 'STOP_SAFE', 1), (('DUPLICATE', 0, True), 'ESCALATE', 2), (('DUPLICATE', 1, False), 'ESCALATE', 1), (('DUPLICATE', 1, True), 'RETRY', 2), (('DUPLICATE', 2, False), 'ESCALATE', 2), (('DUPLICATE', 2, True), 'STOP_SAFE', 4), (('NOOP', 0, False), 'VERIFY', 2), (('NOOP', 0, True), 'VERIFY', 3), (('NOOP', 1, False), 'VERIFY', 4), (('NOOP', 1, True), 'RETRY', 1), (('NOOP', 2, False), 'ESCALATE', 2), (('NOOP', 2, True), 'ESCALATE', 1), (('NOT_COMMITTED', 0, False), 'WAIT', 2), (('NOT_COMMITTED', 0, True), 'VERIFY', 4), (('NOT_COMMITTED', 1, False), 'STOP_SAFE', 1), (('NOT_COMMITTED', 1, True), 'VERIFY', 3), (('NOT_COMMITTED', 2, False), 'VERIFY', 1), (('NOT_COMMITTED', 2, True), 'WAIT', 2), (('PARTIAL', 0, False), 'COMPENSATE', 1), (('PARTIAL', 0, True), 'STOP_SAFE', 2), (('PARTIAL', 1, False), 'COMPENSATE', 3), (('PARTIAL', 1, True), 'STOP_SAFE', 4), (('PARTIAL', 2, False), 'ESCALATE', 3), (('PARTIAL', 2, True), 'COMPENSATE', 1), (('PERMISSION', 0, False), 'STOP_SAFE', 1), (('PERMISSION', 0, True), 'ESCALATE', 2), (('PERMISSION', 1, False), 'ESCALATE', 2), (('PERMISSION', 1, True), 'ESCALATE', 1), (('PERMISSION', 2, False), 'ESCALATE', 1), (('PERMISSION', 2, True), 'ESCALATE', 1), (('RATE_LIMIT', 0, False), 'VERIFY', 2), (('RATE_LIMIT', 0, True), 'VERIFY', 4), (('RATE_LIMIT', 1, False), 'RETRY', 2), (('RATE_LIMIT', 1, True), 'VERIFY', 3), (('RATE_LIMIT', 2, False), 'VERIFY', 4), (('RATE_LIMIT', 2, True), 'RETRY', 4), (('SCHEMA', 0, False), 'REPAIR', 3), (('SCHEMA', 0, True), 'STOP_SAFE', 1), (('SCHEMA', 1, False), 'REPAIR', 1), (('SCHEMA', 1, True), 'STOP_SAFE', 2), (('SCHEMA', 2, False), 'REPAIR', 4), (('SCHEMA', 2, True), 'ESCALATE', 3), (('START', 0, False), 'VERIFY', 3), (('START', 0, True), 'ROLLBACK', 2), (('START', 1, False), 'COMPENSATE', 1), (('START', 1, True), 'RETRY', 3), (('START', 2, False), 'COMPENSATE', 4), (('START', 2, True), 'WAIT', 3), (('TIMEOUT', 0, False), 'WAIT', 3), (('TIMEOUT', 0, True), 'VERIFY', 2), (('TIMEOUT', 1, False), 'VERIFY', 4), (('TIMEOUT', 1, True), 'VERIFY', 4), (('TIMEOUT', 2, False), 'COMPENSATE', 3), (('TIMEOUT', 2, True), 'VERIFY', 3), (('WAITED', 0, False), 'WAIT', 4), (('WAITED', 0, True), 'ESCALATE', 2), (('WAITED', 1, False), 'WAIT', 4), (('WAITED', 1, True), 'COMPENSATE', 2), (('WAITED', 2, False), 'COMPENSATE', 2), (('WAITED', 2, True), 'VERIFY', 1)), 'RETRY', 2, False, False)",
+      "selected_fsm_is_hand": false,
+      "selected_validation_metrics_original": {
+        "avoid_resid": 1.5,
+        "cond_rec": 0.39285714285714285,
+        "containment": 1.0,
+        "corr_esc": 0.0,
+        "dup": 0.0,
+        "sla_viol": 0.0,
+        "unnec_actions_r12": 16.821428571428573,
+        "violations": 0.0
+      },
+      "validation_rows": 108
+    }
+  ],
+  "runs_with_hand_in_validation_pareto_front": 33,
+  "seed_count": 3,
+  "selected_hand_fsm_runs": 32,
+  "status": "D078_INDEPENDENT_DIAGNOSTIC_COMPLETE",
+  "validation_family_count": 4,
+  "validation_scenario_count": 108
+}

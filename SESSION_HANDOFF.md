@@ -1,3 +1,15 @@
+## 0F. 最新权威接管状态（2026-11-11，D-082 执行完成）
+
+- 工作仓库：yujian777555/kaitibaogao；分支 pilot-a-stateful-recovery；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。
+- D-081 corrective CI run 42828590264 @192f958 已 success，28+290=318 tests；首轮失败及 D-078 skipped 记录保留。
+- D-078 独立复算：42/42 runs；32/42 选择 Hand、33/42 Pareto front 含 Hand；Hand R1/R2=1.0、R3=0、R4=1.0；robust/analytic disagreement=0；成功工作流预期 active effects 不再误计为 harm。
+- D-079 挑战集 288 Train-only scenarios 已锁定；manifest SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`；0 UNKNOWN、ID/seed 全唯一、角色配对一致。
+- D-079 Train-only 诊断 14 arms×3 seeds=42 runs 已完成并独立核验；SBCG 对 Hand 的 CondRecSucc −0.5521，R4 containment +0.6667，硬约束 −0.1458。**整体提升不成立，当前候选 NO-GO；所有臂 R3=0。**
+- 当前唯一任务：R4 独立复审；算法侧仅可预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融和新挑战划分，不得在同一 Diagnostic 上反复调参。
+- 不运行正式 A-3b，不访问 Test，不运行 Pilot B，不启动 A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox；不合并 main。D-076 R4 的 technical-missing power 和 pre-run/post-run gate 仍需独立复核。
+
+---
+
 ## 0E. 最新权威接管状态（2026-11-11，D-081 corrective commit）
 
 - 工作仓库：yujian777555/kaitibaogao；分支 pilot-a-stateful-recovery；main 683b3fe7fc52c86e917d523fdc6bbb13abbfd653。
@@ -2379,3 +2391,18 @@ R4 = READY_FOR_INDEPENDENT_REVIEW。SBCG = IMPLEMENTED + SYNTHETIC TESTED，性�
 - 修正提交后的 CI 尚未运行；challenge manifest SHA 尚未生成/冻结。
 - 唯一下一任务：提交 corrective patch，等待 regression CI；若通过，审查 D-078 independent audit 与 288-scenario Train-only manifest，随后锁定 manifest hash。不得提前运行 D079 optimizer。
 
+
+
+## 64. D-082 完整执行记录（2026-11-11）
+
+### 必读
+- `81_D082_EXECUTION_AND_TRAIN_ONLY_DIAGNOSTIC.md`
+- `results/d079_d078_audit/`（D-078 复算）
+- `results/d079_challenge_candidate/`（288 场景与 lock）
+- `results/d079_train_only_diagnostic_final/`（最终诊断与独立核验）
+
+### 当前结论
+D-081 CI 已修复并 success。挑战集 288 Train-only 场景和 lock 通过。D-079 42-run Train-only 诊断完成；SBCG 相对 Hand 的 CondRecSucc −0.5521，虽 R4/硬约束更好，但整体提升不成立，当前 NO-GO。所有臂 R3=0；这是下一机制必须解释的核心障碍。
+
+### 唯一下一任务
+R4 独立复审。算法侧仅可预注册 prefix rollback/compensation-before-escalation 的单机制消融与新的挑战划分。不得用同一 Diagnostic 反复调参；不得访问 Test、启动正式 A-3b、Pilot B、A800/ARWM、真实 LLM API 或合并 main。

@@ -1,0 +1,8 @@
+{
+  "status": "LOCKED_TRAIN_ONLY",
+  "lock": "experiments\\pilot_a3b\\results\\d079_challenge_candidate\\d079_manifest_lock.json",
+  "manifest_content_sha256": "cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa",
+  "manifest_file_sha256": "0072550d432d306d4c02912bebaaa4a4756edb33a68c962cf59e9fb198d6c152",
+  "scenario_ids_sha256": "4d7b19605155bdbfde61216ecfda6019f09d78a76fa7162fd16c18496114ec99",
+  "verify_ok": true
+}

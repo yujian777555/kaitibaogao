@@ -1,0 +1,10 @@
+{
+  "status": "D078_INDEPENDENT_DIAGNOSTIC_COMPLETE",
+  "run_count": 42,
+  "selected_hand_fsm_runs": 32,
+  "label_disagreements": 0,
+  "hand_primary_success": 1.0,
+  "hand_r3_correct_escalation": 0.0,
+  "hand_r4_damage_containment": 1.0,
+  "outdir": "experiments/pilot_a3b/results/d079_d078_audit"
+}

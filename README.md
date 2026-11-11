@@ -918,3 +918,16 @@ SBCG 已实现五维安全目标、零容差硬约束、family×signature×safet
 **对 D-076 独立复审的状态更新：** D-076 的 `78_D076_INDEPENDENT_REVIEW.md` 是针对旧基线 `3d2dacf` 的审查记录。其指出的若干 SBCG 阻断（canonical NSGA-III、f3 公式、Train→Validation 选择、cache accounting）已在后续 D-078 代码提交中作了修订并通过对应 CI；不能继续把旧审查结论当作当前代码状态。R4 pre-run/post-run gate、technical-missing power 校准等必须单独核验，不因 D-078 合成 pilot 通过而视为关闭。
 
 **下一步：** 不扩大到 Test、不启动 A800/真实 LLM。先做 D-079 结果诊断：按 scenario/family 拆解指标与 Pareto 差异，检查 1.0 CondRecSucc 是否天花板效应、为什么多个优化器收敛到相同 FSM/结果；再设计难度分层的合成挑战集与预注册的 Train-only 机制诊断。只有能稳定区分算法的任务机制才进入后续更大规模验证。
+
+
+## 2026-11-11：D-082 — D-079 修复验收、挑战集锁定与 Train-only 诊断
+
+执行报告：[81_D082_EXECUTION_AND_TRAIN_ONLY_DIAGNOSTIC.md](81_D082_EXECUTION_AND_TRAIN_ONLY_DIAGNOSTIC.md)。
+
+D-081 corrective CI run 42828590264 @192f958 已 success（318/318）。D-078 已独立复算 42/42 runs：32/42 选择 Hand，33/42 的 Validation Pareto front 含 Hand；Hand R1/R2=1.0、R3=0、R4=1.0；robust/analytic disagreement=0。成功工作流的预期 active effects 不再误计为 harm，R4 unavoidable residual 进入最小伤害边界。
+
+D-079 挑战集已锁定：288 Train-only scenarios（Search/Diagnostic 各144），8 families、6 strata、3 repeats；0 UNKNOWN，ID/seed 全唯一，D6 全部为 compensation unavailable。manifest SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`，raw-file 与 scenario-ID 哈希及篡改测试均通过。
+
+Train-only 诊断实际完成 14 arms×3 seeds=42 runs。SBCG 相对 Hand 的 CondRecSucc 为 **−0.5521**，R4 containment **+0.6667**，constraint violation **−0.1458**；相对 matched NSGA-II 的 CondRecSucc −0.0104。**没有整体提升，当前 SBCG 为 NO-GO；所有臂 R3 CorrectEscalation=0。** 原始首次与最终诊断、CSV/JSON/报告和独立核验均保留。
+
+唯一下一任务：R4 独立复审；算法侧仅可预注册针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融及新挑战划分。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API 和 main 合并继续 HOLD。

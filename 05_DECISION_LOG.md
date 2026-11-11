@@ -1524,3 +1524,22 @@ D-078 实验 workflow [42820836080](https://github.com/yujian777555/kaitibaogao/
 
 ### 唯一下一任务
 核验 D-081 对应 GitHub Actions regression run；若成功，审查并复核 D-079 audit outputs 与 Train-only challenge manifest，随后提交 SHA-256 manifest lock。若 CI 未触发，先触发 CI，不得绕过门禁。
+
+
+## 决策 D-082：D-079 门禁完成，但 SBCG 整体提升不成立（2026-11-11）
+
+### CI 与诊断验收
+- D-081 修正版 regression run 42828590264 @192f958 = success，28+290=318 tests。首轮 282-test 失败为 D6 family contract 假设错误；D-078 run 在 preflight 失败且算法 skipped，无新数据。
+- D-078 独立复算 42/42：32/42 选择 Hand、33/42 Pareto front 含 Hand；Hand R1/R2=1.0、R3=0、R4=1.0；robust/analytic disagreement=0。预期成功 active effects 不再误计 harm；R4 unavoidable residual 正确进入 minimum-harm。
+
+### 挑战集与 lock
+288 个 Train-only scenarios，Search/Diagnostic 各144；8 families×6 strata×3 repeats×2 roles；0 UNKNOWN；ID/seed 全唯一；D6 compensation unavailable 全覆盖。manifest SHA=`cafdc52e037c08ca8cd95c0546014bab6dd27e9bd6d28122afb90f28b3cd1efa`；raw-file=`0072550d…`；scenario-ID=`4d7b1960…`。新增 6 项 lock/tamper 测试。
+
+### Train-only 算法证据
+14 arms×3 seeds=42 runs；Search 上限每 EA/seed 6912 episodes，Diagnostic 独立角色144场景。SBCG 对 Hand：CondRecSucc −0.5521 [−0.7812,−0.3125]，R4 containment +0.6667，constraint violation −0.1458；对 matched NSGA-II 的 CondRecSucc −0.0104。no-M1 的 CondRecSucc 0.4896 高于完整 SBCG 0.2292，但 harm 更高。所有臂 R3 CorrectEscalation=0。
+
+### 决定
+**当前 SBCG 的整体算法提升 = NO-GO。** 安全/R4 信号不得抵消恢复终点失败，也不得写成已超过 Hand 或强 NSGA 基线。不得在相同 Diagnostic 上反复修改机制制造提升。首次和最终 D-079 结果均保留，独立 CSV 重算零不一致。
+
+### 唯一下一任务
+R4 独立复审；算法侧仅预注册一个针对 R3 的 prefix rollback/compensation-before-escalation 单机制消融和新的挑战划分。正式 A-3b、Test、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 与 main 合并继续 HOLD。
