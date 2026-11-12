@@ -1,5 +1,11 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+> **D-087 冻结状态（2026-11-12）：** 92 号已由 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数；新 Validation 80 scenarios/4 families，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test。五个原 NSGA-III 候选已冻结，SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`，没有新搜索或修改 genome。复制上限 1,040 episodes，前置协议测试 4/4。
+>
+> **唯一下一任务：** 执行一次冻结复制，保存所有候选/基线原始轨迹并独立复算；不得重训、重选、追加预算或访问 Test。复制结果尚未产生，正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+>
+> **仓库纪律：** 工作分支 `pilot-a-stateful-recovery`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。每次提交后核验远端 SHA、ahead/behind、工作区和真实 CI，不以旧 run 替代。
+
 > **D-086 实际探索结果（2026-11-11）：** 8 个搜索/消融臂×5 seeds=40 runs、316,416 行原始账本，独立审计全部通过。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、硬约束为 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II。**只是探索性 EC 信号，不是确认性创新。**
 >
 > **Full 明确 NO_GO：** Full C-NSGA-III R3 均值 0.9、成本 5.6，未满足 `r3_all_one` 和 `no_regression_vs_ea`，不得用平均成本掩盖其落后普通 NSGA-III。NoAlternate 和 NoPendingVerification 显著破坏恢复，NoFailureFeedback 成本上升，NoDependencyPriority 贡献未识别。

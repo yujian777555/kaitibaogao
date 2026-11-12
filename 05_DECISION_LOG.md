@@ -1658,3 +1658,11 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 ## D-086-CI：最终结果提交核验（2026-11-11）
 
 结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` 为 success。日志实际执行 385+28=413 项测试；D-086 manifest 锁与固定策略门均重新生成并上传 artifact。独立 artifact 审计和 `nsga3_candidate_assessment.json` 结论不变：Full NO_GO，普通 NSGA-III 仅为探索性积极信号，下一阶段仍需按 92 号协议复制验证。
+
+## D-087-FREEZE：复制协议、独立 Validation 与候选已冻结（2026-11-12）
+
+- 92 号由 `93_D087_PROTOCOL_REVIEW.md` 审查；补齐具体图、成本、结果表和回执延迟，不改变科学判据。
+- 新 Validation：4 families、80 scenarios、R1/R2/R3/R4 各 20；SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`；无 Train/Test。
+- 五个 NSGA-III 候选直接来自原 selection.genome，冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`；无新搜索或修改。
+- 预算候选 400、基线 640、合计 1,040；每 episode 24 决策。前置协议测试 4/4 通过，结果 artifact 测试待实际数据。
+- 唯一下一任务是执行一次冻结复制并独立复算。复制当前 NOT RUN，所有受禁实验和 Test 继续 HOLD。

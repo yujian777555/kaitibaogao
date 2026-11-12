@@ -1,6 +1,14 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## 最新执行状态（2026-11-11，D-086 探索结果）
+## 最新执行状态（2026-11-12，D-087 复制协议已冻结）
+
+- **协议审查：** `93_D087_PROTOCOL_REVIEW.md` 记录 92 号的独立复核与执行参数冻结，不改变主要终点、候选、基线、seeds 或预算。
+- **新 Validation：** 4 个独立 family、80 scenarios、R1/R2/R3/R4 各 20；manifest SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test payload。
+- **候选冻结：** 直接继承原 NSGA-III 的 5 个 selection.genome；frozen SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`，未重新搜索或修改 genome。
+- **执行边界：** 候选最多 400 episodes、八个固定基线最多 640、总计最多 1,040；每 episode 24 决策。四项前置协议测试通过，结果 artifact 测试须待实际复制后运行。
+- **唯一下一任务：** 执行一次冻结复制评价，并从原始 CSV/JSON 独立复算。不得重新训练、重新选择、追加预算或访问 Test；复制结果尚未产生。
+
+## D-086 探索结果（历史状态）
 
 - **D-085 独立复审：** `88_D085_INDEPENDENT_REVIEW_D086.md` = ACCEPTED_WITH_LIMITATIONS，数据、隔离与封顶事实成立，但不证明算法有效。
 - **非封顶模型：** 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`；公开依赖、备选路径、可靠性/成本和确认预算形成真实策略差异。固定门 768 行，无共同支配方法。

@@ -1,4 +1,14 @@
-## 0J. 最新权威接管状态（2026-11-11，D-086 探索结果）
+## 0K. 最新权威接管状态（2026-11-12，D-087 协议与候选冻结）
+
+- 接管基线 `0f53cf7ba0f1d173ae93fe5ea3d0f96d6d6ba0ff`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；初始 ahead 275 / behind 0，工作区干净，最近 CI 43033472661 success。
+- `93_D087_PROTOCOL_REVIEW.md` 完成 92 号审查及执行参数补充，未修改原科学判据。新 Validation 4 families、80 scenarios、四类各 20，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，不含 Train/Test。
+- 五个 NSGA-III 候选直接从原 runs 的 selection.genome 冻结，SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`；没有 Train 搜索、重选或修改 genome。
+- 复制预算：候选 400、固定基线 640、总计 1,040，每 episode 24 决策。四项前置协议测试通过；结果 artifact 测试待真实结果生成。
+- 唯一下一任务：执行一次冻结复制并独立复算；不得重训、重选、追加预算或访问 Test。复制结果尚未产生。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+
+---
+
+## 0J. 历史接管状态（2026-11-11，D-086 探索结果）
 
 - D-085 独立复审 = ACCEPTED_WITH_LIMITATIONS；封顶事实成立，但算法有效性未获证明。
 - 新 manifest Train=72、Validation=24，SHA=`362e7a8a0acafbb40f6ddccf207bede85a656193c6544bf3cd949c1fe43ffd67`；依赖、备选路径、可靠性/成本、未决回执和确认预算形成真实非封顶决策边界。固定门 768 行，无共同支配方法。

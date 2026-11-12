@@ -7,7 +7,13 @@
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
 
-## 0J. D-086 探索结果与独立复制门（2026-11-11）
+## 0K. D-087 复制执行前冻结（2026-11-12）
+
+`93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数，不改变原终点或判据。新 Validation 80 scenarios/4 families，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`；五个 NSGA-III 候选已冻结，SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`。预算为候选 400、固定基线 640、总计 1,040；无 Train/Test。
+
+前置协议测试 4/4 通过；复制结果尚未产生。唯一下一任务是执行一次冻结复制并从原始账本独立复算，不重训、重选、追加预算或访问 Test。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+
+## 0J. D-086 探索结果与独立复制门（历史状态）
 
 实际探索 40 runs、316,416 行原始账本，独立审计全部通过；本地完整回归 385+28=413。结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` = success。普通 NSGA-III 在五 seeds 上 R3/R4/CondRecSucc=1、约束 0、平均成本 5.0，低于 Greedy 的 15.1667，且不劣于 Random Search/NSGA-II；这是探索性 EC 信号，不是确认性创新。
 
