@@ -133,3 +133,9 @@ Greedy 的 R3 成本为 20.0。冻结候选的成本 8.85 数值上较低，**�
 现已同时保存 raw SHA-256 与 canonical SHA-256，审计使用 canonical 内容（行尾统一为 LF），raw 哈希仅作生成时的字节溯源。旧 manifest 保留为 `d087_artifact_manifest.pre_canonical_hash.json`；完整失败 CI 原始日志以 `d087_ci_43154910372_failure.log.gz` 压缩保存，字节不修改。新增 CRLF/LF 等价回归。该修复不重新评价候选，不改变 REPLICATION_FAILED / NO-GO。
 
 最终提交后必须重新核验 CI，不得把本次失败或历史成功冒充修复后的通过。
+
+## 11. 最终 CI 证据
+
+修复后的代码/结果提交 `9ce0df1c0dc011de4424cd0a4f3fff79adf4e87d` 的 regression run `43156190408` = **success**。日志实际执行 398+28=426 项测试；D-087 manifest、锁和原始账本的独立审计均通过，未重新运行复制评价。
+
+Artifact `13915563618` 已下载并再次独立复算，16 项检查全部通过，复制结论仍为 **REPLICATION_FAILED / NO-GO**。完整证据见 `95_D087_CI_EVIDENCE.json`。本结论不授权新算法搜索、模型训练、Test 或其他受禁实验。

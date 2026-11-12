@@ -1684,3 +1684,11 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 CI 43154910372 在结果提交 cf16275 上因 raw artifact hash 不一致而失败，但原始指标、预算和复制判据均通过。核查确认 Git 换行规范化导致 raw 字节差异，canonical 内容一致。
 
 现同时保存 raw SHA 与 canonical SHA（行尾统一 LF），审计使用 canonical 哈希；旧 manifest 和失败日志保留。新增 CRLF/LF 等价测试，完整回归 398+28=426 全部通过。没有重新评价候选，REPLICATION_FAILED / NO-GO 不变。
+
+## D-087-FINAL-CI：复制失败结论的独立验证完成（2026-11-12）
+
+最终代码/结果提交 `9ce0df1c0dc011de4424cd0a4f3fff79adf4e87d` 的 regression run `43156190408` = success。日志确认 398+28=426 tests；D-087 manifest 与已保存原始账本在 CI 中独立审计通过，未重新执行候选评价。
+
+Artifact `13915563618` 已下载并再次独立复算，16 项检查全部通过。早期 CI 43154910372 的 raw 哈希失败保留为压缩日志；canonical 修复已验证。科学结论仍为 **REPLICATION_FAILED / NO-GO**，0/5 候选通过，不能宣称跨 family 优势或算法创新。
+
+证据：`95_D087_CI_EVIDENCE.json`。

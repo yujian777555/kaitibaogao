@@ -13,7 +13,7 @@ Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_re
 
 **REPLICATION_FAILED / NO-GO：** 五候选 R3=R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0，0/5 通过。rv02/rv03/rv04 的 repeat 4 预算耗尽，rv01 全成功。成本低于 Greedy 的 20.0 不能抵消恢复失败，跨 family 泛化主张撤回。
 
-独立审计全部通过；完整回归 398+28=426；首次输出/审计及 raw 哈希 CI 失败日志保留。唯一下一任务是独立复核 94 号报告、93 号协议及失败根因，决定路线是否终止。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+独立审计全部通过；完整回归 398+28=426；最终 CI 43156190408 = success，artifact 已下载复算。首次输出/审计及 raw 哈希 CI 失败日志保留，证据见 `95_D087_CI_EVIDENCE.json`。唯一下一任务是独立复核 94 号报告、93 号协议及失败根因，决定路线是否终止。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
 
 ## 0K. D-087 复制执行前冻结（历史状态）
 
