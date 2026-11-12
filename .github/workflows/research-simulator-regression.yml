@@ -102,3 +102,21 @@ jobs:
             ${{ runner.temp }}/d086-fixed-gate/
           if-no-files-found: error
 
+      - name: Generate and lock-check D-087 independent Validation
+        run: |
+          mkdir -p "$RUNNER_TEMP/d087-validation"
+          python experiments/pilot_a3b/d087_challenge.py --outdir "$RUNNER_TEMP/d087-validation" --lock-path "$RUNNER_TEMP/d087-lock.json"
+
+      - name: Audit saved D-087 raw evidence without rerunning evaluation
+        run: python experiments/pilot_a3b/d087_replication_audit.py
+
+      - name: Upload D-087 manifest and independently audited evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: d087-frozen-replication-regression-evidence
+          path: |
+            ${{ runner.temp }}/d087-validation/
+            ${{ runner.temp }}/d087-lock.json
+            experiments/pilot_a3b/results/d087_replication/
+          if-no-files-found: error
+

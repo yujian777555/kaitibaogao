@@ -40,13 +40,16 @@ def _file_sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def _write_once(path, text):
+def _write_once(path, text, newline=None):
     path = Path(path)
-    if path.exists() and path.read_text(encoding="utf-8") != text:
-        raise FileExistsError("refusing to overwrite different D-087 evidence: " + str(path))
+    if path.exists():
+        with path.open("r", encoding="utf-8", newline=newline) as handle:
+            if handle.read() != text:
+                raise FileExistsError("refusing to overwrite different D-087 evidence: " + str(path))
     path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists():
-        path.write_text(text, encoding="utf-8")
+        with path.open("w", encoding="utf-8", newline=newline) as handle:
+            handle.write(text)
 
 
 def freeze_candidates():
@@ -316,7 +319,9 @@ def evaluate_replication(manifest, frozen):
 
 def write_outputs(summary, rows, per_family, outdir=OUTDIR):
     outdir = Path(outdir)
-    fields = [key for key in rows[0] if key != "trace"] + ["trace_json"]
+    fields = list(dict.fromkeys(
+        key for row in rows for key in row if key != "trace"
+    )) + ["trace_json"]
     import csv
     import io
     buffer = io.StringIO(newline="")
@@ -338,7 +343,7 @@ def write_outputs(summary, rows, per_family, outdir=OUTDIR):
         "| Method | Seed | R3 | R4 | CondRecSucc | R3 cost | Constraints | Duplicate | Pending |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
-    for item in summary["baselines"].values() + summary["candidates"]:
+    for item in list(summary["baselines"].values()) + summary["candidates"]:
         report.append(
             f"| {item['method']} | {item['seed']} | {item['r3_success']:.4f} | {item['r4_success']:.4f} | "
             f"{item['condrec']:.4f} | {item['r3_cost']:.4f} | {item['constraint_count']} | "
@@ -362,7 +367,7 @@ def write_outputs(summary, rows, per_family, outdir=OUTDIR):
         }, indent=2, sort_keys=True) + "\n",
     }
     for filename, text in texts.items():
-        _write_once(outdir / filename, text)
+        _write_once(outdir / filename, text, newline="" if filename.endswith(".csv") else None)
     artifact = {
         "files": {
             filename: hashlib.sha256((outdir / filename).read_bytes()).hexdigest()

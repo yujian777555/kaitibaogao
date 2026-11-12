@@ -1666,3 +1666,15 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 - 五个 NSGA-III 候选直接来自原 selection.genome，冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`；无新搜索或修改。
 - 预算候选 400、基线 640、合计 1,040；每 episode 24 决策。前置协议测试 4/4 通过，结果 artifact 测试待实际数据。
 - 唯一下一任务是执行一次冻结复制并独立复算。复制当前 NOT RUN，所有受禁实验和 Test 继续 HOLD。
+
+## D-087-RESULT：冻结 NSGA-III 独立复制失败（2026-11-12）
+
+- 92 号经 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数，原科学判据不变。五个冻结候选 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`，直接来自原 selection.genome，没有新搜索。
+- 新 Validation 4 families/80 scenarios，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test、无历史 family 交叉。
+- 候选 400 episodes + 全部八个固定基线 640 episodes，共 1,040 次唯一调用，cache=0，无新增预算。
+- 五候选均为 R3=R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0；0/5 通过。**REPLICATION_FAILED / NO-GO**。
+- 成本低于 Greedy 的 20.0，但恢复主终点未满足，不能把成本差写成整体提升。Greedy 本身 pending=1、constraint=1，也不得隐藏基线失败。
+- rv01 全成功；rv02/rv03/rv04 的 repeat 4 因延迟失败补偿与冻结确认节奏耗尽预算，产生可避免残余；无 duplicate/pending。跨 family 泛化优势不予确认，不删除 D-086 历史探索结果。
+- 原始 JSON/CSV、指标、预算、候选指纹、判据和 artifact 哈希的独立审计全部通过。首次输出与审计失败日志均保留。
+
+唯一下一任务：独立复核 94 号报告、93 号协议与失败机制，再决定是否终止路线。当前不启动新优化、训练或任何受禁实验。

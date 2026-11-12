@@ -1,6 +1,16 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## 最新执行状态（2026-11-12，D-087 复制协议已冻结）
+## 最新执行状态（2026-11-12，D-087 独立复制失败）
+
+- **协议与冻结：** 92 号经 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数，科学判据未改。五个 NSGA-III 候选直接来自原 selection.genome，冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`，没有重新搜索。
+- **独立 Validation：** 4 个新 family、80 scenarios，manifest SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test、无 family 交叉。
+- **实际复制：** 5 个冻结候选与全部 8 个固定基线共 1,040 行，调用 1,040、cache hits=0，无新增 Train、预算或参数优化。
+- **结果：REPLICATION_FAILED / NO-GO。** 五候选均为 R3=0.85、R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0；0/5 满足复制判据。成本低于 Greedy 的 20.0，但不能抵消恢复失败。
+- **失败边界：** rv01 全成功，rv02/rv03/rv04 的 repeat 4 因延迟失败补偿与冻结确认节奏耗尽预算；没有隐藏信息、duplicate 或 pending 解释失败。不得撤回原始记录，只撤回泛化主张。
+- **验证：** 原始 JSON/CSV、指纹、预算、指标、判据和 artifact 哈希的独立审计全部通过；完整回归 **397+28=425** 全部通过。
+- **唯一下一任务：** 独立复核 `94_D087_REPLICATION_RESULT.md`、93 号协议和失败根因，再决定路线是否终止。当前不启动新优化、模型训练、Test 或其他受禁实验。
+
+## D-086 探索结果（历史状态）
 
 - **协议审查：** `93_D087_PROTOCOL_REVIEW.md` 记录 92 号的独立复核与执行参数冻结，不改变主要终点、候选、基线、seeds 或预算。
 - **新 Validation：** 4 个独立 family、80 scenarios、R1/R2/R3/R4 各 20；manifest SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test payload。

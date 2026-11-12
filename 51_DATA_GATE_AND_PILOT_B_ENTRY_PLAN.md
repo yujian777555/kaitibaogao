@@ -7,7 +7,15 @@
 前置文件：47_PILOT_A3_PROTOCOL.md、49_FIRST_INNOVATION_RELATED_WORK_AUDIT.md、50_DATASET_SELECTION_AND_VALIDATION_PLAN.md
 Phase A 交付：PILOT_A3_INDEPENDENT_REAUDIT.md、recompute_a3_audit.py、a3_recompute_report.json、a3_artifact_manifest.json、ci_artifact/（原始 JSON/CSV）
 
-## 0K. D-087 复制执行前冻结（2026-11-12）
+## 0L. D-087 独立复制结果（2026-11-12）
+
+新 Validation 4 families/80 scenarios，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`；五个原 NSGA-III 候选冻结，SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`。实际 1,040 次评价、cache=0，无 Train 搜索、参数修改或 Test。
+
+**REPLICATION_FAILED / NO-GO：** 五候选 R3=R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0，0/5 通过。rv02/rv03/rv04 的 repeat 4 预算耗尽，rv01 全成功。成本低于 Greedy 的 20.0 不能抵消恢复失败，跨 family 泛化主张撤回。
+
+独立审计全部通过；完整回归 397+28=425；首次输出/审计失败日志保留。唯一下一任务是独立复核 94 号报告、93 号协议及失败根因，决定路线是否终止。正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
+
+## 0K. D-087 复制执行前冻结（历史状态）
 
 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数，不改变原终点或判据。新 Validation 80 scenarios/4 families，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`；五个 NSGA-III 候选已冻结，SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`。预算为候选 400、固定基线 640、总计 1,040；无 Train/Test。
 

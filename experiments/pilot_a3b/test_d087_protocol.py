@@ -51,6 +51,40 @@ class D087PreExecutionTests(unittest.TestCase):
         self.assertEqual(decision["status"], "REPLICATION_FAILED")
         self.assertEqual(decision["research_decision"], "NO_GO")
 
+    def test_csv_output_includes_candidate_only_fields(self):
+        import csv
+        import tempfile
+        from d087_replication import write_outputs
+        metrics = {
+            "r3_success": 1.0, "r4_success": 1.0, "condrec": 1.0,
+            "r3_cost": 1.0, "constraint_count": 0,
+            "duplicate_count": 0, "pending_count": 0,
+        }
+        summary = {
+            "decision": "PARTIAL_REPLICATION",
+            "decision_detail": {"candidate_pass_count": 0},
+            "raw_row_count": 2, "evaluation_calls": 2, "cache_hits": 0,
+            "manifest_sha256": "synthetic", "candidate_sha256": "synthetic",
+            "source_config_sha256": "synthetic", "algorithm_sha256": {},
+            "budget": {"total_cap": 1040},
+            "baselines": {"Hand": {"method": "Hand", "seed": -1, **metrics}},
+            "candidates": [{"method": "FrozenNSGA-III", "seed": 711, **metrics}],
+        }
+        rows = [
+            {"method": "Hand", "optimizer_seed": -1, "scenario_id": "a", "trace": []},
+            {"method": "FrozenNSGA-III", "optimizer_seed": 711,
+             "scenario_id": "b", "genome_sha256": "candidate-only", "trace": []},
+        ]
+        with tempfile.TemporaryDirectory() as temp:
+            write_outputs(summary, rows, [], temp)
+            with (Path(temp) / "d087_replication_rows.csv").open(encoding="utf-8", newline="") as handle:
+                reader = csv.DictReader(handle)
+                self.assertIn("genome_sha256", reader.fieldnames)
+                self.assertEqual(next(reader)["genome_sha256"], "")
+                self.assertEqual(next(reader)["genome_sha256"], "candidate-only")
+            raw = (Path(temp) / "d087_replication_rows.csv").read_bytes()
+            self.assertNotIn(b"\r\r\n", raw)
+
     def test_replication_module_has_no_search_or_test_entry(self):
         import d087_replication
         self.assertFalse(hasattr(d087_replication, "run_search"))

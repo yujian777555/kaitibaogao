@@ -107,6 +107,8 @@ def audit_replication(outdir=OUTDIR):
         for key, value in recomputed.items():
             if value != expected[key]:
                 mismatches.append({"method": method, "seed": seed, "metric": key, "expected": expected[key], "actual": value})
+        if method != "FrozenNSGA-III":
+            continue
         for family_item in family_values:
             expected_family = next(
                 item for item in summary["per_family"]

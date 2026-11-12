@@ -1,0 +1,29 @@
+name: D-087 frozen candidate replication
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  replication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify protocol and frozen candidates
+        run: python -m unittest discover -s experiments/pilot_a3b -p "test_d087_protocol.py" -v
+      - name: Execute frozen replication once
+        run: python experiments/pilot_a3b/d087_replication.py
+      - name: Independently recompute saved evidence
+        run: python experiments/pilot_a3b/d087_replication_audit.py
+      - name: Upload D-087 replication evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: d087-frozen-replication-evidence
+          path: experiments/pilot_a3b/results/d087_replication/
+          if-no-files-found: error

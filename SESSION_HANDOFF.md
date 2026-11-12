@@ -1,4 +1,16 @@
-## 0K. 最新权威接管状态（2026-11-12，D-087 协议与候选冻结）
+## 0L. 最新权威接管状态（2026-11-12，D-087 复制失败）
+
+- 92 号经 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数，未改变候选、判据、基线、seeds 或预算。冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`。
+- 新 Validation 4 families、80 scenarios、无 Train/Test，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`；候选与 family 均无历史交叉。
+- 实际评价 1,040 行，候选 400+基线 640，调用 1,040、cache=0；没有 Train 搜索、重选、参数优化或 Test。
+- **结果 REPLICATION_FAILED / NO-GO：** 五候选均为 R3=0.85、R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0；0/5 通过。成本低于 Greedy 的 20.0 不构成整体优势。
+- rv01 全成功；rv02/rv03/rv04 的 repeat 4 出现预算耗尽和可避免残余，duplicate/pending 均为 0。原探索结果保留，但跨 family 泛化主张撤回。
+- 原始 JSON/CSV、预算、指标、指纹、判据和 artifact 哈希的独立审计全通过；完整回归 **397+28=425** 全部通过，提交后的远端 CI 待核验。
+- 唯一下一任务：独立复核 `94_D087_REPLICATION_RESULT.md`、93 号协议及失败机制，决定路线是否终止；不启动新优化、训练、Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 或 main merge。
+
+---
+
+## 0K. 历史接管状态（2026-11-12，D-087 协议与候选冻结）
 
 - 接管基线 `0f53cf7ba0f1d173ae93fe5ea3d0f96d6d6ba0ff`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；初始 ahead 275 / behind 0，工作区干净，最近 CI 43033472661 success。
 - `93_D087_PROTOCOL_REVIEW.md` 完成 92 号审查及执行参数补充，未修改原科学判据。新 Validation 4 families、80 scenarios、四类各 20，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，不含 Train/Test。

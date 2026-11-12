@@ -96,3 +96,9 @@ NSGA-III 的选中基因组并不等同于固定 Greedy：它们使用成本权�
 ## 8. 最终 CI 证据
 
 结果提交 `5210d1c40fbb41b39a51e2ef7ef544e582dc4af5` 的 regression run `43033472661` 为 success。日志实际执行 385+28=413 项测试，并重新生成 D-086 manifest、锁及 768 行固定策略门数据；D-086 artifact 已上传。该 CI 证据支持可复现性，不改变 Full NO_GO 与普通 NSGA-III 仍需独立复制的结论。
+
+## 9. D-087 独立复制结果
+
+D-087 按 92/93 号协议对冻结候选进行了独立复制，结果为 **REPLICATION_FAILED / NO-GO**：新 Validation 上 R3=R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0，0/5 候选通过。成本虽低于 Greedy 的 20.0，但不能抵消恢复失败。
+
+D-086 原始探索结果与 artifact 不修改，但不再支持未经验证的跨 family 泛化表述。详见 `94_D087_REPLICATION_RESULT.md`。

@@ -1,5 +1,15 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+> **D-087 实际复制结果（2026-11-12）：** 92 号经 93 号补齐执行参数后执行；五个原 NSGA-III 候选完全冻结，冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`。新 Validation 4 families/80 scenarios，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test。共 1,040 次评价、无缓存复用、无 Train 搜索。
+>
+> **结论：REPLICATION_FAILED / NO-GO。** 五候选均为 R3=R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0，0/5 通过。成本虽低于 Greedy 的 20.0，但恢复主终点失败，不得宣称跨 family 优势。rv01 全成功，rv02/rv03/rv04 的 repeat 4 因延迟失败补偿与冻结确认节奏耗尽预算；duplicate/pending 均为 0。
+>
+> **独立验证：** 原始 JSON/CSV、预算、候选指纹、family 指标、判据和 artifact 哈希全部独立复算通过。完整回归 397+28=425。首次输出/审计失败日志均保留；不改变任务、阈值、候选或统计口径。
+>
+> **唯一下一任务：** 独立复核 `94_D087_REPLICATION_RESULT.md`、93 号协议和失败机制，决定路线是否终止；不启动新优化、训练、Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 或 main merge。
+>
+> **仓库纪律：** 工作分支 `pilot-a-stateful-recovery`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。每次提交后核验远端 SHA、ahead/behind、工作区和真实 CI，不以旧 run 替代。
+
 > **D-087 冻结状态（2026-11-12）：** 92 号已由 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数；新 Validation 80 scenarios/4 families，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test。五个原 NSGA-III 候选已冻结，SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`，没有新搜索或修改 genome。复制上限 1,040 episodes，前置协议测试 4/4。
 >
 > **唯一下一任务：** 执行一次冻结复制，保存所有候选/基线原始轨迹并独立复算；不得重训、重选、追加预算或访问 Test。复制结果尚未产生，正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 和 main merge 继续禁止。
