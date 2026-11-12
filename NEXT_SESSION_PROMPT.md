@@ -4,7 +4,7 @@
 >
 > **结论：REPLICATION_FAILED / NO-GO。** 五候选均为 R3=R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0，0/5 通过。成本虽低于 Greedy 的 20.0，但恢复主终点失败，不得宣称跨 family 优势。rv01 全成功，rv02/rv03/rv04 的 repeat 4 因延迟失败补偿与冻结确认节奏耗尽预算；duplicate/pending 均为 0。
 >
-> **独立验证：** 原始 JSON/CSV、预算、候选指纹、family 指标、判据和 artifact 哈希全部独立复算通过。完整回归 397+28=425。首次输出/审计失败日志均保留；不改变任务、阈值、候选或统计口径。
+> **独立验证：** 原始 JSON/CSV、预算、候选指纹、family 指标、判据和 canonical artifact 哈希全部独立复算通过。完整回归 398+28=426。首次输出/审计及 raw 哈希 CI 失败均保留；不改变任务、阈值、候选或统计口径。
 >
 > **唯一下一任务：** 独立复核 `94_D087_REPLICATION_RESULT.md`、93 号协议和失败机制，决定路线是否终止；不启动新优化、训练、Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 或 main merge。
 >

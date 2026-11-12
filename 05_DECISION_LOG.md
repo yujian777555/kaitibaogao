@@ -1678,3 +1678,9 @@ runner 已兼容 committed content-level lock 与文件级 lock，并用 v2 重�
 - 原始 JSON/CSV、指标、预算、候选指纹、判据和 artifact 哈希的独立审计全部通过。首次输出与审计失败日志均保留。
 
 唯一下一任务：独立复核 94 号报告、93 号协议与失败机制，再决定是否终止路线。当前不启动新优化、训练或任何受禁实验。
+
+## D-087-HASH-FIX：跨平台 canonical artifact 校验（2026-11-12）
+
+CI 43154910372 在结果提交 cf16275 上因 raw artifact hash 不一致而失败，但原始指标、预算和复制判据均通过。核查确认 Git 换行规范化导致 raw 字节差异，canonical 内容一致。
+
+现同时保存 raw SHA 与 canonical SHA（行尾统一 LF），审计使用 canonical 哈希；旧 manifest 和失败日志保留。新增 CRLF/LF 等价测试，完整回归 398+28=426 全部通过。没有重新评价候选，REPLICATION_FAILED / NO-GO 不变。

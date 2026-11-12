@@ -143,7 +143,10 @@ def audit_replication(outdir=OUTDIR):
         status = "REPLICATION_FAILED"
     checks["decision_recomputed"] = status == summary["decision"] and summary["decision_detail"]["candidate_pass_count"] == passed
     artifact = json.loads((outdir / "d087_artifact_manifest.json").read_text(encoding="utf-8"))
-    checks["artifact_hashes"] = all(hashlib.sha256((outdir / filename).read_bytes()).hexdigest() == digest for filename, digest in artifact["files"].items())
+    checks["artifact_hashes"] = all(
+        hashlib.sha256(b"\n".join((outdir / filename).read_bytes().splitlines())).hexdigest() == digest
+        for filename, digest in artifact["files"].items()
+    )
     return {
         "ok": all(checks.values()),
         "checks": checks,

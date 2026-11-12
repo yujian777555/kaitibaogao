@@ -85,6 +85,17 @@ class D087PreExecutionTests(unittest.TestCase):
             raw = (Path(temp) / "d087_replication_rows.csv").read_bytes()
             self.assertNotIn(b"\r\r\n", raw)
 
+    def test_artifact_hashes_are_line_ending_independent(self):
+        import tempfile
+        from d087_replication import _canonical_file_sha
+        with tempfile.TemporaryDirectory() as temp:
+            first = Path(temp) / "crlf"
+            second = Path(temp) / "lf"
+            first.write_bytes(b"a\r\nb\r\n")
+            second.write_bytes(b"a\nb\n")
+            self.assertEqual(_canonical_file_sha(first), _canonical_file_sha(second))
+            self.assertNotEqual(hashlib.sha256(first.read_bytes()), hashlib.sha256(second.read_bytes()))
+
     def test_replication_module_has_no_search_or_test_entry(self):
         import d087_replication
         self.assertFalse(hasattr(d087_replication, "run_search"))

@@ -5,7 +5,7 @@
 - 实际评价 1,040 行，候选 400+基线 640，调用 1,040、cache=0；没有 Train 搜索、重选、参数优化或 Test。
 - **结果 REPLICATION_FAILED / NO-GO：** 五候选均为 R3=0.85、R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0；0/5 通过。成本低于 Greedy 的 20.0 不构成整体优势。
 - rv01 全成功；rv02/rv03/rv04 的 repeat 4 出现预算耗尽和可避免残余，duplicate/pending 均为 0。原探索结果保留，但跨 family 泛化主张撤回。
-- 原始 JSON/CSV、预算、指标、指纹、判据和 artifact 哈希的独立审计全通过；完整回归 **397+28=425** 全部通过，提交后的远端 CI 待核验。
+- 原始 JSON/CSV、预算、指标、指纹、判据和 canonical artifact 哈希的独立审计全通过；完整回归 **398+28=426** 全部通过。CI 43154910372 的 raw 哈希失败已修复并保留原日志，新 CI 待核验。
 - 唯一下一任务：独立复核 `94_D087_REPLICATION_RESULT.md`、93 号协议及失败机制，决定路线是否终止；不启动新优化、训练、Test、正式 A-3b、Pilot B、A800/ARWM、真实 LLM API、UndoBench TEST、ThinkingBox 或 main merge。
 
 ---

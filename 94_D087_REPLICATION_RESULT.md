@@ -122,6 +122,14 @@ Greedy 的 R3 成本为 20.0。冻结候选的成本 8.85 数值上较低，**�
 
 ## 9. 完整回归与提交边界
 
-本地完整回归为 **397+28=425，全部通过**，包含冻结协议、原始账本、独立复算和 artifact 不可变性测试。复制 workflow 仅允许 `workflow_dispatch`；regression 只重新生成 Validation manifest 并审计已保存原始账本，不随普通 push 重跑评价。
+本地完整回归为 **398+28=426，全部通过**，包含冻结协议、原始账本、独立复算、跨平台 canonical 哈希和 artifact 不可变性测试。复制 workflow 仅允许 `workflow_dispatch`；regression 只重新生成 Validation manifest 并审计已保存原始账本，不随普通 push 重跑评价。
 
 提交后仍需核验真实远端 HEAD、main、ahead/behind、文件内容和 CI，不能将本报告中的历史 run 当作新提交的证据。
+
+## 10. 跨平台 artifact 哈希修正
+
+结果提交 `cf162756a075358767f93d56df7001949cfeaef7` 的 regression `43154910372` 曾因 artifact_hashes=false 失败，其他复制指标和判据均通过。实际原因是 raw 字节经 Git 换行规范化后变化，而 canonical 内容一致。
+
+现已同时保存 raw SHA-256 与 canonical SHA-256，审计使用 canonical 内容（行尾统一为 LF），raw 哈希仅作生成时的字节溯源。旧 manifest 保留为 `d087_artifact_manifest.pre_canonical_hash.json`；完整失败 CI 原始日志以 `d087_ci_43154910372_failure.log.gz` 压缩保存，字节不修改。新增 CRLF/LF 等价回归。该修复不重新评价候选，不改变 REPLICATION_FAILED / NO-GO。
+
+最终提交后必须重新核验 CI，不得把本次失败或历史成功冒充修复后的通过。
