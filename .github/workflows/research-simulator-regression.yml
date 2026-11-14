@@ -6,12 +6,14 @@ on:
     paths:
       - "experiments/pilot_a_recovery/**"
       - "experiments/pilot_a3b/**"
+      - "experiments/d088_recovery/**"
       - ".github/workflows/research-simulator-regression.yml"
   pull_request:
     branches: [pilot-a-stateful-recovery]
     paths:
       - "experiments/pilot_a_recovery/**"
       - "experiments/pilot_a3b/**"
+      - "experiments/d088_recovery/**"
       - ".github/workflows/research-simulator-regression.yml"
 
 jobs:
@@ -28,6 +30,8 @@ jobs:
         run: python -m unittest discover -s experiments/pilot_a_recovery -p "test_*.py" -v
       - name: Test pilot_a3b
         run: python -m unittest discover -s experiments/pilot_a3b -p "test_*.py" -v
+      - name: Test d088_recovery
+        run: python -m unittest discover -s experiments/d088_recovery -p "test_*.py" -v
       - name: Generate D-064-C formal scenario manifest candidate
         run: |
           mkdir -p "$RUNNER_TEMP/d064c"
