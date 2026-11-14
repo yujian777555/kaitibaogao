@@ -2552,3 +2552,7 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 - 残余 R3 失败（4/24）全在 g03_PAIR_RACE：stop_residual=2 过早停 + 互依对 alternate 未选。
 - 冻结 genome 存 `results/d089_audit.json`；D-088-R2 两份 R3 genome 亦存档。
 - 新文件：`experiments/d089_recovery/`（6 模块）+ `98_D089_BUDGET_COOPERATION_EXPERIMENT.md`。
+
+## D-089 修正（2026-11-15）
+
+门控修复后重跑：B4 adaptive 非负贡献（0.833/1.000）；三停止模式等效；负贡献仅 high_safety=2.0。Fresh 双指标提升数字不变。最终数字见 98 号报告。

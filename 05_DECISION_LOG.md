@@ -1723,3 +1723,7 @@ D-087 失败机制反事实审计：rv02/rv03/rv04 repeat 4 的 30 条失败轨�
 **Fresh 复制：冻结候选 R3=0.750/R4=1.000 vs Greedy 0.562/0.750——首次 R3 与 R4 同时超基线（+18.8pp/+25pp），预算竞争解决。** 权衡保留：harm 0.188 vs 0.109。残余 4 个 R3 失败定位 g03 互依对（stop_residual=2 过早停）。
 
 报告：`98_D089_BUDGET_COOPERATION_EXPERIMENT.md`。无 Test/LLM/A800。
+
+## D-089 修正（2026-11-15）
+
+策略门控漏洞修复（strict 模式派发路径绕过最坏情形清结门控）后全量重跑：35 runs 仍零违规。修正结论：B4 adaptive_stop 在正确门控下达 0.833/1.000（不再是负贡献）；三停止模式等效；high_safety=2.0 才是负贡献。Fresh 复制数字不变：R3=0.750（+18.8pp）/R4=1.000（+25pp）vs Greedy。最终数字以 `98_D089_BUDGET_COOPERATION_EXPERIMENT.md` 与 `results/d089_search_report.json`（重跑后）为准。演化 vs 随机仍未证（均值持平，NSGA-III 尾部更差）。

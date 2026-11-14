@@ -112,9 +112,16 @@ class D089BudgetPolicy(D088RecoveryPolicy):
                     return resolved
             return self._finish((self.genome.stop_action,))
 
-        # B2 gate: never dispatch if the escalation reserve would be spent
-        resolve_cost = 2.0 * len(pending)
-        if budget <= self.escalation_reserve + resolve_cost + 1:
+        # B2 gate: never dispatch unless the worst-case finish still fits
+        # (shared waits + one VERIFY per in-flight receipt + terminal).
+        if not self._can_dispatch_more(view):
+            if pending:
+                resolved = self._resolve_pending(view)
+                if resolved is not None:
+                    return resolved
+            return self._finish((self.genome.stop_action,))
+
+        if not available:
             if pending:
                 resolved = self._resolve_pending(view)
                 if resolved is not None:
