@@ -1009,3 +1009,9 @@ v2 使用 `family|stratum` cluster_id，role 独立；288 Train-only 行、48 cl
 - **Replicated improvement: mechanism B raises R3 CorrectEscalation 0.650→0.800 (+15pp vs Greedy) on Fresh families with zero violations.** Trade-off preserved: R4 0.750→0.200, harm 0.062→0.450.
 - Evolution contribution not yet established (RandomSearch ties at equal budget).
 - Report: `96_D088_FEEDBACK_RECOVERY_EXPERIMENT.md`.
+
+## D-088-R2 — 2026-11-15
+
+- 两项改进：strict_residual_stop（残余感知停止）+ 反馈条件化变异/结构分段交叉。报告 `97_D088_R2_OPERATOR_AND_STOP_ABLATION.md`。
+- **机制 B 的 R3 提升（0.650→0.800，+15pp vs Greedy，零违规）已两次独立 genome 确认并 Fresh 复制。**
+- R4 短板与演化价值未解；下一轮：Pareto 前沿保留、预算分割、大预算配对、counterfactual 锚点种群。

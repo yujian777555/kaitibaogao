@@ -2535,3 +2535,11 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 - best_r4（NSGA-II/A s711）Fresh 未复制（与 Greedy 打平）。
 - 下一轮：①R4-aware 停止条件（残余>min_reachable 禁止停止）②反馈条件化变异 vs RandomSearch 配对检验 ③BC 组合独立冻结验证。
 - 报告：`96_D088_FEEDBACK_RECOVERY_EXPERIMENT.md`；审计：`results/d088_independent_audit.json`。
+
+## D-088-R2 Handoff（2026-11-15）
+
+- **两次独立复制的提升：机制 B R3 0.650→0.800（+15pp vs Greedy）on Fresh families，零违规。** 两个冻结 genome：R1 `RandomSearch/B/seed711`、R2 `E2_strict_stop|BC_strict0|feedback|seed822`（见 `results/d088_r2_audit.json`）。
+- R4 短板未解：开发集 R4=0.875 候选 Fresh 打平；strict_residual_stop 部分 seed 有效（ABC s711 R4 0.583→0.792）但加剧预算竞争。
+- 演化价值未证：144 评价下 RandomSearch=NSGA-II；反馈条件化变异无一致优势。
+- 下一轮：①(R3,R4) Pareto 前沿保留 + 预算分割策略 ②pop=32×30 代 + counterfactual 锚点初始种群 ③strict_residual_stop 预算阈值参数化。
+- 新文件：`d088_r2_experiment.py` / `d088_r2_audit.py` / `97_D088_R2_OPERATOR_AND_STOP_ABLATION.md`。

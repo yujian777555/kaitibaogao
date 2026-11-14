@@ -1703,3 +1703,11 @@ D-087 失败机制反事实审计：rv02/rv03/rv04 repeat 4 的 30 条失败轨�
 结果：Greedy 基线 R3=0.792/R4=0.750/harm=0.021。机制 B 组 R3=0.833 全 seed 一致（+4.1pp），但 RandomSearch/B 同分——收益归机制设计而非演化。NSGA-II/C·A seed711 R4=0.833/harm=0.083（超基线）。独立复算 63 runs 全一致。Fresh 复制：best_r3（机制 B）R3=0.800 vs Greedy 0.650（**+15pp 真实提升，零违规，已复制**）；但 R4 0.200 vs 0.750、harm 0.450 vs 0.062（权衡必须保留）。best_r4 候选 Fresh 打平未复制。
 
 科学结论：机制 B 的 R3 提升真实可重复；R4 短板与演化价值未证是下一轮重点。报告：`96_D088_FEEDBACK_RECOVERY_EXPERIMENT.md`。无 Test/LLM/A800。
+
+## D-088-R2：算子消融与残余感知停止（2026-11-15）
+
+两项算法改进：①`strict_residual_stop`（残余感知停止规则，修复 R4 提前 ESCALATE）②反馈条件化变异+结构分段交叉（验证演化价值）。配对实验（pop=16×8 代=144 评价，seeds 711/822/933，开发 96 场景）+ Fresh 80 场景复制。
+
+结果：①strict_residual_stop 在 ABC 组 seed711 配对提升 R3 0.542→0.792/R4 0.583→0.792，但 BC 组表现为 R3↔R4 权衡移动（预算竞争）。②反馈条件化变异无一致优势，RandomSearch 与演化同分——演化价值仍未证明。③开发集 best_balanced（BC/base s711，R4=0.875）Fresh 未复制。④**best_r3 候选 Fresh R3=0.800 vs Greedy 0.650（+15pp，零违规）——与 R1 轮第二个独立 genome 确认，机制 B 的 R3 提升已两次独立复制**。独立复算 29 runs 零不一致。
+
+报告：`97_D088_R2_OPERATOR_AND_STOP_ABLATION.md`。无 Test/LLM/A800。

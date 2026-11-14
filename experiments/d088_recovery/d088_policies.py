@@ -318,6 +318,13 @@ class D088RecoveryPolicy(BasePolicy):
             resolved = self._resolve_pending(view)
             if resolved is not None:
                 return resolved
+        # strict residual stop (R2): never stop while a reachable
+        # compensable route remains, unless the budget cannot fit another
+        # dispatch cycle.  This prevents early ESCALATE that leaves
+        # avoidable residual (R4 failures in R1 round).
+        if self.genome.strict_residual_stop and available and self._can_dispatch_more(view):
+            _score, tool_id, route_name = self._priority(view, available)
+            return self._finish_tracked(("COMPENSATE", tool_id, route_name), view)
         if not available or active <= self.genome.stop_residual or not self._can_dispatch_more(view):
             if pending:
                 resolved = self._resolve_pending(view)

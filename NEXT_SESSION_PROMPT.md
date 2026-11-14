@@ -1332,3 +1332,11 @@ All work remains in `kaitibaogao`; never merge the user's other repositories.
 3. BC 组合冻结与独立 Fresh 验证（开发集均衡最优）。
 4. 保持：D-087 Validation 只读；禁止 Test/LLM API/A800；安全约束零容忍。
 5. 更新四件套并提交推送后核验 CI。
+
+## D-088-R2 Next（2026-11-15）
+
+1. R3↔R4 预算竞争：多目标 Pareto 前沿保留（不选均衡单点）或预算分割（ESCALATE 固定份额 + 恢复预算按 min_reachable 分配）。
+2. 演化价值验证：pop=32×30 代（960 评价）配对 5 seeds，counterfactual 反事实序列作为锚点基因注入初始种群。
+3. strict_residual_stop 参数化：剩余预算 < 阈值时优先保 ESCALATE。
+4. 两份 R3 提升冻结 genome 已存档；待 Validation 授权后正式复制。
+5. 禁止 Test/LLM API/A800；安全约束零容忍；四件套同步。

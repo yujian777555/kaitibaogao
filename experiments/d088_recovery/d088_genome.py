@@ -65,6 +65,8 @@ class D088RecoveryGenome:
     allow_alternate: bool = True
     allow_verify: bool = True
     stop_action: str = "ESCALATE"
+    # D (R2): residual-aware stopping
+    strict_residual_stop: bool = True
     # A
     enable_a: bool = False
     route_failure_penalty: float = -1.0
@@ -118,6 +120,7 @@ def random_genome(rng: random.Random, arm: str = "ABC") -> D088RecoveryGenome:
         kwargs[name] = rng.choice(values)
     kwargs["allow_alternate"] = rng.choice((True, False))
     kwargs["allow_verify"] = rng.choice((True, False))
+    kwargs["strict_residual_stop"] = rng.choice((True, False))
     kwargs["stop_action"] = rng.choice(("ESCALATE", "STOP_SAFE"))
     for name, bounds in A_CONTINUOUS.items():
         kwargs[name] = rng.uniform(*bounds)
@@ -154,7 +157,7 @@ def _mutate_value(name, current, rng):
         values = A_DISCRETE.get(name) or B_DISCRETE.get(name)
         idx = values.index(current)
         return values[(idx + 1) % len(values)] if rng.random() < 0.5 else rng.choice(values)
-    if name in ("allow_alternate", "allow_verify", "cycle_break_alternate"):
+    if name in ("allow_alternate", "allow_verify", "cycle_break_alternate", "strict_residual_stop"):
         return not current
     if name == "stop_action":
         return "STOP_SAFE" if current == "ESCALATE" else "ESCALATE"
@@ -163,7 +166,7 @@ def _mutate_value(name, current, rng):
 
 MUTABLE_NAMES = (
     list(SHARED_CONTINUOUS) + list(SHARED_DISCRETE)
-    + ["allow_alternate", "allow_verify", "stop_action"]
+    + ["allow_alternate", "allow_verify", "stop_action", "strict_residual_stop"]
     + list(A_CONTINUOUS) + list(A_DISCRETE)
     + list(B_CONTINUOUS) + list(B_DISCRETE)
     + list(C_CONTINUOUS) + list(C_BOOLEAN)
@@ -190,5 +193,81 @@ def crossover(a: D088RecoveryGenome, b: D088RecoveryGenome, rng: random.Random) 
     for name in dataclasses.asdict(a):
         src = a if rng.random() < 0.5 else b
         kwargs[name] = getattr(src, name)
+    kwargs.update(arm_flags(arm_label(a)))
+    return D088RecoveryGenome(**kwargs)
+
+
+# ---------------------------------------------------------------------------
+# R2 operators: feedback-conditioned mutation + structured segment crossover
+# ---------------------------------------------------------------------------
+# Gene segments: mutations/crossovers operate on mechanism segments so that
+# co-adapted parameter blocks (A/B/C) are preserved or exchanged wholesale.
+SEGMENTS = {
+    "shared": [
+        "hint_weight", "cost_weight", "failure_weight", "position_weight",
+        "dependency_weight", "max_attempts", "stop_residual",
+        "allow_alternate", "allow_verify", "stop_action", "strict_residual_stop",
+    ],
+    "A": list(A_CONTINUOUS) + list(A_DISCRETE),
+    "B": list(B_CONTINUOUS) + list(B_DISCRETE),
+    "C": list(C_CONTINUOUS) + list(C_BOOLEAN),
+}
+
+
+def mutate_feedback(genome: D088RecoveryGenome, rng: random.Random,
+                    failure_profile: dict | None = None) -> D088RecoveryGenome:
+    """Feedback-conditioned mutation.
+
+    ``failure_profile`` counts recent failure signals (per mechanism
+    segment).  The mutation is biased toward segments whose mechanism is
+    implicated in observed failures:
+      - route_failures   -> segment A (route switching)
+      - pending/verify   -> segment B (delay handling)
+      - dependency_block -> segment C (path coordination)
+      - budget_exhaust   -> shared (stop/residual semantics)
+    Without a profile, segment choice is uniform.
+    """
+    if failure_profile:
+        weights = {
+            "shared": 1.0 + failure_profile.get("budget_exhaust", 0),
+            "A": 1.0 + failure_profile.get("route_failures", 0),
+            "B": 1.0 + failure_profile.get("pending_residue", 0),
+            "C": 1.0 + failure_profile.get("dependency_block", 0),
+        }
+        names = list(weights)
+        total = sum(weights.values())
+        pick = rng.random() * total
+        acc = 0.0
+        segment = names[-1]
+        for name in names:
+            acc += weights[name]
+            if pick <= acc:
+                segment = name
+                break
+    else:
+        segment = rng.choice(list(SEGMENTS))
+    name = rng.choice(SEGMENTS[segment])
+    if name.startswith("enable_mech_") or name.startswith("enable_"):
+        return mutate_feedback(genome, rng, failure_profile)
+    new_val = _mutate_value(name, getattr(genome, name), rng)
+    return dataclasses.replace(genome, **{name: new_val})
+
+
+def crossover_segments(a: D088RecoveryGenome, b: D088RecoveryGenome,
+                       rng: random.Random) -> D088RecoveryGenome:
+    """Structured crossover: exchange whole mechanism segments.
+
+    Preserves intra-segment linkage (co-adapted A/B/C parameter blocks),
+    which uniform per-gene crossover would destroy.
+    """
+    kwargs = {}
+    for segment, names in SEGMENTS.items():
+        src = a if rng.random() < 0.5 else b
+        for name in names:
+            kwargs[name] = getattr(src, name)
+    # genes not in any segment (none currently) fall back to uniform
+    for name in dataclasses.asdict(a):
+        if name not in kwargs:
+            kwargs[name] = getattr(a if rng.random() < 0.5 else b, name)
     kwargs.update(arm_flags(arm_label(a)))
     return D088RecoveryGenome(**kwargs)

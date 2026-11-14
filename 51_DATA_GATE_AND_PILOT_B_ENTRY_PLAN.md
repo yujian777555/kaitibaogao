@@ -446,3 +446,7 @@ v1 manifest 因 cluster_id 角色碎片化而被撤销，不再视为有效 lock
 ## 19. D-088 数据门（2026-11-15）
 
 D-088 使用独立 Train-only 数据：开发 96 场景（`d088r|train|`，manifest `e32ddd2f…`）与 Fresh 复制 80 场景（`d088r|train2|`，全新 families），均 SHA-256 锁定于 `experiments/d088_recovery/results/`。D-087 Validation 仅作历史失败审计（只读）；Pilot B、正式 A-3b、Test、A800/ARWM 与真实 LLM API 继续 HOLD。机制 B 的 R3 提升已在 Fresh 复制，R4 权衡与演化价值待下一轮。
+
+## 20. D-088-R2 数据门（2026-11-15）
+
+R2 配对实验沿用 D-088 Train 数据门：开发 96 场景（`d088r|train|`）与 Fresh 复制 80 场景（`d088r|train2|`），manifest SHA-256 不变。29 个 run 原始账本与独立复算见 `experiments/d088_recovery/results/d088_r2_report.json` / `d088_r2_audit.json`。机制 B 的 R3 提升已两次独立复制；R4 与演化价值待下一轮。Test、A800/ARWM、真实 LLM API 继续 HOLD。
