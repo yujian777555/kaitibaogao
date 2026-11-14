@@ -2543,3 +2543,12 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 - 演化价值未证：144 评价下 RandomSearch=NSGA-II；反馈条件化变异无一致优势。
 - 下一轮：①(R3,R4) Pareto 前沿保留 + 预算分割策略 ②pop=32×30 代 + counterfactual 锚点初始种群 ③strict_residual_stop 预算阈值参数化。
 - 新文件：`d088_r2_experiment.py` / `d088_r2_audit.py` / `97_D088_R2_OPERATOR_AND_STOP_ABLATION.md`。
+
+## D-089 Handoff（2026-11-15）
+
+- **双指标提升已复制：冻结候选 Fresh R3=0.750（+18.8pp）/ R4=1.000（+25pp）vs Greedy，零违规。** R3 提升保持，R4 短板修复，预算竞争解决。权衡：harm 0.188 vs 0.109。
+- 预算竞争根因：停止条件语义（非动作耗尽）。有效内核=可达性感知停止+预算门控；B1 Pareto/B2 预留基因/B4 adaptive 在 960 预算下无增益或负贡献。
+- **演化价值第三次未证：RandomSearch 5/5 稳定最优。** 下一轮做状态条件化规则编码或 2880 预算，否则正式承认贡献在策略类设计。
+- 残余 R3 失败（4/24）全在 g03_PAIR_RACE：stop_residual=2 过早停 + 互依对 alternate 未选。
+- 冻结 genome 存 `results/d089_audit.json`；D-088-R2 两份 R3 genome 亦存档。
+- 新文件：`experiments/d089_recovery/`（6 模块）+ `98_D089_BUDGET_COOPERATION_EXPERIMENT.md`。

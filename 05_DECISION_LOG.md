@@ -1711,3 +1711,15 @@ D-087 失败机制反事实审计：rv02/rv03/rv04 repeat 4 的 30 条失败轨�
 结果：①strict_residual_stop 在 ABC 组 seed711 配对提升 R3 0.542→0.792/R4 0.583→0.792，但 BC 组表现为 R3↔R4 权衡移动（预算竞争）。②反馈条件化变异无一致优势，RandomSearch 与演化同分——演化价值仍未证明。③开发集 best_balanced（BC/base s711，R4=0.875）Fresh 未复制。④**best_r3 候选 Fresh R3=0.800 vs Greedy 0.650（+15pp，零违规）——与 R1 轮第二个独立 genome 确认，机制 B 的 R3 提升已两次独立复制**。独立复算 29 runs 零不一致。
 
 报告：`97_D088_R2_OPERATOR_AND_STOP_ABLATION.md`。无 Test/LLM/A800。
+
+## D-089：预算协同与 960 评价搜索（2026-11-15）
+
+预算竞争分析（29 runs 逐动作统计）：失败 100% 为提前停止型、0 例预算耗尽——停止条件无法区分"仍可恢复"与"恢复无益"是 R3/R4 竞争本质。
+
+实现 B1 Pareto 档案 / B2 Escalation Reserve / B3 Reachability-Aware（public_min_harm 公开不动点）/ B4 Parameterized Stop。B4 初版成本估算 bug（假设全败→立即停止）已修复为随时势单轮估算。新 Train 数据：开发 96（g01–g06，manifest `b2307404…`）+ Fresh 64（h01–h04，`2ee16a6b…`）。
+
+960 评价配对实验（pop=32，5 seeds，35 runs，全部零违规）：RandomSearch 5/5 稳定最优（R3=0.833/R4=1.000）；NSGA-II/III 有塌缩 seeds；EvoBudget≈NSGA-II。消融：B1 无增益、锚点无贡献、反馈变异弱信号；策略级消融显示 legacy/strict stop 均 0.833/1.000 而 adaptive 0.542/0.917（B4 负贡献）。独立复算 35 runs 零不一致。
+
+**Fresh 复制：冻结候选 R3=0.750/R4=1.000 vs Greedy 0.562/0.750——首次 R3 与 R4 同时超基线（+18.8pp/+25pp），预算竞争解决。** 权衡保留：harm 0.188 vs 0.109。残余 4 个 R3 失败定位 g03 互依对（stop_residual=2 过早停）。
+
+报告：`98_D089_BUDGET_COOPERATION_EXPERIMENT.md`。无 Test/LLM/A800。

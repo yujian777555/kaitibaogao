@@ -1340,3 +1340,11 @@ All work remains in `kaitibaogao`; never merge the user's other repositories.
 3. strict_residual_stop 参数化：剩余预算 < 阈值时优先保 ESCALATE。
 4. 两份 R3 提升冻结 genome 已存档；待 Validation 授权后正式复制。
 5. 禁止 Test/LLM API/A800；安全约束零容忍；四件套同步。
+
+## D-089 Next（2026-11-15）
+
+1. g03 互依对修复：R3 类任务（min=0）禁止 stop_residual>0 的停止；互依环 alternate 破除优先级强化。目标 R3 0.833→0.95+。
+2. harm 收窄：冻结候选 harm 0.188→0.11 以下，研究恢复顺序与残余分布。
+3. 演化价值第四次：状态条件化规则编码（非连续参数）或 2880 评价三倍预算配对；连续参数空间三次随机=演化，应正式记录该结论边界。
+4. B4 成本估算校准。
+5. 三份冻结 genome 待 Validation 授权。禁止 Test/LLM API/A800；安全约束零容忍；四件套同步。

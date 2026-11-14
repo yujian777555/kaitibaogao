@@ -1015,3 +1015,9 @@ v2 使用 `family|stratum` cluster_id，role 独立；288 Train-only 行、48 cl
 - 两项改进：strict_residual_stop（残余感知停止）+ 反馈条件化变异/结构分段交叉。报告 `97_D088_R2_OPERATOR_AND_STOP_ABLATION.md`。
 - **机制 B 的 R3 提升（0.650→0.800，+15pp vs Greedy，零违规）已两次独立 genome 确认并 Fresh 复制。**
 - R4 短板与演化价值未解；下一轮：Pareto 前沿保留、预算分割、大预算配对、counterfactual 锚点种群。
+
+## D-089 — 2026-11-15
+
+- 预算竞争解决：冻结候选 Fresh R3=0.750/R4=1.000 双超 Greedy（+18.8pp/+25pp），零违规。报告 `98_D089_BUDGET_COOPERATION_EXPERIMENT.md`。
+- 有效内核=可达性感知停止+预算门控；B1/B2/B4-adaptive 无增益；演化 vs 随机第三次未证。
+- 下一轮：g03 互依对修复、harm 收窄、状态条件化编码/2880 预算。
