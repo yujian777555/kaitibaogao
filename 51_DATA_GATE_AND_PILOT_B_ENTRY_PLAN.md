@@ -442,3 +442,7 @@ D-081 corrective CI 已成功：run 42828590264 @192f958，318/318 tests。D-078
 v1 manifest 因 cluster_id 角色碎片化而被撤销，不再视为有效 lock。v2 以 `family|stratum` 表示统计簇，role 独立；288 Train-only 行恰好映射到 48 个可 join clusters，每簇 6 行、每角色 3 行。
 
 唯一有效 manifest SHA 为 `09df6babbb6e3222ea57a7f354654636ac2437b7011dbe3f1ac738df894a0bca`，lock 为 `experiments/pilot_a3b/d079_manifest_lock.json`。v2 Train-only 诊断已重跑并通过独立核验。Pilot B、正式 A-3b、Test、A800/ARWM 与真实 LLM API 继续 HOLD。
+
+## 19. D-088 数据门（2026-11-15）
+
+D-088 使用独立 Train-only 数据：开发 96 场景（`d088r|train|`，manifest `e32ddd2f…`）与 Fresh 复制 80 场景（`d088r|train2|`，全新 families），均 SHA-256 锁定于 `experiments/d088_recovery/results/`。D-087 Validation 仅作历史失败审计（只读）；Pilot B、正式 A-3b、Test、A800/ARWM 与真实 LLM API 继续 HOLD。机制 B 的 R3 提升已在 Fresh 复制，R4 权衡与演化价值待下一轮。

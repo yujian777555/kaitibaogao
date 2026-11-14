@@ -1,0 +1,186 @@
+{
+  "rv02_CROSS_DELAY|D3_DEPENDENT_ABORT|r4": {
+    "found": true,
+    "class_success": 1,
+    "label": "R3",
+    "decision_count": 7,
+    "avoidable_harm": 0,
+    "residual_side_effects": 0,
+    "constraint_violation": 0,
+    "sequence": [
+      [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "B",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "B",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "ESCALATE"
+      ]
+    ]
+  },
+  "rv02_CROSS_DELAY|D4_BLOCKED_COMPENSATION|r4": {
+    "found": true,
+    "class_success": 0,
+    "label": "R4",
+    "decision_count": 3,
+    "avoidable_harm": 1,
+    "residual_side_effects": 2,
+    "constraint_violation": 0,
+    "sequence": [
+      [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      [
+        "ESCALATE"
+      ]
+    ]
+  },
+  "rv03_MULTI_ROUTE|D3_DEPENDENT_ABORT|r4": {
+    "found": true,
+    "class_success": 0,
+    "label": "R3",
+    "decision_count": 3,
+    "avoidable_harm": 3,
+    "residual_side_effects": 3,
+    "constraint_violation": 0,
+    "sequence": [
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "ESCALATE"
+      ]
+    ]
+  },
+  "rv03_MULTI_ROUTE|D4_BLOCKED_COMPENSATION|r4": {
+    "found": true,
+    "class_success": 0,
+    "label": "R4",
+    "decision_count": 3,
+    "avoidable_harm": 2,
+    "residual_side_effects": 3,
+    "constraint_violation": 0,
+    "sequence": [
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "ESCALATE"
+      ]
+    ]
+  },
+  "rv04_REVERSE_RECOVERY|D3_DEPENDENT_ABORT|r4": {
+    "found": true,
+    "class_success": 1,
+    "label": "R3",
+    "decision_count": 7,
+    "avoidable_harm": 0,
+    "residual_side_effects": 0,
+    "constraint_violation": 0,
+    "sequence": [
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "B",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "B",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      [
+        "ESCALATE"
+      ]
+    ]
+  },
+  "rv04_REVERSE_RECOVERY|D4_BLOCKED_COMPENSATION|r4": {
+    "found": true,
+    "class_success": 0,
+    "label": "R4",
+    "decision_count": 3,
+    "avoidable_harm": 1,
+    "residual_side_effects": 2,
+    "constraint_violation": 0,
+    "sequence": [
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "COMPENSATE",
+        "A",
+        "primary"
+      ],
+      [
+        "ESCALATE"
+      ]
+    ]
+  }
+}

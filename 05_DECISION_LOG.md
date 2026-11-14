@@ -1692,3 +1692,14 @@ CI 43154910372 在结果提交 cf16275 上因 raw artifact hash 不一致而失�
 Artifact `13915563618` 已下载并再次独立复算，16 项检查全部通过。早期 CI 43154910372 的 raw 哈希失败保留为压缩日志；canonical 修复已验证。科学结论仍为 **REPLICATION_FAILED / NO-GO**，0/5 候选通过，不能宣称跨 family 优势或算法创新。
 
 证据：`95_D087_CI_EVIDENCE.json`。
+# Appended by D-088 experiment round
+
+## D-088-EXPERIMENT-1：反馈驱动动态恢复机制 Train 实验（2026-11-15）
+
+D-087 失败机制反事实审计：rv02/rv03/rv04 repeat 4 的 30 条失败轨迹在 24 步预算内全部存在合法完成序列（rv02/rv04 D3 仅需 7 步 primary 依赖序）。失败可归因于：①失败后不切换路线 ②串行等待浪费预算。实现三机制（A 失败反馈路线切换 / B 延迟感知自适应确认 / C 依赖感知路径协同）及组合，机制开关按组固定、突变不翻转。实现中修复三个策略缺陷（PENDING 探针不学习延迟、停止前不清结 pending、预算耗尽前仍派发），修复后全组硬违规=0。
+
+实验：开发 96 场景（6 families，`d088r|train|`，manifest `e32ddd2f…`）+ Fresh 80 场景（5 全新 families，`d088r|train2|`）。臂=7 固定基线 + RandomSearch/NSGA-II/NSGA-III × {A,B,C,AB,AC,BC,ABC}，pop=12×7 代，seeds 711/822/933。
+
+结果：Greedy 基线 R3=0.792/R4=0.750/harm=0.021。机制 B 组 R3=0.833 全 seed 一致（+4.1pp），但 RandomSearch/B 同分——收益归机制设计而非演化。NSGA-II/C·A seed711 R4=0.833/harm=0.083（超基线）。独立复算 63 runs 全一致。Fresh 复制：best_r3（机制 B）R3=0.800 vs Greedy 0.650（**+15pp 真实提升，零违规，已复制**）；但 R4 0.200 vs 0.750、harm 0.450 vs 0.062（权衡必须保留）。best_r4 候选 Fresh 打平未复制。
+
+科学结论：机制 B 的 R3 提升真实可重复；R4 短板与演化价值未证是下一轮重点。报告：`96_D088_FEEDBACK_RECOVERY_EXPERIMENT.md`。无 Test/LLM/A800。

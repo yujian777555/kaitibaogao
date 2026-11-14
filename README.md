@@ -1000,3 +1000,12 @@ v2 使用 `family|stratum` cluster_id，role 独立；288 Train-only 行、48 cl
 - New provisional algorithm hypothesis: Fault-Stratified Pareto Archive Evolution (FSPAE), described in `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
 - EvoTool paper/code generation-budget mismatch is documented in `83_EVOTOOL_REPRODUCTION_AUDIT.md`.
 - No baseline reproduction or optimizer experiment has been run.
+
+## D-088 feedback-driven recovery — 2026-11-15
+
+- D-087 failure counterfactual audit: all 30 repeat-4 failures have legal ≤24-step completions; root cause = no route switching + serial waiting.
+- Three mechanisms implemented in `experiments/d088_recovery/` (A failure-feedback route switching, B delay-aware adaptive confirmation, C dependency-aware path coordination), with budget-aware dispatch gating and pending-resolution guarantees (zero hard violations after fixes).
+- Development 96 scenarios + Fresh 80 scenarios (`d088r|train|` / `d088r|train2|`), SHA-256 locked.
+- **Replicated improvement: mechanism B raises R3 CorrectEscalation 0.650→0.800 (+15pp vs Greedy) on Fresh families with zero violations.** Trade-off preserved: R4 0.750→0.200, harm 0.062→0.450.
+- Evolution contribution not yet established (RandomSearch ties at equal budget).
+- Report: `96_D088_FEEDBACK_RECOVERY_EXPERIMENT.md`.

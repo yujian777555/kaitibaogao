@@ -1324,3 +1324,11 @@ Next:
 4. Do not write positive results or claim FSPAE works until matched-budget experiments and a locked shift test pass.
 
 All work remains in `kaitibaogao`; never merge the user's other repositories.
+
+## D-088 Next（2026-11-15）
+
+1. R4 短板修复：实现残余伤害感知停止条件（residual>min_reachable_harm 时禁止 ESCALATE，继续补偿可达路线），加入机制 B；重跑 Fresh 复制。
+2. 演化价值验证：反馈条件化变异（失败轨迹引导）+ pop=24×20 代，与 RandomSearch 配对比较（3 seeds 起）。
+3. BC 组合冻结与独立 Fresh 验证（开发集均衡最优）。
+4. 保持：D-087 Validation 只读；禁止 Test/LLM API/A800；安全约束零容忍。
+5. 更新四件套并提交推送后核验 CI。

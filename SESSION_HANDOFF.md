@@ -2523,3 +2523,15 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 - New method hypothesis: FSPAE, a fault-stratified Pareto archive with coverage-deficit parent sampling. Details: `84_MODULE_LEVEL_COMPARISON_AND_FSPAE_HYPOTHESIS.md`.
 - D-078 remains NO_UPLIFT; 32/42 selections equal Hand, Hand R3 correct escalation 0.0. FSPAE is only a hypothesis.
 - Next action: prepare the exact EvoTool Qwen3-8B tau-bench baseline preflight; ask user before launching vLLM/A800 or any real API. No formal A-3b optimizer, Validation/Test, or external benchmark Test is authorized.
+
+## D-088 Experiment Handoff（2026-11-15）
+
+- 反事实审计：D-087 的 30 条失败轨迹全部有 24 步内合法解；根因=不切换路线+串行等待。
+- 三机制 A/B/C 实现于 `experiments/d088_recovery/`，含预算感知派发门控与 pending 清结保证（全组违规=0）。
+- 开发 96 场景 + Fresh 80 场景（`d088r|train|` / `d088r|train2|`），SHA-256 锁定。
+- **已复制的提升：机制 B（延迟感知批量调度）R3 0.650→0.800（+15pp vs Greedy），Fresh family，零违规。**
+- **权衡：R4 0.750→0.200，harm 0.062→0.450（机制 B 提前 ESCALATE 保 R3）。**
+- **演化贡献未证：RandomSearch 同预算同分；需反馈条件化变异/更大预算。**
+- best_r4（NSGA-II/A s711）Fresh 未复制（与 Greedy 打平）。
+- 下一轮：①R4-aware 停止条件（残余>min_reachable 禁止停止）②反馈条件化变异 vs RandomSearch 配对检验 ③BC 组合独立冻结验证。
+- 报告：`96_D088_FEEDBACK_RECOVERY_EXPERIMENT.md`；审计：`results/d088_independent_audit.json`。
