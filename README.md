@@ -1021,3 +1021,7 @@ v2 使用 `family|stratum` cluster_id，role 独立；288 Train-only 行、48 cl
 - 预算竞争解决：冻结候选 Fresh R3=0.750/R4=1.000 双超 Greedy（+18.8pp/+25pp），零违规。报告 `98_D089_BUDGET_COOPERATION_EXPERIMENT.md`。
 - 有效内核=可达性感知停止+预算门控；B1/B2/B4-adaptive 无增益；演化 vs 随机第三次未证。
 - 下一轮：g03 互依对修复、harm 收窄、状态条件化编码/2880 预算。
+
+## D-090 状态（2026-11-16）
+
+D-090 已完成 `d090r|train|` 96 场景 Train-only 小规模机制对照。g03_PAIR_RACE 的互依环已定位，r2 场景在 24 步预算下存在 25 步公开下界。P1 局部减少 g03 失败但 Harm 上升，五种搜索方法在 96-eval 配对对照中结果相同。当前不形成冻结候选或独立 Validation 申请。

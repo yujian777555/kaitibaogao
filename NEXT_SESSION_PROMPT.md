@@ -1348,3 +1348,7 @@ All work remains in `kaitibaogao`; never merge the user's other repositories.
 3. 演化价值第四次：状态条件化规则编码（非连续参数）或 2880 评价三倍预算配对；连续参数空间三次随机=演化，应正式记录该结论边界。
 4. B4 成本估算校准。
 5. 三份冻结 genome 待 Validation 授权。禁止 Test/LLM API/A800；安全约束零容忍；四件套同步。
+
+## D-090 当前状态 — 2026-11-16
+
+阅读 `99_D090_PAIR_RACE_RULE_SEARCH.md` 与 `experiments/d090_recovery/results/d090_mechanism_ablation.json`。D-090 Train-only 小规模对照尚未显示演化超过同编码随机搜索。P1 可减少 g03 失败但 Harm 代价过高，P2 违反 pending 硬约束。下一步研究 pair 与延迟确认的联合预算分配和 Harm-aware 可行性修复，保持 D-089 B3 作为基础。不要访问正式 Validation/Test、启动 A800/ARWM 或真实 LLM/API。

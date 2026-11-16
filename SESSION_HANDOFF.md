@@ -2556,3 +2556,11 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 ## D-089 修正（2026-11-15）
 
 门控修复后重跑：B4 adaptive 非负贡献（0.833/1.000）；三停止模式等效；负贡献仅 high_safety=2.0。Fresh 双指标提升数字不变。最终数字见 98 号报告。
+
+## D-090 Pair-Race 与状态条件化规则搜索 — 2026-11-16
+
+- D-089 g03_PAIR_RACE 已完成逐轨迹复核。主路径 A<-B/B<-A 形成互依环，alternate 无依赖。D-090 r2 场景的三条延迟路径在 24 步合同下需要至少 25 步完成并升级，属于预算边界。
+- 新 Train-only manifest namespace 为 `d090r|train|`，6 families × 4 strata × 4 repeats = 96 scenarios。manifest 与逐场景 rows 保存在 `experiments/d090_recovery/results/`。
+- 固定机制消融显示 P1 将 g03 R3 失败从 4/4 降为 1/4，但 Harm 上升到 0.479。P2 Harm=0.146 但产生 2 个约束和 4 个 pending。P3/P4 未修复 g03。
+- Random Search、NSGA-II、NSGA-III、State-Conditioned Evolution、State-Conditioned Random Search 在 96 唯一评价预算下均为 R3=0.875、R4=1.000、Harm=0.042、零违规。当前没有演化优势，也没有冻结候选。
+- 报告：`99_D090_PAIR_RACE_RULE_SEARCH.md`。实验代码：`experiments/d090_recovery/`。D-090 继续保持 Train-only，不能访问正式 Validation/Test。
