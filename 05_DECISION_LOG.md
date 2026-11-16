@@ -1,5 +1,22 @@
 # 05 — 研究决策日志
 
+## 2026-11-16：D-090 Train-only 结果与 D-091 审计决策
+
+### 决策 D-090：保留双目标/损害改善作为探索性结果，不宣称 EC 搜索优势
+
+- D-090 Train-only 96 scenarios / 6 families；五种搜索方法均报告 R3=.875、R4=1.000、Harm=.042、硬约束违规=0，3 paired seeds、每方法 96 unique genome evaluations。
+- 方法间汇总结果相同，尚不能判断是相同 genome、phenotype 等价、指标聚合碰撞、实现路径塌缩还是搜索平台；不得宣称演化优于随机搜索。
+- 固定消融 P1 有 g03 局部改善但 Harm/R4 恶化；P2 有硬约束违规，均不能冻结为候选。
+- g03 r2 的 25 步公开下界需要独立证明；D-090 的 24 步合同、原始标签和分母不得事后修改。
+
+### 决策 D-091：先审计，不立即追加搜索或 Validation
+
+- 下一任务为 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
+- D-091 只读审计原始账本、独立复算指标、核验五种方法实现与 phenotype、证明 r2 可行性下界并定位 P1/P2 行为级问题。
+- CI run `43881534809` regression success、D-090 test step success；已列 artifacts 不含 D-090 专属结果包，因此必须补独立账本复算 artifact。
+- 当前无冻结候选、无 Validation 授权、无 Test 访问。未启动 A800 或真实模型训练。
+
+
 ## 2026-11-02：项目启动与研究边界锁定
 
 ### 决策 D-001：唯一仓库
