@@ -1,5 +1,18 @@
 # kaitibaogao — 硕士学位论文开题研究
 
+## D-090 最新状态（2026-11-16；D-091 审计优先）
+
+- D-090 Train-only：6 families、96 scenarios，namespace `d090r|train|`；报告 `99_D090_PAIR_RACE_RULE_SEARCH.md`。
+- 固定消融结果：Legacy B3 R3=.500/R4=1.000/Harm=.271/violations=0；P1 .708/.917/.479/0；P2 .667/1.000/.146/2；P3 .583/1.000/.229/0；P4 .417/1.000/.313/2。P1 有 g03 局部改善但 Harm 恶化；P2 有硬违规，不可用。
+- 五种搜索方法均报告 R3=.875、R4=1.000、Harm=.042、硬约束违规=0；3 paired seeds、每方法 96 unique genome evaluations。此为 Train-only 探索结果，不能证明演化优于随机搜索。
+- g03 A/B 公开互依环，C 独立；r2 报告 24 步合同下存在 25 步公开下界，须由 D-091 独立证明，不得事后改标签或分母。
+- 当前无冻结候选、无 Validation 授权、无 Test 访问。SSH 30939/30522 握手失败；未启动 A800 或模型训练。
+- CI run `43881534809` success，`Test d090_recovery` step success。该 run 已列 artifacts 不含 D-090 专属结果包；CI 绿灯只证明回归测试，不代表 D-090 账本已被 CI 独立复算。
+- **下一唯一任务：D-091**，审计原始账本、独立复算、搜索算法身份/phenotype 等价、r2 可行性下界和 P1/P2 轨迹。禁止在审计前启动新搜索、冻结候选或 Validation。
+- D-091 方案：`100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
+
+---
+
 ## 最新执行状态（2026-11-12，D-087 独立复制失败）
 
 - **协议与冻结：** 92 号经 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数，科学判据未改。五个 NSGA-III 候选直接来自原 selection.genome，冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`，没有重新搜索。
