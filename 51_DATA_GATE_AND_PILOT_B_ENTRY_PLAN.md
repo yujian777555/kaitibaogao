@@ -1,5 +1,17 @@
 # 51 — 数据门禁、Pilot A-3 复核与 Pilot B 进入计划
 
+## 0M. D-090 Train-only 结果与 D-091 门禁（2026-11-16）
+
+D-090 使用 `d090r|train|` 新命名空间、6 families、96 Train-only scenarios。固定消融：Legacy B3 R3=.500/R4=1.000/Harm=.271/violations=0；P1=.708/.917/.479/0；P2=.667/1.000/.146/2；P3=.583/1.000/.229/0；P4=.417/1.000/.313/2。P1 的局部 g03 改善伴随整体 Harm 恶化；P2 因硬约束违规排除。
+
+五种搜索方法均报告 R3=.875、R4=1.000、Harm=.042、硬约束=0；每方法 96 unique genome evaluations、3 paired seeds。该结果仅为 Train-only 探索，不能证明演化优于随机搜索。g03 r2 的 25 步下界待独立证明。
+
+CI `43881534809` regression success，D-090 test step success；已列 artifacts 不含 D-090 专属结果包。当前无冻结候选、无 Validation 授权、无 Test 访问。
+
+**下一唯一任务：** 执行 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。在原始账本独立复算、搜索算法身份审计和 r2 下界证明完成前，不启动新搜索、候选冻结、Validation 或 Pilot B。
+
+---
+
 日期：2026-11-06
 所属项目：kaitibaogao / 第一项创新候选
 状态：D-085 / R4 代码与协议 ACCEPTED / PREFIX 固定机制可行 / EC 功效实验因封顶 HOLD / FORMAL A-3B=HOLD
