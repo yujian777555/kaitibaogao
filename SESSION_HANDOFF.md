@@ -1,3 +1,15 @@
+## 0M. D-090 最新权威接管状态（2026-11-16）
+
+- 唯一工作仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`；D-090 报告 `99_D090_PAIR_RACE_RULE_SEARCH.md`。
+- D-090 使用 `d090r|train|`，6 families、96 Train-only scenarios。固定消融与五种搜索结果详见 99 号报告及 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
+- 搜索方法汇总均为 R3=.875/R4=1.000/Harm=.042/硬约束=0；3 paired seeds、每方法 96 unique genome evaluations。方法间相同结果不构成 EC 优势证明。
+- P1 g03 局部失败 4/4→1/4，但 Harm=.479、R4=.917；P2 Harm=.146 但有 2 项硬约束违规及 pending，不可作为候选。
+- g03 r2 报告 24 步预算内最小需求 25 步；D-091 必须独立证明下界，原始标签、预算和 D-090 结果不得改写。
+- CI `43881534809` regression success，D-090 test step success；当前列出的 CI artifacts 不含 D-090 专属结果包。须为 D-091 增加原始账本独立复算 artifact。
+- 无冻结候选，无独立 Validation 授权，无 Test。未启动 A800/模型训练；SSH 30939/30522 握手失败。
+- **唯一下一任务：D-091 只读证据审计与搜索可辨识性检查。** 审计前不运行新搜索、不调参、不冻结候选、不申请 Validation。
+
+---
 ## 0L. 最新权威接管状态（2026-11-12，D-087 复制失败）
 
 - 92 号经 `93_D087_PROTOCOL_REVIEW.md` 审查并补齐执行参数，未改变候选、判据、基线、seeds 或预算。冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`。
