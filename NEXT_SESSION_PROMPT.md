@@ -1,5 +1,19 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+## D-091 接管任务（2026-11-16）
+
+你接管 `yujian777555/kaitibaogao` 的 `pilot-a-stateful-recovery` 分支。先读 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md` 和 `99_D090_PAIR_RACE_RULE_SEARCH.md`，后者为 D-090 原始研究报告。
+
+**当前事实：** D-090 使用 6 families/96 Train-only scenarios。五种搜索方法均报告 R3=.875、R4=1.000、Harm=.042、硬约束违规=0；每方法 96 unique genome evaluations、3 paired seeds。固定消融中 P1 g03 局部改善但 Harm=.479、R4=.917；P2 Harm=.146 但有 2 项硬约束违规。g03 r2 被报告为 24 步合同下 25 步下界。没有冻结候选或 Validation 授权。
+
+**CI：** run `43881534809` regression success，`Test d090_recovery` step success；已列 artifacts 不含 D-090 专属结果包。不要把回归测试通过写成实验账本独立复算通过。
+
+**唯一任务：** 完成 D-091：原始账本 SHA/完整性与指标独立复算；逐 seed/family 复算；五方法算法身份、算子调用、预算公平、genome/phenotype 等价与聚合碰撞审计；r2 25 步下界证明；P1/P2 轨迹安全复核。不得重跑 D-090、启动新搜索、调参、冻结候选、访问 Validation/Test、启动 A800/真实 LLM API 或修改 main。
+
+审计结束后只提出 D-092 的 Train-only 预注册方案。不要把演化优势写成既定结论。每轮更新 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG 与 51 号计划，并核验提交和 CI。
+
+---
+
 > **D-087 实际复制结果（2026-11-12）：** 92 号经 93 号补齐执行参数后执行；五个原 NSGA-III 候选完全冻结，冻结 SHA=`31495e830da326778b44398a649e2614416451107fdea982530378b4abc6244c`。新 Validation 4 families/80 scenarios，SHA=`d2cdc1aa697592e2439b5a8d5dd354726d3b8dc74e4f215530f0d4c575d88ed8`，无 Train/Test。共 1,040 次评价、无缓存复用、无 Train 搜索。
 >
 > **结论：REPLICATION_FAILED / NO-GO。** 五候选均为 R3=R4=0.85、CondRecSucc=1、成本 8.85、硬约束 0，0/5 通过。成本虽低于 Greedy 的 20.0，但恢复主终点失败，不得宣称跨 family 优势。rv01 全成功，rv02/rv03/rv04 的 repeat 4 因延迟失败补偿与冻结确认节奏耗尽预算；duplicate/pending 均为 0。
