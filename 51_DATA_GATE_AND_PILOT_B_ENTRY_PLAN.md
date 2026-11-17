@@ -1,4 +1,18 @@
-## 0W. D-092 R2.3 定向修复门禁（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## 0X. D-092 R2.3 独立验收门禁（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+
+`110_D092_R2_3_INDEPENDENT_REVIEW.md`独立确认F9 canonical UTF-8 bytes和P07真实14-action/budget=10控制流通过；D-091负面证据完整继承；R2.3/R2.2身份与13/13源码绑定匹配。
+
+D-092五臂、反馈、预算、选择、硬约束、信息隔离和账本规格具备实现条件。此结论只允许进入实现，不证明算法提升，不批准实验。
+
+**GO：** Typed Adapter、五臂统一Runner、完整NSGA-II/III、A3/A4反馈、账本、静态算法测试、合成测试和实现一致性审查。
+
+**HOLD：** 960 Probe、正式Train-only搜索、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式A-3b、真实API、A800/ARWM、UndoBench TEST、ThinkingBox、D-090重跑和main merge。Probe/搜索仍需实现复审和用户明确批准。
+
+审查基线HEAD=`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`，main未变，工作区clean；CI=NOT RUN，无新artifact。提交后按真实SHA核验，不虚报CI。
+
+---
+
+## 0W. D-092 R2.3 定向修复门禁（历史状态；已被上方0X独立验收 supersede）
 
 R2.2 immutable snapshot=`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`，raw/canonical/blob=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3` / `006aface19258f5d9ba597011dfe9048dfea8897`。R2.3 raw/canonical/blob=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522` / `549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4` / `1498f20a6f298093c06d126a766c037a980869a3`。详见`109_D092_R2_3_TARGETED_REPAIR_REPORT.md`。
 

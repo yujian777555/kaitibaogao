@@ -1,6 +1,20 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2.3 两项定向修复完成（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## D-092 R2.3 独立验收通过（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+
+独立报告：`110_D092_R2_3_INDEPENDENT_REVIEW.md`。基线 HEAD=`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=320/0，工作区 clean。
+
+- F9 canonical UTF-8 identity bytes：ACCEPT；独立哈希向量通过。
+- F13/P07真实14-action/budget=10控制流：ACCEPT；源码调用链与精确分数2.770802651881641通过。
+- D-091负面证据继承：PASS；旧Random身份、静态State-Evo、8 genome→1 phenotype、21-step最短、P1/P2/P4负结果和best-only缺口均保留。
+- D-092五臂/反馈/预算/选择/约束/信息隔离设计：PASS_FOR_IMPLEMENTATION；均是规格审查，不是实现验证。
+- R2.3 raw/canonical/blob=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522` / `549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4` / `1498f20a6f298093c06d126a766c037a980869a3`；R2.2 snapshot保持完整。
+- **下一任务：立即实现Typed Adapter与五臂统一Runner，并执行静态/合成测试。** 不运行960 probe、genome search、exhaustive、Validation/Test或其他受禁实验。
+- 基线CI=NOT RUN；本审查提交后按真实SHA查询，不虚报通过。
+
+---
+
+## D-092 R2.3 两项定向修复完成（历史状态；已由110号独立验收 supersede）
 
 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。本轮起始 HEAD=`b7b0ba4b623a22e01a10dded378d80215ca4866a`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；起始 ahead/behind=318/0、工作区 clean。最终 SHA 以提交后远端核验为准。
 

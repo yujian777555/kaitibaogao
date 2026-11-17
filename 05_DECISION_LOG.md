@@ -1,6 +1,16 @@
 # 05 — 研究决策日志
 
-## 2026-11-18：D-092 R2.3 两项定向修复交付 — READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN
+## 2026-11-18：D-092 R2.3 独立验收 — ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO
+
+独立审查`110_D092_R2_3_INDEPENDENT_REVIEW.md`以HEAD`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`为基线，实际读取R2.3/R2.2、D-091原始证据和绑定源码，独立复算身份、F9哈希向量、P07预算与优先级分数。
+
+F9与P07均ACCEPT。P07真实共同前缀为14 actions，C delayed success在dispatch当场改变状态，B primary可在C receipt pending时派发，随后budget=10，P06 ordinary选B primary、P07 tight选B alternate。D-091负面证据全部保留，包括旧Random/State-Evo身份缺陷、8 genome→1 phenotype、21-step最短、P1/P2/P4负结果和不可复原的搜索历史。
+
+五臂、反馈、预算、选择、硬约束、信息隔离与账本设计具备实现条件。**决定为ACCEPT_FOR_TYPED_ADAPTER，不是APPROVED_FOR_EXPERIMENT。** 下一步直接实现Typed Adapter、五臂Runner与静态/合成测试；960 Probe、正式搜索、exhaustive和Validation/Test继续禁止。审查基线无新CI/artifact；规格审查不能替代实现测试。
+
+---
+
+## 2026-11-18：D-092 R2.3 两项定向修复交付（历史状态；已由110号独立验收 supersede）
 
 R2.2 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`，raw/canonical/blob=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3` / `006aface19258f5d9ba597011dfe9048dfea8897`。R2.3 canonical raw/canonical/blob=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522` / `549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4` / `1498f20a6f298093c06d126a766c037a980869a3`。
 

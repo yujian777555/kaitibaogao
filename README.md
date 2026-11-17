@@ -1,6 +1,18 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2.3 定向修复与验收准备（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## D-092 R2.3 独立验收通过（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+
+- 独立报告：`110_D092_R2_3_INDEPENDENT_REVIEW.md`；审查HEAD=`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`，main未变，工作区clean。
+- F9 canonical UTF-8 identity bytes与P07真实14-action/budget=10轨迹均独立通过；P06/P07精确分数差2.770802651881641。
+- D-091全部负面事实保留，输出manifest所列12文件SHA/字节数匹配；没有重跑D-090。
+- 五臂、反馈、预算、Pareto选择、硬约束与信息隔离具备实现条件；规格通过不等于实现或算法实验通过。
+- R2.3 raw/canonical/blob保持`75f9c72a…e7522` / `549c595e…7ce4` / `1498f20a…69a3`；R2.2 snapshot完整。
+- **下一任务：Typed Adapter→静态算法测试→合成测试→实现一致性审查。** 960 Probe、正式搜索、Validation/Test继续禁止；APPROVED_FOR_EXPERIMENT=NO。
+- 审查基线CI=NOT RUN；本审查提交无代码测试，按真实远端状态记录。
+
+---
+
+## D-092 R2.3 定向修复与验收准备（历史状态；已由110号独立验收 supersede）
 
 - **R2.3：** `103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522`，canonical=`549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4`，blob=`1498f20a6f298093c06d126a766c037a980869a3`。
 - **R2.2 immutable snapshot：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`；raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`，canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。

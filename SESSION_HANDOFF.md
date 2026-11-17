@@ -1,4 +1,15 @@
-## 0X. D-092 R2.3 定向修复交接（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## 0Y. D-092 R2.3 独立验收交接（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+
+- 报告=`110_D092_R2_3_INDEPENDENT_REVIEW.md`；审查/远端HEAD=`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=320/0，工作区clean。
+- F9 encoding ACCEPT；P07真实14-action/budget=10 ACCEPT。D-091负面证据全部继承，12个输出artifact当前SHA/字节数一致。
+- D-092五臂、动态反馈、预算、选择、硬约束与信息隔离规格通过；实现尚未发生。
+- R2.3 raw/canonical/blob=`75f9c72a…e7522`/`549c595e…7ce4`/`1498f20a…69a3`；R2.2 snapshot=`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`完整。
+- **下一步立即Typed Adapter与五臂Runner、静态/合成测试。** 需要144映射、完整NSGA-II/III、A3/A4、预算/账本/审计与A1/A4等价测试。
+- APPROVED_FOR_EXPERIMENT=NO；不运行960 probe、正式搜索、exhaustive、Validation/Test或其他受禁实验。基线CI=NOT RUN。
+
+---
+
+## 0X. D-092 R2.3 定向修复交接（历史状态；已被上方0Y独立验收 supersede）
 
 - 起始 HEAD=`b7b0ba4b623a22e01a10dded378d80215ca4866a`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=318/0；起始工作区 clean。
 - R2.2 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`：raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`，canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
