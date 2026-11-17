@@ -1,5 +1,19 @@
 # kaitibaogao — 硕士学位论文开题研究
 
+## D-091 最新接管状态（2026-11-17；审计尚未执行）
+
+- 唯一任务：只读审计 D-090 的原始数据、指标、搜索方法身份、genotype/phenotype 多样性、g03-r2 可行性与 P1/P2/P4 安全轨迹。当前仍是 TRAIN-ONLY；无冻结候选、无 Validation 授权、无 Test 访问。
+- D-090 原始搜索结果仍为五方法 R3=.875/R4=1.000/Harm=.041667/硬约束=0；这些是探索性 Train 结果，不是 EC 优势证据。
+- **源码预审发现（待 D-091 本地复现）：** `random` 实际落入与 `nsga2` 相同的演化分支；`state_evo` 使用固定 mutation profile 而非动态状态反馈；`GENERATIONS=6` 未被搜索循环使用。
+- **候选行为预审：** 15 个 run 的 best genomes 有 8 个不同值，但其 96 场景 trace bundle 在 105/105 两两比较中完全相同。仅限当前 D-090 Train manifest，不外推。
+- **r2 审计缺口：** 现有 g03 audit 脚本读取 D-089 场景/报告。D-090 r2 的 25 步下界未获证明；有一个按当前动作语义计算的 23-step witness，必须在真实环境中回放并 BFS/DP 验证。
+- CI `43881534809` regression success、D-090 test step success；不代表上述独立审计已执行。
+- 权威详细执行提示词：`101_D091_EXECUTOR_PROMPT.md`；审计方案：`100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
+- **下一唯一任务：执行 D-091；不得启动新搜索、调参、冻结候选、Validation、Test、A800/真实 LLM API 或 main merge。**
+
+---
+
+
 ## D-090 最新状态（2026-11-16；D-091 审计优先）
 
 - D-090 Train-only：6 families、96 scenarios，namespace `d090r|train|`；报告 `99_D090_PAIR_RACE_RULE_SEARCH.md`。
