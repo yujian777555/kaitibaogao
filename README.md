@@ -1,14 +1,15 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2 预注册修订（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+## D-092 R2 独立审查结论（2026-11-17；REQUEST_CHANGES / HOLD）
 
-- **文件身份：** R1 原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`；canonical R2 为 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。R2 raw SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical SHA=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，Git blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
-- **F1/F2：** μ=12、λ=12、12 个无放回唯一初始候选和 7 轮×12 个唯一 offspring=96；父代在轮内冻结，mutation 单父均匀抽取，crossover 两个不同父代无放回抽取，A0 从未评价集合无放回均匀采样。唯一 OFFER 伪代码从 attempts=0 开始，384 cap 含初始化与全部重复/cache proposal。
-- **F3/F4：** canonical NSGA-III 已补全 ASF、极端点、零跨度 normalization、35 方向唯一顺序、最后 front、niche=0 最近距离与 niche>0 seeded 随机选择。blocked contract/dependency 是 soft 合法拒绝回执；六类硬约束统一为 invalid、unauthorized、实际非法转移、pending、duplicate、runtime abort。
-- **F5/F6/F7：** 允许完整 Train rollout 后的 evaluator reward，禁止预先读取 label/hidden schedule；原“过早终止”更名为 unsuccessful escalation rate。trace/outcome/joint phenotype canonical hash 完整定义；10 个 probe genomes×96 scenes=960 独立 episodes；无效 seed/NO_FEASIBLE 均使相关比较 NO_CLAIM，不替换 seed。
-- **M1–M4：** A1/A4 逐 seed trajectory equivalence；144 空间中 96 评价覆盖 66.7%，另设一次 144×96=13,824 episodes 的 Train-only exhaustive reference，不参与调参或竞争；目标 runtime 固定 CPython 3.11.9/NumPy 1.26.4/Ubuntu 22.04 x86_64；六类硬字段和资源账本统一。
-- **静态检查：** F1–F7/M1–M4、轮次、attempt 初始化计数、canonical niching、反馈边界、probe/oracle 算术、统计 no-claim、13 份源码哈希和 R1 保留全部通过；无 OPEN/TBD。未实现 adapter/searcher，未执行 probe、算法测试或 genome search。
-- **边界：** 只交新的独立会话审查，不是 APPROVED_FOR_EXPERIMENT。本轮无新 CI/artifact；历史 D-091 CI 44068259009 与 artifact 14321023302 不是 R2 实验证据。
+- **权威报告：** 106_D092_R2_INDEPENDENT_REVIEW.md。R2 的版本、数据和 13 份源码绑定核验通过；不批准 adapter/searcher 实现或实验。
+- **R2 身份：** raw SHA=c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5；canonical SHA=7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53；Git blob=9196c717f2cb79ecd21a25e055a77afe0db03f59。
+- **核验通过：** R1 snapshot；13 份源码 blob/canonical SHA；D-090 Train manifest；96 个唯一 IDs；R1/R2/R3/R4 各 24 场景；R2 commit 仅文档修改。
+- **已基本关闭：** μ=12、λ=12、12 个初始+7×12=96 unique；384 attempt cap 含初始化；A0 无放回；轮末 survivor；A1/A4 等价规格。
+- **剩余阻断：** F8 typed genome 到 D090 底层字段映射；F9 delayed VERIFY/FAILED attempt 归因；F10 action mask 和合法状态转移；F11 NSGA-III normalization 坐标系；F12 optimizer/audit reward view 隔离；F13 probe PASS/HOLD 与 phenotype-collapse 阈值；F14 多目标 exhaustive search gap；F15 PRNG engine/common-random-numbers 定义。
+- **下一唯一任务：** 保留 R2 immutable snapshot，修订 canonical 103 为 R2.1，只关闭 106 号报告 F8–F15；不重开已通过的轮次、预算和五臂设计。
+- **CI 边界：** R2 commit 无新 workflow run/status check/artifact；历史 D-091 CI 44068259009 不是 R2 测试或实验批准。
+
 
 ---
 

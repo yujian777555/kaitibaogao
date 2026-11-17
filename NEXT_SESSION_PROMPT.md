@@ -1,6 +1,47 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2 独立审查接管（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+## D-092 R2 独立审查结论与 R2.1 定向修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
+
+唯一仓库/分支：yujian777555/kaitibaogao / pilot-a-stateful-recovery。接手时必须重新查询 HEAD、main、ahead/behind 和工作树。
+
+### R2 身份核验通过
+
+- 审查时 HEAD：3b76e78bb0bd58cb9b812ab7850757bee7cefb07；main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=313/0。
+- R2 raw SHA：c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5；canonical SHA：7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53；Git blob：9196c717f2cb79ecd21a25e055a77afe0db03f59。
+- R1 snapshot raw/canonical SHA 均匹配；13 份源码 blob/canonical SHA 全部匹配；Train manifest 与 96 个 scenario IDs、R1/R2/R3/R4 各 24 个标签均匹配。
+- R2 commit 只改文档；没有新 CI、status check 或 artifact。
+
+### 独立决定
+
+**REQUEST_CHANGES / HOLD。** 完整报告：106_D092_R2_INDEPENDENT_REVIEW.md。
+
+R2 的 mu/lambda/round、OFFER 384 cap、96 unique/9,216 episodes、五臂控制流骨架和 A1/A4 等价规格已基本闭合，不得重新打开这些已解决问题。
+
+必须定向关闭：
+1. F8：五字段 typed genome 到 D090Genome 底层字段的完整映射缺失。尤其 fallback_mode=2、completion_mode=1 会使单独关闭 boolean 仍然启用机制；harm budget=None 可能触发类型错误。
+2. F9：FAILED observation 可能由 delayed VERIFY 返回或被重复 VERIFY 重复返回；必须按 COMPENSATE attempt 一对一归因，保证 r_t 在 [0,1]。
+3. F10：action tuple grammar、RETRY_WORKFLOW preconditions、COMPENSATE public mask、合法 state transition edges 未冻结。
+4. F11：NSGA-III E matrix 使用 raw 还是 translated extreme points 不明确；scale=a-z* 可能重复减 ideal point。
+5. F12：optimizer_reward_view 与 audit_only_view 未隔离。
+6. F13：probe PASS/HOLD 和 phenotype-collapse 阈值没有量化。
+7. F14：五目标 exhaustive Pareto reference 的 search gap 未定义。
+8. F15：PRNG engine/API 未冻结；同 seed 不含 arm ID 实际是 common-random-numbers coupling，应明确。
+
+### 唯一下一任务：R2.1 定向澄清
+
+1. 将当前 R2 原样保存为 103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md。
+2. 修订 canonical 103 为 R2.1，只关闭 106 号报告 F8–F15。
+3. 不改 96 场景、96 unique evaluations、μ/λ、五臂、主要比较、种子、统计门槛和反馈矩阵。
+4. 只做文档/公式/接口规格与静态/合成测试设计；不得运行 probe、genome search 或 exhaustive reference。
+5. R2.1 完成后交独立会话定向复核；通过后立即进入 typed adapter + static/synthetic tests 实现审查，不再开展大范围文档重构。
+
+**禁止：** D-092 searcher/adapter 实现、probe 960 episodes、genome search、调参、候选冻结、exhaustive 13,824 episodes、Validation/Test、Pilot B、正式 A-3b、真实 API、A800/ARWM、UndoBench TEST、ThinkingBox、重跑 D-090、修改 main。
+
+维护 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG、51 数据门禁。记录 R2 immutable snapshot 和 R2.1 raw/canonical SHA、Git blob；不得声称未触发的 CI 通过。
+
+---
+
+## D-092 R2 独立审查任务（已完成；历史记录）
 
 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。开始必须 fetch 并核验真实 HEAD、main、ahead/behind 和本地工作树，不得覆盖未提交工作。
 

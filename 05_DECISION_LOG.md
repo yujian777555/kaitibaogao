@@ -1,5 +1,19 @@
 # 05 — 研究决策日志
 
+## 2026-11-17：D-092 R2 独立审查决定 — REQUEST_CHANGES / HOLD
+
+R2 文件身份和数据绑定核验通过：R2 raw SHA=c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5，canonical SHA=7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53；R1 immutable snapshot、13 份源码 blob/canonical SHA、D-090 manifest、96 unique IDs 和四类标签各 24 均复核匹配。
+
+**决定：** R2 REQUEST_CHANGES / HOLD。阻断项：F8 typed genome 到 D090 底层字段 mapping 缺失；F9 delayed VERIFY/FAILED attempt 计数可能重复且不能保证 r_t≤1；F10 action mask 和状态转移表未冻结；F11 NSGA-III normalization matrix raw/translated 坐标系不明确；F12 optimizer_reward_view 与 audit_only_view 未隔离；F13 probe PASS/HOLD 和 phenotype-collapse 阈值未定义；F14 exhaustive multiobjective search gap 未定义；F15 PRNG engine/API 未冻结。
+
+已基本关闭：μ=12、λ=12、12+7×12=96 unique、384 attempts 含初始化、A0 无放回、A1/A4 等价规格和数据/源码哈希。不得重开这些项目。
+
+**唯一下一任务：** 保留 R2 immutable snapshot，修订 canonical 103 为 R2.1，只关闭 F8–F15。R2.1 定向复核通过后立即进入 typed adapter + static/synthetic tests 实现审查，不再开展大范围文档重构。此前不运行 probe、genome search、exhaustive reference、Validation/Test 或 main merge。
+
+完整审查：106_D092_R2_INDEPENDENT_REVIEW.md。R2 commit 无新 CI/status/artifact；没有运行算法或 probe。
+
+---
+
 ## 2026-11-17：D-091 源码预审发现与执行边界
 
 ### 预审事实（待 D-091 独立复现）

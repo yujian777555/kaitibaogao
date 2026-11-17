@@ -1,3 +1,25 @@
+## 0R. D-092 R2 独立审查门禁（2026-11-17；REQUEST_CHANGES / HOLD）
+
+R2 raw/canonical SHA、R1 snapshot、13 份源码 blob/canonical SHA、D-090 Train manifest、96 scenario IDs 和 R1/R2/R3/R4 各 24 场景均独立复核通过。R2 commit 只修改文档，没有新 CI/status/artifact。
+
+但 R2 仍不接受。见 106_D092_R2_INDEPENDENT_REVIEW.md。必须关闭：
+- F8：五字段 typed genome 到 D090 底层字段的完整 mapping；
+- F9：COMPENSATE attempt 与 delayed VERIFY receipt 一对一归因，保证 r_t∈[0,1]；
+- F10：action grammar、public mask、RETRY preconditions、state transition table；
+- F11：NSGA-III normalization E matrix 坐标系；
+- F12：optimizer reward allowlist 与 audit-only output 隔离；
+- F13：probe PASS/HOLD 和 phenotype-collapse 阈值；
+- F14：多目标 exhaustive reference search gap 公式；
+- F15：PRNG engine、API 和 common-random-numbers 语义。
+
+**GO：** 仅保留 R2 immutable snapshot，修订 canonical 103 为 R2.1，完成上述定向澄清和静态/合成测试规格。已通过的 μ/λ、96 unique、384 cap、五臂和 A1/A4 等价不重开。
+
+**HOLD：** adapter/searcher 实现、probe 960 episodes、96×96 genome search、调参、候选冻结、exhaustive 13,824 episodes、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 LLM/API、UndoBench TEST、ThinkingBox 和 main merge。
+
+R2.1 定向复核通过后立即进入 typed adapter + static/synthetic tests 实现审查，不再进行大范围协议重写。
+
+---
+
 ## 0Q. D-092 R2 协议修订门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
 
 R1 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`。R2 canonical 文件 raw SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical SHA=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，Git blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。

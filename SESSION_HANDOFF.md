@@ -1,4 +1,16 @@
-## 0R. D-092 R2 预注册修订交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+## 0S. D-092 R2 独立审查交接（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- 审查时 HEAD=3b76e78bb0bd58cb9b812ab7850757bee7cefb07；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=313/0。
+- R2 raw SHA=c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5；canonical SHA=7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53；blob=9196c717f2cb79ecd21a25e055a77afe0db03f59。R1 snapshot raw/canonical SHA 均匹配。
+- 13 份源码 blob/canonical SHA 全部匹配；manifest hash、96 unique IDs、四类标签各 24 均匹配。R2 commit 只修改 7 个文档文件，无代码修改。
+- **决定：REQUEST_CHANGES / HOLD**，见 106_D092_R2_INDEPENDENT_REVIEW.md。F8 typed genome→D090底层字段 mapping 缺失；F9 FAILED/delayed VERIFY attempt 计数不唯一；F10 action mask/状态转移表不完整；F11 NSGA-III E matrix raw/translated 坐标系歧义；F12 optimizer reward 与 audit-only 信息未隔离；F13 probe PASS/HOLD 和 phenotype-collapse 阈值缺失；F14 多目标 exhaustive search gap 未定义；F15 PRNG engine 未冻结。
+- 已基本关闭且不应重开：μ/λ/7 rounds、96 unique、384 cap、A0 无放回、A1/A4 等价规格、R1/R2 和源码/manifest 身份。
+- **唯一下一任务：** 保留 R2 immutable snapshot 103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md，修订 canonical 103 为 R2.1，只关闭 F8–F15；不运行 probe、search 或 exhaustive reference。
+- R2 commit 无新 CI/status/artifact；远端 API 不证明执行者本地 clean。R2.1 定向复核通过后，立即进入 typed adapter + static/synthetic tests 实现审查。
+
+---
+
+## 0R. D-092 R2 预注册修订交接（历史状态；已被独立审查 0S supersede）
 
 - 起始 HEAD=`df2b8612a7c08ba3e93211f29c76198b569b79a3`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；开始工作区 clean。R1 原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`。
 - canonical R2=`103_D092_TRAIN_ONLY_PREREGISTRATION.md`：raw SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical SHA=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，Git blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
