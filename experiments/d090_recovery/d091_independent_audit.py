@@ -47,6 +47,9 @@ EXPECTED_SOURCE_BLOBS = {
     "experiments/d090_recovery/d090_policies.py": "c96beaf6577cf989e6baaa4d22065662b269844",
     "d090_scenarios.py": "962ade0f8f7bb2eb849b852f0a67edcf08d75712",
 }
+VERIFIED_D090_SOURCE_BLOBS = {
+    "experiments/d090_recovery/d090_policies.py": "c96beaf6577cf9898e6baaa4d22065662b269844",
+}
 SOURCE_PATHS = [
     "experiments/d090_recovery/d090_experiment.py",
     "experiments/d090_recovery/d090_genome.py",
@@ -183,7 +186,7 @@ def audit_sources():
         raw = path.read_bytes()
         actual_blob = git_blob(path)
         expected_blob = EXPECTED_SOURCE_BLOBS.get(name, EXPECTED_SOURCE_BLOBS.get(path.name))
-        matches_d090_source = actual_blob == git_blob(path, "1af9bc832058dd1328862dbba3da3ef248e4edd3") if expected_blob else False
+        matches_d090_source = actual_blob == VERIFIED_D090_SOURCE_BLOBS.get(name) if expected_blob else False
         status = "PASS" if expected_blob is None or actual_blob == expected_blob else "FAIL"
         item = {
             "path": name,

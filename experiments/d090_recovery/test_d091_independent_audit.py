@@ -4,7 +4,9 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+import d091_independent_audit as audit_module
 from d091_independent_audit import (
     ARTIFACT_NAMES,
     audit_candidates,
@@ -33,6 +35,17 @@ class TestD091IndependentAudit(unittest.TestCase):
         correction = result["registry_corrections"][0]
         self.assertEqual(correction["path"], "experiments/d090_recovery/d090_policies.py")
         self.assertTrue(correction["matches_d090_source_commit"])
+
+    def test_source_integrity_without_historical_git_objects(self):
+        real_git_blob = audit_module.git_blob
+
+        def shallow_git_blob(path, ref="HEAD"):
+            return real_git_blob(path, ref) if ref == "HEAD" else None
+
+        with patch.object(audit_module, "git_blob", side_effect=shallow_git_blob):
+            result = audit_sources()
+        self.assertEqual(result["status"], "PASS_WITH_LIMITATIONS")
+        self.assertEqual(len(result["registry_corrections"]), 1)
 
     def test_metric_recomputation_and_per_family_counts(self):
         result = audit_metrics(self.manifest, self.report, self.ablation)
