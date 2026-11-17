@@ -1,15 +1,15 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-091 最新接管状态（2026-11-17；审计尚未执行）
+## D-091 独立审计完成（2026-11-17）
 
-- 唯一任务：只读审计 D-090 的原始数据、指标、搜索方法身份、genotype/phenotype 多样性、g03-r2 可行性与 P1/P2/P4 安全轨迹。当前仍是 TRAIN-ONLY；无冻结候选、无 Validation 授权、无 Test 访问。
-- D-090 原始搜索结果仍为五方法 R3=.875/R4=1.000/Harm=.041667/硬约束=0；这些是探索性 Train 结果，不是 EC 优势证据。
-- **源码预审发现（待 D-091 本地复现）：** `random` 实际落入与 `nsga2` 相同的演化分支；`state_evo` 使用固定 mutation profile 而非动态状态反馈；`GENERATIONS=6` 未被搜索循环使用。
-- **候选行为预审：** 15 个 run 的 best genomes 有 8 个不同值，但其 96 场景 trace bundle 在 105/105 两两比较中完全相同。仅限当前 D-090 Train manifest，不外推。
-- **r2 审计缺口：** 现有 g03 audit 脚本读取 D-089 场景/报告。D-090 r2 的 25 步下界未获证明；有一个按当前动作语义计算的 23-step witness，必须在真实环境中回放并 BFS/DP 验证。
-- CI `43881534809` regression success、D-090 test step success；不代表上述独立审计已执行。
-- 权威详细执行提示词：`101_D091_EXECUTOR_PROMPT.md`；审计方案：`100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
-- **下一唯一任务：执行 D-091；不得启动新搜索、调参、冻结候选、Validation、Test、A800/真实 LLM API 或 main merge。**
+- **数据与复算：** D-090 三份原始 JSON、manifest/report 内部 SHA 和 Git blob 均核验；15 个 best candidates 与五组消融的全部保存指标复算差异为 0。101 号一个 `d090_policies.py` blob 登记转写错误已单独更正。
+- **算法身份：** 当前 `random` 与 `nsga2` 实际共用 NSGA-II 路径，Random Search 对照无效；`state_evo` 使用静态 mutation profile；`GENERATIONS=6` 不控制循环，真实 proposal/cache/generation 历史不可从现存 best-only 账本复原。
+- **行为可辨识性：** 15 个 best candidates 有 8 个 genome/规则签名，但 96 个 Train 场景上只有 1 个 trace/outcome phenotype，105/105 两两相同；不能据此比较算法优劣。
+- **r2 更正：** 23-step witness 已在真实环境成功回放；独立 BFS 证明当前语义下最短为 **21** 步。99 号的 25-step 下界由 `102_D091_INDEPENDENT_AUDIT_RESULT.md` 撤回，不修改原始标签、预算或 artifact。
+- **消融：** P1 的 g03 局部改善伴随 R2/R4 与整体 Harm 退化；P2/P4 的最后 ESCALATE 分别遗留 4/2 个 pending，硬约束优先，均不得成为候选。
+- **验证：** 本地完整回归 **456/456**；CI run `44067543678` success，专属 artifact `14320134130` 已下载并通过全部输出哈希和关键结果复核。早期失败 CI 44065635071/44066525906 日志保留。
+- **交付：** `102_D091_INDEPENDENT_AUDIT_RESULT.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION.md`、`experiments/d090_recovery/results/d091_audit/`。D-092 仅为 NOT FROZEN / NOT RUN 方案。
+- **唯一下一任务：** 独立审查 102/103；审查与明确授权前不得实现或运行 D-092。Validation、Test、Pilot B、正式 A-3b、A800/真实 LLM API 和 main merge 继续禁止。
 
 ---
 

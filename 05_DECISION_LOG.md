@@ -1771,3 +1771,17 @@ D-087 失败机制反事实审计：rv02/rv03/rv04 repeat 4 的 30 条失败轨�
 - g03 的 P1 pair 检测把失败从 4/4 降为 1/4，但整体 R3=0.708、R4=0.917、Harm=0.479。P2 Harm=0.146 但出现 pending/约束违规，拒绝采用。
 - 5 种搜索方法各 3 个 seed、每 run 96 个唯一 genome 评价，结果完全相同：R3=0.875、R4=1.000、Harm=0.042、零违规。演化相对同编码随机搜索未显示优势。
 - g03 r2 的公开最小动作下界为 25，不能在 24 步合同内完成。当前没有冻结候选，也不申请独立 Validation。
+
+## D-091：D-090 独立证据、算法身份与下界更正（2026-11-17）
+
+D-091 只读审计已实际执行，不重跑 D-090 搜索。三份原始 JSON、manifest/report 内部 SHA、Git blob 和 96 场景唯一性均核验；15×96 搜索 best rows 与 5×96 固定消融 rows 的全部指标独立复算差异为 0。101 号 `d090_policies.py` blob 的登记转写错误单独记录，真实 blob=`c96beaf6577cf9898e6baaa4d22065662b269844`，与原 D-090 源码提交一致。
+
+- `random` 与 `nsga2` 使用同一 RNG、初始化、variation 和 `nsga2_select`，Random Search 对照无效。`state_evo` 使用固定 mutation profile，不是动态失败反馈；`state_random` 是直接随机采样但初始池不配对。`GENERATIONS=6` 不控制 while evals<BUDGET；真实 proposal/cache/operator/generation 历史为 NOT_AUDITABLE_FROM_SAVED_TRACE。
+- 六维 survivor objectives 与 `_best()` 的 archive lexicographic key 不一致，最终选择不显式包含 CondRec，也不是直接选 final population/Pareto front。
+- 15 个 best candidates 只有 8 个 canonical genome/规则签名，96 个 Train 场景的 trace/outcome bundle 只有 1 个 phenotype，105/105 两两相同。结论为 IMPLEMENTATION_COLLAPSE + PHENOTYPE_EQUIVALENCE，不外推为所有搜索候选或环境等价。
+- 旧 g03 脚本实际读取 D-089。D-091 使用真实 D-090 Pair-Race r2 回放 23-step witness，class_success=1、pending/duplicate/constraint=0；独立 BFS 找到并证明当前模拟器语义下最短 21 步。99 号 25-step 下界撤回，原始 cap、标签、分母和 artifact 不修改。
+- P1 g03 失败由 4/4 降至 1/4，但总 Harm 26→46、R2/R4 退化；8 个 R2 因 pair 过滤阻断当前 D 而首步 ESCALATE。P2 在 Multi-Route r1/r3 各留 pending=2，P4 在 Deep-Chain r1/r2 各留 pending=1；两者均在 `_resolve_pending=None` 后直接 ESCALATE。P3 只改变停止条件，不解决 g03 路线可达性。P2/P4 硬约束违规不可抵消。
+
+交付 `102_D091_INDEPENDENT_AUDIT_RESULT.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION.md` 与 `experiments/d090_recovery/results/d091_audit/`。D-092 仅 PROPOSED / NOT FROZEN / NOT RUN；下一任务为独立审查，不执行搜索。
+
+本地完整回归 456/456。早期 CI 44065635071（shallow 历史对象缺失）与 44066525906（raw SHA 换行差异）失败日志均压缩保留；最终代码 `e5d13f60b30910d6c6b0c10d99f66227b125fb59` 的 CI `44067543678`=success，artifact `14320134130` 已下载复核全部输出哈希和科学结论。绿色 CI 不等于算法创新或搜索对照有效。

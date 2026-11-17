@@ -1,0 +1,170 @@
+{
+  "P1_pair_race": {
+    "class_failures": 17,
+    "constraint_rows": 0,
+    "constraint_scenarios": [],
+    "duplicate_total": 0,
+    "failure_family_counts": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 2,
+      "d090_MULTI_ROUTE": 7,
+      "d090_PAIR_RACE": 6
+    },
+    "failure_label_counts": {
+      "R2": 8,
+      "R3": 7,
+      "R4": 2
+    },
+    "harm_by_family": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 4,
+      "d090_FORK_JOIN": 0,
+      "d090_MULTI_ROUTE": 21,
+      "d090_PAIR_RACE": 19,
+      "d090_RESIDUAL_HARM": 0
+    },
+    "harm_by_label": {
+      "R1": 0.0,
+      "R2": 32.0,
+      "R3": 12.0,
+      "R4": 2.0
+    },
+    "harm_sum": 46,
+    "pair_race_r3_failures": 1,
+    "pending_total": 0
+  },
+  "P2_exhaustive_fallback": {
+    "class_failures": 8,
+    "constraint_rows": 2,
+    "constraint_scenarios": [
+      "d090r|train|d090_MULTI_ROUTE|D3_DEPENDENT_ABORT|r1",
+      "d090r|train|d090_MULTI_ROUTE|D3_DEPENDENT_ABORT|r3"
+    ],
+    "duplicate_total": 0,
+    "failure_family_counts": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 2,
+      "d090_MULTI_ROUTE": 2,
+      "d090_PAIR_RACE": 2
+    },
+    "failure_label_counts": {
+      "R3": 8
+    },
+    "harm_by_family": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 4,
+      "d090_FORK_JOIN": 0,
+      "d090_MULTI_ROUTE": 4,
+      "d090_PAIR_RACE": 4,
+      "d090_RESIDUAL_HARM": 0
+    },
+    "harm_by_label": {
+      "R1": 0.0,
+      "R2": 0.0,
+      "R3": 14.0,
+      "R4": 0.0
+    },
+    "harm_sum": 14,
+    "pair_race_r3_failures": 2,
+    "pending_total": 4
+  },
+  "P3_completion_gate": {
+    "class_failures": 10,
+    "constraint_rows": 0,
+    "constraint_scenarios": [],
+    "duplicate_total": 0,
+    "failure_family_counts": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_MULTI_ROUTE": 4,
+      "d090_PAIR_RACE": 4
+    },
+    "failure_label_counts": {
+      "R3": 10
+    },
+    "harm_by_family": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 0,
+      "d090_FORK_JOIN": 0,
+      "d090_MULTI_ROUTE": 12,
+      "d090_PAIR_RACE": 8,
+      "d090_RESIDUAL_HARM": 0
+    },
+    "harm_by_label": {
+      "R1": 0.0,
+      "R2": 0.0,
+      "R3": 22.0,
+      "R4": 0.0
+    },
+    "harm_sum": 22,
+    "pair_race_r3_failures": 4,
+    "pending_total": 0
+  },
+  "P4_harm_order": {
+    "class_failures": 14,
+    "constraint_rows": 2,
+    "constraint_scenarios": [
+      "d090r|train|d090_DEEP_CHAIN|D3_DEPENDENT_ABORT|r1",
+      "d090r|train|d090_DEEP_CHAIN|D3_DEPENDENT_ABORT|r2"
+    ],
+    "duplicate_total": 0,
+    "failure_family_counts": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 2,
+      "d090_FORK_JOIN": 2,
+      "d090_MULTI_ROUTE": 4,
+      "d090_PAIR_RACE": 4
+    },
+    "failure_label_counts": {
+      "R3": 14
+    },
+    "harm_by_family": {
+      "d090_DEEP_CHAIN": 4,
+      "d090_FANOUT_DELAY": 4,
+      "d090_FORK_JOIN": 2,
+      "d090_MULTI_ROUTE": 12,
+      "d090_PAIR_RACE": 8,
+      "d090_RESIDUAL_HARM": 0
+    },
+    "harm_by_label": {
+      "R1": 0.0,
+      "R2": 0.0,
+      "R3": 30.0,
+      "R4": 0.0
+    },
+    "harm_sum": 30,
+    "pair_race_r3_failures": 4,
+    "pending_total": 2
+  },
+  "legacy": {
+    "class_failures": 12,
+    "constraint_rows": 0,
+    "constraint_scenarios": [],
+    "duplicate_total": 0,
+    "failure_family_counts": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 2,
+      "d090_MULTI_ROUTE": 4,
+      "d090_PAIR_RACE": 4
+    },
+    "failure_label_counts": {
+      "R3": 12
+    },
+    "harm_by_family": {
+      "d090_DEEP_CHAIN": 2,
+      "d090_FANOUT_DELAY": 4,
+      "d090_FORK_JOIN": 0,
+      "d090_MULTI_ROUTE": 12,
+      "d090_PAIR_RACE": 8,
+      "d090_RESIDUAL_HARM": 0
+    },
+    "harm_by_label": {
+      "R1": 0.0,
+      "R2": 0.0,
+      "R3": 26.0,
+      "R4": 0.0
+    },
+    "harm_sum": 26,
+    "pair_race_r3_failures": 4,
+    "pending_total": 0
+  }
+}

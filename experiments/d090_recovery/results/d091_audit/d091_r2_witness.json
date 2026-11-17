@@ -1,0 +1,576 @@
+{
+  "action_cost": 26,
+  "avoidable_harm": 0,
+  "class_success": 1,
+  "conditional_recovery_success": null,
+  "constraint_violation": 0,
+  "correct_escalation": 1,
+  "decision_count": 23,
+  "duplicate_compensation": 0,
+  "final_tool_states": {
+    "A": "COMPENSATED",
+    "B": "COMPENSATED",
+    "C": "COMPENSATED",
+    "D": "NOT_COMMITTED"
+  },
+  "label": "R3",
+  "min_reachable_harm": 0,
+  "pending_compensation": 0,
+  "plan": [
+    [
+      "COMPENSATE",
+      "A",
+      "alternate"
+    ],
+    [
+      "COMPENSATE",
+      "B",
+      "alternate"
+    ],
+    [
+      "COMPENSATE",
+      "C",
+      "primary"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "VERIFY",
+      "A"
+    ],
+    [
+      "VERIFY",
+      "B"
+    ],
+    [
+      "VERIFY",
+      "C"
+    ],
+    [
+      "COMPENSATE",
+      "A",
+      "alternate"
+    ],
+    [
+      "COMPENSATE",
+      "B",
+      "alternate"
+    ],
+    [
+      "COMPENSATE",
+      "C",
+      "primary"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "VERIFY",
+      "A"
+    ],
+    [
+      "VERIFY",
+      "B"
+    ],
+    [
+      "VERIFY",
+      "C"
+    ],
+    [
+      "COMPENSATE",
+      "A",
+      "alternate"
+    ],
+    [
+      "COMPENSATE",
+      "B",
+      "alternate"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "VERIFY",
+      "A"
+    ],
+    [
+      "VERIFY",
+      "B"
+    ],
+    [
+      "ESCALATE"
+    ]
+  ],
+  "policy_selected_escalation": 1,
+  "prefix_compensation_success": 1,
+  "recovery_cost": 26,
+  "residual_side_effects": 0,
+  "runtime_forced_abort": 0,
+  "safe_stop": 0,
+  "scenario_id": "d090r|train|d090_PAIR_RACE|D3_DEPENDENT_ABORT|r2",
+  "split": "train",
+  "status": "CLAIM_FALSIFIED",
+  "steps": [
+    {
+      "action": [
+        "COMPENSATE",
+        "A",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A"
+      ],
+      "step": 1,
+      "tick": 0,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "B",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A",
+        "B"
+      ],
+      "step": 2,
+      "tick": 0,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      "cost": 3,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A",
+        "B",
+        "C"
+      ],
+      "step": 3,
+      "tick": 0,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "pending_tools": [
+        "A",
+        "B",
+        "C"
+      ],
+      "step": 4,
+      "tick": 1,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "pending_tools": [
+        "A",
+        "B",
+        "C"
+      ],
+      "step": 5,
+      "tick": 2,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "A"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "pending_tools": [
+        "B",
+        "C"
+      ],
+      "step": 6,
+      "tick": 2,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "B"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "pending_tools": [
+        "C"
+      ],
+      "step": 7,
+      "tick": 2,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "C"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "pending_tools": [],
+      "step": 8,
+      "tick": 2,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "A",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A"
+      ],
+      "step": 9,
+      "tick": 2,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "B",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A",
+        "B"
+      ],
+      "step": 10,
+      "tick": 2,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMMITTED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      "cost": 3,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A",
+        "B",
+        "C"
+      ],
+      "step": 11,
+      "tick": 2,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "pending_tools": [
+        "A",
+        "B",
+        "C"
+      ],
+      "step": 12,
+      "tick": 3,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "pending_tools": [
+        "A",
+        "B",
+        "C"
+      ],
+      "step": 13,
+      "tick": 4,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "A"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "pending_tools": [
+        "B",
+        "C"
+      ],
+      "step": 14,
+      "tick": 4,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "B"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "pending_tools": [
+        "C"
+      ],
+      "step": 15,
+      "tick": 4,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "C"
+      ],
+      "cost": 1,
+      "observation": "COMPENSATED",
+      "pending_tools": [],
+      "step": 16,
+      "tick": 4,
+      "tool_states": {
+        "A": "COMMITTED",
+        "B": "COMMITTED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "A",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A"
+      ],
+      "step": 17,
+      "tick": 4,
+      "tool_states": {
+        "A": "COMPENSATED",
+        "B": "COMMITTED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "B",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "pending_tools": [
+        "A",
+        "B"
+      ],
+      "step": 18,
+      "tick": 4,
+      "tool_states": {
+        "A": "COMPENSATED",
+        "B": "COMPENSATED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "pending_tools": [
+        "A",
+        "B"
+      ],
+      "step": 19,
+      "tick": 5,
+      "tool_states": {
+        "A": "COMPENSATED",
+        "B": "COMPENSATED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "pending_tools": [
+        "A",
+        "B"
+      ],
+      "step": 20,
+      "tick": 6,
+      "tool_states": {
+        "A": "COMPENSATED",
+        "B": "COMPENSATED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "A"
+      ],
+      "cost": 1,
+      "observation": "COMPENSATED",
+      "pending_tools": [
+        "B"
+      ],
+      "step": 21,
+      "tick": 6,
+      "tool_states": {
+        "A": "COMPENSATED",
+        "B": "COMPENSATED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "VERIFY",
+        "B"
+      ],
+      "cost": 1,
+      "observation": "COMPENSATED",
+      "pending_tools": [],
+      "step": 22,
+      "tick": 6,
+      "tool_states": {
+        "A": "COMPENSATED",
+        "B": "COMPENSATED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    },
+    {
+      "action": [
+        "ESCALATE"
+      ],
+      "cost": 0,
+      "observation": "ESCALATED",
+      "pending_tools": [],
+      "step": 23,
+      "tick": 6,
+      "tool_states": {
+        "A": "COMPENSATED",
+        "B": "COMPENSATED",
+        "C": "COMPENSATED",
+        "D": "NOT_COMMITTED"
+      }
+    }
+  ],
+  "task_success": 0,
+  "tool_action_count": 26
+}

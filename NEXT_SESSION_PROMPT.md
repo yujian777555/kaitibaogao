@@ -1,26 +1,16 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-091 最新接管提示（2026-11-17）
+## D-091 完成后的独立审查提示（2026-11-17）
 
-你接管 `yujian777555/kaitibaogao` 的 `pilot-a-stateful-recovery` 分支。先同步远端并核验 HEAD、origin branch、main 和工作树，再阅读 `101_D091_EXECUTOR_PROMPT.md` 全文；该文件是本轮可直接执行的权威提示词。配套研究协议为 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
+你接管 `yujian777555/kaitibaogao` 的 `pilot-a-stateful-recovery` 分支。先同步远端并核验 HEAD、main、ahead/behind 和工作树，再完整阅读 `102_D091_INDEPENDENT_AUDIT_RESULT.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION.md` 与 `101_D091_EXECUTOR_PROMPT.md`。
 
-**当前唯一任务：** D-091 只读审计 D-090 的原始数据、指标、算法臂身份、genotype/phenotype、g03-r2 可行性和消融失败轨迹。禁止启动新搜索、调参、冻结候选或访问 Validation/Test。
+**已完成的实际审计：** D-090 原始三 JSON 和全部保存指标独立复算一致；`random` 实际与 NSGA-II 同路径，`state_evo` 只有静态 mutation profile，真实 proposal/cache/generation 历史不可复原；15 个 best candidates 的 8 个 genome 在 96 个 Train 场景上只有 1 个 phenotype。g03-r2 的 23-step witness 真实成功，BFS 最短为 **21**，25-step 下界撤回。P1 整体 Harm 退化，P2/P4 带 pending ESCALATE，硬约束不可接受。
 
-**必须先核实的已发现问题：**
+**证据边界：** 原始 best_rows 数值可信，但五种搜索方法的公平比较无效，不能宣称 EC 提升或形成冻结候选。D-092 只是 NOT FROZEN / NOT RUN 设计草案，反馈系数、行为表示、canonical NSGA-III 与预算可达性仍有 OPEN 项。
 
-1. `d090_experiment.py::run_method()` 没有 `method == "random"` 分支；`random` 和 `nsga2` 使用同一 RNG、初始化、variation 和 `nsga2_select` 路径，保存的三个 paired seeds best genome 相同。
-2. `state_evo` 使用固定 mutation profile，不读取 episode failure/state feedback；不能把它直接描述为动态状态反馈演化。
-3. `GENERATIONS=6` 只进 report metadata，while loop 按 unique eval budget 终止。
-4. 15 个 best candidates 有 8 个不同 genome，但保存的 96 场景 trace bundle 105/105 pairwise 完全相同；仅限 D-090 Train。
-5. 两个旧 g03 audit 脚本读取 D-089 场景和 D-089 report，不是 D-090 r2。
-6. `objectives()` 的六维目标与 `_best()` 的 lexicographic archive selection 需要审计。
-7. D-090 r2 有一个待执行的 23-step witness：A/B alternate、C primary，按三轮批量 dispatch、全局 WAIT 两次、逐个 VERIFY，最后 ESCALATE。必须用真实环境回放并 BFS/DP 求最短路径，未验证前不得宣布 25-step claim 已被推翻。
+**验证：** 本地 456/456；最终审计代码 `e5d13f60b30910d6c6b0c10d99f66227b125fb59` 的 CI `44067543678` = success。Artifact `14320134130` 已下载复核，digest=`sha256:d5504a81fe0e56a828ec617571ba82788a53fcc9393ef122165162116f4eca57`。两个早期失败 run 的日志均保留；不得把它们写成成功。
 
-**D-090 原始边界：** 6 families × 4 strata × 4 repeats = 96 Train-only scenarios；seeds 711/822/933；每个 method/seed 报告 96 unique genome evaluations；当前无候选冻结、无 Validation 授权。CI `43881534809` 只证明 regression/test step 成功，不证明独立科学审计。
-
-**交付：** 只读独立复算脚本、算法 dispatch 审计、候选 phenotype 矩阵、D-090 r2 witness/BFS、P1/P2/P4 轨迹报告、D-091 artifact、最终审计报告；维护 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG 和 51 数据门禁。若资料不足，标 `NOT_AUDITABLE_FROM_SAVED_TRACE` / `D091_PARTIAL / HOLD`。
-
-完整执行步骤、代码级检查点、允许/禁止边界、输出清单和验收条件均在 `101_D091_EXECUTOR_PROMPT.md`。不得以写文档或绿色 CI 代替实际审计。
+**唯一下一任务：** 由新的独立审查会话复核 102、103 和 `experiments/d090_recovery/results/d091_audit/`，决定是否批准 D-092 的 Train-only 实现/实验设计。未经明确授权，不实现或运行 D-092，不进行新 genome search、调参、候选冻结、Validation、Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox 或 main merge。
 
 ---
 

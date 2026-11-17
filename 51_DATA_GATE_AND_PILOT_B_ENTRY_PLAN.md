@@ -1,19 +1,19 @@
 # 51 — 数据门禁、Pilot A-3 复核与 Pilot B 进入计划
 
-## 0N. D-091 源码预审与门禁（2026-11-17）
+## 0N. D-091 审计完成与门禁（2026-11-17）
 
-D-091 权威执行提示词为 `101_D091_EXECUTOR_PROMPT.md`，审计协议为 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。本轮新增源码预审发现，尚未执行完整独立审计：
+D-091 已按 `101_D091_EXECUTOR_PROMPT.md` 完成只读审计，结果见 `102_D091_INDEPENDENT_AUDIT_RESULT.md`，D-092 仅有未冻结方案 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。
 
-- `random` 与 `nsga2` 在当前 `run_method()` 中实际走同一演化分支；Random Search 基线无效。
-- `state_evo` 使用固定 mutation profile，不是动态状态反馈。
-- `GENERATIONS=6` 未用于 loop 终止。
-- 15 个 best candidates 中 8 个 genome，但当前 96 个 Train 场景上的 trace bundle 105/105 两两相同。
-- 现有 g03 audit scripts 读取 D-089 而非 D-090 r2。
-- 25-step claim 有待真实环境回放的 23-step witness；必须执行 replay + BFS/DP 后才能判定。
+- DATA_INTEGRITY=PASS_WITH_LIMITATIONS：原始结果完整；一个 source blob 登记更正和 raw-byte 跨平台限制已显式保存。
+- METRIC_RECOMPUTE=PASS：15 个 best candidates 与五组消融的保存指标差异均为 0；best-only 账本不支持完整搜索过程复算。
+- METHOD_IDENTITY=FAIL：Random 与 NSGA-II 同路径；State Evo 非动态反馈；GENERATIONS=6 不是实际控制量。
+- PHENOTYPE_DIVERSITY=FAIL：8 genome/规则签名在 96 Train 场景仅有 1 个 phenotype，105/105 等价。
+- R2_REACHABILITY=CLAIM_FALSIFIED：23-step witness 成功，BFS 最短 21；原 25-step 下界撤回。
+- ABLATION_SAFETY=FAIL：P2/P4 分别在两个场景遗留 4/2 个 pending，硬约束不可接受。
 
-**门禁：** D-090 原始结果仍为 Train-only 探索结果；无冻结候选、无 Validation、无 Test。D-091 未完成前，Pilot B、正式 A-3b、A800/真实 LLM API 和任何新搜索均保持 HOLD。
+CI `44067543678` success，456/456 tests；D-091 artifact `14320134130` 已下载并逐项复核。早期失败 CI 日志保留，不以绿色覆盖失败。
 
-CI `43881534809` regression/test success 不代表 D-091 独立审计完成。D-091 需单独上传复算与最短路径 artifact。
+**门禁：** 无冻结候选、无 Validation/Test 授权。唯一下一任务是独立审查 102/103 与 artifact；D-092、Pilot B、正式 A-3b、A800/真实 LLM API 和任何新搜索均保持 HOLD，main 不得修改或 merge。
 
 ---
 

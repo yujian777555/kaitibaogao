@@ -1,0 +1,323 @@
+{
+  "action_coverage": "ESCALATE, shared WAIT, every pending-tool VERIFY order, and every currently feasible primary/alternate dispatch. RETRY_WORKFLOW under permission, VERIFY without pending, blocked/compensated dispatch and STOP_SAFE cannot improve physical R3 reachability; idempotent reuse after completion is a no-op.",
+  "breadth_first_order": true,
+  "class_success": 1,
+  "constraint_violation": 0,
+  "decision_count": 21,
+  "dequeued_by_depth": {
+    "0": 1,
+    "1": 4,
+    "2": 9,
+    "3": 21,
+    "4": 42,
+    "5": 71,
+    "6": 107,
+    "7": 155,
+    "8": 186,
+    "9": 224,
+    "10": 301,
+    "11": 381,
+    "12": 474,
+    "13": 608,
+    "14": 723,
+    "15": 845,
+    "16": 1028,
+    "17": 1058,
+    "18": 1225,
+    "19": 1107,
+    "20": 2
+  },
+  "duplicate_compensation": 0,
+  "expanded_states": 8572,
+  "final_tool_states": {
+    "A": "COMPENSATED",
+    "B": "COMPENSATED",
+    "C": "COMPENSATED",
+    "D": "NOT_COMMITTED"
+  },
+  "historical_lower_bound": 25,
+  "path": [
+    [
+      "COMPENSATE",
+      "A",
+      "alternate"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "VERIFY",
+      "A"
+    ],
+    [
+      "COMPENSATE",
+      "A",
+      "alternate"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "VERIFY",
+      "A"
+    ],
+    [
+      "COMPENSATE",
+      "A",
+      "alternate"
+    ],
+    [
+      "COMPENSATE",
+      "B",
+      "primary"
+    ],
+    [
+      "COMPENSATE",
+      "C",
+      "primary"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "VERIFY",
+      "B"
+    ],
+    [
+      "VERIFY",
+      "C"
+    ],
+    [
+      "COMPENSATE",
+      "B",
+      "primary"
+    ],
+    [
+      "COMPENSATE",
+      "C",
+      "primary"
+    ],
+    [
+      "WAIT"
+    ],
+    [
+      "VERIFY",
+      "A"
+    ],
+    [
+      "VERIFY",
+      "B"
+    ],
+    [
+      "VERIFY",
+      "C"
+    ],
+    [
+      "ESCALATE"
+    ]
+  ],
+  "pending_compensation": 0,
+  "proof": "Unit-cost BFS; every shallower reachable nonterminal state was dequeued before the first accepted ESCALATE. Duplicate-producing and terminal-failure branches cannot lead to an accepted R3 result.",
+  "recovery_cost": 28,
+  "scenario_id": "d090r|train|d090_PAIR_RACE|D3_DEPENDENT_ABORT|r2",
+  "seen_states": 9729,
+  "state_definition": "Tool states, both route attempt counters, pending_success, remaining resolve time, terminal action and duplicate count. Absolute tick is stored in each environment; remaining resolve time is an equivalent reduction because future delays are relative to dispatch tick.",
+  "status": "CLAIM_FALSIFIED",
+  "trace": [
+    {
+      "action": [
+        "COMPENSATE",
+        "A",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "tick": 0
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "tick": 1
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "tick": 2
+    },
+    {
+      "action": [
+        "VERIFY",
+        "A"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "tick": 2
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "A",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "tick": 2
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "tick": 3
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "tick": 4
+    },
+    {
+      "action": [
+        "VERIFY",
+        "A"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "tick": 4
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "A",
+        "alternate"
+      ],
+      "cost": 1,
+      "observation": "TIMEOUT",
+      "tick": 4
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "B",
+        "primary"
+      ],
+      "cost": 3,
+      "observation": "TIMEOUT",
+      "tick": 4
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      "cost": 3,
+      "observation": "TIMEOUT",
+      "tick": 4
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "tick": 5
+    },
+    {
+      "action": [
+        "VERIFY",
+        "B"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "tick": 5
+    },
+    {
+      "action": [
+        "VERIFY",
+        "C"
+      ],
+      "cost": 1,
+      "observation": "FAILED",
+      "tick": 5
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "B",
+        "primary"
+      ],
+      "cost": 3,
+      "observation": "TIMEOUT",
+      "tick": 5
+    },
+    {
+      "action": [
+        "COMPENSATE",
+        "C",
+        "primary"
+      ],
+      "cost": 3,
+      "observation": "TIMEOUT",
+      "tick": 5
+    },
+    {
+      "action": [
+        "WAIT"
+      ],
+      "cost": 1,
+      "observation": "WAITED",
+      "tick": 6
+    },
+    {
+      "action": [
+        "VERIFY",
+        "A"
+      ],
+      "cost": 1,
+      "observation": "COMPENSATED",
+      "tick": 6
+    },
+    {
+      "action": [
+        "VERIFY",
+        "B"
+      ],
+      "cost": 1,
+      "observation": "COMPENSATED",
+      "tick": 6
+    },
+    {
+      "action": [
+        "VERIFY",
+        "C"
+      ],
+      "cost": 1,
+      "observation": "COMPENSATED",
+      "tick": 6
+    },
+    {
+      "action": [
+        "ESCALATE"
+      ],
+      "cost": 0,
+      "observation": "ESCALATED",
+      "tick": 6
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "fairness": "Shared encoding, scenario set and nominal 96-unique-genome cap; state_random lacks matched initial population; complete proposal/cache parity is not auditable from saved artifacts.",
+  "generation_count_status": "NOT_AUDITABLE_FROM_SAVED_TRACE",
+  "generations_name_references_in_run_method": 0,
+  "method_comparisons_in_run_method": [
+    "nsga3",
+    "state_evo",
+    "state_random"
+  ],
+  "methods": [
+    {
+      "actual_search_identity": "NSGA-II-equivalent",
+      "declared_unique_genome_evaluations": 96,
+      "direct_random_sampling": false,
+      "dynamic_failure_feedback": false,
+      "evolutionary_initial_population": "Random(seed * 131 + i * 17 + 3), i=0..11",
+      "explicit_method_branch": false,
+      "method": "random",
+      "operators": "random_d090_genome + mutation/crossover",
+      "rng_initialization": "Random(seed * 7919 + 17)",
+      "saved_proposal_history": false,
+      "scenario_rollouts_per_unique_genome": 96,
+      "survivor_selection": "nsga2_select"
+    },
+    {
+      "actual_search_identity": "NSGA-II",
+      "declared_unique_genome_evaluations": 96,
+      "direct_random_sampling": false,
+      "dynamic_failure_feedback": false,
+      "evolutionary_initial_population": "Random(seed * 131 + i * 17 + 3), i=0..11",
+      "explicit_method_branch": false,
+      "method": "nsga2",
+      "operators": "random_d090_genome + mutation/crossover",
+      "rng_initialization": "Random(seed * 7919 + 17)",
+      "saved_proposal_history": false,
+      "scenario_rollouts_per_unique_genome": 96,
+      "survivor_selection": "nsga2_select"
+    },
+    {
+      "actual_search_identity": "NSGA-III-simplified",
+      "declared_unique_genome_evaluations": 96,
+      "direct_random_sampling": false,
+      "dynamic_failure_feedback": false,
+      "evolutionary_initial_population": "Random(seed * 131 + i * 17 + 3), i=0..11",
+      "explicit_method_branch": true,
+      "method": "nsga3",
+      "operators": "random_d090_genome + mutation/crossover",
+      "rng_initialization": "Random(seed * 7919 + 17)",
+      "saved_proposal_history": false,
+      "scenario_rollouts_per_unique_genome": 96,
+      "survivor_selection": "nsga3_select"
+    },
+    {
+      "actual_search_identity": "Static-profile NSGA-II",
+      "declared_unique_genome_evaluations": 96,
+      "direct_random_sampling": false,
+      "dynamic_failure_feedback": false,
+      "evolutionary_initial_population": "Random(seed * 131 + i * 17 + 3), i=0..11",
+      "explicit_method_branch": true,
+      "method": "state_evo",
+      "operators": "constant profile + mutation/crossover",
+      "rng_initialization": "Random(seed * 7919 + 17)",
+      "saved_proposal_history": false,
+      "scenario_rollouts_per_unique_genome": 96,
+      "survivor_selection": "nsga2_select"
+    },
+    {
+      "actual_search_identity": "Direct random search",
+      "declared_unique_genome_evaluations": 96,
+      "direct_random_sampling": true,
+      "dynamic_failure_feedback": false,
+      "evolutionary_initial_population": "shared run RNG; no population",
+      "explicit_method_branch": true,
+      "method": "state_random",
+      "operators": "random_d090_genome only",
+      "rng_initialization": "Random(seed * 7919 + 17)",
+      "saved_proposal_history": false,
+      "scenario_rollouts_per_unique_genome": 96,
+      "survivor_selection": "_best over proposals"
+    }
+  ],
+  "nsga2_evidence": {
+    "calls": [
+      "crowding",
+      "fast_nds",
+      "len",
+      "sorted"
+    ],
+    "implementation": "Fast non-dominated sorting plus per-objective crowding distance",
+    "source": "experiments/d089_recovery/d089_search_experiment.py:81-137"
+  },
+  "nsga3_evidence": {
+    "calls": [
+      "d2",
+      "enumerate",
+      "fast_nds",
+      "len",
+      "list",
+      "max",
+      "min",
+      "range",
+      "sum"
+    ],
+    "canonical_nsga3": false,
+    "implementation": "Ideal-point shift, p=3 reference directions, perpendicular association and minimum-niche random selection; no full extreme-point normalization",
+    "source": "experiments/d089_recovery/d089_search_experiment.py:140-187"
+  },
+  "operator_invocation_status": "NOT_AUDITABLE_FROM_SAVED_TRACE",
+  "proposal_cache_archive_status": "NOT_AUDITABLE_FROM_SAVED_TRACE",
+  "random_nsGA2_same_best_by_seed": [
+    {
+      "same_best_genome": true,
+      "seed": 711
+    },
+    {
+      "same_best_genome": true,
+      "seed": 822
+    },
+    {
+      "same_best_genome": true,
+      "seed": 933
+    }
+  ],
+  "selection_semantics": {
+    "best_lexicographic_key": [
+      "min(R3,R4)",
+      "R3+R4",
+      "-Harm",
+      "-RecoveryCost"
+    ],
+    "best_pool": "all archived proposals after zero constraint/pending filtering, not final population or Pareto front",
+    "cond_rec_explicit_in_best": false,
+    "selection_consistent_with_survivor_objectives": false,
+    "survivor_objectives": [
+      "constraint+pending",
+      "1-cond_rec",
+      "1-R3",
+      "1-R4",
+      "Harm",
+      "RecoveryCost"
+    ]
+  },
+  "source": "experiments/d090_recovery/d090_experiment.py:60-121",
+  "state_evo_evidence": "Constant {'pair':1,'fallback':1,'completion':1,'harm':1}; no episode failure_profile or dynamic profile update in run_method.",
+  "status": "FAIL"
+}

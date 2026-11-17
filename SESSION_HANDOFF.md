@@ -1,3 +1,16 @@
+## 0O. D-091 最新权威接管状态（2026-11-17；审计完成）
+
+- 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`；起始同步 SHA=`6bfead6b41a9bdf44f08b35a82938049bbf73e7c`，最终审计代码 SHA=`e5d13f60b30910d6c6b0c10d99f66227b125fb59`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改/合并。
+- **原始数据与复算：** 三份 D-090 JSON 完整，内部 SHA 与 Git blob 可核验；15 个搜索 best 和五组固定消融指标全部独立复算，最大差异 0。101 号 `d090_policies.py` 的登记 blob 更正为 `c96beaf6577cf9898e6baaa4d22065662b269844`，原始文件未改。
+- **算法审计：** `random` 与 `nsga2` 同实现，Random Search 对照无效；`state_evo` 只有静态 mutation bias；`GENERATIONS=6` 未用于循环。六维 survivor 与 `_best()` archive 字典序选择不一致。proposal/cache/operator/generation 过程均标为 NOT_AUDITABLE_FROM_SAVED_TRACE。
+- **行为：** 15 个 best candidates 有 8 个 genome/规则签名，但 96 场景 trace/outcome 只有 1 个 phenotype，105/105 pairwise 等价；结论不外推到其他环境或未保存候选。
+- **r2：** D-090 Pair-Race r2 的 23-step witness 真实回放成功；BFS 最短路径为 **21**，原 25-step 下界撤回。原 24-step cap、标签和原始数据保持不变。
+- **消融：** P1 Harm=.479167、CondRec=.833、R4=.9167，8 个 R2 因 pair 过滤阻断 D 而首步升级；P2 在 Multi-Route r1/r3 各留 pending=2，P4 在 Deep-Chain r1/r2 各留 pending=1。两者均为 `_resolve_pending=None` 后直接 ESCALATE；硬约束不可被 Harm/Cost 抵消。P3 不改变 g03 的可达性。
+- **证据：** `102_D091_INDEPENDENT_AUDIT_RESULT.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION.md`、`experiments/d090_recovery/results/d091_audit/`。本地 456/456；CI `44067543678` success；artifact `14320134130`、digest `sha256:d5504a81fe0e56a828ec617571ba82788a53fcc9393ef122165162116f4eca57`，下载复核全通过。早期 CI 44065635071/44066525906 失败日志保留。
+- **唯一下一任务：** 独立审查 102/103 与 D-091 artifact，决定是否批准 D-092 的 Train-only 实现/执行设计。当前不运行新搜索、不冻结候选、不访问 Validation/Test、不启动 Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox 或 main merge。
+
+---
+
 ## 0N. D-091 最新权威接管状态（2026-11-17；待执行）
 
 - 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。接管前已知文档提交 `4e511b93fadb71ebab4b38f7dcbdf986b695d1a8`；本轮新增 D-091 提示词后提交继续更新，接管时必须先 fetch 远端。
