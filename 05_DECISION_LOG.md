@@ -1810,3 +1810,17 @@ B1–B8 均在规格层闭合：绑定 96 个固定 Train 场景和真实环境/
 静态复核实际检查 13 份源码 canonical SHA/Git blob、manifest/probe hash、预算算术、反馈零向量、R0 保留和文档结构，全部通过；无 OPEN/TBD 占位。未实现搜索器、未运行算法测试或 genome search、未选择候选。R1 只标记 **READY_FOR_INDEPENDENT_REVIEW**，不是 APPROVED_FOR_EXPERIMENT。
 
 本轮只有根目录文档变化，无新 CI 或 artifact；历史 D-091 CI `44068259009` 与 artifact `14321023302` 仅为既有审计证据。下一任务是由独立会话复审 R1；实现授权、实现复审和用户明确批准仍是独立门禁。Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 API 和 main merge 继续禁止。
+
+
+## D-092-R1-INDEPENDENT-REVIEW（2026-11-17）：REQUEST_CHANGES / HOLD
+
+R1 文件与历史版本身份核验通过：R1 raw SHA=2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5，canonical SHA=3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55；R0 与 R1 修订前父提交原始 103 逐字节相同。13 份源码 Git blob/canonical SHA、manifest hash、96 scenario IDs、5 anchors 和 probe ID hash 全部匹配。
+
+**决定：** R1 REQUEST_CHANGES / HOLD。主要阻断：F1 搜索 round/population/parent sampling 未定义；F2 initialization attempts 未进入 384 cap 伪代码；F3 NSGA-III niching/ASF/zero-range normalization 不足以称 canonical；F4 blocked receipts 误标 illegal transition 且 unauthorized action 未定义；F5 feedback 依赖 label-derived evaluator reward 但数据边界表述矛盾；F6 phenotype hash/probe rollout 预算不完整；F7 invalid seed/no-feasible 的统计处理缺失。另需解决 A1/A4 等价性、144-genome search-space 的 EA 必要性、Python runtime lock 和硬约束计数字段数量不一致。
+
+完整证据与修订要求见 105_D092_R1_INDEPENDENT_REVIEW.md。
+
+**唯一下一任务：** 保存 R1 immutable snapshot，修订 canonical 103 为 R2，关闭 F1–F7 并解决 M1–M4；只做协议设计，不实现、不运行。R2 再交独立审查。R1 不批准任何实现或实验。
+
+本轮只读远端审查，没有新 CI/artifact；R1 commit 查询 workflow runs 为 0。没有检查执行者本地工作树。
+

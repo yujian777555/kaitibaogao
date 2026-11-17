@@ -1,14 +1,14 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R1 预注册修订（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+## D-092 R1 独立审查结论（2026-11-17；REQUEST_CHANGES / HOLD）
 
 - **交付：** 原草案保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`；canonical R1 为 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。R0 raw SHA=`3d0b0d0e22d5cfd676ddb8ff7feadaf2dfc9dd7981c0d50920fcf5dd1bf9f367`；R1 raw SHA=`2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA=`3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`。
 - **B1/B2：** 绑定固定 96 个 Train 场景及完整环境/策略/genome/selector 依赖闭包哈希；每臂每 seed 必须恰好完成 96 个 unique genome evaluations，即 9,216 个真实 episodes，另设 384 proposal-attempt 资源上限。重复候选不占真实 rollout；不足目标即 INVALID。五臂五 seeds 的 230,400 仅为设计上限。
 - **B3/B4/B5：** 冻结 A0 Random、A1 NSGA-II、A2 完整 NSGA-III、A3 动态反馈、A4 零反馈；主比较 A3−A1。新 typed genome 压缩为五字段，全部 96 Train 场景构成固定 probe panel。反馈六项特征、映射矩阵、β=2、τ=.25、ε=.1、零反馈均匀分布和数值稳定规则均已定义。
 - **B6/B7/B8：** 完整 NSGA-III 归一化/参考方向/association/niching、独立 RNG streams、不可补偿硬约束、唯一 Pareto+字典序选择、R3 的 1/24 探索性阈值、4/5 同向要求、collapse 和无效 run 停止规则均已写入。
-- **静态复审：** 13 份源码 canonical SHA/Git blob、manifest/probe 哈希、预算算术、反馈零向量、R0 保留和文档结构全部通过；无 OPEN/TBD 占位。未实现搜索器、未运行算法或 genome search。
+- **静态身份复核：** 13 份源码 canonical SHA/Git blob、manifest/probe 哈希和 R0 保留通过；但独立审查发现算法控制流、NSGA-III、硬约束语义和日志仍有阻断项。未实现搜索器、未运行算法或 genome search。
 - **边界：** 本状态仅为 `READY_FOR_INDEPENDENT_REVIEW`，不是 `APPROVED_FOR_EXPERIMENT`。本轮只有文档变更，无新 CI/artifact；历史 D-091 CI `44068259009` 与 artifact `14321023302` 保持为已有证据。
-- **唯一下一任务：** 新独立会话逐项审查 R1；审查、实现授权、实现复审和用户明确批准前不得执行 D-092。
+- **独立审查：** R1 已由新会话复核，结论 REQUEST_CHANGES / HOLD；见 105_D092_R1_INDEPENDENT_REVIEW.md。
 
 ---
 
@@ -1075,3 +1075,14 @@ v2 使用 `family|stratum` cluster_id，role 独立；288 Train-only 行、48 cl
 ## D-090 状态（2026-11-16）
 
 D-090 已完成 `d090r|train|` 96 场景 Train-only 小规模机制对照。g03_PAIR_RACE 的互依环已定位，r2 场景在 24 步预算下存在 25 步公开下界。P1 局部减少 g03 失败但 Harm 上升，五种搜索方法在 96-eval 配对对照中结果相同。当前不形成冻结候选或独立 Validation 申请。
+
+
+## D-092 R1 独立审查（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- **报告：** 105_D092_R1_INDEPENDENT_REVIEW.md。R1 不接受；不批准 adapter/searcher 实现或 genome search。
+- **远端基线：** 审查时 HEAD=7a94d9711fa792e76d710d48f5cfc562e0c5a072，main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653，ahead/behind=310/0。
+- **身份核验 PASS：** R1 raw/canonical SHA、R0 与父提交原始文件相等、13 份源码 Git blob/canonical SHA、D-090 manifest、96 个 scenario IDs、5 个 anchors 和 probe ID hash 均复核匹配。
+- **主要阻断：** 搜索轮次/种群/父代选择/A0 sampling 未定义；attempt cap 未把初始化计数写入伪代码；NSGA-III niching/zero-range fallback 不完整；blocked receipts 被误称 illegal transition；feedback 使用 label-derived evaluator reward 但数据边界表述矛盾；phenotype hash/probe 预算与 invalid seed 处理缺失。
+- **额外研究问题：** 五字段 genome 只有 144 个组合，96 个 evaluations 覆盖 66.7%；需解释 EA 必要性并考虑独立 Train-only exhaustive oracle。
+- **下一唯一任务：** 保留 R1 快照，修订 canonical 103 为 R2，关闭 105 号报告 F1–F7 并解决 M1–M4；只做设计，不实现、不运行。
+- 本轮只读审查，未运行任何算法/probe/genome search；没有新 CI/artifact。最新既有 D-091 CI 44068259009 不代表 R1 测试通过。

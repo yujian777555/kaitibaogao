@@ -2633,3 +2633,15 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 
 
 **文档 CI 边界：** `.github/workflows/research-simulator-regression.yml` 的 push `paths` 只包含实验代码目录和该 workflow 文件。本轮只修改 Markdown 文档，因此后续文档提交没有触发 regression CI；这不是 CI failure。最后一次真实 D-091 代码审计 CI 仍为 `44068259009` @ `5cde039c`。
+
+
+## 0Q. D-092 R1 独立审查交接（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- **唯一仓库/分支：** yujian777555/kaitibaogao / pilot-a-stateful-recovery。审查时 branch HEAD=7a94d9711fa792e76d710d48f5cfc562e0c5a072，main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653，ahead/behind=310/0。
+- **R1 文件身份：** blob=f5dc28e67d648344cfd8465956f51e1f0582baf4；raw SHA=2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5；canonical SHA=3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55。R0 与父提交原始 103 逐字节一致。
+- **独立核验：** 13 份源码 Git blob 与 canonical SHA 全部匹配；manifest hash、96 scenario IDs、5 anchors、96-ID probe hash 全部匹配。预算乘法和反馈零向量数学正确。
+- **审查决定：** REQUEST_CHANGES / HOLD，详见 105_D092_R1_INDEPENDENT_REVIEW.md。阻断项包括：mu/lambda/round 和父代选择缺失；384 cap 初始化 attempt 计数不一致；NSGA-III niching/ASF/zero-range fallback 不完整；blocked receipts 误标 illegal transition；feedback 使用 label-derived evaluator reward 的边界矛盾；phenotype hash/probe 预算缺失；无效 seed 处理缺失。
+- **研究设计提醒：** 当前五字段空间为 144 个组合，96 evaluations 覆盖 66.7%；需要说明 EA 必要性并考虑 Train-only exhaustive oracle。A1/A4 应做 trajectory equivalence check。
+- **唯一下一任务：** 保留 R1 快照 103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md，修订 canonical 103 为 R2，关闭 F1–F7 并解决 M1–M4。只做文档、公式和算法规格；不实现、不运行。
+- **CI 边界：** R1 commit 无新 workflow run；最新既有 D-091 CI 44068259009 不代表 R1 通过。本轮未运行算法测试、probe、genome search，也不能从 GitHub API 声称本地工作树 clean。
+

@@ -1,6 +1,61 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R1 独立审查接管（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+## D-092 R1 独立审查结论与 R2 修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
+
+唯一仓库：yujian777555/kaitibaogao；唯一分支：pilot-a-stateful-recovery。不得读取或混用其他仓库。
+
+### 审查基线
+
+- R1 审查时 branch HEAD：7a94d9711fa792e76d710d48f5cfc562e0c5a072
+- main：683b3fe7fc52c86e917d523fdc6bbb13abbfd653
+- ahead / behind：310 / 0
+- R1 blob：f5dc28e67d648344cfd8465956f51e1f0582baf4
+- R1 raw SHA-256：2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5
+- R1 canonical SHA-256：3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55
+- R0 已确认与 R1 修订前父提交中的原始 103 文件逐字节一致。
+- 最新既有 D-091 CI：44068259009 success；不是 R1 CI。R1 commit 无新 workflow run。
+
+### 独立核验通过项
+
+13 份源码 Git blob SHA 与 canonical SHA-256 全部匹配；D-090 Train manifest hash 匹配；96 个唯一 scenario IDs、5 个 probe anchors 和 96-ID probe hash 均复核通过。R1 raw/canonical SHA 也重新计算匹配。
+
+### 独立审查决定
+
+**REQUEST_CHANGES / HOLD。R1 不接受；不批准实现或实验。**
+
+权威报告：105_D092_R1_INDEPENDENT_REVIEW.md。
+
+必须修订的阻断项：
+1. 搜索控制流缺少 mu/lambda/offspring round、父代选择、A0 随机分布；因此 A3 的反馈集合 U_t 无法唯一计算。
+2. 384 attempt cap 的定义包含 initialization，但伪代码没有对 12 个初始 proposal 计数。
+3. NSGA-III niching、ASF、零跨度 normalization fallback、参考方向顺序不完整，不能直接称 canonical。
+4. DEPENDENCY_BLOCKED/CONTRACT_BLOCKED 是合法 COMPENSATE 请求的环境拒绝回执，不是非法状态转移；hard constraint 和 unauthorized action 必须重新定义。
+5. feedback 的 class_success/avoidable_harm 是 label/hidden-outcome-derived evaluator reward；必须明确允许 post-rollout reward，或替换为纯可观察特征。
+6. phenotype/outcome hash canonical schema 与 probe rollout 数量/预算缺失。
+7. 无效 seed、NO_FEASIBLE_CANDIDATE 和 4/5 统计条件的处理不完整。
+
+同时解决：
+- A1/A4 理论上相同，应增加 trajectory equivalence check；
+- 当前 genome space 只有 144 个组合，96 evaluations 覆盖 66.7%，应说明为何仍需 EA，考虑独立 Train-only exhaustive oracle；
+- Python patch/runtime lock；
+- §8.1 五类 hard constraints 与 §10 “六类”字段不一致。
+
+### 唯一下一任务：修订为 R2
+
+1. 将当前 R1 原样保存为 103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md。
+2. 将 canonical 103 修订为 R2，关闭报告 F1–F7，处理 M1–M4。
+3. 只做文档、公式、预算和算法规格修订；不得实现搜索器或 adapter。
+4. R2 完成后交新的独立会话复审。
+
+**在 R2 独立审查和用户明确批准前，禁止：** D-092 搜索器/adapter 实现、probe rollout、genome search、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox、main merge。不得重跑 D-090。
+
+本地工作树状态必须由执行者本地检查；远端 GitHub API 不能证明本地 clean。每次文档更新继续维护 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG、51 号计划。
+
+---
+
+## D-092 R1 独立审查接管（已完成；历史状态）
+
+## D-092 R1 独立审查任务（已完成；历史记录）
 
 你接管唯一仓库 `yujian777555/kaitibaogao` 的唯一工作分支 `pilot-a-stateful-recovery`。开始必须 fetch 并核验真实 HEAD、main、ahead/behind、工作树和未提交文件；不得丢弃执行者已有工作。
 
