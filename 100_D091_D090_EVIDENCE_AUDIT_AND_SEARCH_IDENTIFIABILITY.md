@@ -1,5 +1,22 @@
 # D-091：D-090 证据独立审计与搜索可辨识性检查
 
+## 0.1 D-091 静态预审新增发现
+
+在撰写本轮详细执行提示词时，对 D-090 源码及两个原始 JSON blob 做了额外静态审计。以下为必须在本地独立复现的高优先级发现：
+
+1. `d090_experiment.py::run_method()` 没有 `method == "random"` 的独立分支。`random` 与 `nsga2` 均进入同一演化分支，使用相同 seed RNG、初始种群、默认变异/交叉和 `nsga2_select`；保存的三个 paired seeds 中两者 best genome 完全相同。因此当前 Random Search 标签无效，不能作为 NSGA-II 的独立随机基线。
+2. `state_evo` 传入固定 mutation profile `{"pair":1,"fallback":1,"completion":1,"harm":1}`，不是由实际 episode 状态或失败反馈动态更新；`state_random` 才是规则基因空间直接随机采样。必须重命名/重新界定方法身份，不能把静态加权称为动态状态反馈。
+3. `GENERATIONS=6` 只写入 report metadata；`run_method()` 的 while loop 按 unique eval budget 终止，未使用 GENERATIONS。真实 generation 数、proposal 数、cache hits 是否可复原必须审计。
+4. 对保存的 `d090_train_report.json` 解析得到 15 个 run、8 个不同 best genome，但所有 15 个 best candidates 在 96 个 D-090 Train scenarios 上的 trace bundle 完全一致（105/105 两两相同）；所有逐场景 outcome signature 也相同。这是当前 manifest 上的 phenotype collapse 信号，不可外推到其他环境。
+5. 两个既有 g03 audit 脚本分别读取 D-089 的 `g03_PAIR_RACE` repeat 0 和 D-089 `d089_search_report.json`，不是 D-090 的 `d090_PAIR_RACE` repeat 2，故不能支持 D-090 r2 的 25 步下界。
+6. `objectives()` 使用 6 维目标，但 `_best()` 在整个 archive 上以 `min(R3,R4), R3+R4, -Harm, -RecoveryCost` 做统一 lexicographic selection；没有显式纳入 cond_rec，也不是直接从 final NSGA population/Pareto front 选候选。需审计此口径与多目标声明的一致性。
+
+### r2 反例待验证
+
+D-090 `d090_PAIR_RACE / D3_DEPENDENT_ABORT / repeat=2` 的定义支持一个待执行的 23-step witness：每轮同时 dispatch A-alternate、B-alternate、C-primary（第三轮只 dispatch A/B）；每轮 WAIT 两次后分别 VERIFY；三轮完成后 ESCALATE。A/B alternate outcomes 为 `[False,False,True]`、delay=2；C primary outcomes 为 `[False,True]`、delay=1。按动作计数 8+8+6+1=23。`WAIT` 推进全局 tick，因此多个 pending receipt 可以共享时间推进。必须用真实环境回放并用 BFS/DP 求最短路径；在执行前不得直接宣称 25 步下界已被推翻。
+
+完整执行要求见 `101_D091_EXECUTOR_PROMPT.md`。
+
 日期：2026-11-16
 仓库：`yujian777555/kaitibaogao`
 分支：`pilot-a-stateful-recovery`
