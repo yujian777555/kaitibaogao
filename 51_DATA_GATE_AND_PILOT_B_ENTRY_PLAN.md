@@ -1,4 +1,24 @@
-## 0S. D-092 R2.1 定向修订门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## 0T. D-092 R2.1 独立复审门禁（2026-11-17；REQUEST_CHANGES / HOLD）
+
+R2/R1 snapshot 与 Train manifest/6 anchors 通过；但 R2.1 尚不批准执行。详见 `107_D092_R2_1_INDEPENDENT_REVIEW.md`。
+
+必须修订：
+- F9：attempt IDs 改为跨 genome episode 唯一的 composite identity；C/F/D 集合按 composite keys 计数；补 immediate COMPENSATED success 与其他 receipt lifecycle。
+- F10：修正 `d088_policies.py` blob SHA；malformed/unhashable tool/route 参数须在环境字典查找前安全归一为 INVALID_ACTION。
+- F11：E 矩阵行/列约定统一；补非对称非对角 normalization expected-answer 测试。
+- F12：删除 optimizer-visible 的 label-indicating None fields 和可 join label 的 scenario_id；拆分 evaluator-internal reward rows 与 optimizer-visible aggregate fitness。
+- F13：更换不可达的 P03/Q1 fallback probe 和 P07/Q3 预算窗口 probe；只用冻结 Train 做源码级可达性推演，不运行 probe 后挑选。
+- F15：改用 `random.Random(seed_integer)` 或明确等价的无系统熵初始化。
+
+F8 genome mapping 与 F14 Pareto search-gap 规格接受，不重开。μ/λ、96 unique、384 attempts、五臂、主比较、seeds、反馈矩阵、统计门槛和 96 Train scenarios 均不重开。
+
+**GO：** 保留 R2.1 immutable snapshot，修订 canonical 103 为 R2.2，只关闭上述问题；随后做一次定向独立复核。复核通过后立即进入 typed adapter + static/synthetic tests 实现审查。
+
+**HOLD：** 当前不运行 960 probe、96×96 genome search、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM 或 main merge。
+
+---
+
+## 0S. D-092 R2.1 定向修订门禁（历史状态；已被 0T 独立复审 supersede）
 
 R2 已保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md`，canonical R2.1 为 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。R2.1 raw/canonical SHA=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee` / `e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，Git blob=`773f39e5984c20d011a8d89245ecf52790886088`；R2 snapshot 的三种身份保持 `c6e4d110…e66c57b5` / `7f4fb63a…53a5bc53` / `9196c717…03f59`。
 

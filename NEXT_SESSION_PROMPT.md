@@ -1,6 +1,45 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2.1 定向修订完成（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## D-092 R2.1 独立复审结论与 R2.2 定向修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
+
+唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。审查基线 HEAD=`ab915751d8bb95d5f3e76b1d1e4c259f9819cfcc`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=315/0。接手必须重新查询 branch HEAD/main/worktree。
+
+### 独立决定
+
+**REQUEST_CHANGES / HOLD。** 完整报告：`107_D092_R2_1_INDEPENDENT_REVIEW.md`。
+
+R2/R1 快照身份通过：R2 snapshot 与父提交原 canonical R2 逐字节一致；R1 snapshot 前后完全一致。Train manifest 有 96 IDs、四类各24，6个probe锚点均存在。本次 R2.1 commit 只修改 7 份文档；无新 workflow/check/status/artifact。
+
+13 项源码依赖中，12 个 Git blob 匹配；`experiments/d088_recovery/d088_policies.py` 的声明 blob 与实际 blob 不匹配：
+- 声明：`afe2ed253704d2bf9e3f4e57f6e0a14f04f14be5`
+- 实际：`afe2ed253704d2bf9f3e3f57f6e0a14f04f14be5`
+
+### F8–F15 审查结论
+
+- **F8 PASS（规格层）：** 五字段→D090底层参数映射与绑定源码语义一致；实现唯一性测试尚未执行。
+- **F9 REQUEST_CHANGES：** attempt ID 仅由 scenario_id+dispatch ordinal 派生，不同 genome episode 会碰撞；C_t 未明确使用 composite key；立即 COMPENSATED success 缺 terminal-record 规则。
+- **F10 PARTIAL：** 状态表主体匹配源码，但 unhashable tool/route 参数在环境 membership 检查中可抛 TypeError；须先由总函数式 grammar validator 安全处理。修复 d088_policies blob。
+- **F11 REQUEST_CHANGES：** E_ji 公式表示第 j 行是 extreme point，文字却写第 j 列；对角线 synthetic test 无法发现转置。补非对称非对角期望值。
+- **F12 REQUEST_CHANGES：** optimizer allowlist 中 conditional_recovery_success / correct_escalation 的 None pattern 可直接识别 R1/R2/R3/R4；scenario_id 可 join 带标签 manifest。拆分 evaluator-internal reward rows 与 optimizer-visible aggregate fitness。
+- **F13 REQUEST_CHANGES：** P03 的 Q1 在 pair_race_alternate=true 时已有 cycle alternate normal routes，fallback 不触发；P07 的 Q3 priority competition 只在 budget=19、14、7 左右出现，不存在预注册的 9–12 差异窗口。必须更换两个可达 anchor/contrast。
+- **F14 PASS（规格层）：** 五维 component regret 和 Pareto-front normalized distance 已明确；未执行 exhaustive。
+- **F15 PARTIAL：** PRNG/CRN 基本冻结，但 `random.Random()` 无参构造先默认 seed，再 reseed，与禁系统熵不完全一致；优先改为 `random.Random(seed_integer)`。
+
+### 唯一下一任务：R2.2 定向修订
+
+1. 将 canonical R2.1 原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`。
+2. 修订 canonical 103 为 R2.2，只关闭 F9/F10/F11/F12/F13/F15。
+3. 不重开 F8 和 F14；不改变 μ/λ、96 unique、384 attempts、五臂、主比较、seeds、反馈矩阵、统计门槛、96 Train scenarios。
+4. F13 只用冻结 Train 场景做源码级可达性推演；不运行 960 probes，不按实验结果挑场景。
+5. R2.2 完成后进行一次定向独立复核；通过后立即进入 typed adapter + static/synthetic tests 实现审查。
+
+**禁止：** probe 960 episodes、genome search、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 API、A800/ARWM、UndoBench TEST、ThinkingBox、重跑 D-090、修改 main。
+
+维护 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG、51 数据门禁。记录 R2.1 immutable snapshot 与 R2.2 raw/canonical SHA/Git blob；不得虚报 CI。
+
+---
+
+## D-092 R2.1 定向修订交付（历史状态；已被下方独立复审 supersede）
 
 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。本轮起始 HEAD=`fc4d9b8b62aed7fb3abc3e9d4fe3ecbe985c0315`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，起始 ahead/behind=314/0、工作区 clean；接手时仍须动态查询最终提交和远端状态。
 

@@ -1,6 +1,16 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2.1 定向修订完成（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## D-092 R2.1 独立复审结论（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- **权威报告：** [107_D092_R2_1_INDEPENDENT_REVIEW.md](107_D092_R2_1_INDEPENDENT_REVIEW.md)。R2/R1 快照和 Train IDs/锚点通过；F8、F14 规格接受；F9/F11/F12/F13 有实质问题，F10/F15 尚有小型闭合缺口。
+- **源码绑定：** 12/13 Git blob 匹配；`experiments/d088_recovery/d088_policies.py` 声明 blob 与实际 blob 不同。必须修正。
+- **关键问题：** F9 attempt composite identity/立即成功 receipt；F11 E 行列方向；F12 per-scenario None 字段泄露标签；F13 P03 fallback 与 P07 budget probe 不可达。
+- **下一唯一任务：** 保存 R2.1 immutable snapshot，修订 canonical 103 为 R2.2，只关闭 F9/F10/F11/F12/F13/F15；不重开 F8/F14 或既有预算/五臂/统计设计。
+- **边界：** 当前无 adapter/searcher、无 probe、无 genome search、无 exhaustive、无 Validation/Test；R2.1 commit 无新 CI/check/artifact。
+
+---
+
+## D-092 R2.1 定向修订交付（历史状态；已被 107 号独立复审 supersede）
 
 - **canonical：** `103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw SHA-256=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`；canonical SHA-256=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`；Git blob=`773f39e5984c20d011a8d89245ecf52790886088`。
 - **R2 历史：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md` 原样保留；raw=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。

@@ -1,5 +1,17 @@
 # 05 — 研究决策日志
 
+## 2026-11-17：D-092 R2.1 独立定向复审 — REQUEST_CHANGES / HOLD
+
+R2.1 commit `ab915751d8bb95d5f3e76b1d1e4c259f9819cfcc` 的 Git 版本、R2/R1 snapshot 和 Train manifest/anchors 核验通过。R2 snapshot 与父提交 canonical R2 逐字节一致；R1 未覆盖；96 Train IDs、6 probe anchors 均存在。13 项源码 blob 中 12 项匹配，`experiments/d088_recovery/d088_policies.py` 声明 blob 与实际 blob 不匹配。
+
+**决定：** R2.1 REQUEST_CHANGES / HOLD。F8 genome mapping 和 F14 multi-objective search gap 接受为规格；F9 attempt identity 与 immediate success receipt 仍缺定义；F10 malformed/unhashable action 路径不闭合；F11 E 行列方向矛盾且对角测试不能发现转置；F12 conditional_recovery_success/correct_escalation 的 None pattern 泄露标签，scenario_id 可 join manifest；F13 P03 fallback 在 Q1 不触发，P07 的 Q3 预算窗口不可达；F15 Random() 无参构造与禁系统熵不一致。
+
+**唯一下一任务：** 保存 R2.1 immutable snapshot，修订 canonical 103 为 R2.2，只关闭 F9/F10/F11/F12/F13/F15。F8/F14 和已通过的预算/五臂/seeds/反馈矩阵/统计门槛不重开。R2.2 定向复核通过后立即进入 typed adapter + static/synthetic tests 实现审查。
+
+完整审查：`107_D092_R2_1_INDEPENDENT_REVIEW.md`。本轮未运行 probe/search/exhaustive/Validation/Test；无新 CI/status/artifact。
+
+---
+
 ## 2026-11-17：D-092 R2.1 定向修订交付 — READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN
 
 本轮以 106 号 R2 独立审查为最高依据，原样保存 R2 snapshot，并只修订 canonical 103 的 F8–F15。R2 snapshot raw/canonical SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5` / `7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。R2.1 raw/canonical SHA=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee` / `e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。

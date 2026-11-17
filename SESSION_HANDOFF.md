@@ -1,4 +1,15 @@
-## 0T. D-092 R2.1 定向修订交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## 0U. D-092 R2.1 独立复审交接（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- 审查基线 HEAD=`ab915751d8bb95d5f3e76b1d1e4c259f9819cfcc`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=315/0。
+- R2 snapshot 与父提交 canonical R2 逐字节一致；R1 snapshot 前后相同；96 Train IDs 和 6 个 probe 锚点均存在。
+- 源码依赖 blob 12/13 匹配；`experiments/d088_recovery/d088_policies.py` 声明 blob `afe2ed253704d2bf9e3f4e57f6e0a14f04f14be5`，实际 `afe2ed253704d2bf9f3e3f57f6e0a14f04f14be5`。
+- **决定 REQUEST_CHANGES / HOLD**，见 `107_D092_R2_1_INDEPENDENT_REVIEW.md`。F8/F14 规格接受；F9 attempt identity 和 immediate-success terminal receipt 缺失；F10 malformed/unhashable action 路径需总函数处理并修正源码 blob；F11 E 行列方向矛盾；F12 per-scenario None pattern 泄露标签；F13 P03 fallback 和 P07 budget window 不可达；F15 Random() 无参初始化与禁系统熵不一致。
+- **唯一下一任务：** 保存 canonical R2.1 为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`，修订 canonical 103 为 R2.2，只关闭 F9/F10/F11/F12/F13/F15。F8/F14、μ/λ、96 unique、384 cap、五臂、seeds、反馈矩阵、统计门槛不得重开。
+- 当前未实现 adapter/searcher，未运行算法测试、960 probe、genome search、13,824 exhaustive 或 Validation/Test；本次 R2.1 commit 无新 CI/status/artifact。R2.2 定向复核通过后立即进入 typed adapter + static/synthetic tests 实现审查。
+
+---
+
+## 0T. D-092 R2.1 定向修订交接（历史状态；已被 0U 独立复审 supersede）
 
 - 起始 HEAD=`fc4d9b8b62aed7fb3abc3e9d4fe3ecbe985c0315`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=314/0，起始工作区 clean。最终提交/远端状态须在本轮结束后重新查询。
 - R2 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md`：raw=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
