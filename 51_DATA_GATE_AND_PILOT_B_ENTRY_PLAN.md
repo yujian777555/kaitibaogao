@@ -490,7 +490,7 @@ R2 配对实验沿用 D-088 Train 数据门：开发 96 场景（`d088r|train|`�
 
 D-091 的只读审计和专属 CI artifact 已完成复核，但总体状态保持 `D091_PARTIAL / HOLD`：D-090 三份原始 JSON 与保存 rows 指标复算通过；Random/NSGA-II 方法身份错误、State Evo 非动态反馈、15 个 best candidates 在当前 96 Train 场景上 8 genome→1 phenotype；真实 proposal/cache/generation/operator 历史不可从 best-only 账本复原。g03-r2 旧 25-step 下界被真实 23-step witness 和 21-step BFS 推翻。P2/P4 有 pending 硬约束违规，P1 全局 Harm 退化。
 
-最新 D-091 CI run `44068259009` success；artifact `14321023302` digest=`sha256:925f1f5cc14f1b8c3d0678e2b03d67c891f6d13996b3def928ac182cf17aee03`，下载与内部 output manifest SHA 检查通过。102 号中旧 run/artifact 仍保留为历史有效执行。
+最新 D-091 CI run `44068259009` success；artifact `14321023302` digest=`sha256:925f1f5cc14f1b8c3d0678e2b03d67c891f6d13996b3def928ac182cf17aee03`，下载与内部 output manifest SHA 检查通过。102 号中旧 run/artifact 仍保留为历史有效执行。文档维护提交不触发 regression workflow（其 push paths 仅监控实验代码目录和 workflow 文件），因此本轮不声称有新的代码 CI。
 
 D-092 103 号预注册经独立审查为 `REQUEST_CHANGES / HOLD`，尚未冻结、未运行。B1–B8 必须先关闭：Train/evaluator/environment SHA 锁、预算计量单位、主要对照/终点/GO-NO-GO、typed genome/probe panel、反馈公式与统计集合、canonical NSGA-II/III/RNG、硬约束/候选排序、资源账本与停止规则。
 

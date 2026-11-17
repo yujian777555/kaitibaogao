@@ -4,13 +4,15 @@
 
 你接管的唯一仓库是 `yujian777555/kaitibaogao`，唯一工作分支是 `pilot-a-stateful-recovery`。严禁读取、引用或混用用户其他项目。
 
-### 最新远端基线
+### 审查基线与提交记录
 
-- branch HEAD：`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`
+- 审查开始时 branch HEAD：`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`
 - main HEAD：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`
-- ahead / behind：306 / 0
+- 审查开始时 ahead / behind：306 / 0
+- 首个审查文档提交：`fe53c9fa724ff2c609a3a0c5ef5da199fc8e61d8`；该提交后 ahead / behind 为 307 / 0
+- 随后有一次仅修正 canonical prompt 重复标题和审查基线表述的文档提交；因此**接手时必须动态查询当前 branch HEAD 与 ahead/behind**，不要把上述 SHA 当作永久最新值。
 - 最新 D-091 CI：run `44068259009` = success，测试代码 head `5cde039c73b0a5d83fd6d0d7b3816e20f22f0f9b`
-- 当前 HEAD 比该 CI 多一个仅修改 6 个文档的提交；本地工作树状态必须由下一执行者在本地重新检查，不能从 GitHub API 推断。
+- 当前本地工作树状态必须由执行者在本地重新检查，不能从 GitHub API 推断。
 
 ### D-091 独立审查结论
 
@@ -51,7 +53,7 @@
 
 ---
 
-## D-091 完成后的独立审查提示（历史接管记录，已由上方 D-092 审查状态 supersede）
+<!-- Historical D-091 handoff begins below; current authority is the D-092 block above. -->
 
 ## D-091 完成后的独立审查提示（2026-11-17）
 

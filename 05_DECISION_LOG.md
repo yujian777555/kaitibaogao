@@ -1789,7 +1789,7 @@ D-091 只读审计已实际执行，不重跑 D-090 搜索。总体状态为 D09
 
 ## D-092-REVIEW（2026-11-17）：Train-only 预注册独立审查
 
-**事实核验：** 远端分支 `pilot-a-stateful-recovery` HEAD=`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=306/0。最新 D-091 CI run `44068259009` = success，head=`5cde039c73b0a5d83fd6d0d7b3816e20f22f0f9b`；当前 HEAD 后续只有文档更新。GitHub API 不提供本地工作树状态，本轮未声称本地 clean。
+**事实核验（审查开始时）：** 远端分支 `pilot-a-stateful-recovery` HEAD=`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=306/0。首个审查文档提交 `fe53c9fa724ff2c609a3a0c5ef5da199fc8e61d8` 后 ahead/behind=307/0；后续 canonical prompt 勘误为文档提交，最新 SHA 应动态查询。最新 D-091 CI run `44068259009` = success，head=`5cde039c73b0a5d83fd6d0d7b3816e20f22f0f9b`；当前 HEAD 后续只有文档更新。GitHub API 不提供本地工作树状态，本轮未声称本地 clean。
 
 **D-091 复核结论：** 三份 D-090 原始 JSON / manifest / report 指纹与已保存 rows 指标复算一致，最大差异 0。方法身份 FAIL（random 与 NSGA-II 同路径；state_evo 静态 profile）；候选 phenotype FAIL（15 个保存 best candidates 在 96 Train scenarios 上 8 genomes→1 phenotype）；r2 25-step claim 被 23-step witness 与 21-step BFS 推翻；P2/P4 存在 pending 硬约束违规。完整搜索过程仍 `NOT_AUDITABLE_FROM_SAVED_TRACE`，D-091 保持 `D091_PARTIAL / HOLD`。
 
@@ -1798,3 +1798,5 @@ D-091 只读审计已实际执行，不重跑 D-090 搜索。总体状态为 D09
 **决策：** 103 号 D-092 草案 `REQUEST_CHANGES / HOLD`，不批准实现/冻结/运行。原因：B1–B8 未关闭，包括数据版本锁、预算计量单位、主要对照与判据、typed genome/probe panel、动态反馈参数、canonical NSGA-II/III/RNG、硬约束/候选选择和资源/停止规则。详见 `104_D092_INDEPENDENT_REVIEW.md`。
 
 **唯一下一步：** 修订 103 为 R1，逐项关闭 B1–B8，只做设计与静态测试规格；独立审查 R1 并等待用户明确批准。不得启动新搜索、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 API 或 main merge。
+
+**CI 触发说明：** 本轮后续提交仅修改 Markdown；regression workflow 的 push paths 不包含文档路径，因此没有新 regression run，不能将 status 空白误报为成功或失败。最新真实代码审计 run 仍为 `44068259009`。

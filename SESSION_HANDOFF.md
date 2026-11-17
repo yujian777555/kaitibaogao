@@ -2610,7 +2610,7 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 
 ## 2026-11-17 D-092 独立预注册审查交接
 
-**仓库/分支：** `yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。远端 branch HEAD=`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=306/0。当前 HEAD 比最新 D-091 CI head `5cde039c` 多一个仅文档变更提交；本地工作树状态尚未由当前连接核验。
+**仓库/分支：** `yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。审查开始时远端 branch HEAD=`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=306/0。首个审查文档提交=`fe53c9fa724ff2c609a3a0c5ef5da199fc8e61d8`（ahead/behind=307/0）；随后仅有 canonical prompt 标题/基线勘误，最新 HEAD 与 ahead/behind 必须在下一会话动态查询。本地工作树状态尚未由当前连接核验。
 
 **D-091 审查：** 102 号报告、101 执行提示、D-091 审计器/专项测试和结果目录相互一致。三份原始 JSON 的 Git blob / 内部 SHA 核验通过；15×96 search best rows 与 5×96 ablation rows 的最大指标复算差异为 0。Random 与 NSGA-II 实际同路径，State Evo 为静态 mutation profile，proposal/cache/generation/operator 历史不可审计。15 个保存 best candidates 在 96 个 Train 场景上 8 genome→1 phenotype。g03-r2 的 23-step witness 真实成功，BFS 最短 21；旧 25-step 下界撤回。P1 整体 Harm 退化，P2/P4 pending 硬约束违规，P3 未修复 g03。总体仍为 `D091_PARTIAL / HOLD`，不得宣称 EC 提升。
 
@@ -2620,3 +2620,5 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 
 **唯一下一任务：** 修订 103 为 R1，关闭 104 的 B1–B8，只做协议/公式/预算/编码和静态测试规格；独立审查 R1 后等待用户明确批准。此前不得实现或运行 D-092 搜索，不访问 Validation/Test，不启动 Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox 或 main merge。
 
+
+**文档 CI 边界：** `.github/workflows/research-simulator-regression.yml` 的 push `paths` 只包含实验代码目录和该 workflow 文件。本轮只修改 Markdown 文档，因此后续文档提交没有触发 regression CI；这不是 CI failure。最后一次真实 D-091 代码审计 CI 仍为 `44068259009` @ `5cde039c`。
