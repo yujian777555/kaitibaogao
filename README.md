@@ -1,6 +1,19 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2.1 独立复审结论（2026-11-17；REQUEST_CHANGES / HOLD）
+## D-092 R2.2 定向修复交付（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+- **R2.2：** `103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`；canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`；blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
+- **R2.1 历史：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md` 原样保存；raw=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`，canonical=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。
+- **六项：** F9 composite episode/attempt identity 与完整 receipt lifecycle；F10 total malformed validator+安全 sentinel；F11 row convention+非对角精确解；F12 仅聚合 optimizer fitness/feedback；F13 可达 P03/P07 对照和 complete/near collapse 术语；F15 无系统熵直接 integer-seed 构造。
+- **源码勘误：** 107 的 d088 blob 指认有误。Git 与 GitHub API 均证实正确值为 `afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5`，R2.1 原表无需改成错误对象。
+- **不变项：** F8 mapping、F14 gap、μ/λ、96 unique、384 attempts、五臂、五 seeds、反馈矩阵、统计判据和原96 Train场景。
+- **验证：** 13/13真实源码哈希、96 IDs/6 anchors、冻结章节、144映射、十项展开、P03/P07对照差异、非对角E公式和静态格式全部通过；没有运行算法或rollout。
+- **下一唯一任务：** 独立会话只复核六项及blob勘误；通过后进入 Typed Adapter → 静态算法测试 → 合成测试 → 实现一致性审查。Probe/search仍需实现复审和用户明确批准。
+- **CI：** 维护时无新CI/artifact；提交后按最终SHA查询，历史运行不是R2.2证据。
+
+---
+
+## D-092 R2.1 独立复审结论（历史状态；已被上方 R2.2 交付 supersede）
 
 - **权威报告：** [107_D092_R2_1_INDEPENDENT_REVIEW.md](107_D092_R2_1_INDEPENDENT_REVIEW.md)。R2/R1 快照和 Train IDs/锚点通过；F8、F14 规格接受；F9/F11/F12/F13 有实质问题，F10/F15 尚有小型闭合缺口。
 - **源码绑定：** 12/13 Git blob 匹配；`experiments/d088_recovery/d088_policies.py` 声明 blob 与实际 blob 不同。必须修正。

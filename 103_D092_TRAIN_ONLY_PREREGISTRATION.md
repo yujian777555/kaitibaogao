@@ -1,12 +1,12 @@
-# 103 — D-092 Train-only 动态失败反馈演化预注册 R2.1
+# 103 — D-092 Train-only 动态失败反馈演化预注册 R2.2
 
-**协议版本：** `D092-R2.1-PREREGISTRATION`
+**协议版本：** `D092-R2.2-PREREGISTRATION`
 **状态：** `READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN`
-**历史版本：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md`
-**最高审查依据：** `106_D092_R2_INDEPENDENT_REVIEW.md`
+**历史版本：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`
+**最高审查依据：** `107_D092_R2_1_INDEPENDENT_REVIEW.md`
 **唯一科学问题：** 在相同真实评价预算下，动态失败反馈能否比标准 NSGA-II 找到更好的安全恢复策略？
 
-R2.1 只定向关闭 F8–F15：真实底层 genome 映射、attempt 级回执、公开动作/状态约束、NSGA-III 坐标系、信息接口、probe/collapse 判据、多目标 search gap 和 PRNG。μ=12、λ=12、12+7×12=96 unique evaluations、384 attempts、五臂、主次比较、五 seeds、反馈矩阵和统计门槛全部继承 R2，不作修改。
+R2.2 只定向修复 107 号指出的六项：F9 跨 genome attempt 身份与 receipt lifecycle、F10 malformed-action 总函数路径和源码身份复核、F11 矩阵行列及非对角测试、F12 per-scenario 标签隔离、F13 P03/P07 可达对照、F15 无系统熵初始化。F8 和 F14 保持 107 号接受的规格不变；μ=12、λ=12、12+7×12=96 unique evaluations、384 attempts、五臂、主次比较、五 seeds、反馈矩阵、统计门槛和原 96 Train 场景均不修改。
 
 本文件只是可执行协议与静态/合成测试规格。没有实现搜索器或 typed adapter，没有执行 probe、genome search、穷举参考或候选选择。
 
@@ -58,7 +58,9 @@ canonical file hash 为 `b"\n".join(file_bytes.splitlines())` 的 SHA-256。
 | `experiments/pilot_a3b/dependency_genome.py` | `11f4d00673ff1088c6d244ff218c3fd69fe8376e4ba621c813b8fbb446f3c373` | `c3e544cdef87dbde1389aed8fde869bc94fe805b` |
 | `experiments/pilot_a3b/dependency_policies.py` | `abcc0e83b070128973012ca8403e8ec56f70543d4b918dc5fbbb101e54af8d1a` | `dfcb2a0f4b5174482dd6d6e74d097f62852ceae6` |
 
-目标 schema/evaluator/ledger 分别为 `D092R2_1_TYPED_GENOME_V2_1`、`D092R2_1_EVALUATOR_V2_1`、`D092R2_1_LEDGER_V2_1`。新实现尚不存在；实现审查必须追加 typed adapter、搜索器、反馈、账本、运行时锁文件的真实哈希。任何不匹配均为 `INVALID_HASH_BINDING`。
+**F10 源码身份勘误：** R2.2 通过 `git rev-parse HEAD:.../d088_policies.py`、`git show ... | git hash-object --stdin` 和 GitHub Contents API 独立复核，真实 blob 均为表中的 `afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5`；107 号写出的 `afe2ed253704d2bf9f3e3f57f6e0a14f04f14be5` 不是该仓库对象。故本表保留原正确值，107 号该项属于审查转写错误，不写入错误 SHA。13 项 canonical SHA/blob 必须重新全部匹配才可进入实现。
+
+目标 schema/evaluator/ledger 分别为 `D092R2_2_TYPED_GENOME_V2_2`、`D092R2_2_EVALUATOR_V2_2`、`D092R2_2_LEDGER_V2_2`。新实现尚不存在；实现审查必须追加 typed adapter、搜索器、反馈、账本、运行时锁文件的真实哈希。任何不匹配均为 `INVALID_HASH_BINDING`。
 
 ## 3. Typed genome、枚举与搜索空间
 
@@ -204,40 +206,62 @@ require attempts <= 384, unique_evaluations == 96, full_episodes == 9216
 
 ## 5. F5：动态反馈的允许信息与数学定义
 
-### 5.1 F12：信息边界与两个不可混用接口
+### 5.1 F12：evaluator-internal 与 optimizer-visible 的强制分层
 
-真实 `report()` 同时含公开结果和 label-derived 字段。R2.1 不允许把该字典直接交给优化器；trusted evaluator 在**完整 Train episode 结束后**先投影，再交付下列两个接口：
+真实 `report()` 同时含公开结果、label-derived reward 和可连接 manifest 的 `scenario_id`。R2.2 使用以下三层接口；优化器不得接收任何 per-scenario reward row，即使已经删除标签或 scenario_id 也不例外。
 
-- `optimizer_reward_view`：只允许 `scenario_id`、`class_success`、`task_success`、`conditional_recovery_success`、`correct_escalation`、`residual_side_effects`、`avoidable_harm`、`action_cost`、`recovery_cost`、`decision_count`、`pending_compensation`、`duplicate_compensation`、legacy `constraint_violation`、`policy_selected_escalation`、`safe_stop`、`runtime_forced_abort`、六类硬约束和两个 soft blocked-attempt 聚合、第 5.2 节公开 attempt ledger，以及逐项仅含 `action/observation/cost/tick` 的 trace。字段不在 allowlist 即不得出现。fitness 的 R3/R4/CondRec 分层在 trusted evaluator 内完成后只交付聚合数值；不向优化器暴露标签列。
-- `audit_only_view`：完整 `report()`、原始 `label`、`min_reachable_harm`、`classify_scenario()` 输出、hidden-outcome-derived diagnostics、完整 outcome-signature bundle 和审计哈希。只能由 evaluator/独立审计器访问，不能传给 policy、variation、survivor、feedback selector、候选选择器或任何其他搜索组件；只能写受控审计日志，搜索日志仅保留 opaque hash。
+1. **`evaluator_internal_rows`（仅 trusted evaluator）：** 对完整 Train episode 保存 `episode_reference`、原始 scenario_id、label、完整 `report()`、`class_success`、`conditional_recovery_success`、`correct_escalation`、`min_reachable_harm`、per-scenario avoidable_harm、完整公开 trace，以及第 5.2 节 composite-key attempt records。trusted evaluator 在此层按冻结 manifest 的 R1/R2/R3/R4 成员关系计算 R3/R4/CondRec 分层指标和六项反馈边际量；这些原始行绝不传给搜索组件。
+2. **`optimizer_reward_view`（每个完整 unique genome 一个聚合对象）：** 仅允许 `genome_sha256`；聚合 `fitness={R3,R4,CondRec,Harm,RecoveryCost}`；六类硬约束各自跨 96 episodes 的总和、`constraint_episode_count`、两个 soft blocked-attempt 总数；聚合 `feedback_marginals={row_count=96,attempt_count,failure_attempt_count,dependency_blocked_attempt_count,pending_row_count,runtime_abort_row_count,unsuccessful_escalation_row_count,avoidable_harm_sum}`；以及三个 opaque phenotype hashes。
 
-策略仍只接收环境现有 `public_view()`，不得接收上述任一 report view。原始 `label`、`min_reachable_harm`、`classify_scenario()` 调用、hidden route outcomes、真实 delay/resolve_at、未来结果、Validation/Test 或锁箱字段均不得进入 optimizer-visible rows。`class_success`、`avoidable_harm` 和分层 fitness 是明确允许的 post-rollout reward，但不能反读其生成过程或在 rollout 前调用。
+   明确禁止 `scenario_id`、原始 label、per-scenario `class_success`、`conditional_recovery_success`、`correct_escalation`、`min_reachable_harm`、per-scenario avoidable_harm、原始 trace、episode_reference、episode token 和任何 96-row reward/list 字段。不得按固定场景顺序输出数组来绕过禁止项。A3 只对 U_t 的 12 个聚合 `feedback_marginals` 求和，得到与第 5.2 节相同的分子/分母；不能访问单 episode receipt ledger。
+3. **`audit_only_view`：** 完整 evaluator-internal rows、hidden-outcome-derived diagnostics、完整 trace/outcome signature bundle、hash→record 审计索引和访问日志。只能由 evaluator/独立审计器使用，不能传给 policy、variation、survivor、feedback selector、候选选择器或其他搜索组件；搜索日志仅保留 opaque hashes。
 
-第 9.3 节含 `min_reachable_harm` 的 outcome signature 仅由 `audit_only_view` 计算；优化器最多接收 opaque `outcome_signature_sha256`，不能接收原始 bundle 或反查表。每次视图创建记录 `view_type`、字段排序 allowlist hash、源 episode ID 和接收者；若 optimizer view 出现额外键、audit view 被搜索组件访问，或哈希反查表暴露给搜索组件，立即 `INFORMATION_BOUNDARY_VIOLATION / INVALID`。
+策略仍只接收环境 `public_view()`，不得接收任何 report view。`class_success` 与 `avoidable_harm` 仍是允许的 post-rollout evaluator reward，但只以聚合 fitness/feedback 数值向优化器暴露，不再是可逐场景识别类别的 reward。聚合 R3/R4/CondRec 是实验必需的适应度，不得被解释为开放标签列。
+
+第 9 节含 scenario_id/min_reachable_harm 的 trace/outcome bundle 仅在 evaluator-internal/audit 层生成；优化器只接收 hash 用于预注册相等性和多样性计数，不能访问 bundle、episode token 或 hash→audit record 查询接口。每次视图创建记录 view_type、排序 allowlist hash、聚合对象 hash 和接收者；出现额外键、per-scenario 数组、audit 查询或跨层访问即 `INFORMATION_BOUNDARY_VIOLATION / INVALID`。
 
 ### 5.2 F9：attempt-level 回执账本、反馈集合和六项特征
 
 \(U_t\) 始终是上一轮恰好 12 个新唯一 offspring，因此 \(N_t=12\times96=1{,}152\)。cache/duplicates 不重复加权，初始池不进入 offspring feedback。
 
-每次通过语法和 public mask 的 `COMPENSATE(tool,route)` dispatch 分配一个 `compensation_attempt_id`：`dispatch_ordinal` 在每个 episode 从 0 开始、仅对通过 grammar/mask 的 COMPENSATE 递增；对该 ordinal 计算
-`SHA256(canonical_json({"dispatch_ordinal":n,"scenario_id":ID}))`，使用完整 32 字节十六进制值；`(episode_reference,compensation_attempt_id)` 是账本主键。记录 tool、route、dispatch tick、dispatch observation、terminal receipt、terminal tick、来源 VERIFY ordinal 和 `terminal_recorded` boolean。语法 invalid 或 mask unauthorized 的请求不创建 attempt。
+**跨 genome episode 身份。** 每个 arm×seed 的 `unique_ordinal` 按 96 个 NEW_UNIQUE 接受顺序从 0 到 95 分配且不复用。trusted evaluator 为每次真实 scenario rollout 计算：
 
-归因规则如下：
+```text
+episode_reference = SHA256(UTF8(canonical_json({
+  "seed": seed,
+  "unique_ordinal": unique_ordinal,
+  "genome_sha256": canonical_typed_genome_sha256,
+  "scenario_id": scenario_id
+})))
+```
 
-1. 原 dispatch 返回 `FAILED`、`DEPENDENCY_BLOCKED` 或 `CONTRACT_BLOCKED` 时，立即记录该 attempt 的唯一 terminal failure；`TIMEOUT` 不是 terminal receipt。
-2. delayed attempt 由 `VERIFY(tool)` 完成时，通过该 tool 当前唯一 pending route 回连原 attempt；只有首次得到 `COMPENSATED` 或 `FAILED` 才写 terminal receipt。若同 tool 有多个 pending route 或找不到原 attempt，账本 INVALID。
-3. 无 pending 的 VERIFY 即使重复返回 `last_receipt=FAILED`，也只是历史观测，不创建 attempt、不修改 terminal receipt、不增加任何反馈分子。尚早的 VERIFY 返回 `PENDING` 也不是 terminal failure。
-4. 每个 attempt 最多一个 terminal receipt。`ALREADY_COMPENSATED`、dispatch 时 `PENDING`、`DUPLICATE_COMPENSATION` 和未解决的 `TIMEOUT` 均不进入 r/d 分子；未解决 attempt 留在分母并由 p 特征独立反映。
-5. 软 blocked 的计数单位也是唯一 attempt ID，不是任意 trace observation。每个 attempt 在 `{FAILED,DEPENDENCY_BLOCKED,CONTRACT_BLOCKED}` 中至多贡献一次。
+`episode_reference` 是完整 32 字节小写十六进制值，只在 evaluator-internal/audit 层使用。跨 arm 账本以 `(arm,seed,episode_reference)` 命名；同 seed 的 A1/A4 对相同 genome/scenario 有意得到相同 episode_reference，不因 arm 标签破坏轨迹等价，跨 arm 绝不共用缓存或去重。
 
-令 \(\mathcal C_t\) 为 \(U_t\) 的全部唯一 compensation attempt IDs，\(C_t=|\mathcal C_t|\)，\(\mathcal F_t\) 为其中 terminal receipt 属于上述三类的 IDs，\(\mathcal D_t\) 为其中 `DEPENDENCY_BLOCKED` IDs。定义
+`dispatch_ordinal` 在每 episode 从 0 开始，仅对通过 grammar/mask 的 COMPENSATE 递增。每次 dispatch 计算
+`compensation_attempt_id=SHA256(UTF8(canonical_json({"episode_reference":episode_reference,"dispatch_ordinal":n})))`。run 内主键是 **`attempt_key=(episode_reference,compensation_attempt_id)`**，全局主键是 `(arm,seed,episode_reference,compensation_attempt_id)`；任何反馈集合都不得按裸 attempt ID 去重。记录 tool、route、dispatch tick、dispatch observation、closing/terminal receipt、terminal tick、来源 VERIFY ordinal、`terminal_recorded` 和 `unresolved_at_episode_end`。语法 invalid 或 mask unauthorized 不创建 attempt。
+
+**完整 receipt lifecycle：**
+
+| 当前 dispatch 的环境回执 | 当前 attempt record 的关闭规则 | r/d 归因 |
+|---|---|---|
+| immediate `COMPENSATED` | 立即写 terminal success，terminal tick=dispatch tick，`terminal_recorded=true`，VERIFY ordinal=null | 不进入失败分子 |
+| immediate `FAILED` | 立即写 terminal failure，同上关闭 | FAILED，仅 r |
+| `CONTRACT_BLOCKED` / `DEPENDENCY_BLOCKED` | 立即写对应 terminal failure 并关闭 | r；dependency 同时进入 d |
+| `ALREADY_COMPENSATED` | 以 `non_progress_dispatch` 关闭，terminal tick=dispatch tick，terminal_recorded=true | 不进入失败分子 |
+| dispatch 当下 `PENDING` | 仅关闭**本次无进展 dispatch** record；它指向的既有 pending attempt 仍独立保持 open | 不进入失败分子 |
+| `DUPLICATE_COMPENSATION` | 以 duplicate dispatch-final receipt 关闭，并保留硬约束关联 | 不进入 r/d；duplicate 独立计数 |
+| `TIMEOUT` | 保持 open、`terminal_recorded=false`，关联唯一 pending route；不是 terminal receipt | 尚未进入失败分子 |
+
+delayed attempt 由 `VERIFY(tool)` 完成时，通过该 tool 当前唯一 pending route 回连原 attempt_key；首次得到 `COMPENSATED` 或 `FAILED` 才写 terminal success/failure、terminal tick 和 VERIFY ordinal，并设 `terminal_recorded=true`。同 tool 多 pending route、找不到原 attempt 或二次关闭均为 INVALID。无 pending 的 VERIFY 即使重复返回 `last_receipt=FAILED`，也不创建/修改 record、不增加分子；尚早 VERIFY 的 `PENDING` 不关闭 attempt。episode 结束仍 open 的 TIMEOUT attempt 标 `unresolved_at_episode_end=true`，留在 C 分母并由 p 特征独立反映。每个 attempt_key 至多一个 closing receipt；软 blocked 的计数单位同样是 composite attempt_key。
+
+令 \(\mathcal C_t\) 为 \(U_t\) 的全部唯一 **composite attempt_keys**（open/closed 均计入），\(C_t=|\mathcal C_t|\)；\(\mathcal F_t\) 为其中 closing failure class 属于 `{FAILED,DEPENDENCY_BLOCKED,CONTRACT_BLOCKED}` 的 keys，\(\mathcal D_t\) 为其中 `DEPENDENCY_BLOCKED` keys。定义
 
 \[
 r_t=\frac{|\mathcal F_t|}{\max(1,C_t)},\qquad
  d_t=\frac{|\mathcal D_t|}{\max(1,C_t)}.
 \]
 
-因为 \(\mathcal D_t\subseteq\mathcal F_t\subseteq\mathcal C_t\)，必有 \(0\le d_t\le r_t\le1\)。立即失败、延迟失败、重复 VERIFY、重复 COMPENSATE、blocked 和未决 pending 的合成账本测试必须逐项验证这一不变量。其余四个特征保持 R2 定义：
+因为 \(\mathcal D_t\subseteq\mathcal F_t\subseteq\mathcal C_t\)，必有 \(0\le d_t\le r_t\le1\)。合成账本测试必须覆盖同一 scenario 在 12 个不同 genome episodes 中相同 dispatch ordinal 产生 12 个独立 episode_reference/attempt_keys、immediate success 关闭、immediate/blocked/dispatch-final receipts、delayed 成功/失败、重复 VERIFY 和未决 pending。trusted evaluator 将各 genome 的 C/F/D 和其他边际量聚合后才交付第 5.1 节 optimizer view。其余四个特征保持原定义：
 
 \[
 p_t=\frac{\#\{\mathrm{pending\_compensation}>0\}\text{ rows}}{N_t},
@@ -304,13 +328,22 @@ p_k(t)=(1-\epsilon)\widetilde p_k+\epsilon/K.
    \[
    E_{j i}=\bar f_i(e^j)=f_i(e^j)-z_i^*,\qquad j,i\in\{1,\ldots,5\},
    \]
-   即第 \(j\) 列是第 \(j\) 个极端点的**平移后**五维向量，绝不能使用 raw \(f(e^j)\)。解 \(E x=\mathbf1\)，并令 translated intercept \(a_j=1/x_j\)。仅当矩阵非奇异、解和所有 \(x_j,a_j\) 有限且所有 \(a_j>10^{-12}\) 时接受该超平面；任一条件失败即对**所有维度**使用 translated fallback \(a_i=\max_{s\in S}\bar f_i(s)\)。无论哪种路径，均有
+   即第 \(j\) **行**是第 \(j\) 个极端点的**平移后**五维行向量，第 \(i\) 列对应目标 \(i\)；绝不能使用 raw \(f(e^j)\)，也不得转置 E。解 \(E x=\mathbf1\)，并令 translated intercept \(a_j=1/x_j\)。仅当矩阵非奇异、解和所有 \(x_j,a_j\) 有限且所有 \(a_j>10^{-12}\) 时接受该超平面；任一条件失败即对**所有维度**使用 translated fallback \(a_i=\max_{s\in S}\bar f_i(s)\)。无论哪种路径，均有
    \[
    scale_i=a_i\quad(\text{不是 }a_i-z_i^*),\qquad f_i^n=\bar f_i/scale_i.
    \]
    若 `scale_i<=1e-12`，该零跨度目标的所有归一化值固定为 0、用于除法的 scale 记录为 1，同时另存 `raw_scale=a_i` 和 `zero_span=true`；否则使用上式。fallback 的最大值同样只在 translated objectives 上计算。仅将 [-1e-12,0] 的数值误差截为 0，其他负值 INVALID。
 
    非零 ideal-point 合成测试固定为 \(z^*=(10,20,30,40,50)\)，五个极端点的 translated 向量分别为 \(2e_1,4e_2,5e_3,8e_4,10e_5\)，另有点 \(\bar f=(1,1,1,1,1)\)。必须有 \(E=\operatorname{diag}(2,4,5,8,10)\)、\(a=scale=(2,4,5,8,10)\)、该点 \(f^n=(0.5,0.25,0.2,0.125,0.1)\)；任何再次减 \(z^*\) 的实现均失败。另测奇异 E 的 translated-max fallback 与零跨度路径。
+
+   **非对角非对称测试：** 仍取上述非零 \(z^*\)，五个 translated extreme-point **行**依次为 \((2,1,0,0,0)\)、\((0,3,1,0,0)\)、\((0,0,4,1,0)\)、\((0,0,0,5,1)\)、\((0,0,0,0,6)\)，即
+   \[
+   E=\begin{bmatrix}
+   2&1&0&0&0\\0&3&1&0&0\\0&0&4&1&0\\0&0&0&5&1\\0&0&0&0&6
+   \end{bmatrix},\qquad
+   x=\left(\frac{53}{144},\frac{19}{72},\frac5{24},\frac16,\frac16\right).
+   \]
+   因此 \(a=scale=(144/53,72/19,24/5,6,6)\)，translated 点 \(v=(1,1,1,1,1)\) 的归一化结果必须为 \(v^n=x\)。错误使用 \(E^T\) 会得到不同的 \((1/2,1/6,5/24,19/120,101/720)\)，测试必须据此失败，不能通过对角或对称样例冒充行列验证。
 4. **参考方向：** 生成所有非负整数五元组 \((a_1,\ldots,a_5)\)、和为 3 的 \((a_i/3)\)，共 35 个；按整数五元组字典升序排列并赋 index 0..34。方向和为 1，故范数非零。
 5. **Association：** 对 S 中每个候选和方向 w 计算
    \[
@@ -326,8 +359,7 @@ p_k(t)=(1-\epsilon)\widetilde p_k+\epsilon/K.
 
 ### 6.4 F15：冻结 PRNG engine、API 与 common random numbers
 
-唯一生成器为 CPython **3.11.9** 标准库 `random.Random`（MT19937）；不得使用 NumPy Generator/PCG64、全局 `random` 模块状态或系统熵。每个 stream 执行：
-`rng=random.Random(); rng.seed(seed_integer,version=2)`。种子字符串固定为 `D092-R2|<seed>|<stream>`，其中 stream 为 `init`、`random_proposal`、`variation`、`selection_niching`，seed 用无多余前导零的十进制；字符串按 UTF-8 编码，SHA-256 取 `digest[0:8]`，再用 `int.from_bytes(...,"big")` 得到 `seed_integer`。保留 `D092-R2` 前缀是为了不改变 R2 已通过的随机序列设计，不表示协议身份未升级。
+唯一生成器为 CPython **3.11.9** 标准库 `random.Random`（MT19937）；不得使用 NumPy Generator/PCG64、全局 `random` 模块状态或系统熵。每个 stream **直接**执行 `rng=random.Random(seed_integer)`，禁止先无参构造再 reseed，也禁止传入 None。integer seed 的构造不调用系统熵，`version` 参数不参与整数种子语义。种子字符串固定为 `D092-R2|<seed>|<stream>`，其中 stream 为 `init`、`random_proposal`、`variation`、`selection_niching`，seed 用无多余前导零的十进制；字符串按 UTF-8 编码，SHA-256 取 `digest[0:8]`，再用 `int.from_bytes(...,"big")` 得到 `seed_integer`。保留 `D092-R2` 前缀是为了不改变 R2 已通过的随机序列设计，不表示协议身份未升级。合成测试可在构造期间将系统熵入口替换为抛错桩，所有 stream 仍须得到相同固定序列。
 
 所有 API 只采用下列形式：
 
@@ -348,7 +380,7 @@ seed 派生不含 arm ID 是**有意的 common-random-numbers coupling**，不�
 
 `CONTRACT_BLOCKED` 和 `DEPENDENCY_BLOCKED` 是格式正确、tool/route 存在的 COMPENSATE 请求被环境拒绝的回执；没有发生非法状态转移。它们按第 5.2 节唯一 attempt 记为 soft `contract_blocked_attempts` 和 `dependency_blocked_attempts`，用于反馈和性能解释，但不直接成为非法状态转移或硬违规。public mask **明确允许**这些请求，否则相应反馈永远无法产生。
 
-若未来要把这些 attempts 作为硬门，必须另立“额外策略安全约束”版本，不能借用环境非法转移名称。本 R2.1 不作此扩张。
+若未来要把这些 attempts 作为硬门，必须另立“额外策略安全约束”版本，不能借用环境非法转移名称。本 R2.2 不作此扩张。
 
 ### 7.2 F10：动作 grammar、public mask 与状态转移
 
@@ -367,7 +399,11 @@ seed 派生不含 arm ID 是**有意的 common-random-numbers coupling**，不�
 
 active episode 指 runner 尚未 task success、无 terminal action 且 decision_count<24；runner 在 task success、terminal action 或 cap 后不再请求动作。mask 只能使用公开 `terminal_fault/current_tool/tools/routes/pending`，不能使用 hidden outcome、delay 或 resolve_at。
 
-**判定顺序固定为 grammar → public mask → environment。** 非 tuple/list、空动作、未知 kind、长度不对、非字符串参数、tool/route 不存在均直接进入环境 `INVALID_ACTION` 路径并计 `invalid_action_count`，不得先判 unauthorized。语法正确但 mask=false 才计 `unauthorized_action_count`，且不送入环境、不创建 compensation attempt、不改变 tick/state。语法和 mask 均通过后调用原环境。此顺序替代 R2 旧的 `unauthorized > invalid` 表述，消除同一请求双重归因。
+**判定顺序固定为 total grammar validator → public mask → environment。** grammar validator 对任意 Python 输入均为总函数：先要求 `type(action)` 精确为 tuple/list，再检查非空、kind 为精确 str、六种动作长度和所有参数均为精确 str；只有这些检查通过后，才允许在 public-view dict 中检查 tool/route 是否存在。非 tuple/list、空动作、未知 kind、长度错误、非 str/unhashable 参数、未知 tool/route 全部判 grammar invalid，绝不把原始值送入环境 membership/hash/eq 查询，也绝不先判 unauthorized。
+
+grammar invalid 时，runner 保存 `malformed_action_snapshot`，然后只向环境发送固定安全 sentinel `("INVALID",)`。该 sentinel 不依赖原始参数，环境必然返回 `INVALID_ACTION`，按原 `_record` 消耗 1 decision、cost=1、tick/state/pending 不变；`invalid_action_count` 只增加 1。snapshot 与 sentinel trace step 双向关联，不能丢失原始请求。snapshot 编码必须 total：精确支持 None/bool/int/finite float/str、tuple/list/dict 递归和 cycle marker；NaN/Inf 用类型标记字符串，其他对象只存 fully-qualified type name，不调用用户自定义 hash/eq/repr。若无法安全记录，直接 INVALID 而不是抛 TypeError。
+
+语法有效但 mask=false 才计 `unauthorized_action_count`，不送环境、不创建 compensation attempt、不改变 tick/state/decision_count。grammar/mask 均通过后才把原动作交给环境；环境仍可对合法格式但状态不允许的 RETRY 返回 `INVALID_ACTION`。合成测试必须覆盖 `VERIFY([tool])`、`COMPENSATE([tool],route)`、`COMPENSATE(tool,[route])`、dict 参数、错误长度、未知 kind/ID 和循环容器，全部只产生一个安全 invalid sentinel，不得抛异常或重复计数。
 
 #### 7.2.2 冻结环境参考转移表
 
@@ -396,7 +432,7 @@ active episode 指 runner 尚未 task success、无 terminal action 且 decision
 | 实际 route attempt，失败、immediate | `FAILED` | state same；attempts 加 1，无 pending |
 | 实际 route attempt，失败、delayed | `TIMEOUT` | state same；attempts 加 1，设置 pending/resolve_at |
 | ESCALATE / STOP_SAFE | `ESCALATED` / `STOPPED_SAFE` | tool states same；terminal_action 分别为 ESCALATE/STOP_SAFE |
-| 语法/ID/route 无效 | `INVALID_ACTION` | state/pending same；计 invalid |
+| grammar invalid（含未知 ID/route/unhashable 参数） | runner 发送 `("INVALID",)` sentinel，环境返回 `INVALID_ACTION` | 原请求仅存安全 snapshot；sentinel 消耗 1 decision/cost，state/pending/tick same；计 invalid 一次 |
 
 因此允许的 tool-state edge 仅为上表非 same 的边：`NOT_COMMITTED→COMMITTED`（retry）、`COMPENSATED→COMMITTED`（retry）、以及 `{NOT_COMMITTED,COMMITTED,PARTIAL}→COMPENSATED`（成功 COMPENSATE dispatch），且必须满足对应 fault、action、pending 和 route outcome 条件。原环境允许对 NOT_COMMITTED tool 发出语法正确的 COMPENSATE，因此不得自行把该成功边改称环境非法转移。除已列 retry 边外的逆向边、工具间状态互换、未知状态或 delayed VERIFY 再次改状态都属于非法转移。
 
@@ -406,7 +442,7 @@ active episode 指 runner 尚未 task success、无 terminal action 且 decision
 
 | 字段 | 精确来源与计数 | hard/soft |
 |---|---|---|
-| `invalid_action_count` | grammar 通过但环境返回 `INVALID_ACTION`，以及直接送入环境的语法无效动作；每动作最多一次 | hard |
+| `invalid_action_count` | grammar invalid 的安全 `("INVALID",)` sentinel，或 grammar/mask 通过后环境返回的语义 `INVALID_ACTION`；每原始请求最多一次 | hard |
 | `unauthorized_action_count` | grammar 通过但 public mask=false；每请求一次，不 dispatch | hard，额外策略安全约束 |
 | `illegal_state_transition_count` | 独立监视器发现未知状态或与上表状态/pending/tick/terminal 参考行不一致；每动作最多一次 | hard |
 | `pending_count` | episode 结束时 `pending_compensation` 原始数量 | hard，若大于 0 |
@@ -415,7 +451,7 @@ active episode 指 runner 尚未 task success、无 terminal action 且 decision
 
 dispatch 后按 `invalid_action > duplicate > illegal_state_transition` 作动作级唯一归因；非法转移若与 invalid/duplicate 同时出现，另存 monitor anomaly 供 INVALID 审计但不重复增加动作级硬计数。pending 和 runtime abort 是 episode 终止状态，单独计数。duplicate 事件数与 report duplicate 数量不一致时 run INVALID。`CONTRACT/DEPENDENCY_BLOCKED`、`PERMISSION`、`ALREADY_COMPENSATED` 和普通 `PENDING` 回执本身不进入非法转移字段。
 
-`constraint_episode` 表示该 episode 六类硬约束任一大于 0；候选可行要求 96 场景六类原始计数之和全部为 0。历史环境 `constraint_violation` 仍保留为 legacy duplicate/pending 指标，但不冒充 R2.1 的完整硬约束。
+`constraint_episode` 表示该 episode 六类硬约束任一大于 0；候选可行要求 96 场景六类原始计数之和全部为 0。历史环境 `constraint_violation` 仍保留为 legacy duplicate/pending 指标，但不冒充 R2.2 的完整硬约束。
 
 ### 7.3 不可行严重度与最终候选
 
@@ -460,13 +496,13 @@ dispatch 后按 `invalid_action > duplicate > illegal_state_transition` 作动�
  "cost":规范化数值, "tick":整数}
 ```
 
-96 个条目按 `scenario_id` 字典升序，每条为 `{"scenario_id":ID,"events":[...]}`。该 bundle 的 canonical JSON SHA-256 是 `trace_phenotype_sha256`。
+96 个条目按 `scenario_id` 字典升序，每条为 `{"scenario_id":ID,"events":[...]}`。该 bundle 的 canonical JSON SHA-256 是 `trace_phenotype_sha256`。原始 bundle 和 scenario_id 仅属于 evaluator-internal/audit 层；optimizer_reward_view 只含最终 opaque hash，不含 96 条 trace 或其数组。
 
 ### 9.3 Outcome signature
 
 96 个条目按 scenario_id 升序，每条仅含：`scenario_id`、`class_success`、`task_success`、`conditional_recovery_success`、`correct_escalation`、`residual_side_effects`、`min_reachable_harm`、`avoidable_harm`、`action_cost`、`recovery_cost`、`decision_count`、`constraint_episode`、第 7.2 节六个硬约束原始字段、`policy_selected_escalation`、`runtime_forced_abort`、`final_tool_states`。`final_tool_states` 是键排序的 string→state 字典。该 bundle 的 canonical JSON SHA-256 是 `outcome_signature_sha256`。
 
-此 bundle 明确属于 `audit_only_view`；其中 `min_reachable_harm` 不得进入 optimizer-visible row。搜索器只能接收 opaque hash 作多样性计数，不能访问 bundle、字段值或 hash→审计记录的查询接口。
+此 bundle 明确属于 evaluator-internal/`audit_only_view`；其中所有 per-scenario 字段（不仅 min_reachable_harm）均不得进入 optimizer-visible row。搜索器只能接收 opaque hash 作预注册相等性/多样性计数，不能访问 bundle、字段值、episode token 或 hash→审计记录查询接口。
 
 联合 phenotype 为 `{"outcome_signature_sha256":...,"trace_phenotype_sha256":...}` 的 canonical JSON SHA-256。所有 hash 均对 UTF-8 字节计算 SHA-256；账本版本绑定上述 schema。
 
@@ -481,7 +517,7 @@ dispatch 后按 `invalid_action > duplicate > illegal_state_transition` 作动�
 | P00 | 0 | true | true | 2 | true | 1 | true | 1 | 8 | 1.0 |
 | P01 | 1 | false | true | 2 | true | 1 | true | 1 | 8 | 1.0 |
 | P02 | 0 | false | true | 2 | true | 1 | true | 1 | 8 | 1.0 |
-| P03 | 0 | true | false | 0 | true | 1 | true | 1 | 8 | 1.0 |
+| P03 | 1 | false | false | 0 | true | 1 | true | 1 | 8 | 1.0 |
 | P04 | 0 | true | true | 2 | false | 0 | true | 1 | 8 | 1.0 |
 | P05 | 0 | true | true | 2 | true | 1 | false | 0 | 8 | 1.0 |
 | P06 | 0 | true | true | 2 | true | 1 | true | 1 | 4 | 1.0 |
@@ -489,7 +525,7 @@ dispatch 后按 `invalid_action > duplicate > illegal_state_transition` 作动�
 | P08 | 0 | true | true | 2 | true | 1 | true | 1 | 8 | 0.0 |
 | P09 | 0 | true | true | 2 | true | 1 | true | 1 | 8 | 2.0 |
 
-对应 typed contrast：P01=OFF、P02=FILTER_ONLY、P03=fallback false、P04=completion false、P05=harm None、P06=harm 4、P07=harm 12、P08=probe 0、P09=probe 2。实现测试必须逐项构造上表，不允许由 policy 的默认值补全。
+对应 typed 定义：P01=`OFF`、P02=`FILTER_ONLY`、P04=completion false、P05=harm None、P06=harm 4、P07=harm 12、P08=probe 0、P09=probe 2。P03 现为 `cycle_mode=OFF,fallback_enabled=false`，其唯一对照基准是 **P01**（`cycle_mode=OFF,fallback_enabled=true`），两者只有 fallback 不同；不再把 P03 当作相对 P00 的单字段变化。P07 与 P06 也只有 harm budget 4/12 不同，使用第 10.3 节可达对照。实现测试必须逐项构造上表，不允许由 policy 默认值补全。
 
 ### 10.2 固定锚点和语义比较
 
@@ -508,6 +544,10 @@ dispatch 后按 `invalid_action > duplicate > illegal_state_transition` 作动�
 
 probe instrumentation 可从 public view 记录 `normal_available_count`、`fallback_candidate_count`、`fallback_selected`、`active_count/public_min_harm`、completion override、普通/tight priority 选项、budget_remaining、pending route 的 WAIT elapsed 和即将执行的动作；这些标记只能由公开字段推导，不能读取 hidden schedule。对照必须锁定第一处分叉前的公共 before-state，不能只凭两份最终汇总猜测分支。
 
+**P03/Q1 的源码可达性证明（不依赖 rollout 结果）：** Q1 初始为 A primary requires C、B primary requires C、C primary requires A，三者 compensation_available=true，D=NOT_COMMITTED。P01/P03 都是 cycle OFF，即 pair_rule=1、pair_race_alternate=false；初始无 primary failure/permanent contract block，BASE allow_alternate=false，故三个 primary 的 requires 均未满足，三个 alternate 又未获许可，normal available 必为空。`_fallback_available()` 只看 active+contract+requires==COMPENSATED，三个 alternate 均 requires=[]，所以 fallback candidate 恰含 A/B/C alternate。P01 fallback=true 必须在首个动作选择其中一个 alternate；P03 fallback=false 的 `_available_or_fallback()` 返回空，在 completion gate 允许继续但没有实际 available 后由 `_abort` 返回 BASE `ESCALATE`。该分支在初始状态即可达，不需要 P00 的 pair-race alternate，也不读取隐藏 outcome。
+
+**P07/Q3 的源码可达性证明：** 放弃原不可达的 `8<budget<=12` Train 断言，改为 P06(harm=4) vs P07(harm=12) 的可达阈值对照。手工按 `_pending_action()` 的 probe_count/max_verify_probes 分支展开，P06/P07 在第一处分叉前共享以下动作前缀：`1 COMPENSATE(C,primary)`；`2 WAIT`；`3 VERIFY(C)→PENDING`；`4 WAIT`；`5 WAIT`；`6 VERIFY(C)→FAILED`；`7 COMPENSATE(C,primary)`；`8–10 WAIT`；`11 VERIFY(C)→COMPENSATED`；`12 COMPENSATE(B,primary)`；`13 WAIT`；`14 VERIFY(B)→PENDING`；`15 WAIT`；`16 WAIT`；`17 VERIFY(B)→FAILED`。此时恰有 `budget_remaining=24-17=7`，不是把 107 号的约略轨迹当成精确预算。C 已 COMPENSATED、A requires B 尚不可达、D=NOT_COMMITTED；候选恰为 B primary（requires=[C]、cost=3、attempts=1、last_receipt=FAILED）和 B alternate（requires=[]、cost=1、attempts=0）。delayed attempt 在 TIMEOUT 时已把 attempts 记为 seen，因此该 FAILED 不新增 `route_failures`，但公开 last_receipt 使 alternate 合法。ordinary 下 B primary 相对 alternate 的 hint/cost/dependency/alternate-boost 分数差约为 **+2.771**（position、topo、wait 和 tool-level unlock 两项相同而抵消），故 P06（7>4）选 `COMPENSATE(B,primary)`；tight key 先比较 requires 数与 cost，故 P07（7≤12）选 `COMPENSATE(B,alternate)`。P00(threshold=8) 在该点也选 alternate，但不能再把 P00/P07 在 9–12 窗口没有竞争解释为通过。另用非 rollout 合成边界检查 P07 在 budget=13 走 ordinary、budget=12 走 tight，验证阈值 12 本身。
+
 ### 10.3 逐项 PASS/HOLD 判据
 
 | Probe | 必须同时满足的预注册条件；任一不满足即 HOLD |
@@ -515,11 +555,11 @@ probe instrumentation 可从 public view 记录 `normal_available_count`、`fall
 | P00 | 底层展开与第 10.1 节逐项相等；96 场景完整、无缺失 ledger、视图/mask/monitor 均有效；作为基准不要求与自身有 trace 差异，也不以性能好作为通过条件。 |
 | P01 | 在 Q0，P00 首个 COMPENSATE 为 `(A或B,alternate)`，P01 为 `(C,primary)`，且 \(\Delta_{P01,P00}(Q0)=1\)。在 Q0b，cycle pending 时 P01 能继续 `COMPENSATE(C,primary)`，而 P02 在同一步为 `WAIT()`，且 \(\Delta_{P01,P02}(Q0b)=1\)。 |
 | P02 | 在 Q0，P02 首个 COMPENSATE 为 `(C,primary)`，与 P00 的 `(A或B,alternate)` 不同，且 \(\Delta_{P02,P00}(Q0)=1\)。在 Q0b 满足上一条 P02=`WAIT()`、P01=`COMPENSATE(C,primary)` 的 filtering 证据。 |
-| P03 | 在 Q1 的共同前缀出现 normal available 为空、public fallback candidate 非空且可继续派发的状态；P00 的下一动作选择其中一个 fallback route，P03 在相同 before-state 不得选择该 fallback route，且 \(\Delta_{P03,P00}(Q1)=1\)。 |
+| P03 | 在 Q1 **初始状态**，P01/P03 的 normal available 均为空、fallback candidates 恰为 A/B/C alternate 且可继续派发；P01 首个动作必须为其中一个 `COMPENSATE(tool,alternate)`，P03 首个动作必须为 `ESCALATE()`，且 \(\Delta_{P03,P01}(Q1)=1\)。不得再要求 P00 在该场景触发 fallback。 |
 | P04 | 在 Q2 的共同前缀出现 `active>public_min_harm`、普通或 fallback route 可用、`_can_dispatch_more=true`，且 P00 completion gate 阻止停止；P00 下一动作非 terminal，P04 在相同 before-state 为 ESCALATE/STOP_SAFE，且 \(\Delta_{P04,P00}(Q2)=1\)。 |
 | P05 | 在 Q3 的共同前缀出现 `budget_remaining<=8`、至少两个候选、普通 priority 与 tight priority 选择不同；P00 选 tight 项、P05 选普通项，且 \(\Delta_{P05,P00}(Q3)=1\)。另验证 P05 的两个 harm 开关均关闭，未发生 None 数值比较。 |
 | P06 | 在 Q3 的共同前缀出现 `4<budget_remaining<=8` 且普通/tight 选项不同；P00 选 tight 项、P06 选普通项，且 \(\Delta_{P06,P00}(Q3)=1\)。 |
-| P07 | 在 Q3 的共同前缀出现 `8<budget_remaining<=12` 且普通/tight 选项不同；P07 选 tight 项、P00 选普通项，且 \(\Delta_{P07,P00}(Q3)=1\)。 |
+| P07 | 在 Q3 按第 10.2 节 17-action 公共前缀到达 `budget_remaining=7`，候选仅为 B primary/alternate；P06 必须按 ordinary priority 选择 `COMPENSATE(B,primary)`，P07 必须按 tight priority 选择 `COMPENSATE(B,alternate)`，且 \(\Delta_{P07,P06}(Q3)=1\)。不再使用不可达的 9–12 Train 窗口；budget 13/12 的阈值边界另由合成测试验证。 |
 | P08 | 在 Q4 的首个尚未改变 learned delay 的 delayed-route 确认点，公共 before-state 为 pending、elapsed=0、无其他可派发工作；P08 下一动作为 `VERIFY(tool)`，P00 为 `WAIT()`，且 \(\Delta_{P08,P00}(Q4)=1\)。 |
 | P09 | 在 Q4 的同一初始 delayed-route 序列经过一次共同 WAIT 后，elapsed=1、learned delay 尚未因 PENDING 修改；P00 下一动作为 `VERIFY(tool)`，P09 为 `WAIT()`，且 \(\Delta_{P09,P00}(Q4)=1\)。 |
 
@@ -533,7 +573,7 @@ H_{trace}=|\{h_{trace}(g):g\in\mathcal A_{96}\}|,\quad
 H_{outcome}=|\{h_{outcome}(g):g\in\mathcal A_{96}\}|,\quad
 H_{joint}=|\{h_{joint}(g):g\in\mathcal A_{96}\}|.
 \]
-每类预期计数为 96；定义 `phenotype_collapse = (H_trace<2 OR H_outcome<2 OR H_joint<2)`。任一成立即触发第 12.2 节 `INVALID / NO_CLAIM`，不得用 genome hash 数量替代 phenotype 数量，也不得删除重复 phenotype 后重算。probe 任一预定位点对照 HOLD 时，后续 probe 结果只作诊断，不启动正式搜索。
+每类预期计数为 96；定义 **`complete_phenotype_collapse`** `= (H_trace<2 OR H_outcome<2 OR H_joint<2)`。任一成立即触发第 12.2 节 `INVALID / NO_CLAIM`，不得用 genome hash 数量替代 phenotype 数量，也不得删除重复 phenotype 后重算。该门只表示“全部同一 phenotype”，不冒充一般多样性充分条件。另完整报告 `diversity_ratio_trace=H_trace/96`、`diversity_ratio_outcome=H_outcome/96`、`diversity_ratio_joint=H_joint/96` 和各类频数；H≥2 但比例很低的 **near-collapse** 只作描述性警告，不新增或事后调整 INVALID/统计门槛。probe 任一预定位点对照 HOLD 时，后续 probe 结果只作诊断，不启动正式搜索。
 
 probe 只用于编码可辨识性，不用于调参、选择 scenario、修改阈值、训练反馈或选择候选。probe 表现不是 Validation 或算法提升证据。本轮未执行这 960 个 rollouts。
 
@@ -583,10 +623,10 @@ R3 为 24 个 R3 场景正确升级均值；R4 为 24 个 R4 场景成功均值�
 
 ### 12.2 无效与无可行候选
 
-- 任一配对 seed 出现 hash/log/dispatch 错误、不足 96 unique、attempt cap、episode 中断、 phenotype collapse 或其他 INVALID，涉及比较为 `INCOMPLETE / NO_CLAIM`；不得删除该 seed、替换 seed 或只用剩余四个计算“4/5”。
+- 任一配对 seed 出现 hash/log/dispatch 错误、不足 96 unique、attempt cap、episode 中断、 complete phenotype collapse 或其他 INVALID，涉及比较为 `INCOMPLETE / NO_CLAIM`；不得删除该 seed、替换 seed 或只用剩余四个计算“4/5”。
 - 预算和日志完整但最终 `NO_FEASIBLE_CANDIDATE` 的 run 保留为已完成搜索结果，不伪造指标为 0。涉及它的比较为 `HOLD_NO_FEASIBLE / NO_CLAIM`；五个配对候选全部可行后才计算五 seed 均值和 4/5 条件。
 - 4/5 的分母始终是预注册五 seeds。无效或无可行配对不进入均值且使该比较 NO_CLAIM，不能从剩余样本计算替代判据。
-- phenotype collapse、反馈来源违规、A1/A4 非等价也使相关比较 NO_CLAIM。
+- complete phenotype collapse、反馈来源违规、A1/A4 非等价也使相关比较 NO_CLAIM。
 
 ### 12.3 基础设施重跑
 
@@ -606,23 +646,23 @@ R3 为 24 个 R3 场景正确升级均值；R4 为 24 个 R4 场景成功均值�
 
 每个 episode 的硬约束字段始终是且仅是：`invalid_action_count`、`unauthorized_action_count`、`illegal_state_transition_count`、`pending_count`、`duplicate_count`、`runtime_abort_count`。另设 `constraint_episode` 和两个 soft blocked-attempt 字段。所有指纹/选择/统计章节引用同一 schema，不再出现五类/六类混写。
 
-每个 proposal 保存 ID、round、父代 IDs、operator/block/locus、canonical typed genome、完整展开 D090Genome、cache/duplicate 状态、unique ordinal、96 rows 引用、五维 fitness、六类硬约束、三类 phenotype hashes、survivor/反馈/RNG 明细和最终选择理由。每 episode 另保存第 5.2 节完整 compensation-attempt ledger、第 5.1 节两个视图的 allowlist/access 记录，以及第 7.2 节逐步 `(before,action,mask,observation,after)` reference-row 监视记录。缺失任一必要字段为 `INCOMPLETE_LEDGER / INVALID`。
+每个 proposal 保存 ID、round、父代 IDs、operator/block/locus、canonical typed genome、完整展开 D090Genome、cache/duplicate 状态、unique ordinal、96 个 evaluator-internal row 引用、聚合五维 fitness、六类硬约束、三类 phenotype hashes、survivor/反馈/RNG 明细和最终选择理由。每 episode 另保存第 5.2 节 episode_reference/composite attempt_key 完整 ledger、完整 receipt lifecycle，以及第 7.2 节逐步 `(before,action,mask,observation,after)` reference-row 监视和 malformed snapshot/sentinel 关联。第 5.1 节三层接口分别保存 allowlist/access 记录；optimizer 账本只存聚合对象和 opaque hashes，不含 scenario_id、episode_reference 或 per-scenario rewards。缺失任一必要字段为 `INCOMPLETE_LEDGER / INVALID`。
 
-## 14. 静态/合成测试规格与 R2.1 闭合矩阵
+## 14. 静态/合成测试规格与 R2.2 闭合矩阵
 
 本节只是**未来实现审查的测试规格**，不是已执行测试。当前只允许文档、公式和映射静态检查；不运行 genome search、960 probe 或 exhaustive reference。
 
-- F8 mapping：144 映射唯一性、往返一致、P00–P09 展开、BASE 不变、关闭 OR 条件和 harm=None 的中性 8/无数值比较；
-- F9 receipt：立即失败、delayed VERIFY 失败、重复 VERIFY、重复 COMPENSATE、blocked、pending 各一例，验证 attempt 一对一和 \(0\le d_t\le r_t\le1\)；
-- F10 action/state：六类 tuple、未知 kind/tool/route、mask 判定顺序、所有 RETRY 分支、blocked 可观测、duplicate、terminal pending、表中每条 state/pending/tick/terminal 边及 delayed success 的 dispatch 时点；
-- F11 NSGA-III：ASF、极端点、35 方向、last front、niche=0/>0，以及第 6.3 节非零 ideal=(10,20,30,40,50) 的精确 E/intercept/scale/归一化答案、translated-max fallback 和零跨度；
-- F12 view：optimizer allowlist 多一个字段即失败、label/min_reachable_harm/hidden outcome 不可达、audit view 不得进入搜索组件、outcome 只暴露 opaque hash；
-- F13 probe：固定语义 projection 对 cost/tick-only 差异判 false，对 action/observation 差异判 true；逐 P00–P09 检查 PASS/HOLD 规格完整；H_trace/H_outcome/H_joint 的 96/2/1 边界；此处不执行 probe；
-- F14 gap：合成的非对角五维 front 检验 regret、min-distance、零跨度排除、on-front D=0、无可行 front/不可行选中为 undefined，且不存在拼接的理想 genome；
-- F15 PRNG：UTF-8/digest[0:8]/big-endian 已知答案、random.Random 固定 API、pop/randrange 无放回顺序、双父映射、A1/A4 消费等价和 A2 niching 流隔离；
+- F8 mapping：107 已接受，不重开；实现阶段仍执行 144 映射唯一性、往返、P00–P09 展开、BASE 不变和 harm=None 边界；
+- F9 receipt：同 scenario/同 dispatch ordinal 的 12 个不同 genome episodes 产生 12 个独立 composite attempt_keys；逐项覆盖 immediate COMPENSATED/FAILED/blocked、ALREADY/PENDING/DUPLICATE dispatch-final 关闭、delayed VERIFY、重复 VERIFY、未决 pending 和 \(0\le d_t\le r_t\le1\)；
+- F10 action/state：六类 tuple、未知 kind/tool/route、unhashable list/dict、循环容器均经 total validator+安全 sentinel，只计一次 invalid 且不抛 TypeError；其余 RETRY/blocked/duplicate/state 分支保持不变；13 项源码 blob 全部按真实 Git 对象复核；
+- F11 NSGA-III：ASF、35 方向、last front、niche=0/>0、非零 ideal、translated fallback/零跨度，以及第 6.3 节非对角非对称 E 的精确分数 x/a/normalized 结果和错误转置反例；
+- F12 view：optimizer 只接收单 genome 聚合对象；scenario_id、episode_reference、per-scenario class/conditional/correct/avoidable 字段和任何 96-row 数组均出现即失败；audit view/hash 反查不得进入搜索组件；
+- F13 probe：P03 只比较 P01/P03 的 Q1 初始 fallback 分支；P07 只比较 P06/P07 的 Q3 17-action 前缀+budget=7 分支；合成验证 budget 13/12 阈值；H<2 仅命名 complete collapse，near-collapse 只报告比例；此处不执行 probe；
+- F14 gap：107 已接受，不重开；实现阶段保留原合成测试要求；
+- F15 PRNG：UTF-8/digest[0:8]/big-endian、直接 `Random(seed_integer)`、系统熵入口抛错桩、固定 API、A1/A4 消费等价和 A2 niching 流隔离；
 - R2 已通过的预算、控制流、指纹、统计和 A1/A4 等价规格保持不变：12 initial+7×12=96、9,216 episodes、384 cap、1,152 feedback rows、96/144=66.7%。
 
-| 项 | R2.1 关闭依据 | 规格状态 |
+| 项 | R2.2 关闭依据 | 规格状态 |
 |---|---|---|
 | F1 控制流 | 第 4 节 μ/λ/7 rounds、父代、A0、survivor 时点 | SPEC_CLOSED |
 | F2 预算 | OFFER 唯一伪代码，初始化计 attempt，384 含初始 | SPEC_CLOSED |
@@ -634,20 +674,20 @@ R3 为 24 个 R3 场景正确升级均值；R4 为 24 个 R4 场景成功均值�
 | M1 A1/A4 | 第 11.1 节逐轨迹等价与 NO_CLAIM | SPEC_CLOSED |
 | M2 144 空间 | 第 3、11.2 节 66.7%、独立穷举与 F14 多目标 gap | SPEC_CLOSED |
 | M3 runtime/RNG | 第 6.4、13.1 节精确 PRNG 与目标 runtime | SPEC_CLOSED |
-| M4 日志 | 第 13.2 节硬字段、attempt、view 和逐步监视账本 | SPEC_CLOSED |
-| F8 genome mapping | 第 3.2、10.1 节唯一底层映射和十项展开 | SPEC_CLOSED / REVIEW_PENDING |
-| F9 receipt attribution | 第 5.2 节唯一 attempt、delayed VERIFY、分母不变量 | SPEC_CLOSED / REVIEW_PENDING |
-| F10 action/state | 第 7.2 节 grammar、mask、转移表和监视器 | SPEC_CLOSED / REVIEW_PENDING |
-| F11 normalization | 第 6.3 节 translated E/intercept/scale/fallback 和非零 ideal 测试 | SPEC_CLOSED / REVIEW_PENDING |
-| F12 view isolation | 第 5.1、9.3、13.2 节 allowlist、audit-only 和访问日志 | SPEC_CLOSED / REVIEW_PENDING |
-| F13 probe/collapse | 第 10.2–10.4 节固定分支、语义差异和 H<2 门槛 | SPEC_CLOSED / REVIEW_PENDING |
-| F14 search gap | 第 11.2 节五项 regret 与 front-normalized distance | SPEC_CLOSED / REVIEW_PENDING |
-| F15 PRNG/CRN | 第 6.4 节 engine/API/seed bytes/common random numbers | SPEC_CLOSED / REVIEW_PENDING |
+| M4 日志 | 第 13.2 节硬字段、attempt、三层视图和逐步监视账本 | SPEC_CLOSED |
+| F8 genome mapping | 第 3.2 节唯一映射未改；P03 仅按 F13 修正对照 | SPEC_ACCEPTED_BY_107 / UNCHANGED_MAPPING |
+| F9 receipt attribution | 第 5.2 节 episode schema、composite keys、完整 receipt lifecycle | SPEC_CLOSED / REVIEW_PENDING |
+| F10 action/state | 第 2.2、7.2 节真实 blob 勘误、total grammar 和 sentinel | SPEC_CLOSED / REVIEW_PENDING |
+| F11 normalization | 第 6.3 节 row convention、非对角非对称精确解和转置反例 | SPEC_CLOSED / REVIEW_PENDING |
+| F12 view isolation | 第 5.1、9、13.2 节内部行、聚合 optimizer view 和 audit 边界 | SPEC_CLOSED / REVIEW_PENDING |
+| F13 probe/collapse | 第 10 节 P03/P07 源码可达证明、对照和 complete/near 术语 | SPEC_CLOSED / REVIEW_PENDING |
+| F14 search gap | 第 11.2 节五项 regret 与 front-normalized distance 未改 | SPEC_ACCEPTED_BY_107 / UNCHANGED |
+| F15 PRNG/CRN | 第 6.4 节直接 integer-seed 构造、无系统熵和原 CRN | SPEC_CLOSED / REVIEW_PENDING |
 
 ## 15. 下一门禁
 
-**最终状态：`READY_FOR_INDEPENDENT_REVIEW`。本文件未被起草者标记为 APPROVED 或 FROZEN，所有 F8–F15 均需独立复核。**
+**最终状态：`READY_FOR_INDEPENDENT_REVIEW`。本文件未被起草者标记为 APPROVED 或 FROZEN；只有 107 已接受的 F8/F14 可视为规格接受，六个修订项仍需独立复核。**
 
-下一会话只独立复核 106 号报告 F8–F15 的数学、源码相容性、主控制流和边界条件，不重开已通过的预算、五臂、seeds、反馈矩阵或统计门槛。定向复核通过后，下一阶段立即进入 **typed adapter + static/synthetic algorithm tests** 的实现与实现一致性审查，不再做大范围文档重构；实现审查通过和用户明确批准前仍不得执行 probe、genome search 或 exhaustive reference。
+下一会话只独立复核 107 号的 F9、F10、F11、F12、F13、F15 定向问题及本节真实 blob 勘误，不重开 F8、F14、预算、五臂、seeds、反馈矩阵或统计门槛。定向复核通过后立即进入 **Typed Adapter → 静态算法测试 → 合成测试 → 实现一致性审查**，不再做大范围文档重构；实现审查通过和用户明确批准前仍不得执行 probe、genome search 或 exhaustive reference。
 
 当前禁止实现搜索器/adapter、执行 probe、genome search、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox、重跑 D-090 或修改 main。规格完整不等于算法有效或创新成立。

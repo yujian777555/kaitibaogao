@@ -1,4 +1,22 @@
-## 0T. D-092 R2.1 独立复审门禁（2026-11-17；REQUEST_CHANGES / HOLD）
+## 0U. D-092 R2.2 定向修复门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+R2.1 immutable snapshot 已保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`。R2.2 raw/canonical SHA=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
+
+六项均已写入可检查定义：F9 composite identity+完整 lifecycle；F10 total malformed validator+安全 sentinel；F11 row E+非对角精确解；F12 evaluator-internal与聚合optimizer分层；F13 可达P03/P07对照；F15直接integer seed。F8/F14与全部预算、五臂、seeds、反馈矩阵、统计门槛未改。
+
+**重要勘误：** 本地Git和GitHub API均证明 d088 blob 为 `afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5`，与R2.1原表一致；107所列另一SHA不存在。不得以遵循审查为由写入错误哈希。
+
+静态/公式检查通过13/13源码身份、96 Train IDs、冻结章节、144映射、十项展开、P03/P07单机制差异、非对角E和P07分数；无OPEN/TBD。未运行算法测试或任何rollout。
+
+**GO：** 新独立会话只复核107号六项及blob勘误。通过后直接进入 Typed Adapter → 静态算法测试 → 合成测试 → 实现一致性审查。
+
+**HOLD：** 当前不实现/运行adapter/searcher、960 probe、genome search、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式A-3b、真实API、A800/ARWM或main merge。Probe/Train-only搜索须实现复审通过和用户明确批准。
+
+规格完成不等于性能提升或创新成立。维护时无新CI/artifact，提交后真实查询。
+
+---
+
+## 0T. D-092 R2.1 独立复审门禁（历史状态；已被上方 0U supersede）
 
 R2/R1 snapshot 与 Train manifest/6 anchors 通过；但 R2.1 尚不批准执行。详见 `107_D092_R2_1_INDEPENDENT_REVIEW.md`。
 

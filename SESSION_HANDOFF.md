@@ -1,4 +1,17 @@
-## 0U. D-092 R2.1 独立复审交接（2026-11-17；REQUEST_CHANGES / HOLD）
+## 0V. D-092 R2.2 定向修复交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+- 起始 HEAD=`0ff5f8dd73312d37de681bc3093692cd62596e56`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=316/0，起始工作区 clean。
+- R2.1 snapshot=`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`：raw=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`，canonical=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。
+- R2.2 canonical：raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`，canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
+- F9 使用 seed/ordinal/genome/scenario episode identity、composite attempt keys 和完整 immediate/delayed/non-progress lifecycle。F10 malformed/unhashable 输入由 total validator+安全 INVALID sentinel 处理。F11 E 行约定和非对角精确测试已补齐。F12 optimizer 只剩聚合对象，不再暴露 per-scenario 标签信息。F15 直接 Random(integer)。
+- F13：P03=P01 cycle-OFF 背景下仅关闭 fallback，Q1 初始即可触发；P07=P06 基础上仅把 harm 4→12，Q3 17-action 前缀后 budget=7 选择 ordinary B primary vs tight B alternate。H<2 仅称 complete collapse，near-collapse 不新增统计门。
+- **107 blob 勘误：** 正确 d088 blob=`afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5`，本地 Git/HEAD/GitHub API 一致；107 给出的另一值不存在。R2.2 不写入错误 SHA。
+- F8/F14及预算/五臂/seeds/反馈矩阵/统计不变。静态检查13/13哈希、96 IDs、冻结章节、144映射、十项展开、E精确解和P07分数均通过，无OPEN/TBD。
+- 未实现/运行算法、probe、search、exhaustive或Validation/Test；无新性能结论。下一唯一任务为独立定向复核六项；通过后立即 Typed Adapter→静态算法测试→合成测试→实现一致性审查。维护时无新CI/artifact。
+
+---
+
+## 0U. D-092 R2.1 独立复审交接（历史状态；已被上方 0V supersede）
 
 - 审查基线 HEAD=`ab915751d8bb95d5f3e76b1d1e4c259f9819cfcc`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=315/0。
 - R2 snapshot 与父提交 canonical R2 逐字节一致；R1 snapshot 前后相同；96 Train IDs 和 6 个 probe 锚点均存在。

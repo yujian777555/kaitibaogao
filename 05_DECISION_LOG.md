@@ -1,6 +1,20 @@
 # 05 — 研究决策日志
 
-## 2026-11-17：D-092 R2.1 独立定向复审 — REQUEST_CHANGES / HOLD
+## 2026-11-17：D-092 R2.2 定向修复交付 — READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN
+
+R2.1 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`。R2.2 raw/canonical SHA=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`；R2.1 raw/canonical/blob 保持 `104df349…34648ee` / `e7102747…4695a3` / `773f39e5…0886088`。
+
+**规格决定：** F9 episode/attempt composite identity 和完整 receipt lifecycle；F10 total grammar+安全 INVALID sentinel；F11 E 行约定及非对角非对称精确测试；F12 优化器仅见单 genome 聚合 fitness/feedback，不再见 per-scenario 标签字段或 scenario_id；F13 P03 改为 P01/P03 的 Q1 初始 fallback 对照，P07 改为 P06/P07 的 Q3 budget=7 对照，complete/near-collapse 分开；F15 直接 Random(seed_integer)。
+
+**审查证据更正：** 107 关于 d088_policies blob 的指认经本地 Git、HEAD 内容和 GitHub API 联合核验为转写错误。正确值仍为 `afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5`；R2.2 明确保留，不把不存在的对象写入协议。
+
+F8/F14、五臂、μ/λ、96 unique、384 attempts、五 seeds、反馈矩阵和统计判据未重开。静态/公式检查覆盖13/13真实哈希、96 Train IDs、冻结章节逐字一致、144映射、P00–P09、P03/P07单机制差异、E精确解与P07分数，全部通过；无OPEN/TBD。
+
+未运行算法测试、rollout、probe、search、exhaustive或Validation/Test，规格交付不构成算法提升。下一唯一任务是新独立会话定向复核六项和blob勘误；通过后立即进入 Typed Adapter→静态算法测试→合成测试→实现一致性审查。Probe和正式Train-only搜索仍需实现复审与用户明确批准。维护时无新CI/artifact。
+
+---
+
+## 2026-11-17：D-092 R2.1 独立定向复审（历史状态；已由上方 R2.2 交付 supersede）
 
 R2.1 commit `ab915751d8bb95d5f3e76b1d1e4c259f9819cfcc` 的 Git 版本、R2/R1 snapshot 和 Train manifest/anchors 核验通过。R2 snapshot 与父提交 canonical R2 逐字节一致；R1 未覆盖；96 Train IDs、6 probe anchors 均存在。13 项源码 blob 中 12 项匹配，`experiments/d088_recovery/d088_policies.py` 声明 blob 与实际 blob 不匹配。
 

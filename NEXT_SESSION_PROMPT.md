@@ -1,6 +1,34 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2.1 独立复审结论与 R2.2 定向修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
+## D-092 R2.2 定向修复交付（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。本轮起始 HEAD=`0ff5f8dd73312d37de681bc3093692cd62596e56`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，起始 ahead/behind=316/0、工作区 clean；接手时动态核验最终 HEAD/远端。
+
+### 文件身份
+
+- canonical R2.2：`103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw SHA=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`，canonical SHA=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，Git blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
+- R2.1 immutable snapshot：`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`；raw=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`，canonical=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。R0/R1/R2 均未覆盖。
+
+### 六项定向修复
+
+- F9：episode_reference 纳入 seed/unique ordinal/genome hash/scenario；attempt hash纳入 episode_reference；C/F/D 只用 composite keys；immediate COMPENSATED 与所有 dispatch-final receipts 均关闭 record，TIMEOUT 才保持 open。
+- F10：total grammar validator 在任何字典查询前处理 malformed/unhashable/cyclic 输入，安全 `("INVALID",)` sentinel 记账且保留原始 snapshot。**源码 SHA 核验推翻 107 转写：** 正确 blob 仍是 `afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5`，经本地 Git 与 GitHub API 双重确认；不得改成 107 所写不存在的对象。
+- F11：E 第 j 行=第 j 个 translated extreme point；加入非对角非对称矩阵、精确分数解/intercepts/normalized vector 和转置反例。
+- F12：evaluator-internal rows 与 optimizer 单 genome 聚合对象分离；optimizer 不再收到 scenario_id、episode token、per-scenario class/conditional/correct/avoidable 或任何 96-row 数组。
+- F13：P03 比较 P01/P03，在 Q1 初始状态隔离 fallback；P07 比较 P06/P07，在 Q3 精确 17-action 前缀后 budget=7 比较 B primary/alternate。保留 10 genomes×96=960 设计预算；H<2 改名 complete collapse，near-collapse 仅描述。
+- F15：直接 `random.Random(seed_integer)`，不再无参构造或 reseed。
+
+F8 mapping、F14 公式、五臂、μ/λ、96 unique、384 attempts、五 seeds、反馈矩阵和统计判据均未改；静态逐字比较通过。
+
+### 实际验证与唯一下一任务
+
+静态/公式检查通过：R2.1 快照身份；13/13 源码 canonical SHA 与真实 Git blob；96 Train IDs/6 anchors；F8/F14及冻结章节不变；144 映射和 P00–P09 展开；P03/P01 与 P07/P06 单机制差异；非对角 E 精确解/转置反例；P07 分数差约2.771；无 OPEN/TBD；diff 格式正确。**没有运行 rollout、算法测试、probe、search、exhaustive 或 Validation/Test。**
+
+唯一下一任务：新独立会话只复核 107 号六项及 blob 勘误。通过后直接进入 **Typed Adapter → 静态算法测试 → 合成测试 → 实现一致性审查**，不再扩大文档审查；实现复审和用户明确批准后才可 Probe/Train-only search。维护时尚无新 CI/artifact，提交后真实查询，历史 CI 不算本轮证据。
+
+---
+
+## D-092 R2.1 独立复审结论与 R2.2 定向修订接管（历史任务；已由上方 R2.2 交付 supersede）
 
 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。审查基线 HEAD=`ab915751d8bb95d5f3e76b1d1e4c259f9819cfcc`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=315/0。接手必须重新查询 branch HEAD/main/worktree。
 
