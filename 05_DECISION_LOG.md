@@ -1824,3 +1824,15 @@ R1 文件与历史版本身份核验通过：R1 raw SHA=2b67f64a20ffe622264ee976
 
 本轮只读远端审查，没有新 CI/artifact；R1 commit 查询 workflow runs 为 0。没有检查执行者本地工作树。
 
+## D-092-R2：控制流、canonical NSGA-III 与反馈边界修订（2026-11-17）
+
+R1 原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`。canonical R2 的 raw SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical SHA=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，Git blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
+
+F1/F2 固定 μ=12、λ=12、无放回唯一初始 12 与 7 轮 12 unique offspring；轮内父代冻结、mutation 单父均匀、crossover 两不同父、A0 无放回；唯一 OFFER 伪代码从 attempts=0 起算，384 cap 含初始化和重复/cache。F3 完整定义 ASF、极端点、零跨度 normalization、35 方向唯一枚举、最后 front、niche=0 最近距离及 niche>0 seeded 随机选择。F4 将 CONTRACT/DEPENDENCY_BLOCKED 归为 soft 合法拒绝回执，硬约束统一为 invalid、unauthorized、实际非法转移、pending、duplicate、runtime abort 六类。
+
+F5 明确允许完整 Train rollout 后使用 class_success/avoidable_harm 等 evaluator reward，但禁止预读 label/min_reachable_harm/hidden outcomes；e_t 更名为 unsuccessful escalation rate。F6 固定 trace/outcome/joint phenotype canonical JSON/hash，定义 10 个 probe genomes×96=960 独立 episodes。F7 规定无效配对或 NO_FEASIBLE 使相关比较 NO_CLAIM，五对完整前不计算均值/4-5，不替换 seed；仅允许首个 proposal 前的同 seed 基础设施 preflight 重跑一次。
+
+M1 要求 A1/A4 逐 seed 完整轨迹等价；M2 明确 144 搜索空间、96/144=66.7%，在所有正式结果锁定后单独运行一次 144×96=13,824 episodes 的 Train-only exhaustive reference，仅报告 search gap，不参与调参或竞争。M3 固定 CPython 3.11.9、NumPy 1.26.4、Ubuntu 22.04 x86_64 和 hash-locked 依赖责任。M4 统一六类硬字段、指纹 schema 和独立资源账本。
+
+静态检查实际覆盖 F1–F7/M1–M4、固定轮次、初始化 attempts、canonical niching、反馈边界、probe/oracle 算术、NO_CLAIM、13 份源码哈希及 R1 保留，全部通过；无 OPEN/TBD。未实现 adapter/searcher，未执行 probe、算法测试或 genome search。R2 只标记 **READY_FOR_INDEPENDENT_REVIEW**，不是 APPROVED_FOR_EXPERIMENT。本轮无新 CI/artifact，下一唯一任务是新独立会话复审。
+

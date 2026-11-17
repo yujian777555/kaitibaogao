@@ -1,3 +1,19 @@
+## 0Q. D-092 R2 协议修订门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+
+R1 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`。R2 canonical 文件 raw SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical SHA=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，Git blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
+
+- F1/F2：12 初始+7×12 offspring=96 unique；父代/随机采样/轮末 survivor 唯一定义；384 attempts 含初始化和重复/cache，独立 arm×seed 计数。
+- F3/F4：canonical NSGA-III 完整 ASF、归一化和 niche 0/>0；blocked receipts 不误计非法转移，六类硬约束统一。
+- F5/F6/F7：post-rollout reward 边界明确；phenotype hash、10 probe genomes/960 独立 episodes 完整；无效 seed/NO_FEASIBLE 均 NO_CLAIM，不替换 seed。
+- M1–M4：A1/A4 等价检查；144 空间/66.7% 覆盖与一次 13,824 episodes exhaustive reference；精确目标 runtime；统一硬字段和账本。
+
+静态检查通过，无 OPEN/TBD；未实现/运行任何算法或 probe。本轮无新 CI/artifact，历史 D-091 证据不构成 R2 批准。
+
+**GO：** 仅独立审查 R2。
+**HOLD：** adapter/searcher 实现、probe、genome search、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 LLM/API、UndoBench TEST、ThinkingBox 和 main merge。
+
+---
+
 ## 0P. D-092 R1 独立审查门禁（2026-11-17；REQUEST_CHANGES / HOLD）
 
 R1 的文件身份和既有数据绑定核验通过：R1 raw/canonical SHA 匹配，R0 与父提交原始文件相同；13 份源码 Git blob/canonical SHA、manifest、96 scenario IDs、5 anchors、probe ID hash 全部复核匹配。

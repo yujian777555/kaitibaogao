@@ -1,5 +1,31 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+## D-092 R2 独立审查接管（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+
+唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。开始必须 fetch 并核验真实 HEAD、main、ahead/behind 和本地工作树，不得覆盖未提交工作。
+
+### 权威文件与身份
+
+- R2：`103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical SHA=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，Git blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
+- R1 历史：`103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`；R0 历史：`103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`。
+- R1 审查依据：`105_D092_R1_INDEPENDENT_REVIEW.md`；本轮已逐项处理 F1–F7 和 M1–M4。
+
+### R2 的核心可执行定义
+
+μ=12、λ=12、共享无放回唯一初始 12、7 轮各接受 12 个新唯一 offspring；轮内父代冻结，mutation 单父均匀、crossover 两不同父代，A0 从未评价集合无放回采样。每轮结束才 survivor；A3 反馈仅来自上一轮 12×96=1,152 rows。OFFER 从 attempts=0 开始，384 cap 含初始和所有重复/cache；有效 run 必须 96 unique/9,216 episodes。
+
+canonical NSGA-III 使用完整 ASF、极端点、零跨度处理、35 方向唯一排序、最后 front、niche=0 最近距离和 niche>0 seeded 随机选择。blocked contract/dependency 为 soft 回执，硬约束只有 invalid、unauthorized、实际非法转移、pending、duplicate、runtime abort 六类。
+
+允许完成 Train rollout 后的 evaluator reward，不允许预读 label/hidden schedule。原 e_t 改名 unsuccessful escalation rate。三类 phenotype canonical hash 已定义；probe 为 10 genomes×96=960 独立 episodes；穷举参考为 144×96=13,824 episodes，均不参与调参。无效 seed/NO_FEASIBLE 导致相关比较 NO_CLAIM，不替换 seed。A1/A4 必须逐轨迹等价。目标 runtime 为 CPython 3.11.9、NumPy 1.26.4、Ubuntu 22.04 x86_64。
+
+### 验证边界和唯一任务
+
+静态检查已覆盖全部 F/M 项、预算、公式、13 份源码哈希和 R1 保留，无 OPEN/TBD。没有实现 adapter/searcher，没有执行 probe、算法测试或 genome search。本轮无新 CI/artifact；历史 D-091 CI `44068259009` 不是 R2 实验批准。
+
+**唯一下一任务：** 独立审查 R2 的控制流、预算、canonical NSGA-III、反馈边界、硬约束、probe/hash、统计和 runtime lock，给出 ACCEPT 或 REQUEST CHANGES。不得由修订者自行批准。审查后仍需实现授权、实现一致性复审及用户明确批准；此前禁止实现/运行 D-092、probe、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 API、A800/ARWM 和 main merge。
+
+---
+
 ## D-092 R1 独立审查结论与 R2 修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
 
 唯一仓库：yujian777555/kaitibaogao；唯一分支：pilot-a-stateful-recovery。不得读取或混用其他仓库。

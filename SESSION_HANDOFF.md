@@ -1,3 +1,14 @@
+## 0R. D-092 R2 预注册修订交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+
+- 起始 HEAD=`df2b8612a7c08ba3e93211f29c76198b569b79a3`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；开始工作区 clean。R1 原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md`。
+- canonical R2=`103_D092_TRAIN_ONLY_PREREGISTRATION.md`：raw SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical SHA=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，Git blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
+- F1/F2 固定 μ=12、λ=12、7 rounds、共享无放回初始 12、轮内冻结父代、A0 无放回和 OFFER 计数；384 cap 含初始化及重复。F3 使用 canonical ASF/normalization/niche 0/>0。F4 将 blocked receipts 与六类硬约束分离。F5 明确 post-rollout reward 和 unsuccessful escalation。F6 固定三类 phenotype hash、10 probe genomes/960 episodes。F7 无效或 NO_FEASIBLE 配对均 NO_CLAIM，不替换 seed。
+- M1 要求 A1/A4 trajectory equivalence；M2 明确 144 空间/66.7% 覆盖并设一次 13,824 episodes 的独立 exhaustive reference；M3 固定 CPython 3.11.9、NumPy 1.26.4、Ubuntu 22.04 x86_64 目标执行锁；M4 统一六类硬字段及所有账本。
+- 静态检查全部通过，无 OPEN/TBD。未实现 adapter/searcher，未运行 probe、算法测试、genome search 或候选选择。本轮只有文档修改，无新 CI/artifact。
+- **唯一下一任务：** 新独立会话审查 R2。不得自行批准实验；实现授权、实现复审和用户明确批准仍是独立门禁。Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 API 和 main merge 继续禁止。
+
+---
+
 ## 0Q. D-092 R1 独立审查交接（2026-11-17；REQUEST_CHANGES / HOLD）
 
 - 唯一仓库/分支：yujian777555/kaitibaogao / pilot-a-stateful-recovery。R1 审查时 branch HEAD=7a94d9711fa792e76d710d48f5cfc562e0c5a072，main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653，ahead/behind=310/0。当前接手时必须动态查询最新 HEAD。
