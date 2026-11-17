@@ -1,5 +1,20 @@
 ## 0M. D-090 最新权威接管状态（2026-11-16）
 
+## 0N. D-091 最新权威接管状态（2026-11-17；待执行）
+
+- 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。接管前已知文档提交 `4e511b93fadb71ebab4b38f7dcbdf986b695d1a8`；本轮新增 D-091 提示词后提交继续更新，接管时必须先 fetch 远端。
+- D-090 事实：6 families、96 Train-only scenarios、3 seeds、5 个方法、每 run 96 unique genome evals；报告五方法均 R3=.875/R4=1.000/Harm=.041667/硬约束=0。没有冻结候选/Validation/Test。
+- 本轮静态预审（必须本地独立复现，不等同于最终审计）：`random` 分支与 `nsga2` 实际同路径；`state_evo` mutation profile 是固定常量；`GENERATIONS=6` 未被 loop 使用；15 个 best candidates 只有 8 个不同 genome，但 96 场景完整 trace bundle 105/105 pairwise 相同。
+- D-090 两个旧 g03 audit 脚本使用 D-089 scenario/report，未审计 D-090 `d090_PAIR_RACE` r2。25-step claim 仍待证；存在待环境回放的 23-step 反例序列。
+- `objectives()` 六维目标与 `_best()` 的 archive lexicographic selection 不一致，需审计其是否符合多目标实验定义。
+- 现有 CI `43881534809` success 仅表示 regression 和 D-090 unit test 通过，不代表 D-091 审计或 D-090 原始搜索过程已独立复算。D-090 report 只保存每个 run 的 best_rows，未保存全部 96 genome 的完整逐场景搜索轨迹。
+- **唯一下一任务：** 严格执行 `101_D091_EXECUTOR_PROMPT.md`，完成 D-090 原始账本独立复算、方法身份审计、候选行为指纹、r2 witness/BFS、P1/P2/P4 失败轨迹和专属 CI artifact。
+- 禁止：重跑 D-090 搜索、新 genome search、调参、候选冻结、Validation、Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox、main 修改/merge。
+- 完成后更新 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG、51 数据门禁；若证据缺失，状态必须为 `D091_PARTIAL / HOLD`，不得写成 PASS。
+
+---
+
+
 - 唯一工作仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`；D-090 报告 `99_D090_PAIR_RACE_RULE_SEARCH.md`。
 - D-090 使用 `d090r|train|`，6 families、96 Train-only scenarios。固定消融与五种搜索结果详见 99 号报告及 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
 - 搜索方法汇总均为 R3=.875/R4=1.000/Harm=.042/硬约束=0；3 paired seeds、每方法 96 unique genome evaluations。方法间相同结果不构成 EC 优势证明。
