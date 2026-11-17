@@ -1,5 +1,17 @@
 # kaitibaogao — 硕士学位论文开题研究
 
+## D-092 R1 预注册修订（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+
+- **交付：** 原草案保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`；canonical R1 为 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。R0 raw SHA=`3d0b0d0e22d5cfd676ddb8ff7feadaf2dfc9dd7981c0d50920fcf5dd1bf9f367`；R1 raw SHA=`2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA=`3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`。
+- **B1/B2：** 绑定固定 96 个 Train 场景及完整环境/策略/genome/selector 依赖闭包哈希；每臂每 seed 必须恰好完成 96 个 unique genome evaluations，即 9,216 个真实 episodes，另设 384 proposal-attempt 资源上限。重复候选不占真实 rollout；不足目标即 INVALID。五臂五 seeds 的 230,400 仅为设计上限。
+- **B3/B4/B5：** 冻结 A0 Random、A1 NSGA-II、A2 完整 NSGA-III、A3 动态反馈、A4 零反馈；主比较 A3−A1。新 typed genome 压缩为五字段，全部 96 Train 场景构成固定 probe panel。反馈六项特征、映射矩阵、β=2、τ=.25、ε=.1、零反馈均匀分布和数值稳定规则均已定义。
+- **B6/B7/B8：** 完整 NSGA-III 归一化/参考方向/association/niching、独立 RNG streams、不可补偿硬约束、唯一 Pareto+字典序选择、R3 的 1/24 探索性阈值、4/5 同向要求、collapse 和无效 run 停止规则均已写入。
+- **静态复审：** 13 份源码 canonical SHA/Git blob、manifest/probe 哈希、预算算术、反馈零向量、R0 保留和文档结构全部通过；无 OPEN/TBD 占位。未实现搜索器、未运行算法或 genome search。
+- **边界：** 本状态仅为 `READY_FOR_INDEPENDENT_REVIEW`，不是 `APPROVED_FOR_EXPERIMENT`。本轮只有文档变更，无新 CI/artifact；历史 D-091 CI `44068259009` 与 artifact `14321023302` 保持为已有证据。
+- **唯一下一任务：** 新独立会话逐项审查 R1；审查、实现授权、实现复审和用户明确批准前不得执行 D-092。
+
+---
+
 ## D-092 预注册独立审查（2026-11-17；REQUEST_CHANGES / HOLD）
 
 - **D-091 复核：** 原始 JSON 与已保存 rows 指标复算一致；但 Random 与 NSGA-II 实际同路径，State Evo 为静态 mutation profile，15 个 best candidates 在当前 96 个 Train 场景上只有 1 个 phenotype。搜索 proposal/cache/generation/operator 历史仍不可审计。

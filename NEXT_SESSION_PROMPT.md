@@ -1,5 +1,36 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+## D-092 R1 独立审查接管（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+
+你接管唯一仓库 `yujian777555/kaitibaogao` 的唯一工作分支 `pilot-a-stateful-recovery`。开始必须 fetch 并核验真实 HEAD、main、ahead/behind、工作树和未提交文件；不得丢弃执行者已有工作。
+
+### 本轮权威材料
+
+1. `103_D092_TRAIN_ONLY_PREREGISTRATION.md`：R1 canonical 协议；raw SHA=`2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA=`3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`。
+2. `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`：历史草案，raw SHA=`3d0b0d0e22d5cfd676ddb8ff7feadaf2dfc9dd7981c0d50920fcf5dd1bf9f367`。
+3. `104_D092_INDEPENDENT_REVIEW.md`：R0 的 REQUEST_CHANGES 依据。
+4. `101_D091_EXECUTOR_PROMPT.md`、`102_D091_INDEPENDENT_AUDIT_RESULT.md` 与 D-091 artifact：历史事实与数据限制。
+
+### R1 已固定的核心设计
+
+- 仅 D-090 的 96 个 Train 场景；绑定 manifest、环境、evaluator、策略、genome 和 selector 的完整真实哈希；任何不匹配即 INVALID。
+- 每臂每 seed 恰好 96 个完整 unique genome evaluations（9,216 episodes）；384 proposal-attempt cap；重复/cache 不占真实 rollout，不足即 INVALID。96×96×5×5=230,400 只是设计上限。
+- A0 独立 Random、A1 NSGA-II、A2 完整 NSGA-III、A3 动态反馈、A4 真零反馈。主比较 A3−A1；其余为 A1−A0、A3−A4、A2−A1。
+- typed genome 五字段与全部 96 场景 probe panel；反馈六项特征、固定矩阵、β=2、τ=.25、ε=.1，零反馈严格均匀；完整 selector/RNG/日志规格。
+- 硬约束不可补偿；最终从 unique feasible archive 的 Pareto 集使用统一字典序。R3 探索性阈值 1/24、至少 4/5 seeds 同向，不删除不利 seed。
+
+### 静态证据与限制
+
+13 份源码 canonical SHA/Git blob、manifest/probe 哈希、预算算术、反馈零向量、R0 保留及文档结构均已静态核验。无 OPEN/TBD 占位。没有实现搜索器、运行算法测试、启动 genome search 或产生候选。本轮无新 CI/artifact；历史 D-091 CI `44068259009` 和 artifact `14321023302` 是既有证据，不是 R1 实验批准。
+
+### 唯一下一任务
+
+由独立审查者逐项审查 R1 的 B1–B8、数学正确性、真实源码相容性、预算公平性、零反馈、完整 NSGA-III、硬约束、统计边界和日志可复原性，给出 ACCEPT 或 REQUEST CHANGES。不得由起草者自行宣布通过。
+
+**状态只能是 READY_FOR_INDEPENDENT_REVIEW，不能写成 APPROVED_FOR_EXPERIMENT。** 独立审查后仍需实现授权、实现一致性复审及用户明确批准。此前禁止实现/运行 D-092、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox、重跑 D-090 和 main merge。
+
+---
+
 ## D-092 独立审查后的 canonical 接管状态（2026-11-17；优先于下方 D-091 历史提示）
 
 你接管的唯一仓库是 `yujian777555/kaitibaogao`，唯一工作分支是 `pilot-a-stateful-recovery`。严禁读取、引用或混用用户其他项目。

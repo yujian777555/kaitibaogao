@@ -1,5 +1,21 @@
 # 51 — 数据门禁、Pilot A-3 复核与 Pilot B 进入计划
 
+## 0O. D-092 R1 协议修订与门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+
+`103_D092_TRAIN_ONLY_PREREGISTRATION.md` 已修订为 R1，R0 保存在 `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`。R1 raw SHA=`2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA=`3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`。
+
+- 数据：只允许 D-090 固定 96 Train 场景；manifest/internal SHA、环境、evaluator、策略和 genome 依赖闭包全部绑定，hash mismatch 即 INVALID。
+- 预算：96 unique genome evaluations/run，96 rollouts/genome；384 proposal attempts 为资源上限；不足真实预算即 INVALID。五臂五 seeds 的 230,400 episodes 不是实际运行数。
+- 算法：A0 真随机、A1 NSGA-II、A2 完整 NSGA-III、A3 动态反馈、A4 零反馈；A3−A1 是主比较，不把 NSGA-III 与反馈效果混合归因。
+- 编码/反馈：五字段 typed genome、全部 96 场景 probe、六项反馈特征、固定映射矩阵和参数、零反馈严格均匀、完整日志。
+- 安全/统计：硬约束不可补偿；无可行候选即 NO_FEASIBLE_CANDIDATE；R3 阈值 1/24 与 4/5 同向只作 Train 探索信号，不作确认性/泛化结论。
+
+静态审查与真实哈希核验已通过；没有 OPEN/TBD 占位。未实现搜索器、未运行算法测试或 genome search。本轮只有文档修改，无新 CI/artifact；历史 D-091 CI `44068259009` 和 artifact `14321023302` 不构成 R1 执行许可。
+
+**下一唯一任务：** 独立审查 R1。实现、实现复审和用户明确批准前，D-092、新搜索、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 LLM/API、UndoBench TEST、ThinkingBox 和 main merge 全部 HOLD。
+
+---
+
 ## 0N. D-091 审计执行完成与门禁（2026-11-17；D091_PARTIAL / HOLD）
 
 D-091 已按 `101_D091_EXECUTOR_PROMPT.md` 完成只读审计，结果见 `102_D091_INDEPENDENT_AUDIT_RESULT.md`，D-092 仅有未冻结方案 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。

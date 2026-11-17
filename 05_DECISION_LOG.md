@@ -1800,3 +1800,13 @@ D-091 只读审计已实际执行，不重跑 D-090 搜索。总体状态为 D09
 **唯一下一步：** 修订 103 为 R1，逐项关闭 B1–B8，只做设计与静态测试规格；独立审查 R1 并等待用户明确批准。不得启动新搜索、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 API 或 main merge。
 
 **CI 触发说明：** 本轮后续提交仅修改 Markdown；regression workflow 的 push paths 不包含文档路径，因此没有新 regression run，不能将 status 空白误报为成功或失败。最新真实代码审计 run 仍为 `44068259009`。
+
+## D-092-R1：Train-only 预注册修订完成，等待独立审查（2026-11-17）
+
+本轮从真实 HEAD `c50e674592cae1020eba766247fa6bc69d413ca6` 开始，main 保持 `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。103 号原草案保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`（raw SHA `3d0b0d0e22d5cfd676ddb8ff7feadaf2dfc9dd7981c0d50920fcf5dd1bf9f367`），canonical 文件写入完整 R1（raw SHA `2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA `3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`）。
+
+B1–B8 均在规格层闭合：绑定 96 个固定 Train 场景和真实环境/evaluator/genome/policy/selector 哈希；采用每臂每 seed 恰好 96 个完整 unique genome evaluations（9,216 rollouts）与 384 proposal-attempt 上限；冻结 A0/A1/A2/A3/A4 及 A1−A0、A3−A4、A3−A1、A2−A1 的论证职责；定义五字段 typed genome、全部 96 场景 probe panel、六项反馈特征、固定映射矩阵、β=2/τ=.25/ε=.1、零反馈严格均匀、完整 NSGA-II/III、独立 RNG、不可补偿硬约束、唯一 Pareto+字典序选择、R3 的 1/24 探索性阈值、4/5 同向及完整过程账本。
+
+静态复核实际检查 13 份源码 canonical SHA/Git blob、manifest/probe hash、预算算术、反馈零向量、R0 保留和文档结构，全部通过；无 OPEN/TBD 占位。未实现搜索器、未运行算法测试或 genome search、未选择候选。R1 只标记 **READY_FOR_INDEPENDENT_REVIEW**，不是 APPROVED_FOR_EXPERIMENT。
+
+本轮只有根目录文档变化，无新 CI 或 artifact；历史 D-091 CI `44068259009` 与 artifact `14321023302` 仅为既有审计证据。下一任务是由独立会话复审 R1；实现授权、实现复审和用户明确批准仍是独立门禁。Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 API 和 main merge 继续禁止。

@@ -1,3 +1,14 @@
+## 0P. D-092 R1 预注册修订交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+
+- 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。同步后起始 HEAD=`c50e674592cae1020eba766247fa6bc69d413ca6`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，main 未修改/合并。开始和写入前工作区均 clean；最终提交后必须重新查询。
+- **文件：** R0=`103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`，raw SHA=`3d0b0d0e22d5cfd676ddb8ff7feadaf2dfc9dd7981c0d50920fcf5dd1bf9f367`；canonical R1=`103_D092_TRAIN_ONLY_PREREGISTRATION.md`，raw SHA=`2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA=`3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`。
+- **B1–B8：** 固定 D-090 96 Train manifest 与源码依赖闭包；96 unique evaluations/run、96 scenes/genome、384 attempt cap；五臂与四个比较；五字段 typed genome、全部 96 场景 probe panel；完整反馈特征/矩阵/参数/零反馈/日志；完整 NSGA-II/III 和命名 RNG；不可补偿约束及唯一候选选择；R3 阈值 1/24、4/5 同向、探索性统计和 fail-closed 停止规则。
+- **静态验证：** 13 份源码哈希全部与真实仓库一致；manifest、96-ID probe hash、R0 保留和预算/公式/文档检查通过，无 OPEN/TBD。未运行算法测试、未实现搜索器、未运行 genome search，未选择或冻结候选。
+- **CI/artifact：** 本轮为根目录 Markdown 修订，无新 CI/artifact；不得声称新 CI 通过。历史 D-091 最新 CI=`44068259009` success，artifact=`14321023302` 仍为已有审计证据。
+- **唯一下一任务：** 由独立审查会话检查 R1 的 B1–B8、公式、源码相容性和可审计性。不得自行宣布 APPROVED_FOR_EXPERIMENT；实现、实现复审和用户明确批准仍是独立门禁。Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 API 和 main merge 继续禁止。
+
+---
+
 ## 0O. D-091 最新权威接管状态（2026-11-17；审计执行完成，D091_PARTIAL / HOLD）
 
 - 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`；起始同步 SHA=`6bfead6b41a9bdf44f08b35a82938049bbf73e7c`，最终审计代码 SHA=`e5d13f60b30910d6c6b0c10d99f66227b125fb59`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改/合并。
