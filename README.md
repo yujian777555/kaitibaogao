@@ -1,6 +1,20 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2.2 独立复审结论（2026-11-17；REQUEST_CHANGES / HOLD）
+## D-092 R2.3 定向修复与验收准备（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+- **R2.3：** `103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522`，canonical=`549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4`，blob=`1498f20a6f298093c06d126a766c037a980869a3`。
+- **R2.2 immutable snapshot：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`；raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`，canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
+- **报告：** `109_D092_R2_3_TARGETED_REPAIR_REPORT.md`，含F9前后差异、P07真实14-action轨迹、P06/P07分叉和冻结核验。
+- **F9：** 仅明确identity payload统一canonical JSON并`.encode("utf-8")`后SHA-256；字段、composite keys、计数与lifecycle不变。
+- **P07：** 第7步C delayed success当场改状态，第8步B primary可在C receipt pending时派发，第14步VERIFY(C)；随后budget=10，P06 ordinary选B primary，P07 tight选B alternate，分数差+2.770802651881641。
+- **冻结：** F8/F14、P03、96 Train、μ/λ、96 unique、384 attempts、五臂、五seeds、反馈矩阵、统计判据不变；R2.1/R2/R1/R0未覆盖。
+- **验证：** 13/13源码身份、快照、冻结章节、14步轨迹、预算与分数静态检查通过；无旧17-action/budget=7残留，无OPEN/TBD/TODO，diff检查通过。算法测试和rollout均NOT RUN。
+- **下一唯一任务：** 独立验收F9 encoding与P07 trace；通过后立即Typed Adapter→静态算法测试→合成测试→实现一致性审查。Probe/Train-only搜索仍需实现复审和用户明确批准。
+- **CI：** 维护时无新CI/artifact；提交后按真实HEAD查询，无run即NOT RUN。
+
+---
+
+## D-092 R2.2 独立复审结论（历史状态；已被上方 R2.3 交付 supersede）
 
 - **权威报告：** [108_D092_R2_2_INDEPENDENT_REVIEW.md](108_D092_R2_2_INDEPENDENT_REVIEW.md)。R2.2 raw/canonical/blob、13/13源码哈希、R2.1 snapshot、96 Train IDs/6 anchors 全部通过。
 - **六项：** F9/F10/F11/F12/F15 通过规格复审；F13 的 P03 通过，P07 的 17-action/budget=7 prefix 不符合真实控制流。

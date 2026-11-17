@@ -1,6 +1,20 @@
 # 05 — 研究决策日志
 
-## 2026-11-17：D-092 R2.2 独立定向复审 — REQUEST_CHANGES / HOLD
+## 2026-11-18：D-092 R2.3 两项定向修复交付 — READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN
+
+R2.2 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`，raw/canonical/blob=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3` / `006aface19258f5d9ba597011dfe9048dfea8897`。R2.3 canonical raw/canonical/blob=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522` / `549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4` / `1498f20a6f298093c06d126a766c037a980869a3`。
+
+**F9：** 108已接受identity/lifecycle，本轮只明确canonical JSON使用ensure_ascii=False、sort_keys=True、separators=(",",":")、allow_nan=False，并以`.encode("utf-8")`字节计算SHA-256；identity字段、composite keys、反馈计数和receipt生命周期不变。
+
+**F13/P07：** 更正为真实14-action共同前缀与budget_remaining=10。C delayed success在dispatch当场将C改为COMPENSATED，故B primary可在C receipt pending时于action8派发；action14 VERIFY(C)=COMPENSATED。P06 threshold4 ordinary选B primary，P07 threshold12 tight选B alternate；ordinary分数差精确为+2.770802651881641。P06/P07机制与阈值未改。
+
+**冻结与验证：** F8/F14、P03、96 Train、μ/λ、96 unique、384 attempts、五臂、五seeds、反馈矩阵和统计判据不变；R2.1/R2/R1/R0未覆盖。13/13源码身份、快照、冻结文本、14步表、预算、分数、无旧17/7残留和diff检查通过；无OPEN/TBD/TODO。算法测试、rollout、probe、search、exhaustive和Validation/Test均NOT RUN，无算法提升或创新成立结论。
+
+完整报告：`109_D092_R2_3_TARGETED_REPAIR_REPORT.md`。下一唯一任务为独立复核F9 encoding与P07；通过后立即进入Typed Adapter→静态算法测试→合成测试→实现一致性审查，不再扩大文档审查。实现复审和用户明确批准后才运行Probe/Train-only搜索。维护时无新CI/artifact，提交后真实查询。
+
+---
+
+## 2026-11-17：D-092 R2.2 独立定向复审（历史状态；已由上方 R2.3 交付 supersede）
 
 R2.2 的 raw/canonical SHA/Git blob 与 13/13 源码身份全部复核匹配；R2.1 snapshot 与父提交逐字节一致；R0/R1/R2 未覆盖；Train manifest 96 IDs、四类各24，6 anchors 均存在。无新 workflow/check/status/artifact。
 

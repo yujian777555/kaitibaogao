@@ -1,4 +1,20 @@
-## 0V. D-092 R2.2 独立复审门禁（2026-11-17；REQUEST_CHANGES / HOLD）
+## 0W. D-092 R2.3 定向修复门禁（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+R2.2 immutable snapshot=`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`，raw/canonical/blob=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3` / `006aface19258f5d9ba597011dfe9048dfea8897`。R2.3 raw/canonical/blob=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522` / `549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4` / `1498f20a6f298093c06d126a766c037a980869a3`。详见`109_D092_R2_3_TARGETED_REPAIR_REPORT.md`。
+
+本轮仅明确F9 canonical JSON UTF-8哈希字节，并将P07修正为14-action/budget=10的真实控制流：C delayed success在dispatch当场改状态，B primary可在C receipt pending时派发，P06 ordinary与P07 tight在14步后分叉。其余已通过项和所有预算、五臂、seeds、反馈矩阵、统计判据均不重开。
+
+**实际验证：** R2.2/R2.1/R2/R1身份、13/13源码、96 Train IDs、F8/F14及冻结文本、F9 lifecycle、P03、精确14步表、P06/P07分数、无旧17/7残留、无OPEN/TBD/TODO和`git diff --check`通过。未运行算法测试、probe、search、exhaustive或Validation/Test。
+
+**GO：** 独立会话只验收F9 encoding与P07 trace。通过后立即 Typed Adapter → 静态算法测试 → 合成测试 → 实现一致性审查，不做新文献调研或大范围协议重写。
+
+**HOLD：** 实现复审与用户明确批准前不运行960 probe或正式Train-only搜索；当前不运行genome search、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式A-3b、真实API、A800/ARWM、UndoBench TEST、ThinkingBox或main merge。
+
+维护时无新CI/artifact；提交后按最终HEAD真实查询，无run即NOT RUN。规格修复不等于算法性能提升。
+
+---
+
+## 0V. D-092 R2.2 独立复审门禁（历史状态；已被上方 0W supersede）
 
 详见 108_D092_R2_2_INDEPENDENT_REVIEW.md。R2.2 raw/canonical/blob、13/13源码哈希、R2.1 snapshot、96 Train IDs/6 anchors 通过；F9/F10/F11/F12/F15 通过规格审查，P03 通过。
 

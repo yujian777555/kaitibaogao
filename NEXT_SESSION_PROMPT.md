@@ -1,6 +1,33 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2.2 独立复审结论与 R2.3 两处定向修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
+## D-092 R2.3 两项定向修复完成（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。本轮起始 HEAD=`b7b0ba4b623a22e01a10dded378d80215ca4866a`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；起始 ahead/behind=318/0、工作区 clean。最终 SHA 以提交后远端核验为准。
+
+### 交付与身份
+
+- canonical R2.3：`103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522`，canonical=`549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4`，blob=`1498f20a6f298093c06d126a766c037a980869a3`。
+- R2.2 immutable snapshot：`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`；raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`，canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
+- 验收报告：`109_D092_R2_3_TARGETED_REPAIR_REPORT.md`。R2.1/R2/R1/R0 均未覆盖。
+
+### 仅两项变化
+
+1. **F9 encoding：** episode_reference 与 compensation_attempt_id 的既有 payload 不变；统一以 `canonical_json(payload).encode("utf-8")` 为 SHA-256 输入。canonical JSON 使用 ensure_ascii=False、sort_keys=True、separators=(",",":")、allow_nan=False；无额外换行。identity/composite keys、反馈与 receipt lifecycle 不变。
+2. **F13/P07：** 真实共同前缀为 14 actions，随后 decision_count=14、budget_remaining=10。第7步 C delayed success 在 dispatch 当场将 C 改为 COMPENSATED；第8步 B primary 可在 C receipt pending 时派发；第14步 VERIFY(C)=COMPENSATED。P06 threshold4 ordinary 选 B primary，P07 threshold12 tight 选 B alternate；分数差精确为 +2.770802651881641。
+
+F8/F14、F10/F11/F12/F15、P03、96 Train、μ/λ、96 unique、384 attempts、五臂、五 seeds、反馈矩阵和统计判据均保持原样。
+
+### 验证与下一任务
+
+静态/公式检查通过：快照身份、13/13源码哈希、96 Train IDs、冻结文本、F9字节编码、精确14-action表、预算10、P06/P07分数、无旧17-action/budget=7残留、无OPEN/TBD/TODO、`git diff --check`。109号报告记录完整证据。**未运行算法测试、rollout、960 probe、genome search、exhaustive或Validation/Test；无算法提升证据。**
+
+唯一下一任务：新独立会话只验收上述 F9 encoding 与 P07 trace。通过后立即进入 **Typed Adapter → 静态算法测试 → 合成测试 → 实现一致性审查**，不做新文献调研或大范围协议重写。实现阶段必须保持五臂统一 evaluator、96 unique/384 attempts、聚合 optimizer view、完整账本与 audit 复算。实现复审和用户明确批准前不运行 probe/search。
+
+当前禁止：probe、genome search、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式A-3b、真实API、A800/ARWM、UndoBench TEST、ThinkingBox、重跑D-090、修改main。维护时无新CI/artifact；提交后真实查询，无run即NOT RUN。
+
+---
+
+## D-092 R2.2 独立复审结论与 R2.3 两处定向修订接管（历史任务；已由上方 R2.3 交付 supersede）
 
 唯一仓库/分支：yujian777555/kaitibaogao / pilot-a-stateful-recovery。复审基线 HEAD=7cd092431b0817f67aca3960ecad2590fb6d5b13；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=317/0。接手必须重新查询 branch HEAD/main/worktree。
 

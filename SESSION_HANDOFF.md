@@ -1,4 +1,17 @@
-## 0W. D-092 R2.2 独立复审交接（2026-11-17；REQUEST_CHANGES / HOLD）
+## 0X. D-092 R2.3 定向修复交接（2026-11-18；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+- 起始 HEAD=`b7b0ba4b623a22e01a10dded378d80215ca4866a`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=318/0；起始工作区 clean。
+- R2.2 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_2.md`：raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`，canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
+- R2.3 canonical：raw=`75f9c72aa7d3a70880f59f7b803ed88e919d47e9c42e7168ba1b7eddbc3e7522`，canonical=`549c595ed657d0b0582e6d6f41dfcfc241bde82b7daa2bdbf89bb3a660497ce4`，blob=`1498f20a6f298093c06d126a766c037a980869a3`。报告=`109_D092_R2_3_TARGETED_REPAIR_REPORT.md`。
+- F9仅明确两种identity payload以相同canonical JSON参数序列化并UTF-8编码后SHA-256；字段和receipt lifecycle不变。
+- P07改为真实14-action/budget=10：action7 C delayed success当场COMPENSATED；action8 B primary在C receipt pending时派发；action14 VERIFY(C)=COMPENSATED。P06(4) ordinary选B primary，P07(12)tight选B alternate，精确差+2.770802651881641。
+- F8/F14、P03、96 Train、μ/λ、96 unique、384 attempts、五臂、五seeds、反馈矩阵和统计判据不变；R2.1/R2/R1/R0保留。
+- 静态核验快照、13/13源码哈希、96 IDs、冻结章节、14步表、预算/分数、无旧17/7残留、无OPEN/TBD/TODO及diff全部通过。未运行算法测试或rollout；无新性能证据。
+- 下一唯一任务：独立复核F9 encoding和P07；通过后立即Typed Adapter→静态算法测试→合成测试→实现一致性审查。实现复审和用户批准前不运行probe/search。维护时无新CI/artifact。
+
+---
+
+## 0W. D-092 R2.2 独立复审交接（历史状态；已被上方 0X supersede）
 
 - 审查 HEAD=7cd092431b0817f67aca3960ecad2590fb6d5b13；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=317/0。
 - R2.2 raw/canonical/blob 匹配；13/13 源码 canonical SHA/Git blob 匹配；R2.1 snapshot 与父提交 R2.1 canonical 逐字节一致；R0/R1/R2 未覆盖。Train 96 IDs、四类各24，6锚点存在。
