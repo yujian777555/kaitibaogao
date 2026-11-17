@@ -47,6 +47,23 @@ class TestD091IndependentAudit(unittest.TestCase):
         self.assertEqual(result["status"], "PASS_WITH_LIMITATIONS")
         self.assertEqual(len(result["registry_corrections"]), 1)
 
+    def test_source_integrity_with_git_normalized_result_bytes(self):
+        original_read_bytes = Path.read_bytes
+
+        def read_git_normalized_bytes(path):
+            relative = path.relative_to(audit_module.ROOT).as_posix()
+            if path.parent == audit_module.RESULTS and relative.rsplit("/", 1)[-1] in audit_module.EXPECTED_RESULTS:
+                return audit_module.subprocess.check_output(["git", "show", f"HEAD:{relative}"], cwd=audit_module.ROOT)
+            return original_read_bytes(path)
+
+        with patch.object(Path, "read_bytes", read_git_normalized_bytes):
+            result = audit_sources()
+        self.assertEqual(result["status"], "PASS_WITH_LIMITATIONS")
+        self.assertTrue(all(item["git_blob_matches"] for item in result["files"]))
+        by_name = {item["path"].rsplit("/", 1)[-1]: item for item in result["files"]}
+        self.assertFalse(by_name["d090_train_report.json"]["historical_generated_sha_matches"])
+        self.assertFalse(by_name["d090_mechanism_ablation.json"]["historical_generated_sha_matches"])
+
     def test_metric_recomputation_and_per_family_counts(self):
         result = audit_metrics(self.manifest, self.report, self.ablation)
         self.assertEqual(result["status"], "PASS")
