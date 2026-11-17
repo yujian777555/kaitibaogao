@@ -1,5 +1,25 @@
 # 05 — 研究决策日志
 
+## 2026-11-17：D-091 源码预审发现与执行边界
+
+### 预审事实（待 D-091 独立复现）
+
+- `d090_experiment.py` 没有 `random` 专属分支；`random` 与 `nsga2` 当前走同一演化路径，且相同 seed 的 best genome 相同。当前 Random Search 不能作为独立基线。
+- `state_evo` 使用固定 mutation profile，不是从 episode 状态/失败轨迹动态更新的反馈演化。
+- `GENERATIONS=6` 未参与 while-loop 终止；循环以 unique evaluation budget 为条件。
+- 远端 report 中 15 个 best candidates 仅 8 个不同 genome，但 96 个 D-090 Train 场景的 trace bundle 105/105 两两完全相同。该事实仅限现有 manifest。
+- 两个旧 g03 audit 脚本读取 D-089 scenario/report，不足以证明 D-090 r2 的 25-step claim。
+- 六维 `objectives()` 与 `_best()` 的 archive lexicographic selection 口径不一致，需审计。
+
+### 决策 D-091：先独立审计，暂停所有新搜索
+
+- 权威提示词：`101_D091_EXECUTOR_PROMPT.md`；研究协议：`100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。
+- D-091 只读复算原始数据、审计方法身份、候选行为等价、D-090 r2 最短路径和消融安全轨迹；不得重跑 D-090 search。
+- 23-step witness 是待验证反例，不是已完成结论。若真实环境回放成功，应更正 25-step claim，但不得修改 D-090 历史原始结果。
+- 只有 D-091 真实审计结束后才能制定 D-092 Train-only 预注册；本轮无 Validation/Test 授权。
+
+
+
 ## 2026-11-16：D-090 Train-only 结果与 D-091 审计决策
 
 ### 决策 D-090：保留双目标/损害改善作为探索性结果，不宣称 EC 搜索优势
