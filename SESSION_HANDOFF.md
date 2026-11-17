@@ -1,4 +1,4 @@
-## 0O. D-091 最新权威接管状态（2026-11-17；审计完成）
+## 0O. D-091 最新权威接管状态（2026-11-17；审计执行完成，D091_PARTIAL / HOLD）
 
 - 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`；起始同步 SHA=`6bfead6b41a9bdf44f08b35a82938049bbf73e7c`，最终审计代码 SHA=`e5d13f60b30910d6c6b0c10d99f66227b125fb59`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，未修改/合并。
 - **原始数据与复算：** 三份 D-090 JSON 完整，内部 SHA 与 Git blob 可核验；15 个搜索 best 和五组固定消融指标全部独立复算，最大差异 0。101 号 `d090_policies.py` 的登记 blob 更正为 `c96beaf6577cf9898e6baaa4d22065662b269844`，原始文件未改。

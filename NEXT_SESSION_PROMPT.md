@@ -6,7 +6,7 @@
 
 **已完成的实际审计：** D-090 原始三 JSON 和全部保存指标独立复算一致；`random` 实际与 NSGA-II 同路径，`state_evo` 只有静态 mutation profile，真实 proposal/cache/generation 历史不可复原；15 个 best candidates 的 8 个 genome 在 96 个 Train 场景上只有 1 个 phenotype。g03-r2 的 23-step witness 真实成功，BFS 最短为 **21**，25-step 下界撤回。P1 整体 Harm 退化，P2/P4 带 pending ESCALATE，硬约束不可接受。
 
-**证据边界：** 原始 best_rows 数值可信，但五种搜索方法的公平比较无效，不能宣称 EC 提升或形成冻结候选。D-092 只是 NOT FROZEN / NOT RUN 设计草案，反馈系数、行为表示、canonical NSGA-III 与预算可达性仍有 OPEN 项。
+**状态与证据边界：** D091_PARTIAL / HOLD。原始 best_rows 数值可信，但五种搜索方法的公平比较无效，完整搜索过程为 NOT_AUDITABLE_FROM_SAVED_TRACE；不能宣称 EC 提升或形成冻结候选。D-092 只是 NOT FROZEN / NOT RUN 设计草案，反馈系数、行为表示、canonical NSGA-III 与预算可达性仍有 OPEN 项。
 
 **验证：** 本地 456/456；最终审计代码 `e5d13f60b30910d6c6b0c10d99f66227b125fb59` 的 CI `44067543678` = success。Artifact `14320134130` 已下载复核，digest=`sha256:d5504a81fe0e56a828ec617571ba82788a53fcc9393ef122165162116f4eca57`。两个早期失败 run 的日志均保留；不得把它们写成成功。
 

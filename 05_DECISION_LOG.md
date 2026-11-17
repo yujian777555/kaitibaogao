@@ -1774,7 +1774,7 @@ D-087 失败机制反事实审计：rv02/rv03/rv04 repeat 4 的 30 条失败轨�
 
 ## D-091：D-090 独立证据、算法身份与下界更正（2026-11-17）
 
-D-091 只读审计已实际执行，不重跑 D-090 搜索。三份原始 JSON、manifest/report 内部 SHA、Git blob 和 96 场景唯一性均核验；15×96 搜索 best rows 与 5×96 固定消融 rows 的全部指标独立复算差异为 0。101 号 `d090_policies.py` blob 的登记转写错误单独记录，真实 blob=`c96beaf6577cf9898e6baaa4d22065662b269844`，与原 D-090 源码提交一致。
+D-091 只读审计已实际执行，不重跑 D-090 搜索。总体状态为 D091_PARTIAL / HOLD：审计执行和 artifact 复核完成，但 best-only 保存使完整搜索过程不可审计。三份原始 JSON、manifest/report 内部 SHA、Git blob 和 96 场景唯一性均核验；15×96 搜索 best rows 与 5×96 固定消融 rows 的全部指标独立复算差异为 0。101 号 `d090_policies.py` blob 的登记转写错误单独记录，真实 blob=`c96beaf6577cf9898e6baaa4d22065662b269844`，与原 D-090 源码提交一致。
 
 - `random` 与 `nsga2` 使用同一 RNG、初始化、variation 和 `nsga2_select`，Random Search 对照无效。`state_evo` 使用固定 mutation profile，不是动态失败反馈；`state_random` 是直接随机采样但初始池不配对。`GENERATIONS=6` 不控制 while evals<BUDGET；真实 proposal/cache/operator/generation 历史为 NOT_AUDITABLE_FROM_SAVED_TRACE。
 - 六维 survivor objectives 与 `_best()` 的 archive lexicographic key 不一致，最终选择不显式包含 CondRec，也不是直接选 final population/Pareto front。

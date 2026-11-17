@@ -1,6 +1,6 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-091 独立审计完成（2026-11-17）
+## D-091 审计执行完成（2026-11-17；D091_PARTIAL / HOLD，搜索过程证据不全）
 
 - **数据与复算：** D-090 三份原始 JSON、manifest/report 内部 SHA 和 Git blob 均核验；15 个 best candidates 与五组消融的全部保存指标复算差异为 0。101 号一个 `d090_policies.py` blob 登记转写错误已单独更正。
 - **算法身份：** 当前 `random` 与 `nsga2` 实际共用 NSGA-II 路径，Random Search 对照无效；`state_evo` 使用静态 mutation profile；`GENERATIONS=6` 不控制循环，真实 proposal/cache/generation 历史不可从现存 best-only 账本复原。

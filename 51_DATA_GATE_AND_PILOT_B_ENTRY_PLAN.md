@@ -1,6 +1,6 @@
 # 51 — 数据门禁、Pilot A-3 复核与 Pilot B 进入计划
 
-## 0N. D-091 审计完成与门禁（2026-11-17）
+## 0N. D-091 审计执行完成与门禁（2026-11-17；D091_PARTIAL / HOLD）
 
 D-091 已按 `101_D091_EXECUTOR_PROMPT.md` 完成只读审计，结果见 `102_D091_INDEPENDENT_AUDIT_RESULT.md`，D-092 仅有未冻结方案 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。
 

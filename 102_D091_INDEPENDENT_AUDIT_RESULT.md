@@ -3,7 +3,7 @@
 **日期：** 2026-11-17
 **工作分支：** `pilot-a-stateful-recovery`
 **审计范围：** D-090 Train-only 已保存证据；不重跑搜索、不选择候选
-**当前状态：** D091_AUDIT_COMPLETE；专属 CI artifact 已下载复核
+**当前状态：** D091_PARTIAL / HOLD；审计执行与专属 CI artifact 复核已完成，完整搜索过程为 NOT_AUDITABLE_FROM_SAVED_TRACE
 
 ---
 
