@@ -1,4 +1,18 @@
-## 0U. D-092 R2.2 定向修复门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## 0V. D-092 R2.2 独立复审门禁（2026-11-17；REQUEST_CHANGES / HOLD）
+
+详见 108_D092_R2_2_INDEPENDENT_REVIEW.md。R2.2 raw/canonical/blob、13/13源码哈希、R2.1 snapshot、96 Train IDs/6 anchors 通过；F9/F10/F11/F12/F15 通过规格审查，P03 通过。
+
+**唯一阻断：P07/Q3 prefix 错误。** C 第二次 delayed success 在 dispatch 时立即把 C state 改为 COMPENSATED；因此 action8 B primary 可派发。真实共同前缀14 actions 后 budget=10，P06 threshold4 ordinary 选 B primary，P07 threshold12 tight 选 B alternate。R2.2 所写17 actions/budget7 不可达。
+
+另补一行 F9 identity payload 的 canonical JSON 编码规则，复用 §3.3 参数。107 的 d088_policies blob SHA 和 Q3 预算窗口结论均有审查勘误，见108。
+
+**GO：** R2.3 只修 P07 prefix/PASS 条件与 F9 hash serialization；其他规格、预算、五臂、seeds、反馈矩阵、统计门槛不重开。R2.3 定向复核通过后立即进入 typed adapter + static/synthetic tests。
+
+**HOLD：** 当前不运行 960 probe、96×96 genome search、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM 或 main merge。
+
+---
+
+## 0U. D-092 R2.2 定向修复门禁（历史状态；已被 0V 独立复审 supersede）
 
 R2.1 immutable snapshot 已保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`。R2.2 raw/canonical SHA=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
 

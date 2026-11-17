@@ -1,6 +1,47 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2.2 定向修复交付（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## D-092 R2.2 独立复审结论与 R2.3 两处定向修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
+
+唯一仓库/分支：yujian777555/kaitibaogao / pilot-a-stateful-recovery。复审基线 HEAD=7cd092431b0817f67aca3960ecad2590fb6d5b13；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=317/0。接手必须重新查询 branch HEAD/main/worktree。
+
+### 独立决定
+
+**REQUEST_CHANGES / HOLD。** 完整报告：108_D092_R2_2_INDEPENDENT_REVIEW.md。
+
+R2.2 raw/canonical SHA 和 Git blob 均重新计算匹配；13/13 源码 canonical SHA 与 Git blob 全部匹配；R2.1 snapshot 与父提交 canonical R2.1 逐字节一致；R0/R1/R2 未覆盖。Train manifest 96 IDs、R1/R2/R3/R4 各24，6个固定锚点均存在。7-file commit 只修改文档；无新 workflow/check/status/artifact。
+
+### 107 号报告的两项审查勘误
+
+1. d088_policies.py 正确 Git blob 是 afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5；107 中另一 SHA 是审查转写错误。
+2. 107 对 Q3 预算 8–12 不可达的判断也错了：推演遗漏 C delayed success 在 dispatch 当场把 C 状态改为 COMPENSATED 后，B primary 可在 C receipt pending 时独立派发。
+
+### 六项结果
+
+- F9 PASS：composite episode/attempt keys 与 receipt lifecycle 闭合；R2.3 需补一句 identity payload 使用 §3.3 同样 canonical JSON 序列化参数（UTF-8、ensure_ascii=False、sort_keys=True、separators=(",",":"), allow_nan=False）。
+- F10 PASS（规格层）：total grammar validator + safe sentinel 顺序正确；实现未运行。
+- F11 PASS：E 第 j 行为第 j 个 translated extreme point；非对角精确分数与转置反例正确。
+- F12 PASS（规格层）：optimizer 仅见单 genome 聚合 fitness/feedback，无 per-scenario reward、scenario_id、episode_reference 或 96-row 数组。
+- F13 P03 PASS：P01/P03 的 Q1 初始 fallback 对照可达。
+- F13 P07 REQUEST_CHANGES：R2.2 声称 17-action prefix 后 budget=7，但 action 7 的 C delayed success 已在 dispatch 时把 C 状态改为 COMPENSATED，action 8 实际会派发 B primary，不会 WAIT。真实共同 prefix 是 14 actions，随后 budget_remaining=10；P06 threshold4 走 ordinary 选择 B primary，P07 threshold12 走 tight 选择 B alternate。普通分数差 primary−alternate=+2.770802651881641。完整逐步轨迹见 108 报告。
+- F15 PASS：直接 Random(seed_integer)，无无参构造/系统熵。
+- F8/F14 与预算、五臂、seeds、反馈矩阵、统计门槛均未改变。
+
+### 唯一下一任务：R2.3 两处极小修订
+
+1. 保存 R2.2 immutable snapshot；canonical 103 升级 R2.3。
+2. 只修 P07：用 14-action Q3 prefix、budget=10、P06/P07 第一处分叉重写源码证明与 PASS 条件。不得删掉 B primary 在 C pending 时的独立派发。
+3. 只补 F9：episode_reference 与 compensation_attempt_id 使用 §3.3 同一 canonical JSON serializer。
+4. 不重开其余五项；不改变 96 Train、μ/λ、96 unique、384 cap、五臂、seeds、反馈矩阵、统计门槛。
+5. R2.3 完成后仅对两处做定向独立复核。
+
+**R2.3 复核通过后立即进入 Typed Adapter → 静态算法测试 → 合成测试 → 实现一致性审查。**
+
+禁止 probe 960 episodes、genome search、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、真实 API、A800/ARWM、UndoBench TEST、ThinkingBox、重跑 D-090、修改 main。
+
+维护 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG、51 数据门禁。记录 R2.2 immutable snapshot 与 R2.3 raw/canonical SHA/Git blob；不得虚报 CI。
+
+---
+## D-092 R2.2 定向修复交付（历史状态；已被下方独立复审 supersede）
 
 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。本轮起始 HEAD=`0ff5f8dd73312d37de681bc3093692cd62596e56`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，起始 ahead/behind=316/0、工作区 clean；接手时动态核验最终 HEAD/远端。
 

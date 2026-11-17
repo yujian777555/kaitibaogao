@@ -1,5 +1,19 @@
 # 05 — 研究决策日志
 
+## 2026-11-17：D-092 R2.2 独立定向复审 — REQUEST_CHANGES / HOLD
+
+R2.2 的 raw/canonical SHA/Git blob 与 13/13 源码身份全部复核匹配；R2.1 snapshot 与父提交逐字节一致；R0/R1/R2 未覆盖；Train manifest 96 IDs、四类各24，6 anchors 均存在。无新 workflow/check/status/artifact。
+
+**规格决定：** F9/F10/F11/F12/F15 通过规格复审，P03 通过。P07 尚未闭合：Q3 action7 的 delayed success 在 dispatch 时立即将 C state 变为 COMPENSATED，因此 action8 会派发 B primary，而不是继续 WAIT。真实共同前缀为14 actions，budget_remaining=10；P06 ordinary 选 B primary，P07 tight 选 B alternate。107 号关于 Q3 8–12 区间不可达的结论是审查推演错误，漏算了 pending receipt 期间的独立派发。
+
+**107 号 SHA 勘误：** d088_policies.py 正确 blob 为 afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5；107 所列另一值是转写错误。
+
+**唯一下一任务：** R2.3 只修 P07 的14-action/budget=10 prefix 与 PASS 条件，并明确 F9 identity payload 使用 §3.3 canonical JSON 编码参数。R2.3 定向复核通过后立即进入 typed adapter + static/synthetic tests。
+
+完整报告：108_D092_R2_2_INDEPENDENT_REVIEW.md。本轮未运行 probe/search/exhaustive/Validation/Test；无算法提升证据。
+
+---
+
 ## 2026-11-17：D-092 R2.2 定向修复交付 — READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN
 
 R2.1 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`。R2.2 raw/canonical SHA=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c` / `f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`，blob=`006aface19258f5d9ba597011dfe9048dfea8897`；R2.1 raw/canonical/blob 保持 `104df349…34648ee` / `e7102747…4695a3` / `773f39e5…0886088`。

@@ -1,6 +1,17 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2.2 定向修复交付（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## D-092 R2.2 独立复审结论（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- **权威报告：** [108_D092_R2_2_INDEPENDENT_REVIEW.md](108_D092_R2_2_INDEPENDENT_REVIEW.md)。R2.2 raw/canonical/blob、13/13源码哈希、R2.1 snapshot、96 Train IDs/6 anchors 全部通过。
+- **六项：** F9/F10/F11/F12/F15 通过规格复审；F13 的 P03 通过，P07 的 17-action/budget=7 prefix 不符合真实控制流。
+- **关键发现：** C 第二次 delayed success 在 dispatch 当场将 C 状态改为 COMPENSATED，因此 B primary 会在 C receipt pending 时于 action 8 派发。真实 P07/P06 分叉为 14-action prefix 后 budget=10；P06 选 B primary，P07 选 B alternate。
+- **107 号勘误：** d088_policies.py 正确 blob 为 afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5；107 SHA 是转写错误。107 关于 Q3 8–12 区间不可达的结论也因漏算 B primary 派发而错误。
+- **下一唯一任务：** R2.3 只修 P07 真实前缀/budget，并明确 F9 identity payload canonical JSON 序列化；其余规格不重开。复核通过后立即进入 typed adapter + static/synthetic tests。
+- **边界：** 无算法源码/数据修改、无 probe/search/exhaustive/Validation/Test、无新 CI/artifact。
+
+---
+
+## D-092 R2.2 定向修复交付（历史状态；已被 108 号独立复审 supersede）
 
 - **R2.2：** `103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw=`c0035d0f7236eff03325e81c2b7967ae166bc4c73047e390d502859f6d8fdc5c`；canonical=`f18aecb71791e43220ac74920c67c27141c58eaadfde74fd0190103e0b4695a3`；blob=`006aface19258f5d9ba597011dfe9048dfea8897`。
 - **R2.1 历史：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md` 原样保存；raw=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`，canonical=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。

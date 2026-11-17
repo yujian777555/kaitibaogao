@@ -1,4 +1,15 @@
-## 0V. D-092 R2.2 定向修复交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+## 0W. D-092 R2.2 独立复审交接（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- 审查 HEAD=7cd092431b0817f67aca3960ecad2590fb6d5b13；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=317/0。
+- R2.2 raw/canonical/blob 匹配；13/13 源码 canonical SHA/Git blob 匹配；R2.1 snapshot 与父提交 R2.1 canonical 逐字节一致；R0/R1/R2 未覆盖。Train 96 IDs、四类各24，6锚点存在。
+- 107 勘误：d088_policies.py 正确 blob=afe2ed253704d2bf9f4e3f57f6e0a14f04f14be5；107 的另一 SHA 是转写错误。107 对 Q3 8–12 区间不可达的判断也错，因漏算 C pending 时 B primary 的独立派发。
+- F9/F10/F11/F12/F15 规格复核通过；P03 通过。**P07 HOLD：** action7 C delayed success dispatch 当场将 C state 改为 COMPENSATED，故 action8 会 dispatch B primary，不会 WAIT。真实共同 prefix 为14 actions，随后 budget=10；P06 threshold4 ordinary 选 B primary，P07 threshold12 tight 选 B alternate。
+- **唯一下一任务：** R2.3 只修 P07 的14-action/budget=10 轨迹和 PASS 条件；并明确 F9 两种 identity payload 使用 §3.3 同一 canonical JSON serializer。其余规格不重开。
+- R2.3 定向复核通过后立即进入 Typed Adapter→静态算法测试→合成测试→实现一致性审查。未运行 probe/search/exhaustive/Validation/Test；无新 CI/artifact。
+
+---
+
+## 0V. D-092 R2.2 定向修复交接（历史状态；已被 0W 独立复审 supersede）
 
 - 起始 HEAD=`0ff5f8dd73312d37de681bc3093692cd62596e56`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=316/0，起始工作区 clean。
 - R2.1 snapshot=`103_D092_TRAIN_ONLY_PREREGISTRATION_R2_1.md`：raw=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`，canonical=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。
