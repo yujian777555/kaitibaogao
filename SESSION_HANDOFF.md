@@ -1,4 +1,16 @@
-## 0P. D-092 R1 预注册修订交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+## 0Q. D-092 R1 独立审查交接（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- 唯一仓库/分支：yujian777555/kaitibaogao / pilot-a-stateful-recovery。R1 审查时 branch HEAD=7a94d9711fa792e76d710d48f5cfc562e0c5a072，main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653，ahead/behind=310/0。当前接手时必须动态查询最新 HEAD。
+- R1 blob=f5dc28e67d648344cfd8465956f51e1f0582baf4；raw SHA=2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5；canonical SHA=3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55。R0 与父提交原始 103 逐字节一致。
+- 13 份源码 Git blob/canonical SHA、manifest hash、96 scenario IDs、5 anchors、96-ID probe hash 全部复核匹配。
+- 决策：REQUEST_CHANGES / HOLD，详见 105_D092_R1_INDEPENDENT_REVIEW.md。F1–F7 阻断：mu/lambda/round 和父代选择缺失；attempt cap 初始化计数不一致；NSGA-III niching/ASF/zero-range fallback 不完整；blocked receipts 误标 illegal transition；feedback reward 来源边界矛盾；phenotype hash/probe 预算缺失；invalid seed 处理缺失。
+- 同时解决 A1/A4 trajectory equivalence、144-genome search-space/EA 必要性、Python runtime lock 和硬约束计数字段数量不一致。
+- 唯一下一任务：保留 R1 immutable snapshot 103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md，修订 canonical 103 为 R2，关闭 F1–F7 并解决 M1–M4。只做文档、公式和算法规格；不实现、不运行。
+- R1 commit 无新 workflow run；最新既有 D-091 CI 44068259009 不代表 R1 通过。本轮未运行算法测试、probe、genome search，也不能从 GitHub API 声称本地工作树 clean。
+
+---
+
+## 0P. D-092 R1 预注册修订交接（历史状态；已被独立审查 0Q supersede）
 
 - 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。同步后起始 HEAD=`c50e674592cae1020eba766247fa6bc69d413ca6`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，main 未修改/合并。开始和写入前工作区均 clean；最终提交后必须重新查询。
 - **文件：** R0=`103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`，raw SHA=`3d0b0d0e22d5cfd676ddb8ff7feadaf2dfc9dd7981c0d50920fcf5dd1bf9f367`；canonical R1=`103_D092_TRAIN_ONLY_PREREGISTRATION.md`，raw SHA=`2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA=`3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`。

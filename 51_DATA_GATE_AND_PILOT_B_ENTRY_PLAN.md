@@ -1,6 +1,20 @@
+## 0P. D-092 R1 独立审查门禁（2026-11-17；REQUEST_CHANGES / HOLD）
+
+R1 的文件身份和既有数据绑定核验通过：R1 raw/canonical SHA 匹配，R0 与父提交原始文件相同；13 份源码 Git blob/canonical SHA、manifest、96 scenario IDs、5 anchors、probe ID hash 全部复核匹配。
+
+但 R1 不接受。详见 105_D092_R1_INDEPENDENT_REVIEW.md。F1–F7 必须修订：搜索 mu/lambda/round、父代选择和 A0 sampling 未定义；attempt cap 未计初始化 proposal；NSGA-III niching/ASF/zero-range fallback 不完整；blocked receipts 语义错误；feedback label-derived reward 边界不一致；phenotype hash/probe rollout 预算缺失；invalid seed 处理缺失。另解决 A1/A4 等价、144-genome 搜索空间解释、runtime lock 和 hard-constraint count 不一致。
+
+**GO：** 只允许保留 R1 immutable snapshot，修订 canonical 103 为 R2，完成公式、round/budget、selector、constraint 和日志规格；R2 后再独立审查。
+
+**HOLD：** adapter/searcher 实现、probe rollout、genome search、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 LLM/API、UndoBench TEST、ThinkingBox 和 main merge。
+
+**下一唯一任务：** R2 关闭 105 号报告 F1–F7，并解决 M1–M4。用户明确批准最终执行锁前，不运行 D-092。
+
+---
+
 # 51 — 数据门禁、Pilot A-3 复核与 Pilot B 进入计划
 
-## 0O. D-092 R1 协议修订与门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW）
+## 0O. D-092 R1 协议修订交付（历史状态；已被 0P 独立审查 supersede）
 
 `103_D092_TRAIN_ONLY_PREREGISTRATION.md` 已修订为 R1，R0 保存在 `103_D092_TRAIN_ONLY_PREREGISTRATION_R0.md`。R1 raw SHA=`2b67f64a20ffe622264ee97629db7d587f56005e7f551ff59bef4b3b29099ec5`，canonical SHA=`3a5ad0f108c79bc5fb71529d22d774f4776206c2db42022a994d1893fa1fdc55`。
 

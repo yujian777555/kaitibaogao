@@ -53,8 +53,6 @@
 
 ---
 
-## D-092 R1 独立审查接管（已完成；历史状态）
-
 ## D-092 R1 独立审查任务（已完成；历史记录）
 
 你接管唯一仓库 `yujian777555/kaitibaogao` 的唯一工作分支 `pilot-a-stateful-recovery`。开始必须 fetch 并核验真实 HEAD、main、ahead/behind、工作树和未提交文件；不得丢弃执行者已有工作。
