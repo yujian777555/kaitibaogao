@@ -1,9 +1,12 @@
 # 109 — D-092 R2.3 定向修复与独立验收准备报告
 
-**日期：** 2026-11-18  
-**仓库/分支：** `yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`  
-**最高审查依据：** `108_D092_R2_2_INDEPENDENT_REVIEW.md`  
-**状态：** `READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN`  
+**日期：** 2026-11-18
+
+**仓库/分支：** `yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`
+
+**最高审查依据：** `108_D092_R2_2_INDEPENDENT_REVIEW.md`
+
+**状态：** `READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN`
 **范围：** 仅 F9 canonical identity encoding 与 F13/P07 真实控制流；无算法实现或实验执行。
 
 ## 1. Git 接管与提交身份
