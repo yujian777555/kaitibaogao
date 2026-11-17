@@ -1,6 +1,18 @@
 # 05 — 研究决策日志
 
-## 2026-11-18：D-092 R2.3 独立验收 — ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO
+## 2026-11-18：D-092 Typed Adapter 与五臂 Runner 实现自检完成
+
+110号规格验收后，新增`experiments/d092_recovery/`实现typed mapping、反馈、完整NSGA-II/III、guarded runtime、聚合evaluator/audit与五臂Runner。workflow只新增合成测试，不运行Probe或搜索。
+
+**验证事实：** D-092测试73/73；完整回归529/529；compileall和最终diff检查通过。本地CPython3.9.13/NumPy1.26.4，目标3.11.9/Ubuntu未在本地部署。实现中发现并修复A2可行池过滤、optimizer opaque trace名称误伤、row-count门禁和audit保存问题；预算失败均保留。
+
+**合成 INVALID：** A0 VALID 96/96；A1/A4=79 unique、A2=77、A3=60，均因384 attempt cap INVALID；A1/A4轨迹等价仍成立。不同unique数量不是算法性能证据，不得追加预算或修改seeds挽救。
+
+报告=`111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`。R2.3/R2.2、96 Train、原D-090源码和负面历史未改。当前状态READY_FOR_IMPLEMENTATION_REVIEW，APPROVED_FOR_EXPERIMENT=NO。下一唯一任务为独立实现一致性复审；Probe与正式Train-only搜索仍需复审和用户明确批准。CI以最终提交真实run为准。
+
+---
+
+## 2026-11-18：D-092 R2.3 独立验收（历史规格门禁；实现进展见111号）
 
 独立审查`110_D092_R2_3_INDEPENDENT_REVIEW.md`以HEAD`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`为基线，实际读取R2.3/R2.2、D-091原始证据和绑定源码，独立复算身份、F9哈希向量、P07预算与优先级分数。
 

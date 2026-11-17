@@ -9,6 +9,7 @@ on:
       - "experiments/d088_recovery/**"
       - "experiments/d089_recovery/**"
       - "experiments/d090_recovery/**"
+      - "experiments/d092_recovery/**"
       - ".github/workflows/research-simulator-regression.yml"
   pull_request:
     branches: [pilot-a-stateful-recovery]
@@ -18,6 +19,7 @@ on:
       - "experiments/d088_recovery/**"
       - "experiments/d089_recovery/**"
       - "experiments/d090_recovery/**"
+      - "experiments/d092_recovery/**"
       - ".github/workflows/research-simulator-regression.yml"
 
 jobs:
@@ -40,6 +42,8 @@ jobs:
         run: python -m unittest discover -s experiments/d089_recovery -p "test_*.py" -v
       - name: Test d090_recovery
         run: python -m unittest discover -s experiments/d090_recovery -p "test_*.py" -v
+      - name: Test d092_recovery synthetic implementation
+        run: python -m unittest discover -s experiments/d092_recovery -p "test_*.py" -v
       - name: Generate D-064-C formal scenario manifest candidate
         run: |
           mkdir -p "$RUNNER_TEMP/d064c"

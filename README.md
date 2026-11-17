@@ -1,6 +1,17 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2.3 独立验收通过（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+## D-092 Typed Adapter 实现与合成测试完成（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+
+- 新增`experiments/d092_recovery/`六个实现模块和七组测试，覆盖144映射、反馈、完整NSGA-II/III、runtime/evaluator隔离、五臂预算和审计。
+- **测试：** D-092 73/73；完整本地回归529/529；`compileall`与`git diff --check`通过。本地CPython3.9.13，目标3.11.9/Ubuntu未在本地部署。
+- **合成运行：** A0=VALID；A1/A4/A2/A3因384 attempt cap分别保留79/79/77/60 unique的INVALID部分账本；不构成算法优劣证据。
+- **报告：** `111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`。workflow只运行D-092合成测试，不运行Probe/search。
+- **冻结：** R2.3/R2.2、96 Train、原D-090源码与历史负面证据未改。
+- **下一任务：** 独立实现一致性复审。APPROVED_FOR_EXPERIMENT=NO；实验需复审和用户明确批准。CI以最终提交真实run为准。
+
+---
+
+## D-092 R2.3 独立验收通过（历史规格门禁；实现进展见上方111号）
 
 - 独立报告：`110_D092_R2_3_INDEPENDENT_REVIEW.md`；审查HEAD=`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`，main未变，工作区clean。
 - F9 canonical UTF-8 identity bytes与P07真实14-action/budget=10轨迹均独立通过；P06/P07精确分数差2.770802651881641。

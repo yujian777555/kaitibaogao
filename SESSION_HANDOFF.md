@@ -1,4 +1,16 @@
-## 0Y. D-092 R2.3 独立验收交接（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+## 0Z. D-092 Typed Adapter 实现交接（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+
+- 110号验收后已实现`experiments/d092_recovery/`六模块和七组测试；workflow新增D-092合成测试，不包含Probe/search。
+- 测试：D-092=73/73；完整回归529/529；compileall/diff通过。本地Python3.9.13/NumPy1.26.4，目标3.11.9/Ubuntu未在本地部署。
+- 合成状态：A0 VALID 96/96；A1/A4=79 unique、A2=77、A3=60，均在384 attempts后INVALID_ATTEMPT_CAP并保留完整部分账本；不是算法性能结果。
+- 实现报告=`111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`，含全部代码/测试哈希和自检。R2.3 canonical与R2.2 snapshot未改。
+- 双视图通道、A1/A4等价、A2可行池、row-count门禁、无效账本均已实现并测试。optimizer仅见聚合对象，audit独立保存。
+- **下一唯一任务：独立实现一致性复审。** 复审重点为NSGA-III、反馈集合、attempt lifecycle、预算、隔离和无效处理。APPROVED_FOR_EXPERIMENT=NO；Probe/search需复审和用户明确批准。
+- 维护时不预填CI成功；最终按代码提交真实查询。
+
+---
+
+## 0Y. D-092 R2.3 独立验收交接（历史规格门禁；实现进展见上方111号）
 
 - 报告=`110_D092_R2_3_INDEPENDENT_REVIEW.md`；审查/远端HEAD=`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=320/0，工作区clean。
 - F9 encoding ACCEPT；P07真实14-action/budget=10 ACCEPT。D-091负面证据全部继承，12个输出artifact当前SHA/字节数一致。

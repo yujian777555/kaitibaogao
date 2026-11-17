@@ -1,6 +1,20 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2.3 独立验收通过（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+## D-092 Typed Adapter 实现与合成测试完成（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+
+110号已允许Typed Adapter，规格基线提交=`2a95f0922a87d2b3b39b65363c09385d421fb762`。main仍为`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
+
+- 新增`experiments/d092_recovery/`：typed genome、反馈、完整NSGA-II/III、guarded runtime、聚合evaluator/audit、五臂Runner与完整账本；workflow只新增合成测试。
+- **验证：** D-092=73/73；完整回归28+398+8+8+14+73=529/529；本地CPython3.9.13/NumPy1.26.4，目标3.11.9/Ubuntu未在本地部署。
+- **合成边界：** A0 VALID 96/96；A1/A4=79 unique/384 attempts INVALID；A2=77/384 INVALID；A3=60/384 INVALID。均为INVALID_ATTEMPT_CAP控制流证据，不是算法性能比较；A1/A4轨迹仍完全一致。
+- **报告：** `111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`，含模块/测试/文件哈希和自检边界。
+- R2.3 canonical raw/canonical/blob仍为`75f9c72a…e7522`/`549c595e…7ce4`/`1498f20a…69a3`；R2.2 snapshot未变。
+- **下一任务：独立实现一致性复审。** APPROVED_FOR_EXPERIMENT=NO；Probe、正式搜索、exhaustive、Validation/Test继续禁止。实现审查通过和用户明确批准后才可申请实验。
+- CI按最终代码提交真实查询；维护时不预填成功。
+
+---
+
+## D-092 R2.3 独立验收通过（历史规格门禁；实现进展见上方111号）
 
 独立报告：`110_D092_R2_3_INDEPENDENT_REVIEW.md`。基线 HEAD=`6f9f7d9af062d9f4a871e429d40da6c0645cdb18`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=320/0，工作区 clean。
 

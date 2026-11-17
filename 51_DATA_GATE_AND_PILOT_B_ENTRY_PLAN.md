@@ -1,4 +1,18 @@
-## 0X. D-092 R2.3 独立验收门禁（2026-11-18；ACCEPT_FOR_TYPED_ADAPTER / APPROVED_FOR_EXPERIMENT=NO）
+## 0Y. D-092 Typed Adapter 实现门禁（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+
+Typed Adapter、五臂Runner、完整NSGA-II/III、反馈、runtime/evaluator隔离与账本已实现，见`experiments/d092_recovery/`和`111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`。
+
+**验证：** D-092 73/73，完整回归529/529；compileall/diff通过。A0合成VALID；A1/A4/A2/A3分别保留79/79/77/60 unique的384-cap INVALID证据，不作算法性能解释。workflow仅新增合成测试。
+
+**GO：** 新独立会话做实现一致性复审，核对代码哈希、真实调用链、测试、预算、隔离和无效运行。
+
+**HOLD：** APPROVED_FOR_EXPERIMENT=NO；960 Probe、正式Train-only搜索、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式A-3b、真实API、A800/ARWM、UndoBench TEST、ThinkingBox、D-090重跑和main merge继续禁止。实验需实现复审通过和用户明确批准。
+
+R2.3/R2.2和Train数据未改。CI按最终代码提交真实查询，不预填PASS。
+
+---
+
+## 0X. D-092 R2.3 独立验收门禁（历史规格门禁；实现进展见111号）
 
 `110_D092_R2_3_INDEPENDENT_REVIEW.md`独立确认F9 canonical UTF-8 bytes和P07真实14-action/budget=10控制流通过；D-091负面证据完整继承；R2.3/R2.2身份与13/13源码绑定匹配。
 
