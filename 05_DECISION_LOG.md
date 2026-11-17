@@ -8,7 +8,7 @@
 
 **合成 INVALID：** A0 VALID 96/96；A1/A4=79 unique、A2=77、A3=60，均因384 attempt cap INVALID；A1/A4轨迹等价仍成立。不同unique数量不是算法性能证据，不得追加预算或修改seeds挽救。
 
-报告=`111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`。R2.3/R2.2、96 Train、原D-090源码和负面历史未改。当前状态READY_FOR_IMPLEMENTATION_REVIEW，APPROVED_FOR_EXPERIMENT=NO。下一唯一任务为独立实现一致性复审；Probe与正式Train-only搜索仍需复审和用户明确批准。CI以最终提交真实run为准。
+报告=`111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`。R2.3/R2.2、96 Train、原D-090源码和负面历史未改。当前状态READY_FOR_IMPLEMENTATION_REVIEW，APPROVED_FOR_EXPERIMENT=NO。下一唯一任务为独立实现一致性复审；Probe与正式Train-only搜索仍需复审和用户明确批准。CI证据：代码提交`1e697b19aea2a25dd6a2b2996325c600fbdd82f7`的run`44156241648`已completed/success，D-092步骤73/73=OK；无D-092专属artifact，既有artifact不冒充本轮性能证据。
 
 ---
 

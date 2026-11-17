@@ -8,7 +8,7 @@ Typed Adapter、五臂Runner、完整NSGA-II/III、反馈、runtime/evaluator隔
 
 **HOLD：** APPROVED_FOR_EXPERIMENT=NO；960 Probe、正式Train-only搜索、13,824 exhaustive、调参、候选冻结、Validation/Test、Pilot B、正式A-3b、真实API、A800/ARWM、UndoBench TEST、ThinkingBox、D-090重跑和main merge继续禁止。实验需实现复审通过和用户明确批准。
 
-R2.3/R2.2和Train数据未改。CI按最终代码提交真实查询，不预填PASS。
+R2.3/R2.2和Train数据未改。CI证据：代码HEAD`1e697b19aea2a25dd6a2b2996325c600fbdd82f7`的run`44156241648`已completed/success，D-092测试73/73通过；无D-092专属artifact，既有artifact不属于本轮性能证据。
 
 ---
 

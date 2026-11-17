@@ -7,7 +7,7 @@
 - **合成运行：** A0=VALID；A1/A4/A2/A3因384 attempt cap分别保留79/79/77/60 unique的INVALID部分账本；不构成算法优劣证据。
 - **报告：** `111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`。workflow只运行D-092合成测试，不运行Probe/search。
 - **冻结：** R2.3/R2.2、96 Train、原D-090源码与历史负面证据未改。
-- **下一任务：** 独立实现一致性复审。APPROVED_FOR_EXPERIMENT=NO；实验需复审和用户明确批准。CI以最终提交真实run为准。
+- **下一任务：** 独立实现一致性复审。APPROVED_FOR_EXPERIMENT=NO；实验需复审和用户明确批准。CI证据：代码提交`1e697b19aea2a25dd6a2b2996325c600fbdd82f7`的run`44156241648`=completed/success，D-092步骤73/73=OK；无D-092专属artifact，既有artifact不属于本轮性能证据。
 
 ---
 

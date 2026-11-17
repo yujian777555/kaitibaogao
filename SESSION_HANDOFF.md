@@ -6,7 +6,7 @@
 - 实现报告=`111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`，含全部代码/测试哈希和自检。R2.3 canonical与R2.2 snapshot未改。
 - 双视图通道、A1/A4等价、A2可行池、row-count门禁、无效账本均已实现并测试。optimizer仅见聚合对象，audit独立保存。
 - **下一唯一任务：独立实现一致性复审。** 复审重点为NSGA-III、反馈集合、attempt lifecycle、预算、隔离和无效处理。APPROVED_FOR_EXPERIMENT=NO；Probe/search需复审和用户明确批准。
-- 维护时不预填CI成功；最终按代码提交真实查询。
+- **CI证据：** 代码HEAD`1e697b19aea2a25dd6a2b2996325c600fbdd82f7`对应run`44156241648`=completed/success，D-092步骤73/73通过；无D-092专属artifact，既有artifact不作本轮性能证据。
 
 ---
 

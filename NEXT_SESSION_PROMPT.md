@@ -10,7 +10,7 @@
 - **报告：** `111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`，含模块/测试/文件哈希和自检边界。
 - R2.3 canonical raw/canonical/blob仍为`75f9c72a…e7522`/`549c595e…7ce4`/`1498f20a…69a3`；R2.2 snapshot未变。
 - **下一任务：独立实现一致性复审。** APPROVED_FOR_EXPERIMENT=NO；Probe、正式搜索、exhaustive、Validation/Test继续禁止。实现审查通过和用户明确批准后才可申请实验。
-- CI按最终代码提交真实查询；维护时不预填成功。
+- **CI证据：** 代码HEAD`1e697b19aea2a25dd6a2b2996325c600fbdd82f7`的run`44156241648`已completed/success，D-092测试步骤73/73=OK；无D-092专属artifact，既有artifact不属于本轮性能证据。
 
 ---
 
