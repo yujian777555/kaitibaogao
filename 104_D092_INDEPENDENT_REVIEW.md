@@ -144,6 +144,7 @@ D-092 必须先给出完整 typed genome schema、每个位点的语义、有效
 - failure features 的逐项定义、分子/分母和归一化；
 - 每个 operator block 与每个 failure feature 的映射矩阵；
 - 每个 block 的 beta 系数、温度、概率上下限、平滑/数值稳定处理；
+- 显式规定 `phi_k(0)=0`，确保 `no_feedback` 的零反馈向量确实产生均匀块概率，而不是因特征映射截距而隐式保留反馈偏置；
 - 每轮反馈使用的样本集合（建议只统计上一轮完成的 unique genome evaluations，不能因重复 proposal/cache hit 重复加权）；
 - 更新时点、第一轮初始化、随机数流和概率日志；
 - 失败反馈只来源于已完成 Train rollout 的公开 evaluator 输出，不读取隐藏故障 schedule、未来 outcome、Validation/Test 或金标准标签。
