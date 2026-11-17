@@ -1,6 +1,19 @@
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 R2 独立审查结论（2026-11-17；REQUEST_CHANGES / HOLD）
+## D-092 R2.1 定向修订完成（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+- **canonical：** `103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw SHA-256=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`；canonical SHA-256=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`；Git blob=`773f39e5984c20d011a8d89245ecf52790886088`。
+- **R2 历史：** `103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md` 原样保留；raw=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
+- **F8–F15：** 五字段到底层 D090Genome 唯一映射与十项 probe 展开；COMPENSATE/VERIFY attempt 归因；完整动作 grammar/mask/状态转移；translated NSGA-III normalization；optimizer/audit view；probe/collapse 量化门；五目标 exhaustive gap；固定 PRNG 与 common-random-numbers 语义均已写入规格，等待独立复核。
+- **未改变：** μ=12、λ=12、96 unique、384 attempts、五臂、主比较、五 seeds、反馈矩阵和统计门槛。
+- **验证：** 13/13 源码哈希、96 Train IDs/6 锚点、144 映射唯一性、十项展开、六个冻结章节一致性和 `git diff --check` 均通过；无 OPEN/TBD。仅文档/映射静态检查，不是算法测试。
+- **未运行：** adapter/searcher 实现、算法测试、960 probe、genome search、13,824 exhaustive、Validation/Test 均为 NOT RUN；无新算法结果，不证明演化提升或创新。
+- **下一唯一任务：** 独立会话只复核 F8–F15。通过后进入 typed adapter + static/synthetic tests 实现审查；实现复审和用户明确批准前不运行实验。
+- **CI：** 本轮为根目录文档修订，维护时尚无新 CI/artifact；提交后按真实 HEAD 查询，历史 D-091 CI `44068259009` 不构成 R2.1 验证。
+
+---
+
+## D-092 R2 独立审查结论（历史状态；已被上方 R2.1 交付 supersede）
 
 - **权威报告：** 106_D092_R2_INDEPENDENT_REVIEW.md。R2 的版本、数据和 13 份源码绑定核验通过；不批准 adapter/searcher 实现或实验。
 - **R2 身份：** raw SHA=c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5；canonical SHA=7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53；Git blob=9196c717f2cb79ecd21a25e055a77afe0db03f59。

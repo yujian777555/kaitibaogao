@@ -1,6 +1,18 @@
 # 05 — 研究决策日志
 
-## 2026-11-17：D-092 R2 独立审查决定 — REQUEST_CHANGES / HOLD
+## 2026-11-17：D-092 R2.1 定向修订交付 — READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN
+
+本轮以 106 号 R2 独立审查为最高依据，原样保存 R2 snapshot，并只修订 canonical 103 的 F8–F15。R2 snapshot raw/canonical SHA=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5` / `7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。R2.1 raw/canonical SHA=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee` / `e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。
+
+**规格决定：** F8 完整映射全部底层控制字段，harm=None 使用中性数值 8 且关闭两个开关；F9 每 episode 持久化 compensation attempt 与 delayed VERIFY 唯一归因；F10 固定六种动作、grammar→mask→environment、真实状态/回执/tick 转移表；F11 E/intercept/fallback 全部位于 translated 坐标，scale=a；F12 优化器与审计视图严格分离，outcome 审计字段只暴露 opaque hash；F13 固定 P00–P09 分支证据、action/observation 差异和 H<2 collapse；F14 报告五目标 regret 与 front-normalized distance，不虚构共同最优 genome；F15 冻结 CPython random.Random、API、seed 字节与 CRN。
+
+以上均为 `SPEC_CLOSED / REVIEW_PENDING`，不是独立 ACCEPT。μ/λ、96 unique、384 attempts、五臂、主次比较、五 seeds、反馈矩阵和统计门槛没有修改。静态检查确认 13/13 源码哈希、96 Train IDs/6 锚点、144 唯一映射、P00–P09 展开、六个冻结章节和文档格式，无 OPEN/TBD。
+
+**研究边界：** 未实现 adapter/searcher，未运行算法测试、probe、genome search、exhaustive reference、Validation/Test，未产生性能提升或创新证据。下一唯一任务是新独立会话定向复核 F8–F15；通过后进入 typed adapter + static/synthetic tests 实现审查，实验仍需实现复审和用户明确批准。维护时尚无新 CI/artifact，最终按提交后真实 Actions 状态记录。
+
+---
+
+## 2026-11-17：D-092 R2 独立审查决定（历史状态；已由上方 R2.1 交付 supersede）
 
 R2 文件身份和数据绑定核验通过：R2 raw SHA=c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5，canonical SHA=7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53；R1 immutable snapshot、13 份源码 blob/canonical SHA、D-090 manifest、96 unique IDs 和四类标签各 24 均复核匹配。
 

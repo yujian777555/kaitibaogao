@@ -1,4 +1,17 @@
-## 0S. D-092 R2 独立审查交接（2026-11-17；REQUEST_CHANGES / HOLD）
+## 0T. D-092 R2.1 定向修订交接（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+- 起始 HEAD=`fc4d9b8b62aed7fb3abc3e9d4fe3ecbe985c0315`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`；ahead/behind=314/0，起始工作区 clean。最终提交/远端状态须在本轮结束后重新查询。
+- R2 已原样保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md`：raw=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。
+- canonical R2.1=`103_D092_TRAIN_ONLY_PREREGISTRATION.md`：raw=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`，canonical=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，blob=`773f39e5984c20d011a8d89245ecf52790886088`。
+- F8：唯一底层 mapping、harm=None 中性 8、P00–P09 展开。F9：每 episode attempt ID、delayed VERIFY 回连、重复 VERIFY 不重复计数、\(0\le d\le r\le1\)。F10：六种 tuple、公开 mask、完整环境转移和逐步监视。F11：E 只用 translated objectives，scale 不再减 ideal，含非零 ideal 合成规格。
+- F12：optimizer_reward_view/audit_only_view allowlist 与 opaque outcome hash。F13：Q0/Q0b/Q1–Q4 固定分支、action/observation 语义差异、仅 cost/tick 不通过、三类 H<2 collapse。F14：五项 component regret 与归一化 Pareto-front distance，空 front/不可行选中 undefined。F15：CPython random.Random、精确 randrange/pop/seed bytes 和 CRN。
+- 预算/五臂/seeds/反馈矩阵/统计门槛未改；静态检查 13/13 源码哈希、96 IDs/6 锚点、144 唯一映射、10 展开、6 个冻结章节和 diff 格式全部通过，无 OPEN/TBD。
+- **没有实现或运行算法。** adapter/searcher、算法测试、probe、genome search、exhaustive、Validation/Test 均 NOT RUN；无新性能结论。规格完成不等于算法验证或创新成立。
+- **下一唯一任务：** 新独立会话只复核 F8–F15。通过后立即进入 typed adapter + static/synthetic tests 实现审查；实现复审与用户明确批准前不运行实验。维护时无新 CI/artifact，提交后真实查询，旧 D-091 CI 不是本轮证据。
+
+---
+
+## 0S. D-092 R2 独立审查交接（历史状态；已被上方 0T supersede）
 
 - 审查时 HEAD=3b76e78bb0bd58cb9b812ab7850757bee7cefb07；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=313/0。
 - R2 raw SHA=c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5；canonical SHA=7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53；blob=9196c717f2cb79ecd21a25e055a77afe0db03f59。R1 snapshot raw/canonical SHA 均匹配。

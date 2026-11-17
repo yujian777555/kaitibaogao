@@ -1,4 +1,20 @@
-## 0R. D-092 R2 独立审查门禁（2026-11-17；REQUEST_CHANGES / HOLD）
+## 0S. D-092 R2.1 定向修订门禁（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+R2 已保存为 `103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md`，canonical R2.1 为 `103_D092_TRAIN_ONLY_PREREGISTRATION.md`。R2.1 raw/canonical SHA=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee` / `e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，Git blob=`773f39e5984c20d011a8d89245ecf52790886088`；R2 snapshot 的三种身份保持 `c6e4d110…e66c57b5` / `7f4fb63a…53a5bc53` / `9196c717…03f59`。
+
+F8–F15 已有唯一映射、attempt-level 回执、公开 action/state 接口、translated normalization、view 隔离、量化 probe/collapse、五目标 gap 和 PRNG/CRN 定义。μ/λ、96 unique、384 attempts、五臂、主比较、seeds、反馈矩阵和统计门槛不变。
+
+**实际静态验证：** 13/13 源码 canonical SHA/blob、96 Train IDs/6 锚点、144→144 唯一映射、十项 probe 展开、六个 R2 冻结章节逐字一致、无 OPEN/TBD 和 `git diff --check` 均通过。仅属文档/映射检查，不是算法实现或实验验证。
+
+**GO：** 新独立会话只复核 106 号 F8–F15。定向通过后进入 typed adapter + static/synthetic algorithm tests 实现与实现一致性审查。
+
+**HOLD：** 当前不实现 adapter/searcher；不执行 960 probe、96×96 genome search、13,824 exhaustive、调参或候选冻结；实现复审和用户明确批准前不运行这些实验。Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 LLM/API、UndoBench TEST、ThinkingBox、重跑 D-090 和 main merge 继续禁止。
+
+规格闭合不等于性能提升、实验通过或创新成立。本轮维护时尚无新 CI/artifact；提交后按最终 SHA 查询，旧 D-091 CI 不是 R2.1 证据。
+
+---
+
+## 0R. D-092 R2 独立审查门禁（历史状态；已被上方 0S supersede）
 
 R2 raw/canonical SHA、R1 snapshot、13 份源码 blob/canonical SHA、D-090 Train manifest、96 scenario IDs 和 R1/R2/R3/R4 各 24 场景均独立复核通过。R2 commit 只修改文档，没有新 CI/status/artifact。
 

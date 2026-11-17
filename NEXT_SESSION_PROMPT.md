@@ -1,6 +1,31 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 R2 独立审查结论与 R2.1 定向修订接管（2026-11-17；REQUEST_CHANGES / HOLD）
+## D-092 R2.1 定向修订完成（2026-11-17；READY_FOR_INDEPENDENT_REVIEW / NOT FROZEN / NOT RUN）
+
+唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。本轮起始 HEAD=`fc4d9b8b62aed7fb3abc3e9d4fe3ecbe985c0315`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，起始 ahead/behind=314/0、工作区 clean；接手时仍须动态查询最终提交和远端状态。
+
+### 本轮交付与真实身份
+
+- canonical R2.1：`103_D092_TRAIN_ONLY_PREREGISTRATION.md`；raw SHA-256=`104df3497f58171f48e82e25674d1b14e22673a34561d263f8679aadd34648ee`，canonical SHA-256=`e71027477f49bde939c3a45a1d7327e04d426da4b06a4b4a9a1c41c687916a45`，Git blob=`773f39e5984c20d011a8d89245ecf52790886088`。
+- R2 immutable snapshot：`103_D092_TRAIN_ONLY_PREREGISTRATION_R2.md`；raw=`c6e4d1103710eef12fa65105721c6295b5875c45003cc3bc13baa601e66c57b5`，canonical=`7f4fb63a9c7ec005d17113ef8c5ddfb48d20bd3f229c947ca67668e5d3a5bc53`，blob=`9196c717f2cb79ecd21a25e055a77afe0db03f59`。R0/R1 未覆盖。
+- F8–F15 均已写入可检查的数学/接口/状态定义和边界条件：完整底层 genome 映射与 P00–P09 展开；attempt 一对一回执；六种动作 grammar/mask/转移表；translated E/intercept/scale；两个 reward/audit 接口；逐 probe PASS/HOLD 与 H<2 collapse；五目标 regret/front distance；random.Random API/CRN。
+- 不变项：μ=12、λ=12、12+7×12=96 unique、384 attempts、五臂、A3−A1/A3−A4 主比较、五个 seeds、原反馈矩阵和统计门槛。冻结章节与 R2 逐字一致。
+
+### 实际验证与边界
+
+文档/映射静态检查通过：13/13 源码 canonical SHA/blob、96 唯一 Train IDs、6 个预注册锚点、144→144 映射唯一性、P00–P09 全展开、6 个冻结章节逐字一致、无 OPEN/TBD/TODO、`git diff --check` 通过。首次内联检查命令自身的关键字参数错误已修正后完整重跑通过；没有修改实验源码或结果。
+
+**没有实现 adapter/searcher，没有运行算法测试、960 probe、96×96 search、13,824 exhaustive reference、调参或候选冻结，没有访问 Validation/Test。** 规格闭合不等于算法有效、实验通过或创新成立。本轮维护时尚无新 CI/artifact；提交后必须查询真实 run，历史 D-091 CI `44068259009` 不是 R2.1 验证。
+
+### 唯一下一任务
+
+由**新的独立会话**只复核 `106_D092_R2_INDEPENDENT_REVIEW.md` 的 F8–F15 与 R2.1，对照 `experiments/d090_recovery/d090_genome.py`、`d090_policies.py`、`experiments/pilot_a3b/dependency_recovery.py`，检查公式、状态机、信息流和主控制流一致；不得重开已通过的预算/五臂设计，也不得由本轮起草者自批。
+
+定向复核通过后立即进入 typed adapter + static/synthetic algorithm tests 的实现和实现一致性审查，不再做大范围文档重构。实现审查通过及用户明确批准前，继续禁止 probe、genome search、exhaustive reference、Validation/Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox、重跑 D-090 和 main merge。
+
+---
+
+## D-092 R2 独立审查结论与 R2.1 定向修订接管（历史任务；已由上方 R2.1 交付 supersede）
 
 唯一仓库/分支：yujian777555/kaitibaogao / pilot-a-stateful-recovery。接手时必须重新查询 HEAD、main、ahead/behind 和工作树。
 
