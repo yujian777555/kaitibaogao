@@ -2606,3 +2606,17 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 - Random Search、NSGA-II、NSGA-III、State-Conditioned Evolution、State-Conditioned Random Search 在 96 唯一评价预算下均为 R3=0.875、R4=1.000、Harm=0.042、零违规。当前没有演化优势，也没有冻结候选。
 - 报告：`99_D090_PAIR_RACE_RULE_SEARCH.md`。实验代码：`experiments/d090_recovery/`。D-090 继续保持 Train-only，不能访问正式 Validation/Test。
 
+
+
+## 2026-11-17 D-092 独立预注册审查交接
+
+**仓库/分支：** `yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。远端 branch HEAD=`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=306/0。当前 HEAD 比最新 D-091 CI head `5cde039c` 多一个仅文档变更提交；本地工作树状态尚未由当前连接核验。
+
+**D-091 审查：** 102 号报告、101 执行提示、D-091 审计器/专项测试和结果目录相互一致。三份原始 JSON 的 Git blob / 内部 SHA 核验通过；15×96 search best rows 与 5×96 ablation rows 的最大指标复算差异为 0。Random 与 NSGA-II 实际同路径，State Evo 为静态 mutation profile，proposal/cache/generation/operator 历史不可审计。15 个保存 best candidates 在 96 个 Train 场景上 8 genome→1 phenotype。g03-r2 的 23-step witness 真实成功，BFS 最短 21；旧 25-step 下界撤回。P1 整体 Harm 退化，P2/P4 pending 硬约束违规，P3 未修复 g03。总体仍为 `D091_PARTIAL / HOLD`，不得宣称 EC 提升。
+
+**CI/artifact 更新：** run `44068259009` = success，D-091 审计与上传步骤均成功；artifact `14321023302`，digest `sha256:925f1f5cc14f1b8c3d0678e2b03d67c891f6d13996b3def928ac182cf17aee03`，ZIP 109,605 bytes，内部 12 个 output-manifest 文件逐项 SHA/bytes 检查通过，到期 `2027-02-15T10:48:46Z`。102 号中的 run 440675 / artifact 14320134130 是此前有效运行，不是本轮最新重复验证。
+
+**D-092 决策：** `REQUEST_CHANGES / HOLD`。103 号尚未冻结、未运行；不批准搜索器实现或实验。104 号报告列出 B1–B8：数据/evaluator SHA 锁定、proposal/rollout 预算语义、主要比较与判据、typed genome/probe panel、动态反馈公式和统计集合、canonical NSGA-II/III 与 RNG streams、硬约束和候选选择、资源账本与停止规则。
+
+**唯一下一任务：** 修订 103 为 R1，关闭 104 的 B1–B8，只做协议/公式/预算/编码和静态测试规格；独立审查 R1 后等待用户明确批准。此前不得实现或运行 D-092 搜索，不访问 Validation/Test，不启动 Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox 或 main merge。
+

@@ -484,3 +484,17 @@ R2 配对实验沿用 D-088 Train 数据门：开发 96 场景（`d088r|train|`�
 ## 21. D-089 数据门（2026-11-15）
 
 新数据体系：开发 96 场景（`d089r|train|`，manifest `b2307404…`）+ Fresh 复制 64 场景（`d089r|train2|`，`2ee16a6b…`），SHA-256 锁定于 `experiments/d089_recovery/results/`。D-088-R2 Fresh（80 场景）已消费，禁止再作调参依据。35 个 960-评价 run 原始账本与独立复算见 `d089_search_report.json` / `d089_audit.json`。双指标提升已复制；Test、A800/ARWM、真实 LLM API 继续 HOLD。
+
+
+## 22. D-091 审计与 D-092 预注册门禁（2026-11-17）
+
+D-091 的只读审计和专属 CI artifact 已完成复核，但总体状态保持 `D091_PARTIAL / HOLD`：D-090 三份原始 JSON 与保存 rows 指标复算通过；Random/NSGA-II 方法身份错误、State Evo 非动态反馈、15 个 best candidates 在当前 96 Train 场景上 8 genome→1 phenotype；真实 proposal/cache/generation/operator 历史不可从 best-only 账本复原。g03-r2 旧 25-step 下界被真实 23-step witness 和 21-step BFS 推翻。P2/P4 有 pending 硬约束违规，P1 全局 Harm 退化。
+
+最新 D-091 CI run `44068259009` success；artifact `14321023302` digest=`sha256:925f1f5cc14f1b8c3d0678e2b03d67c891f6d13996b3def928ac182cf17aee03`，下载与内部 output manifest SHA 检查通过。102 号中旧 run/artifact 仍保留为历史有效执行。
+
+D-092 103 号预注册经独立审查为 `REQUEST_CHANGES / HOLD`，尚未冻结、未运行。B1–B8 必须先关闭：Train/evaluator/environment SHA 锁、预算计量单位、主要对照/终点/GO-NO-GO、typed genome/probe panel、反馈公式与统计集合、canonical NSGA-II/III/RNG、硬约束/候选排序、资源账本与停止规则。
+
+**GO：** 只允许修订 103 为 R1、定义公式/预算/编码/测试规格和进行不触发搜索的静态协议审查。  
+**HOLD：** D-092 搜索代码实现、genome search、调参、候选选择/冻结、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 LLM/API、UndoBench TEST、ThinkingBox 和 main merge。
+
+**下一唯一任务：** 修订 103 为 R1，逐项关闭 104 号报告 B1–B8；完成后由独立会话复审，等待用户明确批准后再考虑实现。

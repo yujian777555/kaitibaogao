@@ -1,5 +1,16 @@
 # kaitibaogao — 硕士学位论文开题研究
 
+## D-092 预注册独立审查（2026-11-17；REQUEST_CHANGES / HOLD）
+
+- **D-091 复核：** 原始 JSON 与已保存 rows 指标复算一致；但 Random 与 NSGA-II 实际同路径，State Evo 为静态 mutation profile，15 个 best candidates 在当前 96 个 Train 场景上只有 1 个 phenotype。搜索 proposal/cache/generation/operator 历史仍不可审计。
+- **r2 更正：** 23-step witness 成功，BFS 最短为 21；撤回旧 25-step 下界。P2/P4 pending 硬约束违规，P1 整体 Harm 退化。
+- **最新 CI：** run `44068259009` success；D-091 artifact `14321023302`，digest `sha256:925f1f5cc14f1b8c3d0678e2b03d67c891f6d13996b3def928ac182cf17aee03`，下载 ZIP 与内部 12 个输出文件 SHA 全部匹配。
+- **D-092 决策：** `REQUEST_CHANGES / HOLD`，不批准实现、冻结或运行。103 号必须先关闭 104 号报告 B1–B8（数据锁、预算单位、主要比较/判据、typed genome/probe、反馈公式、canonical EA/RNG、硬约束/选择、资源账本/停止规则）。
+- **唯一下一任务：** 修订 103 为 R1，只做协议与静态测试规格；独立复审并等待用户明确批准。Validation/Test、Pilot B、正式 A-3b、A800/真实 API、UndoBench TEST、ThinkingBox 和 main merge 继续 HOLD。
+- 审查报告：[`104_D092_INDEPENDENT_REVIEW.md`](104_D092_INDEPENDENT_REVIEW.md)。
+
+---
+
 ## D-091 审计执行完成（2026-11-17；D091_PARTIAL / HOLD，搜索过程证据不全）
 
 - **数据与复算：** D-090 三份原始 JSON、manifest/report 内部 SHA 和 Git blob 均核验；15 个 best candidates 与五组消融的全部保存指标复算差异为 0。101 号一个 `d090_policies.py` blob 登记转写错误已单独更正。

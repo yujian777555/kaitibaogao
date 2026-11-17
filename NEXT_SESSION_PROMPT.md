@@ -1,5 +1,58 @@
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
+## D-092 独立审查后的 canonical 接管状态（2026-11-17；优先于下方 D-091 历史提示）
+
+你接管的唯一仓库是 `yujian777555/kaitibaogao`，唯一工作分支是 `pilot-a-stateful-recovery`。严禁读取、引用或混用用户其他项目。
+
+### 最新远端基线
+
+- branch HEAD：`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`
+- main HEAD：`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`
+- ahead / behind：306 / 0
+- 最新 D-091 CI：run `44068259009` = success，测试代码 head `5cde039c73b0a5d83fd6d0d7b3816e20f22f0f9b`
+- 当前 HEAD 比该 CI 多一个仅修改 6 个文档的提交；本地工作树状态必须由下一执行者在本地重新检查，不能从 GitHub API 推断。
+
+### D-091 独立审查结论
+
+读取 `104_D092_INDEPENDENT_REVIEW.md`、`102_D091_INDEPENDENT_AUDIT_RESULT.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION.md`、`101_D091_EXECUTOR_PROMPT.md` 和 `experiments/d090_recovery/results/d091_audit/`。
+
+- D-090 三份原始 JSON 和已保存 15×96 search best rows、5×96 ablation rows 的指标复算一致，最大差异 0。
+- `random` 与 `nsga2` 实际同路径；`state_evo` 仅静态 mutation profile；真实 proposal/cache/generation/operator 历史无法从 best-only trace 审计。
+- 15 个 best candidates 在 96 个 Train 场景上有 8 个 genome、1 个 trace/outcome phenotype；仅对该保存集合成立。
+- g03-r2 的 23-step witness 成功，BFS 最短为 21；撤回旧 25-step 下界。
+- P1 整体 Harm 退化；P2/P4 存在 pending 硬约束违规；P3 未修复 g03。
+- D-091 仍为 `D091_PARTIAL / HOLD`，因为完整搜索过程不可审计，不得声称 EC 提升。
+
+最新重复 CI artifact：`14321023302`，digest `sha256:925f1f5cc14f1b8c3d0678e2b03d67c891f6d13996b3def928ac182cf17aee03`，到期 `2027-02-15T10:48:46Z`。已下载 ZIP 哈希与 GitHub digest 一致，内部 12 个 output-manifest 文件逐项 SHA/字节数一致。
+
+### D-092 审查决定
+
+**`REQUEST_CHANGES / HOLD`。不批准 D-092 搜索代码实现、预注册冻结或实验运行。**
+
+103 号方案仍有 B1–B8 阻断项，详见 104 号报告：
+1. 未锁定 Train manifest / evaluator / environment 不可变 SHA；
+2. proposal slots 与 unique evaluations / real rollouts 预算单位混淆；
+3. 未冻结主要对照、主要终点和 GO/NO-GO 判据；
+4. typed genome 与 phenotype probe panel 未定义；
+5. feedback feature mapping、beta、tau、归一化、概率边界与更新统计 OPEN；
+6. canonical NSGA-II/III、reference implementation、RNG streams 和测试 OPEN；
+7. 硬约束 comparator、infeasible 排序和最终 lexicographic 选择顺序不完整；
+8. 资源账本、phenotype gate、失败/无效 run 的停止规则不完整。
+
+### 唯一下一任务
+
+只将 `103_D092_TRAIN_ONLY_PREREGISTRATION.md` 修订为 R1，逐项关闭 104 号报告 B1–B8；只做协议、公式、预算、编码和静态测试规格。R1 交独立会话复审并等待用户明确批准。
+
+**在新的独立审查与用户明确批准前，禁止：** D-092 搜索器实现、genome search、调参、候选选择/冻结、Validation、Test、Pilot B、正式 A-3b、真实 LLM/API、A800/ARWM、UndoBench TEST、ThinkingBox、main merge。不得重跑 D-090。
+
+### 本仓库维护制度
+
+每轮实质性研究/代码/实验/协议/决策变化，同轮更新 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG 和 51 号计划；提交后核验远端 HEAD、main、ahead/behind、真实 CI 和 artifact。不得声称本地工作树 clean，除非实际执行 git status。
+
+---
+
+## D-091 完成后的独立审查提示（历史接管记录，已由上方 D-092 审查状态 supersede）
+
 ## D-091 完成后的独立审查提示（2026-11-17）
 
 你接管 `yujian777555/kaitibaogao` 的 `pilot-a-stateful-recovery` 分支。先同步远端并核验 HEAD、main、ahead/behind 和工作树，再完整阅读 `102_D091_INDEPENDENT_AUDIT_RESULT.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION.md` 与 `101_D091_EXECUTOR_PROMPT.md`。

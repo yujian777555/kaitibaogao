@@ -1785,3 +1785,16 @@ D-091 只读审计已实际执行，不重跑 D-090 搜索。总体状态为 D09
 交付 `102_D091_INDEPENDENT_AUDIT_RESULT.md`、`103_D092_TRAIN_ONLY_PREREGISTRATION.md` 与 `experiments/d090_recovery/results/d091_audit/`。D-092 仅 PROPOSED / NOT FROZEN / NOT RUN；下一任务为独立审查，不执行搜索。
 
 本地完整回归 456/456。早期 CI 44065635071（shallow 历史对象缺失）与 44066525906（raw SHA 换行差异）失败日志均压缩保留；最终代码 `e5d13f60b30910d6c6b0c10d99f66227b125fb59` 的 CI `44067543678`=success，artifact `14320134130` 已下载复核全部输出哈希和科学结论。绿色 CI 不等于算法创新或搜索对照有效。
+
+
+## D-092-REVIEW（2026-11-17）：Train-only 预注册独立审查
+
+**事实核验：** 远端分支 `pilot-a-stateful-recovery` HEAD=`ae920581a6da9d974ad8bd2d06cfd1ec6b07aabc`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`，ahead/behind=306/0。最新 D-091 CI run `44068259009` = success，head=`5cde039c73b0a5d83fd6d0d7b3816e20f22f0f9b`；当前 HEAD 后续只有文档更新。GitHub API 不提供本地工作树状态，本轮未声称本地 clean。
+
+**D-091 复核结论：** 三份 D-090 原始 JSON / manifest / report 指纹与已保存 rows 指标复算一致，最大差异 0。方法身份 FAIL（random 与 NSGA-II 同路径；state_evo 静态 profile）；候选 phenotype FAIL（15 个保存 best candidates 在 96 Train scenarios 上 8 genomes→1 phenotype）；r2 25-step claim 被 23-step witness 与 21-step BFS 推翻；P2/P4 存在 pending 硬约束违规。完整搜索过程仍 `NOT_AUDITABLE_FROM_SAVED_TRACE`，D-091 保持 `D091_PARTIAL / HOLD`。
+
+**最新 artifact：** run `44068259009` 的 `d091-independent-audit-evidence` artifact ID=`14321023302`，digest=`sha256:925f1f5cc14f1b8c3d0678e2b03d67c891f6d13996b3def928ac182cf17aee03`；下载 ZIP 哈希和内部 12 个 output-manifest 文件 hashes/bytes 全部匹配。
+
+**决策：** 103 号 D-092 草案 `REQUEST_CHANGES / HOLD`，不批准实现/冻结/运行。原因：B1–B8 未关闭，包括数据版本锁、预算计量单位、主要对照与判据、typed genome/probe panel、动态反馈参数、canonical NSGA-II/III/RNG、硬约束/候选选择和资源/停止规则。详见 `104_D092_INDEPENDENT_REVIEW.md`。
+
+**唯一下一步：** 修订 103 为 R1，逐项关闭 B1–B8，只做设计与静态测试规格；独立审查 R1 并等待用户明确批准。不得启动新搜索、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 API 或 main merge。
