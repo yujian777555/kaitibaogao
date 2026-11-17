@@ -1,5 +1,23 @@
 # 51 — 数据门禁、Pilot A-3 复核与 Pilot B 进入计划
 
+## 0N. D-091 源码预审与门禁（2026-11-17）
+
+D-091 权威执行提示词为 `101_D091_EXECUTOR_PROMPT.md`，审计协议为 `100_D091_D090_EVIDENCE_AUDIT_AND_SEARCH_IDENTIFIABILITY.md`。本轮新增源码预审发现，尚未执行完整独立审计：
+
+- `random` 与 `nsga2` 在当前 `run_method()` 中实际走同一演化分支；Random Search 基线无效。
+- `state_evo` 使用固定 mutation profile，不是动态状态反馈。
+- `GENERATIONS=6` 未用于 loop 终止。
+- 15 个 best candidates 中 8 个 genome，但当前 96 个 Train 场景上的 trace bundle 105/105 两两相同。
+- 现有 g03 audit scripts 读取 D-089 而非 D-090 r2。
+- 25-step claim 有待真实环境回放的 23-step witness；必须执行 replay + BFS/DP 后才能判定。
+
+**门禁：** D-090 原始结果仍为 Train-only 探索结果；无冻结候选、无 Validation、无 Test。D-091 未完成前，Pilot B、正式 A-3b、A800/真实 LLM API 和任何新搜索均保持 HOLD。
+
+CI `43881534809` regression/test success 不代表 D-091 独立审计完成。D-091 需单独上传复算与最短路径 artifact。
+
+---
+
+
 ## 0M. D-090 Train-only 结果与 D-091 门禁（2026-11-16）
 
 D-090 使用 `d090r|train|` 新命名空间、6 families、96 Train-only scenarios。固定消融：Legacy B3 R3=.500/R4=1.000/Harm=.271/violations=0；P1=.708/.917/.479/0；P2=.667/1.000/.146/2；P3=.583/1.000/.229/0；P4=.417/1.000/.313/2。P1 的局部 g03 改善伴随整体 Harm 恶化；P2 因硬约束违规排除。
