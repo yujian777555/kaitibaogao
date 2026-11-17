@@ -1,5 +1,3 @@
-## 0M. D-090 最新权威接管状态（2026-11-16）
-
 ## 0N. D-091 最新权威接管状态（2026-11-17；待执行）
 
 - 唯一仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`。接管前已知文档提交 `4e511b93fadb71ebab4b38f7dcbdf986b695d1a8`；本轮新增 D-091 提示词后提交继续更新，接管时必须先 fetch 远端。
@@ -13,6 +11,9 @@
 - 完成后更新 README、SESSION_HANDOFF、NEXT_SESSION_PROMPT、05_DECISION_LOG、51 数据门禁；若证据缺失，状态必须为 `D091_PARTIAL / HOLD`，不得写成 PASS。
 
 ---
+
+## 0M. D-090 最新权威接管状态（2026-11-16）
+
 
 
 - 唯一工作仓库/分支：`yujian777555/kaitibaogao` / `pilot-a-stateful-recovery`；D-090 报告 `99_D090_PAIR_RACE_RULE_SEARCH.md`。
@@ -2591,3 +2592,4 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 - 固定机制消融显示 P1 将 g03 R3 失败从 4/4 降为 1/4，但 Harm 上升到 0.479。P2 Harm=0.146 但产生 2 个约束和 4 个 pending。P3/P4 未修复 g03。
 - Random Search、NSGA-II、NSGA-III、State-Conditioned Evolution、State-Conditioned Random Search 在 96 唯一评价预算下均为 R3=0.875、R4=1.000、Harm=0.042、零违规。当前没有演化优势，也没有冻结候选。
 - 报告：`99_D090_PAIR_RACE_RULE_SEARCH.md`。实验代码：`experiments/d090_recovery/`。D-090 继续保持 Train-only，不能访问正式 Validation/Test。
+
