@@ -7,6 +7,7 @@
 - P05/P06根因：Q3中P00/P05/P06完整trace相同；预算窗口内无可执行的ordinary/tight分叉。budget=3/2虽有理论候选差异，实际分别为VERIFY(B)/ESCALATE且不能dispatch。不得改场景/阈值/判据制造PASS。
 - **五臂五seed正式Train-only搜索NOT RUN；没有A3−A1/A4性能、统计或创新成立结论。** Probe不是性能证据，HOLD原始结果不得删除。
 - 有效完整回归=542/542（含D-092=86/86），环境Ubuntu22.04/CPython3.11.9/NumPy1.26.4。执行锁与代码提交=`7be851e264bcad2e2d3105c7c21f2c3e7db76ebd`；最终维护SHA/远端CI以交接顶部和实际GitHub查询为准。
+- 代码/结果提交`c1975a7f3fea73f6af6d845b229ec9fd3e769593`的CI run`44299067518`已completed/success，D-092日志86/86 OK；6个既有artifact，无D-092专属CI artifact，CI未运行Probe/search。
 - 下一步只保留诊断和经新版本预注册的机制研究；当前不得启动正式搜索、exhaustive、Validation/Test或修改main。
 
 ---

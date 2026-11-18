@@ -8,7 +8,8 @@
 - P05/P06与P00的Q3 trace完全相同；窗口内无可执行ordinary/tight分叉。budget3理论A primary/alternate不同但VERIFY(B)，budget2为ESCALATE，均`_can_dispatch_more=false`。不得修改冻结Probe来追求PASS。
 - 硬约束合计：invalid0、illegal0、duplicate0、pending120、runtime_abort146、unauthorized2748；全部保留。
 - 环境=Ubuntu22.04/CPython3.11.9/NumPy1.26.4。D-092=86/86；有效全量回归28+398+8+8+14+86=542/542。一次0-tests循环已作废并显式重跑，不作通过证据。
-- Probe执行锁/修复提交=`7be851e264bcad2e2d3105c7c21f2c3e7db76ebd`；锁内source_head是基线`e505f0d2126f729968f298c1448f9dedcabb48d1`，逐文件hash才绑定实际执行代码。main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`未改。最终维护HEAD/CI须在推送后实际查询。
+- Probe执行锁/修复提交=`7be851e264bcad2e2d3105c7c21f2c3e7db76ebd`；锁内source_head是基线`e505f0d2126f729968f298c1448f9dedcabb48d1`，逐文件hash才绑定实际执行代码。main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`未改。
+- 代码/结果提交`c1975a7f3fea73f6af6d845b229ec9fd3e769593`的真实CI run=`44299067518`，job=`134783672580`，completed/success；日志D-092=86/86 OK。6个既有artifact，无D-092专属CI artifact；Probe/search未在CI执行。后续纯维护提交无run时须标NOT RUN。
 - **下一会话：** 先核验113和原始账本；正式搜索仍受全PASS门禁阻断。若研究新对照，只能新版本预注册和独立Train证据，不能改D-092结果。Validation/Test、exhaustive、真实API、A800和main修改继续禁止。
 
 ---

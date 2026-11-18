@@ -11,6 +11,7 @@
 5. 不得重跑冻结Probe调参、改场景/窗口/阈值/统计门槛、删除不利episode、补预算或换seed。若继续修复研究设计，只能形成新的版本化预注册并取得相应审查/授权；原D-092 HOLD永久保留。
 6. 可复算命令：`PYTHONHASHSEED=0 .runtime/venv/bin/python experiments/d092_recovery/d092_probe_audit.py`。完整回归实测542/542，D-092=86/86；后续代码修改后必须重新运行。
 7. Validation/Test、13,824 exhaustive、Pilot B、真实LLM/API、A800/ARWM、D-090重跑和main修改均未授权。提交后核验远端HEAD/main/ahead-behind/worktree/真实CI；没有run就写NOT RUN。
+8. 代码/结果提交`c1975a7f3fea73f6af6d845b229ec9fd3e769593`的CI run`44299067518`已completed/success，D-092日志86/86 OK；CI没有运行Probe/search，6个既有artifact均非D-092性能证据。后续纯文档提交不虚构新CI。
 
 ---
 

@@ -126,7 +126,15 @@ P07 的 PASS 证明 harm budget=12 在 budget=10 的预定对照可以改变选�
 
 一次循环命令因 suite 变量为空而错误显示 0 tests；该次结果未计入通过证据，随后已用六个显式 suite 命令完整重跑，以上数字来自有效重跑。
 
-## 8. 未执行事项与下一步
+## 8. 远端 CI 与 artifact
+
+代码/结果提交 `c1975a7f3fea73f6af6d845b229ec9fd3e769593` 触发真实 GitHub Actions run [`44299067518`](https://github.com/yujian777555/kaitibaogao/actions/runs/44299067518)，workflow=`Research simulator regression tests`，job=`134783672580`，最终状态 `completed/success`。D-092 步骤日志实际为 `Ran 86 tests`、`OK`。CI 使用 Ubuntu 22.04、CPython 3.11.9 和 hash-locked NumPy 1.26.4。
+
+该 run 生成 6 个既有 artifact：`d064c-formal-scenario-manifest-candidate`、`d079-d078-audit-and-challenge-candidate`、`d085-prefix-development-and-mechanism-audit`、`d086-dependency-development-and-fixed-gate`、`d087-frozen-replication-regression-evidence`、`d091-independent-audit-evidence`。没有 D-092 专属 CI artifact；D-092 Probe 原始产物作为 Git 文件入库。CI 没有执行 Probe、正式 genome search 或 exhaustive reference。
+
+本报告后续的纯文档维护提交若未触发新 run，必须标记该提交 CI=NOT RUN；上述 success 只归属于 SHA=`c1975a7f3fea73f6af6d845b229ec9fd3e769593`，不能转移为算法性能证据。
+
+## 9. 未执行事项与下一步
 
 - A0–A4 × seeds 711/822/933/1044/1155 正式搜索：NOT RUN。
 - A3−A1、A3−A4、A1−A0、A2−A1：NOT RUN，无逐 seed 改善或统计门槛结论。
