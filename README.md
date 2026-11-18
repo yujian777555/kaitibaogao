@@ -1,3 +1,15 @@
+## D-093 接管：D-092 HOLD 后的三个真实阻断（2026-11-18；尚未执行新实验）
+
+当前 D-092：960 Probe 完成，P05/P06 HOLD，正式搜索 NOT RUN。不可修改 R2.3、113号报告、原始episodes JSONL或D-090/D-089/D-088历史源码。
+
+除P05/P06可达性问题外，复核发现更关键的硬约束风险：Probe总计 unauthorized_action_count=2,748、runtime_abort_count=146、pending_count=120。R2.3 §7.2.2将六类都定义为hard，候选可行要求六类原始计数全部为0。源码调用链显示潜在原因：D088RecoveryPolicy._recover_current()在current state=COMPENSATED时无条件提出RETRY_WORKFLOW；D092 public_action_allowed()仅在current无pending时允许；delayed success会先改state后保留pending。必须按原始JSONL逐条确认，不能只凭源码推断全部计数根因。
+
+第二项阻断：既有synthetic search preflight中A0=96 unique/VALID，A1/A4=79、A2=77、A3=60，均在384 attempts内未达96 unique。必须先分析duplicate proposal、variation与survivor多样性，不得直接启动正式搜索或暗改attempt cap。
+
+第三项阻断：P05/P06的Q3预算窗口没有可执行ordinary/tight分叉。D092 HOLD永久保留；新Harm probe必须用D093 fresh Train manifest、静态可达性证明和预先锁定的scenario grid。
+
+新执行接管文件：114_D093_EXPEDITED_EXECUTION_PROMPT.md。先只读复算D092原始证据，再新建D093 receipt-aware policy adapter、诊断proposal starvation、设计四组H0/H4/H8/H12可达性Probe。只有硬约束、proposal coverage、A1/A4等价和新Probe门禁全部通过后，才启动D093五臂Train-only搜索。当前没有执行D093 rollout或正式搜索，不能声称新提升。
+
 
 
 ## D-092 真实 960 Probe 完成但门禁 HOLD（2026-11-18；当前状态）
