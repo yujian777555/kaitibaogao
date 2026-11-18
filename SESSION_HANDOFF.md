@@ -3,6 +3,7 @@
 - 分支`d094-llm-agent-integration`，建分支基线`f409a730fd1c1cae90584f7591a213e916f28c2c`。新实现全部位于`experiments/d094_llm_agent/`，D-092/D-093与main未改。
 - 交付六个核心模块、版本化Prompt、Canary Runner、4组测试及`D094_DESIGN.md`/`D094_EXPERIMENT_PLAN.md`/`D094_API_CANARY_REPORT.md`/`D094_NEXT_SESSION_PROMPT.md`。LLM每轮决策，工具由本地Schema+环境权限双重控制，B0适配器不调用LLM，B2由NSGA-II演化648种合法Typed Genome。
 - 测试D-094=36/36，Black/compileall通过。Ubuntu22.04/CPython3.11.9下七套件一次性全量回归=578/578（28+398+8+8+14+86+36）。安全工具bandit/gitleaks/semgrep/mypy/ruff不可用，未运行。
+- 代码提交`bc087c0dd08c5bd25b25e64311775765ae5c81d4`的真实CI run=`44328080784`，job=`134884679031`，completed/success，D-094日志36/36 OK。6个既有artifact，无D-094专属性能artifact；CI未执行真实API/搜索。后续纯文档提交无run时标记NOT RUN。
 - Mock Canary=MOCK_PASS，2 decisions、2 mock attempts、工具轨迹verify→complete、hash chain有效。真实API=BLOCKED_CONFIGURATION：key存在但base URL/model/两项Token价格缺失；真实调用0、Token 0、成本0，未使用模型，未接通。
 - Phase2 B0/B1/B2、API genome search、B3/RSI、Validation/Test和训练均NOT RUN；无算法提升或创新成立结论。下一步只在配置完整后运行最多4 attempts/0.10 USD的真实Canary，PASS后进入独立小Train对照。
 - 本地切分支曾触发D-092 JSONL CRLF转换并导致审计失败；已从当前HEAD逐字节恢复原LF证据后86/86通过，未修改D-092 Git blob或研究内容。不得掩盖该类环境差异。

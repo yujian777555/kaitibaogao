@@ -5,7 +5,7 @@
 - 真实OpenAI-compatible Adapter、多轮LLM Agent、Typed Genome、NSGA-II、多目标评价和账本已实现；D-094测试36/36，全量回归578/578。
 - Mock Canary两轮决策完成工具执行，但不是实际API。真实Canary因base URL、MODEL和Token价格缺失而BLOCKED_CONFIGURATION；真实调用0、Token 0、成本0，模型未配置。
 - 下一步先配置环境变量并执行受限真实Canary；只有真实PASS才进入D-094独立小Train的B0/B1/B2。Phase2搜索、B3/RSI、Validation/Test和训练当前NOT RUN，无提升结论。
-- D-092/D-093源码、数据、报告和main保持不变。最终提交/CI以实际远端查询为准，无run写NOT RUN。
+- D-092/D-093源码、数据、报告和main保持不变。代码提交`bc087c0dd08c5bd25b25e64311775765ae5c81d4`的CI run`44328080784`已completed/success，D-094日志36/36 OK；无D-094专属性能artifact。后续纯文档提交无run写NOT RUN。
 
 ---
 

@@ -1,6 +1,6 @@
 # D-094 Phase 0 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** 建立可审计的真实 OpenAI-compatible LLM Agent、Typed Genome 与 NSGA-II 基础链路，并在配置允许时执行最小 Canary。
 
@@ -37,10 +37,10 @@
 - `OpenAICompatibleTransport(base_url, model, api_key, urlopen_impl=None)`
 - `LLMClient.generate_action(observation, available_tools, agent_config) -> LLMDecision`
 
-- [ ] 写 HTTP payload、密钥脱敏、重试、预算、成本、无效 JSON 的失败测试。
-- [ ] 运行 `python -m unittest discover -s experiments/d094_llm_agent -p "test_d094_llm_client.py" -v`，确认因模块缺失而失败。
-- [ ] 实现预算/成本/hash-chain 账本、真实传输、Mock 传输和结构化解析。
-- [ ] 重跑测试，确认真实 payload 与全部边界通过。
+- [x] 写 HTTP payload、密钥脱敏、重试、预算、成本、无效 JSON 的失败测试。
+- [x] 运行 `python -m unittest discover -s experiments/d094_llm_agent -p "test_d094_llm_client.py" -v`，确认因模块缺失而失败。
+- [x] 实现预算/成本/hash-chain 账本、真实传输、Mock 传输和结构化解析。
+- [x] 重跑测试，确认真实 payload 与全部边界通过。
 
 ### Task 2: Typed Genome 与 Agent Loop
 
@@ -51,9 +51,9 @@
 - `LLMAgent.run(task, environment) -> AgentRunResult`
 - `RuleBasedAgent.run(task, environment) -> AgentRunResult`
 
-- [ ] 写每轮 LLM 决策、Schema/权限拒绝、记忆/恢复、B0 零调用和 648 Genome 合法性测试。
-- [ ] 观察 RED，随后实现版本化 Prompt、合法变异/交叉、工具网关和多轮 Agent。
-- [ ] 重跑测试，确认 LLM 每轮参与、确定性环境最终授权、失败不静默接管。
+- [x] 写每轮 LLM 决策、Schema/权限拒绝、记忆/恢复、B0 零调用和 648 Genome 合法性测试。
+- [x] 观察 RED，随后实现版本化 Prompt、合法变异/交叉、工具网关和多轮 Agent。
+- [x] 重跑测试，确认 LLM 每轮参与、确定性环境最终授权、失败不静默接管。
 
 ### Task 3: NSGA-II 与评价器
 
@@ -64,18 +64,18 @@
 - `evaluate_episodes(episodes) -> EvaluationMetrics`
 - `population_diversity(genomes, phenotype_hashes) -> dict`
 
-- [ ] 写非支配/crowding 已知答案、可行性不可补偿、合法后代、七项目标和 phenotype 多样性测试。
-- [ ] 观察 RED，随后实现 NSGA-II 与多目标评价。
-- [ ] 重跑测试，确认无加权总分、无可行候选被高成功率违规候选替代。
+- [x] 写非支配/crowding 已知答案、可行性不可补偿、合法后代、七项目标和 phenotype 多样性测试。
+- [x] 观察 RED，随后实现 NSGA-II 与多目标评价。
+- [x] 重跑测试，确认无加权总分、无可行候选被高成功率违规候选替代。
 
 ### Task 4: Canary、文档与仓库验证
 
 **Files:** `run_d094_canary.py`, `D094_API_CANARY_REPORT.md`, `D094_NEXT_SESSION_PROMPT.md`, workflow/handoff files
 
-- [ ] 用 Mock 完成多步真实 Agent Loop 集成测试。
-- [ ] 只检查环境变量存在性；配置完整才运行真实 Canary，否则记录阻断和 0 调用。
-- [ ] 运行 D-094、全项目回归、`compileall`、`git diff --check`，核验无密钥和 D-092/D-093 差异。
-- [ ] 提交推送后核验远端 HEAD/main、文件内容、真实 CI 和 artifact；未运行项明确 NOT RUN。
+- [x] 用 Mock 完成多步真实 Agent Loop 集成测试。
+- [x] 只检查环境变量存在性；配置完整才运行真实 Canary，否则记录阻断和 0 调用。
+- [x] 运行 D-094、全项目回归、`compileall`、`git diff --check`，核验无密钥和 D-092/D-093 差异。
+- [x] 提交推送后核验远端 HEAD/main、文件内容、真实 CI 和 artifact；未运行项明确 NOT RUN。
 
 ## 后续实验门禁
 

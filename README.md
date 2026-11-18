@@ -2,7 +2,7 @@
 
 - 独立分支`d094-llm-agent-integration`，基线`f409a730fd1c1cae90584f7591a213e916f28c2c`；新目录`experiments/d094_llm_agent/`，D-092/D-093证据与main不变。
 - 已实现OpenAI-compatible真实HTTP路径、环境密钥、结构化JSON、多轮LLM Agent、工具Schema/权限网关、请求/成本/hash-chain账本、六基因Typed Genome、NSGA-II和多目标评价；设计见`D094_DESIGN.md`。
-- D-094测试36/36；全量回归578/578。Mock Canary两轮决策并完成`verify_dependency→complete_recovery`，不是实际API证据。真实HTTP Adapter通过受控请求测试，但未进行真实网络调用。
+- D-094测试36/36；全量回归578/578。代码提交`bc087c0dd08c5bd25b25e64311775765ae5c81d4`的CI run`44328080784`已completed/success。Mock Canary两轮决策并完成`verify_dependency→complete_recovery`，不是实际API证据。真实HTTP Adapter通过受控请求测试，但未进行真实网络调用。
 - **真实Canary=BLOCKED_CONFIGURATION：** API key存在，base URL、MODEL和输入/输出Token价格未配置；真实调用0、Token 0、成本0、延迟0，模型未配置，API未接通。详见`D094_API_CANARY_REPORT.md`。
 - B0/B1/B2仅完成对照设计，Phase2搜索、B3、RSI、Validation/Test和训练均NOT RUN；没有可验证提升。下一步按`D094_NEXT_SESSION_PROMPT.md`先完成受限真实Canary。
 

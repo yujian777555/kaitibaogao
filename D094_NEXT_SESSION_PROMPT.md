@@ -5,7 +5,7 @@
 - 唯一仓库：`yujian777555/kaitibaogao`；工作分支：`d094-llm-agent-integration`。
 - 建分支基线：`f409a730fd1c1cae90584f7591a213e916f28c2c`。开始工作前必须重新查询远端 HEAD、main 和 worktree，不信任历史完成声明。
 - Phase 0 已实现于 `experiments/d094_llm_agent/`：OpenAI-compatible HTTP Adapter、Mock、结构化动作、多轮 Agent、工具网关、Typed Genome、NSGA-II、评价器和请求/执行账本。
-- D-094 单元/Mock 测试：36/36。Black 与 compileall 已执行；全项目回归和最终 CI 以根 `SESSION_HANDOFF.md` 顶部及真实 GitHub 记录为准。
+- D-094 单元/Mock 测试：36/36，全项目回归578/578。Black 与 compileall 已执行。代码提交`bc087c0dd08c5bd25b25e64311775765ae5c81d4`的CI run`44328080784`已completed/success，D-094日志36/36 OK；无D-094专属性能artifact。后续纯文档提交无run时写NOT RUN。
 - Mock Canary：MOCK_PASS，2 个 LLM decisions，工具轨迹 `verify_dependency → complete_recovery`，hash chain valid。它不是实际 API 实验。
 - 真实 Canary：**BLOCKED_CONFIGURATION**。API key 存在，但 base URL、MODEL、输入/输出 Token 价格未配置；真实 HTTP attempts=0、Token=0、成本=0、延迟=0，API 未接通。没有可验证的算法提升。
 
