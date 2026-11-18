@@ -1,3 +1,14 @@
+## D-094 当前接管：Phase 0 完成，真实 API 配置阻断（2026-11-18）
+
+工作分支已切换为`d094-llm-agent-integration`，基线`f409a730fd1c1cae90584f7591a213e916f28c2c`。先读取`D094_NEXT_SESSION_PROMPT.md`、`D094_API_CANARY_REPORT.md`和`D094_DESIGN.md`，不要沿用下方D-093任务或修改其历史。
+
+- 真实OpenAI-compatible Adapter、多轮LLM Agent、Typed Genome、NSGA-II、多目标评价和账本已实现；D-094测试36/36，全量回归578/578。
+- Mock Canary两轮决策完成工具执行，但不是实际API。真实Canary因base URL、MODEL和Token价格缺失而BLOCKED_CONFIGURATION；真实调用0、Token 0、成本0，模型未配置。
+- 下一步先配置环境变量并执行受限真实Canary；只有真实PASS才进入D-094独立小Train的B0/B1/B2。Phase2搜索、B3/RSI、Validation/Test和训练当前NOT RUN，无提升结论。
+- D-092/D-093源码、数据、报告和main保持不变。最终提交/CI以实际远端查询为准，无run写NOT RUN。
+
+---
+
 ## D-093 接管：D-092 HOLD 后的三个真实阻断（2026-11-18；尚未执行新实验）
 
 当前 D-092：960 Probe 完成，P05/P06 HOLD，正式搜索 NOT RUN。不可修改 R2.3、113号报告、原始episodes JSONL或D-090/D-089/D-088历史源码。

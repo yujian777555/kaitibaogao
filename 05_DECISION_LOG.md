@@ -1,5 +1,17 @@
 # 05 — 研究决策日志
 
+## 2026-11-18：D-094 Phase 0 实现与真实 API 配置门禁
+
+从`f409a730fd1c1cae90584f7591a213e916f28c2c`创建独立分支`d094-llm-agent-integration`，新增独立目录，不修改D-092/D-093或main。
+
+已实现OpenAI-compatible真实HTTP传输与Mock、结构化动作、每轮LLM决策、确定性工具Schema/权限网关、请求/成本/hash-chain账本、六基因Typed Genome、NSGA-II和多目标评价。D-094测试36/36，全量回归578/578；Mock多轮Canary完成2个LLM决策和2次工具执行，但不作为真实API证据。
+
+**真实Canary决定：BLOCKED_CONFIGURATION。** 环境存在API key，但未配置base URL、MODEL和输入/输出Token价格，因此不发送网络请求。真实调用0、Token 0、成本0、延迟0，模型未配置，API未接通。只有配置完整且真实多轮链路PASS后，才进入D-094独立小Train的B0/B1/B2；当前Phase2、B3/RSI、Validation/Test和训练均NOT RUN，不宣称提升或创新成立。
+
+---
+
+
+
 ## D-093 接管：D-092 HOLD 后的三个真实阻断（2026-11-18；尚未执行新实验）
 
 当前 D-092：960 Probe 完成，P05/P06 HOLD，正式搜索 NOT RUN。不可修改 R2.3、113号报告、原始episodes JSONL或D-090/D-089/D-088历史源码。

@@ -2,7 +2,7 @@ name: Research simulator regression tests
 
 on:
   push:
-    branches: [pilot-a-stateful-recovery]
+    branches: [pilot-a-stateful-recovery, d094-llm-agent-integration]
     paths:
       - "experiments/pilot_a_recovery/**"
       - "experiments/pilot_a3b/**"
@@ -10,9 +10,10 @@ on:
       - "experiments/d089_recovery/**"
       - "experiments/d090_recovery/**"
       - "experiments/d092_recovery/**"
+      - "experiments/d094_llm_agent/**"
       - ".github/workflows/research-simulator-regression.yml"
   pull_request:
-    branches: [pilot-a-stateful-recovery]
+    branches: [pilot-a-stateful-recovery, d094-llm-agent-integration]
     paths:
       - "experiments/pilot_a_recovery/**"
       - "experiments/pilot_a3b/**"
@@ -20,6 +21,7 @@ on:
       - "experiments/d089_recovery/**"
       - "experiments/d090_recovery/**"
       - "experiments/d092_recovery/**"
+      - "experiments/d094_llm_agent/**"
       - ".github/workflows/research-simulator-regression.yml"
 
 jobs:
@@ -44,6 +46,8 @@ jobs:
         run: python -m unittest discover -s experiments/d090_recovery -p "test_*.py" -v
       - name: Test d092_recovery synthetic implementation
         run: python -m unittest discover -s experiments/d092_recovery -p "test_*.py" -v
+      - name: Test d094_llm_agent Mock and unit tests
+        run: python -m unittest discover -s experiments/d094_llm_agent -p "test_*.py" -v
       - name: Generate D-064-C formal scenario manifest candidate
         run: |
           mkdir -p "$RUNNER_TEMP/d064c"

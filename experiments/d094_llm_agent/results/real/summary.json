@@ -1,0 +1,19 @@
+{
+  "agent_status": "NOT_RUN",
+  "api_attempt_count": 0,
+  "api_connected": false,
+  "backend": "openai-compatible",
+  "cost_usd": 0.0,
+  "credential_status": "PRESENT",
+  "input_tokens": 0,
+  "latency_seconds": 0.0,
+  "llm_decision_count": 0,
+  "missing_configuration": [
+    "BASE_URL",
+    "MODEL",
+    "D094_LLM_INPUT_COST_PER_1M",
+    "D094_LLM_OUTPUT_COST_PER_1M"
+  ],
+  "output_tokens": 0,
+  "status": "BLOCKED_CONFIGURATION"
+}
