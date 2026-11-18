@@ -16,7 +16,17 @@
 
 # kaitibaogao — 硕士学位论文开题研究
 
-## D-092 Typed Adapter 实现与合成测试完成（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+## D-092 真实 Probe 执行锁完成（2026-11-18；LOCKED_BEFORE_ROLLOUT）
+
+- 三项账本/RNG修复及回归通过；D-092=82/82。新增可执行Probe Runner、执行锁和精确运行时。
+- 锁文件=`experiments/d092_recovery/results/probe/execution_lock.json`，raw SHA=`eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787`；seed=711，96场景×10 genomes=960，无缓存。
+- 实际环境：Ubuntu22.04 WSL、CPython3.11.9、NumPy1.26.4、PYTHONHASHSEED=0；wheel SHA=`666dbfb6ec68962c033a450943ded891bed2d54e6755e35e5835d63f4f6931d5`。
+- 用户已明确授权Probe和条件性正式Train-only搜索。下一步执行960 Probe；全部PASS后直接进入五臂五seed搜索。失败/HOLD全部保留，不补预算或换seed。
+- CI环境已固定Ubuntu22.04/Python3.11.9/hash-locked NumPy；CI不执行Probe/search。
+
+---
+
+## D-092 Typed Adapter 实现与合成测试完成（历史；当前真实Probe锁见上方）
 
 - 新增`experiments/d092_recovery/`六个实现模块和七组测试，覆盖144映射、反馈、完整NSGA-II/III、runtime/evaluator隔离、五臂预算和审计。
 - **测试：** D-092 73/73；完整本地回归529/529；`compileall`与`git diff --check`通过。本地CPython3.9.13，目标3.11.9/Ubuntu未在本地部署。

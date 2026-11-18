@@ -1,6 +1,18 @@
 # 05 — 研究决策日志
 
-## 2026-11-18：D-092 Typed Adapter 与五臂 Runner 实现自检完成
+## 2026-11-18：D-092 三项修复与真实 Probe 执行锁
+
+BudgetLedger现在为每个消耗attempt保留PENDING→NEW_UNIQUE/DUPLICATE_CACHED/FAILED/INTERRUPTED唯一记录；失败不进archive/cache。run_arm将普通异常转为INVALID并保留未知partial标记；m1_equivalence纳入完整命名RNG事件，篡改测试失败。
+
+新增真实Probe Runner与执行锁：`experiments/d092_recovery/results/probe/execution_lock.json`，raw SHA=`eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787`；seed=711，10 genomes×96 Train=960，无缓存。D-092测试82/82通过。
+
+实际环境已在Ubuntu22.04 WSL核验为CPython3.11.9、NumPy1.26.4、PYTHONHASHSEED=0；wheel SHA=`666dbfb6ec68962c033a450943ded891bed2d54e6755e35e5835d63f4f6931d5`。CI workflow固定同一目标版本和hash lock，但不执行Probe/search。
+
+用户已明确授权：下一步立即执行960 Probe，全部PASS后直接进入五臂五seed正式Train-only搜索。任何HOLD/INVALID保留，不补预算、不删seed。Validation/Test、真实LLM/API、A800和main修改仍禁止。
+
+---
+
+## 2026-11-18：D-092 Typed Adapter 与五臂 Runner 实现自检完成（历史；真实Probe锁见上方）
 
 110号规格验收后，新增`experiments/d092_recovery/`实现typed mapping、反馈、完整NSGA-II/III、guarded runtime、聚合evaluator/audit与五臂Runner。workflow只新增合成测试，不运行Probe或搜索。
 

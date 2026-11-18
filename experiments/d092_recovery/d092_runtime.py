@@ -243,6 +243,7 @@ def run_guarded_episode(
     unauthorized_count = 0
     illegal_count = 0
     adapter_events = []
+    transition_records = []
     request_count = 0
     while not env.task_success() and env.terminal_action is None:
         if env.decision_count >= 24 or request_count >= 24:
@@ -274,10 +275,31 @@ def run_guarded_episode(
                     "observation": "UNAUTHORIZED_ACTION",
                     "trace_index": None,
                 })
+                transition_records.append({
+                    "before": before,
+                    "action": list(action),
+                    "mask_result": "UNAUTHORIZED",
+                    "observation": "UNAUTHORIZED_ACTION",
+                    "after": env.view(),
+                    "before_tick": before_tick,
+                    "after_tick": env.tick,
+                    "legal": True,
+                })
                 continue
             observation = env.step(action)
         after = env.view()
-        if not _transition_legal(before, after, action, observation, before_tick, env.tick, env):
+        legal = _transition_legal(before, after, action, observation, before_tick, env.tick, env)
+        transition_records.append({
+            "before": before,
+            "action": list(action),
+            "mask_result": "SENTINEL" if action == ("INVALID",) else "ALLOWED",
+            "observation": observation,
+            "after": after,
+            "before_tick": before_tick,
+            "after_tick": env.tick,
+            "legal": legal,
+        })
+        if not legal:
             illegal_count += 1
         if action[0] == "COMPENSATE" and observation != "INVALID_ACTION":
             ledger.record_dispatch(action[1], action[2], observation, env.tick)
@@ -295,6 +317,7 @@ def run_guarded_episode(
         "episode_reference": episode,
         "attempt_records": ledger.records,
         "adapter_events": adapter_events,
+        "transition_records": transition_records,
         "invalid_action_count": invalid_count + sum(event["observation"] == "INVALID_ACTION" for event in report["trace"] if event["action"] != ["INVALID"]),
         "unauthorized_action_count": unauthorized_count,
         "illegal_state_transition_count": illegal_count,

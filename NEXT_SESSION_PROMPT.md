@@ -16,7 +16,18 @@
 
 # NEXT_SESSION_PROMPT.md — Canonical Handoff Prompt
 
-## D-092 Typed Adapter 实现与合成测试完成（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+## D-092 真实 Probe 执行锁已完成（2026-11-18；LOCKED_BEFORE_ROLLOUT / 实验已获用户授权）
+
+- 当前基线HEAD=`e505f0d2126f729968f298c1448f9dedcabb48d1`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。不覆盖110/111或R2.3历史。
+- 三项修复已实现：每个attempt先PENDING后最终状态；普通evaluator异常转为INVALID且未知partial不伪报0；M1比较完整RNG事件。新增失败/中断/篡改回归后D-092=82/82通过。
+- Probe Runner已实现完整960原始账本和逐项PASS/HOLD；执行锁=`experiments/d092_recovery/results/probe/execution_lock.json`，raw SHA=`eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787`，seed=711，无缓存。
+- 精确运行时已在WSL验证：Ubuntu22.04、CPython3.11.9、NumPy1.26.4、PYTHONHASHSEED=0；wheel SHA=`666dbfb6ec68962c033a450943ded891bed2d54e6755e35e5835d63f4f6931d5`；资源快照=`.claude_resources.json`。
+- **下一步立即执行960 Probe；全部PASS才继续五臂五seed正式Train-only搜索。** 用户已明确授权这两项，无需再次确认。任何HOLD/INVALID均保留，不补预算、不换seed。
+- CI workflow固定Ubuntu22.04/Python3.11.9/hash-locked NumPy，只运行测试，不在CI启动Probe/search。
+
+---
+
+## D-092 Typed Adapter 实现与合成测试完成（历史；当前真实Probe锁见上方）
 
 110号已允许Typed Adapter，规格基线提交=`2a95f0922a87d2b3b39b65363c09385d421fb762`。main仍为`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
 

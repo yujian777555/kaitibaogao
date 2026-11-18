@@ -88,6 +88,7 @@ class BudgetLedger:
         self.duplicate_proposals = 0
         self.full_episodes = 0
         self.partial_episodes = 0
+        self.partial_episodes_unknown = False
         self.invalid_reason = ""
         self.proposal_seen = set()
         self.completed_cache: Dict[str, Dict[str, Any]] = {}
@@ -100,13 +101,23 @@ class BudgetLedger:
         self.initial_hashes: List[str] = []
         self.audit_archive: List[Dict[str, Any]] = []
 
+    def _offer_failure(self, log: Dict[str, Any], status: str, error: Exception, reason: str, unknown: bool) -> None:
+        self.invalid_reason = reason
+        log.update(
+            status=status,
+            error_type=type(error).__name__,
+            error=str(error),
+            partial_episodes_unknown=unknown,
+        )
+        if unknown:
+            self.partial_episodes_unknown = True
+
     def offer(self, genome: TypedGenome, round_id: int, variation: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         if self.attempts >= self.attempt_cap:
             self.invalid_reason = "INVALID_ATTEMPT_CAP"
             raise BudgetError(self.invalid_reason)
         self.attempts += 1
         key = genome_sha256(genome)
-        metadata = dict(variation or {})
         log = {
             "proposal_id": f"{self.arm}|{self.seed}|{self.attempts}",
             "arm": self.arm,
@@ -114,75 +125,78 @@ class BudgetLedger:
             "round": round_id,
             "genome_sha256": key,
             "genome": genome.to_dict(),
-            "variation": metadata,
+            "variation": dict(variation or {}),
             "attempt": self.attempts,
+            "status": "PENDING",
+            "partial_episodes_unknown": False,
         }
-        if key in self.proposal_seen:
-            self.duplicate_proposals += 1
-            if key not in self.completed_cache:
-                self.invalid_reason = "INVALID_INCOMPLETE_PRIOR_PROPOSAL"
-                raise BudgetError(self.invalid_reason)
-            self.cache_hits += 1
-            log.update(status="DUPLICATE_CACHED", unique_ordinal=self.completed_cache[key]["unique_ordinal"])
-            self.proposal_log.append(log)
-            return {"status": "DUPLICATE_CACHED", "entry": self.completed_cache[key]}
-        self.proposal_seen.add(key)
-        unique_ordinal = self.unique_evaluations
+        self.proposal_log.append(log)
         try:
+            if key in self.proposal_seen:
+                self.duplicate_proposals += 1
+                if key not in self.completed_cache:
+                    raise BudgetError("INVALID_INCOMPLETE_PRIOR_PROPOSAL")
+                self.cache_hits += 1
+                log.update(status="DUPLICATE_CACHED", unique_ordinal=self.completed_cache[key]["unique_ordinal"])
+                return {"status": "DUPLICATE_CACHED", "entry": self.completed_cache[key]}
+            self.proposal_seen.add(key)
+            unique_ordinal = self.unique_evaluations
             if hasattr(self.evaluator, "evaluate"):
                 result = self.evaluator.evaluate(genome, self.seed, unique_ordinal)
             else:
                 result = self.evaluator(genome, self.seed, unique_ordinal)
+            view = result.get("optimizer_reward_view") if isinstance(result, dict) and "optimizer_reward_view" in result else result
+            try:
+                assert_optimizer_view(view)
+            except Exception:
+                self.invalid_reason = "OPTIMIZER_VIEW_INVALID"
+                raise
+            if view["genome_sha256"] != key:
+                self.invalid_reason = "EVALUATOR_IDENTITY_MISMATCH"
+                raise BudgetError(self.invalid_reason)
+            if view["feedback_marginals"]["row_count"] != self.episodes_per_genome:
+                self.invalid_reason = "EPISODE_COUNT_MISMATCH"
+                raise BudgetError(self.invalid_reason)
+            fitness = view["fitness"]
+            candidate = Candidate(
+                genome_hash=key,
+                objectives=(
+                    1.0 - fitness["R3"], 1.0 - fitness["R4"], 1.0 - fitness["CondRec"],
+                    fitness["Harm"], fitness["RecoveryCost"],
+                ),
+                hard_constraints=view["hard_constraints"],
+                phenotype_hashes=view["phenotype_hashes"],
+            )
+            entry = {
+                "genome_object": genome,
+                "genome": genome.to_dict(),
+                "genome_sha256": key,
+                "unique_ordinal": unique_ordinal,
+                "round": round_id,
+                "optimizer_reward_view": view,
+                "candidate": candidate,
+            }
+            if isinstance(result, dict) and "audit_only_view" in result:
+                self.audit_archive.append({
+                    "unique_ordinal": unique_ordinal,
+                    "genome_sha256": key,
+                    "audit_only_view": result["audit_only_view"],
+                })
+            self.completed_cache[key] = entry
+            self.archive[key] = entry
+            self.unique_evaluations += 1
+            self.full_episodes += self.episodes_per_genome
+            log.update(status="NEW_UNIQUE", unique_ordinal=unique_ordinal)
+            return {"status": "NEW_UNIQUE", "entry": entry}
         except EvaluationInterrupted as error:
             self.partial_episodes += error.partial_episodes
-            self.invalid_reason = "EVALUATION_INTERRUPT"
+            log["partial_episodes"] = error.partial_episodes
+            self._offer_failure(log, "INTERRUPTED", error, "EVALUATION_INTERRUPT", False)
             raise
-        except Exception:
-            self.invalid_reason = "EVALUATOR_ERROR"
+        except Exception as error:
+            reason = self.invalid_reason or "EVALUATOR_ERROR"
+            self._offer_failure(log, "FAILED", error, reason, True)
             raise
-        view = result.get("optimizer_reward_view") if isinstance(result, dict) and "optimizer_reward_view" in result else result
-        assert_optimizer_view(view)
-        if view["genome_sha256"] != key:
-            self.invalid_reason = "EVALUATOR_IDENTITY_MISMATCH"
-            raise BudgetError(self.invalid_reason)
-        if view["feedback_marginals"]["row_count"] != self.episodes_per_genome:
-            self.invalid_reason = "EPISODE_COUNT_MISMATCH"
-            raise BudgetError(self.invalid_reason)
-        fitness = view["fitness"]
-        candidate = Candidate(
-            genome_hash=key,
-            objectives=(
-                1.0 - fitness["R3"],
-                1.0 - fitness["R4"],
-                1.0 - fitness["CondRec"],
-                fitness["Harm"],
-                fitness["RecoveryCost"],
-            ),
-            hard_constraints=view["hard_constraints"],
-            phenotype_hashes=view["phenotype_hashes"],
-        )
-        entry = {
-            "genome_object": genome,
-            "genome": genome.to_dict(),
-            "genome_sha256": key,
-            "unique_ordinal": unique_ordinal,
-            "round": round_id,
-            "optimizer_reward_view": view,
-            "candidate": candidate,
-        }
-        if isinstance(result, dict) and "audit_only_view" in result:
-            self.audit_archive.append({
-                "unique_ordinal": unique_ordinal,
-                "genome_sha256": key,
-                "audit_only_view": result["audit_only_view"],
-            })
-        self.completed_cache[key] = entry
-        self.archive[key] = entry
-        self.unique_evaluations += 1
-        self.full_episodes += self.episodes_per_genome
-        log.update(status="NEW_UNIQUE", unique_ordinal=unique_ordinal)
-        self.proposal_log.append(log)
-        return {"status": "NEW_UNIQUE", "entry": entry}
 
     def finalize(self) -> Dict[str, int]:
         expected_episodes = self.unique_evaluations * self.episodes_per_genome
@@ -199,6 +213,7 @@ class BudgetLedger:
             "duplicate_proposals": self.duplicate_proposals,
             "full_episodes": self.full_episodes,
             "partial_episodes": self.partial_episodes,
+            "partial_episodes_unknown": self.partial_episodes_unknown,
             "invalid_reason": self.invalid_reason,
         }
 
@@ -386,7 +401,7 @@ def run_arm(arm: str, seed: int, evaluator, episodes_per_genome: int = 96) -> Di
     ledger = BudgetLedger(evaluator, arm, seed, episodes_per_genome=episodes_per_genome)
     try:
         return _run_arm(arm, seed, evaluator, episodes_per_genome, ledger)
-    except (BudgetError, EvaluationInterrupted) as error:
+    except Exception as error:
         archive = list(ledger.archive.values())
         phenotype = complete_phenotype_collapse([entry["optimizer_reward_view"] for entry in archive]) if archive else {
             "H_trace": 0, "H_outcome": 0, "H_joint": 0,
@@ -423,7 +438,7 @@ def m1_equivalence(first: Dict[str, Any], second: Dict[str, Any]) -> bool:
         raise ValueError("M1 compares A1 with A4")
     keys = (
         "seed", "status", "initial_genomes", "budget", "proposal_log", "rounds",
-        "survivor_log", "archive", "final_candidate", "phenotype", "episodes_per_genome",
+        "survivor_log", "archive", "final_candidate", "phenotype", "episodes_per_genome", "rng",
     )
     left = {key: first[key] for key in keys}
     right = {key: second[key] for key in keys}
@@ -432,4 +447,11 @@ def m1_equivalence(first: Dict[str, Any], second: Dict[str, Any]) -> bool:
             {key: value for key, value in row.items() if key not in ("proposal_id", "arm")}
             for row in target["proposal_log"]
         ]
+        target["rng"] = {
+            stream: [
+                {key: value for key, value in event.items() if key != "arm"}
+                for event in events
+            ]
+            for stream, events in target["rng"].items()
+        }
     return canonical_json_bytes(left) == canonical_json_bytes(right)

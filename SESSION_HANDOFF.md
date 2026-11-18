@@ -14,7 +14,18 @@
 当前远端 HEAD=cfe431ab026a2626bf28c00ec45352db9a7f1dd4；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=323/0。上述授权不修改 canonical 103 或历史报告。
 
 
-## 0Z. D-092 Typed Adapter 实现交接（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+## 0AA. D-092 真实 Probe 锁交接（2026-11-18；LOCKED_BEFORE_ROLLOUT）
+
+- 三项修复：attempt一对一PENDING/最终记录；普通异常INVALID且partial unknown；M1完整RNG比较。D-092=82/82通过。
+- Probe Runner和锁已实现；锁=`experiments/d092_recovery/results/probe/execution_lock.json`，raw=`eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787`，seed711，960无缓存。
+- 实际环境已核验Ubuntu22.04/CPython3.11.9/NumPy1.26.4/PYTHONHASHSEED=0；wheel SHA=`666dbfb6ec68962c033a450943ded891bed2d54e6755e35e5835d63f4f6931d5`。
+- 资源快照=`.claude_resources.json`；大结果分run/分文件，避免低内存聚合。
+- 用户明确授权：下一步执行960 Probe，全部PASS后立即五臂五seed正式Train-only搜索，无需再问；HOLD/INVALID保留，不补预算/换seed。
+- 不访问Validation/Test、真实LLM/API、A800，不改main；CI只运行测试。
+
+---
+
+## 0Z. D-092 Typed Adapter 实现交接（历史；真实Probe锁见上方）
 
 - 110号验收后已实现`experiments/d092_recovery/`六模块和七组测试；workflow新增D-092合成测试，不包含Probe/search。
 - 测试：D-092=73/73；完整回归529/529；compileall/diff通过。本地Python3.9.13/NumPy1.26.4，目标3.11.9/Ubuntu未在本地部署。

@@ -1,4 +1,16 @@
-## 0Y. D-092 Typed Adapter 实现门禁（2026-11-18；READY_FOR_IMPLEMENTATION_REVIEW / APPROVED_FOR_EXPERIMENT=NO）
+## 0AA. D-092 真实 Probe 执行门禁（2026-11-18；LOCKED_BEFORE_ROLLOUT）
+
+三项账本/RNG修复已完成，D-092=82/82。Probe执行锁=`experiments/d092_recovery/results/probe/execution_lock.json`，raw=`eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787`；seed=711、960 episodes、无缓存。
+
+精确环境已验证Ubuntu22.04/CPython3.11.9/NumPy1.26.4/PYTHONHASHSEED=0；依赖hash lock=`experiments/d092_recovery/d092_requirements.lock`。资源快照=`.claude_resources.json`。
+
+**GO（用户已明确授权）：** 立即执行960 Probe；全部预注册PASS后直接进入五臂五seed正式Train-only搜索。无需再次确认。
+
+**HOLD：** Probe任一HOLD则正式搜索不启动，保留全部960结果并定位原因；不得重跑调参、补预算或替换seed。Validation/Test、真实LLM/API、A800、其他仓库和main修改继续禁止。CI只运行测试。
+
+---
+
+## 0Y. D-092 Typed Adapter 实现门禁（历史；真实Probe锁见上方）
 
 Typed Adapter、五臂Runner、完整NSGA-II/III、反馈、runtime/evaluator隔离与账本已实现，见`experiments/d092_recovery/`和`111_D092_TYPED_ADAPTER_IMPLEMENTATION_REVIEW.md`。
 

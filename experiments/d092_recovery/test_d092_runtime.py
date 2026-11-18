@@ -175,6 +175,19 @@ class TestGrammarMaskAndMonitor(unittest.TestCase):
                 raise AssertionError("hash called")
         snapshot = safe_action_snapshot(("VERIFY", Hostile()))
         self.assertIn("Hostile", snapshot)
+    def test_transition_monitor_preserves_before_action_mask_observation_after(self):
+        report = run_guarded_episode(SequencePolicy([("COMPENSATE", "C", "primary"), ("ESCALATE",)]), scenario([True]))
+        self.assertEqual(len(report["transition_records"]), 2)
+        for record in report["transition_records"]:
+            self.assertIn("before", record)
+            self.assertIn("action", record)
+            self.assertIn("mask_result", record)
+            self.assertIn("observation", record)
+            self.assertIn("after", record)
+            self.assertTrue(record["legal"])
+        self.assertEqual(report["transition_records"][0]["observation"], "COMPENSATED")
+        self.assertEqual(report["transition_records"][0]["before"]["tools"]["C"]["state"], "COMMITTED")
+        self.assertEqual(report["transition_records"][0]["after"]["tools"]["C"]["state"], "COMPENSATED")
 
 
 if __name__ == "__main__":

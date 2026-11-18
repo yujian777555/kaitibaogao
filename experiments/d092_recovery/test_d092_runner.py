@@ -228,5 +228,88 @@ class TestFiveArmSyntheticIntegration(unittest.TestCase):
         self.assertTrue(all("audit_only_view" not in row["optimizer_reward_view"] for row in result["archive"]))
 
 
+class TestFailureAuditRegression(unittest.TestCase):
+    def test_runtime_error_is_invalid_and_attempt_is_logged(self):
+        class FailingEvaluator(SyntheticEvaluator):
+            def evaluate(self, genome, seed, unique_ordinal):
+                raise RuntimeError("synthetic evaluator failure")
+
+        result = run_arm("A0", 711, FailingEvaluator(), episodes_per_genome=2)
+        self.assertEqual(result["status"], "INVALID")
+        self.assertEqual(result["budget"]["attempts"], 1)
+        self.assertEqual(len(result["proposal_log"]), 1)
+        self.assertEqual(result["proposal_log"][0]["status"], "FAILED")
+        self.assertEqual(result["proposal_log"][0]["error_type"], "RuntimeError")
+        self.assertTrue(result["budget"]["partial_episodes_unknown"])
+        self.assertFalse(result["archive"])
+
+    def test_malformed_view_is_invalid_and_not_cached(self):
+        class MalformedEvaluator(SyntheticEvaluator):
+            def evaluate(self, genome, seed, unique_ordinal):
+                return {"unexpected": "view"}
+
+        result = run_arm("A0", 711, MalformedEvaluator(), episodes_per_genome=2)
+        self.assertEqual(result["status"], "INVALID")
+        self.assertEqual(result["proposal_log"][0]["status"], "FAILED")
+        self.assertEqual(result["invalid_reason"], "OPTIMIZER_VIEW_INVALID")
+        self.assertFalse(result["archive"])
+
+    def test_identity_and_row_count_failures_keep_final_attempt_records(self):
+        class WrongIdentity(SyntheticEvaluator):
+            def evaluate(self, genome, seed, unique_ordinal):
+                view = super().evaluate(genome, seed, unique_ordinal)
+                view["genome_sha256"] = "wrong"
+                return view
+
+        class WrongRows(SyntheticEvaluator):
+            def evaluate(self, genome, seed, unique_ordinal):
+                view = super().evaluate(genome, seed, unique_ordinal)
+                view["feedback_marginals"]["row_count"] = 1
+                return view
+
+        for evaluator, reason in [(WrongIdentity(), "EVALUATOR_IDENTITY_MISMATCH"), (WrongRows(), "EPISODE_COUNT_MISMATCH")]:
+            result = run_arm("A0", 711, evaluator, episodes_per_genome=2)
+            self.assertEqual(result["status"], "INVALID")
+            self.assertEqual(result["invalid_reason"], reason)
+            self.assertEqual(result["proposal_log"][0]["status"], "FAILED")
+            self.assertEqual(result["budget"]["attempts"], len(result["proposal_log"]))
+            self.assertFalse(result["archive"])
+
+    def test_interruption_records_partial_rollout_and_no_cache(self):
+        class InterruptedEvaluator(SyntheticEvaluator):
+            def evaluate(self, genome, seed, unique_ordinal):
+                raise EvaluationInterrupted(1)
+
+        result = run_arm("A0", 711, InterruptedEvaluator(), episodes_per_genome=2)
+        self.assertEqual(result["status"], "INVALID")
+        self.assertEqual(result["proposal_log"][0]["status"], "INTERRUPTED")
+        self.assertEqual(result["budget"]["partial_episodes"], 1)
+        self.assertFalse(result["budget"]["partial_episodes_unknown"])
+        self.assertFalse(result["archive"])
+
+    def test_failure_during_initialization_preserves_completed_prefix(self):
+        class FailThirdEvaluator(SyntheticEvaluator):
+            def evaluate(self, genome, seed, unique_ordinal):
+                if unique_ordinal == 2:
+                    raise RuntimeError("third initial genome failed")
+                return super().evaluate(genome, seed, unique_ordinal)
+
+        result = run_arm("A0", 711, FailThirdEvaluator(), episodes_per_genome=2)
+        self.assertEqual(result["status"], "INVALID")
+        self.assertEqual(result["budget"]["attempts"], 3)
+        self.assertEqual(len(result["proposal_log"]), 3)
+        self.assertEqual(len(result["archive"]), 2)
+        self.assertEqual(result["proposal_log"][-1]["status"], "FAILED")
+        self.assertFalse(result["proposal_log"][-1]["genome_sha256"] in {row["genome_sha256"] for row in result["archive"]})
+
+    def test_m1_compares_full_rng_events_and_detects_tampering(self):
+        first = run_arm("A1", 711, SyntheticEvaluator(), episodes_per_genome=2)
+        second = run_arm("A4", 711, SyntheticEvaluator(), episodes_per_genome=2)
+        self.assertTrue(m1_equivalence(first, second))
+        self.assertTrue(second["rng"]["variation"])
+        second["rng"]["variation"][0]["value"] = "tampered"
+        self.assertFalse(m1_equivalence(first, second))
+
+
 if __name__ == "__main__":
     unittest.main()
