@@ -1,6 +1,19 @@
 
 
-## D-092 快速实验授权与执行接管（2026-11-18）
+## 0AB. D-092 真实 Probe=HOLD 交接（2026-11-18；当前状态）
+
+- 960/960真实Train episodes已完成，seed711、无cache；P05/P06 HOLD，其余8项PASS。正式五臂五seed搜索**NOT RUN**，不得把测试/Probe当成算法提升。
+- 权威报告=`113_D092_PROBE_RESULT.md`；原始`episodes.jsonl`=39,218,251 bytes，SHA=`b063fba6d24c2a89038dddffe62cedaed518f489cfa1097bfc2b90cea421f02a`；summary SHA=`2338e9924f392bb2a7d323c506b29e71a7f6a4b47734e77cc8504dcf2b781264`；independent audit SHA=`854b6cb02524621af1f405975d015e6dafac5894feb442b8cdb0f411791dc276`。
+- 新审计器`d092_probe_audit.py`不导入生产Probe判据，独立核验960 pair、96 Train/probe、2032唯一attempt、episode hashes、transition/lifecycle/feedback、summary和Train-only边界。audit=PASS，probe=HOLD。
+- P05/P06与P00的Q3 trace完全相同；窗口内无可执行ordinary/tight分叉。budget3理论A primary/alternate不同但VERIFY(B)，budget2为ESCALATE，均`_can_dispatch_more=false`。不得修改冻结Probe来追求PASS。
+- 硬约束合计：invalid0、illegal0、duplicate0、pending120、runtime_abort146、unauthorized2748；全部保留。
+- 环境=Ubuntu22.04/CPython3.11.9/NumPy1.26.4。D-092=86/86；有效全量回归28+398+8+8+14+86=542/542。一次0-tests循环已作废并显式重跑，不作通过证据。
+- Probe执行锁/修复提交=`7be851e264bcad2e2d3105c7c21f2c3e7db76ebd`；锁内source_head是基线`e505f0d2126f729968f298c1448f9dedcabb48d1`，逐文件hash才绑定实际执行代码。main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`未改。最终维护HEAD/CI须在推送后实际查询。
+- **下一会话：** 先核验113和原始账本；正式搜索仍受全PASS门禁阻断。若研究新对照，只能新版本预注册和独立Train证据，不能改D-092结果。Validation/Test、exhaustive、真实API、A800和main修改继续禁止。
+
+---
+
+## D-092 快速实验授权与执行接管（2026-11-18；历史授权，当前结果见上方）
 
 用户已明确要求“抓紧实验吧，马上要开题了”。本授权范围为：关键实现门禁修复后执行 R2.3 的 960 Probe；仅当实现审查 ACCEPT_FOR_PROBE 且全部预注册 Probe 判据 PASS 时，继续五臂×五 seed Train-only 搜索。无需为这两阶段再次询问用户。Validation/Test、外部 benchmark、真实 LLM/API、A800 模型训练及 main merge 不在授权范围内。13,824 exhaustive reference 仅按 R2.3 §11.2 在正式结果和日志全部锁定后单独执行一次。
 

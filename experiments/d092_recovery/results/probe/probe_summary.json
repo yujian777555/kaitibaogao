@@ -1,0 +1,157 @@
+{
+  "cache_hits": 0,
+  "compensation_attempts": 2032,
+  "criteria": {
+    "P00": {
+      "checks": {
+        "complete_96_and_legal_monitor": true
+      },
+      "details": {
+        "baseline": "complete 96 rows; no performance gate"
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P01": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q0_alternate_vs_primary": true,
+        "q0b_off_vs_filter": true
+      },
+      "details": {
+        "q0b_first_difference": 1
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P02": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q0_alternate_vs_primary": true,
+        "q0b_off_vs_filter": true
+      },
+      "details": {
+        "q0b_first_difference": 1
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P03": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q1_initial_fallback": true
+      },
+      "details": {
+        "fallback_candidates": [
+          [
+            "A",
+            "alternate"
+          ],
+          [
+            "B",
+            "alternate"
+          ],
+          [
+            "C",
+            "alternate"
+          ]
+        ]
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P04": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q2_completion_override": true
+      },
+      "details": {
+        "first_difference": 16
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P05": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q3_harm_priority_window": false
+      },
+      "details": {
+        "first_difference": null
+      },
+      "episode_count": 96,
+      "status": "HOLD"
+    },
+    "P06": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q3_harm_priority_window": false
+      },
+      "details": {
+        "first_difference": null
+      },
+      "episode_count": 96,
+      "status": "HOLD"
+    },
+    "P07": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q3_budget_10_branch": true,
+        "q3_exact_14_prefix": true
+      },
+      "details": {
+        "first_difference": 14
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P08": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q4_delay_probe_cadence": true
+      },
+      "details": {
+        "first_difference": 1
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P09": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q4_delay_probe_cadence": true
+      },
+      "details": {
+        "first_difference": 2
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    }
+  },
+  "elapsed_seconds": 2.761795168999999,
+  "episode_count": 960,
+  "episodes_jsonl_bytes": 39218251,
+  "episodes_jsonl_sha256": "b063fba6d24c2a89038dddffe62cedaed518f489cfa1097bfc2b90cea421f02a",
+  "execution_lock_created_utc": "2026-11-18T11:34:37.624687+00:00",
+  "execution_lock_sha256": "eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787",
+  "expected_episode_count": 960,
+  "hard_constraints": {
+    "duplicate_count": 0,
+    "illegal_state_transition_count": 0,
+    "invalid_action_count": 0,
+    "pending_count": 120,
+    "runtime_abort_count": 146,
+    "unauthorized_action_count": 2748
+  },
+  "overall_pass": false,
+  "protocol": "D092-R2.3",
+  "runtime": {
+    "numpy_version": "1.26.4",
+    "platform": "Ubuntu 22.04 LTS x86_64",
+    "python_version": "3.11.9",
+    "pythonhashseed": "0"
+  },
+  "scientific_claim": "Probe checks mechanism identifiability only; not algorithm performance evidence",
+  "seed": 711,
+  "status": "HOLD"
+}

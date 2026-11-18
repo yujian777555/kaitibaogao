@@ -1,0 +1,284 @@
+{
+  "audit_schema": "d092_probe_independent_audit_v1",
+  "cache_hits": 0,
+  "criteria": {
+    "P00": {
+      "checks": {
+        "complete_96_and_legal_monitor": true
+      },
+      "details": {
+        "baseline": "complete 96 rows; no performance gate"
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P01": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q0_alternate_vs_primary": true,
+        "q0b_off_vs_filter": true
+      },
+      "details": {
+        "q0b_first_difference": 1
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P02": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q0_alternate_vs_primary": true,
+        "q0b_off_vs_filter": true
+      },
+      "details": {
+        "q0b_first_difference": 1
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P03": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q1_initial_fallback": true
+      },
+      "details": {
+        "fallback_candidates": [
+          [
+            "A",
+            "alternate"
+          ],
+          [
+            "B",
+            "alternate"
+          ],
+          [
+            "C",
+            "alternate"
+          ]
+        ]
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P04": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q2_completion_override": true
+      },
+      "details": {
+        "first_difference": 16
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P05": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q3_harm_priority_window": false
+      },
+      "details": {
+        "first_difference": null
+      },
+      "episode_count": 96,
+      "status": "HOLD"
+    },
+    "P06": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q3_harm_priority_window": false
+      },
+      "details": {
+        "first_difference": null
+      },
+      "episode_count": 96,
+      "status": "HOLD"
+    },
+    "P07": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q3_budget_10_branch": true,
+        "q3_exact_14_prefix": true
+      },
+      "details": {
+        "first_difference": 14
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P08": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q4_delay_probe_cadence": true
+      },
+      "details": {
+        "first_difference": 1
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    },
+    "P09": {
+      "checks": {
+        "complete_96_and_legal_monitor": true,
+        "q4_delay_probe_cadence": true
+      },
+      "details": {
+        "first_difference": 2
+      },
+      "episode_count": 96,
+      "status": "PASS"
+    }
+  },
+  "episode_count": 960,
+  "episodes_jsonl_bytes": 39218251,
+  "episodes_jsonl_sha256": "b063fba6d24c2a89038dddffe62cedaed518f489cfa1097bfc2b90cea421f02a",
+  "execution_lock_sha256": "eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787",
+  "execution_lock_source_head": "e505f0d2126f729968f298c1448f9dedcabb48d1",
+  "hard_constraints": {
+    "duplicate_count": 0,
+    "illegal_state_transition_count": 0,
+    "invalid_action_count": 0,
+    "pending_count": 120,
+    "runtime_abort_count": 146,
+    "unauthorized_action_count": 2748
+  },
+  "no_cache_locked": true,
+  "overall_pass": false,
+  "probe_status": "HOLD",
+  "protocol": "D092-R2.3",
+  "q3_harm_priority_diagnostic": {
+    "p00_p05_first_difference": null,
+    "p00_p05_trace_equal": true,
+    "p00_p06_first_difference": null,
+    "p00_p06_trace_equal": true,
+    "p05_eligible_steps": [],
+    "p06_eligible_steps": [],
+    "reason_code": "NO_EXECUTABLE_PRIORITY_DIVERGENCE_IN_PREREGISTERED_WINDOW",
+    "states": [
+      {
+        "actual_action": [
+          "WAIT"
+        ],
+        "available": [],
+        "budget_remaining": 8,
+        "can_dispatch_more": true,
+        "ordinary": null,
+        "pending": true,
+        "step": 16,
+        "tight": null
+      },
+      {
+        "actual_action": [
+          "VERIFY",
+          "A"
+        ],
+        "available": [],
+        "budget_remaining": 7,
+        "can_dispatch_more": false,
+        "ordinary": null,
+        "pending": true,
+        "step": 17,
+        "tight": null
+      },
+      {
+        "actual_action": [
+          "WAIT"
+        ],
+        "available": [],
+        "budget_remaining": 6,
+        "can_dispatch_more": false,
+        "ordinary": null,
+        "pending": true,
+        "step": 18,
+        "tight": null
+      },
+      {
+        "actual_action": [
+          "WAIT"
+        ],
+        "available": [],
+        "budget_remaining": 5,
+        "can_dispatch_more": false,
+        "ordinary": null,
+        "pending": true,
+        "step": 19,
+        "tight": null
+      },
+      {
+        "actual_action": [
+          "VERIFY",
+          "A"
+        ],
+        "available": [],
+        "budget_remaining": 4,
+        "can_dispatch_more": false,
+        "ordinary": null,
+        "pending": true,
+        "step": 20,
+        "tight": null
+      },
+      {
+        "actual_action": [
+          "VERIFY",
+          "B"
+        ],
+        "available": [
+          [
+            "A",
+            "primary"
+          ],
+          [
+            "A",
+            "alternate"
+          ]
+        ],
+        "budget_remaining": 3,
+        "can_dispatch_more": false,
+        "ordinary": [
+          "A",
+          "primary"
+        ],
+        "pending": true,
+        "step": 21,
+        "tight": [
+          "A",
+          "alternate"
+        ]
+      },
+      {
+        "actual_action": [
+          "ESCALATE"
+        ],
+        "available": [
+          [
+            "A",
+            "primary"
+          ],
+          [
+            "A",
+            "alternate"
+          ]
+        ],
+        "budget_remaining": 2,
+        "can_dispatch_more": false,
+        "ordinary": [
+          "A",
+          "primary"
+        ],
+        "pending": false,
+        "step": 22,
+        "tight": [
+          "A",
+          "alternate"
+        ]
+      }
+    ]
+  },
+  "scientific_claim": "Artifact integrity and mechanism identifiability only; no algorithm performance claim",
+  "seed": 711,
+  "status": "PASS",
+  "summary_matches_raw": true,
+  "train_scenarios_per_probe": 96,
+  "unique_compensation_attempt_ids": 2032,
+  "unique_episode_references": 960,
+  "validation_test_rows": 0
+}

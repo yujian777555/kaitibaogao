@@ -1,6 +1,20 @@
 
 
-## D-092 快速实验授权与执行接管（2026-11-18）
+## D-092 真实 Probe 已完成：HOLD / 正式搜索 NOT RUN（2026-11-18；当前接管任务）
+
+唯一仓库`yujian777555/kaitibaogao`，分支`pilot-a-stateful-recovery`。开始前实际fetch并核验远端HEAD/main/worktree，不信任历史完成声明。Probe执行锁/修复提交=`7be851e264bcad2e2d3105c7c21f2c3e7db76ebd`；main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。
+
+1. 阅读`113_D092_PROBE_RESULT.md`、`experiments/d092_recovery/results/probe/probe_summary.json`和`independent_audit.json`。无需重读全部历史，不得覆盖110/111或R2.3/R2.2等历史文件。
+2. 真实结果=960/960、seed711、cache0；P00–P04/P07–P09 PASS，P05/P06 HOLD。原始JSONL SHA=`b063fba6d24c2a89038dddffe62cedaed518f489cfa1097bfc2b90cea421f02a`。审计=PASS只表示原始账本一致，不表示门禁通过。
+3. P05/P06根因已定位：Q3的P00/P05/P06 trace完全相同；预定窗口没有实际ordinary/tight选择分叉。budget3/2的理论差异分别被VERIFY(B)/ESCALATE和不可dispatch控制流遮蔽。完整逐状态证据在113和independent_audit。
+4. **不要启动五臂五seed正式搜索。** 用户授权以全部Probe PASS为条件，该条件未满足。A3−A1/A4、R3/R4/CondRec/Harm搜索指标、phenotype collapse和候选选择均NOT RUN，不得编造结果。
+5. 不得重跑冻结Probe调参、改场景/窗口/阈值/统计门槛、删除不利episode、补预算或换seed。若继续修复研究设计，只能形成新的版本化预注册并取得相应审查/授权；原D-092 HOLD永久保留。
+6. 可复算命令：`PYTHONHASHSEED=0 .runtime/venv/bin/python experiments/d092_recovery/d092_probe_audit.py`。完整回归实测542/542，D-092=86/86；后续代码修改后必须重新运行。
+7. Validation/Test、13,824 exhaustive、Pilot B、真实LLM/API、A800/ARWM、D-090重跑和main修改均未授权。提交后核验远端HEAD/main/ahead-behind/worktree/真实CI；没有run就写NOT RUN。
+
+---
+
+## D-092 快速实验授权与执行接管（2026-11-18；历史授权，当前结果见上方）
 
 用户已明确要求“抓紧实验吧，马上要开题了”。本授权范围为：关键实现门禁修复后执行 R2.3 的 960 Probe；仅当实现审查 ACCEPT_FOR_PROBE 且全部预注册 Probe 判据 PASS 时，继续五臂×五 seed Train-only 搜索。无需为这两阶段再次询问用户。Validation/Test、外部 benchmark、真实 LLM/API、A800 模型训练及 main merge 不在授权范围内。13,824 exhaustive reference 仅按 R2.3 §11.2 在正式结果和日志全部锁定后单独执行一次。
 

@@ -1,4 +1,14 @@
-## 0AA. D-092 真实 Probe 执行门禁（2026-11-18；LOCKED_BEFORE_ROLLOUT）
+## 0AB. D-092 Probe 结果门禁（2026-11-18；HOLD / FORMAL SEARCH NOT RUN）
+
+960/960真实Train Probe已完成并独立复算，seed711、无cache。P05/P06 HOLD，其余8项PASS。原始账本SHA=`b063fba6d24c2a89038dddffe62cedaed518f489cfa1097bfc2b90cea421f02a`；报告=`113_D092_PROBE_RESULT.md`；审计=`experiments/d092_recovery/results/probe/independent_audit.json`。
+
+**HOLD原因：** Q3中P00/P05/P06 trace完全相同，预注册预算窗口没有可执行ordinary/tight分叉；budget3/2的理论差异由VERIFY/ESCALATE与不可dispatch控制流遮蔽。审计一致性和542/542回归不能替代Probe门禁。
+
+**当前决定：** 正式五臂五seed Train-only搜索、A3统计比较、候选冻结和13,824 exhaustive均NOT RUN。不得改Probe场景/阈值/判据、重跑调参或删除不利结果。后续设计必须新版本预注册；Validation/Test、Pilot B、真实API、A800和main修改继续禁止。
+
+---
+
+## 0AA. D-092 真实 Probe 执行门禁（2026-11-18；历史LOCKED_BEFORE_ROLLOUT，结果见上方）
 
 三项账本/RNG修复已完成，D-092=82/82。Probe执行锁=`experiments/d092_recovery/results/probe/execution_lock.json`，raw=`eb114463c3549527d577c26a24f221a03291d20a9a1e6e524514300aaa4b9787`；seed=711、960 episodes、无缓存。
 

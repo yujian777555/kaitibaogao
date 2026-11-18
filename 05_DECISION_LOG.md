@@ -1,5 +1,19 @@
 # 05 — 研究决策日志
 
+## 2026-11-18：D-092 真实 960 Probe=HOLD，正式搜索未启动
+
+实际执行10 genomes×96冻结Train scenarios=960 episodes，seed711、无cache。P00–P04/P07–P09 PASS，P05/P06因Q3预定harm-priority分叉不存在而HOLD。原始JSONL SHA=`b063fba6d24c2a89038dddffe62cedaed518f489cfa1097bfc2b90cea421f02a`，完整结果见`113_D092_PROBE_RESULT.md`。
+
+根因不是`None`数值比较或summary漏报：P00/P05/P06的Q3 trace/outcome完全一致；budget8–4无可比较候选，budget3/2虽有理论ordinary/tight差异，实际分别VERIFY(B)/ESCALATE且不能dispatch。P07仍独立证明budget10/threshold12对照可达，但不替代P05/P06判据。
+
+新增独立审计器及4项测试，复算960 pair、2032 attempt、hash/transition/lifecycle/feedback/summary/Train-only边界和全部判据；audit PASS不代表Probe PASS。D-092=86/86，全量回归542/542，环境为冻结Ubuntu22.04/CPython3.11.9/NumPy1.26.4。
+
+**决定：保留HOLD和全部硬约束/失败记录；不修改预注册、不重跑调参、不补预算、不删除seed。五臂五seed正式Train-only搜索NOT RUN，无A3−A1/A4或创新成立结论。** 后续对照只能走新版本预注册与独立Train证据。Validation/Test、exhaustive、真实API、A800和main修改继续禁止。
+
+---
+
+
+
 ## 2026-11-18：D-092 三项修复与真实 Probe 执行锁
 
 BudgetLedger现在为每个消耗attempt保留PENDING→NEW_UNIQUE/DUPLICATE_CACHED/FAILED/INTERRUPTED唯一记录；失败不进archive/cache。run_arm将普通异常转为INVALID并保留未知partial标记；m1_equivalence纳入完整命名RNG事件，篡改测试失败。

@@ -1,6 +1,17 @@
 
 
-## D-092 快速实验授权与执行接管（2026-11-18）
+## D-092 真实 960 Probe 完成但门禁 HOLD（2026-11-18；当前状态）
+
+- 真实执行960/960 Train episodes，seed=711、cache=0；P00–P04/P07–P09 PASS，**P05/P06 HOLD**。结果报告=`113_D092_PROBE_RESULT.md`，原始账本=`experiments/d092_recovery/results/probe/episodes.jsonl`，SHA=`b063fba6d24c2a89038dddffe62cedaed518f489cfa1097bfc2b90cea421f02a`。
+- 独立复算=`d092_probe_audit.py`/`independent_audit.json`：960唯一pair、2032唯一attempt、summary/hash/状态/反馈/判据一致，audit PASS但Probe仍HOLD。
+- P05/P06根因：Q3中P00/P05/P06完整trace相同；预算窗口内无可执行的ordinary/tight分叉。budget=3/2虽有理论候选差异，实际分别为VERIFY(B)/ESCALATE且不能dispatch。不得改场景/阈值/判据制造PASS。
+- **五臂五seed正式Train-only搜索NOT RUN；没有A3−A1/A4性能、统计或创新成立结论。** Probe不是性能证据，HOLD原始结果不得删除。
+- 有效完整回归=542/542（含D-092=86/86），环境Ubuntu22.04/CPython3.11.9/NumPy1.26.4。执行锁与代码提交=`7be851e264bcad2e2d3105c7c21f2c3e7db76ebd`；最终维护SHA/远端CI以交接顶部和实际GitHub查询为准。
+- 下一步只保留诊断和经新版本预注册的机制研究；当前不得启动正式搜索、exhaustive、Validation/Test或修改main。
+
+---
+
+## D-092 快速实验授权与执行接管（2026-11-18；历史授权，当前结果见上方）
 
 用户已明确要求“抓紧实验吧，马上要开题了”。本授权范围为：关键实现门禁修复后执行 R2.3 的 960 Probe；仅当实现审查 ACCEPT_FOR_PROBE 且全部预注册 Probe 判据 PASS 时，继续五臂×五 seed Train-only 搜索。无需为这两阶段再次询问用户。Validation/Test、外部 benchmark、真实 LLM/API、A800 模型训练及 main merge 不在授权范围内。13,824 exhaustive reference 仅按 R2.3 §11.2 在正式结果和日志全部锁定后单独执行一次。
 
