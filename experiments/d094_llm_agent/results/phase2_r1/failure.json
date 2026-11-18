@@ -1,0 +1,20 @@
+{
+  "actual_episode_count": 72,
+  "budget": {
+    "backend": "openai-compatible",
+    "cost_unknown": false,
+    "cost_usd": 0.04056210000000002,
+    "input_tokens": 103039,
+    "max_cost_usd": 1.0,
+    "max_requests": 4000,
+    "output_tokens": 8042,
+    "over_budget": false,
+    "request_count": 163
+  },
+  "error": "formal Pareto cost objective requires locked token prices",
+  "error_type": "ValueError",
+  "evolution_ledger": [],
+  "partial_archive": [],
+  "protocol": "D094_PHASE2_TRAIN_V1",
+  "status": "INVALID"
+}

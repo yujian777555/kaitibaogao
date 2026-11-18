@@ -22,6 +22,7 @@ class EpisodeRecord:
     token_cost_usd: float | None
     latency_seconds: float
     phenotype_hash: str
+    token_cost_upper_usd: float | None = None
 
 
 @dataclasses.dataclass(frozen=True)
@@ -38,6 +39,7 @@ class EvaluationMetrics:
     token_cost_usd: float | None
     latency_seconds: float
     behavior_diversity: float
+    token_cost_upper_usd: float | None = None
 
 
 def evaluate_episodes(episodes: Iterable[EpisodeRecord]) -> EvaluationMetrics:
@@ -61,8 +63,20 @@ def evaluate_episodes(episodes: Iterable[EpisodeRecord]) -> EvaluationMetrics:
             not math.isfinite(row.token_cost_usd) or row.token_cost_usd < 0.0
         ):
             raise ValueError("invalid token cost")
+        if row.token_cost_upper_usd is not None and (
+            not math.isfinite(row.token_cost_upper_usd)
+            or row.token_cost_upper_usd < 0.0
+        ):
+            raise ValueError("invalid token cost upper bound")
     count = len(rows)
     priced = all(row.token_cost_usd is not None for row in rows)
+    upper_values = [
+        row.token_cost_upper_usd
+        if row.token_cost_upper_usd is not None
+        else row.token_cost_usd
+        for row in rows
+    ]
+    priced_upper = all(value is not None for value in upper_values)
     return EvaluationMetrics(
         task_success_rate=sum(row.task_success for row in rows) / count,
         recovery_success_rate=sum(row.recovery_success for row in rows) / count,
@@ -74,12 +88,13 @@ def evaluate_episodes(episodes: Iterable[EpisodeRecord]) -> EvaluationMetrics:
         token_cost_usd=sum(row.token_cost_usd for row in rows) if priced else None,
         latency_seconds=sum(row.latency_seconds for row in rows) / count,
         behavior_diversity=len({row.phenotype_hash for row in rows}) / count,
+        token_cost_upper_usd=sum(upper_values) if priced_upper else None,
     )
 
 
 def objective_vector(metrics: EvaluationMetrics) -> tuple[float, ...]:
-    """Convert metrics to seven minimization objectives for NSGA-II."""
-    if metrics.token_cost_usd is None:
+    """Convert metrics to seven minimization objectives using conservative cost."""
+    if metrics.token_cost_upper_usd is None:
         raise ValueError("formal Pareto cost objective requires locked token prices")
     return (
         1.0 - metrics.task_success_rate,
@@ -87,7 +102,7 @@ def objective_vector(metrics: EvaluationMetrics) -> tuple[float, ...]:
         float(metrics.constraint_violation),
         metrics.harm,
         metrics.tool_cost,
-        metrics.token_cost_usd,
+        metrics.token_cost_upper_usd,
         metrics.latency_seconds,
     )
 

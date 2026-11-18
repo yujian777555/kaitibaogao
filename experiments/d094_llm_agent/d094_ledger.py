@@ -5,6 +5,7 @@ import hashlib
 import json
 import math
 import re
+import threading
 from pathlib import Path
 from typing import Any
 
@@ -111,18 +112,33 @@ class RequestLedger:
         self.total_output_tokens = 0
         self.cost_unknown = False
         self._total_cost_usd = 0.0
+        self._total_cost_upper_usd = 0.0
+        self.cost_upper_unknown = False
 
     @property
     def total_cost_usd(self) -> float | None:
         """Return None when any provider usage lacks a trustworthy price."""
         return None if self.cost_unknown else self._total_cost_usd
 
+    @property
+    def known_cost_usd(self) -> float:
+        """Return the sum backed by actual provider token usage."""
+        return self._total_cost_usd
+
+    @property
+    def total_cost_upper_usd(self) -> float | None:
+        """Return a conservative cost upper bound, including no-response errors."""
+        return None if self.cost_upper_unknown else self._total_cost_upper_usd
+
     def begin(self, model: str, backend: str, prompt_sha256: str) -> int:
         """Reserve one HTTP attempt and append its PENDING record."""
         if len(self.records) >= self.max_requests:
             raise LLMBudgetExceeded("HTTP attempt budget exhausted")
-        if self.total_cost_usd is not None and self.total_cost_usd >= self.max_cost_usd:
-            raise LLMCostLimitExceeded("API cost budget exhausted")
+        if (
+            self.total_cost_upper_usd is not None
+            and self.total_cost_upper_usd >= self.max_cost_usd
+        ):
+            raise LLMCostLimitExceeded("API cost upper-bound budget exhausted")
         self.records.append(
             {
                 "attempt": len(self.records),
@@ -154,6 +170,7 @@ class RequestLedger:
         input_tokens: int | None = None,
         output_tokens: int | None = None,
         total_tokens: int | None = None,
+        cost_upper_usd: float | None = None,
         error: Exception | None = None,
     ) -> None:
         """Finalize exactly one reserved attempt with public accounting fields."""
@@ -165,6 +182,10 @@ class RequestLedger:
         for value in (input_tokens, output_tokens, total_tokens):
             if value is not None and (type(value) is not int or value < 0):
                 raise ValueError("invalid token usage")
+        if cost_upper_usd is not None and (
+            not math.isfinite(cost_upper_usd) or cost_upper_usd < 0.0
+        ):
+            raise ValueError("invalid cost upper bound")
         priced = (
             input_tokens is not None
             and output_tokens is not None
@@ -177,9 +198,15 @@ class RequestLedger:
                 + output_tokens * self.output_price_per_1m
             ) / 1_000_000.0
             self._total_cost_usd += cost
+            upper = cost
         else:
             cost = None
             self.cost_unknown = True
+            upper = cost_upper_usd
+        if upper is None:
+            self.cost_upper_unknown = True
+        else:
+            self._total_cost_upper_usd += upper
         self.total_input_tokens += input_tokens or 0
         self.total_output_tokens += output_tokens or 0
         record.update(
@@ -190,15 +217,21 @@ class RequestLedger:
             output_tokens=output_tokens,
             total_tokens=total_tokens,
             cost_usd=cost,
+            cost_upper_usd=upper,
             latency_seconds=max(0.0, latency_seconds),
             error_type=None if error is None else type(error).__name__,
             error=None if error is None else safe_error(error),
         )
 
     def enforce_cost_limit(self) -> None:
-        """Stop subsequent use when the measured priced cost exceeds its cap."""
-        if self.total_cost_usd is not None and self.total_cost_usd > self.max_cost_usd:
-            raise LLMCostLimitExceeded("API cost budget exceeded by recorded usage")
+        """Stop subsequent use when the conservative cost upper bound exceeds its cap."""
+        if (
+            self.total_cost_upper_usd is not None
+            and self.total_cost_upper_usd > self.max_cost_usd
+        ):
+            raise LLMCostLimitExceeded(
+                "API cost upper-bound budget exceeded by recorded usage"
+            )
 
 
 class ExecutionLedger:
@@ -243,3 +276,124 @@ def verify_execution_ledger(events: list[dict[str, Any]]) -> bool:
             return False
         previous = event["event_sha256"]
     return True
+
+
+class SharedBudget:
+    """Thread-safe request and conservative token-cost budget across episodes."""
+
+    def __init__(
+        self,
+        max_requests: int,
+        max_cost_usd: float,
+        input_price_per_1m: float | None,
+        output_price_per_1m: float | None,
+    ) -> None:
+        if max_requests <= 0 or not math.isfinite(max_cost_usd) or max_cost_usd < 0.0:
+            raise ValueError("invalid shared budget")
+        self.max_requests = max_requests
+        self.max_cost_usd = max_cost_usd
+        self.input_price_per_1m = input_price_per_1m
+        self.output_price_per_1m = output_price_per_1m
+        self.request_count = 0
+        self.input_tokens = 0
+        self.output_tokens = 0
+        self.cost_usd = 0.0
+        self._cost_upper_usd = 0.0
+        self.cost_unknown = input_price_per_1m is None or output_price_per_1m is None
+        self.cost_upper_unknown = self.cost_unknown
+        self._pending_upper: dict[int, float] = {}
+        self._lock = threading.Lock()
+
+    def _request_upper(self, payload: dict[str, Any]) -> float | None:
+        if self.cost_upper_unknown:
+            return None
+        input_bytes = len(canonical_json_bytes(payload.get("messages", [])))
+        output_tokens = payload.get("max_tokens", 0)
+        if type(output_tokens) is not int or output_tokens < 0:
+            raise ValueError("invalid request output cap")
+        return (
+            input_bytes * self.input_price_per_1m
+            + output_tokens * self.output_price_per_1m
+        ) / 1_000_000.0
+
+    def before_request(self, payload: dict[str, Any]) -> None:
+        """Atomically reserve one real or Mock transport attempt and its upper bound."""
+        upper = self._request_upper(payload)
+        with self._lock:
+            if self.request_count >= self.max_requests:
+                raise LLMBudgetExceeded("shared HTTP attempt budget exhausted")
+            current_upper = self._cost_upper_usd + sum(self._pending_upper.values())
+            if self.cost_usd >= self.max_cost_usd or current_upper >= self.max_cost_usd:
+                raise LLMCostLimitExceeded("shared API cost budget exhausted")
+            self.request_count += 1
+            if upper is not None:
+                self._pending_upper[threading.get_ident()] = upper
+
+    def after_response(self, result: Any) -> None:
+        """Replace a request upper bound with actual provider usage when available."""
+        usage = result.body.get("usage", {})
+        input_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
+        output_tokens = (
+            usage.get("completion_tokens") if isinstance(usage, dict) else None
+        )
+        with self._lock:
+            upper = self._pending_upper.pop(threading.get_ident(), 0.0)
+            if type(input_tokens) is not int or type(output_tokens) is not int:
+                self.cost_unknown = True
+                self._cost_upper_usd += upper
+                return
+            self.input_tokens += input_tokens
+            self.output_tokens += output_tokens
+            if not self.cost_unknown:
+                actual = (
+                    input_tokens * self.input_price_per_1m
+                    + output_tokens * self.output_price_per_1m
+                ) / 1_000_000.0
+                self.cost_usd += actual
+                self._cost_upper_usd += actual
+            else:
+                self._cost_upper_usd += upper
+
+    def after_error(self) -> None:
+        """Retain the conservative upper bound for a no-response transport error."""
+        with self._lock:
+            self.cost_unknown = True
+            self._cost_upper_usd += self._pending_upper.pop(threading.get_ident(), 0.0)
+
+    def snapshot(self) -> dict[str, Any]:
+        """Return a consistent public accounting snapshot."""
+        with self._lock:
+            upper = self._cost_upper_usd + sum(self._pending_upper.values())
+            return {
+                "request_count": self.request_count,
+                "input_tokens": self.input_tokens,
+                "output_tokens": self.output_tokens,
+                "cost_usd": None if self.cost_unknown else self.cost_usd,
+                "cost_upper_usd": None if self.cost_upper_unknown else upper,
+                "cost_unknown": self.cost_unknown,
+                "max_requests": self.max_requests,
+                "max_cost_usd": self.max_cost_usd,
+                "over_budget": self.request_count > self.max_requests
+                or self.cost_usd > self.max_cost_usd
+                or (not self.cost_upper_unknown and upper > self.max_cost_usd),
+            }
+
+
+class SharedBudgetTransport:
+    """Apply one shared budget around any real or Mock transport."""
+
+    def __init__(self, transport: Any, budget: SharedBudget) -> None:
+        self.transport = transport
+        self.budget = budget
+        self.backend = transport.backend
+        self.model = transport.model
+
+    def __call__(self, payload: dict[str, Any], timeout: float) -> Any:
+        self.budget.before_request(payload)
+        try:
+            result = self.transport(payload, timeout)
+        except Exception:
+            self.budget.after_error()
+            raise
+        self.budget.after_response(result)
+        return result

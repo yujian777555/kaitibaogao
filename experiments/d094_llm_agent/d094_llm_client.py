@@ -19,6 +19,7 @@ from d094_ledger import (
     LLMCostLimitExceeded,
     LLMResponseError,
     RequestLedger,
+    canonical_json_bytes,
     payload_sha256,
 )
 from d094_prompts import build_messages, prompt_template_sha256
@@ -268,14 +269,20 @@ class LLMClient:
     @classmethod
     def from_env(cls) -> "LLMClient":
         """Construct the real client from environment variables without logging secrets."""
-        api_key = os.environ.get("D094_LLM_API_KEY") or os.environ.get("OPENAI_API_KEY")
+        api_key = (
+            os.environ.get("D094_LLM_API_KEY")
+            or os.environ.get("DEEPSEEK_API_KEY")
+            or os.environ.get("OPENAI_API_KEY")
+        )
         base_url = (
             os.environ.get("D094_LLM_BASE_URL")
+            or os.environ.get("DEEPSEEK_BASE_URL")
             or os.environ.get("OPENAI_BASE_URL")
             or os.environ.get("OPENAI_API_BASE")
         )
         model = (
             os.environ.get("D094_LLM_MODEL")
+            or os.environ.get("DEEPSEEK_MODEL")
             or os.environ.get("OPENAI_MODEL")
             or os.environ.get("OPENAI_MODEL_NAME")
         )
@@ -332,7 +339,17 @@ class LLMClient:
             "response_format": {"type": "json_object"},
             "max_tokens": self.max_output_tokens,
         }
+        if self.transport.model == "deepseek-flash":
+            payload["thinking"] = {"type": "disabled"}
         prompt_hash = payload_sha256(payload)
+        input_price = self.ledger.input_price_per_1m
+        output_price = self.ledger.output_price_per_1m
+        cost_upper = None
+        if input_price is not None and output_price is not None:
+            input_upper = len(canonical_json_bytes(messages))
+            cost_upper = (
+                input_upper * input_price + self.max_output_tokens * output_price
+            ) / 1_000_000.0
         for attempt in range(self.max_retries + 1):
             index = self.ledger.begin(
                 self.transport.model, self.transport.backend, prompt_hash
@@ -363,6 +380,7 @@ class LLMClient:
                     input_tokens=input_tokens,
                     output_tokens=output_tokens,
                     total_tokens=total_tokens,
+                    cost_upper_usd=cost_upper,
                 )
                 self.ledger.enforce_cost_limit()
                 return LLMDecision(
@@ -403,6 +421,7 @@ class LLMClient:
                         input_tokens=input_tokens,
                         output_tokens=output_tokens,
                         total_tokens=total_tokens,
+                        cost_upper_usd=cost_upper,
                         error=error,
                     )
                 retryable = isinstance(error, (TransportError, LLMResponseError)) and (
@@ -421,15 +440,19 @@ def real_configuration_missing(require_pricing: bool = True) -> list[str]:
     """Report missing real-Canary configuration names without reading secret values."""
     checks = {
         "API_KEY": bool(
-            os.environ.get("D094_LLM_API_KEY") or os.environ.get("OPENAI_API_KEY")
+            os.environ.get("D094_LLM_API_KEY")
+            or os.environ.get("DEEPSEEK_API_KEY")
+            or os.environ.get("OPENAI_API_KEY")
         ),
         "BASE_URL": bool(
             os.environ.get("D094_LLM_BASE_URL")
+            or os.environ.get("DEEPSEEK_BASE_URL")
             or os.environ.get("OPENAI_BASE_URL")
             or os.environ.get("OPENAI_API_BASE")
         ),
         "MODEL": bool(
             os.environ.get("D094_LLM_MODEL")
+            or os.environ.get("DEEPSEEK_MODEL")
             or os.environ.get("OPENAI_MODEL")
             or os.environ.get("OPENAI_MODEL_NAME")
         ),

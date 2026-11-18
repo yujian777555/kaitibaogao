@@ -1,0 +1,50 @@
+{
+  "backend": "openai-compatible",
+  "config": {
+    "generations": 3,
+    "global_cost_cap": 1.0,
+    "global_request_cap": 4000,
+    "max_concurrency": 4,
+    "max_output_tokens": 128,
+    "population_size": 8,
+    "seeds": [
+      101,
+      202,
+      303
+    ],
+    "timeout_seconds": 20.0
+  },
+  "created_utc": "2026-11-18T16:38:20.677121+00:00",
+  "genome_space": 648,
+  "input_price_per_1m": 0.3,
+  "model": "deepseek-flash",
+  "output_price_per_1m": 1.2,
+  "paired_seeds": [
+    101,
+    202,
+    303
+  ],
+  "planned_episode_count": 1260,
+  "planned_final_candidates": 1,
+  "planned_search_candidates": 32,
+  "price_basis": "DeepSeek peak/cache-miss conservative estimate; not a billing invoice",
+  "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing",
+  "protocol": "D094_PHASE2_TRAIN_V1",
+  "source_files": {
+    "d094_agent.py": "bcf1be44a5d4cec8c2471d919e20bf6e613c5d931d9b6c5570b0305f9ccf6eca",
+    "d094_evaluator.py": "99bd40a6818753af6fdd4cc829acf362a5e403a925bb198340218e5d0a3a4119",
+    "d094_evolution.py": "c6abebd7382a88e0bac9a2f204758da55288b81e60a3e573b04211bd5b5ac3cb",
+    "d094_genome.py": "e14e9af447132bfdbcfb8830d8e727aa13fedfe6ec1ab0019cd0437c26a0101c",
+    "d094_ledger.py": "68fbba2089575009e544b5cc8591cedd76ee95c3358a8d5c7f5ccf3afd6ea908",
+    "d094_llm_client.py": "3df0608a283b62afd57695b6de30a1e53a5c3b65e7144ecc55958d02de8472e1",
+    "d094_prompts.py": "403e6481c74231efee663ba4dc92b0a925a1acc1cd7fa108f93922d8ef9f7d4d",
+    "d094_tasks.py": "a8d5097c9ccd59487008a33ab6635d5add4cbb779fff63e6e82b6b17a2a58fed",
+    "run_d094_phase2.py": "99dee7d28204591dd2d757abaebff32a4045c40796c00fa3b46863d5012c6c6f"
+  },
+  "temperature": 0.0,
+  "thinking": {
+    "type": "disabled"
+  },
+  "train_manifest_sha256": "8241b75b333fbdde7312e007a74aec91ffda215e2ee7893450dafc5e883ac0d7",
+  "train_task_count": 12
+}

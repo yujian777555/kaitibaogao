@@ -4,15 +4,20 @@
 
 ## 真实 API
 
-- 状态：**BLOCKED_CONFIGURATION**
-- API 真实接通：False
-- HTTP attempts：0
-- 输入/输出 Token：0 / 0
-- 成本（USD）：0.0
-- 延迟（秒）：0.0
-- Agent 状态：NOT_RUN
-- LLM decisions：0
-- 缺失配置（仅名称）：`BASE_URL`、`MODEL`、`D094_LLM_INPUT_COST_PER_1M`、`D094_LLM_OUTPUT_COST_PER_1M`
+- 状态：**PASS**
+- API 真实接通：True
+- HTTP attempts：3
+- 输入/输出 Token：1552 / 148
+- 成本（USD）：0.0006432
+- 延迟（秒）：5.2379412
+- Agent 状态：COMPLETED
+- LLM decisions：3
+- 响应模型：`deepseek-flash`（官方对应 DeepSeek-V4.1-Flash-1017）
+- 工具轨迹：`inspect_dependencies → verify_dependency → complete_recovery`
+- 硬约束违规：0；hash chain valid=True。
+- 原始轨迹：`experiments/d094_llm_agent/results/canary_r1/real/trace.jsonl`；完整账本：`results/canary_r1/real/summary.json`。
+- 成本口径：按官方峰值且全部 input cache-miss 费率（input 0.3、output 1.2 USD/1M tokens）由真实 Token 计算保守估计，不是账单查询；[官方模型与价格](https://api-docs.deepseek.com/quick_start/pricing)。
+- 请求显式使用 `thinking={"type":"disabled"}`，未保存思维链；[官方 Thinking Mode](https://api-docs.deepseek.com/guides/thinking_mode/)。
 
 ## Mock 多轮集成
 

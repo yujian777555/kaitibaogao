@@ -26,6 +26,7 @@ class Candidate:
     objectives: tuple[float, ...]
     constraint_violation: int = 0
     phenotype_hash: str = ""
+    execution_errors: int = 0
 
     def __post_init__(self) -> None:
         if len(self.objectives) < 2 or any(
@@ -34,6 +35,8 @@ class Candidate:
             raise ValueError("invalid objective vector")
         if type(self.constraint_violation) is not int or self.constraint_violation < 0:
             raise ValueError("invalid hard-constraint count")
+        if type(self.execution_errors) is not int or self.execution_errors < 0:
+            raise ValueError("invalid execution-error count")
 
     @property
     def genome_id(self) -> str:
@@ -42,8 +45,8 @@ class Candidate:
 
     @property
     def feasible(self) -> bool:
-        """Feasibility cannot be compensated by any objective."""
-        return self.constraint_violation == 0
+        """Feasibility cannot be compensated by any objective or hidden error."""
+        return self.constraint_violation == 0 and self.execution_errors == 0
 
 
 def _dominates(first: Candidate, second: Candidate) -> bool:
@@ -241,9 +244,10 @@ class NSGAII:
 
         initial = rng.sample(list(enumerate_genomes()), population_size)
         population = [evaluate(genome, -1) for genome in initial]
+        evaluated = {candidate.genome_id for candidate in population}
         for generation in range(generations):
             ranks, distances = _selection_metadata(population)
-            existing = {candidate.genome_id for candidate in population}
+            existing = set(evaluated)
             offspring = []
             attempts = 0
             while len(offspring) < population_size and attempts < population_size * 20:
@@ -274,5 +278,6 @@ class NSGAII:
                 )
                 offspring.append(evaluate(child, generation))
                 existing.add(child_hash)
+                evaluated.add(child_hash)
             population = nsga2_survivors([*population, *offspring], population_size)
         return feasible_pareto(population)

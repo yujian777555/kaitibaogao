@@ -1,0 +1,31 @@
+{
+  "audit_schema": "d094_phase2_independent_audit_v1",
+  "budget_denied_count": 288,
+  "cost_upper_usd": 1.0002363000000032,
+  "cost_usd": 1.0002363000000032,
+  "episode_count": 1260,
+  "episodes_sha256": "1aeabb018dcb5a3041fb383407fb7d2ec8da8ad4d730ac5f9d78302295bd36b9",
+  "event_hash_chain": "NOT_PROVIDED_BY_RUNNER",
+  "execution_lock_canonical_match": false,
+  "execution_lock_crlf_match": true,
+  "hard_constraints": {
+    "duplicate_count": 0,
+    "illegal_transition_count": 0,
+    "invalid_action_count": 0,
+    "pending_count": 0,
+    "runtime_abort_count": 603,
+    "unauthorized_action_count": 420
+  },
+  "input_tokens": 2600905,
+  "output_tokens": 183304,
+  "raw_request_records": 3992,
+  "request_count": 3704,
+  "scientific_scope": "Audit consistency only; not algorithm performance or confirmatory statistical evidence",
+  "selected_genome_sha256": "b5dbe97a0ff4bc9da85d2373b24427f027e4c026cd965003a6e1657d25618abe",
+  "status": "PASS_WITH_LIMITATIONS",
+  "summary_matches_raw": true,
+  "summary_status": "INVALID_BUDGET",
+  "unique_provider_request_ids": 3704,
+  "unique_request_identities": 3992,
+  "unique_search_genomes": 32
+}

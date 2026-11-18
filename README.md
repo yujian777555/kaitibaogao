@@ -1,4 +1,22 @@
-## D-094 Phase 0：真实 LLM Agent 接口完成，Canary 配置阻断（2026-11-18）
+## D-094 R2 已结束但 INVALID_BUDGET（2026-11-19；当前状态）
+
+- R2实际写入1260/1260 episodes；真实API=3704次，Token=2600905/183304，Token推导成本1.0002363 USD超过1.00 USD。288次预算拒绝未发送；B2 final无真实调用，实验无效。
+- B0=36/36、B1=24/36；B1逐seed相对B0=-5/12、-3/12、-4/12。B2 vs B1有效差值NOT AVAILABLE。
+- 搜索阶段选中Genome`b5dbe97a0ff4…18abe`评价36/36，但最终未验证；当前创新=INVALID，不是POSITIVE_SIGNAL。32 Genome→24 phenotype，无complete collapse。
+- 原始数据独立复算一致，审计PASS_WITH_LIMITATIONS（无Phase2逐事件hash-chain）。报告=`D094_PHASE2_R2_RESULT.md`、`D094_R2_INDEPENDENT_AUDIT.md`、`D094_GENOME_PHENOTYPE_ANALYSIS.md`。
+- R1/R2失败均保留；D-092/D-093与main不变。R3仅在`D094_NEXT_EXPERIMENT_PLAN.md`中设计，真实搜索NOT RUN；先解决预算预留和账本缺口。
+
+---
+
+## D-094 Phase 1 真实 Canary 已 PASS（2026-11-19；Phase 2 执行中，历史状态）
+
+- 真实模型=`deepseek-flash`，官方base URL=`https://api.deepseek.com`，显式非思考JSON模式。3次真实HTTP/LLM决策依次完成inspect→verify→complete，工具结果进入后续决策，hash chain有效，硬约束0。
+- 真实Token=1552输入/148输出，延迟5.2379412秒；按官方峰值/cache-miss费率保守估算0.0006432 USD，非账单。原始轨迹=`experiments/d094_llm_agent/results/canary_r1/`。
+- Phase2 R1因transport error成本未知和B2/search用量覆盖问题保留INVALID，B2未运行；修复成本上下界、跨代去重和累计审计后，V2正在独立`phase2_r2`执行。不得把R1或运行中状态写成对照通过。
+
+---
+
+## D-094 Phase 0：真实 LLM Agent 接口完成，Canary 配置阻断（2026-11-18；历史状态）
 
 - 独立分支`d094-llm-agent-integration`，基线`f409a730fd1c1cae90584f7591a213e916f28c2c`；新目录`experiments/d094_llm_agent/`，D-092/D-093证据与main不变。
 - 已实现OpenAI-compatible真实HTTP路径、环境密钥、结构化JSON、多轮LLM Agent、工具Schema/权限网关、请求/成本/hash-chain账本、六基因Typed Genome、NSGA-II和多目标评价；设计见`D094_DESIGN.md`。

@@ -123,6 +123,7 @@ class TestLLMClient(unittest.TestCase):
                 ),
             ],
             max_retries=1,
+            max_cost_usd=100.0,
             sleep_fn=sleeps.append,
         )
         output = client.generate_action(*inputs())
@@ -189,6 +190,44 @@ class TestLLMClient(unittest.TestCase):
         with patch.dict("os.environ", {"OPENAI_API_KEY": "secret"}, clear=True):
             with self.assertRaises(LLMConfigurationError):
                 LLMClient.from_env()
+
+    def test_deepseek_flash_explicitly_disables_thinking(self):
+        transport = MockTransport([result()], model="deepseek-flash")
+        client = LLMClient(
+            transport, max_requests=1, max_retries=0, sleep_fn=lambda _seconds: None
+        )
+        client.generate_action(*inputs())
+        payload = transport.calls[0][0]
+        self.assertEqual(payload["thinking"], {"type": "disabled"})
+        self.assertNotIn("reasoning_effort", payload)
+
+    def test_deepseek_environment_aliases_construct_real_client(self):
+        from d094_llm_client import real_configuration_missing
+
+        environment = {
+            "DEEPSEEK_API_KEY": "configured-secret",
+            "DEEPSEEK_BASE_URL": "https://api.deepseek.com",
+            "DEEPSEEK_MODEL": "deepseek-flash",
+            "D094_LLM_INPUT_COST_PER_1M": "0.3",
+            "D094_LLM_OUTPUT_COST_PER_1M": "1.2",
+        }
+        with patch.dict("os.environ", environment, clear=True):
+            client = LLMClient.from_env()
+            self.assertEqual(client.transport.model, "deepseek-flash")
+            self.assertEqual(real_configuration_missing(), [])
+            self.assertNotIn("configured-secret", repr(client.transport))
+
+    def test_transport_error_has_conservative_cost_upper_bound(self):
+        client = self.make_client(
+            [TransportError("network disconnected", retryable=True), result()],
+            max_retries=1,
+            max_cost_usd=100.0,
+        )
+        client.generate_action(*inputs())
+        self.assertTrue(client.ledger.cost_unknown)
+        self.assertIsNone(client.ledger.total_cost_usd)
+        self.assertGreater(client.ledger.total_cost_upper_usd, 0.022)
+        self.assertGreater(client.ledger.records[0]["cost_upper_usd"], 0.0)
 
     def test_real_http_path_serializes_openai_compatible_request(self):
         captured = []

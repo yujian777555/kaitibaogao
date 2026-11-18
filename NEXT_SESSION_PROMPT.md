@@ -1,4 +1,20 @@
-## D-094 当前接管：Phase 0 完成，真实 API 配置阻断（2026-11-18）
+## D-094 当前接管：R2 已审计，INVALID_BUDGET；R3 NOT RUN（2026-11-19）
+
+先读`D094_NEXT_SESSION_PROMPT.md`和`D094_PHASE2_R2_RESULT.md`。R2已结束，不得重启：1260 episodes、3704真实API、成本1.0002363 USD超限；B2 final无真实调用，无有效B2-B1比较。搜索阶段36/36信号只能用于后续复现，当前创新=INVALID。
+
+独立审计与Genome/Phenotype分析已完成；32 Genome→24 phenotype，无complete collapse。下一步只做`D094_NEXT_EXPERIMENT_PLAN.md`的R3审查/预算预检和实现准备，必须先预留最终评价预算并补齐账本，不能启动大规模API。D-092/D-093/main不变。最终Git/测试/CI按实际远端记录。
+
+---
+
+## D-094 当前接管：真实 Canary 已 PASS，Phase 2 R2 执行中（2026-11-19；历史状态）
+
+真实`deepseek-flash` Canary已完成3次真实LLM决策和inspect→verify→complete轨迹，Token=1552/148，保守成本估算0.0006432 USD，硬约束0。先读`D094_API_CANARY_REPORT.md`和`D094_NEXT_SESSION_PROMPT.md`。
+
+Phase2 R1 INVALID已保留，B2未运行；V2修复成本上界/跨代去重/用量累计后，R2正在执行。接管时先检查后台/远端和`results/phase2_r2/summary.json`是否存在，运行`d094_phase2_audit.py`独立复算后再报告B0/B1/B2。不得把运行中或R1失败写成有效提升。
+
+---
+
+## D-094 当前接管：Phase 0 完成，真实 API 配置阻断（2026-11-18；历史状态）
 
 工作分支已切换为`d094-llm-agent-integration`，基线`f409a730fd1c1cae90584f7591a213e916f28c2c`。先读取`D094_NEXT_SESSION_PROMPT.md`、`D094_API_CANARY_REPORT.md`和`D094_DESIGN.md`，不要沿用下方D-093任务或修改其历史。
 

@@ -1,55 +1,41 @@
 # D-094 下一会话接管提示词
 
-## 当前状态
+## 当前权威状态：R2 已结束，但 INVALID_BUDGET
 
-- 唯一仓库：`yujian777555/kaitibaogao`；工作分支：`d094-llm-agent-integration`。
-- 建分支基线：`f409a730fd1c1cae90584f7591a213e916f28c2c`。开始工作前必须重新查询远端 HEAD、main 和 worktree，不信任历史完成声明。
-- Phase 0 已实现于 `experiments/d094_llm_agent/`：OpenAI-compatible HTTP Adapter、Mock、结构化动作、多轮 Agent、工具网关、Typed Genome、NSGA-II、评价器和请求/执行账本。
-- D-094 单元/Mock 测试：36/36，全项目回归578/578。Black 与 compileall 已执行。代码提交`bc087c0dd08c5bd25b25e64311775765ae5c81d4`的CI run`44328080784`已completed/success，D-094日志36/36 OK；无D-094专属性能artifact。后续纯文档提交无run时写NOT RUN。
-- Mock Canary：MOCK_PASS，2 个 LLM decisions，工具轨迹 `verify_dependency → complete_recovery`，hash chain valid。它不是实际 API 实验。
-- 真实 Canary：**BLOCKED_CONFIGURATION**。API key 存在，但 base URL、MODEL、输入/输出 Token 价格未配置；真实 HTTP attempts=0、Token=0、成本=0、延迟=0，API 未接通。没有可验证的算法提升。
+唯一仓库：`yujian777555/kaitibaogao`；分支：`d094-llm-agent-integration`。开始前重新核验远端 HEAD、main、工作区和是否存在后台任务；不要重启 R2。
 
-## 不可变边界
+### 真实证据
 
-不得修改 D-092/D-093 的源码、数据、预注册、报告或 HOLD 结论，不得修改 main，不得把 Mock 写成真实接通。不要删除或覆盖已有 Canary 证据；新运行使用新的版本化输出目录。CI 只运行测试，不发起真实 API 请求。
+- Canary：`deepseek-flash` PASS，3次真实LLM决策，inspect→verify→complete，Token1552/148，成本估算0.0006432 USD，硬约束0。证据=`results/canary_r1/`。
+- Phase 2 R1：INVALID，B2未运行；永久保留在`results/phase2_r1/`。
+- Phase 2 R2：1260/1260 episodes已写入，但成本1.0002363 USD超过1.00 USD，状态INVALID_BUDGET。
+- R2真实API=3704次，Token=2600905/183304；原始请求记录3992，其中288条预算拒绝未发送。
+- B0=36/36成功，B1=24/36；B2 final 36个 episodes全部LLM_ERROR且没有真实调用，不能用于性能比较。
+- 搜索选中Genome `b5dbe97a0ff4bc9da85d2373b24427f027e4c026cd965003a6e1657d25618abe` 在搜索评价中36/36成功，但最终评价无效；当前创新判定=INVALID，不是POSITIVE_SIGNAL。
+- 32个唯一搜索Genome对应24个 phenotype，无complete collapse；17/496对不同Genome行为相同。六类约束=invalid0、unauthorized420、illegal0、pending0、duplicate0、runtime_abort603。
 
-## 下一步：先完成真实 Canary
+### 必读文件
 
-在用户环境配置以下变量，不要把值写入 Git、日志或聊天：
+1. `D094_PHASE2_R2_RESULT.md`
+2. `D094_R2_INDEPENDENT_AUDIT.md`
+3. `D094_GENOME_PHENOTYPE_ANALYSIS.md`
+4. `D094_NEXT_EXPERIMENT_PLAN.md`
+5. `experiments/d094_llm_agent/results/phase2_r2/summary.json`、`independent_audit.json`、`analysis.json`
 
-- `D094_LLM_API_KEY`（或既有 `OPENAI_API_KEY`）
-- `D094_LLM_BASE_URL`
-- `D094_LLM_MODEL`
-- `D094_LLM_INPUT_COST_PER_1M`
-- `D094_LLM_OUTPUT_COST_PER_1M`
-- 可选预算覆盖：`D094_LLM_MAX_REQUESTS`、`D094_LLM_MAX_COST_USD`、`D094_LLM_TIMEOUT_SECONDS`
-
-真实执行入口会强制更低上限：最多 3 个 Agent decisions、4 个 HTTP attempts、1 次 retry、每次 128 output tokens、20 秒超时、0.10 USD 估算成本上限、temperature=0。配置不完整或价格无效时继续零调用阻断。
+### 可复算命令
 
 ```bash
-python experiments/d094_llm_agent/run_d094_canary.py \
-  --execute-real \
-  --outdir experiments/d094_llm_agent/results/canary_r1
+python experiments/d094_llm_agent/d094_phase2_audit.py \
+  --outdir experiments/d094_llm_agent/results/phase2_r2
+python experiments/d094_llm_agent/d094_analysis.py \
+  --outdir experiments/d094_llm_agent/results/phase2_r2
+python -m unittest discover -s experiments/d094_llm_agent -p "test_*.py" -q
 ```
 
-只有真实响应、多个真实 LLM decisions、工具执行、零硬约束违规和完整账本均通过，才能把 Canary 写成 PASS。失败时保留 request ledger 的模型、请求 ID、Prompt hash、Token、延迟和错误，不记录密钥或隐式思维链。
+审计为PASS_WITH_LIMITATIONS：Phase2 Runner未提供逐事件hash-chain；原始文件SHA已锁定。被拒绝重复proposal、每代survivor phenotype和实际mutated locus未完整记录，不能编造。
 
-## 真实 Canary 后的实验
+### 下一任务
 
-真实 Canary PASS 后，按 `D094_EXPERIMENT_PLAN.md` 建立新的 D-094 独立小 Train，依次跑通：
+只推进`D094_NEXT_EXPERIMENT_PLAN.md`的R3独立审查/预算预检与实现准备；R3真实API实验当前NOT RUN。R3必须先预留B1和最终评价预算、禁止零调用final、补齐mutation/duplicate/survivor/hash-chain账本。模型继续`deepseek-flash`，不超过1500次真实HTTP/0.50 USD的R3上限，不扩大规模。
 
-1. B0：注入的确定性规则策略，LLM=0；
-2. B1：固定 Genome/Prompt/模型/API；
-3. B2：相同模型/API/任务/预算下 NSGA-II 优化 Typed Genome。
-
-先检查工具调用成功率、Genotype/Phenotype 多样性和成本，再决定是否扩大。不得用 D-092/D-093 Train、Validation/Test 或结果调参。B3 动态反馈、RSI、A800 训练和大规模 API 搜索均需后续独立设计与授权。
-
-## 验证命令
-
-```bash
-python -m unittest discover -s experiments/d094_llm_agent -p "test_*.py" -v
-black --check experiments/d094_llm_agent
-python -m compileall -q experiments/d094_llm_agent
-```
-
-安全工具 bandit/gitleaks/semgrep/mypy/ruff 在上次环境中不可用，不得声称其已运行。提交后必须核验远端 HEAD/main、工作区、文件内容、真实 CI 和 artifact；没有 run 就写 NOT RUN。
+不得修改D-092/D-093或main，不删除R1/R2失败，不把Mock/缓存当真实API，不启动A800训练或Validation/Test。提交后核验本地/远端HEAD、main、工作区、测试、真实CI和artifact；纯文档无run时写NOT RUN。

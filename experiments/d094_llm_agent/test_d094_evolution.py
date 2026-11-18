@@ -139,6 +139,19 @@ class TestNSGAII(unittest.TestCase):
         self.assertEqual(len(variation["parent_genome_hashes"]), 2)
         self.assertEqual(len(variation["child_genome_hash"]), 64)
 
+    def test_cross_generation_duplicate_genomes_are_never_reevaluated(self):
+        def evaluate(genome: AgentGenome) -> Candidate:
+            return Candidate(genome, (float(genome.max_plan_steps),) * 7)
+
+        optimizer = NSGAII()
+        optimizer.optimize(evaluate, population_size=4, generations=4, seed=0)
+        evaluated = [
+            event["genome_hash"]
+            for event in optimizer.ledger
+            if event["event_type"] == "evaluation"
+        ]
+        self.assertEqual(len(evaluated), len(set(evaluated)))
+
 
 if __name__ == "__main__":
     unittest.main()

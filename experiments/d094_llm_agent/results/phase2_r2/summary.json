@@ -1,0 +1,714 @@
+{
+  "actual_episode_count": 1260,
+  "arms": {
+    "B0": {
+      "arm": "B0",
+      "candidate": {
+        "constraint_violation": 0,
+        "execution_errors": 0,
+        "genome": {
+          "max_plan_steps": 5,
+          "memory_mode": "structured_failures",
+          "planning_mode": "stepwise",
+          "recovery_mode": "dependency_aware",
+          "reflection_trigger": "after_failure",
+          "tool_call_guard": "post_plan_verify"
+        },
+        "objectives": [
+          0.0,
+          0.0,
+          0.0,
+          6.75,
+          121.5,
+          0.0,
+          0.0
+        ],
+        "phenotype_hash": "e3f5e1fc34ef456f24bdfd0e926bd04f806a25a1288818b916c85b8c2e609232"
+      },
+      "episode_count": 36,
+      "episode_ids": [
+        "6fdf483fef07fc28943966e90b2ec9348bf8234020c9455e79ffc86f52221403",
+        "e6e091a9b1117ff85e22f8ffedd34fc20cd77c4fad2fa8235a7d1561e32c0f25",
+        "67a9216777e60313650eb326d25a78d503ae2d0c70dd255ecd00ae6eb05df4b0",
+        "18651929d956b727d0a2577880b5a7b67051dc93e50c5dc17f5c417402d156a6",
+        "0601a6e11175b3e0eaea2500ad48f737e274d7f1c0e0eab5c96ffd04956fa431",
+        "19fc5e67faecb982828ad7cef7b51a6a714ccba34205f4c369d0ee9c6b7e867a",
+        "7d582df6440fd1270ac78e65d1112a17b6c05ed3afb8a78e6affc4be400ac53e",
+        "fb7348da70484dd2c61eea094d7c7c8c591c09051284819ec06e1670bae74937",
+        "2e7db8b7f3598676788269e00f6cb8b4fc26c57ea474d48d9b8a08c8d2b11509",
+        "635783e58cf8af511094b239a6db34f90fdf36f24ce6e7dc7fd6256960d012ae",
+        "7a86125a865a70198bdaaa8fd9d22617e57ef95915258ca95d8e741d9ad5d67a",
+        "9643d64d078e04e0fa4ba4aacf36565a73e88f68fcbb26ce15fd654cf5a8fea9",
+        "25360c029c625b33de466a61e626d3ddae2f21fac5a56d2c2344c8456e98e3fd",
+        "4b3107860480b5b075dc71314cb89024b803c686de6f85588f7a518f414e1ea0",
+        "a7661f3249ec753e948ccdec387d649f449fbfc15b2d231d02980c6ae4012b2c",
+        "7ef6b8c417a941c8f7642474266cd57069850a88989b4c7208e393b1c5f52b2d",
+        "fa4bb501c9cf9224652c566094eda2177f052c749e063862ad80cacdb783d3a5",
+        "1a3bcc7707d0bbebbab47bddb5e4b656913c0efd0f2f079468982789d31c803e",
+        "7ed0cdbdc5c0c9229413811b8d3e410023f511784fd56c4b0709475ed91e801d",
+        "cc3ae3b4e1781f51e5e023bcb5fe0d5aeae3a6d2a1a351f3d295f89d88f274d1",
+        "4b3057fa763d6ecc195be57ef92157f386cf6a9b2cb5e51b0edff3f0f8a4c3e4",
+        "80baf334f048f363e4c4071ba625f3214d47c656dbe25e172b074f155d93079f",
+        "0731e080e81b68ecff2d05ca1cbbbf5239e16891714f091795c32cb0a4e0985c",
+        "61fb5cb4089663e581bf5f68c835feb9013c5ffce944c7c49654501d10be0833",
+        "aa1ec38d71728dcf1d4e770b4014308aab8188fdc0dfa5f611e752839f23e610",
+        "fa80697fdfd773d95e880aa19cd520f9ccab9d695d0d0ccd4493faa3a44ab2c6",
+        "137cb11c16f85ab5fe1f109487e9391a5881502147bbefa5b389a8b03cd690fc",
+        "f4bf8b404ee7414b96f253d894219ceec2f71a00379bfa87d9fa2ab8ba799d0e",
+        "21a8d3e81b8a6f2701689d3b06fa383388b885102e61998cf98a356b836fcb6f",
+        "1c0c6083741a8a51b4a30cf5f66a46a879ca56e83e96c21aaefc03e0635bf0e0",
+        "e74e3d4a11fc9f470e83c3dad57b953e5f9f2be209a4608265d7d7e81475b5a3",
+        "ba4c735b389c1a781dad915037901c9d256e8f9f993abe2c21d33619b2b01f86",
+        "2a6c87e864600fc5cf2a21aa4fa2ebfb6c15e030bf8f1a24b865e49b6929da66",
+        "ca93e7732a841b14609b15baf6d8f0121f86c6fb4e583505d2054e481c135591",
+        "7907be59d0dc89db097529f26b4687c25e13da8f962ba8b324391854be9992ef",
+        "113454ebb2339ec1f824017a5a1e542d8d124033d6e19c7d6f2db6d9006e492d"
+      ],
+      "execution_errors": 0,
+      "genome": {
+        "max_plan_steps": 5,
+        "memory_mode": "structured_failures",
+        "planning_mode": "stepwise",
+        "recovery_mode": "dependency_aware",
+        "reflection_trigger": "after_failure",
+        "tool_call_guard": "post_plan_verify"
+      },
+      "genome_sha256": "aa65f0c73881388f4c05236b5b88ade3a498b20717d0d48f5dc1dd6545e96a4b",
+      "metrics": {
+        "behavior_diversity": 0.16666666666666666,
+        "constraint_violation": 0,
+        "harm": 6.75,
+        "input_tokens": 0,
+        "latency_seconds": 0.0,
+        "output_tokens": 0,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0,
+        "token_cost_usd": 0.0,
+        "tool_cost": 121.5
+      },
+      "per_seed": {
+        "101": {
+          "behavior_diversity": 0.3333333333333333,
+          "constraint_violation": 0,
+          "harm": 2.25,
+          "input_tokens": 0,
+          "latency_seconds": 0.0,
+          "output_tokens": 0,
+          "recovery_success_rate": 1.0,
+          "task_success_rate": 1.0,
+          "token_cost_upper_usd": 0.0,
+          "token_cost_usd": 0.0,
+          "tool_cost": 40.5
+        },
+        "202": {
+          "behavior_diversity": 0.3333333333333333,
+          "constraint_violation": 0,
+          "harm": 2.25,
+          "input_tokens": 0,
+          "latency_seconds": 0.0,
+          "output_tokens": 0,
+          "recovery_success_rate": 1.0,
+          "task_success_rate": 1.0,
+          "token_cost_upper_usd": 0.0,
+          "token_cost_usd": 0.0,
+          "tool_cost": 40.5
+        },
+        "303": {
+          "behavior_diversity": 0.3333333333333333,
+          "constraint_violation": 0,
+          "harm": 2.25,
+          "input_tokens": 0,
+          "latency_seconds": 0.0,
+          "output_tokens": 0,
+          "recovery_success_rate": 1.0,
+          "task_success_rate": 1.0,
+          "token_cost_upper_usd": 0.0,
+          "token_cost_usd": 0.0,
+          "tool_cost": 40.5
+        }
+      },
+      "phase": "fixed"
+    },
+    "B1": {
+      "arm": "B1",
+      "candidate": {
+        "constraint_violation": 0,
+        "execution_errors": 0,
+        "genome": {
+          "max_plan_steps": 5,
+          "memory_mode": "structured_failures",
+          "planning_mode": "stepwise",
+          "recovery_mode": "dependency_aware",
+          "reflection_trigger": "after_failure",
+          "tool_call_guard": "post_plan_verify"
+        },
+        "objectives": [
+          0.33333333333333337,
+          0.33333333333333337,
+          0.0,
+          6.75,
+          120.20000000000006,
+          0.040534500000000015,
+          7.920163947222225
+        ],
+        "phenotype_hash": "f796da16e5423c4ff48370066b96c1da25dc0c3f6e275b57f4cb9797bcbe14de"
+      },
+      "episode_count": 36,
+      "episode_ids": [
+        "a2f4e73150829529162a8c808d5931a93a17fb4a0f619de3ebae5796dcd62511",
+        "4039684dbb53087d0da0f477cbbb054c8a23d0db3d8e3d7cfed34a7cc02f8b34",
+        "540482f86043cd02971f546b6c20db522decae5fe5f6fd15b9bad0fb3cf13c97",
+        "5c2e885f0006354ac6f6bca58bb8ed4a946c215df30081ee99f41c58f8d3ed8c",
+        "d3da328287c0038b0f9ef54ce52ccbddab735c545f39daa2189470c385ca8770",
+        "03bd525ba4701c0cb494dd7d2dfa5a2e1684c4551698e05e01455d5098a35f53",
+        "d33a9d91aceb4c160d1a6db724d1ed295dfa69b2ab6e86455f72fb2b93ca9606",
+        "1183c1b79af3e5a4b214c971a81016562d4a01a4085de860315d9676aa28e4d7",
+        "76198986f1a23f4cafd68ae3f4a563bc5a1f727df98c73602b1e412a34b3e84d",
+        "7a3a66aa42b65a1a4dce842ed059d7428fdc3b94f902b42a6622167fb2675f11",
+        "4f895858ea74e837f68630344e52b79dc9d9cd6ff07a4381ebc22daa9e6181a8",
+        "d14eaf0403bcef5c1d0fe4aed50bf7af7d248d3e096747ea37cb35615484b18f",
+        "9e32969c462aeca09acfae537244ff7a12bb48e8c5364a711779caeae573af47",
+        "1e82c82802fff8718b5fcfb75e1dd497d7941cd571cde7af592083060e3fc580",
+        "bcc959bafa088fc4e69ac6b6c3060a88360d7967b48209d64a874ca72fb32827",
+        "ae32f317eae11d7fcc225ca9235fa25b8012e33506b7a2455eb6d8ab5756640c",
+        "78d8b69145d03ae791732ab16e9b0f8828e1e752d1af475d064a442cee9a6402",
+        "f2722e0cbf4273df2afd69af5a73dac060df9f257d3a0fd702411b170c5f6358",
+        "2e50267e85eab57b9ca4cb80fda72f6ed12e3439bd093579806379a736785d80",
+        "24d20a424ca8bdf946e1af2dc6bcd95c083720bfa8545fb6878eccbc6d621476",
+        "211a4f93ae548240568df7154b4f01601ed68825f4ae7d04fbf73f78e296dc23",
+        "9d6c033c6af15a26764b34f7f6231973221d597b6bf53558329309cb21c588fc",
+        "a3bc7c7299d72f34035768485ddf5a8108fe2c26f577ccc0a2fb6db57d39bf5b",
+        "bced23e442a07d485c855b3aa43e33481ad21ed3a18d6b2be0a2041c3f68b1f3",
+        "78bbcb15a94a4f6a7c912d0fbb3ae43119d8b17e9d68582026ecd5e55af4ef84",
+        "96e0af881034dd90d3ba885f5ebd935d15d561ca9b13242c1bad930aaaa8d860",
+        "d5134025a92d595b15c0c42a12cadac877d32f5c18f02bead30e5db7a20f8bc6",
+        "cc1f07663fd8dda3e1a3fa31fac3db78a39999389b96ec7258af2d565951914b",
+        "87414f938881bf7f643144ed9f22a6da57d71c406f1412604c0e57102c44bbdc",
+        "de42cb3ee2e9879d0443cc8463e4a11b0dae2bddf295e92dc527c9ed8f8e18ff",
+        "48ce7033c6ed74acf588aee8c58fc5ef261c275d724e2eccb6c01eb71a58c1c1",
+        "e944f9e610b66663bde55c9a7a59da8f6362d31ef61c6cd2774947edffa5ffe8",
+        "dc31b5c6d9d46169fc7e310f049580857ccdd5d58ae6cccf038f94c5bbe13392",
+        "6d728d6a8ac4650792bc361fd67788be728b32d434ea701efbf4f6d83d48bac6",
+        "d9d6942a37dd20055df9b9ebf804c264b087cedfcf82fa2479586921bce57ec9",
+        "a392efc32dffb0331542953e28f3d17a81db39717188709fdb8fccd37244a6bf"
+      ],
+      "execution_errors": 0,
+      "genome": {
+        "max_plan_steps": 5,
+        "memory_mode": "structured_failures",
+        "planning_mode": "stepwise",
+        "recovery_mode": "dependency_aware",
+        "reflection_trigger": "after_failure",
+        "tool_call_guard": "post_plan_verify"
+      },
+      "genome_sha256": "aa65f0c73881388f4c05236b5b88ade3a498b20717d0d48f5dc1dd6545e96a4b",
+      "metrics": {
+        "behavior_diversity": 0.25,
+        "constraint_violation": 0,
+        "harm": 6.75,
+        "input_tokens": 103091,
+        "latency_seconds": 7.920163947222225,
+        "output_tokens": 8006,
+        "recovery_success_rate": 0.6666666666666666,
+        "task_success_rate": 0.6666666666666666,
+        "token_cost_upper_usd": 0.040534500000000015,
+        "token_cost_usd": 0.040534500000000015,
+        "tool_cost": 120.20000000000006
+      },
+      "per_seed": {
+        "101": {
+          "behavior_diversity": 0.4166666666666667,
+          "constraint_violation": 0,
+          "harm": 2.25,
+          "input_tokens": 34342,
+          "latency_seconds": 7.822398600000003,
+          "output_tokens": 2673,
+          "recovery_success_rate": 0.5833333333333334,
+          "task_success_rate": 0.5833333333333334,
+          "token_cost_upper_usd": 0.0135102,
+          "token_cost_usd": 0.0135102,
+          "tool_cost": 39.800000000000004
+        },
+        "202": {
+          "behavior_diversity": 0.4166666666666667,
+          "constraint_violation": 0,
+          "harm": 2.25,
+          "input_tokens": 34355,
+          "latency_seconds": 8.013811083333332,
+          "output_tokens": 2679,
+          "recovery_success_rate": 0.75,
+          "task_success_rate": 0.75,
+          "token_cost_upper_usd": 0.013521299999999998,
+          "token_cost_usd": 0.013521299999999998,
+          "tool_cost": 40.60000000000001
+        },
+        "303": {
+          "behavior_diversity": 0.5,
+          "constraint_violation": 0,
+          "harm": 2.25,
+          "input_tokens": 34394,
+          "latency_seconds": 7.9242821583333365,
+          "output_tokens": 2654,
+          "recovery_success_rate": 0.6666666666666666,
+          "task_success_rate": 0.6666666666666666,
+          "token_cost_upper_usd": 0.013503000000000001,
+          "token_cost_usd": 0.013503000000000001,
+          "tool_cost": 39.800000000000004
+        }
+      },
+      "phase": "fixed"
+    },
+    "B2": {
+      "arm": "B2",
+      "candidate": {
+        "constraint_violation": 0,
+        "execution_errors": 36,
+        "genome": {
+          "max_plan_steps": 8,
+          "memory_mode": "structured_failures",
+          "planning_mode": "stepwise",
+          "recovery_mode": "retry_priority",
+          "reflection_trigger": "after_subtask",
+          "tool_call_guard": "post_plan_verify"
+        },
+        "objectives": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.039271499999999966,
+          1.9625000012032007e-05
+        ],
+        "phenotype_hash": "3228277316e6c3aac7e346cd5fd9f21e11a963ad25f37441fe96845fdc5e73dc"
+      },
+      "episode_count": 36,
+      "episode_ids": [
+        "3b863fd574d5b73891f8c9878f708857b3512ff85b6d34ed269e9c3e035d5d13",
+        "6b036394b4093d2e738ac68647afa6e8105c5a2b5d9b7145c94ea63c26b28cda",
+        "6a2e49dabee7b1dd08d58eacf5adeb86748bd04b3184b9bc4afca6a1a487e74c",
+        "c083a7fee3f5d296f920860b5ae45f5c0d0117b8d0d2b24b9658b31ded52fa6c",
+        "48114eb5529deb42cad619df5ac01b5e94825cc05f0cc78fba351b8066650b46",
+        "d4b4d7ea60acc96e141b507a293f80dab2a87f2012f54c716926c69fd6053072",
+        "b5291f08e4f007459a1c787a8da13e594aadda8bb2a57edf77808a77b05eb75c",
+        "3faeae0525515d80fe26d50d68885c882d15f8fc01d6f3ca56b58880c4e014d1",
+        "1395c37d9fc39ca2099e425a789d0f4649af86035288d9305627597909c5b50c",
+        "a61710c2404ec020e29412f0bd686667e9d791a0e6f8c833cfa83edd45ef47f8",
+        "c85a7b49115d8c6c87ca504f8166f014c75f3007b6c5ec501bc84ba3ee19d879",
+        "d173de0e235789a409b3cdb8c2bed742ab94f49a81d81f38ae9619bb70daef40",
+        "f83cf18b7cbe43f1583b136616738901c1b8ebe5cce908c1ba4d4ad4cb9ed8fc",
+        "a8be429ca1d5520c27183cd4fa74c3a3a944a9c7f33a4ca67c01de081194fb62",
+        "a01f33fc1bfe82785cf687f82150604215badec9cfdc95cf3c05d0a830cc3ac4",
+        "76d5b4884910472955f8acc548fb69d04d65aceadb91d5ac649ca320620cb420",
+        "f7beaf890547aabd644efe220921c6e1cba238985ead71708217208bff4a57d1",
+        "5f0a34145757e2a67a934af5b5559b8deb7b0775391d29de718f05a235896167",
+        "817ddb71b6c6a429b1f30840381d47762cd63cb5383a51c92bde3c260b67ee85",
+        "84a741ee8a3dde645368bb131b55dc6df8b5fc5132d21f731db48ff3f5074563",
+        "9b1c4a8568bb979bd0ac12be4f0923dedc78074ec787a97c68b5dc571ea3fee2",
+        "8355a7ad8a2638252016fef00da218b48d364fc960a7e30f357f66ca47eac1c1",
+        "010809056d26c853dbd554b2aaabb34ac8bcd25690a6bc81b9148a4464f0e3d4",
+        "4734d5dff08759ae20912176321a1b72be459dbeb5b1ea863573246f8d3175c0",
+        "fdac305f6230495c2db67ccda84538d9199c0c0a7cfd6810b6934ce48276bc6f",
+        "fa85aa54a61ad40e440d920a2b2983b5f1c2fdb453a89070bbe2cd7783cbde3b",
+        "4c73d1d87c5e2deccd0a1e193c86aefc423aa786ca6794845edd95dd70df7d58",
+        "32dca57f8712e27c702773199973c3d05674526d9a5dee73cc6b6e6f5ba0f052",
+        "2b8b118014207f0c865b156522f6dd82e4c364c46d03ee0696be25135c35e8d7",
+        "8ff1c0dfa8ebe776ae9bb6004689b0c7603a4cf6b0afb7970b6f09bc6ca7df26",
+        "dd3c75b9baaaa2dfb21ba3dfb3cb62b84dcc9c3d147ceb786702934748c939ff",
+        "5dc1b4b64d2c28a717ab2bc467db03876294a3cd89e1ab23e9e76457234ecda7",
+        "29b6bbda0ad7957ce57326c9763a48b5f97e3b5ea901944707d2b388089792c7",
+        "c98768dff2569bd48a416357147cae5ac096f2be8e9e9c4f22ffb12f7ead7d92",
+        "4fe1b63fe8c6896d1924cd6dbd962dc431cbc68a9a2cab2a56f37b3e1285a69b",
+        "b58337b155232cd3aa5cfdc1115ce574238fa6ac540591c4a564b9d40e0de5ca"
+      ],
+      "execution_errors": 36,
+      "genome": {
+        "max_plan_steps": 8,
+        "memory_mode": "structured_failures",
+        "planning_mode": "stepwise",
+        "recovery_mode": "retry_priority",
+        "reflection_trigger": "after_subtask",
+        "tool_call_guard": "post_plan_verify"
+      },
+      "genome_sha256": "b5dbe97a0ff4bc9da85d2373b24427f027e4c026cd965003a6e1657d25618abe",
+      "metrics": {
+        "behavior_diversity": 0.027777777777777776,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": 1.9625000012032007e-05,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.039271499999999966,
+        "token_cost_usd": null,
+        "tool_cost": 0.0
+      },
+      "per_seed": {
+        "101": {
+          "behavior_diversity": 0.08333333333333333,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 0,
+          "latency_seconds": 1.9741666638613726e-05,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.013090500000000003,
+          "token_cost_usd": null,
+          "tool_cost": 0.0
+        },
+        "202": {
+          "behavior_diversity": 0.08333333333333333,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 0,
+          "latency_seconds": 2.0050000008116815e-05,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.013090500000000003,
+          "token_cost_usd": null,
+          "tool_cost": 0.0
+        },
+        "303": {
+          "behavior_diversity": 0.08333333333333333,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 0,
+          "latency_seconds": 1.9083333389365482e-05,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.013090500000000003,
+          "token_cost_usd": null,
+          "tool_cost": 0.0
+        }
+      },
+      "phase": "final"
+    }
+  },
+  "backend": "openai-compatible",
+  "budget": {
+    "backend": "openai-compatible",
+    "cost_unknown": false,
+    "cost_upper_usd": 1.0002363000000036,
+    "cost_usd": 1.0002363000000036,
+    "input_tokens": 2600905,
+    "max_cost_usd": 1.0,
+    "max_requests": 4000,
+    "output_tokens": 183304,
+    "over_budget": true,
+    "request_count": 3704
+  },
+  "comparisons": {
+    "B1_minus_B0": {
+      "constraint_violation": 0,
+      "harm": 0.0,
+      "input_tokens": 103091,
+      "latency_seconds": 7.920163947222225,
+      "output_tokens": 8006,
+      "recovery_success_rate": -0.33333333333333337,
+      "task_success_rate": -0.33333333333333337,
+      "token_cost_upper_usd": 0.040534500000000015,
+      "token_cost_usd": 0.040534500000000015,
+      "tool_cost": -1.2999999999999403
+    },
+    "B2_minus_B0": {
+      "constraint_violation": 0,
+      "harm": -6.75,
+      "input_tokens": 0,
+      "latency_seconds": 1.9625000012032007e-05,
+      "output_tokens": 0,
+      "recovery_success_rate": -1.0,
+      "task_success_rate": -1.0,
+      "token_cost_upper_usd": 0.039271499999999966,
+      "token_cost_usd": null,
+      "tool_cost": -121.5
+    },
+    "B2_minus_B1": {
+      "constraint_violation": 0,
+      "harm": -6.75,
+      "input_tokens": -103091,
+      "latency_seconds": -7.920144322222213,
+      "output_tokens": -8006,
+      "recovery_success_rate": -0.6666666666666666,
+      "task_success_rate": -0.6666666666666666,
+      "token_cost_upper_usd": -0.0012630000000000488,
+      "token_cost_usd": null,
+      "tool_cost": -120.20000000000006
+    }
+  },
+  "config": {
+    "generations": 3,
+    "global_cost_cap": 1.0,
+    "global_request_cap": 4000,
+    "max_concurrency": 4,
+    "max_output_tokens": 128,
+    "population_size": 8,
+    "seeds": [
+      101,
+      202,
+      303
+    ],
+    "timeout_seconds": 20.0
+  },
+  "evolution_event_count": 56,
+  "execution_lock_sha256": "bee7cbee73e2f7f1bbc027bc3111ada25f374a6fbfcdfce98b8ccb2a3e08c08e",
+  "model": "deepseek-flash",
+  "per_seed": {
+    "B0": {
+      "101": {
+        "behavior_diversity": 0.3333333333333333,
+        "constraint_violation": 0,
+        "harm": 2.25,
+        "input_tokens": 0,
+        "latency_seconds": 0.0,
+        "output_tokens": 0,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0,
+        "token_cost_usd": 0.0,
+        "tool_cost": 40.5
+      },
+      "202": {
+        "behavior_diversity": 0.3333333333333333,
+        "constraint_violation": 0,
+        "harm": 2.25,
+        "input_tokens": 0,
+        "latency_seconds": 0.0,
+        "output_tokens": 0,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0,
+        "token_cost_usd": 0.0,
+        "tool_cost": 40.5
+      },
+      "303": {
+        "behavior_diversity": 0.3333333333333333,
+        "constraint_violation": 0,
+        "harm": 2.25,
+        "input_tokens": 0,
+        "latency_seconds": 0.0,
+        "output_tokens": 0,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0,
+        "token_cost_usd": 0.0,
+        "tool_cost": 40.5
+      }
+    },
+    "B1": {
+      "101": {
+        "behavior_diversity": 0.4166666666666667,
+        "constraint_violation": 0,
+        "harm": 2.25,
+        "input_tokens": 34342,
+        "latency_seconds": 7.822398600000003,
+        "output_tokens": 2673,
+        "recovery_success_rate": 0.5833333333333334,
+        "task_success_rate": 0.5833333333333334,
+        "token_cost_upper_usd": 0.0135102,
+        "token_cost_usd": 0.0135102,
+        "tool_cost": 39.800000000000004
+      },
+      "202": {
+        "behavior_diversity": 0.4166666666666667,
+        "constraint_violation": 0,
+        "harm": 2.25,
+        "input_tokens": 34355,
+        "latency_seconds": 8.013811083333332,
+        "output_tokens": 2679,
+        "recovery_success_rate": 0.75,
+        "task_success_rate": 0.75,
+        "token_cost_upper_usd": 0.013521299999999998,
+        "token_cost_usd": 0.013521299999999998,
+        "tool_cost": 40.60000000000001
+      },
+      "303": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 0,
+        "harm": 2.25,
+        "input_tokens": 34394,
+        "latency_seconds": 7.9242821583333365,
+        "output_tokens": 2654,
+        "recovery_success_rate": 0.6666666666666666,
+        "task_success_rate": 0.6666666666666666,
+        "token_cost_upper_usd": 0.013503000000000001,
+        "token_cost_usd": 0.013503000000000001,
+        "tool_cost": 39.800000000000004
+      }
+    },
+    "B2": {
+      "101": {
+        "behavior_diversity": 0.08333333333333333,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": 1.9741666638613726e-05,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.013090500000000003,
+        "token_cost_usd": null,
+        "tool_cost": 0.0
+      },
+      "202": {
+        "behavior_diversity": 0.08333333333333333,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": 2.0050000008116815e-05,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.013090500000000003,
+        "token_cost_usd": null,
+        "tool_cost": 0.0
+      },
+      "303": {
+        "behavior_diversity": 0.08333333333333333,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": 1.9083333389365482e-05,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.013090500000000003,
+        "token_cost_usd": null,
+        "tool_cost": 0.0
+      }
+    }
+  },
+  "planned_episode_count": 1260,
+  "protocol": "D094_PHASE2_TRAIN_V2",
+  "scientific_scope": "Small exploratory Train-only comparison; not confirmatory statistical evidence",
+  "search": {
+    "feasible_pareto_front": [
+      "3290e42f3aab01231e9a9f4645fd7f93bc430c7211353b296de54525b7e1838c",
+      "51a5a185837f1cddb27b1ce8cbdb919d0c4fcc23d807b23eb1d873b2cbeae158",
+      "975693d26090eec538c121bd4eeda0e589698d602c8cd679689056b2633e87d5",
+      "a30d7978ef3345b30c582f43c8b0633fddfb9d34114e2306ada20c941f4a98b6",
+      "ab0668f8e6657669682703a7a443cd712af4a1d5b0ef5e606ba59857ed143271",
+      "b20065256ce7cb1aba96318314459ea31fa3933678810a1beca1a74f7e37243e",
+      "b5552d4e68f7afc82ab27ef67ecfc0e247b43933845af5ee9285ed900e32d6e9",
+      "b5dbe97a0ff4bc9da85d2373b24427f027e4c026cd965003a6e1657d25618abe",
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "df7469124efc24359e528220175180428ce7a6f54cc72a4793da0711a7bb3aac"
+    ],
+    "gene_effects": {
+      "max_plan_steps": {
+        "behavior_changed_count": 5,
+        "behavior_changed_fraction": 1.0,
+        "mean_absolute_success_delta": 0.4833333333333333,
+        "mean_absolute_token_cost_delta": 0.012410399999999986,
+        "single_gene_pair_count": 5
+      },
+      "memory_mode": {
+        "behavior_changed_count": 2,
+        "behavior_changed_fraction": 1.0,
+        "mean_absolute_success_delta": 0.0,
+        "mean_absolute_token_cost_delta": 0.0002193000000000004,
+        "single_gene_pair_count": 2
+      },
+      "planning_mode": {
+        "behavior_changed_count": 10,
+        "behavior_changed_fraction": 0.9090909090909091,
+        "mean_absolute_success_delta": 0.13636363636363635,
+        "mean_absolute_token_cost_delta": 0.0024881181818181813,
+        "single_gene_pair_count": 11
+      },
+      "recovery_mode": {
+        "behavior_changed_count": 6,
+        "behavior_changed_fraction": 1.0,
+        "mean_absolute_success_delta": 0.23611111111111108,
+        "mean_absolute_token_cost_delta": 0.004756450000000001,
+        "single_gene_pair_count": 6
+      },
+      "reflection_trigger": {
+        "behavior_changed_count": 10,
+        "behavior_changed_fraction": 1.0,
+        "mean_absolute_success_delta": 0.08333333333333334,
+        "mean_absolute_token_cost_delta": 0.00394338000000001,
+        "single_gene_pair_count": 10
+      },
+      "tool_call_guard": {
+        "behavior_changed_count": 7,
+        "behavior_changed_fraction": 1.0,
+        "mean_absolute_success_delta": 0.21428571428571427,
+        "mean_absolute_token_cost_delta": 0.00448620000000001,
+        "single_gene_pair_count": 7
+      }
+    },
+    "generations": 3,
+    "identical_behavior_groups": [
+      [
+        "2fd2c1692598d62d8ee4b52ae18ddc4d632c709494d9165c581dce637726a390",
+        "42e37a1e8214df2dbe7ce01915e5d458bc42cd607ce16d06f20ebf7afd82f5a6",
+        "63e92c7d7e5a6ecafb0ce7666ad7f1f8ffc80d37a6404be1ebb88ec73b640581",
+        "975693d26090eec538c121bd4eeda0e589698d602c8cd679689056b2633e87d5"
+      ],
+      [
+        "8bd97f4f69df3d0f0ab135c6457591c608fb09a8510e9645d1731a851d66653a",
+        "a30d7978ef3345b30c582f43c8b0633fddfb9d34114e2306ada20c941f4a98b6"
+      ],
+      [
+        "16012619f58927d515514ffa54e5ff013927a078144493ce56567504ed7e4193",
+        "66bf4c886a7f2a86adcc4efe935de152bca16528910854a82744461d138e27dd",
+        "b6e14a9d80cbfe5728b639e1b3494df041cafd2b05af75e04ae444b05bd6e064",
+        "d16b2d4b855a2826388906e42617bc9ff8a661e0a1ac089ae586dab93c5f3fa6",
+        "e6f3b1834c0a8e2911b61d9fecfc5d8062bdc15d4bebf2f4d948db487f5bc313"
+      ]
+    ],
+    "initial_population": 8,
+    "population_diversity": {
+      "behavior_diversity": 0.75,
+      "complete_behavior_collapse": false,
+      "genotype_count": 32,
+      "genotype_diversity": 1.0,
+      "phenotype_count": 32,
+      "unique_genotype_count": 32,
+      "unique_phenotype_count": 24
+    },
+    "selected_genome_sha256": "b5dbe97a0ff4bc9da85d2373b24427f027e4c026cd965003a6e1657d25618abe",
+    "unique_evaluated_genomes": 32
+  },
+  "status": "INVALID_BUDGET",
+  "usage_by_arm_phase": {
+    "B0/fixed": {
+      "api_attempts": 0,
+      "cost_upper_usd": 0,
+      "cost_usd": 0,
+      "input_tokens": 0,
+      "latency_seconds": 0,
+      "output_tokens": 0
+    },
+    "B1/fixed": {
+      "api_attempts": 162,
+      "cost_upper_usd": 0.04053449999999999,
+      "cost_usd": 0.04053449999999999,
+      "input_tokens": 103091,
+      "latency_seconds": 285.12590210000013,
+      "output_tokens": 8006
+    },
+    "B2/final": {
+      "api_attempts": 36,
+      "cost_upper_usd": 0.039271499999999966,
+      "cost_usd": null,
+      "input_tokens": 0,
+      "latency_seconds": 0.0007065000004331523,
+      "output_tokens": 0
+    },
+    "B2/search": {
+      "api_attempts": 3794,
+      "cost_upper_usd": 1.2140517,
+      "cost_usd": null,
+      "input_tokens": 2497814,
+      "latency_seconds": 6182.685232200003,
+      "output_tokens": 175298
+    }
+  },
+  "wall_seconds": 1680.2265611
+}

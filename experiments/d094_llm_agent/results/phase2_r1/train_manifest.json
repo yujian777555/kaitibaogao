@@ -1,0 +1,130 @@
+{
+  "manifest_sha256": "8241b75b333fbdde7312e007a74aec91ffda215e2ee7893450dafc5e883ac0d7",
+  "protocol": "D094_PHASE2_TRAIN_V1",
+  "scenario_count": 12,
+  "split": "train",
+  "tasks": [
+    {
+      "family": "verification",
+      "goal": "Verify the failed dependency, recover the primary route, and complete the task. Public case variant: 0.",
+      "requires_compensation": false,
+      "requires_verification": true,
+      "retry_failures": 0,
+      "retry_never": false,
+      "seed_jitter": false,
+      "task_id": "d094_train_verification_0"
+    },
+    {
+      "family": "verification",
+      "goal": "Verify the failed dependency, recover the primary route, and complete the task. Public case variant: 1.",
+      "requires_compensation": false,
+      "requires_verification": true,
+      "retry_failures": 0,
+      "retry_never": false,
+      "seed_jitter": false,
+      "task_id": "d094_train_verification_1"
+    },
+    {
+      "family": "verification",
+      "goal": "Verify the failed dependency, recover the primary route, and complete the task. Public case variant: 2.",
+      "requires_compensation": false,
+      "requires_verification": true,
+      "retry_failures": 0,
+      "retry_never": false,
+      "seed_jitter": false,
+      "task_id": "d094_train_verification_2"
+    },
+    {
+      "family": "transient",
+      "goal": "Recover from the transient failure with bounded retries and complete the task. Public case variant: 0.",
+      "requires_compensation": false,
+      "requires_verification": false,
+      "retry_failures": 1,
+      "retry_never": false,
+      "seed_jitter": true,
+      "task_id": "d094_train_transient_0"
+    },
+    {
+      "family": "transient",
+      "goal": "Recover from the transient failure with bounded retries and complete the task. Public case variant: 1.",
+      "requires_compensation": false,
+      "requires_verification": false,
+      "retry_failures": 1,
+      "retry_never": false,
+      "seed_jitter": true,
+      "task_id": "d094_train_transient_1"
+    },
+    {
+      "family": "transient",
+      "goal": "Recover from the transient failure with bounded retries and complete the task. Public case variant: 2.",
+      "requires_compensation": false,
+      "requires_verification": false,
+      "retry_failures": 1,
+      "retry_never": false,
+      "seed_jitter": true,
+      "task_id": "d094_train_transient_2"
+    },
+    {
+      "family": "compensation",
+      "goal": "Verify and compensate the permanently failed route, then complete the task. Public case variant: 0.",
+      "requires_compensation": true,
+      "requires_verification": true,
+      "retry_failures": 0,
+      "retry_never": true,
+      "seed_jitter": false,
+      "task_id": "d094_train_compensation_0"
+    },
+    {
+      "family": "compensation",
+      "goal": "Verify and compensate the permanently failed route, then complete the task. Public case variant: 1.",
+      "requires_compensation": true,
+      "requires_verification": true,
+      "retry_failures": 0,
+      "retry_never": true,
+      "seed_jitter": false,
+      "task_id": "d094_train_compensation_1"
+    },
+    {
+      "family": "compensation",
+      "goal": "Verify and compensate the permanently failed route, then complete the task. Public case variant: 2.",
+      "requires_compensation": true,
+      "requires_verification": true,
+      "retry_failures": 0,
+      "retry_never": true,
+      "seed_jitter": false,
+      "task_id": "d094_train_compensation_2"
+    },
+    {
+      "family": "hybrid",
+      "goal": "Verify the failure, handle bounded transient retries, and complete the task. Public case variant: 0.",
+      "requires_compensation": false,
+      "requires_verification": true,
+      "retry_failures": 1,
+      "retry_never": false,
+      "seed_jitter": true,
+      "task_id": "d094_train_hybrid_0"
+    },
+    {
+      "family": "hybrid",
+      "goal": "Verify the failure, handle bounded transient retries, and complete the task. Public case variant: 1.",
+      "requires_compensation": false,
+      "requires_verification": true,
+      "retry_failures": 1,
+      "retry_never": false,
+      "seed_jitter": true,
+      "task_id": "d094_train_hybrid_1"
+    },
+    {
+      "family": "hybrid",
+      "goal": "Verify the failure, handle bounded transient retries, and complete the task. Public case variant: 2.",
+      "requires_compensation": false,
+      "requires_verification": true,
+      "retry_failures": 1,
+      "retry_never": false,
+      "seed_jitter": true,
+      "task_id": "d094_train_hybrid_2"
+    }
+  ],
+  "test_included": false,
+  "validation_included": false
+}

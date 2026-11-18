@@ -1,5 +1,29 @@
 # 05 — 研究决策日志
 
+## 2026-11-19：D-094 R2 数量完成但 INVALID_BUDGET，禁止误报演化提升
+
+R2实际写入1260/1260 episodes，真实API=3704，Token=2600905/183304，成本1.0002363 USD超过1.00 USD。原始请求3992条中288条为预算拒绝未发送。B2 final 36个 episodes均LLM_ERROR且无真实模型调用，故B2 vs B1无有效结论。
+
+B0=36/36，B1=24/36；B1逐seed相对B0=-5/12、-3/12、-4/12，固定LLM未超过规则基线。NSGA-II搜索候选b5dbe97a0ff4…18abe在搜索评价36/36，但最终评价无效，只是待复现信号。**当前创新判定=INVALID，不是POSITIVE_SIGNAL。**
+
+独立审计PASS_WITH_LIMITATIONS：原始数据可复算，六类约束为invalid0/unauthorized420/illegal0/pending0/duplicate0/runtime_abort603；无Phase2逐事件hash-chain。32 Genome→24 phenotype，无complete collapse。R1/R2均保留，D-092/D-093/main不变。
+
+下一轮仅设计R3：预留B1/final预算、禁止零调用final、补齐mutation/duplicate/survivor/hash-chain账本，并分别验证反馈与phenotype-aware机制。R3真实搜索、A800和Validation/Test均NOT RUN。
+
+---
+
+
+
+## 2026-11-19：D-094 真实 Canary PASS；Phase 2 R1 失败保留，V2 执行中
+
+真实`deepseek-flash`通过官方OpenAI-compatible端点完成3次结构化决策和3次工具执行，工具反馈进入后续LLM决策；Token=1552/148、延迟5.2379412秒、保守成本估算0.0006432 USD、硬约束0、hash chain有效。真实LLM接入因此成立，但算法提升尚不成立。
+
+Phase2 R1因单次transport error导致成本未知及B2/search用量覆盖缺陷而INVALID，B2未运行；72 episodes和163 attempts全部保留。V2仅修复成本上下界、跨代去重与用量累计，不改任务/seeds/种群/代数；测试49/49。真实R2正在独立目录运行，需等待结果和原始数据独立复算，不提前宣称B2改善。
+
+---
+
+
+
 ## 2026-11-18：D-094 Phase 0 实现与真实 API 配置门禁
 
 从`f409a730fd1c1cae90584f7591a213e916f28c2c`创建独立分支`d094-llm-agent-integration`，新增独立目录，不修改D-092/D-093或main。

@@ -1,4 +1,24 @@
-## D-094 Phase 0 交接（2026-11-18；真实API配置阻断）
+## D-094 R2 完成审计交接（2026-11-19；INVALID_BUDGET）
+
+- R2真实结束：1260/1260 episodes，3704真实API，Token=2600905/183304，成本1.0002363 USD>1.00；3992原始请求记录含288预算拒绝。数量完整不等于实验有效。
+- B0=36/36，B1=24/36；B2 final 36个LLM_ERROR且无真实调用，B2-B1无有效差值。搜索候选b5dbe97a0ff4…18abe搜索评价36/36，但最终无效；创新=INVALID。
+- 独立审计=PASS_WITH_LIMITATIONS：summary/raw一致，请求/episode身份、模型、Token、成本、Pareto和基因分析可复算；Phase2无逐事件hash-chain。六类约束=0/420/0/0/0/603（invalid/unauthorized/illegal/pending/duplicate/runtime_abort）。
+- 32唯一Genome→24 phenotype，17/496对行为相同；mutation位点、重复proposal和每代survivor历史缺口已明确。
+- 权威文件=`D094_PHASE2_R2_RESULT.md`、`D094_R2_INDEPENDENT_AUDIT.md`、`D094_GENOME_PHENOTYPE_ANALYSIS.md`、`D094_NEXT_EXPERIMENT_PLAN.md`、`D094_NEXT_SESSION_PROMPT.md`。
+- 没有后台R2任务，不得重启。R3 NOT RUN；先做预算预留、禁止零调用final和独立审查。D-092/D-093/main不变，A800/Validation/Test冻结。
+
+---
+
+## D-094 Phase 1 真实接通与 Phase 2 执行中交接（2026-11-19；历史状态）
+
+- `deepseek-flash`真实Canary PASS：3 HTTP attempts/3 LLM decisions，inspect→verify→complete，Token=1552/148，延迟5.2379412秒，保守成本估算0.0006432 USD，硬约束0，hash chain有效。证据=`results/canary_r1/`与`D094_API_CANARY_REPORT.md`。
+- 真实请求显式`thinking=disabled`，密钥只从环境读取。官方价格/模型来源已写入报告，成本不是账单。
+- Phase2 R1保留INVALID：72 episodes、163 attempts，B0=36/36、B1=23/36，B2未运行；一次transport error导致成本未知，且发现B2/search覆盖用量问题。
+- V2修复已知成本+无响应上界、跨代不重复评价、搜索用量累计，测试49/49；真实R2正在`results/phase2_r2`运行，最终结果和独立审计尚未产生。不要提前宣称B2提升。
+
+---
+
+## D-094 Phase 0 交接（2026-11-18；真实API配置阻断，历史状态）
 
 - 分支`d094-llm-agent-integration`，建分支基线`f409a730fd1c1cae90584f7591a213e916f28c2c`。新实现全部位于`experiments/d094_llm_agent/`，D-092/D-093与main未改。
 - 交付六个核心模块、版本化Prompt、Canary Runner、4组测试及`D094_DESIGN.md`/`D094_EXPERIMENT_PLAN.md`/`D094_API_CANARY_REPORT.md`/`D094_NEXT_SESSION_PROMPT.md`。LLM每轮决策，工具由本地Schema+环境权限双重控制，B0适配器不调用LLM，B2由NSGA-II演化648种合法Typed Genome。
