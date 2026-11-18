@@ -4,6 +4,7 @@
 - B0=36/36、B1=24/36；B1逐seed相对B0=-5/12、-3/12、-4/12。B2 vs B1有效差值NOT AVAILABLE。
 - 搜索阶段选中Genome`b5dbe97a0ff4…18abe`评价36/36，但最终未验证；当前创新=INVALID，不是POSITIVE_SIGNAL。32 Genome→24 phenotype，无complete collapse。
 - 原始数据独立复算一致，审计PASS_WITH_LIMITATIONS（无Phase2逐事件hash-chain）。报告=`D094_PHASE2_R2_RESULT.md`、`D094_R2_INDEPENDENT_AUDIT.md`、`D094_GENOME_PHENOTYPE_ANALYSIS.md`。
+- 完整回归595/595，D-094=53/53；代码/结果提交`17120fac98b4aa96a8b5f0cbf5a0d67c8f3d6dec`的CI run`44360886032`已completed/success。CI不运行真实API或搜索。
 - R1/R2失败均保留；D-092/D-093与main不变。R3仅在`D094_NEXT_EXPERIMENT_PLAN.md`中设计，真实搜索NOT RUN；先解决预算预留和账本缺口。
 
 ---

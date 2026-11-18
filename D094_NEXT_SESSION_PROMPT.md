@@ -34,6 +34,10 @@ python -m unittest discover -s experiments/d094_llm_agent -p "test_*.py" -q
 
 审计为PASS_WITH_LIMITATIONS：Phase2 Runner未提供逐事件hash-chain；原始文件SHA已锁定。被拒绝重复proposal、每代survivor phenotype和实际mutated locus未完整记录，不能编造。
 
+### 最终验证身份
+
+完整本地回归595/595，D-094=53/53。代码/结果提交`17120fac98b4aa96a8b5f0cbf5a0d67c8f3d6dec`的CI run`44360886032`已completed/success，D-094日志53/53 OK；6个既有artifact均非D-094性能证据。后续纯文档提交无run时写NOT RUN。
+
 ### 下一任务
 
 只推进`D094_NEXT_EXPERIMENT_PLAN.md`的R3独立审查/预算预检与实现准备；R3真实API实验当前NOT RUN。R3必须先预留B1和最终评价预算、禁止零调用final、补齐mutation/duplicate/survivor/hash-chain账本。模型继续`deepseek-flash`，不超过1500次真实HTTP/0.50 USD的R3上限，不扩大规模。

@@ -10,6 +10,8 @@ B0=36/36，B1=24/36；B1逐seed相对B0=-5/12、-3/12、-4/12，固定LLM未超�
 
 下一轮仅设计R3：预留B1/final预算、禁止零调用final、补齐mutation/duplicate/survivor/hash-chain账本，并分别验证反馈与phenotype-aware机制。R3真实搜索、A800和Validation/Test均NOT RUN。
 
+验证：完整回归595/595，D-094=53/53；代码/结果提交`17120fac98b4aa96a8b5f0cbf5a0d67c8f3d6dec`的CI run`44360886032`已completed/success。CI/测试成功不改变R2 INVALID_BUDGET结论。
+
 ---
 
 

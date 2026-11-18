@@ -6,6 +6,7 @@
 - 32唯一Genome→24 phenotype，17/496对行为相同；mutation位点、重复proposal和每代survivor历史缺口已明确。
 - 权威文件=`D094_PHASE2_R2_RESULT.md`、`D094_R2_INDEPENDENT_AUDIT.md`、`D094_GENOME_PHENOTYPE_ANALYSIS.md`、`D094_NEXT_EXPERIMENT_PLAN.md`、`D094_NEXT_SESSION_PROMPT.md`。
 - 没有后台R2任务，不得重启。R3 NOT RUN；先做预算预留、禁止零调用final和独立审查。D-092/D-093/main不变，A800/Validation/Test冻结。
+- 最终本地完整回归595/595，D-094=53/53。代码/结果提交`17120fac98b4aa96a8b5f0cbf5a0d67c8f3d6dec`的CI run`44360886032`已completed/success，D-094日志53/53 OK；6个既有artifact，无D-094专属性能artifact。后续纯文档提交无run写NOT RUN。
 
 ---
 

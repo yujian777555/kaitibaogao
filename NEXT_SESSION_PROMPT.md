@@ -2,7 +2,9 @@
 
 先读`D094_NEXT_SESSION_PROMPT.md`和`D094_PHASE2_R2_RESULT.md`。R2已结束，不得重启：1260 episodes、3704真实API、成本1.0002363 USD超限；B2 final无真实调用，无有效B2-B1比较。搜索阶段36/36信号只能用于后续复现，当前创新=INVALID。
 
-独立审计与Genome/Phenotype分析已完成；32 Genome→24 phenotype，无complete collapse。下一步只做`D094_NEXT_EXPERIMENT_PLAN.md`的R3审查/预算预检和实现准备，必须先预留最终评价预算并补齐账本，不能启动大规模API。D-092/D-093/main不变。最终Git/测试/CI按实际远端记录。
+独立审计与Genome/Phenotype分析已完成；32 Genome→24 phenotype，无complete collapse。下一步只做`D094_NEXT_EXPERIMENT_PLAN.md`的R3审查/预算预检和实现准备，必须先预留最终评价预算并补齐账本，不能启动大规模API。D-092/D-093/main不变。
+
+完整回归595/595；代码/结果提交`17120fac98b4aa96a8b5f0cbf5a0d67c8f3d6dec`的CI run`44360886032`=completed/success，D-094日志53/53。后续纯文档提交无run写NOT RUN。
 
 ---
 
