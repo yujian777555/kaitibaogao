@@ -691,3 +691,17 @@ R1 的文件身份和既有数据绑定核验通过：R1 raw/canonical SHA 匹�
 **HOLD：** adapter/searcher 实现、probe rollout、genome search、调参、候选冻结、Validation/Test、Pilot B、正式 A-3b、A800/ARWM、真实 LLM/API、UndoBench TEST、ThinkingBox 和 main merge。
 
 **下一唯一任务：** R2 关闭 105 号报告 F1–F7，并解决 M1–M4。用户明确批准最终执行锁前，不运行 D-092。
+
+
+## D-092 快速实验授权与执行接管（2026-11-18）
+
+用户已明确要求“抓紧实验吧，马上要开题了”。本授权范围为：关键实现门禁修复后执行 R2.3 的 960 Probe；仅当实现审查 ACCEPT_FOR_PROBE 且全部预注册 Probe 判据 PASS 时，继续五臂×五 seed Train-only 搜索。无需为这两阶段再次询问用户。Validation/Test、外部 benchmark、真实 LLM/API、A800 模型训练及 main merge 不在授权范围内。13,824 exhaustive reference 仅按 R2.3 §11.2 在正式结果和日志全部锁定后单独执行一次。
+
+远端快速源码复核（HEAD cfe431ab026a2626bf28c00ec45352db9a7f1dd4）确认三项执行阻断：
+1. BudgetLedger.offer() 在 evaluator 成功后才 append proposal_log；中断、异常、malformed view、identity mismatch、row_count mismatch 会消耗 attempt 却缺少 proposal 终态记录。
+2. run_arm() 只捕获 BudgetError/EvaluationInterrupted；普通 RuntimeError/ValueError 可能逃逸，不形成带部分账本的 INVALID。
+3. m1_equivalence() 未比较完整 RNG event streams，尚不能证明 R2.3 §11.1 的完整 A1/A4 等价。
+
+此外，experiments/d092_recovery/ 当前没有实际 Probe runner 或正式 Train-only driver；现有 workflow 只执行 synthetic tests。下一步按 112_D092_EXPEDITED_EXECUTION_PROMPT.md 执行最小修复、补测试、实现 Probe 与正式搜索入口。历史合成 INVALID 数值必须保留，不得扩预算消除。
+
+当前远端 HEAD=cfe431ab026a2626bf28c00ec45352db9a7f1dd4；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=323/0。上述授权不修改 canonical 103 或历史报告。
