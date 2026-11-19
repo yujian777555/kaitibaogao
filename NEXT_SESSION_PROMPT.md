@@ -4,7 +4,9 @@
 
 合成选择器fixture phenotype1→2，但演化fixture Standard/B4均0.75、B5=0.50，未证明搜索效率或性能提升。R3 NOT RUN，INDEPENDENT_REVIEWED=NO，APPROVED_FOR_EXPERIMENT=NO，POSITIVE_SIGNAL=NO。
 
-下一任务是新独立会话的实现一致性复核与R3预算审查；用户明确批准前不得运行真实R3。R1/R2历史、D-092/D-093和main不变。最终Git/CI按实际远端记录。
+下一任务是新独立会话的实现一致性复核与R3预算审查；用户明确批准前不得运行真实R3。R1/R2历史、D-092/D-093和main不变。
+
+完整回归624/624；代码提交`da509c5ad9b9fbaf1796809eb5d4e43143b9fc98`的CI run`44531813596`=completed/success，D-094日志82/82。后续纯文档提交无run写NOT RUN。
 
 ---
 

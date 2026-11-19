@@ -4,6 +4,7 @@
 - D-094=82/82；合成选择器fixture phenotype1→2，但演化fixture Standard/B4均0.75、B5=0.50、每臂8次评价，无搜索效率或性能提升。
 - 规格=`D094_DIVERSITY_AWARE_NSGA2.md`、`D094_FAILURE_FEEDBACK_EVOLUTION.md`、`D094_R3_PREREGISTRATION.md`；自检=`D094_R3_IMPLEMENTATION_REVIEW.md`。当前READY_FOR_INDEPENDENT_REVIEW，不是独立通过或实验批准。
 - R3真实API NOT RUN；新独立会话需审查公式/控制流/预算，用户明确批准后才可执行。R1/R2 INVALID与D-092/D-093/main不变，A800/Validation/Test冻结。
+- 完整回归624/624，D-094=82/82；代码提交`da509c5ad9b9fbaf1796809eb5d4e43143b9fc98`的CI run`44531813596`已completed/success，D-094日志82/82。6个既有artifact，无D-094性能artifact；后续纯文档提交无run写NOT RUN。
 
 ---
 

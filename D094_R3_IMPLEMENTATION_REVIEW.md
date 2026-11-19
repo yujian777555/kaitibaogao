@@ -52,3 +52,7 @@ Phenotype 只能在候选完成评价后获得，因此不能宣称 B4 免费减
 `INDEPENDENT_REVIEWED=NO`；`APPROVED_FOR_EXPERIMENT=NO`；`EXPERIMENT_COMPLETED=NO`；`POSITIVE_SIGNAL=NO`。
 
 下一独立会话必须检查公式/代码一致性、选择器边界、反馈分母与更新时点、重复评价、预算池隔离、R3规模可执行性以及原始账本可复算性。只有复核通过且用户明确批准后，才可运行真实 R3。
+
+## 7. 最终验证证据
+
+完整本地回归624/624，D-094=82/82。代码提交`da509c5ad9b9fbaf1796809eb5d4e43143b9fc98`的真实CI run`44531813596`已completed/success，D-094日志82/82 OK。6个既有artifact均非D-094性能证据；后续纯文档提交无run时写NOT RUN。该CI结果不改变`APPROVED_FOR_EXPERIMENT=NO`。

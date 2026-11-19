@@ -8,6 +8,8 @@ D-094测试82/82。合成选择器fixture唯一phenotype1→2，但演化fixture
 
 当前状态=READY_FOR_INDEPENDENT_REVIEW；INDEPENDENT_REVIEWED=NO、APPROVED_FOR_EXPERIMENT=NO、EXPERIMENT_COMPLETED=NO、POSITIVE_SIGNAL=NO。R3 NOT RUN。下一步由新独立会话复核实现与预算，用户明确批准后才可运行真实R3。R1/R2、D-092/D-093和main不变，A800/Validation/Test冻结。
 
+完整回归624/624，D-094=82/82；代码提交`da509c5ad9b9fbaf1796809eb5d4e43143b9fc98`的CI run`44531813596`已completed/success。CI/测试成功不等于算法创新或实验通过。
+
 ---
 
 
