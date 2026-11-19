@@ -4,7 +4,7 @@ from __future__ import annotations
 import dataclasses
 import math
 import random
-from typing import Callable, Sequence
+from typing import Any, Callable, Sequence
 
 from d094_genome import (
     AgentGenome,
@@ -27,6 +27,8 @@ class Candidate:
     constraint_violation: int = 0
     phenotype_hash: str = ""
     execution_errors: int = 0
+    behavior: dict[str, Any] | None = None
+    failure_profile: dict[str, Any] | None = None
 
     def __post_init__(self) -> None:
         if len(self.objectives) < 2 or any(

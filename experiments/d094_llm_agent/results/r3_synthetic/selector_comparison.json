@@ -1,0 +1,58 @@
+{
+  "full": {
+    "mean_pairwise_behavior_distance": 1.0,
+    "selected_genome_hashes": [
+      "00ae43cdaa49b9c5118516efd39d199e9812a21c939232a3673bcb06720c55ce",
+      "00e8745b559c924fdc379113ab3421384d125fe73e6834e96460b97790a56daf"
+    ],
+    "selected_phenotype_hashes": [
+      "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6",
+      "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+    ],
+    "unique_genomes": 2,
+    "unique_objective_vectors": 1,
+    "unique_phenotypes": 2
+  },
+  "genome": {
+    "mean_pairwise_behavior_distance": 1.0,
+    "selected_genome_hashes": [
+      "00821df35209a1dc13b89a81f9118cf908664d7a621572e059abe00af6f43412",
+      "00ae43cdaa49b9c5118516efd39d199e9812a21c939232a3673bcb06720c55ce"
+    ],
+    "selected_phenotype_hashes": [
+      "6e34df9db19dd13298238b090691d0fd7a5f5daa422645576b92e64dc19f7de6",
+      "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6"
+    ],
+    "unique_genomes": 2,
+    "unique_objective_vectors": 1,
+    "unique_phenotypes": 2
+  },
+  "phenotype": {
+    "mean_pairwise_behavior_distance": 1.0,
+    "selected_genome_hashes": [
+      "00ae43cdaa49b9c5118516efd39d199e9812a21c939232a3673bcb06720c55ce",
+      "00e8745b559c924fdc379113ab3421384d125fe73e6834e96460b97790a56daf"
+    ],
+    "selected_phenotype_hashes": [
+      "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6",
+      "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+    ],
+    "unique_genomes": 2,
+    "unique_objective_vectors": 1,
+    "unique_phenotypes": 2
+  },
+  "standard": {
+    "mean_pairwise_behavior_distance": 0.0,
+    "selected_genome_hashes": [
+      "000e2e9acf8d00dfc5386d842822cde6ea5bfb95d1c956e6021be2858cd284c0",
+      "00821df35209a1dc13b89a81f9118cf908664d7a621572e059abe00af6f43412"
+    ],
+    "selected_phenotype_hashes": [
+      "6e34df9db19dd13298238b090691d0fd7a5f5daa422645576b92e64dc19f7de6",
+      "6e34df9db19dd13298238b090691d0fd7a5f5daa422645576b92e64dc19f7de6"
+    ],
+    "unique_genomes": 2,
+    "unique_objective_vectors": 1,
+    "unique_phenotypes": 1
+  }
+}

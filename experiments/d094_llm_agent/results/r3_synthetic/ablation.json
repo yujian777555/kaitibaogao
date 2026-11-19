@@ -1,0 +1,316 @@
+{
+  "combined": {
+    "duplicate_proposal_count": 1,
+    "evaluation_count": 8,
+    "last_generation_diversity": {
+      "event_type": "survivor_selection",
+      "generation": 0,
+      "genotype_diversity": 1.0,
+      "performance_diversity": 0.5,
+      "phenotype_diversity": 0.5,
+      "selection_method": "full",
+      "survivors": [
+        {
+          "genome_sha256": "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "47444b29b1c188c50e2f2c918aad447e2998eb1be76ad64d13ade4aa51231390",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "292fbbec61229770d6f503873c308e447b83bf352ac2914963e323f7495b4a1b",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6"
+        }
+      ]
+    },
+    "scope": "SYNTHETIC_ONLY",
+    "survivor_genome_hashes": [
+      "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+      "47444b29b1c188c50e2f2c918aad447e2998eb1be76ad64d13ade4aa51231390",
+      "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff"
+    ],
+    "unique_survivor_phenotypes": 1
+  },
+  "diversity": {
+    "duplicate_proposal_count": 1,
+    "evaluation_count": 8,
+    "last_generation_diversity": {
+      "event_type": "survivor_selection",
+      "generation": 0,
+      "genotype_diversity": 1.0,
+      "performance_diversity": 0.5,
+      "phenotype_diversity": 0.75,
+      "selection_method": "full",
+      "survivors": [
+        {
+          "genome_sha256": "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "292fbbec61229770d6f503873c308e447b83bf352ac2914963e323f7495b4a1b",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6"
+        },
+        {
+          "genome_sha256": "b174ac218d90c6736e21f5dc3e1ed076bbdaaea6cd869fedbc0b7311520626cb",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "6e34df9db19dd13298238b090691d0fd7a5f5daa422645576b92e64dc19f7de6"
+        }
+      ]
+    },
+    "scope": "SYNTHETIC_ONLY",
+    "survivor_genome_hashes": [
+      "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+      "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff"
+    ],
+    "unique_survivor_phenotypes": 1
+  },
+  "feedback": {
+    "duplicate_proposal_count": 1,
+    "evaluation_count": 8,
+    "last_generation_diversity": {
+      "event_type": "survivor_selection",
+      "generation": 0,
+      "genotype_diversity": 1.0,
+      "performance_diversity": 0.5,
+      "phenotype_diversity": 0.5,
+      "selection_method": "standard",
+      "survivors": [
+        {
+          "genome_sha256": "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "47444b29b1c188c50e2f2c918aad447e2998eb1be76ad64d13ade4aa51231390",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "09734e0015209c028ef3f584d314236ea2552e7f6b90f7f40d9c591a9a6bca77",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "86ab691e03d462f9f72ee5648b779e788bec30dd4dd4aded4c25efc0c74b28bc"
+        }
+      ]
+    },
+    "scope": "SYNTHETIC_ONLY",
+    "survivor_genome_hashes": [
+      "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+      "47444b29b1c188c50e2f2c918aad447e2998eb1be76ad64d13ade4aa51231390",
+      "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff"
+    ],
+    "unique_survivor_phenotypes": 1
+  },
+  "genome": {
+    "duplicate_proposal_count": 1,
+    "evaluation_count": 8,
+    "last_generation_diversity": {
+      "event_type": "survivor_selection",
+      "generation": 0,
+      "genotype_diversity": 1.0,
+      "performance_diversity": 0.5,
+      "phenotype_diversity": 0.75,
+      "selection_method": "genome",
+      "survivors": [
+        {
+          "genome_sha256": "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "09734e0015209c028ef3f584d314236ea2552e7f6b90f7f40d9c591a9a6bca77",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "86ab691e03d462f9f72ee5648b779e788bec30dd4dd4aded4c25efc0c74b28bc"
+        },
+        {
+          "genome_sha256": "292fbbec61229770d6f503873c308e447b83bf352ac2914963e323f7495b4a1b",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6"
+        }
+      ]
+    },
+    "scope": "SYNTHETIC_ONLY",
+    "survivor_genome_hashes": [
+      "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+      "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff"
+    ],
+    "unique_survivor_phenotypes": 1
+  },
+  "phenotype": {
+    "duplicate_proposal_count": 1,
+    "evaluation_count": 8,
+    "last_generation_diversity": {
+      "event_type": "survivor_selection",
+      "generation": 0,
+      "genotype_diversity": 1.0,
+      "performance_diversity": 0.5,
+      "phenotype_diversity": 0.75,
+      "selection_method": "phenotype",
+      "survivors": [
+        {
+          "genome_sha256": "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "292fbbec61229770d6f503873c308e447b83bf352ac2914963e323f7495b4a1b",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6"
+        },
+        {
+          "genome_sha256": "b174ac218d90c6736e21f5dc3e1ed076bbdaaea6cd869fedbc0b7311520626cb",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "6e34df9db19dd13298238b090691d0fd7a5f5daa422645576b92e64dc19f7de6"
+        }
+      ]
+    },
+    "scope": "SYNTHETIC_ONLY",
+    "survivor_genome_hashes": [
+      "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+      "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff"
+    ],
+    "unique_survivor_phenotypes": 1
+  },
+  "standard": {
+    "duplicate_proposal_count": 1,
+    "evaluation_count": 8,
+    "last_generation_diversity": {
+      "event_type": "survivor_selection",
+      "generation": 0,
+      "genotype_diversity": 1.0,
+      "performance_diversity": 0.5,
+      "phenotype_diversity": 0.75,
+      "selection_method": "standard",
+      "survivors": [
+        {
+          "genome_sha256": "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff",
+          "objectives": [
+            3.0,
+            3.0
+          ],
+          "phenotype_hash": "1ddf64d19e757084e3f7985e8ec4d5301a53de109e407e367c3d7286faf15af2"
+        },
+        {
+          "genome_sha256": "09734e0015209c028ef3f584d314236ea2552e7f6b90f7f40d9c591a9a6bca77",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "86ab691e03d462f9f72ee5648b779e788bec30dd4dd4aded4c25efc0c74b28bc"
+        },
+        {
+          "genome_sha256": "292fbbec61229770d6f503873c308e447b83bf352ac2914963e323f7495b4a1b",
+          "objectives": [
+            5.0,
+            5.0
+          ],
+          "phenotype_hash": "7c8fac6cedc7a53c1be3d2b9dfa98dfc7d11dd83ce58f69aa7b97cc1227d2be6"
+        }
+      ]
+    },
+    "scope": "SYNTHETIC_ONLY",
+    "survivor_genome_hashes": [
+      "06ee56a2795d1a4c777ae32bfb9429581f6516897708462c75523929619dd31f",
+      "6f5cb78e0bd871311bb83ced528897bbdccca4ee9687460d9421858c07bf06ff"
+    ],
+    "unique_survivor_phenotypes": 1
+  }
+}

@@ -1,45 +1,47 @@
-# D-094 下一会话接管提示词
+# D-094 下一会话接管提示词：R3 独立实现一致性复核
 
-## 当前权威状态：R2 已结束，但 INVALID_BUDGET
+## 当前状态
 
-唯一仓库：`yujian777555/kaitibaogao`；分支：`d094-llm-agent-integration`。开始前重新核验远端 HEAD、main、工作区和是否存在后台任务；不要重启 R2。
+- 仓库：`yujian777555/kaitibaogao`；分支：`d094-llm-agent-integration`。先核验远端最新 HEAD、main、工作区和后台任务。
+- R1/R2 INVALID 及原始账本均保留；不得重启或覆盖。
+- B4 行为感知 NSGA-II、B3 失败反馈、B5 组合及请求前预算预留已实现，并有合成证据。
+- D-094 测试=82/82；合成 CLI 已生成 `results/r3_synthetic/`。
+- **R3 NOT RUN；INDEPENDENT_REVIEWED=NO；APPROVED_FOR_EXPERIMENT=NO；POSITIVE_SIGNAL=NO。**
 
-### 真实证据
+## 本轮算法入口
 
-- Canary：`deepseek-flash` PASS，3次真实LLM决策，inspect→verify→complete，Token1552/148，成本估算0.0006432 USD，硬约束0。证据=`results/canary_r1/`。
-- Phase 2 R1：INVALID，B2未运行；永久保留在`results/phase2_r1/`。
-- Phase 2 R2：1260/1260 episodes已写入，但成本1.0002363 USD超过1.00 USD，状态INVALID_BUDGET。
-- R2真实API=3704次，Token=2600905/183304；原始请求记录3992，其中288条预算拒绝未发送。
-- B0=36/36成功，B1=24/36；B2 final 36个 episodes全部LLM_ERROR且没有真实调用，不能用于性能比较。
-- 搜索选中Genome `b5dbe97a0ff4bc9da85d2373b24427f027e4c026cd965003a6e1657d25618abe` 在搜索评价中36/36成功，但最终评价无效；当前创新判定=INVALID，不是POSITIVE_SIGNAL。
-- 32个唯一搜索Genome对应24个 phenotype，无complete collapse；17/496对不同Genome行为相同。六类约束=invalid0、unauthorized420、illegal0、pending0、duplicate0、runtime_abort603。
+- `D094_DIVERSITY_AWARE_NSGA2.md` + `d094_behavior.py` + `d094_diversity.py`：编辑/特征距离、最近邻新颖性、crowding+novelty、重复 phenotype 控制。
+- `D094_FAILURE_FEEDBACK_EVOLUTION.md` + `d094_feedback_evolution.py`：七类失败、归一化矩阵、β=2、τ=0.25、ε=0.1、六算子。
+- `d094_adaptive_evolution.py`：B2 standard、B3 feedback、B4 diversity、B5 combined；记录 mutation locus、duplicate、survivor 和三种多样性。
+- `d094_budget.py`：请求前成本预留、B1/final 池保护、实际结算和失败上界。
+- `D094_R3_PREREGISTRATION.md`：6任务、seeds201/202、每臂4+1代、1500 HTTP/0.50 USD 上限。
 
-### 必读文件
+## 合成结果不能误读
 
-1. `D094_PHASE2_R2_RESULT.md`
-2. `D094_R2_INDEPENDENT_AUDIT.md`
-3. `D094_GENOME_PHENOTYPE_ANALYSIS.md`
-4. `D094_NEXT_EXPERIMENT_PLAN.md`
-5. `experiments/d094_llm_agent/results/phase2_r2/summary.json`、`independent_audit.json`、`analysis.json`
+专用选择器 fixture：Standard 唯一 phenotype=1，Full B4=2，平均行为距离0→1。演化 fixture：Standard/B4 最后一代 phenotype diversity 均0.75，B5=0.50；所有臂均8次评价。没有证明搜索效率、Pareto 或真实性能改善。
 
-### 可复算命令
+Phenotype 只能在真实评价后获得，不能宣称 B4 免费减少初始评价成本。R2 的36/36搜索候选仍未被有效最终验证，不得转为提升结论。
+
+## 新独立会话的复核任务
+
+1. 阅读 `D094_R3_IMPLEMENTATION_REVIEW.md` 及上述公式/代码，不把起草者自检当作独立通过。
+2. 对照真实 R2 原始 JSONL，确认历史证据未被修改。
+3. 检查行为表示是否排除 rationale/Token/隐藏信息，编辑距离和特征距离是否独立重算。
+4. 检查 Pareto/硬约束是否始终优先，零名额/重复/无可行候选是否正确。
+5. 检查失败分类分母、零反馈、softmax、随机控制和更新时点。
+6. 检查 B3/B4/B5 是否只改变各自机制，RNG/评价是否公平。
+7. 检查预算预留是否在请求前、搜索是否不能动用 final 池、失败/重试是否计费。
+8. 运行测试和合成 CLI，审查 R3 预算是否真的能覆盖444个设计 episodes；不可行则阻断，不得擅自提高预算。
+9. 分别给出 B3/B4/B5 的实现一致性结论与必须修复项。
+
+只有独立复核通过且用户明确批准，才可运行真实 R3。不得由本起草会话自行批准。
+
+## 验证命令
 
 ```bash
-python experiments/d094_llm_agent/d094_phase2_audit.py \
-  --outdir experiments/d094_llm_agent/results/phase2_r2
-python experiments/d094_llm_agent/d094_analysis.py \
-  --outdir experiments/d094_llm_agent/results/phase2_r2
 python -m unittest discover -s experiments/d094_llm_agent -p "test_*.py" -q
+python experiments/d094_llm_agent/run_d094_synthetic.py \
+  --outdir experiments/d094_llm_agent/results/r3_synthetic_review
 ```
 
-审计为PASS_WITH_LIMITATIONS：Phase2 Runner未提供逐事件hash-chain；原始文件SHA已锁定。被拒绝重复proposal、每代survivor phenotype和实际mutated locus未完整记录，不能编造。
-
-### 最终验证身份
-
-完整本地回归595/595，D-094=53/53。代码/结果提交`17120fac98b4aa96a8b5f0cbf5a0d67c8f3d6dec`的CI run`44360886032`已completed/success，D-094日志53/53 OK；6个既有artifact均非D-094性能证据。后续纯文档提交无run时写NOT RUN。
-
-### 下一任务
-
-只推进`D094_NEXT_EXPERIMENT_PLAN.md`的R3独立审查/预算预检与实现准备；R3真实API实验当前NOT RUN。R3必须先预留B1和最终评价预算、禁止零调用final、补齐mutation/duplicate/survivor/hash-chain账本。模型继续`deepseek-flash`，不超过1500次真实HTTP/0.50 USD的R3上限，不扩大规模。
-
-不得修改D-092/D-093或main，不删除R1/R2失败，不把Mock/缓存当真实API，不启动A800训练或Validation/Test。提交后核验本地/远端HEAD、main、工作区、测试、真实CI和artifact；纯文档无run时写NOT RUN。
+不得修改 D-092/D-093/main，不删除 R1/R2，不把 Mock/缓存/合成结果当真实 API 性能，不启动 A800 或 Validation/Test。提交后核验远端 HEAD/main/worktree、文件 SHA、真实 CI 和 artifact；无 run 写 NOT RUN。

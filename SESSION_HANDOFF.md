@@ -1,4 +1,13 @@
-## D-094 R2 完成审计交接（2026-11-19；INVALID_BUDGET）
+## D-094 R3 算法实现交接（2026-11-19；等待独立复核，NOT RUN）
+
+- 新增`d094_behavior.py`、`d094_diversity.py`、`d094_feedback_evolution.py`、`d094_adaptive_evolution.py`、`d094_budget.py`和`run_d094_synthetic.py`。B3/B4/B5机制隔离，补齐mutation locus、duplicate、survivor及预算预留账本。
+- D-094=82/82；合成选择器fixture phenotype1→2，但演化fixture Standard/B4均0.75、B5=0.50、每臂8次评价，无搜索效率或性能提升。
+- 规格=`D094_DIVERSITY_AWARE_NSGA2.md`、`D094_FAILURE_FEEDBACK_EVOLUTION.md`、`D094_R3_PREREGISTRATION.md`；自检=`D094_R3_IMPLEMENTATION_REVIEW.md`。当前READY_FOR_INDEPENDENT_REVIEW，不是独立通过或实验批准。
+- R3真实API NOT RUN；新独立会话需审查公式/控制流/预算，用户明确批准后才可执行。R1/R2 INVALID与D-092/D-093/main不变，A800/Validation/Test冻结。
+
+---
+
+## D-094 R2 完成审计交接（2026-11-19；INVALID_BUDGET，历史状态）
 
 - R2真实结束：1260/1260 episodes，3704真实API，Token=2600905/183304，成本1.0002363 USD>1.00；3992原始请求记录含288预算拒绝。数量完整不等于实验有效。
 - B0=36/36，B1=24/36；B2 final 36个LLM_ERROR且无真实调用，B2-B1无有效差值。搜索候选b5dbe97a0ff4…18abe搜索评价36/36，但最终无效；创新=INVALID。

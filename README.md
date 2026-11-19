@@ -1,4 +1,14 @@
-## D-094 R2 已结束但 INVALID_BUDGET（2026-11-19；当前状态）
+## D-094 R3 算法已实现并合成验证，等待独立复核（2026-11-19；NOT RUN）
+
+- B4实现编辑/特征行为距离、crowding+novelty和唯一phenotype控制；B3实现七类失败分类、反馈矩阵和稳定softmax；B5仅组合二者；预算模块实现请求前预留和B1/final池保护。
+- D-094测试82/82。专用选择器fixture唯一phenotype由1→2；但演化fixture Standard/B4均0.75，B5=0.50，所有臂8次评价，**没有搜索效率或真实性能提升信号**。
+- 文档=`D094_DIVERSITY_AWARE_NSGA2.md`、`D094_FAILURE_FEEDBACK_EVOLUTION.md`、`D094_R3_PREREGISTRATION.md`、`D094_R3_IMPLEMENTATION_REVIEW.md`。
+- 当前READY_FOR_INDEPENDENT_REVIEW；INDEPENDENT_REVIEWED=NO、APPROVED_FOR_EXPERIMENT=NO、EXPERIMENT_COMPLETED=NO、POSITIVE_SIGNAL=NO。R3真实API NOT RUN。
+- R1/R2 INVALID和原始账本保留，D-092/D-093/main不变。下一步由新独立会话复核，用户明确批准后才可真实执行。
+
+---
+
+## D-094 R2 已结束但 INVALID_BUDGET（2026-11-19；历史状态）
 
 - R2实际写入1260/1260 episodes；真实API=3704次，Token=2600905/183304，Token推导成本1.0002363 USD超过1.00 USD。288次预算拒绝未发送；B2 final无真实调用，实验无效。
 - B0=36/36、B1=24/36；B1逐seed相对B0=-5/12、-3/12、-4/12。B2 vs B1有效差值NOT AVAILABLE。

@@ -1,4 +1,14 @@
-## D-094 当前接管：R2 已审计，INVALID_BUDGET；R3 NOT RUN（2026-11-19）
+## D-094 当前接管：B3/B4/B5 已实现，等待新独立会话复核（2026-11-19）
+
+先读`D094_NEXT_SESSION_PROMPT.md`和`D094_R3_IMPLEMENTATION_REVIEW.md`。B4行为距离/选择器、B3失败反馈、B5组合及预算预留已实现；D-094测试82/82，合成CLI产物在`results/r3_synthetic/`。
+
+合成选择器fixture phenotype1→2，但演化fixture Standard/B4均0.75、B5=0.50，未证明搜索效率或性能提升。R3 NOT RUN，INDEPENDENT_REVIEWED=NO，APPROVED_FOR_EXPERIMENT=NO，POSITIVE_SIGNAL=NO。
+
+下一任务是新独立会话的实现一致性复核与R3预算审查；用户明确批准前不得运行真实R3。R1/R2历史、D-092/D-093和main不变。最终Git/CI按实际远端记录。
+
+---
+
+## D-094 当前接管：R2 已审计，INVALID_BUDGET；R3 NOT RUN（2026-11-19；历史状态）
 
 先读`D094_NEXT_SESSION_PROMPT.md`和`D094_PHASE2_R2_RESULT.md`。R2已结束，不得重启：1260 episodes、3704真实API、成本1.0002363 USD超限；B2 final无真实调用，无有效B2-B1比较。搜索阶段36/36信号只能用于后续复现，当前创新=INVALID。
 

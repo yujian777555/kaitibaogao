@@ -1,0 +1,17 @@
+{
+  "api_used": false,
+  "generations": 1,
+  "population_size": 4,
+  "protocol": "D094_R3_SYNTHETIC_V1",
+  "scientific_scope": "SYNTHETIC_ONLY",
+  "seed": 42,
+  "source_files": {
+    "d094_adaptive_evolution.py": "18edb4d824cba379a28aa4b56c7ae7e14e1043b087eeac1ef7cae421d3c02fbc",
+    "d094_behavior.py": "acc0bb79782026fce328b7ba0b67d98042181addd792de4bdc16ce4fe4ff328e",
+    "d094_diversity.py": "d7c9979a9a293bb49dc322f90f861cf10766c32768b2fbc4b08190d0e1afa496",
+    "d094_evolution.py": "2619c2b5b37480ef6a200d3818e3fa3a16a1ad9287929c062eb8ed943a13815e",
+    "d094_feedback_evolution.py": "702275f506a93a717b93df077d073dcf0475d013ae66855b56aec9730bb8cf38",
+    "d094_genome.py": "e14e9af447132bfdbcfb8830d8e727aa13fedfe6ec1ab0019cd0437c26a0101c",
+    "run_d094_synthetic.py": "9d1a4bf156f210b8b415cc6ebaaae4f25519827f8134dfaad8ff2a9ecf35ce68"
+  }
+}

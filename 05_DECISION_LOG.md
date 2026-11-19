@@ -1,5 +1,17 @@
 # 05 — 研究决策日志
 
+## 2026-11-19：D-094 B3/B4/B5 实现完成，但未独立复核、未获实验批准
+
+B4已实现规范化行为序列、编辑距离、加权特征距离、crowding+novelty和唯一phenotype控制；B3实现七类公开失败、反馈矩阵、β=2/τ=0.25/ε=0.1的稳定softmax；B5仅组合B3/B4。请求前预算预留和B1/final池保护已实现，演化账本补齐mutation locus、duplicate proposal、survivor和三种多样性。
+
+D-094测试82/82。合成选择器fixture唯一phenotype1→2，但演化fixture Standard/B4均0.75、B5=0.50，所有臂8次评价；因此没有搜索效率或真实性能提升证据。不得把“行为多样性提高”写成“算法性能提高”。
+
+当前状态=READY_FOR_INDEPENDENT_REVIEW；INDEPENDENT_REVIEWED=NO、APPROVED_FOR_EXPERIMENT=NO、EXPERIMENT_COMPLETED=NO、POSITIVE_SIGNAL=NO。R3 NOT RUN。下一步由新独立会话复核实现与预算，用户明确批准后才可运行真实R3。R1/R2、D-092/D-093和main不变，A800/Validation/Test冻结。
+
+---
+
+
+
 ## 2026-11-19：D-094 R2 数量完成但 INVALID_BUDGET，禁止误报演化提升
 
 R2实际写入1260/1260 episodes，真实API=3704，Token=2600905/183304，成本1.0002363 USD超过1.00 USD。原始请求3992条中288条为预算拒绝未发送。B2 final 36个 episodes均LLM_ERROR且无真实模型调用，故B2 vs B1无有效结论。

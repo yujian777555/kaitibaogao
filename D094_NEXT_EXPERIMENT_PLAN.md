@@ -78,3 +78,12 @@ R3 实现前必须具备：
 ## 8. 后续 RSI 与训练
 
 只有当 B3/B4/B5 的独立贡献可复现，才研究跨代经验驱动的 RSI。A800训练继续冻结；高质量轨迹需先通过数据质量、独立评价和训练目标审查，不能与 R2/R3 的 Prompt/Genome 演化混报。
+
+
+## R3 算法实现与合成审查状态（2026-11-19）
+
+B4、B3、B5及请求前预算预留已实现，见`D094_DIVERSITY_AWARE_NSGA2.md`、`D094_FAILURE_FEEDBACK_EVOLUTION.md`和`D094_R3_PREREGISTRATION.md`。实现自检见`D094_R3_IMPLEMENTATION_REVIEW.md`。
+
+D-094测试82/82。专用选择器fixture中Standard唯一phenotype=1、Full B4=2；演化fixture中Standard/B4均0.75，B5=0.50，所有臂均8次评价。没有真实搜索效率或性能提升信号。
+
+当前为READY_FOR_INDEPENDENT_REVIEW，不是APPROVED_FOR_EXPERIMENT。R3真实API实验NOT RUN；下一独立会话必须复核公式、控制流、账本和预算可执行性，并取得用户明确批准。
