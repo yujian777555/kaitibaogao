@@ -1,4 +1,15 @@
-## D-094 R3 算法实现交接（2026-11-19；等待独立复核，NOT RUN）
+## D-094 R3.1 真实结果与复算交接（2026-11-19；COMPLETED / NO_CLEAR_GAIN）
+
+- 唯一分支`d094-llm-agent-integration`；本轮起始HEAD=`6c084d2fd2617a19e52a9879b14670440bcde777`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。最终HEAD/远端/CI必须按本轮提交重新查询，不沿用旧run`44531813596`。
+- R3.1只真实执行一次：42/42 Train episodes，169真实HTTP/169唯一provider ID，Token=127148/8090，成本=上界=0.0478524 USD；无预算拒绝、执行错误、未知成本、超预留或超预算。执行锁SHA=`1853c31b9607f613ef7469a897271d22332c4fc3fc4881768419e5c003e3697b`，预算计划SHA=`6d7c6b5fece5db7a20fbc0f48b508250d6055f18096ddfd37cc0fb2b8411dc86`。
+- B1 fixed成功率/恢复率=1/1；B2/B3/B4/B5 final均0/0。四个预注册比较的总体及逐seed成功率差全部0。搜索唯一Genome=4；唯一Phenotype=B2/B3/B4/B5的2/3/2/3；Pareto front=2/2/3/1。总体判定NO_CLEAR_GAIN，不是创新成立。
+- 只读轨迹归因完成：8个演化final都inspect→verify→retry后MAX_STEPS；选中Genome步数=3，retry失败后未补偿/完成。B1配置同时有步数5、stepwise和dependency-aware，不能把B1的2/2对演化0/2归因于单一机制。
+- 独立程序复算PASS，报告=`D094_R3_1_RESULT.md`、`D094_R3_1_INDEPENDENT_AUDIT.md`；正式产物=`experiments/d094_llm_agent/results/r3_1_real/`。审计测试3/3、D-094=106/106、七目录全量=648/648（28+398+8+8+14+86+106）。根目录discover为0 tests，已显式弃用该次结果。
+- **下一唯一任务：只起草R4 fresh Train预注册，不运行真实实验。** 先锁定动作可达性和公平预算，研究质量约束/状态条件化行为多样性及同父代/任务/seed配对offspring的在线算子信用；不简单扩预算/种群。R1/R2、D-092/D-093历史不变；Validation/Test、A800和外部模型训练仍禁止。
+
+---
+
+## D-094 R3 算法实现交接（2026-11-19；历史状态，R3.1结果见上方）
 
 - 新增`d094_behavior.py`、`d094_diversity.py`、`d094_feedback_evolution.py`、`d094_adaptive_evolution.py`、`d094_budget.py`和`run_d094_synthetic.py`。B3/B4/B5机制隔离，补齐mutation locus、duplicate、survivor及预算预留账本。
 - D-094=82/82；合成选择器fixture phenotype1→2，但演化fixture Standard/B4均0.75、B5=0.50、每臂8次评价，无搜索效率或性能提升。

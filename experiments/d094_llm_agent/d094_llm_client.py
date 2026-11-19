@@ -224,9 +224,13 @@ def _parse_decision(content: Any) -> dict[str, Any]:
     if not isinstance(value["rationale"], str) or len(value["rationale"]) > 240:
         raise LLMResponseError("invalid public rationale")
     if value["action"] == "tool_call" and (
-        not isinstance(value["tool_name"], str) or not value["tool_name"]
+        not isinstance(value["tool_name"], str)
+        or not value["tool_name"]
+        or len(value["tool_name"]) > 64
     ):
-        raise LLMResponseError("tool_call requires a tool name")
+        raise LLMResponseError("tool_call requires a bounded tool name")
+    if len(canonical_json_bytes(value["tool_arguments"])) > 256:
+        raise LLMResponseError("tool arguments exceed the public decision byte cap")
     if value["action"] == "finish" and (
         value["tool_name"] is not None or value["tool_arguments"]
     ):
@@ -248,15 +252,19 @@ class LLMClient:
         max_retries: int = 1,
         timeout: float = 20.0,
         max_output_tokens: int = 128,
+        max_message_bytes: int | None = None,
         sleep_fn: Callable[[float], None] = time.sleep,
         clock: Callable[[], float] = time.perf_counter,
     ) -> None:
         if max_retries < 0 or timeout <= 0.0 or max_output_tokens <= 0:
             raise ValueError("invalid retry, timeout or output-token configuration")
+        if max_message_bytes is not None and max_message_bytes <= 0:
+            raise ValueError("invalid message byte cap")
         self.transport = transport
         self.max_retries = max_retries
         self.timeout = timeout
         self.max_output_tokens = max_output_tokens
+        self.max_message_bytes = max_message_bytes
         self.sleep_fn = sleep_fn
         self.clock = clock
         self.ledger = RequestLedger(
@@ -332,6 +340,11 @@ class LLMClient:
     ) -> LLMDecision:
         """Generate one structured action; every HTTP attempt is ledgered."""
         messages = build_messages(observation, available_tools, agent_config)
+        if (
+            self.max_message_bytes is not None
+            and len(canonical_json_bytes(messages)) > self.max_message_bytes
+        ):
+            raise LLMResponseError("message byte cap exceeded before transport")
         payload = {
             "model": self.transport.model,
             "messages": messages,
@@ -358,6 +371,9 @@ class LLMClient:
             result: TransportResult | None = None
             try:
                 result = self.transport(payload, self.timeout)
+                budget_event = getattr(self.transport, "last_budget_event", None)
+                if budget_event is not None:
+                    self.ledger.records[index].update(budget_event)
                 body = result.body
                 choices = body.get("choices")
                 if not isinstance(choices, list) or not choices:
@@ -381,6 +397,7 @@ class LLMClient:
                     output_tokens=output_tokens,
                     total_tokens=total_tokens,
                     cost_upper_usd=cost_upper,
+                    transport_sent=True,
                 )
                 self.ledger.enforce_cost_limit()
                 return LLMDecision(
@@ -393,6 +410,9 @@ class LLMClient:
                     latency_seconds=max(0.0, self.clock() - started),
                 )
             except Exception as error:
+                budget_event = getattr(self.transport, "last_budget_event", None)
+                if budget_event is not None:
+                    self.ledger.records[index].update(budget_event)
                 if self.ledger.records[index]["status"] == "PENDING":
                     input_tokens = output_tokens = total_tokens = None
                     response_model = None
@@ -422,6 +442,9 @@ class LLMClient:
                         output_tokens=output_tokens,
                         total_tokens=total_tokens,
                         cost_upper_usd=cost_upper,
+                        transport_sent=not isinstance(
+                            error, (LLMBudgetExceeded, LLMCostLimitExceeded)
+                        ),
                         error=error,
                     )
                 retryable = isinstance(error, (TransportError, LLMResponseError)) and (

@@ -152,9 +152,17 @@ class RequestLedger:
                 "output_tokens": None,
                 "total_tokens": None,
                 "cost_usd": None,
+                "budget_request_id": None,
+                "budget_pool": None,
+                "reserved_cost_upper_usd": None,
+                "reservation_status": None,
+                "settled_cost_usd": None,
+                "settled_cost_upper_usd": None,
+                "reservation_exceeded": None,
                 "latency_seconds": None,
                 "error_type": None,
                 "error": None,
+                "transport_sent": None,
             }
         )
         return len(self.records) - 1
@@ -171,6 +179,7 @@ class RequestLedger:
         output_tokens: int | None = None,
         total_tokens: int | None = None,
         cost_upper_usd: float | None = None,
+        transport_sent: bool | None = None,
         error: Exception | None = None,
     ) -> None:
         """Finalize exactly one reserved attempt with public accounting fields."""
@@ -186,23 +195,27 @@ class RequestLedger:
             not math.isfinite(cost_upper_usd) or cost_upper_usd < 0.0
         ):
             raise ValueError("invalid cost upper bound")
-        priced = (
-            input_tokens is not None
-            and output_tokens is not None
-            and self.input_price_per_1m is not None
-            and self.output_price_per_1m is not None
-        )
-        if priced:
-            cost = (
-                input_tokens * self.input_price_per_1m
-                + output_tokens * self.output_price_per_1m
-            ) / 1_000_000.0
-            self._total_cost_usd += cost
-            upper = cost
+        if transport_sent is False:
+            cost = 0.0
+            upper = 0.0
         else:
-            cost = None
-            self.cost_unknown = True
-            upper = cost_upper_usd
+            priced = (
+                input_tokens is not None
+                and output_tokens is not None
+                and self.input_price_per_1m is not None
+                and self.output_price_per_1m is not None
+            )
+            if priced:
+                cost = (
+                    input_tokens * self.input_price_per_1m
+                    + output_tokens * self.output_price_per_1m
+                ) / 1_000_000.0
+                self._total_cost_usd += cost
+                upper = cost
+            else:
+                cost = None
+                self.cost_unknown = True
+                upper = cost_upper_usd
         if upper is None:
             self.cost_upper_unknown = True
         else:
@@ -219,6 +232,7 @@ class RequestLedger:
             cost_usd=cost,
             cost_upper_usd=upper,
             latency_seconds=max(0.0, latency_seconds),
+            transport_sent=transport_sent,
             error_type=None if error is None else type(error).__name__,
             error=None if error is None else safe_error(error),
         )

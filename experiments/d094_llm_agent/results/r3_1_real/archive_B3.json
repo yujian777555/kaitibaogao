@@ -1,0 +1,626 @@
+[
+  {
+    "arm": "B3",
+    "candidate": {
+      "behavior": {
+        "canonical_sha256": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c",
+        "features": {
+          "completed": 0.0,
+          "failed_call_count": 0.0,
+          "recovery_count": 0.0,
+          "rejected_call_count": 16.0,
+          "retry_count": 0.0,
+          "runtime_abort": 0.0,
+          "state_transition_count": 0.0,
+          "tool_call_count": 16.0,
+          "verification_count": 8.0
+        },
+        "sequence": [
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "T|MAX_STEPS",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "T|MAX_STEPS"
+        ],
+        "state_transitions": [],
+        "terminal_status": "MULTI_EPISODE"
+      },
+      "constraint_violation": 16,
+      "execution_errors": 0,
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 16,
+          "planning_failure": 0,
+          "recovery_failure": 0,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 8
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 0,
+          "successful_tool_call_count": 0,
+          "tool_event_count": 16,
+          "verification_attempt_count": 8
+        },
+        "rates": {
+          "dependency_failure": 1.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 0.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 1.0
+        }
+      },
+      "genome": {
+        "max_plan_steps": 8,
+        "memory_mode": "recent_trajectory",
+        "planning_mode": "stepwise",
+        "recovery_mode": "compensation_priority",
+        "reflection_trigger": "after_failure",
+        "tool_call_guard": "strict_schema"
+      },
+      "objectives": [
+        1.0,
+        1.0,
+        16.0,
+        0.0,
+        0.0,
+        0.004796099999999999,
+        7.079481249966193
+      ],
+      "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c"
+    },
+    "episode_count": 2,
+    "episode_ids": [
+      "09684c3094c1c78512762938e6e3ed5ec503b03509cde5ba77cdac9ff8daa1f2",
+      "9b7d5296cb05fb69c8be6e274adf15a7afe67a84fb64f708109b80366be22bd0"
+    ],
+    "execution_errors": 0,
+    "genome": {
+      "max_plan_steps": 8,
+      "memory_mode": "recent_trajectory",
+      "planning_mode": "stepwise",
+      "recovery_mode": "compensation_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "strict_schema"
+    },
+    "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+    "hash_chain_valid": true,
+    "metrics": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 16,
+      "harm": 0.0,
+      "input_tokens": 13011,
+      "latency_seconds": 7.079481249966193,
+      "output_tokens": 744,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.004796099999999999,
+      "token_cost_usd": 0.004796099999999999,
+      "tool_cost": 0.0
+    },
+    "per_seed": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 8,
+        "harm": 0.0,
+        "input_tokens": 6504,
+        "latency_seconds": 6.820093199843541,
+        "output_tokens": 368,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0023928,
+        "token_cost_usd": 0.0023928,
+        "tool_cost": 0.0
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 8,
+        "harm": 0.0,
+        "input_tokens": 6507,
+        "latency_seconds": 7.338869300088845,
+        "output_tokens": 376,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0024032999999999997,
+        "token_cost_usd": 0.0024032999999999997,
+        "tool_cost": 0.0
+      }
+    },
+    "phase": "search",
+    "usage": {
+      "cost_upper_usd": 0.004796099999999999,
+      "cost_usd": 0.004796099999999999,
+      "input_tokens": 13011,
+      "latency_seconds": 14.158962499932386,
+      "output_tokens": 744,
+      "raw_request_records": 16,
+      "real_transport_attempts": 16
+    }
+  },
+  {
+    "arm": "B3",
+    "candidate": {
+      "behavior": {
+        "canonical_sha256": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+        "features": {
+          "completed": 0.0,
+          "failed_call_count": 2.0,
+          "recovery_count": 0.0,
+          "rejected_call_count": 0.0,
+          "retry_count": 2.0,
+          "runtime_abort": 0.0,
+          "state_transition_count": 0.0,
+          "tool_call_count": 6.0,
+          "verification_count": 2.0
+        },
+        "sequence": [
+          "D|tool_call|inspect_state|{}",
+          "R|tool_result|inspect_state|True|False|{\"requires_verification\":true,\"status\":\"INSPECTED\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_result|verify_state|True|False|{\"status\":\"VERIFIED\"}",
+          "D|tool_call|retry_primary|{}",
+          "R|tool_result|retry_primary|False|False|{\"tool_result\":{\"status\":\"PRIMARY_FAILED\"}}",
+          "T|MAX_STEPS",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_result|inspect_state|True|False|{\"requires_verification\":true,\"status\":\"INSPECTED\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_result|verify_state|True|False|{\"status\":\"VERIFIED\"}",
+          "D|tool_call|retry_primary|{}",
+          "R|tool_result|retry_primary|False|False|{\"tool_result\":{\"status\":\"PRIMARY_FAILED\"}}",
+          "T|MAX_STEPS"
+        ],
+        "state_transitions": [],
+        "terminal_status": "MULTI_EPISODE"
+      },
+      "constraint_violation": 0,
+      "execution_errors": 0,
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 0,
+          "planning_failure": 0,
+          "recovery_failure": 2,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 0
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 2,
+          "successful_tool_call_count": 4,
+          "tool_event_count": 6,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 0.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.0
+        }
+      },
+      "genome": {
+        "max_plan_steps": 3,
+        "memory_mode": "structured_failures",
+        "planning_mode": "direct",
+        "recovery_mode": "retry_priority",
+        "reflection_trigger": "after_failure",
+        "tool_call_guard": "post_plan_verify"
+      },
+      "objectives": [
+        1.0,
+        1.0,
+        0.0,
+        0.5,
+        3.4,
+        0.0016344,
+        2.4953989998903126
+      ],
+      "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+    },
+    "episode_count": 2,
+    "episode_ids": [
+      "74adaaef938b19eb38662dae17413006ccc79cd546dfcec66cf35fc4e2f85cf8",
+      "814faa12e9739145cb42d803293c10312e681fdd65623092ebc3a5973e6b966c"
+    ],
+    "execution_errors": 0,
+    "genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+    "hash_chain_valid": true,
+    "metrics": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 0,
+      "harm": 0.5,
+      "input_tokens": 4248,
+      "latency_seconds": 2.4953989998903126,
+      "output_tokens": 300,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0016344,
+      "token_cost_usd": 0.0016344,
+      "tool_cost": 3.4
+    },
+    "per_seed": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.4340267998632044,
+        "output_tokens": 150,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008172,
+        "token_cost_usd": 0.0008172,
+        "tool_cost": 1.7
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.5567711999174207,
+        "output_tokens": 150,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008172,
+        "token_cost_usd": 0.0008172,
+        "tool_cost": 1.7
+      }
+    },
+    "phase": "search",
+    "usage": {
+      "cost_upper_usd": 0.0016344000000000003,
+      "cost_usd": 0.0016344000000000003,
+      "input_tokens": 4248,
+      "latency_seconds": 4.990797999780625,
+      "output_tokens": 300,
+      "raw_request_records": 6,
+      "real_transport_attempts": 6
+    }
+  },
+  {
+    "arm": "B3",
+    "candidate": {
+      "behavior": {
+        "canonical_sha256": "54e2dd59c58a0156a294245734c93cc3cba9202375521f44fdc6a3df61a88eab",
+        "features": {
+          "completed": 0.0,
+          "failed_call_count": 0.0,
+          "recovery_count": 0.0,
+          "rejected_call_count": 6.0,
+          "retry_count": 0.0,
+          "runtime_abort": 0.0,
+          "state_transition_count": 0.0,
+          "tool_call_count": 6.0,
+          "verification_count": 2.0
+        },
+        "sequence": [
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "T|MAX_STEPS",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_rejected|verify_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"verify_state\"}",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_rejected|inspect_state|False|False|{\"error\":\"RECOVERY_COMPENSATION_REQUIRED\",\"executed\":false,\"tool_name\":\"inspect_state\"}",
+          "T|MAX_STEPS"
+        ],
+        "state_transitions": [],
+        "terminal_status": "MULTI_EPISODE"
+      },
+      "constraint_violation": 6,
+      "execution_errors": 0,
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 6,
+          "planning_failure": 0,
+          "recovery_failure": 0,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 2
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 0,
+          "successful_tool_call_count": 0,
+          "tool_event_count": 6,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 1.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 0.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 1.0
+        }
+      },
+      "genome": {
+        "max_plan_steps": 3,
+        "memory_mode": "structured_failures",
+        "planning_mode": "direct",
+        "recovery_mode": "compensation_priority",
+        "reflection_trigger": "after_failure",
+        "tool_call_guard": "post_plan_verify"
+      },
+      "objectives": [
+        1.0,
+        1.0,
+        6.0,
+        0.0,
+        0.0,
+        0.0017328,
+        2.6475037000491284
+      ],
+      "phenotype_hash": "54e2dd59c58a0156a294245734c93cc3cba9202375521f44fdc6a3df61a88eab"
+    },
+    "episode_count": 2,
+    "episode_ids": [
+      "57ee82be5fd9f798ca1a6d4e3d9f4d795d7c7693e111515423b17f6c04cccdaf",
+      "6947c873e61ec5dc07c42293ee11fd9df0a0756254e841837a8498a2b267bce5"
+    ],
+    "execution_errors": 0,
+    "genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "compensation_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+    "hash_chain_valid": true,
+    "metrics": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 6,
+      "harm": 0.0,
+      "input_tokens": 4648,
+      "latency_seconds": 2.6475037000491284,
+      "output_tokens": 282,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0017328,
+      "token_cost_usd": 0.0017328,
+      "tool_cost": 0.0
+    },
+    "per_seed": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 3,
+        "harm": 0.0,
+        "input_tokens": 2324,
+        "latency_seconds": 2.3874540000688285,
+        "output_tokens": 141,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008664,
+        "token_cost_usd": 0.0008664,
+        "tool_cost": 0.0
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 3,
+        "harm": 0.0,
+        "input_tokens": 2324,
+        "latency_seconds": 2.9075534000294283,
+        "output_tokens": 141,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008664,
+        "token_cost_usd": 0.0008664,
+        "tool_cost": 0.0
+      }
+    },
+    "phase": "search",
+    "usage": {
+      "cost_upper_usd": 0.0017328,
+      "cost_usd": 0.0017328,
+      "input_tokens": 4648,
+      "latency_seconds": 5.295007400098257,
+      "output_tokens": 282,
+      "raw_request_records": 6,
+      "real_transport_attempts": 6
+    }
+  },
+  {
+    "arm": "B3",
+    "candidate": {
+      "behavior": {
+        "canonical_sha256": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+        "features": {
+          "completed": 0.0,
+          "failed_call_count": 2.0,
+          "recovery_count": 0.0,
+          "rejected_call_count": 0.0,
+          "retry_count": 2.0,
+          "runtime_abort": 0.0,
+          "state_transition_count": 0.0,
+          "tool_call_count": 6.0,
+          "verification_count": 2.0
+        },
+        "sequence": [
+          "D|tool_call|inspect_state|{}",
+          "R|tool_result|inspect_state|True|False|{\"requires_verification\":true,\"status\":\"INSPECTED\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_result|verify_state|True|False|{\"status\":\"VERIFIED\"}",
+          "D|tool_call|retry_primary|{}",
+          "R|tool_result|retry_primary|False|False|{\"tool_result\":{\"status\":\"PRIMARY_FAILED\"}}",
+          "T|MAX_STEPS",
+          "D|tool_call|inspect_state|{}",
+          "R|tool_result|inspect_state|True|False|{\"requires_verification\":true,\"status\":\"INSPECTED\"}",
+          "D|tool_call|verify_state|{}",
+          "R|tool_result|verify_state|True|False|{\"status\":\"VERIFIED\"}",
+          "D|tool_call|retry_primary|{}",
+          "R|tool_result|retry_primary|False|False|{\"tool_result\":{\"status\":\"PRIMARY_FAILED\"}}",
+          "T|MAX_STEPS"
+        ],
+        "state_transitions": [],
+        "terminal_status": "MULTI_EPISODE"
+      },
+      "constraint_violation": 0,
+      "execution_errors": 0,
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 0,
+          "planning_failure": 0,
+          "recovery_failure": 2,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 0
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 2,
+          "successful_tool_call_count": 4,
+          "tool_event_count": 6,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 0.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.0
+        }
+      },
+      "genome": {
+        "max_plan_steps": 3,
+        "memory_mode": "structured_failures",
+        "planning_mode": "direct",
+        "recovery_mode": "retry_priority",
+        "reflection_trigger": "none",
+        "tool_call_guard": "post_plan_verify"
+      },
+      "objectives": [
+        1.0,
+        1.0,
+        0.0,
+        0.5,
+        3.4,
+        0.0016116,
+        2.614219699986279
+      ],
+      "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+    },
+    "episode_count": 2,
+    "episode_ids": [
+      "777695c9a2f924f74fb7b108509c176240c8336e78d61685a203866735ba0dbe",
+      "5f24c62cc4e58bdb9644639663b7fac81ee9faca8a4b6a0c1f2128901501a060"
+    ],
+    "execution_errors": 0,
+    "genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "none",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+    "hash_chain_valid": true,
+    "metrics": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 0,
+      "harm": 0.5,
+      "input_tokens": 4208,
+      "latency_seconds": 2.614219699986279,
+      "output_tokens": 291,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0016116,
+      "token_cost_usd": 0.0016116,
+      "tool_cost": 3.4
+    },
+    "per_seed": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.463656499865465,
+        "output_tokens": 144,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008039999999999999,
+        "token_cost_usd": 0.0008039999999999999,
+        "tool_cost": 1.7
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.764782900107093,
+        "output_tokens": 147,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008075999999999999,
+        "token_cost_usd": 0.0008075999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "phase": "search",
+    "usage": {
+      "cost_upper_usd": 0.0016115999999999997,
+      "cost_usd": 0.0016115999999999997,
+      "input_tokens": 4208,
+      "latency_seconds": 5.228439399972558,
+      "output_tokens": 291,
+      "raw_request_records": 6,
+      "real_transport_attempts": 6
+    }
+  }
+]

@@ -131,6 +131,12 @@ class TestAdaptiveEvolution(unittest.TestCase):
             for survivor in event["survivors"]:
                 self.assertIn("phenotype_hash", survivor)
                 self.assertIn("genome_sha256", survivor)
+        initial = next(
+            event
+            for event in optimizer.ledger
+            if event["event_type"] == "survivor_selection" and event["generation"] == -1
+        )
+        self.assertIn("objectives", initial["survivors"][0])
 
     def test_b5_combines_only_feedback_and_diversity(self):
         optimizer = AdaptiveNSGAII(mode="combined")

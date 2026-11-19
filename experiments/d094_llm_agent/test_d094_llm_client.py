@@ -229,6 +229,15 @@ class TestLLMClient(unittest.TestCase):
         self.assertGreater(client.ledger.total_cost_upper_usd, 0.022)
         self.assertGreater(client.ledger.records[0]["cost_upper_usd"], 0.0)
 
+    def test_message_byte_cap_blocks_before_transport(self):
+        transport = MockTransport([result()])
+        client = LLMClient(
+            transport, max_requests=1, max_retries=0, max_message_bytes=1
+        )
+        with self.assertRaises(LLMResponseError):
+            client.generate_action(*inputs())
+        self.assertEqual(len(transport.calls), 0)
+
     def test_real_http_path_serializes_openai_compatible_request(self):
         captured = []
 

@@ -147,6 +147,7 @@ class AdaptiveNSGAII:
                     {
                         "genome_sha256": candidate.genome_id,
                         "phenotype_hash": candidate.phenotype_hash,
+                        "objectives": candidate.objectives,
                     }
                     for candidate in population
                 ],

@@ -1,0 +1,129 @@
+{
+  "B1_request_upper": 120,
+  "arm_plans": {
+    "B1": {
+      "base_request_upper": 60,
+      "cost_upper_usd": 0.09043199999999998,
+      "evaluation_episodes": 12,
+      "protected": true,
+      "request_upper": 120,
+      "retry_request_upper": 60
+    },
+    "B2": {
+      "cost_upper_usd": 1.3022207999999997,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.14469119999999996,
+      "final_episodes": 12,
+      "final_protected": true,
+      "final_request_upper": 192,
+      "initial_candidates": 4,
+      "initial_cost_upper_usd": 0.5787647999999999,
+      "initial_episodes": 48,
+      "initial_request_upper": 768,
+      "offspring_candidates": 4,
+      "offspring_cost_upper_usd": 0.5787647999999999,
+      "offspring_episodes": 48,
+      "offspring_request_upper": 768,
+      "retry_request_upper": 864,
+      "search_request_upper": 1536
+    },
+    "B3": {
+      "cost_upper_usd": 1.3022207999999997,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.14469119999999996,
+      "final_episodes": 12,
+      "final_protected": true,
+      "final_request_upper": 192,
+      "initial_candidates": 4,
+      "initial_cost_upper_usd": 0.5787647999999999,
+      "initial_episodes": 48,
+      "initial_request_upper": 768,
+      "offspring_candidates": 4,
+      "offspring_cost_upper_usd": 0.5787647999999999,
+      "offspring_episodes": 48,
+      "offspring_request_upper": 768,
+      "retry_request_upper": 864,
+      "search_request_upper": 1536
+    },
+    "B4": {
+      "cost_upper_usd": 1.3022207999999997,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.14469119999999996,
+      "final_episodes": 12,
+      "final_protected": true,
+      "final_request_upper": 192,
+      "initial_candidates": 4,
+      "initial_cost_upper_usd": 0.5787647999999999,
+      "initial_episodes": 48,
+      "initial_request_upper": 768,
+      "offspring_candidates": 4,
+      "offspring_cost_upper_usd": 0.5787647999999999,
+      "offspring_episodes": 48,
+      "offspring_request_upper": 768,
+      "retry_request_upper": 864,
+      "search_request_upper": 1536
+    },
+    "B5": {
+      "cost_upper_usd": 1.3022207999999997,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.14469119999999996,
+      "final_episodes": 12,
+      "final_protected": true,
+      "final_request_upper": 192,
+      "initial_candidates": 4,
+      "initial_cost_upper_usd": 0.5787647999999999,
+      "initial_episodes": 48,
+      "initial_request_upper": 768,
+      "offspring_candidates": 4,
+      "offspring_cost_upper_usd": 0.5787647999999999,
+      "offspring_episodes": 48,
+      "offspring_request_upper": 768,
+      "retry_request_upper": 864,
+      "search_request_upper": 1536
+    }
+  },
+  "candidates_per_arm": 8,
+  "final_request_upper_per_arm": 192,
+  "fits": false,
+  "input_cost_upper_per_request_usd": 0.0006,
+  "input_price_per_1m_usd": 0.3,
+  "max_input_bytes_per_request": 2000,
+  "max_output_tokens_per_request": 128,
+  "output_cost_upper_per_request_usd": 0.0001536,
+  "output_price_per_1m_usd": 1.2,
+  "paired_episode_count": 12,
+  "per_request_cost_upper_usd": 0.0007535999999999999,
+  "planned_episode_count": 444,
+  "protected_pools": {
+    "B1": {
+      "cost_usd": 0.09043199999999998,
+      "request_count": 120
+    },
+    "final:B2": {
+      "cost_usd": 0.14469119999999996,
+      "request_count": 192
+    },
+    "final:B3": {
+      "cost_usd": 0.14469119999999996,
+      "request_count": 192
+    },
+    "final:B4": {
+      "cost_usd": 0.14469119999999996,
+      "request_count": 192
+    },
+    "final:B5": {
+      "cost_usd": 0.14469119999999996,
+      "request_count": 192
+    }
+  },
+  "protocol": "D094_R3_BUDGET",
+  "search_cost_upper_usd": 4.630118399999999,
+  "search_request_upper_per_arm": 1536,
+  "task_count": 6,
+  "total_cost_upper_usd": 5.299315199999999,
+  "total_request_upper": 7032
+}

@@ -1,0 +1,13 @@
+{
+  "actual_episode_count": 0,
+  "budget": {
+    "backend": "openai-compatible",
+    "cost_usd": 0.0,
+    "request_count": 0,
+    "sent_request_count": 0
+  },
+  "budget_plan_sha256": "1eb5f3eed386b7d717c10a4a36da9c1912082e7df264ecd8c7a9bc8fa3348276",
+  "protocol": "D094_R3_TRAIN",
+  "scientific_scope": "No API request was sent because the frozen design is not budget-safe",
+  "status": "BLOCKED_BUDGET"
+}

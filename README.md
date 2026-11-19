@@ -1,10 +1,19 @@
-## D-094 R3 算法已实现并合成验证，等待独立复核（2026-11-19；NOT RUN）
+## D-094 R3.1 真实五臂实验已完成：NO_CLEAR_GAIN（2026-11-19）
+
+- R3.1真实执行一次并完成42/42 Train episodes、169次真实HTTP；输入/输出127148/8090 tokens，Token推导成本及上界0.0478524 USD。无预算拒绝、执行错误、未知成本或超预算；42条逐事件hash-chain均有效。
+- B1 fixed为2/2成功；B2/B3/B4/B5 final均0/2。B3−B2、B4−B2、B5−B3、B5−B4的总体及seed201/202成功率差全部为0，**没有性能提升，结论=NO_CLEAR_GAIN，不是POSITIVE_SIGNAL**。
+- 搜索唯一Genome均为4；唯一Phenotype依次B2=2、B3=3、B4=2、B5=3，无complete collapse。B3/B5的搜索行为变化只是机制信号；B4未提高多样性，B5未证明协同。
+- 最终轨迹直接归因：四个演化臂8个final episodes均为inspect→verify→retry，retry失败后触及`max_plan_steps=3`，未执行补偿/完成，以MAX_STEPS终止；不是提前finish、预算或传输失败。
+- 结果=`D094_R3_1_RESULT.md`；独立复算=`D094_R3_1_INDEPENDENT_AUDIT.md`及`results/r3_1_real/independent_audit.json`=PASS。D-094=106/106，七目录全量回归=648/648；根目录discover得到0 tests，不作通过证据。
+- 下一步只设计新版本R4：fresh Train预注册、动作可达性、质量约束/状态条件化行为多样性、配对offspring在线算子信用；不得简单扩大预算/种群或自动重跑真实API。R1/R2 INVALID和原始账本保留，D-092/D-093/main不变，Validation/Test/A800/外部训练冻结。
+
+---
+
+## D-094 R3 算法实现与合成验证（2026-11-19；历史状态，R3.1结果见上方）
 
 - B4实现编辑/特征行为距离、crowding+novelty和唯一phenotype控制；B3实现七类失败分类、反馈矩阵和稳定softmax；B5仅组合二者；预算模块实现请求前预留和B1/final池保护。
-- D-094测试82/82，完整回归624/624。代码提交`da509c5ad9b9fbaf1796809eb5d4e43143b9fc98`的CI run`44531813596`已completed/success，D-094日志82/82。专用选择器fixture唯一phenotype由1→2；但演化fixture Standard/B4均0.75，B5=0.50，所有臂8次评价，**没有搜索效率或真实性能提升信号**。
-- 文档=`D094_DIVERSITY_AWARE_NSGA2.md`、`D094_FAILURE_FEEDBACK_EVOLUTION.md`、`D094_R3_PREREGISTRATION.md`、`D094_R3_IMPLEMENTATION_REVIEW.md`。
-- 当前READY_FOR_INDEPENDENT_REVIEW；INDEPENDENT_REVIEWED=NO、APPROVED_FOR_EXPERIMENT=NO、EXPERIMENT_COMPLETED=NO、POSITIVE_SIGNAL=NO。R3真实API NOT RUN。
-- R1/R2 INVALID和原始账本保留，D-092/D-093/main不变。下一步由新独立会话复核，用户明确批准后才可真实执行。
+- 当时D-094测试82/82，完整回归624/624。代码提交`da509c5ad9b9fbaf1796809eb5d4e43143b9fc98`的CI run`44531813596`已completed/success。专用选择器fixture唯一phenotype由1→2；但演化fixture Standard/B4均0.75、B5=0.50，没有搜索效率或真实性能提升信号。
+- 当时状态为READY_FOR_INDEPENDENT_REVIEW、真实R3 NOT RUN。后续R3.1已完成独立审查、预算预检、真实执行和独立复算，当前权威结论以本节上方为准。
 
 ---
 

@@ -56,7 +56,14 @@ def classify_failures(episodes: list[dict[str, Any]]) -> dict[str, Any]:
             tool_events += 1
             tool_name = str(payload.get("tool_name"))
             success = bool(payload.get("success"))
-            error = str(payload.get("observation", {}).get("error", ""))
+            observation = payload.get("observation", {})
+            nested = observation.get("tool_result", {})
+            error = str(
+                observation.get(
+                    "error",
+                    nested.get("error", "") if isinstance(nested, dict) else "",
+                )
+            )
             counts["tool_call_failure"] += error in {
                 "TOOL_SCHEMA_REJECTED",
                 "UNKNOWN_OR_UNAVAILABLE_TOOL",

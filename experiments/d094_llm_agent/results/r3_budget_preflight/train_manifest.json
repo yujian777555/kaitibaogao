@@ -1,0 +1,9 @@
+{
+  "manifest_sha256": "8582cd6aaeafa5c0555e87be63c00073314235facbe0270a2246a8c068ffdccd",
+  "protocol": "D094_R3_TRAIN",
+  "scenario_count": 0,
+  "split": "train",
+  "tasks": [],
+  "test_included": false,
+  "validation_included": false
+}

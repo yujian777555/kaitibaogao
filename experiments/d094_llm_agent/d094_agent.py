@@ -5,7 +5,7 @@ import dataclasses
 from pathlib import Path
 from typing import Any, Callable, Protocol
 
-from d094_ledger import ExecutionLedger, sanitize_public
+from d094_ledger import ExecutionLedger, canonical_json_bytes, sanitize_public
 from d094_llm_client import LLMClient, LLMDecision
 from d094_prompts import assert_public_input
 
@@ -198,10 +198,50 @@ class _AgentLoop:
         if self.execution_ledger is not None:
             self.execution_ledger.append(event_type, safe)
 
+    @staticmethod
+    def _bounded_memory(memory: dict[str, Any]) -> dict[str, Any]:
+        """Bound only the model-facing projection, never the raw event ledger."""
+        bounded = {**memory, "truncated": False}
+        if "entries" in memory:
+            bounded["entries"] = list(memory["entries"])
+            items = bounded["entries"]
+        else:
+            bounded["summary"] = {
+                **memory["summary"],
+                "tool_names": list(memory["summary"]["tool_names"]),
+            }
+            items = bounded["summary"]["tool_names"]
+        while items and len(canonical_json_bytes(bounded)) > 512:
+            items.pop(0)
+            bounded["truncated"] = True
+        if len(canonical_json_bytes(bounded)) > 512:
+            items.clear()
+            bounded["truncated"] = True
+        return bounded
+
     def _memory(self) -> dict[str, Any]:
         mode = self.agent_config["memory_mode"]
         if mode == "recent_trajectory":
-            return {"kind": "recent_trajectory", "entries": self.events[-3:]}
+            entries = []
+            for event in self.events[-3:]:
+                if event["event_type"] == "decision":
+                    payload = event["payload"]
+                    fields = (
+                        "action",
+                        "tool_name",
+                        "tool_arguments",
+                        "rationale",
+                        "verification_required",
+                    )
+                    projected = {field: payload[field] for field in fields}
+                    projected["rationale"] = projected["rationale"].encode("utf-8")[
+                        :80
+                    ].decode("utf-8", "ignore")
+                    event = {"event_type": "decision", "payload": projected}
+                entries.append(event)
+            return self._bounded_memory(
+                {"kind": "recent_trajectory", "entries": entries}
+            )
         if mode == "structured_failures":
             failures = [
                 event
@@ -212,25 +252,33 @@ class _AgentLoop:
                     and not event["payload"]["success"]
                 )
             ]
-            return {"kind": "structured_failures", "entries": failures}
+            return self._bounded_memory(
+                {
+                    "kind": "structured_failures",
+                    "entries": failures[-3:],
+                    "total_failure_count": len(failures),
+                }
+            )
         decisions = [
             event["payload"]
             for event in self.events
             if event["event_type"] == "decision"
         ]
         failures = sum(event["event_type"] == "tool_rejected" for event in self.events)
-        return {
-            "kind": "compressed_summary",
-            "summary": {
-                "event_count": len(self.events),
-                "failure_count": failures,
-                "tool_names": [
-                    event["tool_name"]
-                    for event in decisions
-                    if event["action"] == "tool_call"
-                ],
-            },
-        }
+        return self._bounded_memory(
+            {
+                "kind": "compressed_summary",
+                "summary": {
+                    "event_count": len(self.events),
+                    "failure_count": failures,
+                    "tool_names": [
+                        event["tool_name"]
+                        for event in decisions
+                        if event["action"] == "tool_call"
+                    ],
+                },
+            }
+        )
 
     def _reflection(self) -> dict[str, Any] | None:
         trigger = self.agent_config["reflection_trigger"]
@@ -435,7 +483,10 @@ class LLMAgent(_AgentLoop):
                 observation, tools, self.agent_config
             ),
             "llm",
-            lambda: len(self.client.ledger.records) - self._initial_attempts,
+            lambda: sum(
+                record.get("transport_sent") is not False
+                for record in self.client.ledger.records[self._initial_attempts :]
+            ),
         )
 
 

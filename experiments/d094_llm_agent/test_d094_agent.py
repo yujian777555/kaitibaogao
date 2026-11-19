@@ -247,6 +247,20 @@ class TestAgentLoop(unittest.TestCase):
                 self.assertIn(marker, prompt)
                 self.assertIn("reflection_request", prompt)
 
+    def test_recent_memory_excludes_request_metadata(self):
+        environment = FakeEnvironment(
+            [tool("inspect"), tool("complete")], {"complete"}
+        )
+        client = client_for([action("inspect"), action("complete")])
+        genome = AgentGenome(memory_mode="recent_trajectory")
+        LLMAgent(client, genome.to_agent_config()).run("Recover", environment)
+        prompt = client.transport.calls[1][0]["messages"][1]["content"]
+        self.assertIn("recent_trajectory", prompt)
+        self.assertIn("Use the selected public tool.", prompt)
+        self.assertNotIn("prompt_sha256", prompt)
+        self.assertNotIn("request_id", prompt)
+        self.assertNotIn("latency_seconds", prompt)
+
     def test_max_plan_steps_counts_llm_decisions(self):
         environment = FakeEnvironment([tool("inspect")])
         client = client_for([action("inspect")] * 3)

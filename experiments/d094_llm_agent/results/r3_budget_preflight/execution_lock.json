@@ -1,0 +1,47 @@
+{
+  "backend": "openai-compatible",
+  "budget_plan_sha256": "1eb5f3eed386b7d717c10a4a36da9c1912082e7df264ecd8c7a9bc8fa3348276",
+  "config": {
+    "generations": 1,
+    "global_cost_cap": 0.5,
+    "global_request_cap": 1500,
+    "max_concurrency": 4,
+    "max_message_bytes": 2000,
+    "max_output_tokens": 128,
+    "max_retries": 1,
+    "population_size": 4,
+    "revision": "R3",
+    "search_seed": 711,
+    "seeds": [
+      201,
+      202
+    ],
+    "task_ids": [],
+    "timeout_seconds": 20.0
+  },
+  "created_utc": "2026-11-19T15:25:07.309416+00:00",
+  "model": "deepseek-flash",
+  "protocol": "D094_R3_TRAIN",
+  "source_files": {
+    "d094_adaptive_evolution.py": "d8a2c105b02dee1c8c7dc7047da5b5de8cecac7162abbf85cbbf6680957bbba1",
+    "d094_agent.py": "1777399bcab0c51a31790184db7778d0b273c9a4a661e7fce837b058594b84f7",
+    "d094_behavior.py": "dc7e93dbe2ad74a144080cd006201427b52085fcd755bb5e9b4ecfc466facdc2",
+    "d094_budget.py": "e4348745817f509c752b3ff46b479b2bf6eb5e9d2a5425af06adc8046049d7cc",
+    "d094_diversity.py": "aab951e82d2fcb7f5cba79aafb43cb8351c52eafbd11194e62c1087632fc47d7",
+    "d094_evaluator.py": "9599fdc478d00a43c79852f9660db785d04161da451e6282483a7aed69d7c097",
+    "d094_evolution.py": "2619c2b5b37480ef6a200d3818e3fa3a16a1ad9287929c062eb8ed943a13815e",
+    "d094_feedback_evolution.py": "9d06b7289ae7c5eddce082a57ab0d441fa5eaa7b1d2759ca37582917a26cb09a",
+    "d094_genome.py": "e14e9af447132bfdbcfb8830d8e727aa13fedfe6ec1ab0019cd0437c26a0101c",
+    "d094_ledger.py": "636c4558d2386d38227f779cd4c787d60e751dc94ca643c1a7c1745af753edee",
+    "d094_llm_client.py": "72d13f06d80fc4d3b8e9423520099833111ceb03727695974b111e2f78577267",
+    "d094_prompts.py": "403e6481c74231efee663ba4dc92b0a925a1acc1cd7fa108f93922d8ef9f7d4d",
+    "d094_r3_tasks.py": "e9ac61015bdd69b7462e1e1ae18e4dd2380429bd5fcad24dc1a41e8e06e65c6b",
+    "d094_tasks.py": "a8d5097c9ccd59487008a33ab6635d5add4cbb779fff63e6e82b6b17a2a58fed",
+    "run_d094_r3.py": "2ab8674790bc1645384acff39215ec08a973854661419868273ab4c5c03a9460"
+  },
+  "temperature": 0.0,
+  "thinking": {
+    "type": "disabled"
+  },
+  "train_manifest_sha256": "8582cd6aaeafa5c0555e87be63c00073314235facbe0270a2246a8c068ffdccd"
+}

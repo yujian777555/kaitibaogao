@@ -187,7 +187,6 @@ def diversity_survivors(
         [candidate for candidate in unique.values() if not candidate.feasible],
         key=lambda candidate: (
             candidate.constraint_violation,
-            candidate.execution_errors,
             candidate.genome_id,
         ),
     )

@@ -1,0 +1,20 @@
+{
+  "manifest_sha256": "bfd4ed0123363ed84ccf48133747e267f9f7f1206fb297f3cc46a006464f359d",
+  "protocol": "D094_R3.1_TRAIN",
+  "scenario_count": 1,
+  "split": "train",
+  "tasks": [
+    {
+      "family": "compensation",
+      "goal": "R3 public recovery case compensation 0: verify, recover as required, and complete safely.",
+      "requires_compensation": true,
+      "requires_verification": true,
+      "retry_failures": 0,
+      "retry_never": true,
+      "seed_jitter": false,
+      "task_id": "d094_r3_train_compensation_0"
+    }
+  ],
+  "test_included": false,
+  "validation_included": false
+}

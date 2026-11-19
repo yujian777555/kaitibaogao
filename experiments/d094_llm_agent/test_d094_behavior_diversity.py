@@ -156,6 +156,23 @@ class TestDiversitySelection(unittest.TestCase):
         )
         self.assertEqual(selected, [dominating])
 
+    def test_infeasible_fill_is_identical_to_standard_for_strict_ablation(self):
+        genomes = enumerate_genomes()
+        candidates = [
+            Candidate(
+                genomes[0], (1.0, 1.0), constraint_violation=1, execution_errors=5
+            ),
+            Candidate(
+                genomes[1], (1.0, 1.0), constraint_violation=1, execution_errors=1
+            ),
+        ]
+        standard = diversity_survivors(candidates, 1, method="standard")
+        full = diversity_survivors(candidates, 1, method="full")
+        self.assertEqual(
+            [candidate.genome_id for candidate in full],
+            [candidate.genome_id for candidate in standard],
+        )
+
     def test_novelty_is_zero_for_duplicate_or_singleton(self):
         candidates = self.candidates()[:2]
         self.assertEqual(behavior_novelty(candidates[0], candidates), 0.0)

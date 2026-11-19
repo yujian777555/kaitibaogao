@@ -1,5 +1,19 @@
 # 05 — 研究决策日志
 
+## 2026-11-19：D-094 R3.1 真实五臂完成，判定 NO_CLEAR_GAIN
+
+R3.1在冻结的单Train任务、seeds201/202、population2、1代和0.50 USD/1500请求上限内真实执行一次，42/42 episodes和169次HTTP全部完成。Token=127148/8090，成本=0.0478524 USD；预算/hash-chain/执行锁完整，独立程序复算PASS。
+
+**结果决定：NO_CLEAR_GAIN。** B1 fixed为2/2成功；B2/B3/B4/B5 final均0/2，B3−B2、B4−B2、B5−B3、B5−B4总体与逐seed成功率差均为0。B3/B5唯一Phenotype=3，相对B2=2仅是搜索机制信号；B4=2未提高多样性，B5未证明协同。不得写成POSITIVE_SIGNAL、性能提升或创新成立。
+
+只读轨迹证实8个演化final均inspect→verify→retry，随后因`max_plan_steps=3`以MAX_STEPS终止，未补偿/完成。这是直接轨迹原因，不等于已识别唯一因果根因；B1与演化候选还有多项Genome差异，样本不能支持外推。
+
+**下一决定：只起草R4 fresh Train预注册，暂不执行。** 包含动作可达性门、质量约束/状态条件化多样性和配对offspring在线算子信用，禁止通过简单扩大预算/种群制造改善。权威文件=`D094_R3_1_RESULT.md`、`D094_R3_1_INDEPENDENT_AUDIT.md`、`D094_NEXT_EXPERIMENT_PLAN.md`。
+
+验证：D-094=106/106；按CI七目录实测648/648，根目录0-tests结果无效。R1/R2 INVALID、D-092/D-093和main不变；Validation/Test、A800、外部训练继续冻结。本轮提交后的CI按真实HEAD另查，不沿用历史run。
+
+---
+
 ## 2026-11-19：D-094 B3/B4/B5 实现完成，但未独立复核、未获实验批准
 
 B4已实现规范化行为序列、编辑距离、加权特征距离、crowding+novelty和唯一phenotype控制；B3实现七类公开失败、反馈矩阵、β=2/τ=0.25/ε=0.1的稳定softmax；B5仅组合B3/B4。请求前预算预留和B1/final池保护已实现，演化账本补齐mutation locus、duplicate proposal、survivor和三种多样性。

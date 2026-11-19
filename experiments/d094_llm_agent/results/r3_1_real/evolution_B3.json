@@ -1,0 +1,548 @@
+[
+  {
+    "constraint_violation": 16,
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": -1,
+    "genome_hash": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+    "objectives": [
+      1.0,
+      1.0,
+      16.0,
+      0.0,
+      0.0,
+      0.004796099999999999,
+      7.079481249966193
+    ],
+    "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c"
+  },
+  {
+    "event_type": "feedback_update",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 16,
+        "planning_failure": 0,
+        "recovery_failure": 0,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 8
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 0,
+        "successful_tool_call_count": 0,
+        "tool_event_count": 16,
+        "verification_attempt_count": 8
+      },
+      "rates": {
+        "dependency_failure": 1.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 0.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 1.0
+      }
+    },
+    "generation": -1,
+    "genome_hash": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+  },
+  {
+    "constraint_violation": 0,
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": -1,
+    "genome_hash": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+    "objectives": [
+      1.0,
+      1.0,
+      0.0,
+      0.5,
+      3.4,
+      0.0016344,
+      2.4953989998903126
+    ],
+    "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+  },
+  {
+    "event_type": "feedback_update",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 0,
+        "planning_failure": 0,
+        "recovery_failure": 2,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 0
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 2,
+        "successful_tool_call_count": 4,
+        "tool_event_count": 6,
+        "verification_attempt_count": 2
+      },
+      "rates": {
+        "dependency_failure": 0.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 1.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 0.0
+      }
+    },
+    "generation": -1,
+    "genome_hash": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+  },
+  {
+    "event_type": "survivor_selection",
+    "generation": -1,
+    "genotype_diversity": 1.0,
+    "performance_diversity": 1.0,
+    "phenotype_diversity": 1.0,
+    "selection_method": "initial_population",
+    "survivors": [
+      {
+        "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+        "objectives": [
+          1.0,
+          1.0,
+          16.0,
+          0.0,
+          0.0,
+          0.004796099999999999,
+          7.079481249966193
+        ],
+        "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c"
+      },
+      {
+        "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+        "objectives": [
+          1.0,
+          1.0,
+          0.0,
+          0.5,
+          3.4,
+          0.0016344,
+          2.4953989998903126
+        ],
+        "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+      }
+    ]
+  },
+  {
+    "after_value": null,
+    "before_value": null,
+    "event_type": "variation",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 0,
+        "planning_failure": 0,
+        "recovery_failure": 2,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 0
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 2,
+        "successful_tool_call_count": 4,
+        "tool_event_count": 6,
+        "verification_attempt_count": 2
+      },
+      "rates": {
+        "dependency_failure": 0.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 1.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 0.0
+      }
+    },
+    "generation": 0,
+    "intermediate_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "mutation_locus": null,
+    "offspring_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "offspring_genome_hash": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+    "operator": "crossover",
+    "operator_probabilities": {
+      "crossover": 0.6957301449110355,
+      "memory_mutation": 0.018349896741459523,
+      "planning_mutation": 0.018906561458303738,
+      "recovery_mutation": 0.23322446271801908,
+      "tool_guard_mutation": 0.01689446708559114,
+      "verification_mutation": 0.01689446708559114
+    },
+    "outcome": "DUPLICATE_PROPOSAL",
+    "parent_genome_hashes": [
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+    ],
+    "proposal_ordinal": 0
+  },
+  {
+    "event_type": "duplicate_proposal",
+    "generation": 0,
+    "genome_hash": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+    "outcome": "REJECTED_WITHOUT_EVALUATION",
+    "proposal_ordinal": 0
+  },
+  {
+    "after_value": null,
+    "before_value": null,
+    "event_type": "variation",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 0,
+        "planning_failure": 0,
+        "recovery_failure": 2,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 0
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 2,
+        "successful_tool_call_count": 4,
+        "tool_event_count": 6,
+        "verification_attempt_count": 2
+      },
+      "rates": {
+        "dependency_failure": 0.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 1.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 0.0
+      }
+    },
+    "generation": 0,
+    "intermediate_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "mutation_locus": null,
+    "offspring_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "offspring_genome_hash": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+    "operator": "crossover",
+    "operator_probabilities": {
+      "crossover": 0.6957301449110355,
+      "memory_mutation": 0.018349896741459523,
+      "planning_mutation": 0.018906561458303738,
+      "recovery_mutation": 0.23322446271801908,
+      "tool_guard_mutation": 0.01689446708559114,
+      "verification_mutation": 0.01689446708559114
+    },
+    "outcome": "DUPLICATE_PROPOSAL",
+    "parent_genome_hashes": [
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+    ],
+    "proposal_ordinal": 1
+  },
+  {
+    "event_type": "duplicate_proposal",
+    "generation": 0,
+    "genome_hash": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+    "outcome": "REJECTED_WITHOUT_EVALUATION",
+    "proposal_ordinal": 1
+  },
+  {
+    "after_value": "compensation_priority",
+    "before_value": "retry_priority",
+    "event_type": "variation",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 0,
+        "planning_failure": 0,
+        "recovery_failure": 2,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 0
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 2,
+        "successful_tool_call_count": 4,
+        "tool_event_count": 6,
+        "verification_attempt_count": 2
+      },
+      "rates": {
+        "dependency_failure": 0.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 1.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 0.0
+      }
+    },
+    "generation": 0,
+    "intermediate_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "mutation_locus": "recovery_mode",
+    "offspring_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "compensation_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "offspring_genome_hash": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+    "operator": "recovery_mutation",
+    "operator_probabilities": {
+      "crossover": 0.6957301449110355,
+      "memory_mutation": 0.018349896741459523,
+      "planning_mutation": 0.018906561458303738,
+      "recovery_mutation": 0.23322446271801908,
+      "tool_guard_mutation": 0.01689446708559114,
+      "verification_mutation": 0.01689446708559114
+    },
+    "outcome": "ACCEPTED_FOR_EVALUATION",
+    "parent_genome_hashes": [
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+    ],
+    "proposal_ordinal": 2
+  },
+  {
+    "constraint_violation": 6,
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": 0,
+    "genome_hash": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+    "objectives": [
+      1.0,
+      1.0,
+      6.0,
+      0.0,
+      0.0,
+      0.0017328,
+      2.6475037000491284
+    ],
+    "phenotype_hash": "54e2dd59c58a0156a294245734c93cc3cba9202375521f44fdc6a3df61a88eab"
+  },
+  {
+    "event_type": "feedback_update",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 6,
+        "planning_failure": 0,
+        "recovery_failure": 0,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 2
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 0,
+        "successful_tool_call_count": 0,
+        "tool_event_count": 6,
+        "verification_attempt_count": 2
+      },
+      "rates": {
+        "dependency_failure": 1.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 0.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 1.0
+      }
+    },
+    "generation": 0,
+    "genome_hash": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea"
+  },
+  {
+    "after_value": "none",
+    "before_value": "after_failure",
+    "event_type": "variation",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 6,
+        "planning_failure": 0,
+        "recovery_failure": 0,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 2
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 0,
+        "successful_tool_call_count": 0,
+        "tool_event_count": 6,
+        "verification_attempt_count": 2
+      },
+      "rates": {
+        "dependency_failure": 1.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 0.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 1.0
+      }
+    },
+    "generation": 0,
+    "intermediate_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_failure",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "mutation_locus": "reflection_trigger",
+    "offspring_genome": {
+      "max_plan_steps": 3,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "none",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "offspring_genome_hash": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+    "operator": "verification_mutation",
+    "operator_probabilities": {
+      "crossover": 0.6856275412681521,
+      "memory_mutation": 0.01832485489068973,
+      "planning_mutation": 0.018873237962037714,
+      "recovery_mutation": 0.023585844854431052,
+      "tool_guard_mutation": 0.023585844854431052,
+      "verification_mutation": 0.23000267617025852
+    },
+    "outcome": "ACCEPTED_FOR_EVALUATION",
+    "parent_genome_hashes": [
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+    ],
+    "proposal_ordinal": 3
+  },
+  {
+    "constraint_violation": 0,
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": 0,
+    "genome_hash": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+    "objectives": [
+      1.0,
+      1.0,
+      0.0,
+      0.5,
+      3.4,
+      0.0016116,
+      2.614219699986279
+    ],
+    "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+  },
+  {
+    "event_type": "feedback_update",
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 0,
+        "planning_failure": 0,
+        "recovery_failure": 2,
+        "task_incompletion": 2,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 0
+      },
+      "denominators": {
+        "episode_count": 2,
+        "recovery_attempt_count": 2,
+        "successful_tool_call_count": 4,
+        "tool_event_count": 6,
+        "verification_attempt_count": 2
+      },
+      "rates": {
+        "dependency_failure": 0.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 1.0,
+        "task_incompletion": 1.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 0.0
+      }
+    },
+    "generation": 0,
+    "genome_hash": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973"
+  },
+  {
+    "event_type": "survivor_selection",
+    "generation": 0,
+    "genotype_diversity": 1.0,
+    "performance_diversity": 1.0,
+    "phenotype_diversity": 0.5,
+    "selection_method": "standard",
+    "survivors": [
+      {
+        "genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+        "objectives": [
+          1.0,
+          1.0,
+          0.0,
+          0.5,
+          3.4,
+          0.0016116,
+          2.614219699986279
+        ],
+        "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+      },
+      {
+        "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+        "objectives": [
+          1.0,
+          1.0,
+          0.0,
+          0.5,
+          3.4,
+          0.0016344,
+          2.4953989998903126
+        ],
+        "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+      }
+    ]
+  }
+]

@@ -1,0 +1,856 @@
+{
+  "actual_episode_count": 42,
+  "arms": {
+    "B1": {
+      "arm": "B1",
+      "candidate": {
+        "behavior": {
+          "canonical_sha256": "b9300c05f1f9d2dae2e2c726abf3a3e6a7ff77bce603b45a1e4fbbcb9fdf185e",
+          "features": {
+            "completed": 0.0,
+            "failed_call_count": 1.0,
+            "recovery_count": 2.0,
+            "rejected_call_count": 0.0,
+            "retry_count": 1.0,
+            "runtime_abort": 0.0,
+            "state_transition_count": 0.0,
+            "tool_call_count": 9.0,
+            "verification_count": 2.0
+          },
+          "sequence": [
+            "D|tool_call|inspect_state|{}",
+            "R|tool_result|inspect_state|True|False|{\"requires_verification\":true,\"status\":\"INSPECTED\"}",
+            "D|tool_call|verify_state|{}",
+            "R|tool_result|verify_state|True|False|{\"status\":\"VERIFIED\"}",
+            "D|tool_call|retry_primary|{}",
+            "R|tool_result|retry_primary|False|False|{\"tool_result\":{\"status\":\"PRIMARY_FAILED\"}}",
+            "D|tool_call|compensate_primary|{}",
+            "R|tool_result|compensate_primary|True|False|{\"status\":\"COMPENSATED\"}",
+            "D|tool_call|complete_task|{}",
+            "R|tool_result|complete_task|True|True|{\"status\":\"COMPLETED\"}",
+            "T|COMPLETED",
+            "D|tool_call|inspect_state|{}",
+            "R|tool_result|inspect_state|True|False|{\"requires_verification\":true,\"status\":\"INSPECTED\"}",
+            "D|tool_call|verify_state|{}",
+            "R|tool_result|verify_state|True|False|{\"status\":\"VERIFIED\"}",
+            "D|tool_call|compensate_primary|{}",
+            "R|tool_result|compensate_primary|True|False|{\"status\":\"COMPENSATED\"}",
+            "D|tool_call|complete_task|{}",
+            "R|tool_result|complete_task|True|True|{\"status\":\"COMPLETED\"}",
+            "T|COMPLETED"
+          ],
+          "state_transitions": [],
+          "terminal_status": "MULTI_EPISODE"
+        },
+        "constraint_violation": 0,
+        "execution_errors": 0,
+        "failure_profile": {
+          "counts": {
+            "dependency_failure": 0,
+            "planning_failure": 0,
+            "recovery_failure": 1,
+            "task_incompletion": 0,
+            "tool_call_failure": 0,
+            "unnecessary_tool_call": 0,
+            "verification_failure": 0
+          },
+          "denominators": {
+            "episode_count": 2,
+            "recovery_attempt_count": 3,
+            "successful_tool_call_count": 8,
+            "tool_event_count": 9,
+            "verification_attempt_count": 2
+          },
+          "rates": {
+            "dependency_failure": 0.0,
+            "planning_failure": 0.0,
+            "recovery_failure": 0.3333333333333333,
+            "task_incompletion": 0.0,
+            "tool_call_failure": 0.0,
+            "unnecessary_tool_call": 0.0,
+            "verification_failure": 0.0
+          }
+        },
+        "genome": {
+          "max_plan_steps": 5,
+          "memory_mode": "structured_failures",
+          "planning_mode": "stepwise",
+          "recovery_mode": "dependency_aware",
+          "reflection_trigger": "after_failure",
+          "tool_call_guard": "post_plan_verify"
+        },
+        "objectives": [
+          0.0,
+          0.0,
+          0.0,
+          0.25,
+          8.4,
+          0.0022340999999999997,
+          4.043435999832582
+        ],
+        "phenotype_hash": "b9300c05f1f9d2dae2e2c726abf3a3e6a7ff77bce603b45a1e4fbbcb9fdf185e"
+      },
+      "episode_count": 2,
+      "episode_ids": [
+        "d382063a91b4c2334abe3fc7b3ce49174c87d06a939bacfdbb6bf61e890d0b0e",
+        "f876fae41fdf86ab273ab036f33cbec9f8a8deb9015940f1448895e6d8141bc3"
+      ],
+      "execution_errors": 0,
+      "genome": {
+        "max_plan_steps": 5,
+        "memory_mode": "structured_failures",
+        "planning_mode": "stepwise",
+        "recovery_mode": "dependency_aware",
+        "reflection_trigger": "after_failure",
+        "tool_call_guard": "post_plan_verify"
+      },
+      "genome_sha256": "aa65f0c73881388f4c05236b5b88ade3a498b20717d0d48f5dc1dd6545e96a4b",
+      "hash_chain_valid": true,
+      "metrics": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 5715,
+        "latency_seconds": 4.043435999832582,
+        "output_tokens": 433,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0022340999999999997,
+        "token_cost_usd": 0.0022340999999999997,
+        "tool_cost": 8.4
+      },
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 3260,
+          "latency_seconds": 4.198579999851063,
+          "output_tokens": 242,
+          "recovery_success_rate": 1.0,
+          "task_success_rate": 1.0,
+          "token_cost_upper_usd": 0.0012683999999999998,
+          "token_cost_usd": 0.0012683999999999998,
+          "tool_cost": 4.7
+        },
+        "202": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 2455,
+          "latency_seconds": 3.8882919998141006,
+          "output_tokens": 191,
+          "recovery_success_rate": 1.0,
+          "task_success_rate": 1.0,
+          "token_cost_upper_usd": 0.0009656999999999999,
+          "token_cost_usd": 0.0009656999999999999,
+          "tool_cost": 3.7
+        }
+      },
+      "phase": "fixed",
+      "usage": {
+        "cost_upper_usd": 0.0022340999999999997,
+        "cost_usd": 0.0022340999999999997,
+        "input_tokens": 5715,
+        "latency_seconds": 8.086871999665163,
+        "output_tokens": 433,
+        "raw_request_records": 9,
+        "real_transport_attempts": 9
+      }
+    },
+    "B2": {
+      "arm": "B2",
+      "duplicate_proposal_count": 1,
+      "execution_errors": 0,
+      "final_episode_count": 2,
+      "hash_chain_valid": true,
+      "metrics": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 0,
+        "harm": 0.5,
+        "input_tokens": 4248,
+        "latency_seconds": 2.9320094001013786,
+        "output_tokens": 294,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0016272,
+        "token_cost_usd": 0.0016272,
+        "tool_cost": 3.4
+      },
+      "mode": "standard",
+      "pareto_front": [
+        "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      ],
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2124,
+          "latency_seconds": 3.0232694001169875,
+          "output_tokens": 147,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008136,
+          "token_cost_usd": 0.0008136,
+          "tool_cost": 1.7
+        },
+        "202": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2124,
+          "latency_seconds": 2.8407494000857696,
+          "output_tokens": 147,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008135999999999999,
+          "token_cost_usd": 0.0008135999999999999,
+          "tool_cost": 1.7
+        }
+      },
+      "population_diversity": {
+        "behavior_diversity": 0.5,
+        "complete_behavior_collapse": false,
+        "genotype_count": 4,
+        "genotype_diversity": 1.0,
+        "phenotype_count": 4,
+        "unique_genotype_count": 4,
+        "unique_phenotype_count": 2
+      },
+      "search_episode_count": 8,
+      "search_unique_genomes": 4,
+      "selected_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "usage": {
+        "cost_upper_usd": 0.011435699999999997,
+        "cost_usd": 0.011435699999999997,
+        "input_tokens": 30399,
+        "latency_seconds": 34.48503540002275,
+        "output_tokens": 1930,
+        "raw_request_records": 40,
+        "real_transport_attempts": 40
+      },
+      "variation_count": 3
+    },
+    "B3": {
+      "arm": "B3",
+      "duplicate_proposal_count": 2,
+      "execution_errors": 0,
+      "final_episode_count": 2,
+      "hash_chain_valid": true,
+      "metrics": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 0,
+        "harm": 0.5,
+        "input_tokens": 4208,
+        "latency_seconds": 2.9924591000308283,
+        "output_tokens": 294,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0016151999999999998,
+        "token_cost_usd": 0.0016151999999999998,
+        "tool_cost": 3.4
+      },
+      "mode": "feedback",
+      "pareto_front": [
+        "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+        "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      ],
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2104,
+          "latency_seconds": 2.9869910000124946,
+          "output_tokens": 147,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008075999999999999,
+          "token_cost_usd": 0.0008075999999999999,
+          "tool_cost": 1.7
+        },
+        "202": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2104,
+          "latency_seconds": 2.997927200049162,
+          "output_tokens": 147,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008075999999999999,
+          "token_cost_usd": 0.0008075999999999999,
+          "tool_cost": 1.7
+        }
+      },
+      "population_diversity": {
+        "behavior_diversity": 0.75,
+        "complete_behavior_collapse": false,
+        "genotype_count": 4,
+        "genotype_diversity": 1.0,
+        "phenotype_count": 4,
+        "unique_genotype_count": 4,
+        "unique_phenotype_count": 3
+      },
+      "search_episode_count": 8,
+      "search_unique_genomes": 4,
+      "selected_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+      "usage": {
+        "cost_upper_usd": 0.011390099999999995,
+        "cost_usd": 0.011390099999999995,
+        "input_tokens": 30323,
+        "latency_seconds": 35.65812549984548,
+        "output_tokens": 1911,
+        "raw_request_records": 40,
+        "real_transport_attempts": 40
+      },
+      "variation_count": 4
+    },
+    "B4": {
+      "arm": "B4",
+      "duplicate_proposal_count": 1,
+      "execution_errors": 0,
+      "final_episode_count": 2,
+      "hash_chain_valid": true,
+      "metrics": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 0,
+        "harm": 0.5,
+        "input_tokens": 4248,
+        "latency_seconds": 2.5713632500264794,
+        "output_tokens": 292,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0016248,
+        "token_cost_usd": 0.0016248,
+        "tool_cost": 3.4
+      },
+      "mode": "diversity",
+      "pareto_front": [
+        "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+        "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      ],
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2124,
+          "latency_seconds": 2.9430142000783235,
+          "output_tokens": 145,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008112,
+          "token_cost_usd": 0.0008112,
+          "tool_cost": 1.7
+        },
+        "202": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2124,
+          "latency_seconds": 2.1997122999746352,
+          "output_tokens": 147,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008135999999999999,
+          "token_cost_usd": 0.0008135999999999999,
+          "tool_cost": 1.7
+        }
+      },
+      "population_diversity": {
+        "behavior_diversity": 0.5,
+        "complete_behavior_collapse": false,
+        "genotype_count": 4,
+        "genotype_diversity": 1.0,
+        "phenotype_count": 4,
+        "unique_genotype_count": 4,
+        "unique_phenotype_count": 2
+      },
+      "search_episode_count": 8,
+      "search_unique_genomes": 4,
+      "selected_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "usage": {
+        "cost_upper_usd": 0.011425199999999998,
+        "cost_usd": 0.011425199999999998,
+        "input_tokens": 30392,
+        "latency_seconds": 36.544487099861726,
+        "output_tokens": 1923,
+        "raw_request_records": 40,
+        "real_transport_attempts": 40
+      },
+      "variation_count": 3
+    },
+    "B5": {
+      "arm": "B5",
+      "duplicate_proposal_count": 2,
+      "execution_errors": 0,
+      "final_episode_count": 2,
+      "hash_chain_valid": true,
+      "metrics": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 0,
+        "harm": 0.5,
+        "input_tokens": 4208,
+        "latency_seconds": 2.376197899924591,
+        "output_tokens": 293,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0016139999999999998,
+        "token_cost_usd": 0.0016139999999999998,
+        "tool_cost": 3.4
+      },
+      "mode": "combined",
+      "pareto_front": [
+        "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973"
+      ],
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2104,
+          "latency_seconds": 2.163203699979931,
+          "output_tokens": 146,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008063999999999999,
+          "token_cost_usd": 0.0008063999999999999,
+          "tool_cost": 1.7
+        },
+        "202": {
+          "behavior_diversity": 1.0,
+          "constraint_violation": 0,
+          "harm": 0.25,
+          "input_tokens": 2104,
+          "latency_seconds": 2.5891920998692513,
+          "output_tokens": 147,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0008075999999999999,
+          "token_cost_usd": 0.0008075999999999999,
+          "tool_cost": 1.7
+        }
+      },
+      "population_diversity": {
+        "behavior_diversity": 0.75,
+        "complete_behavior_collapse": false,
+        "genotype_count": 4,
+        "genotype_diversity": 1.0,
+        "phenotype_count": 4,
+        "unique_genotype_count": 4,
+        "unique_phenotype_count": 3
+      },
+      "search_episode_count": 8,
+      "search_unique_genomes": 4,
+      "selected_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+      "usage": {
+        "cost_upper_usd": 0.011367299999999995,
+        "cost_usd": 0.011367299999999995,
+        "input_tokens": 30319,
+        "latency_seconds": 34.56555499974638,
+        "output_tokens": 1893,
+        "raw_request_records": 40,
+        "real_transport_attempts": 40
+      },
+      "variation_count": 4
+    }
+  },
+  "backend": "openai-compatible",
+  "budget": {
+    "available_search_cost_usd": 0.38559319999999997,
+    "available_search_requests": 1290,
+    "backend": "openai-compatible",
+    "budget_denied_count": 0,
+    "cost_complete": true,
+    "cost_unknown": false,
+    "cost_upper_usd": 0.04785240000000001,
+    "cost_usd": 0.04785240000000001,
+    "max_cost_usd": 0.5,
+    "max_requests": 1500,
+    "over_budget": false,
+    "pending_cost_usd": 0,
+    "reservation_exceeded": false,
+    "reserved_cost_usd": 0.0665544,
+    "reserved_pools": {
+      "B1": 0.004778399999999999,
+      "final:B2": 0.015414,
+      "final:B3": 0.015473999999999996,
+      "final:B4": 0.015414,
+      "final:B5": 0.015473999999999996
+    },
+    "reserved_request_count": 41,
+    "reserved_request_pools": {
+      "B1": 1,
+      "final:B2": 10,
+      "final:B3": 10,
+      "final:B4": 10,
+      "final:B5": 10
+    },
+    "sent_request_count": 169,
+    "spent_requests_by_pool": {
+      "B1": 9,
+      "final:B2": 6,
+      "final:B3": 6,
+      "final:B4": 6,
+      "final:B5": 6,
+      "search": 136
+    },
+    "spent_upper_by_pool": {
+      "B1": 0.0022341,
+      "final:B2": 0.0016272,
+      "final:B3": 0.0016151999999999998,
+      "final:B4": 0.0016248,
+      "final:B5": 0.0016139999999999998,
+      "search": 0.03913710000000001
+    }
+  },
+  "budget_plan_sha256": "6d7c6b5fece5db7a20fbc0f48b508250d6055f18096ddfd37cc0fb2b8411dc86",
+  "comparisons": {
+    "B3_minus_B2": {
+      "behavior_diversity": 0.0,
+      "constraint_violation": 0,
+      "harm": 0.0,
+      "input_tokens": -40,
+      "latency_seconds": 0.06044969992944971,
+      "output_tokens": 0,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": -1.2000000000000292e-05,
+      "token_cost_usd": -1.2000000000000292e-05,
+      "tool_cost": 0.0
+    },
+    "B4_minus_B2": {
+      "behavior_diversity": 0.0,
+      "constraint_violation": 0,
+      "harm": 0.0,
+      "input_tokens": 0,
+      "latency_seconds": -0.3606461500748992,
+      "output_tokens": -2,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": -2.4000000000000583e-06,
+      "token_cost_usd": -2.4000000000000583e-06,
+      "tool_cost": 0.0
+    },
+    "B5_minus_B3": {
+      "behavior_diversity": 0.0,
+      "constraint_violation": 0,
+      "harm": 0.0,
+      "input_tokens": 0,
+      "latency_seconds": -0.6162612001062371,
+      "output_tokens": -1,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": -1.2000000000000292e-06,
+      "token_cost_usd": -1.2000000000000292e-06,
+      "tool_cost": 0.0
+    },
+    "B5_minus_B4": {
+      "behavior_diversity": 0.0,
+      "constraint_violation": 0,
+      "harm": 0.0,
+      "input_tokens": -40,
+      "latency_seconds": -0.19516535010188818,
+      "output_tokens": 1,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": -1.0800000000000263e-05,
+      "token_cost_usd": -1.0800000000000263e-05,
+      "tool_cost": 0.0
+    }
+  },
+  "config": {
+    "generations": 1,
+    "global_cost_cap": 0.5,
+    "global_request_cap": 1500,
+    "max_concurrency": 4,
+    "max_message_bytes": 4096,
+    "max_output_tokens": 128,
+    "max_retries": 0,
+    "population_size": 2,
+    "revision": "R3.1",
+    "search_seed": 711,
+    "seeds": [
+      201,
+      202
+    ],
+    "task_ids": [
+      "d094_r3_train_compensation_0"
+    ],
+    "timeout_seconds": 20.0
+  },
+  "evolution_files": {
+    "B2": "evolution_B2.json",
+    "B3": "evolution_B3.json",
+    "B4": "evolution_B4.json",
+    "B5": "evolution_B5.json"
+  },
+  "execution_lock_sha256": "1853c31b9607f613ef7469a897271d22332c4fc3fc4881768419e5c003e3697b",
+  "hash_chain_valid": true,
+  "model": "deepseek-flash",
+  "per_seed": {
+    "B1": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 3260,
+        "latency_seconds": 4.198579999851063,
+        "output_tokens": 242,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0012683999999999998,
+        "token_cost_usd": 0.0012683999999999998,
+        "tool_cost": 4.7
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 2455,
+        "latency_seconds": 3.8882919998141006,
+        "output_tokens": 191,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0009656999999999999,
+        "token_cost_usd": 0.0009656999999999999,
+        "tool_cost": 3.7
+      }
+    },
+    "B2": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 3.0232694001169875,
+        "output_tokens": 147,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008136,
+        "token_cost_usd": 0.0008136,
+        "tool_cost": 1.7
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.8407494000857696,
+        "output_tokens": 147,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008135999999999999,
+        "token_cost_usd": 0.0008135999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "B3": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.9869910000124946,
+        "output_tokens": 147,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008075999999999999,
+        "token_cost_usd": 0.0008075999999999999,
+        "tool_cost": 1.7
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.997927200049162,
+        "output_tokens": 147,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008075999999999999,
+        "token_cost_usd": 0.0008075999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "B4": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.9430142000783235,
+        "output_tokens": 145,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008112,
+        "token_cost_usd": 0.0008112,
+        "tool_cost": 1.7
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.1997122999746352,
+        "output_tokens": 147,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008135999999999999,
+        "token_cost_usd": 0.0008135999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "B5": {
+      "201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.163203699979931,
+        "output_tokens": 146,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008063999999999999,
+        "token_cost_usd": 0.0008063999999999999,
+        "tool_cost": 1.7
+      },
+      "202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.5891920998692513,
+        "output_tokens": 147,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008075999999999999,
+        "token_cost_usd": 0.0008075999999999999,
+        "tool_cost": 1.7
+      }
+    }
+  },
+  "per_seed_comparisons": {
+    "B3_minus_B2": {
+      "201": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": -20,
+        "latency_seconds": -0.0362784001044929,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -6.000000000000146e-06,
+        "token_cost_usd": -6.000000000000146e-06,
+        "tool_cost": 0.0
+      },
+      "202": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": -20,
+        "latency_seconds": 0.15717779996339232,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -6.000000000000037e-06,
+        "token_cost_usd": -6.000000000000037e-06,
+        "tool_cost": 0.0
+      }
+    },
+    "B4_minus_B2": {
+      "201": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": -0.08025520003866404,
+        "output_tokens": -2,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -2.4000000000000583e-06,
+        "token_cost_usd": -2.4000000000000583e-06,
+        "tool_cost": 0.0
+      },
+      "202": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": -0.6410371001111344,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0,
+        "token_cost_usd": 0.0,
+        "tool_cost": 0.0
+      }
+    },
+    "B5_minus_B3": {
+      "201": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": -0.8237873000325635,
+        "output_tokens": -1,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -1.2000000000000292e-06,
+        "token_cost_usd": -1.2000000000000292e-06,
+        "tool_cost": 0.0
+      },
+      "202": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": -0.40873510017991066,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0,
+        "token_cost_usd": 0.0,
+        "tool_cost": 0.0
+      }
+    },
+    "B5_minus_B4": {
+      "201": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": -20,
+        "latency_seconds": -0.7798105000983924,
+        "output_tokens": 1,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -4.800000000000117e-06,
+        "token_cost_usd": -4.800000000000117e-06,
+        "tool_cost": 0.0
+      },
+      "202": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": -20,
+        "latency_seconds": 0.389479799894616,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -6.000000000000037e-06,
+        "token_cost_usd": -6.000000000000037e-06,
+        "tool_cost": 0.0
+      }
+    }
+  },
+  "planned_episode_count": 42,
+  "protocol": "D094_R3.1_TRAIN",
+  "scientific_scope": "Small exploratory Train-only mechanism comparison; not confirmatory evidence",
+  "status": "COMPLETED",
+  "wall_seconds": 79.58402660000138
+}

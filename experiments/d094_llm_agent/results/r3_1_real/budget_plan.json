@@ -1,0 +1,129 @@
+{
+  "B1_request_upper": 10,
+  "arm_plans": {
+    "B1": {
+      "base_request_upper": 10,
+      "cost_upper_usd": 0.013824,
+      "evaluation_episodes": 2,
+      "protected": true,
+      "request_upper": 10,
+      "retry_request_upper": 0
+    },
+    "B2": {
+      "cost_upper_usd": 0.110592,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.0221184,
+      "final_episodes": 2,
+      "final_protected": true,
+      "final_request_upper": 16,
+      "initial_candidates": 2,
+      "initial_cost_upper_usd": 0.0442368,
+      "initial_episodes": 4,
+      "initial_request_upper": 32,
+      "offspring_candidates": 2,
+      "offspring_cost_upper_usd": 0.0442368,
+      "offspring_episodes": 4,
+      "offspring_request_upper": 32,
+      "retry_request_upper": 0,
+      "search_request_upper": 64
+    },
+    "B3": {
+      "cost_upper_usd": 0.110592,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.0221184,
+      "final_episodes": 2,
+      "final_protected": true,
+      "final_request_upper": 16,
+      "initial_candidates": 2,
+      "initial_cost_upper_usd": 0.0442368,
+      "initial_episodes": 4,
+      "initial_request_upper": 32,
+      "offspring_candidates": 2,
+      "offspring_cost_upper_usd": 0.0442368,
+      "offspring_episodes": 4,
+      "offspring_request_upper": 32,
+      "retry_request_upper": 0,
+      "search_request_upper": 64
+    },
+    "B4": {
+      "cost_upper_usd": 0.110592,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.0221184,
+      "final_episodes": 2,
+      "final_protected": true,
+      "final_request_upper": 16,
+      "initial_candidates": 2,
+      "initial_cost_upper_usd": 0.0442368,
+      "initial_episodes": 4,
+      "initial_request_upper": 32,
+      "offspring_candidates": 2,
+      "offspring_cost_upper_usd": 0.0442368,
+      "offspring_episodes": 4,
+      "offspring_request_upper": 32,
+      "retry_request_upper": 0,
+      "search_request_upper": 64
+    },
+    "B5": {
+      "cost_upper_usd": 0.110592,
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.0221184,
+      "final_episodes": 2,
+      "final_protected": true,
+      "final_request_upper": 16,
+      "initial_candidates": 2,
+      "initial_cost_upper_usd": 0.0442368,
+      "initial_episodes": 4,
+      "initial_request_upper": 32,
+      "offspring_candidates": 2,
+      "offspring_cost_upper_usd": 0.0442368,
+      "offspring_episodes": 4,
+      "offspring_request_upper": 32,
+      "retry_request_upper": 0,
+      "search_request_upper": 64
+    }
+  },
+  "candidates_per_arm": 4,
+  "final_request_upper_per_arm": 16,
+  "fits": true,
+  "input_cost_upper_per_request_usd": 0.0012288,
+  "input_price_per_1m_usd": 0.3,
+  "max_input_bytes_per_request": 4096,
+  "max_output_tokens_per_request": 128,
+  "output_cost_upper_per_request_usd": 0.0001536,
+  "output_price_per_1m_usd": 1.2,
+  "paired_episode_count": 2,
+  "per_request_cost_upper_usd": 0.0013824,
+  "planned_episode_count": 42,
+  "protected_pools": {
+    "B1": {
+      "cost_usd": 0.013824,
+      "request_count": 10
+    },
+    "final:B2": {
+      "cost_usd": 0.0221184,
+      "request_count": 16
+    },
+    "final:B3": {
+      "cost_usd": 0.0221184,
+      "request_count": 16
+    },
+    "final:B4": {
+      "cost_usd": 0.0221184,
+      "request_count": 16
+    },
+    "final:B5": {
+      "cost_usd": 0.0221184,
+      "request_count": 16
+    }
+  },
+  "protocol": "D094_R3.1_BUDGET",
+  "search_cost_upper_usd": 0.3538944,
+  "search_request_upper_per_arm": 64,
+  "task_count": 1,
+  "total_cost_upper_usd": 0.456192,
+  "total_request_upper": 330
+}

@@ -63,6 +63,23 @@ class TestFailureClassification(unittest.TestCase):
         self.assertEqual(profile["rates"]["task_incompletion"], 1.0)
         self.assertEqual(profile["rates"]["unnecessary_tool_call"], 0.5)
 
+    def test_nested_agent_error_is_classified(self):
+        episode = {
+            "agent_status": "MAX_STEPS",
+            "events": [
+                {
+                    "event_type": "tool_result",
+                    "payload": {
+                        "tool_name": "inspect_state",
+                        "success": False,
+                        "observation": {"tool_result": {"error": "DEPENDENCY_FAILED"}},
+                    },
+                }
+            ],
+        }
+        profile = classify_failures([episode])
+        self.assertEqual(profile["counts"]["dependency_failure"], 1)
+
     def test_hidden_outcome_is_rejected(self):
         with self.assertRaises(ValueError):
             classify_failures(

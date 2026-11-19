@@ -1,0 +1,13 @@
+{
+  "actual_episode_count": 0,
+  "budget": {
+    "backend": "openai-compatible",
+    "cost_usd": 0.0,
+    "request_count": 0,
+    "sent_request_count": 0
+  },
+  "budget_plan_sha256": "6d7c6b5fece5db7a20fbc0f48b508250d6055f18096ddfd37cc0fb2b8411dc86",
+  "protocol": "D094_R3.1_TRAIN",
+  "scientific_scope": "Preflight only; no API request or episode was executed",
+  "status": "PREFLIGHT_PASS"
+}
