@@ -4,10 +4,16 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
-from analyze_d094_r3_deep import _episode_metrics, _quality_credit, _request_analysis
+from analyze_d094_r3_deep import (
+    _episode_metrics,
+    _quality_credit,
+    _request_analysis,
+    _source_snapshot,
+)
 from d094_behavior import behavior_representation
 
 
@@ -104,7 +110,7 @@ class TestDeepAnalysis(unittest.TestCase):
 
     def test_saved_real_analysis_has_complete_identity_and_zero_search_success(self):
         result = json.loads((HERE / "results" / "r3_1_deep_analysis" / "analysis.json").read_text(encoding="utf-8"))
-        self.assertEqual(result["analysis_sha256"], "2362a32e6923d6c516661b301e6d7bcdb68e3a8ef6d78b3a8ff44271ce43982e")
+        self.assertEqual(result["analysis_sha256"], "743fb89a0a74a92d03a9acbf35a589f8e6088f9ce71c60e08d9c726262ea7e24")
         self.assertFalse(result["api_used"])
         self.assertEqual(result["episode_identity"]["count"], 42)
         self.assertEqual(result["episode_identity"]["unique_provider_request_ids"], 169)
@@ -117,12 +123,23 @@ class TestDeepAnalysis(unittest.TestCase):
     def test_r3_1_source_files_still_match_analysis_snapshot(self):
         result = json.loads((HERE / "results" / "r3_1_deep_analysis" / "analysis.json").read_text(encoding="utf-8"))
         source = HERE / "results" / "r3_1_real"
-        current = {
-            str(path.relative_to(source)): hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in sorted(source.rglob("*"))
-            if path.is_file()
-        }
+        current = _source_snapshot(source)
+        self.assertEqual(
+            result["source_files_sha256_semantics"],
+            "CANONICAL_LF_BYTES_WITH_POSIX_RELATIVE_PATHS",
+        )
         self.assertEqual(current, result["source_files_sha256"])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            evidence = root / "evidence.jsonl"
+            evidence.write_bytes(b'{"x":1}\r\n')
+            crlf = _source_snapshot(root)
+            evidence.write_bytes(b'{"x":1}\n')
+            self.assertEqual(_source_snapshot(root), crlf)
+            self.assertEqual(
+                crlf["evidence.jsonl"],
+                hashlib.sha256(b'{"x":1}\n').hexdigest(),
+            )
 
 
 if __name__ == "__main__":

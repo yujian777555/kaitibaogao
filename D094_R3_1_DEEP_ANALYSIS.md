@@ -6,9 +6,9 @@
 
 - 原始目录：`experiments/d094_llm_agent/results/r3_1_real/`。
 - 只读分析器：`experiments/d094_llm_agent/analyze_d094_r3_deep.py`。
-- 结构化结果：`results/r3_1_deep_analysis/analysis.json`，内部 canonical SHA-256=`2362a32e6923d6c516661b301e6d7bcdb68e3a8ef6d78b3a8ff44271ce43982e`。
+- 结构化结果：`results/r3_1_deep_analysis/analysis.json`，内部 canonical SHA-256=`743fb89a0a74a92d03a9acbf35a589f8e6088f9ce71c60e08d9c726262ea7e24`。
 - 分析器读取全部 episodes、traces、请求账本、archive、evolution、manifest、summary 和独立审计；从公开事件、终态和请求记录重建 episode 指标，并逐项核对保存值。
-- 分析前后对源目录全部文件做 SHA-256 快照，不一致即失败；分析输出写到新目录，`api_used=false`。
+- 分析前后对源目录全部文件做跨平台快照：相对路径统一为POSIX格式，文本字节统一为canonical LF后计算SHA-256；不一致即失败。分析输出写到新目录，`api_used=false`，R3.1原始文件不被改写。
 - 42/42 episode ID、169/169 provider request ID 唯一，42 条逐事件 hash-chain 有效，execution error=0；已有独立复算状态为 `PASS`。
 
 本报告中的事后父子信用只是分析，不参与 R3.1 的选择，不是 R4 的实验结果。

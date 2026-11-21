@@ -47,6 +47,20 @@ def _sha256(value: Any) -> str:
     return hashlib.sha256(_canonical(value)).hexdigest()
 
 
+def _canonical_file_sha256(path: Path) -> str:
+    """Hash immutable text evidence with checkout-independent LF line endings."""
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
+def _source_snapshot(source: Path) -> dict[str, str]:
+    """Use portable relative keys and canonical LF bytes for all source files."""
+    return {
+        path.relative_to(source).as_posix(): _canonical_file_sha256(path)
+        for path in sorted(source.rglob("*"))
+        if path.is_file()
+    }
+
+
 def _assert_json_keys(value: Any, path: str = "$") -> None:
     if isinstance(value, dict):
         for key, item in value.items():
@@ -514,11 +528,7 @@ def analyze_r3_deep(source: Path, output: Path) -> dict[str, Any]:
     output = Path(output).resolve()
     if output == source or source in output.parents:
         raise ValueError("deep-analysis output must be outside the immutable R3.1 directory")
-    source_files = {
-        str(path.relative_to(source)): hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted(source.rglob("*"))
-        if path.is_file()
-    }
+    source_files = _source_snapshot(source)
     rows = _load_episodes(source / "episodes.jsonl")
     if len(rows) != 42 or len({row["episode_id"] for row in rows}) != 42:
         raise ValueError("expected 42 unique R3.1 episodes")
@@ -669,9 +679,8 @@ def analyze_r3_deep(source: Path, output: Path) -> dict[str, Any]:
         "api_used": False,
         "source_directory": str(source),
         "source_files_sha256": source_files,
-        "source_episodes_sha256": hashlib.sha256(
-            (source / "episodes.jsonl").read_bytes()
-        ).hexdigest(),
+        "source_files_sha256_semantics": "CANONICAL_LF_BYTES_WITH_POSIX_RELATIVE_PATHS",
+        "source_episodes_sha256": _canonical_file_sha256(source / "episodes.jsonl"),
         "source_independent_audit_status": independent_audit.get("status"),
         "design": {
             "protocol": manifest["protocol"],
@@ -720,11 +729,7 @@ def analyze_r3_deep(source: Path, output: Path) -> dict[str, Any]:
             "Ex-post parent/offspring credit describes this run; it was not used by R3.1 selection and is not a new experiment result.",
         ],
     }
-    after_files = {
-        str(path.relative_to(source)): hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted(source.rglob("*"))
-        if path.is_file()
-    }
+    after_files = _source_snapshot(source)
     if after_files != source_files:
         raise RuntimeError("immutable R3.1 source changed during deep analysis")
     output.mkdir(parents=True, exist_ok=True)
