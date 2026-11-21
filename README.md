@@ -1,3 +1,13 @@
+## D-094 R4 预注册阶段交付完成：READY_FOR_INDEPENDENT_REVIEW（2026-11-21）
+
+- R3.1 深度分析保持真实结论`NO_CLEAR_GAIN`：42 episodes、169次真实HTTP、0.0478524 USD；16/16搜索候选Task Success均为0。B3/B5虽增加Phenotype，却包含更多约束拒绝循环；纯资源变化不能作为质量信用。详见`D094_R3_1_DEEP_ANALYSIS.md`。
+- R4已选定唯一主机制：**B3质量优先的配对父子算子信用**。B1=Fixed LLM，B2=标准NSGA-II/六算子均匀，B4=旧失败频率反馈消融；不保留B5，不组合多样性。公共eligible pool=216，所有搜索Genome固定五步。
+- 两个Fresh Train任务、seeds 301/302、64 episodes设计、最终独立重评、320请求/0.442368 USD硬上界及探索性配对统计均已预注册。详见`D094_R4_ALGORITHM_DESIGN.md`、`D094_R4_PREREGISTRATION.md`与`D094_R4_BUDGET_ANALYSIS.md`。
+- 最新预检=`PREFLIGHT_PASS`（0 episode、0 API），合成=`SYNTHETIC_VALIDATED`（13项门禁全true，Mock全链64 episodes）；D-094实测135/135，七目录全量回归677/677。Mock数值不是实际API成本或Agent性能。
+- **真实R4=`NOT RUN`，真实API=0，独立审查=`PENDING`，`APPROVED_FOR_EXPERIMENT=NO`。** 当前最高状态仅为`R4_READY_FOR_INDEPENDENT_REVIEW`；下一步在新独立会话按`D094.NEXT_SESSION_PROMPT.md`只读审查，之后仍须用户明确授权真实实验。
+
+---
+
 ## D-094 R3.1 真实五臂实验已完成：NO_CLEAR_GAIN（2026-11-19）
 
 - R3.1真实执行一次并完成42/42 Train episodes、169次真实HTTP；输入/输出127148/8090 tokens，Token推导成本及上界0.0478524 USD。无预算拒绝、执行错误、未知成本或超预算；42条逐事件hash-chain均有效。

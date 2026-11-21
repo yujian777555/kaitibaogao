@@ -1,0 +1,113 @@
+{
+  "B1_request_upper": 20,
+  "arm_plans": {
+    "B1": {
+      "cost_upper_usd": 0.027648,
+      "evaluation_episodes": 4,
+      "protected": true,
+      "request_upper": 20
+    },
+    "B2": {
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.027648,
+      "final_episodes": 4,
+      "final_protected": true,
+      "final_request_upper": 20,
+      "initial_candidates": 2,
+      "offspring_candidates": 2,
+      "search_cost_upper_usd": 0.110592,
+      "search_episodes": 16,
+      "search_request_upper": 80
+    },
+    "B3": {
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.027648,
+      "final_episodes": 4,
+      "final_protected": true,
+      "final_request_upper": 20,
+      "initial_candidates": 2,
+      "offspring_candidates": 2,
+      "search_cost_upper_usd": 0.110592,
+      "search_episodes": 16,
+      "search_request_upper": 80
+    },
+    "B4": {
+      "duplicate_proposal_request_upper": 0,
+      "final_candidates": 1,
+      "final_cost_upper_usd": 0.027648,
+      "final_episodes": 4,
+      "final_protected": true,
+      "final_request_upper": 20,
+      "initial_candidates": 2,
+      "offspring_candidates": 2,
+      "search_cost_upper_usd": 0.110592,
+      "search_episodes": 16,
+      "search_request_upper": 80
+    }
+  },
+  "candidates_per_evolution_arm": 4,
+  "final_request_upper_per_arm": 20,
+  "fits": true,
+  "independent_recalculation_requires_api": false,
+  "input_cost_upper_per_request_usd": 0.0012288,
+  "input_price_per_1m_usd": 0.3,
+  "max_input_bytes_per_request": 4096,
+  "max_output_tokens_per_request": 128,
+  "output_cost_upper_per_request_usd": 0.0001536,
+  "output_price_per_1m_usd": 1.2,
+  "paired_episode_count": 4,
+  "per_request_cost_upper_usd": 0.0013824,
+  "planned_episode_count": 64,
+  "protected_pools": {
+    "B1": {
+      "cost_usd": 0.027648,
+      "request_count": 20
+    },
+    "final:B2": {
+      "cost_usd": 0.027648,
+      "request_count": 20
+    },
+    "final:B3": {
+      "cost_usd": 0.027648,
+      "request_count": 20
+    },
+    "final:B4": {
+      "cost_usd": 0.027648,
+      "request_count": 20
+    }
+  },
+  "protocol": "D094_R4_BUDGET_V1",
+  "r3_1_empirical_basis": {
+    "canonical_message_bytes_available": false,
+    "cost_usd": 0.0478524,
+    "episode_count": 42,
+    "failed_request_cost_usd": 0.0,
+    "failed_request_count": 0,
+    "http_retry_policy": "max_retries=0; request-ledger attempt is episode-local ordinal",
+    "input_tokens": 127148,
+    "input_tokens_per_request": 752.3550295857988,
+    "message_byte_policy": "4096-byte frozen cap audited; historical maximum not reconstructed",
+    "output_tokens": 8090,
+    "output_tokens_per_request": 47.8698224852071,
+    "request_count": 169,
+    "requests_per_episode": 4.023809523809524,
+    "same_prompt_repeat_fraction": 0.03550295857988166,
+    "same_prompt_repeat_records": 6,
+    "source": "results/r3_1_real historical completed Train aggregate"
+  },
+  "r4_empirical_estimate": {
+    "cost_usd": 0.07291794285714286,
+    "episode_count": 64,
+    "input_tokens": 193749.3333333333,
+    "output_tokens": 12327.619047619048,
+    "request_count": 257.5238095238095,
+    "warning": "Historical-distribution planning estimate, not a cap or predicted result"
+  },
+  "scope": "PRE_REAL_RUN_PLAN_NOT_AN_API_INVOICE",
+  "search_request_upper_per_arm": 80,
+  "task_count": 2,
+  "total_cost_upper_usd": 0.442368,
+  "total_request_upper": 320
+}

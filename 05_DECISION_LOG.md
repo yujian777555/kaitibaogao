@@ -1,5 +1,19 @@
 # 05 — 研究决策日志
 
+## 2026-11-21：D-094 R4 选择质量优先的配对父子算子信用，仅提交独立审查
+
+R3.1深度分析重新核对42个真实episodes、169次请求及全部搜索账本：16/16搜索候选Task Success均为0；B3/B5的recovery mutation虽然增加Phenotype，却在两个seeds都增加3个约束，质量信用为-1。B5一次verification mutation的七目标Pareto收益仅由token/延迟等资源变化构成，Success、Recovery、Harm和Phenotype均未改善。由此决定R4不再把失败频率、行为新颖性或完整七目标Pareto变化直接当作主信用。
+
+**选定唯一主机制：B3质量优先的配对父子算子信用。** 对variation第一parent与child的相同四个task/seed单元，先比较约束增减；约束相同再比较`(1-task_success,1-recovery_success,harm)`严格Pareto支配；四单元均值作为accepted offspring reward。每算子仅保留最近W=4个奖励，以τ=0.25、ε=0.2的稳定softmax更新后续概率。纯资源变化不进入主信用，duplicate不评价/不更新。
+
+B1为Fixed LLM，B2为标准NSGA-II/六算子均匀，B4保留旧失败频率反馈作为消融；不保留B5，不组合多样性，三演化臂使用同一feasibility-first survivor。两个Fresh Train任务、seeds 301/302、公共五步、64 episodes、320请求/0.442368 USD、独立final和探索性配对统计均在任何R4真实请求前冻结。
+
+验证：预检0 episode/0 API，合成13项门禁全通过；D-094=135/135，七目录全量=677/677。合成/Mock只证明软件链路，不提供真实Agent性能证据。
+
+**当前决定仅到`R4_READY_FOR_INDEPENDENT_REVIEW`。** 独立审查=PENDING，真实R4=NOT RUN，真实API=0，`APPROVED_FOR_EXPERIMENT=NO`。下一步由新独立会话按`D094.NEXT_SESSION_PROMPT.md`只读复核；即使审查通过，也仍需用户明确授权真实实验。R1/R2/R3.1历史、D-092/D-093、main及Validation/Test冻结边界不变。
+
+---
+
 ## 2026-11-19：D-094 R3.1 真实五臂完成，判定 NO_CLEAR_GAIN
 
 R3.1在冻结的单Train任务、seeds201/202、population2、1代和0.50 USD/1500请求上限内真实执行一次，42/42 episodes和169次HTTP全部完成。Token=127148/8090，成本=0.0478524 USD；预算/hash-chain/执行锁完整，独立程序复算PASS。

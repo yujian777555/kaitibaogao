@@ -1,0 +1,913 @@
+[
+  {
+    "constraint_violation": 10,
+    "episodes": [
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 301,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 302,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 5,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": false,
+        "seed": 301,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": false
+      },
+      {
+        "constraint_violation": 5,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": false,
+        "seed": 302,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": false
+      }
+    ],
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": -1,
+    "genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "compressed_summary",
+      "planning_mode": "stepwise",
+      "recovery_mode": "compensation_priority",
+      "reflection_trigger": "none",
+      "tool_call_guard": "post_plan_verify"
+    },
+    "genome_hash": "be673719081deadb00f501bd68a8756ec02dafe4a27dc1340f4bb629cba4b654",
+    "objectives": [
+      0.5,
+      0.5,
+      10,
+      0.0,
+      6.0,
+      0.0001092,
+      0.0005595500115305185
+    ],
+    "pair_keys": [
+      "d094_r4_train_compensation_unverified_0:301",
+      "d094_r4_train_compensation_unverified_0:302",
+      "d094_r4_train_transient_single_0:301",
+      "d094_r4_train_transient_single_0:302"
+    ],
+    "phenotype_hash": "220be48acd7a39ff5a461074e1b51f376b2134a4e4f64074b81b9561f07cac19"
+  },
+  {
+    "constraint_violation": 0,
+    "episodes": [
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 301,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 302,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.25,
+        "recovery_success": true,
+        "seed": 301,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.25,
+        "recovery_success": true,
+        "seed": 302,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": true
+      }
+    ],
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": -1,
+    "genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "recent_trajectory",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_subtask",
+      "tool_call_guard": "strict_schema"
+    },
+    "genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "objectives": [
+      0.0,
+      0.0,
+      0,
+      0.5,
+      12.0,
+      7.8e-05,
+      0.00042780005605891347
+    ],
+    "pair_keys": [
+      "d094_r4_train_compensation_unverified_0:301",
+      "d094_r4_train_compensation_unverified_0:302",
+      "d094_r4_train_transient_single_0:301",
+      "d094_r4_train_transient_single_0:302"
+    ],
+    "phenotype_hash": "c7d54696f39301f97665c77ac523a44b8bf42423e4c84e8e59e00eda7b216f7b"
+  },
+  {
+    "event_type": "survivor_selection",
+    "generation": -1,
+    "genotype_diversity": 1.0,
+    "performance_diversity": 1.0,
+    "phenotype_diversity": 1.0,
+    "selection_method": "initial_population",
+    "survivors": [
+      {
+        "constraint_violation": 10,
+        "genome_sha256": "be673719081deadb00f501bd68a8756ec02dafe4a27dc1340f4bb629cba4b654",
+        "objectives": [
+          0.5,
+          0.5,
+          10,
+          0.0,
+          6.0,
+          0.0001092,
+          0.0005595500115305185
+        ],
+        "phenotype_hash": "220be48acd7a39ff5a461074e1b51f376b2134a4e4f64074b81b9561f07cac19"
+      },
+      {
+        "constraint_violation": 0,
+        "genome_sha256": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+        "objectives": [
+          0.0,
+          0.0,
+          0,
+          0.5,
+          12.0,
+          7.8e-05,
+          0.00042780005605891347
+        ],
+        "phenotype_hash": "c7d54696f39301f97665c77ac523a44b8bf42423e4c84e8e59e00eda7b216f7b"
+      }
+    ]
+  },
+  {
+    "after_value": "structured_failures",
+    "before_value": "recent_trajectory",
+    "credit_state_before": {
+      "crossover": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "memory_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "planning_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "recovery_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "tool_guard_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "verification_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      }
+    },
+    "event_type": "variation",
+    "generation": 0,
+    "mode": "paired_credit",
+    "mutation_locus": "memory_mode",
+    "offspring_genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_subtask",
+      "tool_call_guard": "strict_schema"
+    },
+    "offspring_genome_hash": "b20065256ce7cb1aba96318314459ea31fa3933678810a1beca1a74f7e37243e",
+    "operator": "memory_mutation",
+    "operator_probabilities": {
+      "crossover": 0.16666666666666666,
+      "memory_mutation": 0.16666666666666666,
+      "planning_mutation": 0.16666666666666666,
+      "recovery_mutation": 0.16666666666666666,
+      "tool_guard_mutation": 0.16666666666666666,
+      "verification_mutation": 0.16666666666666666
+    },
+    "outcome": "ACCEPTED_FOR_EVALUATION",
+    "parent_genome_hashes": [
+      "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+      "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a"
+    ],
+    "primary_parent_genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "proposal_ordinal": 0
+  },
+  {
+    "constraint_violation": 0,
+    "episodes": [
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 301,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 302,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.25,
+        "recovery_success": true,
+        "seed": 301,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.25,
+        "recovery_success": true,
+        "seed": 302,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": true
+      }
+    ],
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": 0,
+    "genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "structured_failures",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_subtask",
+      "tool_call_guard": "strict_schema"
+    },
+    "genome_hash": "b20065256ce7cb1aba96318314459ea31fa3933678810a1beca1a74f7e37243e",
+    "objectives": [
+      0.0,
+      0.0,
+      0,
+      0.5,
+      12.0,
+      7.8e-05,
+      0.0003529499808792025
+    ],
+    "pair_keys": [
+      "d094_r4_train_compensation_unverified_0:301",
+      "d094_r4_train_compensation_unverified_0:302",
+      "d094_r4_train_transient_single_0:301",
+      "d094_r4_train_transient_single_0:302"
+    ],
+    "phenotype_hash": "c7d54696f39301f97665c77ac523a44b8bf42423e4c84e8e59e00eda7b216f7b"
+  },
+  {
+    "credit_after": {
+      "crossover": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "memory_mutation": {
+        "accepted_rewards": [
+          0.0
+        ],
+        "credit": 0.0
+      },
+      "planning_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "recovery_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "tool_guard_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "verification_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      }
+    },
+    "credit_before": {
+      "crossover": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "memory_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "planning_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "recovery_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "tool_guard_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "verification_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      }
+    },
+    "epsilon": 0.2,
+    "event_type": "credit_update",
+    "future_information_used": false,
+    "generation": 0,
+    "offspring_genome_hash": "b20065256ce7cb1aba96318314459ea31fa3933678810a1beca1a74f7e37243e",
+    "offspring_reward": 0.0,
+    "operator": "memory_mutation",
+    "paired_units": {
+      "d094_r4_train_compensation_unverified_0:301": {
+        "child_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 301,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 301,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "reason": "NO_STRICT_QUALITY_DOMINANCE",
+        "reward": 0.0,
+        "seed": 301,
+        "task_id": "d094_r4_train_compensation_unverified_0"
+      },
+      "d094_r4_train_compensation_unverified_0:302": {
+        "child_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 302,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 302,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "reason": "NO_STRICT_QUALITY_DOMINANCE",
+        "reward": 0.0,
+        "seed": 302,
+        "task_id": "d094_r4_train_compensation_unverified_0"
+      },
+      "d094_r4_train_transient_single_0:301": {
+        "child_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.25,
+          "recovery_success": true,
+          "seed": 301,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": true
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.25,
+          "recovery_success": true,
+          "seed": 301,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": true
+        },
+        "reason": "NO_STRICT_QUALITY_DOMINANCE",
+        "reward": 0.0,
+        "seed": 301,
+        "task_id": "d094_r4_train_transient_single_0"
+      },
+      "d094_r4_train_transient_single_0:302": {
+        "child_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.25,
+          "recovery_success": true,
+          "seed": 302,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": true
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.25,
+          "recovery_success": true,
+          "seed": 302,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": true
+        },
+        "reason": "NO_STRICT_QUALITY_DOMINANCE",
+        "reward": 0.0,
+        "seed": 302,
+        "task_id": "d094_r4_train_transient_single_0"
+      }
+    },
+    "primary_parent_genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "probabilities_after": {
+      "crossover": 0.16666666666666666,
+      "memory_mutation": 0.16666666666666666,
+      "planning_mutation": 0.16666666666666666,
+      "recovery_mutation": 0.16666666666666666,
+      "tool_guard_mutation": 0.16666666666666666,
+      "verification_mutation": 0.16666666666666666
+    },
+    "probabilities_before": {
+      "crossover": 0.16666666666666666,
+      "memory_mutation": 0.16666666666666666,
+      "planning_mutation": 0.16666666666666666,
+      "recovery_mutation": 0.16666666666666666,
+      "tool_guard_mutation": 0.16666666666666666,
+      "verification_mutation": 0.16666666666666666
+    },
+    "proposal_ordinal": 0,
+    "resource_objectives_used": false,
+    "tau": 0.25,
+    "window": 4
+  },
+  {
+    "after_value": null,
+    "before_value": null,
+    "credit_state_before": {
+      "crossover": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "memory_mutation": {
+        "accepted_rewards": [
+          0.0
+        ],
+        "credit": 0.0
+      },
+      "planning_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "recovery_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "tool_guard_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "verification_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      }
+    },
+    "event_type": "variation",
+    "generation": 0,
+    "mode": "paired_credit",
+    "mutation_locus": null,
+    "offspring_genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "recent_trajectory",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_subtask",
+      "tool_call_guard": "strict_schema"
+    },
+    "offspring_genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "operator": "crossover",
+    "operator_probabilities": {
+      "crossover": 0.16666666666666666,
+      "memory_mutation": 0.16666666666666666,
+      "planning_mutation": 0.16666666666666666,
+      "recovery_mutation": 0.16666666666666666,
+      "tool_guard_mutation": 0.16666666666666666,
+      "verification_mutation": 0.16666666666666666
+    },
+    "outcome": "DUPLICATE_PROPOSAL",
+    "parent_genome_hashes": [
+      "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+      "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a"
+    ],
+    "primary_parent_genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "proposal_ordinal": 1
+  },
+  {
+    "credit_updated": false,
+    "evaluated": false,
+    "event_type": "duplicate_proposal",
+    "generation": 0,
+    "genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "operator": "crossover",
+    "outcome": "REJECTED_WITHOUT_EVALUATION",
+    "proposal_ordinal": 1
+  },
+  {
+    "after_value": "compensation_priority",
+    "before_value": "retry_priority",
+    "credit_state_before": {
+      "crossover": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "memory_mutation": {
+        "accepted_rewards": [
+          0.0
+        ],
+        "credit": 0.0
+      },
+      "planning_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "recovery_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "tool_guard_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "verification_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      }
+    },
+    "event_type": "variation",
+    "generation": 0,
+    "mode": "paired_credit",
+    "mutation_locus": "recovery_mode",
+    "offspring_genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "recent_trajectory",
+      "planning_mode": "direct",
+      "recovery_mode": "compensation_priority",
+      "reflection_trigger": "after_subtask",
+      "tool_call_guard": "strict_schema"
+    },
+    "offspring_genome_hash": "b47a631eccfa6eb7eadbeb9be0eeb9e7aaf3cc36ebacc0cd1356af77ad5ddfa7",
+    "operator": "recovery_mutation",
+    "operator_probabilities": {
+      "crossover": 0.16666666666666666,
+      "memory_mutation": 0.16666666666666666,
+      "planning_mutation": 0.16666666666666666,
+      "recovery_mutation": 0.16666666666666666,
+      "tool_guard_mutation": 0.16666666666666666,
+      "verification_mutation": 0.16666666666666666
+    },
+    "outcome": "ACCEPTED_FOR_EVALUATION",
+    "parent_genome_hashes": [
+      "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+      "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a"
+    ],
+    "primary_parent_genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "proposal_ordinal": 2
+  },
+  {
+    "constraint_violation": 10,
+    "episodes": [
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 301,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 0,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": true,
+        "seed": 302,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "constraint_violation": 5,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": false,
+        "seed": 301,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": false
+      },
+      {
+        "constraint_violation": 5,
+        "execution_error": false,
+        "harm": 0.0,
+        "recovery_success": false,
+        "seed": 302,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": false
+      }
+    ],
+    "event_type": "evaluation",
+    "execution_errors": 0,
+    "generation": 0,
+    "genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "recent_trajectory",
+      "planning_mode": "direct",
+      "recovery_mode": "compensation_priority",
+      "reflection_trigger": "after_subtask",
+      "tool_call_guard": "strict_schema"
+    },
+    "genome_hash": "b47a631eccfa6eb7eadbeb9be0eeb9e7aaf3cc36ebacc0cd1356af77ad5ddfa7",
+    "objectives": [
+      0.5,
+      0.5,
+      10,
+      0.0,
+      6.0,
+      0.0001092,
+      0.0008717999735381454
+    ],
+    "pair_keys": [
+      "d094_r4_train_compensation_unverified_0:301",
+      "d094_r4_train_compensation_unverified_0:302",
+      "d094_r4_train_transient_single_0:301",
+      "d094_r4_train_transient_single_0:302"
+    ],
+    "phenotype_hash": "220be48acd7a39ff5a461074e1b51f376b2134a4e4f64074b81b9561f07cac19"
+  },
+  {
+    "credit_after": {
+      "crossover": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "memory_mutation": {
+        "accepted_rewards": [
+          0.0
+        ],
+        "credit": 0.0
+      },
+      "planning_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "recovery_mutation": {
+        "accepted_rewards": [
+          -0.5
+        ],
+        "credit": -0.5
+      },
+      "tool_guard_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "verification_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      }
+    },
+    "credit_before": {
+      "crossover": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "memory_mutation": {
+        "accepted_rewards": [
+          0.0
+        ],
+        "credit": 0.0
+      },
+      "planning_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "recovery_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "tool_guard_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      },
+      "verification_mutation": {
+        "accepted_rewards": [],
+        "credit": 0.0
+      }
+    },
+    "epsilon": 0.2,
+    "event_type": "credit_update",
+    "future_information_used": false,
+    "generation": 0,
+    "offspring_genome_hash": "b47a631eccfa6eb7eadbeb9be0eeb9e7aaf3cc36ebacc0cd1356af77ad5ddfa7",
+    "offspring_reward": -0.5,
+    "operator": "recovery_mutation",
+    "paired_units": {
+      "d094_r4_train_compensation_unverified_0:301": {
+        "child_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 301,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 301,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "reason": "NO_STRICT_QUALITY_DOMINANCE",
+        "reward": 0.0,
+        "seed": 301,
+        "task_id": "d094_r4_train_compensation_unverified_0"
+      },
+      "d094_r4_train_compensation_unverified_0:302": {
+        "child_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 302,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": true,
+          "seed": 302,
+          "task_id": "d094_r4_train_compensation_unverified_0",
+          "task_success": true
+        },
+        "reason": "NO_STRICT_QUALITY_DOMINANCE",
+        "reward": 0.0,
+        "seed": 302,
+        "task_id": "d094_r4_train_compensation_unverified_0"
+      },
+      "d094_r4_train_transient_single_0:301": {
+        "child_quality": {
+          "constraint_violation": 5,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": false,
+          "seed": 301,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": false
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.25,
+          "recovery_success": true,
+          "seed": 301,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": true
+        },
+        "reason": "CONSTRAINT_REGRESSION",
+        "reward": -1.0,
+        "seed": 301,
+        "task_id": "d094_r4_train_transient_single_0"
+      },
+      "d094_r4_train_transient_single_0:302": {
+        "child_quality": {
+          "constraint_violation": 5,
+          "execution_error": false,
+          "harm": 0.0,
+          "recovery_success": false,
+          "seed": 302,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": false
+        },
+        "parent_quality": {
+          "constraint_violation": 0,
+          "execution_error": false,
+          "harm": 0.25,
+          "recovery_success": true,
+          "seed": 302,
+          "task_id": "d094_r4_train_transient_single_0",
+          "task_success": true
+        },
+        "reason": "CONSTRAINT_REGRESSION",
+        "reward": -1.0,
+        "seed": 302,
+        "task_id": "d094_r4_train_transient_single_0"
+      }
+    },
+    "primary_parent_genome_hash": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+    "probabilities_after": {
+      "crossover": 0.1891167351710785,
+      "memory_mutation": 0.1891167351710785,
+      "planning_mutation": 0.1891167351710785,
+      "recovery_mutation": 0.054416324144607627,
+      "tool_guard_mutation": 0.1891167351710785,
+      "verification_mutation": 0.1891167351710785
+    },
+    "probabilities_before": {
+      "crossover": 0.16666666666666666,
+      "memory_mutation": 0.16666666666666666,
+      "planning_mutation": 0.16666666666666666,
+      "recovery_mutation": 0.16666666666666666,
+      "tool_guard_mutation": 0.16666666666666666,
+      "verification_mutation": 0.16666666666666666
+    },
+    "proposal_ordinal": 2,
+    "resource_objectives_used": false,
+    "tau": 0.25,
+    "window": 4
+  },
+  {
+    "event_type": "survivor_selection",
+    "generation": 0,
+    "genotype_diversity": 1.0,
+    "performance_diversity": 1.0,
+    "phenotype_diversity": 0.5,
+    "selection_method": "feasibility_first_standard_nsga2",
+    "survivors": [
+      {
+        "constraint_violation": 0,
+        "genome_sha256": "b20065256ce7cb1aba96318314459ea31fa3933678810a1beca1a74f7e37243e",
+        "objectives": [
+          0.0,
+          0.0,
+          0,
+          0.5,
+          12.0,
+          7.8e-05,
+          0.0003529499808792025
+        ],
+        "phenotype_hash": "c7d54696f39301f97665c77ac523a44b8bf42423e4c84e8e59e00eda7b216f7b"
+      },
+      {
+        "constraint_violation": 0,
+        "genome_sha256": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+        "objectives": [
+          0.0,
+          0.0,
+          0,
+          0.5,
+          12.0,
+          7.8e-05,
+          0.00042780005605891347
+        ],
+        "phenotype_hash": "c7d54696f39301f97665c77ac523a44b8bf42423e4c84e8e59e00eda7b216f7b"
+      }
+    ]
+  }
+]

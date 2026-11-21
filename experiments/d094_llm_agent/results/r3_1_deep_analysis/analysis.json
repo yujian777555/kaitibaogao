@@ -1,0 +1,3967 @@
+{
+  "aggregates": {
+    "B1:fixed": {
+      "behavior_diversity": 1.0,
+      "constraint_violation": 0,
+      "episode_count": 2,
+      "execution_errors": 0,
+      "harm": 0.25,
+      "input_tokens": 5715,
+      "latency_seconds": 4.043435999832582,
+      "output_tokens": 433,
+      "real_http_requests": 9,
+      "recovery_success_rate": 1.0,
+      "task_success_rate": 1.0,
+      "token_cost_upper_usd": 0.0022340999999999997,
+      "token_cost_usd": 0.0022340999999999997,
+      "tool_cost": 8.4
+    },
+    "B2:final": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 0,
+      "episode_count": 2,
+      "execution_errors": 0,
+      "harm": 0.5,
+      "input_tokens": 4248,
+      "latency_seconds": 2.9320094001013786,
+      "output_tokens": 294,
+      "real_http_requests": 6,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0016272,
+      "token_cost_usd": 0.0016272,
+      "tool_cost": 3.4
+    },
+    "B2:search": {
+      "behavior_diversity": 0.25,
+      "constraint_violation": 16,
+      "episode_count": 8,
+      "execution_errors": 0,
+      "harm": 1.5,
+      "input_tokens": 26151,
+      "latency_seconds": 3.5776270749774994,
+      "output_tokens": 1636,
+      "real_http_requests": 34,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.009808499999999998,
+      "token_cost_usd": 0.009808499999999998,
+      "tool_cost": 10.2
+    },
+    "B3:final": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 0,
+      "episode_count": 2,
+      "execution_errors": 0,
+      "harm": 0.5,
+      "input_tokens": 4208,
+      "latency_seconds": 2.9924591000308283,
+      "output_tokens": 294,
+      "real_http_requests": 6,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0016151999999999998,
+      "token_cost_usd": 0.0016151999999999998,
+      "tool_cost": 3.4
+    },
+    "B3:search": {
+      "behavior_diversity": 0.375,
+      "constraint_violation": 22,
+      "episode_count": 8,
+      "execution_errors": 0,
+      "harm": 1.0,
+      "input_tokens": 26115,
+      "latency_seconds": 3.7091509124729782,
+      "output_tokens": 1617,
+      "real_http_requests": 34,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.009774899999999998,
+      "token_cost_usd": 0.009774899999999998,
+      "tool_cost": 6.8
+    },
+    "B4:final": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 0,
+      "episode_count": 2,
+      "execution_errors": 0,
+      "harm": 0.5,
+      "input_tokens": 4248,
+      "latency_seconds": 2.5713632500264794,
+      "output_tokens": 292,
+      "real_http_requests": 6,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0016248,
+      "token_cost_usd": 0.0016248,
+      "tool_cost": 3.4
+    },
+    "B4:search": {
+      "behavior_diversity": 0.25,
+      "constraint_violation": 16,
+      "episode_count": 8,
+      "execution_errors": 0,
+      "harm": 1.5,
+      "input_tokens": 26144,
+      "latency_seconds": 3.925220074976096,
+      "output_tokens": 1631,
+      "real_http_requests": 34,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0098004,
+      "token_cost_usd": 0.0098004,
+      "tool_cost": 10.2
+    },
+    "B5:final": {
+      "behavior_diversity": 0.5,
+      "constraint_violation": 0,
+      "episode_count": 2,
+      "execution_errors": 0,
+      "harm": 0.5,
+      "input_tokens": 4208,
+      "latency_seconds": 2.376197899924591,
+      "output_tokens": 293,
+      "real_http_requests": 6,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0016139999999999998,
+      "token_cost_usd": 0.0016139999999999998,
+      "tool_cost": 3.4
+    },
+    "B5:search": {
+      "behavior_diversity": 0.375,
+      "constraint_violation": 22,
+      "episode_count": 8,
+      "execution_errors": 0,
+      "harm": 1.0,
+      "input_tokens": 26111,
+      "latency_seconds": 3.72664489998715,
+      "output_tokens": 1600,
+      "real_http_requests": 34,
+      "recovery_success_rate": 0.0,
+      "task_success_rate": 0.0,
+      "token_cost_upper_usd": 0.0097533,
+      "token_cost_usd": 0.0097533,
+      "tool_cost": 6.8
+    }
+  },
+  "analysis_schema": "d094_r3_1_deep_analysis_v1",
+  "analysis_sha256": "2362a32e6923d6c516661b301e6d7bcdb68e3a8ef6d78b3a8ff44271ce43982e",
+  "api_used": false,
+  "behavior_pairs": {
+    "B2": [
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "same_phenotype": true,
+        "second_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "same_phenotype": true,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+        "same_phenotype": true,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      }
+    ],
+    "B3": [
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.5714285714285714,
+        "feature_distance": 0.1346153846153846,
+        "first_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+        "same_phenotype": false,
+        "second_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.5714285714285714,
+        "feature_distance": 0.1346153846153846,
+        "first_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+        "same_phenotype": false,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.5882352941176471,
+        "feature_distance": 0.3076923076923077,
+        "first_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+        "same_phenotype": true,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      }
+    ],
+    "B4": [
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "same_phenotype": true,
+        "second_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "same_phenotype": true,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+        "same_phenotype": true,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      }
+    ],
+    "B5": [
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.5714285714285714,
+        "feature_distance": 0.1346153846153846,
+        "first_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+        "same_phenotype": false,
+        "second_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.5714285714285714,
+        "feature_distance": 0.1346153846153846,
+        "first_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+        "same_phenotype": false,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.5882352941176471,
+        "feature_distance": 0.3076923076923077,
+        "first_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.0,
+        "feature_distance": 0.0,
+        "first_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+        "same_phenotype": true,
+        "second_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      },
+      {
+        "delta_recovery_success_rate": 0.0,
+        "delta_task_success_rate": 0.0,
+        "edit_distance": 0.8235294117647058,
+        "feature_distance": 0.38461538461538464,
+        "first_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+        "same_phenotype": false,
+        "second_genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30"
+      }
+    ]
+  },
+  "data_gaps": [
+    "Only one Train task and two seeds were evaluated; no cross-task or confirmatory inference is possible.",
+    "Final episodes repeat the same Train task and seeds; they are not held-out generalization evidence.",
+    "Canonical request message bytes were not saved in episode records; only token usage and the frozen byte cap are auditable.",
+    "One generation and two offspring per arm cannot identify stable operator credit or long-horizon effects.",
+    "Ex-post parent/offspring credit describes this run; it was not used by R3.1 selection and is not a new experiment result."
+  ],
+  "design": {
+    "arms": [
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "phase_counts": {
+      "B1:fixed": 2,
+      "B2:final": 2,
+      "B2:search": 8,
+      "B3:final": 2,
+      "B3:search": 8,
+      "B4:final": 2,
+      "B4:search": 8,
+      "B5:final": 2,
+      "B5:search": 8
+    },
+    "protocol": "D094_R3.1_TRAIN",
+    "seeds": [
+      201,
+      202
+    ],
+    "split": "train",
+    "tasks": [
+      "d094_r3_train_compensation_0"
+    ]
+  },
+  "episode_identity": {
+    "all_hash_chains_valid": true,
+    "count": 42,
+    "execution_errors": 0,
+    "unique_episode_ids": 42,
+    "unique_provider_request_ids": 169
+  },
+  "failure_modes": {
+    "B1:fixed": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> compensate_primary -> complete_task": 1,
+        "inspect_state -> verify_state -> retry_primary -> compensate_primary -> complete_task": 1
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 0,
+          "planning_failure": 0,
+          "recovery_failure": 1,
+          "task_incompletion": 0,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 0
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 3,
+          "successful_tool_call_count": 8,
+          "tool_event_count": 9,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 0.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 0.3333333333333333,
+          "task_incompletion": 0.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.0
+        }
+      },
+      "rejection_error_counts": {},
+      "terminal_status_counts": {
+        "COMPLETED": 2
+      }
+    },
+    "B2:final": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> retry_primary": 2
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 0,
+          "planning_failure": 0,
+          "recovery_failure": 2,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 0
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 2,
+          "successful_tool_call_count": 4,
+          "tool_event_count": 6,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 0.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.0
+        }
+      },
+      "rejection_error_counts": {},
+      "terminal_status_counts": {
+        "MAX_STEPS": 2
+      }
+    },
+    "B2:search": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state": 2,
+        "inspect_state -> verify_state -> retry_primary": 6
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 16,
+          "planning_failure": 0,
+          "recovery_failure": 6,
+          "task_incompletion": 8,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 8
+        },
+        "denominators": {
+          "episode_count": 8,
+          "recovery_attempt_count": 6,
+          "successful_tool_call_count": 12,
+          "tool_event_count": 34,
+          "verification_attempt_count": 14
+        },
+        "rates": {
+          "dependency_failure": 0.47058823529411764,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.5714285714285714
+        }
+      },
+      "rejection_error_counts": {
+        "RECOVERY_COMPENSATION_REQUIRED": 16
+      },
+      "terminal_status_counts": {
+        "MAX_STEPS": 8
+      }
+    },
+    "B3:final": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> retry_primary": 2
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 0,
+          "planning_failure": 0,
+          "recovery_failure": 2,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 0
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 2,
+          "successful_tool_call_count": 4,
+          "tool_event_count": 6,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 0.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.0
+        }
+      },
+      "rejection_error_counts": {},
+      "terminal_status_counts": {
+        "MAX_STEPS": 2
+      }
+    },
+    "B3:search": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> inspect_state": 2,
+        "inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state": 2,
+        "inspect_state -> verify_state -> retry_primary": 4
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 22,
+          "planning_failure": 0,
+          "recovery_failure": 4,
+          "task_incompletion": 8,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 10
+        },
+        "denominators": {
+          "episode_count": 8,
+          "recovery_attempt_count": 4,
+          "successful_tool_call_count": 8,
+          "tool_event_count": 34,
+          "verification_attempt_count": 14
+        },
+        "rates": {
+          "dependency_failure": 0.6470588235294118,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.7142857142857143
+        }
+      },
+      "rejection_error_counts": {
+        "RECOVERY_COMPENSATION_REQUIRED": 22
+      },
+      "terminal_status_counts": {
+        "MAX_STEPS": 8
+      }
+    },
+    "B4:final": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> retry_primary": 2
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 0,
+          "planning_failure": 0,
+          "recovery_failure": 2,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 0
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 2,
+          "successful_tool_call_count": 4,
+          "tool_event_count": 6,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 0.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.0
+        }
+      },
+      "rejection_error_counts": {},
+      "terminal_status_counts": {
+        "MAX_STEPS": 2
+      }
+    },
+    "B4:search": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state": 2,
+        "inspect_state -> verify_state -> retry_primary": 6
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 16,
+          "planning_failure": 0,
+          "recovery_failure": 6,
+          "task_incompletion": 8,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 8
+        },
+        "denominators": {
+          "episode_count": 8,
+          "recovery_attempt_count": 6,
+          "successful_tool_call_count": 12,
+          "tool_event_count": 34,
+          "verification_attempt_count": 14
+        },
+        "rates": {
+          "dependency_failure": 0.47058823529411764,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.5714285714285714
+        }
+      },
+      "rejection_error_counts": {
+        "RECOVERY_COMPENSATION_REQUIRED": 16
+      },
+      "terminal_status_counts": {
+        "MAX_STEPS": 8
+      }
+    },
+    "B5:final": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> retry_primary": 2
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 0,
+          "planning_failure": 0,
+          "recovery_failure": 2,
+          "task_incompletion": 2,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 0
+        },
+        "denominators": {
+          "episode_count": 2,
+          "recovery_attempt_count": 2,
+          "successful_tool_call_count": 4,
+          "tool_event_count": 6,
+          "verification_attempt_count": 2
+        },
+        "rates": {
+          "dependency_failure": 0.0,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.0
+        }
+      },
+      "rejection_error_counts": {},
+      "terminal_status_counts": {
+        "MAX_STEPS": 2
+      }
+    },
+    "B5:search": {
+      "action_sequence_counts": {
+        "inspect_state -> verify_state -> inspect_state": 2,
+        "inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state -> inspect_state -> verify_state": 2,
+        "inspect_state -> verify_state -> retry_primary": 4
+      },
+      "failure_profile": {
+        "counts": {
+          "dependency_failure": 22,
+          "planning_failure": 0,
+          "recovery_failure": 4,
+          "task_incompletion": 8,
+          "tool_call_failure": 0,
+          "unnecessary_tool_call": 0,
+          "verification_failure": 10
+        },
+        "denominators": {
+          "episode_count": 8,
+          "recovery_attempt_count": 4,
+          "successful_tool_call_count": 8,
+          "tool_event_count": 34,
+          "verification_attempt_count": 14
+        },
+        "rates": {
+          "dependency_failure": 0.6470588235294118,
+          "planning_failure": 0.0,
+          "recovery_failure": 1.0,
+          "task_incompletion": 1.0,
+          "tool_call_failure": 0.0,
+          "unnecessary_tool_call": 0.0,
+          "verification_failure": 0.7142857142857143
+        }
+      },
+      "rejection_error_counts": {
+        "RECOVERY_COMPENSATION_REQUIRED": 22
+      },
+      "terminal_status_counts": {
+        "MAX_STEPS": 8
+      }
+    }
+  },
+  "final_comparisons": {
+    "B3_minus_B2": {
+      "overall": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": -40,
+        "latency_seconds": 0.06044969992944971,
+        "output_tokens": 0,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -1.2000000000000292e-05,
+        "token_cost_usd": -1.2000000000000292e-05,
+        "tool_cost": 0.0
+      },
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": -20,
+          "latency_seconds": -0.0362784001044929,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": -6.000000000000146e-06,
+          "token_cost_usd": -6.000000000000146e-06,
+          "tool_cost": 0.0
+        },
+        "202": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": -20,
+          "latency_seconds": 0.15717779996339232,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": -6.000000000000037e-06,
+          "token_cost_usd": -6.000000000000037e-06,
+          "tool_cost": 0.0
+        }
+      }
+    },
+    "B4_minus_B2": {
+      "overall": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": -0.3606461500748992,
+        "output_tokens": -2,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -2.4000000000000583e-06,
+        "token_cost_usd": -2.4000000000000583e-06,
+        "tool_cost": 0.0
+      },
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 0,
+          "latency_seconds": -0.08025520003866404,
+          "output_tokens": -2,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": -2.4000000000000583e-06,
+          "token_cost_usd": -2.4000000000000583e-06,
+          "tool_cost": 0.0
+        },
+        "202": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 0,
+          "latency_seconds": -0.6410371001111344,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0,
+          "token_cost_usd": 0.0,
+          "tool_cost": 0.0
+        }
+      }
+    },
+    "B5_minus_B3": {
+      "overall": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": 0,
+        "latency_seconds": -0.6162612001062371,
+        "output_tokens": -1,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -1.2000000000000292e-06,
+        "token_cost_usd": -1.2000000000000292e-06,
+        "tool_cost": 0.0
+      },
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 0,
+          "latency_seconds": -0.8237873000325635,
+          "output_tokens": -1,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": -1.2000000000000292e-06,
+          "token_cost_usd": -1.2000000000000292e-06,
+          "tool_cost": 0.0
+        },
+        "202": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": 0,
+          "latency_seconds": -0.40873510017991066,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": 0.0,
+          "token_cost_usd": 0.0,
+          "tool_cost": 0.0
+        }
+      }
+    },
+    "B5_minus_B4": {
+      "overall": {
+        "behavior_diversity": 0.0,
+        "constraint_violation": 0,
+        "harm": 0.0,
+        "input_tokens": -40,
+        "latency_seconds": -0.19516535010188818,
+        "output_tokens": 1,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": -1.0800000000000263e-05,
+        "token_cost_usd": -1.0800000000000263e-05,
+        "tool_cost": 0.0
+      },
+      "per_seed": {
+        "201": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": -20,
+          "latency_seconds": -0.7798105000983924,
+          "output_tokens": 1,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": -4.800000000000117e-06,
+          "token_cost_usd": -4.800000000000117e-06,
+          "tool_cost": 0.0
+        },
+        "202": {
+          "behavior_diversity": 0.0,
+          "constraint_violation": 0,
+          "harm": 0.0,
+          "input_tokens": -20,
+          "latency_seconds": 0.389479799894616,
+          "output_tokens": 0,
+          "recovery_success_rate": 0.0,
+          "task_success_rate": 0.0,
+          "token_cost_upper_usd": -6.000000000000037e-06,
+          "token_cost_usd": -6.000000000000037e-06,
+          "tool_cost": 0.0
+        }
+      }
+    }
+  },
+  "per_task_seed": {
+    "B1:fixed": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 3260,
+        "latency_seconds": 4.198579999851063,
+        "output_tokens": 242,
+        "real_http_requests": 5,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0012683999999999998,
+        "token_cost_usd": 0.0012683999999999998,
+        "tool_cost": 4.7
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.0,
+        "input_tokens": 2455,
+        "latency_seconds": 3.8882919998141006,
+        "output_tokens": 191,
+        "real_http_requests": 4,
+        "recovery_success_rate": 1.0,
+        "task_success_rate": 1.0,
+        "token_cost_upper_usd": 0.0009656999999999999,
+        "token_cost_usd": 0.0009656999999999999,
+        "tool_cost": 3.7
+      }
+    },
+    "B2:final": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 3.0232694001169875,
+        "output_tokens": 147,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008136,
+        "token_cost_usd": 0.0008136,
+        "tool_cost": 1.7
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.8407494000857696,
+        "output_tokens": 147,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008135999999999999,
+        "token_cost_usd": 0.0008135999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "B2:search": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 8,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.75,
+        "input_tokens": 13074,
+        "latency_seconds": 3.541253249917645,
+        "output_tokens": 813,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0048978,
+        "token_cost_usd": 0.0048978,
+        "tool_cost": 5.1
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 8,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.75,
+        "input_tokens": 13077,
+        "latency_seconds": 3.614000900037354,
+        "output_tokens": 823,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0049107,
+        "token_cost_usd": 0.0049107,
+        "tool_cost": 5.1
+      }
+    },
+    "B3:final": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.9869910000124946,
+        "output_tokens": 147,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008075999999999999,
+        "token_cost_usd": 0.0008075999999999999,
+        "tool_cost": 1.7
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.997927200049162,
+        "output_tokens": 147,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008075999999999999,
+        "token_cost_usd": 0.0008075999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "B3:search": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 0.75,
+        "constraint_violation": 11,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.5,
+        "input_tokens": 13056,
+        "latency_seconds": 3.5263076249102596,
+        "output_tokens": 803,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0048804,
+        "token_cost_usd": 0.0048804,
+        "tool_cost": 3.4
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 0.75,
+        "constraint_violation": 11,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.5,
+        "input_tokens": 13059,
+        "latency_seconds": 3.891994200035697,
+        "output_tokens": 814,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0048944999999999995,
+        "token_cost_usd": 0.0048944999999999995,
+        "tool_cost": 3.4
+      }
+    },
+    "B4:final": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.9430142000783235,
+        "output_tokens": 145,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008112,
+        "token_cost_usd": 0.0008112,
+        "tool_cost": 1.7
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2124,
+        "latency_seconds": 2.1997122999746352,
+        "output_tokens": 147,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008135999999999999,
+        "token_cost_usd": 0.0008135999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "B4:search": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 8,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.75,
+        "input_tokens": 13072,
+        "latency_seconds": 3.6798166999651585,
+        "output_tokens": 818,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.004903199999999999,
+        "token_cost_usd": 0.004903199999999999,
+        "tool_cost": 5.1
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 0.5,
+        "constraint_violation": 8,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.75,
+        "input_tokens": 13072,
+        "latency_seconds": 4.170623449987033,
+        "output_tokens": 813,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.004897199999999999,
+        "token_cost_usd": 0.004897199999999999,
+        "tool_cost": 5.1
+      }
+    },
+    "B5:final": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.163203699979931,
+        "output_tokens": 146,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008063999999999999,
+        "token_cost_usd": 0.0008063999999999999,
+        "tool_cost": 1.7
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 1.0,
+        "constraint_violation": 0,
+        "episode_count": 1,
+        "execution_errors": 0,
+        "harm": 0.25,
+        "input_tokens": 2104,
+        "latency_seconds": 2.5891920998692513,
+        "output_tokens": 147,
+        "real_http_requests": 3,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0008075999999999999,
+        "token_cost_usd": 0.0008075999999999999,
+        "tool_cost": 1.7
+      }
+    },
+    "B5:search": {
+      "d094_r3_train_compensation_0:201": {
+        "behavior_diversity": 0.75,
+        "constraint_violation": 11,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.5,
+        "input_tokens": 13055,
+        "latency_seconds": 3.5558653248881456,
+        "output_tokens": 804,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.0048813,
+        "token_cost_usd": 0.0048813,
+        "tool_cost": 3.4
+      },
+      "d094_r3_train_compensation_0:202": {
+        "behavior_diversity": 0.75,
+        "constraint_violation": 11,
+        "episode_count": 4,
+        "execution_errors": 0,
+        "harm": 0.5,
+        "input_tokens": 13056,
+        "latency_seconds": 3.8974244750861544,
+        "output_tokens": 796,
+        "real_http_requests": 17,
+        "recovery_success_rate": 0.0,
+        "task_success_rate": 0.0,
+        "token_cost_upper_usd": 0.004872,
+        "token_cost_usd": 0.004872,
+        "tool_cost": 3.4
+      }
+    }
+  },
+  "request_analysis": {
+    "all": {
+      "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+      "cost_usd": 0.0478524,
+      "episodes": 42,
+      "failed_request_cost_usd": 0,
+      "failed_request_count": 0,
+      "independent_audit_requires_real_api": false,
+      "input_tokens": 127148,
+      "max_input_tokens_per_request": 831,
+      "max_output_tokens_per_request": 55,
+      "max_requests_per_episode": 8,
+      "mean_input_tokens_per_request": 752.3550295857988,
+      "mean_output_tokens_per_request": 47.8698224852071,
+      "output_tokens": 8090,
+      "per_task": {
+        "d094_r3_train_compensation_0": {
+          "episodes": 42,
+          "mean_input_tokens_per_episode": 3027.3333333333335,
+          "mean_output_tokens_per_episode": 192.61904761904762,
+          "mean_requests_per_episode": 4.023809523809524
+        }
+      },
+      "requests": 169,
+      "same_prompt_repeat_ratio": 0.03550295857988166,
+      "same_prompt_repeat_records": 6,
+      "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+    },
+    "by_arm_phase": {
+      "B1:fixed": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.0022340999999999997,
+        "episodes": 2,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 5715,
+        "max_input_tokens_per_request": 769,
+        "max_output_tokens_per_request": 54,
+        "max_requests_per_episode": 5,
+        "mean_input_tokens_per_request": 635.0,
+        "mean_output_tokens_per_request": 48.111111111111114,
+        "output_tokens": 433,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 2,
+            "mean_input_tokens_per_episode": 2857.5,
+            "mean_output_tokens_per_episode": 216.5,
+            "mean_requests_per_episode": 4.5
+          }
+        },
+        "requests": 9,
+        "same_prompt_repeat_ratio": 0.0,
+        "same_prompt_repeat_records": 0,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B2:final": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.0016272,
+        "episodes": 2,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 4248,
+        "max_input_tokens_per_request": 712,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 3,
+        "mean_input_tokens_per_request": 708.0,
+        "mean_output_tokens_per_request": 49.0,
+        "output_tokens": 294,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 2,
+            "mean_input_tokens_per_episode": 2124.0,
+            "mean_output_tokens_per_episode": 147.0,
+            "mean_requests_per_episode": 3.0
+          }
+        },
+        "requests": 6,
+        "same_prompt_repeat_ratio": 0.0,
+        "same_prompt_repeat_records": 0,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B2:search": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.009808499999999998,
+        "episodes": 8,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 26151,
+        "max_input_tokens_per_request": 831,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 8,
+        "mean_input_tokens_per_request": 769.1470588235294,
+        "mean_output_tokens_per_request": 48.11764705882353,
+        "output_tokens": 1636,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 8,
+            "mean_input_tokens_per_episode": 3268.875,
+            "mean_output_tokens_per_episode": 204.5,
+            "mean_requests_per_episode": 4.25
+          }
+        },
+        "requests": 34,
+        "same_prompt_repeat_ratio": 0.08823529411764706,
+        "same_prompt_repeat_records": 3,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B3:final": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.0016151999999999998,
+        "episodes": 2,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 4208,
+        "max_input_tokens_per_request": 707,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 3,
+        "mean_input_tokens_per_request": 701.3333333333334,
+        "mean_output_tokens_per_request": 49.0,
+        "output_tokens": 294,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 2,
+            "mean_input_tokens_per_episode": 2104.0,
+            "mean_output_tokens_per_episode": 147.0,
+            "mean_requests_per_episode": 3.0
+          }
+        },
+        "requests": 6,
+        "same_prompt_repeat_ratio": 0.0,
+        "same_prompt_repeat_records": 0,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B3:search": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.009774899999999998,
+        "episodes": 8,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 26115,
+        "max_input_tokens_per_request": 831,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 8,
+        "mean_input_tokens_per_request": 768.0882352941177,
+        "mean_output_tokens_per_request": 47.55882352941177,
+        "output_tokens": 1617,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 8,
+            "mean_input_tokens_per_episode": 3264.375,
+            "mean_output_tokens_per_episode": 202.125,
+            "mean_requests_per_episode": 4.25
+          }
+        },
+        "requests": 34,
+        "same_prompt_repeat_ratio": 0.029411764705882353,
+        "same_prompt_repeat_records": 1,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B4:final": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.0016248,
+        "episodes": 2,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 4248,
+        "max_input_tokens_per_request": 712,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 3,
+        "mean_input_tokens_per_request": 708.0,
+        "mean_output_tokens_per_request": 48.666666666666664,
+        "output_tokens": 292,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 2,
+            "mean_input_tokens_per_episode": 2124.0,
+            "mean_output_tokens_per_episode": 146.0,
+            "mean_requests_per_episode": 3.0
+          }
+        },
+        "requests": 6,
+        "same_prompt_repeat_ratio": 0.0,
+        "same_prompt_repeat_records": 0,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B4:search": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.009800399999999999,
+        "episodes": 8,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 26144,
+        "max_input_tokens_per_request": 829,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 8,
+        "mean_input_tokens_per_request": 768.9411764705883,
+        "mean_output_tokens_per_request": 47.970588235294116,
+        "output_tokens": 1631,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 8,
+            "mean_input_tokens_per_episode": 3268.0,
+            "mean_output_tokens_per_episode": 203.875,
+            "mean_requests_per_episode": 4.25
+          }
+        },
+        "requests": 34,
+        "same_prompt_repeat_ratio": 0.058823529411764705,
+        "same_prompt_repeat_records": 2,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B5:final": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.0016139999999999998,
+        "episodes": 2,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 4208,
+        "max_input_tokens_per_request": 707,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 3,
+        "mean_input_tokens_per_request": 701.3333333333334,
+        "mean_output_tokens_per_request": 48.833333333333336,
+        "output_tokens": 293,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 2,
+            "mean_input_tokens_per_episode": 2104.0,
+            "mean_output_tokens_per_episode": 146.5,
+            "mean_requests_per_episode": 3.0
+          }
+        },
+        "requests": 6,
+        "same_prompt_repeat_ratio": 0.0,
+        "same_prompt_repeat_records": 0,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      },
+      "B5:search": {
+        "canonical_message_bytes_status": "NOT_RECORDED_IN_EPISODES; frozen cap was 4096 bytes",
+        "cost_usd": 0.009753299999999998,
+        "episodes": 8,
+        "failed_request_cost_usd": 0,
+        "failed_request_count": 0,
+        "independent_audit_requires_real_api": false,
+        "input_tokens": 26111,
+        "max_input_tokens_per_request": 830,
+        "max_output_tokens_per_request": 55,
+        "max_requests_per_episode": 8,
+        "mean_input_tokens_per_request": 767.9705882352941,
+        "mean_output_tokens_per_request": 47.05882352941177,
+        "output_tokens": 1600,
+        "per_task": {
+          "d094_r3_train_compensation_0": {
+            "episodes": 8,
+            "mean_input_tokens_per_episode": 3263.875,
+            "mean_output_tokens_per_episode": 200.0,
+            "mean_requests_per_episode": 4.25
+          }
+        },
+        "requests": 34,
+        "same_prompt_repeat_ratio": 0.0,
+        "same_prompt_repeat_records": 0,
+        "transport_retry_status": "FROZEN_MAX_RETRIES_0; attempt is the per-episode request ordinal, not a retry counter"
+      }
+    }
+  },
+  "scientific_scope": "READ_ONLY_EXPLORATORY_ANALYSIS",
+  "search": {
+    "B2": {
+      "candidates": [
+        {
+          "arm": "B2",
+          "episode_ids": [
+            "fbede56d5577253697b160a30362abaf76ca45fd81efd1fae389dc41fb418026",
+            "d3281c167d2b568c6e8a9439e39c2cf2f88f723bd13bde1c5f3d127d3f01499b"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "strict_schema"
+          },
+          "genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4236,
+            "latency_seconds": 2.496393849956803,
+            "output_tokens": 299,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016296,
+            "token_cost_usd": 0.0016296,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016296,
+            2.496393849956803
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B2",
+          "episode_ids": [
+            "3253dfdbf95cb5f129ee2e3b73c9ddf545ebf0526ef1aa5450edc82395c9c45d",
+            "54f266caae4961f835c3bffd27faf5ff59ef301e87b0c08ed57480f2b87caee6"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "recent_trajectory",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4655,
+            "latency_seconds": 2.5629209500038996,
+            "output_tokens": 295,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0017504999999999997,
+            "token_cost_usd": 0.0017504999999999997,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0017504999999999997,
+            2.5629209500038996
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B2",
+          "episode_ids": [
+            "27ccaed09cb86b580495cb02eb0955600961a3199e63ffa873894b7c8aecab2e",
+            "e07c1e040336674aaf756afd7e104bf641c3649c8f18ab388dee268d22b4f621"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4248,
+            "latency_seconds": 2.612546299933456,
+            "output_tokens": 295,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016284000000000001,
+            "token_cost_usd": 0.0016284000000000001,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016284000000000001,
+            2.612546299933456
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B2",
+          "episode_ids": [
+            "ae62d3d3f88402d57c68964ccfc45e1e7e7d008971481ed5238cc37d9bc4cdf7",
+            "d5d91aa148d3180281b9955f467393208c3c9c64a6fcfbac916ac0d0a3dc528f"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 16,
+              "planning_failure": 0,
+              "recovery_failure": 0,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 8
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 0,
+              "successful_tool_call_count": 0,
+              "tool_event_count": 16,
+              "verification_attempt_count": 8
+            },
+            "rates": {
+              "dependency_failure": 1.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 0.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 1.0
+            }
+          },
+          "feasible": false,
+          "genome": {
+            "max_plan_steps": 8,
+            "memory_mode": "recent_trajectory",
+            "planning_mode": "stepwise",
+            "recovery_mode": "compensation_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "strict_schema"
+          },
+          "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 16,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0,
+            "input_tokens": 13012,
+            "latency_seconds": 6.638647200015839,
+            "output_tokens": 747,
+            "real_http_requests": 16,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0048000000000000004,
+            "token_cost_usd": 0.0048000000000000004,
+            "tool_cost": 0
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            16.0,
+            0,
+            0,
+            0.0048000000000000004,
+            6.638647200015839
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c",
+          "phenotype_matches_saved": true
+        }
+      ],
+      "duplicate_proposal_count": 1,
+      "feedback_update_count": 0,
+      "independent_final_selection": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "independent_pareto_front": [
+        "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      ],
+      "operator_probability_ranges": {
+        "crossover": {
+          "max": 0.16666666666666666,
+          "min": 0.16666666666666666
+        },
+        "memory_mutation": {
+          "max": 0.16666666666666666,
+          "min": 0.16666666666666666
+        },
+        "tool_guard_mutation": {
+          "max": 0.16666666666666666,
+          "min": 0.16666666666666666
+        }
+      },
+      "operator_summary": {
+        "crossover": {
+          "accepted": 0,
+          "duplicates": 1,
+          "mean_paired_dominance_reward": null,
+          "mean_paired_quality_credit": null,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        },
+        "memory_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": -0.5,
+          "mean_paired_quality_credit": 0.0,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 1,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        },
+        "tool_guard_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": 0.0,
+          "mean_paired_quality_credit": 0.0,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        }
+      },
+      "parent_child": [
+        {
+          "after_value": "recent_trajectory",
+          "arm": "B2",
+          "before_value": "structured_failures",
+          "candidate_offspring_dominates_parent": false,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "memory_mode",
+          "offspring_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+          "offspring_phenotype_changed": false,
+          "operator": "memory_mutation",
+          "operator_probabilities": {
+            "crossover": 0.16666666666666666,
+            "memory_mutation": 0.16666666666666666,
+            "planning_mutation": 0.16666666666666666,
+            "recovery_mutation": 0.16666666666666666,
+            "tool_guard_mutation": 0.16666666666666666,
+            "verification_mutation": 0.16666666666666666
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": -0.5,
+          "paired_episode_count": 2,
+          "paired_quality_credit": 0.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": 0.01509630004875362,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 5.849999999999974e-05,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": -1.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": true,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -0.11434699990786612,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 6.359999999999981e-05,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 0
+        },
+        {
+          "after_value": null,
+          "arm": "B2",
+          "before_value": null,
+          "credit_status": "NOT_EVALUATED_NO_CREDIT",
+          "generation": 0,
+          "mutation_locus": null,
+          "offspring_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "operator": "crossover",
+          "operator_probabilities": {
+            "crossover": 0.16666666666666666,
+            "memory_mutation": 0.16666666666666666,
+            "planning_mutation": 0.16666666666666666,
+            "recovery_mutation": 0.16666666666666666,
+            "tool_guard_mutation": 0.16666666666666666,
+            "verification_mutation": 0.16666666666666666
+          },
+          "outcome": "DUPLICATE_PROPOSAL",
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 1
+        },
+        {
+          "after_value": "strict_schema",
+          "arm": "B2",
+          "before_value": "post_plan_verify",
+          "candidate_offspring_dominates_parent": false,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "tool_call_guard",
+          "offspring_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+          "offspring_phenotype_changed": false,
+          "operator": "tool_guard_mutation",
+          "operator_probabilities": {
+            "crossover": 0.16666666666666666,
+            "memory_mutation": 0.16666666666666666,
+            "planning_mutation": 0.16666666666666666,
+            "recovery_mutation": 0.16666666666666666,
+            "tool_guard_mutation": 0.16666666666666666,
+            "verification_mutation": 0.16666666666666666
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": 0.0,
+          "paired_episode_count": 2,
+          "paired_quality_credit": 0.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -0.531584299984388,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": -6.00000000000123e-07,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": true,
+              "paired_dominance_reward": 1.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": 0.29927940003108233,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 1.7999999999999353e-06,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": -1.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": true,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 2
+        }
+      ],
+      "successful_candidates": 0,
+      "survivor_events": [
+        {
+          "event_type": "survivor_selection",
+          "generation": -1,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 1.0,
+          "selection_method": "initial_population",
+          "survivors": [
+            {
+              "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+              "objectives": [
+                1.0,
+                1.0,
+                16.0,
+                0.0,
+                0.0,
+                0.0048000000000000004,
+                6.638647200015839
+              ],
+              "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c"
+            },
+            {
+              "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016284000000000001,
+                2.612546299933456
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        },
+        {
+          "event_type": "survivor_selection",
+          "generation": 0,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 0.5,
+          "selection_method": "standard",
+          "survivors": [
+            {
+              "genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016296,
+                2.496393849956803
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            },
+            {
+              "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016284000000000001,
+                2.612546299933456
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        }
+      ],
+      "unique_genomes": 4,
+      "unique_phenotypes": 2,
+      "variation_count": 3
+    },
+    "B3": {
+      "candidates": [
+        {
+          "arm": "B3",
+          "episode_ids": [
+            "57ee82be5fd9f798ca1a6d4e3d9f4d795d7c7693e111515423b17f6c04cccdaf",
+            "6947c873e61ec5dc07c42293ee11fd9df0a0756254e841837a8498a2b267bce5"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 6,
+              "planning_failure": 0,
+              "recovery_failure": 0,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 2
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 0,
+              "successful_tool_call_count": 0,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 1.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 0.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 1.0
+            }
+          },
+          "feasible": false,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "compensation_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 6,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0,
+            "input_tokens": 4648,
+            "latency_seconds": 2.6475037000491284,
+            "output_tokens": 282,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0017328,
+            "token_cost_usd": 0.0017328,
+            "tool_cost": 0
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            6.0,
+            0,
+            0,
+            0.0017328,
+            2.6475037000491284
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "54e2dd59c58a0156a294245734c93cc3cba9202375521f44fdc6a3df61a88eab",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B3",
+          "episode_ids": [
+            "777695c9a2f924f74fb7b108509c176240c8336e78d61685a203866735ba0dbe",
+            "5f24c62cc4e58bdb9644639663b7fac81ee9faca8a4b6a0c1f2128901501a060"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "none",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4208,
+            "latency_seconds": 2.614219699986279,
+            "output_tokens": 291,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016116,
+            "token_cost_usd": 0.0016116,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016116,
+            2.614219699986279
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B3",
+          "episode_ids": [
+            "74adaaef938b19eb38662dae17413006ccc79cd546dfcec66cf35fc4e2f85cf8",
+            "814faa12e9739145cb42d803293c10312e681fdd65623092ebc3a5973e6b966c"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4248,
+            "latency_seconds": 2.4953989998903126,
+            "output_tokens": 300,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016344,
+            "token_cost_usd": 0.0016344,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016344,
+            2.4953989998903126
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B3",
+          "episode_ids": [
+            "09684c3094c1c78512762938e6e3ed5ec503b03509cde5ba77cdac9ff8daa1f2",
+            "9b7d5296cb05fb69c8be6e274adf15a7afe67a84fb64f708109b80366be22bd0"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 16,
+              "planning_failure": 0,
+              "recovery_failure": 0,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 8
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 0,
+              "successful_tool_call_count": 0,
+              "tool_event_count": 16,
+              "verification_attempt_count": 8
+            },
+            "rates": {
+              "dependency_failure": 1.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 0.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 1.0
+            }
+          },
+          "feasible": false,
+          "genome": {
+            "max_plan_steps": 8,
+            "memory_mode": "recent_trajectory",
+            "planning_mode": "stepwise",
+            "recovery_mode": "compensation_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "strict_schema"
+          },
+          "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 16,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0,
+            "input_tokens": 13011,
+            "latency_seconds": 7.079481249966193,
+            "output_tokens": 744,
+            "real_http_requests": 16,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.004796099999999999,
+            "token_cost_usd": 0.004796099999999999,
+            "tool_cost": 0
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            16.0,
+            0,
+            0,
+            0.004796099999999999,
+            7.079481249966193
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c",
+          "phenotype_matches_saved": true
+        }
+      ],
+      "duplicate_proposal_count": 2,
+      "feedback_update_count": 4,
+      "independent_final_selection": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+      "independent_pareto_front": [
+        "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+        "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      ],
+      "operator_probability_ranges": {
+        "crossover": {
+          "max": 0.6957301449110355,
+          "min": 0.6856275412681521
+        },
+        "recovery_mutation": {
+          "max": 0.23322446271801908,
+          "min": 0.023585844854431052
+        },
+        "verification_mutation": {
+          "max": 0.23000267617025852,
+          "min": 0.01689446708559114
+        }
+      },
+      "operator_summary": {
+        "crossover": {
+          "accepted": 0,
+          "duplicates": 2,
+          "mean_paired_dominance_reward": null,
+          "mean_paired_quality_credit": null,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 2
+        },
+        "recovery_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": 0.0,
+          "mean_paired_quality_credit": -1.0,
+          "negative_quality_credit_count": 1,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 1,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        },
+        "verification_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": 0.0,
+          "mean_paired_quality_credit": 0.0,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        }
+      },
+      "parent_child": [
+        {
+          "after_value": null,
+          "arm": "B3",
+          "before_value": null,
+          "credit_status": "NOT_EVALUATED_NO_CREDIT",
+          "generation": 0,
+          "mutation_locus": null,
+          "offspring_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "operator": "crossover",
+          "operator_probabilities": {
+            "crossover": 0.6957301449110355,
+            "memory_mutation": 0.018349896741459523,
+            "planning_mutation": 0.018906561458303738,
+            "recovery_mutation": 0.23322446271801908,
+            "tool_guard_mutation": 0.01689446708559114,
+            "verification_mutation": 0.01689446708559114
+          },
+          "outcome": "DUPLICATE_PROPOSAL",
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 0
+        },
+        {
+          "after_value": null,
+          "arm": "B3",
+          "before_value": null,
+          "credit_status": "NOT_EVALUATED_NO_CREDIT",
+          "generation": 0,
+          "mutation_locus": null,
+          "offspring_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "operator": "crossover",
+          "operator_probabilities": {
+            "crossover": 0.6957301449110355,
+            "memory_mutation": 0.018349896741459523,
+            "planning_mutation": 0.018906561458303738,
+            "recovery_mutation": 0.23322446271801908,
+            "tool_guard_mutation": 0.01689446708559114,
+            "verification_mutation": 0.01689446708559114
+          },
+          "outcome": "DUPLICATE_PROPOSAL",
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 1
+        },
+        {
+          "after_value": "compensation_priority",
+          "arm": "B3",
+          "before_value": "retry_priority",
+          "candidate_offspring_dominates_parent": false,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "recovery_mode",
+          "offspring_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+          "offspring_phenotype_changed": true,
+          "operator": "recovery_mutation",
+          "operator_probabilities": {
+            "crossover": 0.6957301449110355,
+            "memory_mutation": 0.018349896741459523,
+            "planning_mutation": 0.018906561458303738,
+            "recovery_mutation": 0.23322446271801908,
+            "tool_guard_mutation": 0.01689446708559114,
+            "verification_mutation": 0.01689446708559114
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": 0.0,
+          "paired_episode_count": 2,
+          "paired_quality_credit": -1.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 3,
+              "delta_harm": -0.25,
+              "delta_latency_seconds": -0.046572799794375896,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 4.92e-05,
+              "delta_tool_cost": -1.7,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": -1.0,
+              "parent_pareto_improvement": false,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 3,
+              "delta_harm": -0.25,
+              "delta_latency_seconds": 0.35078220011200756,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 4.92e-05,
+              "delta_tool_cost": -1.7,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": -1.0,
+              "parent_pareto_improvement": false,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 2
+        },
+        {
+          "after_value": "none",
+          "arm": "B3",
+          "before_value": "after_failure",
+          "candidate_offspring_dominates_parent": false,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "reflection_trigger",
+          "offspring_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+          "offspring_phenotype_changed": false,
+          "operator": "verification_mutation",
+          "operator_probabilities": {
+            "crossover": 0.6856275412681521,
+            "memory_mutation": 0.01832485489068973,
+            "planning_mutation": 0.018873237962037714,
+            "recovery_mutation": 0.023585844854431052,
+            "tool_guard_mutation": 0.023585844854431052,
+            "verification_mutation": 0.23000267617025852
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": 0.0,
+          "paired_episode_count": 2,
+          "paired_quality_credit": 0.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": 0.029629700002260506,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": -1.3200000000000104e-05,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": 0.2080117001896724,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": -9.600000000000125e-06,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 3
+        }
+      ],
+      "successful_candidates": 0,
+      "survivor_events": [
+        {
+          "event_type": "survivor_selection",
+          "generation": -1,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 1.0,
+          "selection_method": "initial_population",
+          "survivors": [
+            {
+              "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+              "objectives": [
+                1.0,
+                1.0,
+                16.0,
+                0.0,
+                0.0,
+                0.004796099999999999,
+                7.079481249966193
+              ],
+              "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c"
+            },
+            {
+              "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016344,
+                2.4953989998903126
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        },
+        {
+          "event_type": "survivor_selection",
+          "generation": 0,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 0.5,
+          "selection_method": "standard",
+          "survivors": [
+            {
+              "genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016116,
+                2.614219699986279
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            },
+            {
+              "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016344,
+                2.4953989998903126
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        }
+      ],
+      "unique_genomes": 4,
+      "unique_phenotypes": 3,
+      "variation_count": 4
+    },
+    "B4": {
+      "candidates": [
+        {
+          "arm": "B4",
+          "episode_ids": [
+            "6a2c120d76b540bbe370ca53e24700a5c6c236cd0cdf7603f85f7d5b4fd8a479",
+            "5e02cf15a4ebd1f19f7ec9a0e8a2e36c3c8b1fb35b519f696319ddcdbc49da16"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "strict_schema"
+          },
+          "genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4236,
+            "latency_seconds": 2.7822336499230005,
+            "output_tokens": 299,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016295999999999997,
+            "token_cost_usd": 0.0016295999999999997,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016295999999999997,
+            2.7822336499230005
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B4",
+          "episode_ids": [
+            "c24a53e8b02fa5dfdd372a7fcd0a854756f4e7d0f3923de48b837cb615f831f2",
+            "ace4861c6861fb361cc82bee14370173ca7ca28880e493aab3358d43f43d22c0"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "recent_trajectory",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4654,
+            "latency_seconds": 2.360196699912194,
+            "output_tokens": 288,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0017418,
+            "token_cost_usd": 0.0017418,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0017418,
+            2.360196699912194
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B4",
+          "episode_ids": [
+            "ae69eb5a548623c31462e28a3c88bfd80e7c92f327e95b15a0a7f50d029bd25f",
+            "5ffa5368b5592a53c404dd23747089b9a518ff7b23793774621c4ff107f45f34"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4248,
+            "latency_seconds": 3.3519304499495775,
+            "output_tokens": 294,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016271999999999999,
+            "token_cost_usd": 0.0016271999999999999,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016271999999999999,
+            3.3519304499495775
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B4",
+          "episode_ids": [
+            "52343b24b78784ebdf258157c6b2d9444da03733933f0f2c8ae18eba1a3ddab2",
+            "59c199c9b7564f8644740c60fed11745682831e4871e78c8073f57fe468169ae"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 16,
+              "planning_failure": 0,
+              "recovery_failure": 0,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 8
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 0,
+              "successful_tool_call_count": 0,
+              "tool_event_count": 16,
+              "verification_attempt_count": 8
+            },
+            "rates": {
+              "dependency_failure": 1.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 0.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 1.0
+            }
+          },
+          "feasible": false,
+          "genome": {
+            "max_plan_steps": 8,
+            "memory_mode": "recent_trajectory",
+            "planning_mode": "stepwise",
+            "recovery_mode": "compensation_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "strict_schema"
+          },
+          "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 16,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0,
+            "input_tokens": 13006,
+            "latency_seconds": 7.206519500119612,
+            "output_tokens": 750,
+            "real_http_requests": 16,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0048018,
+            "token_cost_usd": 0.0048018,
+            "tool_cost": 0
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            16.0,
+            0,
+            0,
+            0.0048018,
+            7.206519500119612
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c",
+          "phenotype_matches_saved": true
+        }
+      ],
+      "duplicate_proposal_count": 1,
+      "feedback_update_count": 0,
+      "independent_final_selection": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+      "independent_pareto_front": [
+        "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+        "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+        "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1"
+      ],
+      "operator_probability_ranges": {
+        "crossover": {
+          "max": 0.16666666666666666,
+          "min": 0.16666666666666666
+        },
+        "memory_mutation": {
+          "max": 0.16666666666666666,
+          "min": 0.16666666666666666
+        },
+        "tool_guard_mutation": {
+          "max": 0.16666666666666666,
+          "min": 0.16666666666666666
+        }
+      },
+      "operator_summary": {
+        "crossover": {
+          "accepted": 0,
+          "duplicates": 1,
+          "mean_paired_dominance_reward": null,
+          "mean_paired_quality_credit": null,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        },
+        "memory_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": 0.0,
+          "mean_paired_quality_credit": 0.0,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        },
+        "tool_guard_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": 0.5,
+          "mean_paired_quality_credit": 0.0,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 1,
+          "proposals": 1
+        }
+      },
+      "parent_child": [
+        {
+          "after_value": "recent_trajectory",
+          "arm": "B4",
+          "before_value": "structured_failures",
+          "candidate_offspring_dominates_parent": false,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "memory_mode",
+          "offspring_genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+          "offspring_phenotype_changed": false,
+          "operator": "memory_mutation",
+          "operator_probabilities": {
+            "crossover": 0.16666666666666666,
+            "memory_mutation": 0.16666666666666666,
+            "planning_mutation": 0.16666666666666666,
+            "recovery_mutation": 0.16666666666666666,
+            "tool_guard_mutation": 0.16666666666666666,
+            "verification_mutation": 0.16666666666666666
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": 0.0,
+          "paired_episode_count": 2,
+          "paired_quality_credit": 0.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -0.5585044999606907,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 5.730000000000004e-05,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -1.4249630001140758,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 5.730000000000004e-05,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 0
+        },
+        {
+          "after_value": null,
+          "arm": "B4",
+          "before_value": null,
+          "credit_status": "NOT_EVALUATED_NO_CREDIT",
+          "generation": 0,
+          "mutation_locus": null,
+          "offspring_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "operator": "crossover",
+          "operator_probabilities": {
+            "crossover": 0.16666666666666666,
+            "memory_mutation": 0.16666666666666666,
+            "planning_mutation": 0.16666666666666666,
+            "recovery_mutation": 0.16666666666666666,
+            "tool_guard_mutation": 0.16666666666666666,
+            "verification_mutation": 0.16666666666666666
+          },
+          "outcome": "DUPLICATE_PROPOSAL",
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 1
+        },
+        {
+          "after_value": "strict_schema",
+          "arm": "B4",
+          "before_value": "post_plan_verify",
+          "candidate_offspring_dominates_parent": false,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "tool_call_guard",
+          "offspring_genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+          "offspring_phenotype_changed": false,
+          "operator": "tool_guard_mutation",
+          "operator_probabilities": {
+            "crossover": 0.16666666666666666,
+            "memory_mutation": 0.16666666666666666,
+            "planning_mutation": 0.16666666666666666,
+            "recovery_mutation": 0.16666666666666666,
+            "tool_guard_mutation": 0.16666666666666666,
+            "verification_mutation": 0.16666666666666666
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": 0.5,
+          "paired_episode_count": 2,
+          "paired_quality_credit": 0.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -0.29498870007228106,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 2.9999999999999645e-06,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -0.8444048999808729,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": -6.000000000000146e-07,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": true,
+              "paired_dominance_reward": 1.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 2
+        }
+      ],
+      "successful_candidates": 0,
+      "survivor_events": [
+        {
+          "event_type": "survivor_selection",
+          "generation": -1,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 1.0,
+          "selection_method": "initial_population",
+          "survivors": [
+            {
+              "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+              "objectives": [
+                1.0,
+                1.0,
+                16.0,
+                0.0,
+                0.0,
+                0.0048018,
+                7.206519500119612
+              ],
+              "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c"
+            },
+            {
+              "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016271999999999999,
+                3.3519304499495775
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        },
+        {
+          "event_type": "survivor_selection",
+          "generation": 0,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 0.5,
+          "selection_method": "full",
+          "survivors": [
+            {
+              "genome_sha256": "148fe6f15441e8a59370385b22e0faeae2bf7d4cd8ca7cd1feb25a85a7872cad",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016295999999999997,
+                2.7822336499230005
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            },
+            {
+              "genome_sha256": "1c489938446363de3ef5565a95ddef222130c9b6359e2de7b33acc5fa7984b17",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0017418,
+                2.360196699912194
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        }
+      ],
+      "unique_genomes": 4,
+      "unique_phenotypes": 2,
+      "variation_count": 3
+    },
+    "B5": {
+      "candidates": [
+        {
+          "arm": "B5",
+          "episode_ids": [
+            "e0196d362762fec8e6feb43068c5810e7e6d1e3069cdfba03d12ac76980cce64",
+            "3c9f2bd3002249b248cf659d12f1d8cf620a0e77f95cae3750ad29f8f6bb75eb"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 6,
+              "planning_failure": 0,
+              "recovery_failure": 0,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 2
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 0,
+              "successful_tool_call_count": 0,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 1.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 0.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 1.0
+            }
+          },
+          "feasible": false,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "compensation_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 6,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0,
+            "input_tokens": 4648,
+            "latency_seconds": 2.347629899973981,
+            "output_tokens": 273,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.001722,
+            "token_cost_usd": 0.001722,
+            "tool_cost": 0
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            6.0,
+            0,
+            0,
+            0.001722,
+            2.347629899973981
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "54e2dd59c58a0156a294245734c93cc3cba9202375521f44fdc6a3df61a88eab",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B5",
+          "episode_ids": [
+            "e39c9caec31ce184ac17e51d216f46aeb9903eda710d1849960f95b395f38ea1",
+            "624f8b8abdffb1584f6260e509e511f4dca3734d57126398e679bbed46f565de"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "none",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4208,
+            "latency_seconds": 2.3437664499506354,
+            "output_tokens": 290,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016103999999999997,
+            "token_cost_usd": 0.0016103999999999997,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016103999999999997,
+            2.3437664499506354
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B5",
+          "episode_ids": [
+            "07c10b07bc1b6791e473b622b104ec40a83076516d85700dc88c1f4f823273b6",
+            "ecbaa573d355944947894bca502daafeebccead24c20771e23b0f030f3daca59"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 0,
+              "planning_failure": 0,
+              "recovery_failure": 2,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 0
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 2,
+              "successful_tool_call_count": 4,
+              "tool_event_count": 6,
+              "verification_attempt_count": 2
+            },
+            "rates": {
+              "dependency_failure": 0.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 1.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 0.0
+            }
+          },
+          "feasible": true,
+          "genome": {
+            "max_plan_steps": 3,
+            "memory_mode": "structured_failures",
+            "planning_mode": "direct",
+            "recovery_mode": "retry_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "post_plan_verify"
+          },
+          "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 0,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0.5,
+            "input_tokens": 4248,
+            "latency_seconds": 2.983732200053055,
+            "output_tokens": 292,
+            "real_http_requests": 6,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.0016248,
+            "token_cost_usd": 0.0016248,
+            "tool_cost": 3.4
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            0.0,
+            0.5,
+            3.4,
+            0.0016248,
+            2.983732200053055
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6",
+          "phenotype_matches_saved": true
+        },
+        {
+          "arm": "B5",
+          "episode_ids": [
+            "998fdac28b8980aaf42c55e4a042fa220e821f24a2c6fa730a393cd9dad1a3c4",
+            "e6fd00e2a54a49e4c4906688d17bc4713d5c5c109ed381845ad9cc06866dfb15"
+          ],
+          "failure_profile": {
+            "counts": {
+              "dependency_failure": 16,
+              "planning_failure": 0,
+              "recovery_failure": 0,
+              "task_incompletion": 2,
+              "tool_call_failure": 0,
+              "unnecessary_tool_call": 0,
+              "verification_failure": 8
+            },
+            "denominators": {
+              "episode_count": 2,
+              "recovery_attempt_count": 0,
+              "successful_tool_call_count": 0,
+              "tool_event_count": 16,
+              "verification_attempt_count": 8
+            },
+            "rates": {
+              "dependency_failure": 1.0,
+              "planning_failure": 0.0,
+              "recovery_failure": 0.0,
+              "task_incompletion": 1.0,
+              "tool_call_failure": 0.0,
+              "unnecessary_tool_call": 0.0,
+              "verification_failure": 1.0
+            }
+          },
+          "feasible": false,
+          "genome": {
+            "max_plan_steps": 8,
+            "memory_mode": "recent_trajectory",
+            "planning_mode": "stepwise",
+            "recovery_mode": "compensation_priority",
+            "reflection_trigger": "after_failure",
+            "tool_call_guard": "strict_schema"
+          },
+          "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+          "metrics": {
+            "behavior_diversity": 0.5,
+            "constraint_violation": 16,
+            "episode_count": 2,
+            "execution_errors": 0,
+            "harm": 0,
+            "input_tokens": 13007,
+            "latency_seconds": 7.231451049970929,
+            "output_tokens": 745,
+            "real_http_requests": 16,
+            "recovery_success_rate": 0.0,
+            "task_success_rate": 0.0,
+            "token_cost_upper_usd": 0.004796099999999999,
+            "token_cost_usd": 0.004796099999999999,
+            "tool_cost": 0
+          },
+          "objectives": [
+            1.0,
+            1.0,
+            16.0,
+            0,
+            0,
+            0.004796099999999999,
+            7.231451049970929
+          ],
+          "pair_keys": [
+            "d094_r3_train_compensation_0:201",
+            "d094_r3_train_compensation_0:202"
+          ],
+          "phase": "search",
+          "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c",
+          "phenotype_matches_saved": true
+        }
+      ],
+      "duplicate_proposal_count": 2,
+      "feedback_update_count": 4,
+      "independent_final_selection": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+      "independent_pareto_front": [
+        "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973"
+      ],
+      "operator_probability_ranges": {
+        "crossover": {
+          "max": 0.6957301449110355,
+          "min": 0.6856275412681521
+        },
+        "recovery_mutation": {
+          "max": 0.23322446271801908,
+          "min": 0.023585844854431052
+        },
+        "verification_mutation": {
+          "max": 0.23000267617025852,
+          "min": 0.01689446708559114
+        }
+      },
+      "operator_summary": {
+        "crossover": {
+          "accepted": 0,
+          "duplicates": 2,
+          "mean_paired_dominance_reward": null,
+          "mean_paired_quality_credit": null,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 2
+        },
+        "recovery_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": 0.0,
+          "mean_paired_quality_credit": -1.0,
+          "negative_quality_credit_count": 1,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 1,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 0,
+          "proposals": 1
+        },
+        "verification_mutation": {
+          "accepted": 1,
+          "duplicates": 0,
+          "mean_paired_dominance_reward": 1.0,
+          "mean_paired_quality_credit": 0.0,
+          "negative_quality_credit_count": 0,
+          "negative_reward_count": 0,
+          "phenotype_changed_count": 0,
+          "positive_quality_credit_count": 0,
+          "positive_reward_count": 1,
+          "proposals": 1
+        }
+      },
+      "parent_child": [
+        {
+          "after_value": null,
+          "arm": "B5",
+          "before_value": null,
+          "credit_status": "NOT_EVALUATED_NO_CREDIT",
+          "generation": 0,
+          "mutation_locus": null,
+          "offspring_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "operator": "crossover",
+          "operator_probabilities": {
+            "crossover": 0.6957301449110355,
+            "memory_mutation": 0.018349896741459523,
+            "planning_mutation": 0.018906561458303738,
+            "recovery_mutation": 0.23322446271801908,
+            "tool_guard_mutation": 0.01689446708559114,
+            "verification_mutation": 0.01689446708559114
+          },
+          "outcome": "DUPLICATE_PROPOSAL",
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 0
+        },
+        {
+          "after_value": null,
+          "arm": "B5",
+          "before_value": null,
+          "credit_status": "NOT_EVALUATED_NO_CREDIT",
+          "generation": 0,
+          "mutation_locus": null,
+          "offspring_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "operator": "crossover",
+          "operator_probabilities": {
+            "crossover": 0.6957301449110355,
+            "memory_mutation": 0.018349896741459523,
+            "planning_mutation": 0.018906561458303738,
+            "recovery_mutation": 0.23322446271801908,
+            "tool_guard_mutation": 0.01689446708559114,
+            "verification_mutation": 0.01689446708559114
+          },
+          "outcome": "DUPLICATE_PROPOSAL",
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 1
+        },
+        {
+          "after_value": "compensation_priority",
+          "arm": "B5",
+          "before_value": "retry_priority",
+          "candidate_offspring_dominates_parent": false,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "recovery_mode",
+          "offspring_genome_sha256": "45ae79315255617193a68e1cda3a8b6b47a7de03e8088f07798c029a25ebeeea",
+          "offspring_phenotype_changed": true,
+          "operator": "recovery_mutation",
+          "operator_probabilities": {
+            "crossover": 0.6957301449110355,
+            "memory_mutation": 0.018349896741459523,
+            "planning_mutation": 0.018906561458303738,
+            "recovery_mutation": 0.23322446271801908,
+            "tool_guard_mutation": 0.01689446708559114,
+            "verification_mutation": 0.01689446708559114
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": 0.0,
+          "paired_episode_count": 2,
+          "paired_quality_credit": -1.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 3,
+              "delta_harm": -0.25,
+              "delta_latency_seconds": -0.2274827001383528,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 4.7999999999999974e-05,
+              "delta_tool_cost": -1.7,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": -1.0,
+              "parent_pareto_improvement": false,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 3,
+              "delta_harm": -0.25,
+              "delta_latency_seconds": -1.0447219000197947,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": 4.92e-05,
+              "delta_tool_cost": -1.7,
+              "offspring_pareto_improvement": false,
+              "paired_dominance_reward": 0.0,
+              "paired_quality_credit": -1.0,
+              "parent_pareto_improvement": false,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 2
+        },
+        {
+          "after_value": "none",
+          "arm": "B5",
+          "before_value": "after_failure",
+          "candidate_offspring_dominates_parent": true,
+          "candidate_parent_dominates_offspring": false,
+          "credit_status": "EX_POST_ANALYSIS_ONLY_NOT_USED_BY_R3_1",
+          "generation": 0,
+          "mutation_locus": "reflection_trigger",
+          "offspring_genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+          "offspring_phenotype_changed": false,
+          "operator": "verification_mutation",
+          "operator_probabilities": {
+            "crossover": 0.6856275412681521,
+            "memory_mutation": 0.01832485489068973,
+            "planning_mutation": 0.018873237962037714,
+            "recovery_mutation": 0.023585844854431052,
+            "tool_guard_mutation": 0.023585844854431052,
+            "verification_mutation": 0.23000267617025852
+          },
+          "outcome": "ACCEPTED_FOR_EVALUATION",
+          "paired_dominance_reward": 1.0,
+          "paired_episode_count": 2,
+          "paired_quality_credit": 0.0,
+          "pairs": [
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -0.5827310000313446,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": -9.600000000000125e-06,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": true,
+              "paired_dominance_reward": 1.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 201,
+              "task_id": "d094_r3_train_compensation_0"
+            },
+            {
+              "delta_constraint_violation": 0,
+              "delta_harm": 0.0,
+              "delta_latency_seconds": -0.6972005001734942,
+              "delta_recovery_success": 0,
+              "delta_task_success": 0,
+              "delta_token_cost_usd": -4.800000000000117e-06,
+              "delta_tool_cost": 0.0,
+              "offspring_pareto_improvement": true,
+              "paired_dominance_reward": 1.0,
+              "paired_quality_credit": 0.0,
+              "parent_pareto_improvement": false,
+              "seed": 202,
+              "task_id": "d094_r3_train_compensation_0"
+            }
+          ],
+          "parent_genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+          "proposal_ordinal": 3
+        }
+      ],
+      "successful_candidates": 0,
+      "survivor_events": [
+        {
+          "event_type": "survivor_selection",
+          "generation": -1,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 1.0,
+          "selection_method": "initial_population",
+          "survivors": [
+            {
+              "genome_sha256": "fa2ad57cf4c6be6a6fae5fe1aec5d33b4cc1202004692e99b9fbb87d4b8e4a30",
+              "objectives": [
+                1.0,
+                1.0,
+                16.0,
+                0.0,
+                0.0,
+                0.004796099999999999,
+                7.231451049970929
+              ],
+              "phenotype_hash": "b4130cd60e0d00b49088c388b35300cb4e6c2e39ced36362b7c2fa6e622f2b5c"
+            },
+            {
+              "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016248,
+                2.983732200053055
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        },
+        {
+          "event_type": "survivor_selection",
+          "generation": 0,
+          "genotype_diversity": 1.0,
+          "performance_diversity": 1.0,
+          "phenotype_diversity": 0.5,
+          "selection_method": "full",
+          "survivors": [
+            {
+              "genome_sha256": "aa0d3b4a917dfb36ea686a903c9c3486781d46892fc5a3c3fef178f31fd04973",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016103999999999997,
+                2.3437664499506354
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            },
+            {
+              "genome_sha256": "caff90af495b62d27146f2d09eca189a57f1d0d9cb47919f71c4e446ee07dbc1",
+              "objectives": [
+                1.0,
+                1.0,
+                0.0,
+                0.5,
+                3.4,
+                0.0016248,
+                2.983732200053055
+              ],
+              "phenotype_hash": "01dd34999c5b1726adf06d4d0b5c2dcc1afa0ec1026c7f4d38ef0111fc7186a6"
+            }
+          ]
+        }
+      ],
+      "unique_genomes": 4,
+      "unique_phenotypes": 3,
+      "variation_count": 4
+    }
+  },
+  "source_directory": "D:\\kaitibaogao\\experiments\\d094_llm_agent\\results\\r3_1_real",
+  "source_episodes_sha256": "f1ded96d3b1b8207e8a132a20d905a5d36286e54751334eeb81bbd1b15fc9f7e",
+  "source_files_sha256": {
+    "archive_B2.json": "4286eb8729a6f87916de92677abf9361bdacfde4f821bbc7536a7f913d6d916e",
+    "archive_B3.json": "fc76e21bcf7ed4a5c1e24ae2507a1a9c329510b9deb88fe09b2fede14cf1f80a",
+    "archive_B4.json": "d1e6b9916cbc16a59cb136aabf53cbbbab9ea555531e16bcf6874f8915df02fd",
+    "archive_B5.json": "d166d3d00b6cc5d624eda706f597a384c67d72097ade281f57bd1d741ba08acf",
+    "budget_plan.json": "6d7c6b5fece5db7a20fbc0f48b508250d6055f18096ddfd37cc0fb2b8411dc86",
+    "episodes.jsonl": "f1ded96d3b1b8207e8a132a20d905a5d36286e54751334eeb81bbd1b15fc9f7e",
+    "evolution_B2.json": "ec75c91e78f2fd4af50a3f6b5a4db3e37ec3f8f325958ec9f34f8f565292fc6e",
+    "evolution_B3.json": "f27c167f6b24b246c664d6b911cabe119f489bc7ff02130aa99a31bc17a2e67b",
+    "evolution_B4.json": "083188b64aa4180a1d048e53af4bad500a87d8311f69676e05c2f75dd66f44ce",
+    "evolution_B5.json": "607a715ea4e3ed569675e4ba6cfea3a36a5e8ccfe371332cffcf356d2c54a2d8",
+    "execution_lock.json": "1853c31b9607f613ef7469a897271d22332c4fc3fc4881768419e5c003e3697b",
+    "independent_audit.json": "87d5d97c8069b7e8cc7082c3a4ae4f5538258304f302680f3fb16bb6913b2187",
+    "summary.json": "4e0f555842f5a4904b54363e3383adff6bad5535aafaaf8636ba9172424576ad",
+    "traces\\07c10b07bc1b6791e473b622b104ec40a83076516d85700dc88c1f4f823273b6.jsonl": "9bf88943df0ff8bc10a783f749eda3af87df0393bffa669c511c2da6fc0cb136",
+    "traces\\09684c3094c1c78512762938e6e3ed5ec503b03509cde5ba77cdac9ff8daa1f2.jsonl": "274376a1d1beda8e1a12582c0980ea722b94be355b2b4a7dd8bc1dba41c32be7",
+    "traces\\102f9fcd3d8e124d58ff3dc997630baecb7b4cd4c0146ac21cb3f659ff46f447.jsonl": "d17ec8f08d53482ce708ceaae62fb07bc1235b07a11282a7310e99aa91fa8710",
+    "traces\\1cca80b254b00c2aa7468e91be624df37ffdfb3ee1b6ea043ccfb37fa1476fe2.jsonl": "3ad5392993266b0f6ac721d37f357cdedf3b133933c1776a9ee1ef6e219fc67e",
+    "traces\\27ccaed09cb86b580495cb02eb0955600961a3199e63ffa873894b7c8aecab2e.jsonl": "2d79d9bc344248151bcaf93ebec54cf18890bd3935590931bdcf5e4e71eda424",
+    "traces\\3253dfdbf95cb5f129ee2e3b73c9ddf545ebf0526ef1aa5450edc82395c9c45d.jsonl": "b6325377c410186dfa73d0572ad0feb07735f388e8560cec6a446804925f2773",
+    "traces\\3c9f2bd3002249b248cf659d12f1d8cf620a0e77f95cae3750ad29f8f6bb75eb.jsonl": "c81eb3ee54d00d1908f6ebf3212128c6acdd60939a033a505f011b8beede8ed8",
+    "traces\\52343b24b78784ebdf258157c6b2d9444da03733933f0f2c8ae18eba1a3ddab2.jsonl": "7e8cfc52d6753658538c5dd7b1624681d176ee98d1bce4ef89b717212e0f3725",
+    "traces\\54f266caae4961f835c3bffd27faf5ff59ef301e87b0c08ed57480f2b87caee6.jsonl": "4c4f9aa9c8cab2c89fc7b87df288ed5bf802497721b13b56d1e3c62ceeaaa4dd",
+    "traces\\57ee82be5fd9f798ca1a6d4e3d9f4d795d7c7693e111515423b17f6c04cccdaf.jsonl": "ecfd267cddb4c2baa2eb14fa48f886539fb76975b41a4d05c319e5ea6765ddce",
+    "traces\\59c199c9b7564f8644740c60fed11745682831e4871e78c8073f57fe468169ae.jsonl": "73e22f6c967c4ed6371d48548da54e6dd7ee904a6e48d034278483fa75720428",
+    "traces\\5a9067fc892c15c7ac908791b4d03d7c89c58e1f939d182163cf68c9a9bfcf02.jsonl": "c9b37da8d42cf6a6676b588d6460b3765e17e94e298e61c9ae6b0f62048feb6b",
+    "traces\\5e02cf15a4ebd1f19f7ec9a0e8a2e36c3c8b1fb35b519f696319ddcdbc49da16.jsonl": "133d64d18e9d2d1fc1a692ee5a8110b3b5d1aec4463d1e402048dbf85e914b3d",
+    "traces\\5f24c62cc4e58bdb9644639663b7fac81ee9faca8a4b6a0c1f2128901501a060.jsonl": "ffcd6e6df9b420059642bfccf5b14d5ea72a72babaa38b2296aa3e0cc773e055",
+    "traces\\5ffa5368b5592a53c404dd23747089b9a518ff7b23793774621c4ff107f45f34.jsonl": "70812c4018f60e0fbd1d60662416db67a03056fbec5c0762d588e2fbf831ed0b",
+    "traces\\624f8b8abdffb1584f6260e509e511f4dca3734d57126398e679bbed46f565de.jsonl": "3b4e029e8b7fcc0f7c2443d41d84284f1229d363ccf5cb59142f5f93f5c6ce9b",
+    "traces\\6947c873e61ec5dc07c42293ee11fd9df0a0756254e841837a8498a2b267bce5.jsonl": "c7afc1c7a137250397d9ea331342c880924aa4b8ad1db6ebc71239ab02c4392e",
+    "traces\\6a2c120d76b540bbe370ca53e24700a5c6c236cd0cdf7603f85f7d5b4fd8a479.jsonl": "de5e2514c7e56f409437eb1e7a9f32c84dc2c31c9227c6a0125f1701aa6fdfbe",
+    "traces\\74adaaef938b19eb38662dae17413006ccc79cd546dfcec66cf35fc4e2f85cf8.jsonl": "77b68b3261ce892b0ec20b22e001f2f704a233565ee46e2a72ddaa77672752d0",
+    "traces\\777695c9a2f924f74fb7b108509c176240c8336e78d61685a203866735ba0dbe.jsonl": "81cfc66b82f51befeeb46c319ed399dc18b9cecdc39be529666e6fa92bfa9928",
+    "traces\\814faa12e9739145cb42d803293c10312e681fdd65623092ebc3a5973e6b966c.jsonl": "78f6b00a4cd589e0dfca5782e946695064e02061e81cbdb26fd2e27a0ec8b7e0",
+    "traces\\998fdac28b8980aaf42c55e4a042fa220e821f24a2c6fa730a393cd9dad1a3c4.jsonl": "153d2d7b1ba4fda8221a618add8cc97e0b64f9395534266929fc5f1d34e62888",
+    "traces\\9b7d5296cb05fb69c8be6e274adf15a7afe67a84fb64f708109b80366be22bd0.jsonl": "8ba6a33567016e8461e55b3374578019fe2a72d3759a9c497c0b90768378c3a4",
+    "traces\\ace4861c6861fb361cc82bee14370173ca7ca28880e493aab3358d43f43d22c0.jsonl": "834c3076d5be598b3393dc566c87593a72ae74bc98c14f42b87f5f475d5ac5c0",
+    "traces\\ae62d3d3f88402d57c68964ccfc45e1e7e7d008971481ed5238cc37d9bc4cdf7.jsonl": "dd8208071f011ee621db329a4d852160b806c9d2b71c83ba82e315104706fc57",
+    "traces\\ae69eb5a548623c31462e28a3c88bfd80e7c92f327e95b15a0a7f50d029bd25f.jsonl": "9c5803acde0925801fddfc43fb2144c650d1587f0f17cd174e3b8ebd57241ecf",
+    "traces\\af130e77e49b3a67a767bda57534b5c4891e27db61d65853be1ba67bd34d53a2.jsonl": "8d7e85e2353eec9a801e3723ad0f492a75da3b5df9e29964b410709decdf3b14",
+    "traces\\b6200082ea6430d5cac3a621b9252816343cb740a231269bc747c85ca3422122.jsonl": "d858e880b590ddd093ffc4501e2063f8c87e883fcaf7dc563a273a91f65fdb28",
+    "traces\\bca87e998c716a669bd104ae2121e9f9aab9e71952198cbd647253a1f7fa713e.jsonl": "343c3b1690a18066c5a592dac6cfa41221df4dc602cec0f8a5ddaa4a3416b06e",
+    "traces\\c24a53e8b02fa5dfdd372a7fcd0a854756f4e7d0f3923de48b837cb615f831f2.jsonl": "01d61ec948f95ee88df07abff40017f838db260db337f7ff53012fcf058ece5a",
+    "traces\\c9bc67ed146e960db888c96b8263964bd11964d0cd443521129aaae7c9e91fbb.jsonl": "690231316217f4f17be34ed20bc3e8b5225f83672d05e406de0b0d3a5cdbd805",
+    "traces\\d3281c167d2b568c6e8a9439e39c2cf2f88f723bd13bde1c5f3d127d3f01499b.jsonl": "21f4e3b2c0f8802886602dcbc855e2a986334e4127ae5b7503f63eee5882c4b6",
+    "traces\\d382063a91b4c2334abe3fc7b3ce49174c87d06a939bacfdbb6bf61e890d0b0e.jsonl": "b23345985494d8b45c524be4a09dfa3e4b02035cdd271005cb6be35c5a816c0f",
+    "traces\\d5d64566732a9ccabe4d4cbdf21b413feb99abda7950da9b2e258cf0bcdaa4f5.jsonl": "22f3ebcd9af549707956bdcf4a89692ed4318d1adbb8c2992758ddc72165694a",
+    "traces\\d5d91aa148d3180281b9955f467393208c3c9c64a6fcfbac916ac0d0a3dc528f.jsonl": "3dd4d5065999ae1b6eb6ba86dcad2f4ba448d32095003012fa2c15ee9e0a2f9b",
+    "traces\\e0196d362762fec8e6feb43068c5810e7e6d1e3069cdfba03d12ac76980cce64.jsonl": "6a462df1cc4eb4a95c289c2922b27fc9e81cc38481ab80ad55399351ba9458ed",
+    "traces\\e07c1e040336674aaf756afd7e104bf641c3649c8f18ab388dee268d22b4f621.jsonl": "125b7058f19fbea6ae9aec623cb56f448f5cb74e195d3109073f2e1baf3ab9e9",
+    "traces\\e39c9caec31ce184ac17e51d216f46aeb9903eda710d1849960f95b395f38ea1.jsonl": "58a1d18a3d27cc3df8029fae4de0e0354d85ca6083d37b6103d9c49ae8acaeb1",
+    "traces\\e6fd00e2a54a49e4c4906688d17bc4713d5c5c109ed381845ad9cc06866dfb15.jsonl": "9322178d7991352b4e996b966e5165cb71e93b5e2d3864617b18ef3efa5de3c3",
+    "traces\\ecbaa573d355944947894bca502daafeebccead24c20771e23b0f030f3daca59.jsonl": "f6986e265d8efb3b74943c92c097fef00415a95f39c8dca4e2891ed0a98e495f",
+    "traces\\f876fae41fdf86ab273ab036f33cbec9f8a8deb9015940f1448895e6d8141bc3.jsonl": "911875d1cf8dcf4b115c063935548e4f77fdf33187e238eadeddc5de48abbec8",
+    "traces\\fbede56d5577253697b160a30362abaf76ca45fd81efd1fae389dc41fb418026.jsonl": "f3649542fd882cf5e4396b51624164cb556bc6af258c70e130ecebe1abc49952",
+    "train_manifest.json": "94c5791bbde11b4294f135084a8fe4a47afba64da82969ca8c77cc291f5b4a47"
+  },
+  "source_independent_audit_status": "PASS"
+}

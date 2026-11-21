@@ -1,0 +1,11 @@
+{
+  "actual_episode_count": 0,
+  "api_used": false,
+  "backend": "none",
+  "budget_plan_sha256": "21b80255516645fdbdf63f5063dbed0b528b4aaf97da4ca52fa1cea3e28ba150",
+  "planned_episode_count": 64,
+  "protocol": "D094_R4_TRAIN_V1",
+  "real_execution_status": "NOT_APPROVED_AND_NOT_IMPLEMENTED",
+  "scientific_scope": "Preflight only; zero API requests and zero episodes",
+  "status": "PREFLIGHT_PASS"
+}

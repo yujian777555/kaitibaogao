@@ -1,3 +1,16 @@
+## D-094 R4 预注册与实现交接（2026-11-21；READY_FOR_INDEPENDENT_REVIEW）
+
+- 唯一分支`d094-llm-agent-integration`；本轮起始HEAD与起始远端HEAD均为`7ff38004a08ae28ea24ac68d895abe2c78052cc5`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。最终HEAD、远端同步和新CI必须在提交推送后按实际SHA查询，不沿用历史run`44559518978`。
+- R3.1只读深度分析完成：42 episodes、169真实HTTP、127148/8090 tokens、0.0478524 USD；16/16搜索候选成功率均为0。B3/B5的recovery mutation虽改变Phenotype，却在两个seeds均增加3个约束；B5一次七目标Pareto改善仅来自资源变化，因此R4主信用排除纯资源收益。报告=`D094_R3_1_DEEP_ANALYSIS.md`，结构化产物=`experiments/d094_llm_agent/results/r3_1_deep_analysis/analysis.json`。
+- R4四臂已冻结：B1 Fixed LLM、B2标准NSGA-II/均匀算子、B3质量优先配对父子算子信用、B4旧失败频率反馈；无B5、无组合多样性。信用先比较约束，再比较Success/Recovery/Harm严格Pareto支配；W=4、τ=0.25、ε=0.2，完整child评价后仅影响后续proposal。
+- Fresh Train两项与历史18个Train任务双向ID/完整规格交集为空；未读取Validation/Test，held-out语义重叠未检查。两个任务×seeds 301/302均通过本地确定性可达性验证，补偿路径3步、transient路径4步，公共五步上限，API=0。
+- 预算硬上界=320请求/0.442368 USD；B1与三个final分别独立预留。64 episodes设计、全archive可行第一Pareto front的final独立重评、16次精确符号翻转、20,000次paired bootstrap和四比较Holm均已写入`D094_R4_PREREGISTRATION.md`。
+- 最新产物：`results/r4_preflight/`=`PREFLIGHT_PASS`、0 episode、0 API；`results/r4_synthetic/`=`SYNTHETIC_VALIDATED`、13 gates全true、Mock 64 episodes、真实LLM调用0。实现自检=`D094_R4_IMPLEMENTATION_REVIEW.md`，不是独立审查。
+- 实测D-094=135/135；其余六套件542/542；七目录合计677/677。受保护的`experiments/pilot_a3b/confusion_report.json`、`I_need_interpret_use.txt`和`incoming/`不纳入提交；R1/R2/R3.1历史证据与main未改。
+- **真实R4=`NOT RUN`，真实API=0，独立审查=`PENDING`，`APPROVED_FOR_EXPERIMENT=NO`。** 唯一下一步是在新独立会话按`D094.NEXT_SESSION_PROMPT.md`只读审查；审查通过后仍须用户明确授权，当前没有真实执行入口。
+
+---
+
 ## D-094 R3.1 真实结果与复算交接（2026-11-19；COMPLETED / NO_CLEAR_GAIN）
 
 - 唯一分支`d094-llm-agent-integration`；本轮起始HEAD=`6c084d2fd2617a19e52a9879b14670440bcde777`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。最终HEAD/远端/CI必须按本轮提交重新查询，不沿用旧run`44531813596`。

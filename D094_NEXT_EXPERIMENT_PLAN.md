@@ -1,39 +1,41 @@
 # D-094 R4 下一轮算法机制实验计划
 
-状态：**仅设计，R4 NOT RUN；需要新预注册、独立审查与明确执行授权。** R3.1已完成，结论为`NO_CLEAR_GAIN`，不得重跑调参。
+状态：**R4已完成设计、实现、预注册与合成/Mock验证；真实R4 NOT RUN，独立审查PENDING，APPROVED_FOR_EXPERIMENT=NO。** R3.1结论保持`NO_CLEAR_GAIN`，不得重跑调参。
 
 ## 1. R3.1 提供的直接依据
 
-真实五臂共42 episodes、169 HTTP、0.0478524 USD，预算和复算均通过，但四个演化臂final全部0/2，四个预注册比较没有成功率差。B3/B5只增加搜索期Phenotype数量，B4没有，B5没有协同证据。详见`D094_R3_1_RESULT.md`与`D094_R3_1_INDEPENDENT_AUDIT.md`。
+真实五臂共42 episodes、169 HTTP、0.0478524 USD，预算和复算均通过，但四个演化臂final全部0/2，四个预注册比较没有成功率差。深度分析进一步确认16/16搜索候选成功率均为0；B3/B5增加的Phenotype包含更多约束拒绝循环，且一次七目标Pareto改善只来自资源变化。详见`D094_R3_1_DEEP_ANALYSIS.md`。
 
-最终8个演化episodes均inspect→verify→retry后因三步上限终止，未补偿/完成。后续首先要区分动作可达性、候选选择和机制信用问题，不能把扩大预算或提高步数本身包装为算法创新。
+最终8个演化episodes均inspect→verify→retry后因三步上限终止，未补偿/完成。R4因此把公共动作可达性作为有效性前提，但不把提高步数本身包装为算法创新。
 
-## 2. R4 的两个待检验机制
+## 2. 已选定的单一R4方案
 
-### A. 质量约束、状态条件化的行为多样性
+| 臂 | 方法 | 研究职责 |
+|---|---|---|
+| B1 | Fixed LLM | 非演化基线 |
+| B2 | 标准NSGA-II、六算子均匀 | 主对照 |
+| B3 | 质量优先的配对父子算子信用 | 唯一主创新 |
+| B4 | 旧失败频率反馈 | 消融对照 |
 
-- 只在满足硬约束和最低任务进展的候选之间奖励行为新颖性；无进展或不可恢复轨迹不能靠异常动作获得探索优势。
-- 行为距离必须条件化到相同公开状态/恢复阶段，比较该状态下的后续动作与结果，避免把前置状态不同造成的序列差异误认为策略多样性。
-- 同时报告质量门通过数、唯一Phenotype、final Success/Recovery/Harm/Cost；Phenotype增加而质量不增仍为NO_CLEAR_GAIN。
+不保留B5，不组合多样性。所有演化臂采用相同feasibility-first标准NSGA-II survivor、216个公共五步Genome、相同初始种群和候选评价机会。
 
-### B. 基于配对 offspring 改进的在线算子信用
+主信用在variation第一parent与child的完全相同四个task/seed单元上计算：先比较约束增减；约束相同再比较`(1-task_success,1-recovery_success,harm)`的严格Pareto支配；四单元均值为offspring reward。资源-only变化=0。最近W=4个accepted reward进入τ=0.25、ε=0.2的softmax；冷启动均匀，duplicate不更新，child完整评价后仅影响后续proposal。
 
-- 对同一父代、任务和seed生成配对offspring，使用预先冻结的公开聚合目标差衡量实际改进；失败分类只作解释，不直接替代结果信用。
-- 算子信用由配对后代的可行性、Success/Recovery、Harm和成本变化更新，固定探索下限并保存概率、分母和每次调用。
-- 必须与静态失败矩阵、均匀算子和无反馈标准NSGA-II同预算比较，防止把额外评价或配对本身误记为反馈收益。
+## 3. 已冻结的Fresh Train、预算、final与统计
 
-## 3. 执行前必须冻结的门禁
+- 两项Fresh Train与历史18个Train任务双向ID/完整规格交集为空；未读取Validation/Test，held-out语义重叠明确标为未检查。两任务×seeds 301/302的本地确定性路径为3/4步，均≤公共五步，API=0。
+- B1=4 episodes；B2/B3/B4各4个搜索候选×4单元+独立final 4 episodes，总计64 episodes。B3没有额外配对评价。
+- final从全部已评价搜索候选的可行第一Pareto front，以`(objectives,genome_sha256)`字典序最小选择，并用四个新episodes重新评价。
+- 全局R4硬上界=320请求/0.442368 USD；B1及三个final各预留20请求/0.027648 USD，搜索不得占用。
+- 主比较=B3−B2 final Task Success，最小有意义效应=0.25；四单元16次精确符号翻转、20,000次paired bootstrap 95% CI、四比较Holm。小样本只作探索性机制证据。
 
-1. 新建fresh Train任务和manifest，不读取Validation/Test；R3.1只用于提出假设，不作为新独立泛化证据。
-2. 在第一条真实请求前证明每类任务的最短必需动作序列与所有候选步数上限相容；明确retry失败后仍需compensate/complete的预算。不能事后为该任务单独加步数。
-3. 冻结任务、seeds、种群、代数、评价次数、final规则、成本/请求上限、RNG、主要比较和失败判据；final预算独立保护。
-4. 采用相同真实评价机会的Standard、仅质量/状态多样性、仅配对信用和组合消融；额外配对评价必须计入所有臂的等效预算或另设公平对照。
-5. 保存逐事件hash-chain、配对身份、offspring改进、算子信用、Genome/Phenotype、Pareto、请求结算和artifact SHA；独立脚本从原始账本复算。
-6. 小样本只作探索性机制证据；任何INVALID、执行错误、未知成本、超预算或final缺失均保留并停止性能结论。
+权威文件=`D094_R4_ALGORITHM_DESIGN.md`、`D094_R4_PREREGISTRATION.md`、`D094_R4_BUDGET_ANALYSIS.md`、`D094_R4_IMPLEMENTATION_REVIEW.md`。
 
 ## 4. 当前唯一任务与禁止事项
 
-先完成R4 fresh Train书面预注册和静态/合成可达性测试，再交独立审查；**不得自动运行真实API**。不得简单扩大预算、种群、代数或步数追求正向结果，不删除不利seed，不改写R1/R2/R3.1。Validation/Test、A800、外部模型训练和main修改继续禁止。
+最新预检为`PREFLIGHT_PASS`，合成为`SYNTHETIC_VALIDATED`（13项门禁全true）；D-094=135/135，七目录全量=677/677。以上均为软件证据，不是实际Agent性能。
+
+**下一步只在新独立会话按`D094.NEXT_SESSION_PROMPT.md`进行只读独立审查。** 当前没有真实执行入口，不得自动运行真实API。审查发现的问题须先报告，不得由审查者暗中改协议追求通过；审查通过后仍须用户明确授权。不得删除不利seed、追加预算、改写R1/R2/R3.1或访问Validation/Test、A800、外部模型训练和main。
 
 ---
 

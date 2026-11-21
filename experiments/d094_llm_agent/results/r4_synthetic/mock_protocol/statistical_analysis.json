@@ -1,0 +1,122 @@
+{
+  "comparisons": {
+    "B2_minus_B1": {
+      "bootstrap_95_ci": {
+        "interpretation": "uncertainty_over_four_observed_units_not_population_generalization",
+        "lower": 0.0,
+        "method": "paired_unit_percentile_bootstrap_95_percent",
+        "replicates": 20000,
+        "seed": 20261123,
+        "upper": 0.0
+      },
+      "holm_adjusted_p_value": 1.0,
+      "minimum_meaningful_effect": null,
+      "ordered_task_seed_differences": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sign_flip": {
+        "extreme_count": 16,
+        "interpretation": "exploratory_only_four_units_cannot_establish_generalization",
+        "method": "two_sided_exact_sign_flip_all_16_sign_patterns",
+        "null_count": 16,
+        "observed_mean_difference": 0.0,
+        "p_value": 1.0,
+        "unit_count": 4
+      }
+    },
+    "B3_minus_B2": {
+      "bootstrap_95_ci": {
+        "interpretation": "uncertainty_over_four_observed_units_not_population_generalization",
+        "lower": 0.0,
+        "method": "paired_unit_percentile_bootstrap_95_percent",
+        "replicates": 20000,
+        "seed": 20261120,
+        "upper": 0.0
+      },
+      "holm_adjusted_p_value": 1.0,
+      "minimum_meaningful_effect": 0.25,
+      "ordered_task_seed_differences": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sign_flip": {
+        "extreme_count": 16,
+        "interpretation": "exploratory_only_four_units_cannot_establish_generalization",
+        "method": "two_sided_exact_sign_flip_all_16_sign_patterns",
+        "null_count": 16,
+        "observed_mean_difference": 0.0,
+        "p_value": 1.0,
+        "unit_count": 4
+      }
+    },
+    "B3_minus_B4": {
+      "bootstrap_95_ci": {
+        "interpretation": "uncertainty_over_four_observed_units_not_population_generalization",
+        "lower": 0.0,
+        "method": "paired_unit_percentile_bootstrap_95_percent",
+        "replicates": 20000,
+        "seed": 20261122,
+        "upper": 0.0
+      },
+      "holm_adjusted_p_value": 1.0,
+      "minimum_meaningful_effect": null,
+      "ordered_task_seed_differences": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sign_flip": {
+        "extreme_count": 16,
+        "interpretation": "exploratory_only_four_units_cannot_establish_generalization",
+        "method": "two_sided_exact_sign_flip_all_16_sign_patterns",
+        "null_count": 16,
+        "observed_mean_difference": 0.0,
+        "p_value": 1.0,
+        "unit_count": 4
+      }
+    },
+    "B4_minus_B2": {
+      "bootstrap_95_ci": {
+        "interpretation": "uncertainty_over_four_observed_units_not_population_generalization",
+        "lower": 0.0,
+        "method": "paired_unit_percentile_bootstrap_95_percent",
+        "replicates": 20000,
+        "seed": 20261121,
+        "upper": 0.0
+      },
+      "holm_adjusted_p_value": 1.0,
+      "minimum_meaningful_effect": null,
+      "ordered_task_seed_differences": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sign_flip": {
+        "extreme_count": 16,
+        "interpretation": "exploratory_only_four_units_cannot_establish_generalization",
+        "method": "two_sided_exact_sign_flip_all_16_sign_patterns",
+        "null_count": 16,
+        "observed_mean_difference": 0.0,
+        "p_value": 1.0,
+        "unit_count": 4
+      }
+    }
+  },
+  "holm_family": [
+    "B3_minus_B2",
+    "B4_minus_B2",
+    "B3_minus_B4",
+    "B2_minus_B1"
+  ],
+  "minimum_meaningful_task_success_effect": 0.25,
+  "primary_comparison": "B3_minus_B2",
+  "scope": "SMALL_SAMPLE_EXPLORATORY_MECHANISM_COMPARISON",
+  "significance_or_general_improvement_claim_allowed": false
+}
