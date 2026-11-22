@@ -1,4 +1,16 @@
-## D-094 R4 预注册与实现交接（2026-11-21；READY_FOR_INDEPENDENT_REVIEW）
+## D-094 R4 独立审查交接（2026-11-23；REQUEST_CHANGES）
+
+- 固定审查HEAD和远端=`a6e27d00cdc466ac5f2fe9150effc88d84ba6698`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。审查报告=`D094_R4_INDEPENDENT_REVIEW.md`，SHA-256=`f91acb68d3c8596bc11484f5efc9a5d0da23604eb00ec49a1f6bcb39b4e33056`；固定提交CI=`44918012853` success，本轮独立复测D-094=135/135。
+- 主算法未发现有符号约束优先、父子质量Pareto、滑窗softmax、duplicate或更新时序错误；B2/B3/B4机制隔离和全archive独立final通过。Fresh Train manifest SHA仍为`e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff`，R3.1的56个源文件快照未变。
+- **R4-001阻断：** `R4Config`可替换seeds/search seed并仍`PREFLIGHT_PASS`；提高调用方上限可让88 episodes、440请求、0.608256 USD通过预检。必须在任何输出/client/episode前精确拒绝非冻结配置。
+- **R4-002阻断：** `d094_r4_statistics.py`未纳入execution lock。必须将统计及未来真实分析入口锁入新修订产物，并测试统计源码篡改会使锁失败。
+- **R4-003阻断：** B2/B3/B4共用`search`池，80请求/臂没有独立transport前硬隔离。必须建立三个命名search池，各80请求/0.110592 USD，全局直接冻结320/0.442368，保留B1/final保护。
+- 统计单元是两个任务×301/302共4个final差值；16仅为符号翻转模式数。两任务`seed_jitter=false`，只能在修复后按探索性四单元结论执行；不得写成16个独立样本或跨任务显著性。若未来改为确认性任务总体推断，必须另行重新预注册。
+- **真实R4=`NOT RUN`，真实API=0，真实实验授权=`NOT_GRANTED`，`APPROVED_FOR_EXPERIMENT=NO`。** 下一实现会话只做上述最小修复，原预注册、历史产物和R1/R2/R3.1保持不变；修复后重新生成新修订锁/合成产物、回归、CI和独立复审。受保护的`confusion_report.json`、`I_need_interpret_use.txt`和`incoming/`不纳入提交。
+
+---
+
+## D-094 R4 预注册与实现交接（2026-11-21；历史状态，审查结论见上方）
 
 - 唯一分支`d094-llm-agent-integration`；本轮起始HEAD与起始远端HEAD均为`7ff38004a08ae28ea24ac68d895abe2c78052cc5`，main=`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。最终HEAD、远端同步和新CI必须在提交推送后按实际SHA查询，不沿用历史run`44559518978`。
 - R3.1只读深度分析完成：42 episodes、169真实HTTP、127148/8090 tokens、0.0478524 USD；16/16搜索候选成功率均为0。B3/B5的recovery mutation虽改变Phenotype，却在两个seeds均增加3个约束；B5一次七目标Pareto改善仅来自资源变化，因此R4主信用排除纯资源收益。报告=`D094_R3_1_DEEP_ANALYSIS.md`，结构化产物=`experiments/d094_llm_agent/results/r3_1_deep_analysis/analysis.json`。

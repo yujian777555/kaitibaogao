@@ -1,5 +1,17 @@
 # 05 — 研究决策日志
 
+## 2026-11-23：D-094 R4 独立审查 REQUEST_CHANGES，禁止直接进入真实实验
+
+固定提交`a6e27d00cdc466ac5f2fe9150effc88d84ba6698`与远端一致，main保持`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。独立审查确认B3质量优先配对父子信用、约束优先、W=4滑窗稳定softmax、duplicate不更新、已完成Train结果时序、四臂公平对照和全archive独立final与预注册一致；Fresh Train规格隔离、R3.1历史快照、默认预算数值和已有合成产物哈希均复算一致。
+
+但零API反例证明：`R4Config(seeds=(401,402),search_seed=999)`仍返回`PREFLIGHT_PASS`，且lock与manifest seeds不一致；提高调用方上限后88 episodes、440请求、0.608256 USD也通过预检。另有两项阻断：`d094_r4_statistics.py`未纳入execution lock；B2/B3/B4共用`search`预算池，80请求/臂没有独立请求前硬隔离。结论因此为**REQUEST_CHANGES**，不是ACCEPT_WITH_LIMITATIONS。
+
+统计审查明确：每比较是2任务×2 seeds=4个final Task Success差值，16只是全部符号翻转模式数，不是独立样本。两个Fresh Train均`seed_jitter=false`，四单元符号翻转、bootstrap和Holm只能作探索性描述，不支持跨任务显著性或普遍提升。保留现有探索性预注册无需改判据；若改为确认性任务总体推断，必须另建版本重新预注册。
+
+**决定只做三项最小一致性修复，不改主算法、任务、seeds、64 episodes、320请求/0.442368 USD、0.25阈值或统计公式，不扩大预算。** 修复后重建新修订锁与合成产物、运行完整回归和CI，再经独立复审；即使复审通过，真实R4仍需用户明确授权。本轮真实R4=NOT RUN、真实API=0、真实实验授权=NOT_GRANTED。报告=`D094_R4_INDEPENDENT_REVIEW.md`，SHA-256=`f91acb68d3c8596bc11484f5efc9a5d0da23604eb00ec49a1f6bcb39b4e33056`；固定提交CI=`44918012853` success，本轮D-094=135/135 OK。
+
+---
+
 ## 2026-11-21：D-094 R4 选择质量优先的配对父子算子信用，仅提交独立审查
 
 R3.1深度分析重新核对42个真实episodes、169次请求及全部搜索账本：16/16搜索候选Task Success均为0；B3/B5的recovery mutation虽然增加Phenotype，却在两个seeds都增加3个约束，质量信用为-1。B5一次verification mutation的七目标Pareto收益仅由token/延迟等资源变化构成，Success、Recovery、Harm和Phenotype均未改善。由此决定R4不再把失败频率、行为新颖性或完整七目标Pareto变化直接当作主信用。

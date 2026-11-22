@@ -1,4 +1,15 @@
-## D-094 R4 预注册阶段交付完成：READY_FOR_INDEPENDENT_REVIEW（2026-11-21）
+## D-094 R4 独立审查：REQUEST_CHANGES（2026-11-23）
+
+- 固定审查提交与远端均为`a6e27d00cdc466ac5f2fe9150effc88d84ba6698`，main保持`683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。权威报告=`D094_R4_INDEPENDENT_REVIEW.md`，SHA-256=`f91acb68d3c8596bc11484f5efc9a5d0da23604eb00ec49a1f6bcb39b4e33056`。
+- 算法主信用、四臂机制隔离、信息时序、公共五步、全archive final和Fresh Train规格隔离通过；但发现三个真实执行前阻断：冻结配置可覆盖且仍`PREFLIGHT_PASS`、统计源码未纳入execution lock、三个搜索臂共用传输预算池而未独立硬隔离。
+- 零API反例已复现：替换seeds/search seed仍通过预检；提高调用方上限后88 episodes、440请求、0.608256 USD仍通过预检。默认320请求/0.442368 USD计划本身及B1/final预留无误，但必须关闭绕过路径。
+- 统计只有2任务×2 seeds=4个final配对单元；16是`2^4`符号模式数，不是独立样本量。两个任务均`seed_jitter=false`，符号翻转/bootstrap/Holm只能作探索性描述，不能作跨任务显著性或普遍提升证据。
+- 本轮独立实测D-094=135/135 OK；固定提交CI run`44918012853`=success。81个合成产物、15个已列源码、4份协议文档及R3.1的56个canonical-LF快照均已独立复算匹配；统计源码未列入15个源码正是阻断之一。
+- **真实R4=`NOT RUN`，真实API=0，真实实验授权=`NOT_GRANTED`，状态=`R4_REQUEST_CHANGES`。** 下一步仅按`D094.NEXT_SESSION_PROMPT.md`完成三项最小一致性修复并重新独立审查；不得改预注册判据、扩大任务/预算或自动执行真实实验。
+
+---
+
+## D-094 R4 预注册阶段交付完成：READY_FOR_INDEPENDENT_REVIEW（2026-11-21；历史状态，审查结论见上方）
 
 - R3.1 深度分析保持真实结论`NO_CLEAR_GAIN`：42 episodes、169次真实HTTP、0.0478524 USD；16/16搜索候选Task Success均为0。B3/B5虽增加Phenotype，却包含更多约束拒绝循环；纯资源变化不能作为质量信用。详见`D094_R3_1_DEEP_ANALYSIS.md`。
 - R4已选定唯一主机制：**B3质量优先的配对父子算子信用**。B1=Fixed LLM，B2=标准NSGA-II/六算子均匀，B4=旧失败频率反馈消融；不保留B5，不组合多样性。公共eligible pool=216，所有搜索Genome固定五步。
