@@ -25,18 +25,31 @@ from d094_feedback_evolution import classify_failures
 from d094_genome import FIXED_GENOME, AgentGenome, genome_sha256
 from d094_ledger import payload_sha256, verify_execution_ledger
 from d094_llm_client import LLMClient
+from d094_r4_analysis import COMPARISONS
 from d094_r4_credit import (
     PairedCreditNSGAII,
     PairedEpisode,
     make_paired_evaluation,
     select_final_candidate,
 )
-from d094_r4_tasks import R4_SEEDS, r4_manifest, r4_tasks
+from d094_r4_statistics import R4_BOOTSTRAP_REPLICATES, R4_STATISTICAL_SEED
+from d094_r4_tasks import R4_MAX_PLAN_STEPS, R4_SEEDS, r4_manifest, r4_tasks
 from d094_tasks import TrainRecoveryEnvironment
 
 
 HERE = Path(__file__).resolve().parent
 EVOLUTION_ARMS = {"B2": "standard", "B3": "paired_credit", "B4": "failure_feedback"}
+FROZEN_EVOLUTION_ARMS = {
+    "B2": "standard",
+    "B3": "paired_credit",
+    "B4": "failure_feedback",
+}
+FROZEN_TASK_IDS = (
+    "d094_r4_train_compensation_unverified_0",
+    "d094_r4_train_transient_single_0",
+)
+FROZEN_MANIFEST_SHA256 = "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff"
+EXECUTION_LOCK_VERSION = "D094_R4_EXECUTION_LOCK_V2"
 SOURCE_NAMES = (
     "d094_agent.py",
     "d094_behavior.py",
@@ -49,7 +62,9 @@ SOURCE_NAMES = (
     "d094_llm_client.py",
     "d094_prompts.py",
     "d094_r3_tasks.py",
+    "d094_r4_analysis.py",
     "d094_r4_credit.py",
+    "d094_r4_statistics.py",
     "d094_r4_tasks.py",
     "d094_tasks.py",
     "run_d094_r4.py",
@@ -64,8 +79,8 @@ class R4Config:
     population_size: int = 2
     generations: int = 1
     max_concurrency: int = 4
-    global_request_cap: int = 1500
-    global_cost_cap: float = 0.5
+    global_request_cap: int = 320
+    global_cost_cap: float = 0.442368
     max_output_tokens: int = 128
     timeout_seconds: float = 20.0
     max_retries: int = 0
@@ -75,6 +90,60 @@ class R4Config:
     input_price_per_1m: float = 0.3
     output_price_per_1m: float = 1.2
     requests_per_episode_upper: int = 5
+
+
+FROZEN_CONFIG = R4Config()
+
+
+def _validate_frozen_config(config: R4Config) -> None:
+    """Reject every caller/task/arm deviation before output or client construction."""
+    if type(config) is not R4Config:
+        raise ValueError("R4 frozen config mismatch: config must be R4Config")
+    for field in dataclasses.fields(R4Config):
+        actual = getattr(config, field.name)
+        expected = getattr(FROZEN_CONFIG, field.name)
+        if type(actual) is not type(expected) or actual != expected:
+            raise ValueError(
+                f"R4 frozen config mismatch: {field.name} expected {expected!r}, got {actual!r}"
+            )
+        if field.name == "seeds" and any(type(seed) is not int for seed in actual):
+            raise ValueError("R4 frozen config mismatch: seeds must contain integers")
+    tasks = r4_tasks()
+    task_ids = tuple(task.task_id for task in tasks)
+    if task_ids != FROZEN_TASK_IDS:
+        raise ValueError(
+            f"R4 frozen Train task IDs mismatch: expected {FROZEN_TASK_IDS!r}, got {task_ids!r}"
+        )
+    manifest = r4_manifest()
+    if manifest["manifest_sha256"] != FROZEN_MANIFEST_SHA256:
+        raise ValueError("R4 frozen Train manifest canonical SHA-256 mismatch")
+    if manifest["common_max_plan_steps"] != R4_MAX_PLAN_STEPS or R4_MAX_PLAN_STEPS != 5:
+        raise ValueError("R4 common eligible pool must use exactly five plan steps")
+    if type(EVOLUTION_ARMS) is not dict or EVOLUTION_ARMS != FROZEN_EVOLUTION_ARMS:
+        raise ValueError(
+            f"R4 frozen arms mismatch: expected B1 Fixed and {FROZEN_EVOLUTION_ARMS!r}"
+        )
+    if FIXED_GENOME != AgentGenome() or FIXED_GENOME.max_plan_steps != 5:
+        raise ValueError("R4 B1 must remain the frozen five-step Fixed genome")
+
+
+def _statistical_method_lock() -> dict[str, Any]:
+    labels = tuple(label for label, _first, _second in COMPARISONS)
+    return {
+        "version": "D094_R4_STATISTICS_V1",
+        "ordered_final_units": "sorted_(task_id,seed)",
+        "independent_unit_count": 4,
+        "sign_flip_pattern_count": 16,
+        "sign_patterns_are_not_independent_units": True,
+        "bootstrap_replicates": R4_BOOTSTRAP_REPLICATES,
+        "bootstrap_base_seed": R4_STATISTICAL_SEED,
+        "comparison_order": list(labels),
+        "comparison_seed_offsets": {label: offset for offset, label in enumerate(labels)},
+        "holm_family": list(labels),
+        "minimum_meaningful_effect": 0.25,
+        "primary_comparison": "B3_minus_B2",
+        "interpretation": "SMALL_SAMPLE_EXPLORATORY_MECHANISM_COMPARISON",
+    }
 
 
 def _r3_1_empirical_basis() -> dict[str, Any]:
@@ -105,10 +174,9 @@ def _r3_1_empirical_basis() -> dict[str, Any]:
 
 def compute_budget_plan(config: R4Config = R4Config()) -> dict[str, Any]:
     """Calculate empirical estimates separately from conservative before-send bounds."""
+    _validate_frozen_config(config)
     task_count = len(r4_tasks())
     paired = task_count * len(config.seeds)
-    if config.requests_per_episode_upper != 5 or config.max_retries != 0:
-        raise ValueError("R4 frozen request upper requires five steps and no retries")
     candidates = config.population_size * (1 + config.generations)
     search_episodes_per_arm = paired * candidates
     b1_requests = paired * config.requests_per_episode_upper
@@ -130,6 +198,13 @@ def compute_budget_plan(config: R4Config = R4Config()) -> dict[str, Any]:
             for arm in EVOLUTION_ARMS
         },
     }
+    search_pools = {
+        f"search:{arm}": {
+            "request_count": search_requests,
+            "cost_usd": search_requests * request_cost,
+        }
+        for arm in EVOLUTION_ARMS
+    }
     arm_plans = {
         "B1": {
             "evaluation_episodes": paired,
@@ -150,6 +225,8 @@ def compute_budget_plan(config: R4Config = R4Config()) -> dict[str, Any]:
             "duplicate_proposal_request_upper": 0,
             "search_cost_upper_usd": search_requests * request_cost,
             "final_cost_upper_usd": final_requests * request_cost,
+            "search_budget_pool": f"search:{arm}",
+            "final_budget_pool": f"final:{arm}",
             "final_protected": True,
         }
     basis = _r3_1_empirical_basis()
@@ -160,7 +237,7 @@ def compute_budget_plan(config: R4Config = R4Config()) -> dict[str, Any]:
         empirical_input * config.input_price_per_1m
         + empirical_output * config.output_price_per_1m
     ) / 1_000_000.0
-    return {
+    plan = {
         "protocol": "D094_R4_BUDGET_V1",
         "scope": "PRE_REAL_RUN_PLAN_NOT_AN_API_INVOICE",
         "task_count": task_count,
@@ -180,6 +257,7 @@ def compute_budget_plan(config: R4Config = R4Config()) -> dict[str, Any]:
         "total_cost_upper_usd": total_cost,
         "planned_episode_count": total_episodes,
         "protected_pools": protected,
+        "search_pools": search_pools,
         "arm_plans": arm_plans,
         "r3_1_empirical_basis": basis,
         "r4_empirical_estimate": {
@@ -194,6 +272,27 @@ def compute_budget_plan(config: R4Config = R4Config()) -> dict[str, Any]:
         "fits": total_requests <= config.global_request_cap
         and total_cost <= config.global_cost_cap,
     }
+    if total_episodes != 64 or total_requests != 320:
+        raise ValueError("R4 frozen scale mismatch: expected 64 episodes and 320 requests")
+    if not math.isclose(total_cost, 0.442368, rel_tol=0.0, abs_tol=1e-15):
+        raise ValueError("R4 frozen cost upper mismatch: expected 0.442368 USD")
+    if set(protected) != {"B1", "final:B2", "final:B3", "final:B4"}:
+        raise ValueError("R4 B1/final protected pool allocation changed")
+    for pool, reservation in protected.items():
+        if reservation["request_count"] != 20 or not math.isclose(
+            reservation["cost_usd"], 0.027648, rel_tol=0.0, abs_tol=1e-15
+        ):
+            raise ValueError(f"R4 protected pool budget mismatch: {pool}")
+    if set(search_pools) != {"search:B2", "search:B3", "search:B4"}:
+        raise ValueError("R4 search pools must be independently allocated to B2/B3/B4")
+    for pool, reservation in search_pools.items():
+        if reservation["request_count"] != 80 or not math.isclose(
+            reservation["cost_usd"], 0.110592, rel_tol=0.0, abs_tol=1e-15
+        ):
+            raise ValueError(f"R4 independent search pool budget mismatch: {pool}")
+    if plan["fits"] is not True:
+        raise ValueError("R4 frozen budget plan does not fit the frozen global caps")
+    return plan
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -251,10 +350,19 @@ def _delta(first: dict[str, Any], second: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _execution_lock(manifest: dict[str, Any], plan_path: Path, config: R4Config, backend: str) -> dict[str, Any]:
+def _execution_lock(
+    manifest: dict[str, Any],
+    plan_path: Path,
+    config: R4Config,
+    backend: str,
+    created_utc: str | None = None,
+) -> dict[str, Any]:
+    _validate_frozen_config(config)
     return {
         "protocol": "D094_R4_TRAIN_V1",
-        "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "execution_lock_version": EXECUTION_LOCK_VERSION,
+        "created_utc": created_utc
+        or datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "backend": backend,
         "real_api_execution_available": False,
         "required_future_real_model": config.model,
@@ -263,6 +371,7 @@ def _execution_lock(manifest: dict[str, Any], plan_path: Path, config: R4Config,
         "config": dataclasses.asdict(config),
         "train_manifest_sha256": manifest["manifest_sha256"],
         "budget_plan_sha256": hashlib.sha256(plan_path.read_bytes()).hexdigest(),
+        "statistical_method": _statistical_method_lock(),
         "source_files": {
             name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()
             for name in SOURCE_NAMES
@@ -279,6 +388,68 @@ def _execution_lock(manifest: dict[str, Any], plan_path: Path, config: R4Config,
     }
 
 
+def _first_lock_difference(expected: Any, actual: Any, path: str = "") -> str | None:
+    if type(expected) is not type(actual):
+        return f"{path or 'execution_lock'}: type {type(actual).__name__} != {type(expected).__name__}"
+    if isinstance(expected, dict):
+        if set(expected) != set(actual):
+            missing = sorted(set(expected) - set(actual))
+            extra = sorted(set(actual) - set(expected))
+            return f"{path or 'execution_lock'}: missing={missing}, extra={extra}"
+        for key in expected:
+            difference = _first_lock_difference(
+                expected[key], actual[key], f"{path}.{key}" if path else key
+            )
+            if difference is not None:
+                return difference
+        return None
+    if isinstance(expected, list):
+        if len(expected) != len(actual):
+            return f"{path}: list length {len(actual)} != {len(expected)}"
+        for index, (wanted, got) in enumerate(zip(expected, actual)):
+            difference = _first_lock_difference(wanted, got, f"{path}[{index}]")
+            if difference is not None:
+                return difference
+        return None
+    if expected != actual:
+        return f"{path}: expected {expected!r}, got {actual!r}"
+    return None
+
+
+def verify_execution_lock(lock_path: Path) -> dict[str, Any]:
+    """Rebuild V2 from current inputs and fail on the first changed lock field."""
+    lock_path = Path(lock_path)
+    raw = lock_path.read_bytes()
+    actual = json.loads(raw.decode("utf-8"))
+    if actual.get("execution_lock_version") != EXECUTION_LOCK_VERSION:
+        raise ValueError("execution lock mismatch: execution_lock_version")
+    config_data = dict(actual["config"])
+    config_data["seeds"] = tuple(config_data["seeds"])
+    config = R4Config(**config_data)
+    expected = _execution_lock(
+        r4_manifest(),
+        lock_path.parent / "budget_plan.json",
+        config,
+        actual["backend"],
+        created_utc=actual["created_utc"],
+    )
+    expected_json = json.loads(
+        json.dumps(expected, ensure_ascii=False, sort_keys=True, allow_nan=False)
+    )
+    difference = _first_lock_difference(expected_json, actual)
+    if difference is not None:
+        raise ValueError(f"execution lock mismatch: {difference}")
+    return {
+        "status": "PASS",
+        "execution_lock_version": EXECUTION_LOCK_VERSION,
+        "execution_lock_sha256": hashlib.sha256(raw).hexdigest(),
+        "train_manifest_sha256": actual["train_manifest_sha256"],
+        "statistics_source_sha256": actual["source_files"]["d094_r4_statistics.py"],
+        "analysis_entry_source_sha256": actual["source_files"]["d094_r4_analysis.py"],
+        "source_file_count": len(actual["source_files"]),
+    }
+
+
 def run_r4(
     outdir: Path,
     config: R4Config = R4Config(),
@@ -286,6 +457,7 @@ def run_r4(
     preflight_only: bool = True,
 ) -> dict[str, Any]:
     """Preflight with zero transport, or execute the identical protocol with Mock only."""
+    _validate_frozen_config(config)
     outdir = Path(outdir)
     if outdir.exists() and any(outdir.iterdir()):
         raise ValueError("R4 output directory must be empty")
@@ -305,9 +477,11 @@ def run_r4(
         return summary
     if preflight_only:
         lock = _execution_lock(manifest, outdir / "budget_plan.json", config, "none")
-        _write_json(outdir / "execution_lock.json", lock)
+        lock_path = outdir / "execution_lock.json"
+        _write_json(lock_path, lock)
         summary = {
             "protocol": "D094_R4_TRAIN_V1",
+            "execution_lock_version": EXECUTION_LOCK_VERSION,
             "status": "PREFLIGHT_PASS",
             "real_execution_status": "NOT_APPROVED_AND_NOT_IMPLEMENTED",
             "scientific_scope": "Preflight only; zero API requests and zero episodes",
@@ -315,7 +489,9 @@ def run_r4(
             "api_used": False,
             "backend": "none",
             "planned_episode_count": plan["planned_episode_count"],
+            "train_manifest_sha256": manifest["manifest_sha256"],
             "budget_plan_sha256": lock["budget_plan_sha256"],
+            "execution_lock_sha256": hashlib.sha256(lock_path.read_bytes()).hexdigest(),
         }
         _write_json(outdir / "summary.json", summary)
         return summary
@@ -332,8 +508,9 @@ def run_r4(
         config.output_price_per_1m,
         max_requests=config.global_request_cap,
     )
-    for pool, reservation in plan["protected_pools"].items():
-        budget.reserve(pool, reservation["cost_usd"], reservation["request_count"])
+    for reservations in (plan["protected_pools"], plan["search_pools"]):
+        for pool, reservation in reservations.items():
+            budget.reserve(pool, reservation["cost_usd"], reservation["request_count"])
     selected_tasks = list(r4_tasks())
     pair_keys = tuple((task.task_id, seed) for task in selected_tasks for seed in config.seeds)
     all_rows: list[dict[str, Any]] = []
@@ -346,7 +523,11 @@ def run_r4(
 
             def evaluate(genome: AgentGenome, arm: str, phase: str):
                 nonlocal episodes_count
-                pool_name = "search" if phase == "search" else ("B1" if arm == "B1" else f"final:{arm}")
+                pool_name = (
+                    f"search:{arm}"
+                    if phase == "search"
+                    else ("B1" if arm == "B1" else f"final:{arm}")
+                )
                 with ThreadPoolExecutor(max_workers=config.max_concurrency) as pool:
                     futures = [
                         pool.submit(
@@ -479,6 +660,7 @@ def run_r4(
                 status = "MOCK_COMPLETED"
             summary = {
                 "protocol": "D094_R4_TRAIN_V1",
+                "execution_lock_version": EXECUTION_LOCK_VERSION,
                 "status": status,
                 "scientific_scope": "MOCK_SOFTWARE_VALIDATION_ONLY_NOT_AGENT_PERFORMANCE_EVIDENCE",
                 "backend": "mock",
@@ -487,16 +669,15 @@ def run_r4(
                 "arms": arms,
                 "comparisons": {
                     label: _delta(arms[first]["metrics"], arms[second]["metrics"])
-                    for label, first, second in (
-                        ("B3_minus_B2", "B2", "B3"),
-                        ("B4_minus_B2", "B2", "B4"),
-                        ("B3_minus_B4", "B4", "B3"),
-                        ("B2_minus_B1", "B1", "B2"),
-                    )
+                    for label, first, second in COMPARISONS
                 },
                 "budget": snapshot,
+                "search_pool_ledgers": {
+                    pool: budget.pool_snapshot(pool) for pool in plan["search_pools"]
+                },
                 "actual_episode_count": episodes_count,
                 "planned_episode_count": expected,
+                "train_manifest_sha256": manifest["manifest_sha256"],
                 "hash_chain_valid": all(row["payload"]["hash_chain_valid"] for row in all_rows),
                 "evolution_files": evolution_files,
                 "execution_lock_sha256": hashlib.sha256((outdir / "execution_lock.json").read_bytes()).hexdigest(),

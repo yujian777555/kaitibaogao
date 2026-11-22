@@ -1,0 +1,83 @@
+{
+  "api_used": false,
+  "fresh_train_manifest_sha256": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff",
+  "gates": {
+    "all_candidate_genomes_have_five_steps": true,
+    "failure_feedback_has_no_paired_credit": true,
+    "fresh_train_isolation": true,
+    "local_reachability": true,
+    "mock_analysis_lock_bound": true,
+    "mock_budget_within_preregistered_caps": true,
+    "mock_execution_lock_verified": true,
+    "mock_hash_chains_valid": true,
+    "mock_protocol_completed": true,
+    "mock_protocol_episode_count_64": true,
+    "mock_search_pools_independent": true,
+    "paired_credit_changes_later_probabilities": true,
+    "paired_credit_updates_after_two_offspring": true,
+    "same_four_search_evaluations": true,
+    "same_initial_population": true,
+    "standard_has_no_feedback_or_credit": true
+  },
+  "mock_cost_upper_usd": 0.001513200000000003,
+  "mock_episode_count": 64,
+  "mock_execution_lock_verification": {
+    "analysis_entry_source_sha256": "ae9f93ef052be1a12daa68eb0cf00f6011d182a63483844208552de67a6c2be9",
+    "execution_lock_sha256": "b9a41961140e4b6058c61bc698ba4373d15a91b7228b1227c7f8db9310c148e2",
+    "execution_lock_version": "D094_R4_EXECUTION_LOCK_V2",
+    "source_file_count": 17,
+    "statistics_source_sha256": "59e16ee7457db7157d2ce2c5283c8ec0d17b009cc4a50c5be5a636187044643e",
+    "status": "PASS",
+    "train_manifest_sha256": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff"
+  },
+  "mock_request_count": 194,
+  "mock_search_pool_ledgers": {
+    "search:B2": {
+      "cost_upper_usd": 0.00037439999999999956,
+      "pending_cost_usd": 0,
+      "pending_request_count": 0,
+      "pool": "search:B2",
+      "remaining_cost_usd": 0.0547848,
+      "remaining_request_count": 32,
+      "sent_request_count": 48,
+      "settled_cost_upper_usd": 0.00037439999999999956,
+      "settled_request_count": 48
+    },
+    "search:B3": {
+      "cost_upper_usd": 0.00037439999999999956,
+      "pending_cost_usd": 0,
+      "pending_request_count": 0,
+      "pool": "search:B3",
+      "remaining_cost_usd": 0.05478480000000001,
+      "remaining_request_count": 32,
+      "sent_request_count": 48,
+      "settled_cost_upper_usd": 0.00037439999999999956,
+      "settled_request_count": 48
+    },
+    "search:B4": {
+      "cost_upper_usd": 0.0004523999999999993,
+      "pending_cost_usd": 0,
+      "pending_request_count": 0,
+      "pool": "search:B4",
+      "remaining_cost_usd": 0.042287999999999965,
+      "remaining_request_count": 22,
+      "sent_request_count": 58,
+      "settled_cost_upper_usd": 0.0004523999999999993,
+      "settled_request_count": 58
+    }
+  },
+  "mock_statistical_output_is_software_fixture_only": true,
+  "protocol": "D094_R4_SYNTHETIC_V1",
+  "real_llm_calls": 0,
+  "scientific_scope": "SYNTHETIC_AND_MOCK_SOFTWARE_VALIDATION_ONLY_NO_REAL_AGENT_PERFORMANCE_CLAIM",
+  "search_seed": 711,
+  "source_files": {
+    "d094_r4_analysis.py": "ae9f93ef052be1a12daa68eb0cf00f6011d182a63483844208552de67a6c2be9",
+    "d094_r4_credit.py": "3ebe26f65961d2847c08c0daf9aaeaa6da5473ab70ab3afa18e31ea7c15e6bd9",
+    "d094_r4_statistics.py": "59e16ee7457db7157d2ce2c5283c8ec0d17b009cc4a50c5be5a636187044643e",
+    "d094_r4_tasks.py": "fc26c6b3a9247784a611b9c2af6b6de855f4c6592bcaed1eb6626fab51fe073e",
+    "run_d094_r4.py": "87484183488e527f485115d7c968464769b56819c469337584c10595f930c3d6",
+    "run_d094_r4_synthetic.py": "a2dceaede19ba48555d09019b344cb16104f602ef60737c7948ca3f57f4e3786"
+  },
+  "status": "SYNTHETIC_VALIDATED"
+}

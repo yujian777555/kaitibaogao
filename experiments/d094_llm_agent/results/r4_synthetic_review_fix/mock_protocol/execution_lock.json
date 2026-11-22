@@ -1,0 +1,89 @@
+{
+  "backend": "mock",
+  "budget_plan_sha256": "903b2cf11c90cd26286a6e2faa5e3c92b4f984ceda8a9c3de2651d232611ee97",
+  "config": {
+    "generations": 1,
+    "global_cost_cap": 0.442368,
+    "global_request_cap": 320,
+    "input_price_per_1m": 0.3,
+    "max_concurrency": 4,
+    "max_message_bytes": 4096,
+    "max_output_tokens": 128,
+    "max_retries": 0,
+    "model": "deepseek-flash",
+    "output_price_per_1m": 1.2,
+    "population_size": 2,
+    "requests_per_episode_upper": 5,
+    "search_seed": 711,
+    "seeds": [
+      301,
+      302
+    ],
+    "timeout_seconds": 20.0
+  },
+  "created_utc": "2026-11-22T17:22:44.028077+00:00",
+  "execution_lock_version": "D094_R4_EXECUTION_LOCK_V2",
+  "protocol": "D094_R4_TRAIN_V1",
+  "protocol_documents": {
+    "D094_R3_1_DEEP_ANALYSIS.md": "3af2ef0be7f64555c135a9914ac843ff60287b24e247c6cc271e4d0de6f3b3a3",
+    "D094_R4_ALGORITHM_DESIGN.md": "43a81d45686e8e97bd8a3ab1384953ca913b075f341e1941d74a3d9898cb1851",
+    "D094_R4_BUDGET_ANALYSIS.md": "f6be5706c981337d3a24059e66a33bf3f009c5fd7a002f0e8d544974e6276963",
+    "D094_R4_PREREGISTRATION.md": "cfb234eb56b243669ab217b2061431e3aa26fb053daf0b8f08f2a9b3542ca2db"
+  },
+  "real_api_execution_available": false,
+  "required_future_real_model": "deepseek-flash",
+  "source_files": {
+    "d094_agent.py": "1777399bcab0c51a31790184db7778d0b273c9a4a661e7fce837b058594b84f7",
+    "d094_behavior.py": "dc7e93dbe2ad74a144080cd006201427b52085fcd755bb5e9b4ecfc466facdc2",
+    "d094_budget.py": "391ab97e372e452a82aa9d6eafa9f5536d5522b5b390ba4d784cec58dd5eb1a8",
+    "d094_evaluator.py": "9599fdc478d00a43c79852f9660db785d04161da451e6282483a7aed69d7c097",
+    "d094_evolution.py": "2619c2b5b37480ef6a200d3818e3fa3a16a1ad9287929c062eb8ed943a13815e",
+    "d094_feedback_evolution.py": "9d06b7289ae7c5eddce082a57ab0d441fa5eaa7b1d2759ca37582917a26cb09a",
+    "d094_genome.py": "e14e9af447132bfdbcfb8830d8e727aa13fedfe6ec1ab0019cd0437c26a0101c",
+    "d094_ledger.py": "636c4558d2386d38227f779cd4c787d60e751dc94ca643c1a7c1745af753edee",
+    "d094_llm_client.py": "72d13f06d80fc4d3b8e9423520099833111ceb03727695974b111e2f78577267",
+    "d094_prompts.py": "403e6481c74231efee663ba4dc92b0a925a1acc1cd7fa108f93922d8ef9f7d4d",
+    "d094_r3_tasks.py": "e9ac61015bdd69b7462e1e1ae18e4dd2380429bd5fcad24dc1a41e8e06e65c6b",
+    "d094_r4_analysis.py": "ae9f93ef052be1a12daa68eb0cf00f6011d182a63483844208552de67a6c2be9",
+    "d094_r4_credit.py": "3ebe26f65961d2847c08c0daf9aaeaa6da5473ab70ab3afa18e31ea7c15e6bd9",
+    "d094_r4_statistics.py": "59e16ee7457db7157d2ce2c5283c8ec0d17b009cc4a50c5be5a636187044643e",
+    "d094_r4_tasks.py": "fc26c6b3a9247784a611b9c2af6b6de855f4c6592bcaed1eb6626fab51fe073e",
+    "d094_tasks.py": "a8d5097c9ccd59487008a33ab6635d5add4cbb779fff63e6e82b6b17a2a58fed",
+    "run_d094_r4.py": "87484183488e527f485115d7c968464769b56819c469337584c10595f930c3d6"
+  },
+  "statistical_method": {
+    "bootstrap_base_seed": 20261120,
+    "bootstrap_replicates": 20000,
+    "comparison_order": [
+      "B3_minus_B2",
+      "B4_minus_B2",
+      "B3_minus_B4",
+      "B2_minus_B1"
+    ],
+    "comparison_seed_offsets": {
+      "B2_minus_B1": 3,
+      "B3_minus_B2": 0,
+      "B3_minus_B4": 2,
+      "B4_minus_B2": 1
+    },
+    "holm_family": [
+      "B3_minus_B2",
+      "B4_minus_B2",
+      "B3_minus_B4",
+      "B2_minus_B1"
+    ],
+    "independent_unit_count": 4,
+    "interpretation": "SMALL_SAMPLE_EXPLORATORY_MECHANISM_COMPARISON",
+    "minimum_meaningful_effect": 0.25,
+    "ordered_final_units": "sorted_(task_id,seed)",
+    "primary_comparison": "B3_minus_B2",
+    "sign_flip_pattern_count": 16,
+    "sign_patterns_are_not_independent_units": true,
+    "version": "D094_R4_STATISTICS_V1"
+  },
+  "temperature": 0.0,
+  "thinking": {
+    "type": "disabled"
+  },
+  "train_manifest_sha256": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff"
+}

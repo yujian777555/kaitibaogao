@@ -147,6 +147,27 @@ class ReservedBudget:
                 self._spent_requests_by_pool.get(pool, 0) + 1
             )
 
+    def pool_snapshot(self, pool: str) -> dict[str, Any]:
+        """Expose one pool's independent pre-send reservation and usage ledger."""
+        with self._lock:
+            pending = [
+                record for record in self._pending.values() if record["pool"] == pool
+            ]
+            pending_cost = sum(record["upper"] for record in pending)
+            spent_cost = self._spent_upper_by_pool.get(pool, 0.0)
+            spent_requests = self._spent_requests_by_pool.get(pool, 0)
+            return {
+                "pool": pool,
+                "sent_request_count": spent_requests + len(pending),
+                "settled_request_count": spent_requests,
+                "cost_upper_usd": spent_cost + pending_cost,
+                "settled_cost_upper_usd": spent_cost,
+                "remaining_cost_usd": self._reservations.get(pool, 0.0),
+                "remaining_request_count": self._request_reservations.get(pool, 0),
+                "pending_cost_usd": pending_cost,
+                "pending_request_count": len(pending),
+            }
+
     def snapshot(self) -> dict[str, Any]:
         """Return consistent cost, request, reservation and settlement accounting."""
         with self._lock:

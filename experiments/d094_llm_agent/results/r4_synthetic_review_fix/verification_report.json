@@ -1,0 +1,55 @@
+{
+  "episode_count": 64,
+  "episodes_raw_sha256": "caad5bf5af3325e28dd7951cd7468e522d568b392a69c861a890b683b5b99cdc",
+  "independent_review": "PENDING",
+  "mock": {
+    "analysis_entry_source_sha256": "ae9f93ef052be1a12daa68eb0cf00f6011d182a63483844208552de67a6c2be9",
+    "budget_plan_raw_sha256": "903b2cf11c90cd26286a6e2faa5e3c92b4f984ceda8a9c3de2651d232611ee97",
+    "execution_lock_sha256": "b9a41961140e4b6058c61bc698ba4373d15a91b7228b1227c7f8db9310c148e2",
+    "execution_lock_version": "D094_R4_EXECUTION_LOCK_V2",
+    "protocol_documents_verified": 4,
+    "source_file_count": 17,
+    "source_files_verified": 17,
+    "statistics_source_sha256": "59e16ee7457db7157d2ce2c5283c8ec0d17b009cc4a50c5be5a636187044643e",
+    "status": "PASS",
+    "train_manifest_raw_sha256": "d3114d002b74ee877dc37a794938f63bd6446c7b8ebbc93c461035b1c824d520",
+    "train_manifest_sha256": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff"
+  },
+  "preflight": {
+    "analysis_entry_source_sha256": "ae9f93ef052be1a12daa68eb0cf00f6011d182a63483844208552de67a6c2be9",
+    "budget_plan_raw_sha256": "903b2cf11c90cd26286a6e2faa5e3c92b4f984ceda8a9c3de2651d232611ee97",
+    "execution_lock_sha256": "d31efba77b98bd96cdd3faf70481b26dd6106695fdff0ba431fcea7abe5b9a8a",
+    "execution_lock_version": "D094_R4_EXECUTION_LOCK_V2",
+    "protocol_documents_verified": 4,
+    "source_file_count": 17,
+    "source_files_verified": 17,
+    "statistics_source_sha256": "59e16ee7457db7157d2ce2c5283c8ec0d17b009cc4a50c5be5a636187044643e",
+    "status": "PASS",
+    "train_manifest_raw_sha256": "d3114d002b74ee877dc37a794938f63bd6446c7b8ebbc93c461035b1c824d520",
+    "train_manifest_sha256": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff"
+  },
+  "protocol": "D094_R4_REVIEW_FIX_ARTIFACT_VERIFICATION_V1",
+  "real_api_calls": 0,
+  "real_r4_status": "NOT RUN",
+  "request_count": 194,
+  "request_pool_counts": {
+    "B1": 10,
+    "final:B2": 10,
+    "final:B3": 10,
+    "final:B4": 10,
+    "search:B2": 48,
+    "search:B3": 48,
+    "search:B4": 58
+  },
+  "scope": "RAW_BYTES_AND_MOCK_SOFTWARE_VALIDATION_ONLY_NO_REAL_PERFORMANCE_CLAIM",
+  "search_pool_cost_upper_usd": {
+    "search:B2": 0.00037439999999999956,
+    "search:B3": 0.00037439999999999956,
+    "search:B4": 0.0004523999999999993
+  },
+  "statistical_analysis_raw_sha256": "33b20aea0e132c09bed5591703a700ba1f7696c22c6b90f356ba72022aa03d96",
+  "status": "PASS",
+  "trace_count": 64,
+  "trace_hash_and_chain_verified": true,
+  "unique_budget_request_ids": 194
+}

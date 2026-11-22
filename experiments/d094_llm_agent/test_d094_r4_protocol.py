@@ -101,11 +101,16 @@ class TestR4Protocol(unittest.TestCase):
             self.assertFalse(summary["budget"]["over_budget"])
             pools = summary["budget"]["spent_requests_by_pool"]
             self.assertLessEqual(pools.get("B1", 0), 20)
-            self.assertLessEqual(pools.get("search", 0), 240)
+            self.assertNotIn("search", pools)
             for arm in ("B2", "B3", "B4"):
                 self.assertEqual(summary["arms"][arm]["search_episode_count"], 16)
                 self.assertEqual(summary["arms"][arm]["final_episode_count"], 4)
+                self.assertLessEqual(pools.get(f"search:{arm}", 0), 80)
                 self.assertLessEqual(pools.get(f"final:{arm}", 0), 20)
+                self.assertEqual(
+                    summary["search_pool_ledgers"][f"search:{arm}"]["sent_request_count"],
+                    pools.get(f"search:{arm}", 0),
+                )
             self.assertGreater(summary["arms"]["B3"]["credit_update_count"], 0)
             self.assertEqual(summary["arms"]["B2"]["credit_update_count"], 0)
             self.assertEqual(summary["arms"]["B4"]["credit_update_count"], 0)

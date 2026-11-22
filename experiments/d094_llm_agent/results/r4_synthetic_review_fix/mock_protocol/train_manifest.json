@@ -1,0 +1,159 @@
+{
+  "common_max_plan_steps": 5,
+  "eligible_genome_pool_size": 216,
+  "fresh_train_isolation": {
+    "fresh_task_count": 2,
+    "fresh_task_sha256": {
+      "d094_r4_train_compensation_unverified_0": "1989a168a404e0844c5bfc18c17b29f81a89870a0ad513d49090dc2f6dbd048c",
+      "d094_r4_train_transient_single_0": "b7fa81390ff250daa0d104e433a42aa2e6cb98cdfb25135a46b325614b112632"
+    },
+    "held_out_overlap_check": "NOT_CHECKED_VALIDATION_TEST_ACCESS_FORBIDDEN",
+    "historical_to_r4_id_matches": [],
+    "historical_to_r4_specification_matches": [],
+    "historical_train_task_count": 18,
+    "independence_limit": "Exact separation from historical Train is proven; semantic separation from inaccessible held-out tasks is not claimed.",
+    "r4_to_historical_id_matches": [],
+    "r4_to_historical_specification_matches": [],
+    "scope": "HISTORICAL_TRAIN_IDS_AND_COMPLETE_CANONICAL_SPECIFICATIONS",
+    "status": "PASS",
+    "validation_or_test_files_read": false
+  },
+  "manifest_sha256": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff",
+  "protocol": "D094_R4_TRAIN_V1",
+  "reachability": {
+    "api_used": false,
+    "common_eligible_pool_max_plan_steps": 5,
+    "episodes": [
+      {
+        "agent_status": "COMPLETED",
+        "constraint_violation": 0,
+        "executed_path": [
+          "inspect_state",
+          "compensate_primary",
+          "complete_task"
+        ],
+        "harm": 0.0,
+        "llm_requests": 0,
+        "max_plan_steps": 5,
+        "remaining_step_allowance": 2,
+        "required_path": [
+          "inspect_state",
+          "compensate_primary",
+          "complete_task"
+        ],
+        "required_steps": 3,
+        "seed": 301,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "agent_status": "COMPLETED",
+        "constraint_violation": 0,
+        "executed_path": [
+          "inspect_state",
+          "compensate_primary",
+          "complete_task"
+        ],
+        "harm": 0.0,
+        "llm_requests": 0,
+        "max_plan_steps": 5,
+        "remaining_step_allowance": 2,
+        "required_path": [
+          "inspect_state",
+          "compensate_primary",
+          "complete_task"
+        ],
+        "required_steps": 3,
+        "seed": 302,
+        "task_id": "d094_r4_train_compensation_unverified_0",
+        "task_success": true
+      },
+      {
+        "agent_status": "COMPLETED",
+        "constraint_violation": 0,
+        "executed_path": [
+          "inspect_state",
+          "retry_primary",
+          "retry_primary",
+          "complete_task"
+        ],
+        "harm": 0.25,
+        "llm_requests": 0,
+        "max_plan_steps": 5,
+        "remaining_step_allowance": 1,
+        "required_path": [
+          "inspect_state",
+          "retry_primary",
+          "retry_primary",
+          "complete_task"
+        ],
+        "required_steps": 4,
+        "seed": 301,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": true
+      },
+      {
+        "agent_status": "COMPLETED",
+        "constraint_violation": 0,
+        "executed_path": [
+          "inspect_state",
+          "retry_primary",
+          "retry_primary",
+          "complete_task"
+        ],
+        "harm": 0.25,
+        "llm_requests": 0,
+        "max_plan_steps": 5,
+        "remaining_step_allowance": 1,
+        "required_path": [
+          "inspect_state",
+          "retry_primary",
+          "retry_primary",
+          "complete_task"
+        ],
+        "required_steps": 4,
+        "seed": 302,
+        "task_id": "d094_r4_train_transient_single_0",
+        "task_success": true
+      }
+    ],
+    "planning_mutation_changes_max_plan_steps": false,
+    "pool_size": 216,
+    "scope": "LOCAL_DETERMINISTIC_ENVIRONMENT_ONLY_NOT_REAL_LLM_PERFORMANCE",
+    "status": "PASS",
+    "step_increase_is_not_innovation_credit": true
+  },
+  "scenario_count": 2,
+  "seeds": [
+    301,
+    302
+  ],
+  "split": "train",
+  "task_generation_rule": "Two explicitly frozen TrainTask specifications; no outcome-driven generator, no hidden-label input and no held-out read.",
+  "tasks": [
+    {
+      "family": "compensation_unverified",
+      "goal": "R4 public recovery case: compensate the permanently failed route without a verification prerequisite, then complete safely.",
+      "requires_compensation": true,
+      "requires_verification": false,
+      "retry_failures": 0,
+      "retry_never": true,
+      "seed_jitter": false,
+      "task_id": "d094_r4_train_compensation_unverified_0",
+      "task_sha256": "1989a168a404e0844c5bfc18c17b29f81a89870a0ad513d49090dc2f6dbd048c"
+    },
+    {
+      "family": "transient_single",
+      "goal": "R4 public recovery case: recover from exactly one deterministic transient failure with bounded retries, then complete safely.",
+      "requires_compensation": false,
+      "requires_verification": false,
+      "retry_failures": 1,
+      "retry_never": false,
+      "seed_jitter": false,
+      "task_id": "d094_r4_train_transient_single_0",
+      "task_sha256": "b7fa81390ff250daa0d104e433a42aa2e6cb98cdfb25135a46b325614b112632"
+    }
+  ],
+  "test_included": false,
+  "validation_included": false
+}

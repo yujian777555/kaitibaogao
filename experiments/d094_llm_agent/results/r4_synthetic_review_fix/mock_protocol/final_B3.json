@@ -1,0 +1,226 @@
+{
+  "arm": "B3",
+  "candidate": {
+    "behavior": {
+      "canonical_sha256": "c7d54696f39301f97665c77ac523a44b8bf42423e4c84e8e59e00eda7b216f7b",
+      "features": {
+        "completed": 0.0,
+        "failed_call_count": 2.0,
+        "recovery_count": 2.0,
+        "rejected_call_count": 0.0,
+        "retry_count": 4.0,
+        "runtime_abort": 0.0,
+        "state_transition_count": 0.0,
+        "tool_call_count": 10.0,
+        "verification_count": 0.0
+      },
+      "sequence": [
+        "D|tool_call|compensate_primary|{}",
+        "R|tool_result|compensate_primary|True|False|{\"status\":\"COMPENSATED\"}",
+        "D|tool_call|complete_task|{}",
+        "R|tool_result|complete_task|True|True|{\"status\":\"COMPLETED\"}",
+        "T|COMPLETED",
+        "D|tool_call|compensate_primary|{}",
+        "R|tool_result|compensate_primary|True|False|{\"status\":\"COMPENSATED\"}",
+        "D|tool_call|complete_task|{}",
+        "R|tool_result|complete_task|True|True|{\"status\":\"COMPLETED\"}",
+        "T|COMPLETED",
+        "D|tool_call|retry_primary|{}",
+        "R|tool_result|retry_primary|False|False|{\"tool_result\":{\"status\":\"TRANSIENT_FAILED\"}}",
+        "D|tool_call|retry_primary|{}",
+        "R|tool_result|retry_primary|True|False|{\"status\":\"PRIMARY_RECOVERED\"}",
+        "D|tool_call|complete_task|{}",
+        "R|tool_result|complete_task|True|True|{\"status\":\"COMPLETED\"}",
+        "T|COMPLETED",
+        "D|tool_call|retry_primary|{}",
+        "R|tool_result|retry_primary|False|False|{\"tool_result\":{\"status\":\"TRANSIENT_FAILED\"}}",
+        "D|tool_call|retry_primary|{}",
+        "R|tool_result|retry_primary|True|False|{\"status\":\"PRIMARY_RECOVERED\"}",
+        "D|tool_call|complete_task|{}",
+        "R|tool_result|complete_task|True|True|{\"status\":\"COMPLETED\"}",
+        "T|COMPLETED"
+      ],
+      "state_transitions": [],
+      "terminal_status": "MULTI_EPISODE"
+    },
+    "constraint_violation": 0,
+    "execution_errors": 0,
+    "failure_profile": {
+      "counts": {
+        "dependency_failure": 0,
+        "planning_failure": 0,
+        "recovery_failure": 2,
+        "task_incompletion": 0,
+        "tool_call_failure": 0,
+        "unnecessary_tool_call": 0,
+        "verification_failure": 0
+      },
+      "denominators": {
+        "episode_count": 4,
+        "recovery_attempt_count": 6,
+        "successful_tool_call_count": 8,
+        "tool_event_count": 10,
+        "verification_attempt_count": 0
+      },
+      "rates": {
+        "dependency_failure": 0.0,
+        "planning_failure": 0.0,
+        "recovery_failure": 0.3333333333333333,
+        "task_incompletion": 0.0,
+        "tool_call_failure": 0.0,
+        "unnecessary_tool_call": 0.0,
+        "verification_failure": 0.0
+      }
+    },
+    "genome": {
+      "max_plan_steps": 5,
+      "memory_mode": "recent_trajectory",
+      "planning_mode": "direct",
+      "recovery_mode": "retry_priority",
+      "reflection_trigger": "after_subtask",
+      "tool_call_guard": "strict_schema"
+    },
+    "objectives": [
+      0.0,
+      0.0,
+      0.0,
+      0.5,
+      12.0,
+      7.8e-05,
+      0.00029574998188763857
+    ],
+    "phenotype_hash": "c7d54696f39301f97665c77ac523a44b8bf42423e4c84e8e59e00eda7b216f7b"
+  },
+  "episode_count": 4,
+  "episode_ids": [
+    "877cb0849a780649215508678f7f0b54063b854a2e2fb35723452e8feeddf554",
+    "4db08348ab709dbd9a923b0b1b33cf6c0dc892d4354bb5a9acb0b8ecc23cc8d1",
+    "98b48a5f03fe9e5fbf4da00351601a391ca6992f66606a089974a7dd0ec2ce17",
+    "71b660c2df7ea6cd2f55eebe9ffe35048492e38f4288292164ead64e7d3c4cae"
+  ],
+  "execution_errors": 0,
+  "genome": {
+    "max_plan_steps": 5,
+    "memory_mode": "recent_trajectory",
+    "planning_mode": "direct",
+    "recovery_mode": "retry_priority",
+    "reflection_trigger": "after_subtask",
+    "tool_call_guard": "strict_schema"
+  },
+  "genome_sha256": "8e43957d7335cea135e00b09f14be6f0acff87fcb0e39cfc625d77c9754b9a2a",
+  "hash_chain_valid": true,
+  "metrics": {
+    "behavior_diversity": 0.5,
+    "constraint_violation": 0,
+    "harm": 0.5,
+    "input_tokens": 100,
+    "latency_seconds": 0.00029574998188763857,
+    "output_tokens": 40,
+    "recovery_success_rate": 1.0,
+    "task_success_rate": 1.0,
+    "token_cost_upper_usd": 7.8e-05,
+    "token_cost_usd": 7.8e-05,
+    "tool_cost": 12.0
+  },
+  "per_seed": {
+    "301": {
+      "behavior_diversity": 1.0,
+      "constraint_violation": 0,
+      "harm": 0.25,
+      "input_tokens": 50,
+      "latency_seconds": 0.0003020499716512859,
+      "output_tokens": 20,
+      "recovery_success_rate": 1.0,
+      "task_success_rate": 1.0,
+      "token_cost_upper_usd": 3.9e-05,
+      "token_cost_usd": 3.9e-05,
+      "tool_cost": 6.0
+    },
+    "302": {
+      "behavior_diversity": 1.0,
+      "constraint_violation": 0,
+      "harm": 0.25,
+      "input_tokens": 50,
+      "latency_seconds": 0.00028944999212399125,
+      "output_tokens": 20,
+      "recovery_success_rate": 1.0,
+      "task_success_rate": 1.0,
+      "token_cost_upper_usd": 3.9e-05,
+      "token_cost_usd": 3.9e-05,
+      "tool_cost": 6.0
+    }
+  },
+  "per_task_seed": [
+    {
+      "constraint_violation": 0,
+      "harm": 0.0,
+      "input_tokens": 20,
+      "latency_seconds": 0.0002707999665290117,
+      "output_tokens": 8,
+      "phenotype_hash": "34d9db87184debf7dce07315296e352e3312c26fe16724e5b681a509d6900b3b",
+      "recovery_success": true,
+      "seed": 301,
+      "task_id": "d094_r4_train_compensation_unverified_0",
+      "task_success": true,
+      "token_cost_upper_usd": 1.56e-05,
+      "token_cost_usd": 1.56e-05,
+      "tool_cost": 3.0
+    },
+    {
+      "constraint_violation": 0,
+      "harm": 0.0,
+      "input_tokens": 20,
+      "latency_seconds": 0.00024419999681413174,
+      "output_tokens": 8,
+      "phenotype_hash": "34d9db87184debf7dce07315296e352e3312c26fe16724e5b681a509d6900b3b",
+      "recovery_success": true,
+      "seed": 302,
+      "task_id": "d094_r4_train_compensation_unverified_0",
+      "task_success": true,
+      "token_cost_upper_usd": 1.56e-05,
+      "token_cost_usd": 1.56e-05,
+      "tool_cost": 3.0
+    },
+    {
+      "constraint_violation": 0,
+      "harm": 0.25,
+      "input_tokens": 30,
+      "latency_seconds": 0.00033329997677356005,
+      "output_tokens": 12,
+      "phenotype_hash": "76a03023b2a78d8774702643d349a73fba89b2050df5a3329c338348ce02102a",
+      "recovery_success": true,
+      "seed": 301,
+      "task_id": "d094_r4_train_transient_single_0",
+      "task_success": true,
+      "token_cost_upper_usd": 2.34e-05,
+      "token_cost_usd": 2.34e-05,
+      "tool_cost": 3.0
+    },
+    {
+      "constraint_violation": 0,
+      "harm": 0.25,
+      "input_tokens": 30,
+      "latency_seconds": 0.00033469998743385077,
+      "output_tokens": 12,
+      "phenotype_hash": "76a03023b2a78d8774702643d349a73fba89b2050df5a3329c338348ce02102a",
+      "recovery_success": true,
+      "seed": 302,
+      "task_id": "d094_r4_train_transient_single_0",
+      "task_success": true,
+      "token_cost_upper_usd": 2.34e-05,
+      "token_cost_usd": 2.34e-05,
+      "tool_cost": 3.0
+    }
+  ],
+  "phase": "final",
+  "usage": {
+    "backend": "mock",
+    "cost_upper_usd": 7.8e-05,
+    "cost_usd": 7.8e-05,
+    "input_tokens": 100,
+    "latency_seconds": 0.0011829999275505543,
+    "output_tokens": 40,
+    "raw_request_records": 10,
+    "transport_attempts": 10
+  }
+}

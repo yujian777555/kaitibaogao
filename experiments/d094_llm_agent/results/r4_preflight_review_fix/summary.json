@@ -1,0 +1,14 @@
+{
+  "actual_episode_count": 0,
+  "api_used": false,
+  "backend": "none",
+  "budget_plan_sha256": "903b2cf11c90cd26286a6e2faa5e3c92b4f984ceda8a9c3de2651d232611ee97",
+  "execution_lock_sha256": "d31efba77b98bd96cdd3faf70481b26dd6106695fdff0ba431fcea7abe5b9a8a",
+  "execution_lock_version": "D094_R4_EXECUTION_LOCK_V2",
+  "planned_episode_count": 64,
+  "protocol": "D094_R4_TRAIN_V1",
+  "real_execution_status": "NOT_APPROVED_AND_NOT_IMPLEMENTED",
+  "scientific_scope": "Preflight only; zero API requests and zero episodes",
+  "status": "PREFLIGHT_PASS",
+  "train_manifest_sha256": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff"
+}

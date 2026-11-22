@@ -9,11 +9,11 @@ from typing import Any
 
 from d094_genome import AgentGenome
 from d094_llm_client import LLMClient, TransportResult
+from d094_r4_analysis import analyze_final_arms
 from d094_r4_credit import PairedCreditNSGAII, make_paired_evaluation, PairedEpisode
-from d094_r4_statistics import preregistered_analysis
 from d094_r4_tasks import fresh_train_isolation, r4_manifest, r4_tasks, validate_reachability
 from d094_tasks import rule_policy
-from run_d094_r4 import run_r4
+from run_d094_r4 import run_r4, verify_execution_lock
 
 
 HERE = Path(__file__).resolve().parent
@@ -143,20 +143,8 @@ def run_search_fixtures() -> dict[str, Any]:
 
 
 def _mock_statistics(summary: dict[str, Any]) -> dict[str, Any]:
-    arms = summary["arms"]
-    differences = {}
-    for label, first, second in (
-        ("B3_minus_B2", "B2", "B3"),
-        ("B4_minus_B2", "B2", "B4"),
-        ("B3_minus_B4", "B4", "B3"),
-        ("B2_minus_B1", "B1", "B2"),
-    ):
-        left = {(row["task_id"], row["seed"]): row["task_success"] for row in arms[first]["per_task_seed"]}
-        right = {(row["task_id"], row["seed"]): row["task_success"] for row in arms[second]["per_task_seed"]}
-        if left.keys() != right.keys():
-            raise ValueError("Mock final paired units differ")
-        differences[label] = [right[key] - left[key] for key in sorted(left)]
-    return preregistered_analysis(differences)
+    """Compatibility wrapper; all final comparisons use the locked analysis entry."""
+    return analyze_final_arms(summary)
 
 
 def _write(path: Path, value: Any) -> None:
@@ -186,8 +174,11 @@ def main() -> None:
     }
     _write(args.outdir / "synthetic_search.json", {"scope": "SYNTHETIC_ONLY", "arms": fixtures, "gates": gates})
     mock = run_r4(args.outdir / "mock_protocol", client_factory=mock_factory, preflight_only=False)
+    lock_path = args.outdir / "mock_protocol" / "execution_lock.json"
+    lock_verification = verify_execution_lock(lock_path)
+    statistics = None
     if mock["status"] == "MOCK_COMPLETED":
-        statistics = _mock_statistics(mock)
+        statistics = analyze_final_arms(mock, execution_lock_path=lock_path)
         _write(args.outdir / "mock_protocol" / "statistical_analysis.json", statistics)
     gates["mock_protocol_completed"] = mock["status"] == "MOCK_COMPLETED"
     gates["mock_protocol_episode_count_64"] = mock.get("actual_episode_count") == 64
@@ -196,6 +187,15 @@ def main() -> None:
         and mock.get("budget", {}).get("cost_upper_usd", 1.0) <= 0.442368
         and not mock.get("budget", {}).get("over_budget", True)
     )
+    gates["mock_execution_lock_verified"] = lock_verification["status"] == "PASS"
+    gates["mock_analysis_lock_bound"] = bool(
+        statistics
+        and statistics["execution_binding"]["execution_lock_sha256"]
+        == lock_verification["execution_lock_sha256"]
+    )
+    gates["mock_search_pools_independent"] = set(
+        mock.get("search_pool_ledgers", {})
+    ) == {"search:B2", "search:B3", "search:B4"}
     gates["mock_hash_chains_valid"] = mock.get("hash_chain_valid") is True
     gates["fresh_train_isolation"] = fresh_train_isolation()["status"] == "PASS"
     gates["local_reachability"] = validate_reachability()["status"] == "PASS"
@@ -212,12 +212,14 @@ def main() -> None:
         "mock_episode_count": mock.get("actual_episode_count"),
         "mock_request_count": mock.get("budget", {}).get("sent_request_count"),
         "mock_cost_upper_usd": mock.get("budget", {}).get("cost_upper_usd"),
+        "mock_search_pool_ledgers": mock.get("search_pool_ledgers", {}),
+        "mock_execution_lock_verification": lock_verification,
         "mock_statistical_output_is_software_fixture_only": True,
         "source_files": {
             name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()
             for name in (
-                "d094_r4_credit.py", "d094_r4_statistics.py", "d094_r4_tasks.py",
-                "run_d094_r4.py", "run_d094_r4_synthetic.py",
+                "d094_r4_analysis.py", "d094_r4_credit.py", "d094_r4_statistics.py",
+                "d094_r4_tasks.py", "run_d094_r4.py", "run_d094_r4_synthetic.py",
             )
         },
     }
