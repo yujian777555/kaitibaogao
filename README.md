@@ -1302,3 +1302,15 @@ D-090 已完成 `d090r|train|` 96 场景 Train-only 小规模机制对照。g03_
 - **额外研究问题：** 五字段 genome 只有 144 个组合，96 个 evaluations 覆盖 66.7%；需解释 EA 必要性并考虑独立 Train-only exhaustive oracle。
 - **下一唯一任务：** 保留 R1 快照，修订 canonical 103 为 R2，关闭 105 号报告 F1–F7 并解决 M1–M4；只做设计，不实现、不运行。
 - 本轮只读审查，未运行任何算法/probe/genome search；没有新 CI/artifact。最新既有 D-091 CI 44068259009 不代表 R1 测试通过。
+
+
+## 2026-11-23：D-094 R4 三项执行阻断修复，等待独立复审
+
+- R4-001：完整冻结配置在任何输出、client、episode 和 HTTP 前 fail-closed；全局直接冻结 320 requests / 0.442368 USD。
+- R4-002：`D094_R4_EXECUTION_LOCK_V2` 锁定 17 个源码，纳入统计公式与最终分析入口；统计源码 SHA 保持 `59e16ee7…643e`。
+- R4-003：search:B2/B3/B4 独立硬隔离，各 80 requests / 0.110592 USD；B1 和 final 预留不变。
+- 新反例 15/15、R4 22/22、D-094 150/150。本地七目录为 690/692：未修改的 pilot_a3b 有两项 Python 3.12.16 浮点严格断言失败，最终同时核验 Python 3.11.9 CI 原始日志，不回改历史判据。
+- 新 preflight 与 synthetic/Mock 产物已生成并做 raw-bytes 复核；64 Mock episodes、194 Mock requests，真实 LLM API=0。Black 本地不可用，compileall/diff check 通过。
+- 报告：`D094_R4_BLOCKER_FIX_REPORT.md`、`D094_R4_TAMPER_TEST_REPORT.md`；代码提交与 CI 见 `D094_R4_STATUS.json`，最终文档 HEAD 动态查询 Git。
+
+**状态：READY_FOR_INDEPENDENT_REVIEW；独立复审 PENDING；真实 R4 NOT RUN。** 下一任务仅按 `D094_R4_INDEPENDENT_REVIEW_PROMPT.md` 进行新会话只读复审；即使 ACCEPT，仍需用户明确授权。

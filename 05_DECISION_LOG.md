@@ -2083,3 +2083,12 @@ M1 要求 A1/A4 逐 seed 完整轨迹等价；M2 明确 144 搜索空间、96/14
 此外，experiments/d092_recovery/ 当前没有实际 Probe runner 或正式 Train-only driver；现有 workflow 只执行 synthetic tests。下一步按 112_D092_EXPEDITED_EXECUTION_PROMPT.md 执行最小修复、补测试、实现 Probe 与正式搜索入口。历史合成 INVALID 数值必须保留，不得扩预算消除。
 
 当前远端 HEAD=cfe431ab026a2626bf28c00ec45352db9a7f1dd4；main=683b3fe7fc52c86e917d523fdc6bbb13abbfd653；ahead/behind=323/0。上述授权不修改 canonical 103 或历史报告。
+
+
+## D-094-R4-BLOCKER-FIX（2026-11-23）：三项执行阻断修复后重新送审
+
+原独立审查 R4-001～R4-003 的实现修复已完成：调用方不能覆盖冻结配置；统计源码与最终分析入口进入 V2 执行锁并绑定统计输出；B2/B3/B4 搜索预算分为三个独立硬上限池，B1/final 预留保持原值。没有通过改变任务、seeds、算法臂、主要终点、最小效应、统计方法或扩大预算规避问题。
+
+新增 15 项反例与 D-094 150 项测试通过。本地七目录实际为 690/692，两个失败是未修改 pilot_a3b 在 Python 3.12.16 下的浮点严格相等断言；保留失败事实并核验 CI Python 3.11.9，不修改历史数据或判据。Black 不可用，compileall/diff check 通过。新 preflight/Mock 产物 raw SHA 复核通过，真实 LLM API=0。
+
+决定：仅进入 `READY_FOR_INDEPENDENT_REVIEW`，由新的独立会话复审并给出 ACCEPT 或 REQUEST_CHANGES。真实 R4=NOT RUN、独立复审=PENDING、APPROVED_FOR_EXPERIMENT=NO；独立 ACCEPT 也不替代用户明确授权。证据见 `D094_R4_BLOCKER_FIX_REPORT.md`、`D094_R4_TAMPER_TEST_REPORT.md` 和 `D094_R4_STATUS.json`。

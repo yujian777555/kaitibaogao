@@ -2896,3 +2896,18 @@ v1 lock 因 cluster_id 与注册表不一致被撤销；v1 诊断仅保留为 su
 - **唯一下一任务：** 保留 R1 快照 103_D092_TRAIN_ONLY_PREREGISTRATION_R1.md，修订 canonical 103 为 R2，关闭 F1–F7 并解决 M1–M4。只做文档、公式和算法规格；不实现、不运行。
 - **CI 边界：** R1 commit 无新 workflow run；最新既有 D-091 CI 44068259009 不代表 R1 通过。本轮未运行算法测试、probe、genome search，也不能从 GitHub API 声称本地工作树 clean。
 
+
+
+## 2026-11-23 D-094 R4 三项阻断修复交接
+
+**仓库/分支：** `yujian777555/kaitibaogao` / `d094-llm-agent-integration`。接管基线=`d1351297e700130ac7fc117868d86ba3a7b852ef`；main 必须保持 `683b3fe7fc52c86e917d523fdc6bbb13abbfd653`。代码提交和 CI 以 `D094_R4_STATUS.json` 为准，最终文档 HEAD 需由下一会话动态查询远端。
+
+**实现：** R4-001 全字段类型+值 fail-closed；R4-002 V2 锁覆盖统计与最终分析入口并绑定统计输出；R4-003 三个搜索池独立预留、逐池 ledger 和第 81 次请求前拒绝。没有更改任务、seeds、四臂、主要终点、0.25 最小效应或统计公式。
+
+**实测：** 新反例 15/15，R4 22/22，D-094 150/150；七套本地 28+396/398+8+8+14+86+150=690/692。pilot_a3b 两项既有 D-087/D-086 浮点严格断言在 Python 3.12.16 失败，未修改其历史数据或判据；CI Python 3.11.9 结果必须读取最终 run/job 日志。compileall 和 diff check PASS，Black 因模块不可用未运行。
+
+**产物：** 新 `r4_preflight_review_fix/` 和 `r4_synthetic_review_fix/` 已按 raw bytes 复核 17 源码、4 协议文档、64 episodes、194 请求、64 traces 与 artifact 清单。Mock 搜索请求 B2/B3/B4=48/48/58；真实 API=0。详见 `D094_R4_BLOCKER_FIX_REPORT.md`、`D094_R4_TAMPER_TEST_REPORT.md`。
+
+**保护项：** `experiments/pilot_a3b/confusion_report.json`、`I_need_interpret_use.txt`、`incoming/` 继续未提交。旧 R4 preflight/synthetic 和 R1/R2/R3.1 原始证据未覆盖。
+
+**唯一下一任务：** 新独立会话按 `D094_R4_INDEPENDENT_REVIEW_PROMPT.md` 只读复审，给出 ACCEPT 或 REQUEST_CHANGES。当前只到 `READY_FOR_INDEPENDENT_REVIEW`；真实 R4=NOT RUN，独立复审=PENDING，APPROVED_FOR_EXPERIMENT=NO。独立 ACCEPT 后仍需用户明确授权。

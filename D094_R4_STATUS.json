@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "date_local": "2026-11-23",
+  "status": "READY_FOR_INDEPENDENT_REVIEW",
+  "repository": "yujian777555/kaitibaogao",
+  "branch": "d094-llm-agent-integration",
+  "baseline": {
+    "start_and_remote_parent": "d1351297e700130ac7fc117868d86ba3a7b852ef",
+    "original_r4_review_commit": "a6e27d00cdc466ac5f2fe9150effc88d84ba6698",
+    "main": "683b3fe7fc52c86e917d523fdc6bbb13abbfd653"
+  },
+  "code_commit": {
+    "sha": "6c7dff13b799996caeb5db48b33e8641307ac25e",
+    "parent": "d1351297e700130ac7fc117868d86ba3a7b852ef",
+    "tree": "ba80d70e5a66a79e4e4938aa666f603e5edb221f",
+    "message": "fix(d094): close R4 execution blockers",
+    "remote_fast_forward_verified": true
+  },
+  "documentation_head": "DYNAMIC_GIT_QUERY_REQUIRED_NOT_EMBEDDED_TO_AVOID_SELF_HASH_CYCLE",
+  "fixes": {
+    "R4-001": {
+      "status": "IMPLEMENTED_AND_TESTED",
+      "summary": "All frozen R4Config fields are checked by value and exact type at run_r4 entry and compute_budget_plan entry, before outdir, client, episode, or HTTP creation. Global caps are fixed at 320 requests and 0.442368 USD."
+    },
+    "R4-002": {
+      "status": "IMPLEMENTED_AND_TESTED",
+      "summary": "D094_R4_EXECUTION_LOCK_V2 locks 17 source files, including the unchanged statistical implementation and the final analysis entry point; lock verification identifies the first mismatching field."
+    },
+    "R4-003": {
+      "status": "IMPLEMENTED_AND_TESTED",
+      "summary": "search:B2, search:B3, and search:B4 have independent request-before-transport reservations and ledgers. No search pool can borrow from another search pool or final reserves."
+    }
+  },
+  "tests": {
+    "new_review_fix_tests": {
+      "passed": 15,
+      "total": 15
+    },
+    "new_plus_original_r4_protocol_tests": {
+      "passed": 22,
+      "total": 22
+    },
+    "d094_full_discover": {
+      "passed": 150,
+      "total": 150
+    },
+    "local_seven_directories": {
+      "python": "3.12.16",
+      "passed": 690,
+      "total": 692,
+      "directories": {
+        "pilot_a_recovery": "28/28",
+        "pilot_a3b": "396/398",
+        "d088_recovery": "8/8",
+        "d089_recovery": "8/8",
+        "d090_recovery": "14/14",
+        "d092_recovery": "86/86",
+        "d094_llm_agent": "150/150"
+      },
+      "unresolved_local_failures": [
+        "Unmodified pilot_a3b D-087 test_independent_audit_and_immutable_outputs: strict last-bit float representation mismatch, for example 1.3250000000000002 versus 1.325.",
+        "Unmodified pilot_a3b dependency-gate test_saved_gate_matches_raw_recomputation: same class of strict digest-equality failure."
+      ],
+      "historical_data_or_criteria_modified": false
+    },
+    "compileall": "PASS",
+    "black": "NOT RUN (No module named black)",
+    "black_dependency_installed": false,
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "code_commit_run": {
+      "workflow": "Research simulator regression tests",
+      "run_id": 45050071884,
+      "job_name": "regression",
+      "job_id": 137293012639,
+      "head_sha": "6c7dff13b799996caeb5db48b33e8641307ac25e",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "python": "3.11.9",
+      "run_url": "https://github.com/yujian777555/kaitibaogao/actions/runs/45050071884",
+      "job_url": "https://github.com/yujian777555/kaitibaogao/actions/runs/45050071884/job/137293012639",
+      "raw_log_sha256_as_downloaded": "cc4db7f2b21ed1a11e5ac420fbcaa7ed497d13b55ac475450757e38a9cfe264a",
+      "raw_log_results": {
+        "pilot_a_recovery": {
+          "ran": 28,
+          "result": "OK"
+        },
+        "pilot_a3b": {
+          "ran": 398,
+          "result": "OK"
+        },
+        "d088_recovery": {
+          "ran": 8,
+          "result": "OK"
+        },
+        "d089_recovery": {
+          "ran": 8,
+          "result": "OK"
+        },
+        "d090_recovery": {
+          "ran": 14,
+          "result": "OK"
+        },
+        "d092_recovery": {
+          "ran": 86,
+          "result": "OK"
+        },
+        "d094_llm_agent": {
+          "ran": 150,
+          "result": "OK"
+        }
+      },
+      "total_passed": 692,
+      "total": 692
+    },
+    "root_documentation_commit": "NOT RUN (docs-only path filter); the code-commit run above must not be represented as a new docs-commit CI run."
+  },
+  "execution_lock": {
+    "version": "D094_R4_EXECUTION_LOCK_V2",
+    "locked_source_count": 17,
+    "locked_protocol_document_count": 4,
+    "preflight_raw_sha256": "d31efba77b98bd96cdd3faf70481b26dd6106695fdff0ba431fcea7abe5b9a8a",
+    "synthetic_mock_raw_sha256": "b9a41961140e4b6058c61bc698ba4373d15a91b7228b1227c7f8db9310c148e2",
+    "statistics_source_sha256": "59e16ee7457db7157d2ce2c5283c8ec0d17b009cc4a50c5be5a636187044643e",
+    "final_analysis_entry_sha256": "ae9f93ef052be1a12daa68eb0cf00f6011d182a63483844208552de67a6c2be9",
+    "statistics_source_changed": false,
+    "final_paired_units_per_primary_comparison": 4,
+    "sign_flip_patterns": 16,
+    "statistical_interpretation": "EXPLORATORY_ONLY_NO_CROSS_TASK_GENERAL_SIGNIFICANCE_CLAIM"
+  },
+  "frozen_budget_pools": {
+    "global": {
+      "request_cap": 320,
+      "cost_cap_usd": 0.442368
+    },
+    "search:B2": {
+      "request_cap": 80,
+      "cost_cap_usd": 0.110592
+    },
+    "search:B3": {
+      "request_cap": 80,
+      "cost_cap_usd": 0.110592
+    },
+    "search:B4": {
+      "request_cap": 80,
+      "cost_cap_usd": 0.110592
+    },
+    "B1_and_each_final": {
+      "pool_count": 4,
+      "request_cap_each": 20,
+      "cost_cap_usd_each": 0.027648
+    },
+    "adversarial_verification": "Each search arm's 81st direct transport request is rejected before transport with the underlying count fixed at 80; cross-pool borrowing, retries, exceptions, unknown usage, and the global cap are separately tested."
+  },
+  "new_artifacts": {
+    "preflight_directory": "experiments/d094_llm_agent/results/r4_preflight_review_fix/",
+    "synthetic_directory": "experiments/d094_llm_agent/results/r4_synthetic_review_fix/",
+    "old_artifacts_overwritten": false,
+    "mock_episodes": 64,
+    "mock_requests": 194,
+    "mock_unique_budget_request_ids": 194,
+    "mock_traces": 64,
+    "mock_cost_upper_bound_usd": 0.001513200000000003,
+    "mock_search_requests": {
+      "search:B2": 48,
+      "search:B3": 48,
+      "search:B4": 58
+    },
+    "mock_B1_and_each_final_requests": 10,
+    "raw_bytes_independent_recalculation": "PASS",
+    "raw_sha256": {
+      "train_manifest_canonical_not_raw": "e8412c74c33faf7a56195d685d49080b5669dbe46efd3ae1ab6dee88917b5bff",
+      "train_manifest_raw": "d3114d002b74ee877dc37a794938f63bd6446c7b8ebbc93c461035b1c824d520",
+      "budget_plan_raw": "903b2cf11c90cd26286a6e2faa5e3c92b4f984ceda8a9c3de2651d232611ee97",
+      "episodes_jsonl_raw": "caad5bf5af3325e28dd7951cd7468e522d568b392a69c861a890b683b5b99cdc",
+      "statistical_analysis_raw": "33b20aea0e132c09bed5591703a700ba1f7696c22c6b90f356ba72022aa03d96",
+      "verification_report_raw": "4ad4f6648c2e00c8eb7c01d984201d80e9994e6396f4ecbc67633ba80eb27b0b",
+      "preflight_artifact_manifest_raw": "7af415f0f93a7e86bf20c40c2f4c143bf671de59b4952d59d255f52451062d09",
+      "synthetic_artifact_manifest_raw": "ef030255a21a6152a690e74dfc1638f19d491f53eb13b7a6e45f9afa3bdc5c37"
+    }
+  },
+  "research_boundaries": {
+    "real_r4": "NOT RUN",
+    "real_llm_api_calls": 0,
+    "real_performance_results": "NONE",
+    "independent_review": "PENDING",
+    "implementer_independent_accept_issued": false,
+    "approved_for_experiment": false,
+    "user_real_experiment_authorization": "NOT_GRANTED",
+    "mock_results_are_real_agent_performance": false
+  },
+  "protected_workspace_items": {
+    "experiments/pilot_a3b/confusion_report.json": "PREEXISTING_TRACKED_MODIFICATION_RETAINED_UNCOMMITTED",
+    "I_need_interpret_use.txt": "UNTRACKED_AND_UNCOMMITTED",
+    "incoming/": "UNTRACKED_AND_UNCOMMITTED"
+  },
+  "next_step": {
+    "prompt": "D094_R4_INDEPENDENT_REVIEW_PROMPT.md",
+    "required_session": "NEW_INDEPENDENT_READ_ONLY_SESSION",
+    "allowed_verdicts": [
+      "ACCEPT",
+      "REQUEST_CHANGES"
+    ],
+    "even_after_accept": "REPORT_AND_WAIT_FOR_EXPLICIT_USER_AUTHORIZATION_BEFORE_REAL_R4"
+  }
+}
